@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Полиморфизм</title>
+</head>
+<body>
+<!-- <pre class="prettyprint lang-cs">public class Shape
+{
+    // A few example members 
+    public int X { get; private set; }
+    public int Y { get; private set; }
+    public int Height { get; set; }
+    public int Width { get; set; }
+
+    // Virtual method 
+    public virtual void Draw()
+    {
+        Console.WriteLine("Performing base class drawing tasks");
+    }
+}
+
+class Circle : Shape
+{
+    public override void Draw()
+    {
+        // Code to draw a circle...
+        Console.WriteLine("Drawing a circle");
+        base.Draw();
+    }
+}
+class Rectangle : Shape
+{
+    public override void Draw()
+    {
+        // Code to draw a rectangle...
+        Console.WriteLine("Drawing a rectangle");
+        base.Draw();
+    }
+}
+class Triangle : Shape
+{
+    public override void Draw()
+    {
+        // Code to draw a triangle...
+        Console.WriteLine("Drawing a triangle");
+        base.Draw();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Polymorphism at work #1: a Rectangle, Triangle and Circle 
+        // can all be used whereever a Shape is expected. No cast is 
+        // required because an implicit conversion exists from a derived  
+        // class to its base class.
+        System.Collections.Generic.List&lt;Shape> shapes = new System.Collections.Generic.List&lt;Shape>();
+        shapes.Add(new Rectangle());
+        shapes.Add(new Triangle());
+        shapes.Add(new Circle());
+
+        // Polymorphism at work #2: the virtual method Draw is 
+        // invoked on each of the derived classes, not the base class. 
+        foreach (Shape s in shapes)
+        {
+            s.Draw();
+        }
+
+        // Keep the console open in debug mode.
+        Console.WriteLine("Press any key to exit.");
+        Console.ReadKey();
+    }
+
+}
+
+/* Output:
+    Drawing a rectangle
+    Performing base class drawing tasks
+    Drawing a triangle
+    Performing base class drawing tasks
+    Drawing a circle
+    Performing base class drawing tasks
+ */
+</pre> -->
+
+<h2>Немного об объектах</h2>
+<p><code class="prettyprint lang-cs">public int day;</code> - тупое поле (переменная).</p>
+<p><code class="prettyprint lang-cs">public int day { get{return day;} set{day = 100;} }</code> - свойство, не "переменная", использовать преимущественно для хранения данных из БД, так как могут выполнять действия при изменении данных, что может быть полезным.</p>
+<p>Дурной тон делать вычисления в <code>get</code> перед его возвращением.</p>
+<h2>Немного полиморфизма</h2>
+<p><code class="prettyprint lang-cs">virtual</code> - виртуальные _методы _свойства _события и _индексаторы могут быть переопределены в производном классе</p>
+<p>тупые _поля не могут быть виртуальными, потому что они тупые.</p>
+<p><code class="prettyprint lang-cs">override</code> - переопределение в производном классе</p>
+<p>и чтоб ты не делал:</p>
+<pre class="prettyprint lang-cs">
+DerivedClass B = new DerivedClass();
+B.DoWork();  // Calls the new method.
+
+BaseClass A = (BaseClass)B;
+A.DoWork();  // Also calls the new method.
+</pre>
+<p>...будет вызываться переопределенный метод.</p>
+<h4>Однако</h4>
+<p><code class="prettyprint lang-cs">public new int Property</code> - позволяет переопределить члены объекта таким образом, что при обращении к ним из под базового класса будут вызываться старые (базовые) члены</p>
+<pre class="prettyprint lang-cs">
+DerivedClass B = new DerivedClass();
+B.DoWork();  // Calls the new method.
+
+BaseClass A = (BaseClass)B;
+A.DoWork();  // Calls the old method.
+</pre>
+<h3>Хватит уже наследовать</h3>
+<pre class="prettyprint lang-cs">
+public class C : B
+{
+    public sealed override void DoWork() { }
+}
+</pre>
+<p><code class="prettyprint lang-cs">public sealed override void DoWork() { }</code> - для далее производных классов (D, E, F…) методо <code>DoWork()</code> уже не будет виртуальным и переопределить его можно только: <code>public new void DoWork() { }</code>.</p>
+<p>Но метод по-прежнему виртуален для C, B и A.</p>
+<p>Если <code>DoWork()</code> вызывается с помощью переменной типа:</p>
+<ul>
+	<li>D - вызывается новый DoWork</li>
+	<li>C - реализацию DoWork на классе C</li>
+	<li>B - реализацию DoWork на классе C</li>
+	<li>A - реализацию DoWork на классе C</li>
+</ul>
+<h3>Всетаки дайте старое</h3>
+<p>с помощью ключевого слова <code>base</code></p>
+<pre class="prettyprint lang-cs">
+public class Base
+{
+    public virtual void DoWork() {/*...*/ }
+}
+public class Derived : Base
+{
+    public override void DoWork()
+    {
+        //Perform Derived's work here 
+        //... 
+        // Call DoWork on base class 
+        base.DoWork();
+    }
+}
+</pre>
+
+
+
+<!-- Подсветка синтаксиса кода -->
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</body>
+</html>
