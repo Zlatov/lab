@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+.tooltippress {
+cursor:pointer;
+color:#D56742;
+border-bottom:dotted 1px #D56742;
+}
+.tooltippressshow {
+display:none;
+position:absolute;
+top:0; left:0;
+
+padding:10px;
+background-color:#ffffff;
+border-radius:2px;
+box-shadow:0 0 20px rgba(0,0,0,1);
+}
+
+.tooltippressshow .tooltippressarr {
+position:absolute;
+top:-20px;
+width:0; height:0;
+
+border-radius:0;
+border:10px solid rgba(0,0,0,0);
+border-bottom:solid 10px #ffffff;
+}
