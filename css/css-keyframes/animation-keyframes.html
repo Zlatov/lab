@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+.background-iteration {
+	position:relative;
+	height: 300px;
+}
+.background-iteration-1, .background-iteration-2, .background-iteration-3, .background-iteration-4 {
+	position:absolute;
+	height:100%;
+	width: 100%;
+}
+.background-iteration-1 { background: radial-gradient(farthest-side at 50% 0%, #FF800D, #FF4000, #FF140D ); }
+.background-iteration-2 { background: radial-gradient(farthest-side at 50% 0%, #FF0D99, #E80CE0, #6C0DFF ); opacity: 0; }
+.background-iteration-3 { background: radial-gradient(farthest-side at 50% 0%, #2CFF0D, #63E80C, #FFF10D ); opacity: 0; }
+.background-iteration-4 { background: radial-gradient(farthest-side at 50% 0%, #FFBD0D, #FF9200, #FF610D ); opacity: 0; }
+
+
+/* Описание анимаций для каждого слоя (элемента) */
+@-webkit-keyframes b_iteration_1 { 0%  { opacity:1; } 25%, 75% { opacity:0; } }
+@-moz-keyframes b_iteration_1    { 0%  { opacity:1; } 25%, 75% { opacity:0; } }
+@-o-keyframes b_iteration_1      { 0%  { opacity:1; } 25%, 75% { opacity:0; } }
+@keyframes b_iteration_1         { 0%  { opacity:1; } 25%, 75% { opacity:0; } }
+
+@-webkit-keyframes b_iteration_2 { 25% { opacity:1; } 0%, 50% { opacity:0; } }
+@-moz-keyframes b_iteration_2    { 25% { opacity:1; } 0%, 50% { opacity:0; } }
+@-o-keyframes b_iteration_2      { 25% { opacity:1; } 0%, 50% { opacity:0; } }
+@keyframes b_iteration_2         { 25% { opacity:1; } 0%, 50% { opacity:0; } }
+
+@-webkit-keyframes b_iteration_3 { 50% { opacity:1; } 25%, 75% { opacity:0; } }
+@-moz-keyframes b_iteration_3    { 50% { opacity:1; } 25%, 75% { opacity:0; } }
+@-o-keyframes b_iteration_3      { 50% { opacity:1; } 25%, 75% { opacity:0; } }
+@keyframes b_iteration_3         { 50% { opacity:1; } 25%, 75% { opacity:0; } }
+
+@-webkit-keyframes b_iteration_4 { 75% { opacity:1; } 50%, 100% { opacity:0; } }
+@-moz-keyframes b_iteration_4    { 75% { opacity:1; } 50%, 100% { opacity:0; } }
+@-o-keyframes b_iteration_4      { 75% { opacity:1; } 50%, 100% { opacity:0; } }
+@keyframes b_iteration_4         { 75% { opacity:1; } 50%, 100% { opacity:0; } }
+
+/* Привязка описанных анимаций и их настройка */
+.background-iteration-1 { -webkit-animation:b_iteration_1 14s 0s linear infinite; animation:b_iteration_1 14s 0s linear infinite; }
+.background-iteration-2 { -webkit-animation:b_iteration_2 14s 0s linear infinite; animation:b_iteration_2 14s 0s linear infinite; }
+.background-iteration-3 { -webkit-animation:b_iteration_3 14s 0s linear infinite; animation:b_iteration_3 14s 0s linear infinite; }
+.background-iteration-4 { -webkit-animation:b_iteration_4 14s 0s linear infinite; animation:b_iteration_4 14s 0s linear infinite; }
+	</style>
+</head>
+<body>
+	<div class="background-iteration">
+		<div class="background-iteration-1"></div>
+		<div class="background-iteration-2"></div>
+		<div class="background-iteration-3"></div>
+		<div class="background-iteration-4"></div>
+	</div>	
+</body>
+</html>
+

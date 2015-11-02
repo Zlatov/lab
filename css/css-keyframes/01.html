@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>css animation-delay</title>
+  <style type="text/css">
+/* Описание анимации */
+@-webkit-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@-moz-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@-o-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+/* Привязка и настройка анимации */
+.flash {
+	/* Привязка анимации к калссу */
+	-webkit-animation-name:flash;-moz-animation-name:flash;-o-animation-name:flash;animation-name:flash;
+	/* Задержка перед началом */
+	-webkit-animation-delay:1s;-moz-animation-delay:1s;-o-animation-delay:1s;animation-delay:1s;
+	/* Продолжительность анимации */
+	-webkit-animation-duration:1s;-moz-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;
+	/* Зацикливание */
+	-webkit-animation-iteration-count:infinite;-moz-animation-iteration-count:infinite;-o-animation-iteration-count:infinite;animation-iteration-count:infinite;
+}
+
+
+/* Пример2 */
+.iteration {
+position:relative;
+height:254px;
+width:254px;
+background-image:url(./iteration.jpg);
+}
+.iteration_1, .iteration_2, .iteration_3, .iteration_4, .iteration_5 {
+position:absolute;
+width:254px;
+height:254px;
+background-image:url(./iteration.jpg);
+}
+
+/* Описание анимации */
+@-webkit-keyframes regular_1 { 0%    { opacity:0; } 14.3% { opacity:1; } 28.6% { opacity:0; } }
+@-moz-keyframes regular_1    { 0%    { opacity:0; } 14.3% { opacity:1; } 28.6% { opacity:0; } }
+@-o-keyframes regular_1      { 0%    { opacity:0; } 14.3% { opacity:1; } 28.6% { opacity:0; } }
+@keyframes regular_1         { 0%    { opacity:0; } 14.3% { opacity:1; } 28.6% { opacity:0; } }
+
+@-webkit-keyframes regular_2 { 14.3% { opacity:0; } 28.6% { opacity:1; } 42.9% { opacity:0; } }
+@-moz-keyframes regular_2    { 14.3% { opacity:0; } 28.6% { opacity:1; } 42.9% { opacity:0; } }
+@-o-keyframes regular_2      { 14.3% { opacity:0; } 28.6% { opacity:1; } 42.9% { opacity:0; } }
+@keyframes regular_2         { 14.3% { opacity:0; } 28.6% { opacity:1; } 42.9% { opacity:0; } }
+
+@-webkit-keyframes regular_3 { 28.6% { opacity:0; } 42.9% { opacity:1; } 57.1% { opacity:0; } }
+@-moz-keyframes regular_3    { 28.6% { opacity:0; } 42.9% { opacity:1; } 57.1% { opacity:0; } }
+@-o-keyframes regular_3      { 28.6% { opacity:0; } 42.9% { opacity:1; } 57.1% { opacity:0; } }
+@keyframes regular_3         { 28.6% { opacity:0; } 42.9% { opacity:1; } 57.1% { opacity:0; } }
+
+@-webkit-keyframes regular_4 { 42.9% { opacity:0; } 57.1% { opacity:1; } 71.4% { opacity:0; } }
+@-moz-keyframes regular_4    { 42.9% { opacity:0; } 57.1% { opacity:1; } 71.4% { opacity:0; } }
+@-o-keyframes regular_4      { 42.9% { opacity:0; } 57.1% { opacity:1; } 71.4% { opacity:0; } }
+@keyframes regular_4         { 42.9% { opacity:0; } 57.1% { opacity:1; } 71.4% { opacity:0; } }
+
+@-webkit-keyframes regular_5 { 57.1% { opacity:0; } 71.4% { opacity:1; } 85.7% { opacity:0; } }
+@-moz-keyframes regular_5    { 57.1% { opacity:0; } 71.4% { opacity:1; } 85.7% { opacity:0; } }
+@-o-keyframes regular_5      { 57.1% { opacity:0; } 71.4% { opacity:1; } 85.7% { opacity:0; } }
+@keyframes regular_5         { 57.1% { opacity:0; } 71.4% { opacity:1; } 85.7% { opacity:0; } }
+
+@-webkit-keyframes regular_6 { 71.4% { opacity:0; } 85.7% { opacity:1; } 100%  { opacity:0; } }
+@-moz-keyframes regular_6    { 71.4% { opacity:0; } 85.7% { opacity:1; } 100%  { opacity:0; } }
+@-o-keyframes regular_6      { 71.4% { opacity:0; } 85.7% { opacity:1; } 100%  { opacity:0; } }
+@keyframes regular_6         { 71.4% { opacity:0; } 85.7% { opacity:1; } 100%  { opacity:0; } }
+
+/* Привязка и настройка анимации */
+.iteration_1 { -webkit-animation:regular_1 7s 0s linear infinite; animation:regular_1 7s 0s linear infinite; }
+.iteration_2 { -webkit-animation:regular_2 7s 0s linear infinite; animation:regular_2 7s 0s linear infinite; }
+.iteration_3 { -webkit-animation:regular_3 7s 0s linear infinite; animation:regular_3 7s 0s linear infinite; }
+.iteration_4 { -webkit-animation:regular_4 7s 0s linear infinite; animation:regular_4 7s 0s linear infinite; }
+.iteration_5 { -webkit-animation:regular_5 7s 0s linear infinite; animation:regular_5 7s 0s linear infinite; }
+.iteration_6 { -webkit-animation:regular_6 7s 0s linear infinite; animation:regular_6 7s 0s linear infinite; }
+
+
+a {
+	-webkit-transition: color 1s ease-out 0.5s;
+	-moz-transition: color 1s ease-out 0.5s;
+	transition: color 1s ease-out 0.5s;
+}
+a:hover {
+	color: green;
+}
+
+</style>
+  </head>
+  <body>
+  <h2>transition</h2>
+  <p><a href="#">color transition</a></p>
+  <h1 class="flash">Hello, world!</h1>
+<div class="iteration" style="background-position: -777px 0px;">
+    <div class="iteration_1" style="background-position: -1295px 0px;"></div>
+    <div class="iteration_2" style="background-position: -1036px 0px;"></div>
+    <div class="iteration_3" style="background-position: -777px 0px;"></div>
+    <div class="iteration_4" style="background-position: -518px 0px;"></div>
+    <div class="iteration_5" style="background-position: -259px 0px;"></div>
+    <div class="iteration_6" style="background-position: 0px 0px;"></div>
+</div>
+  <pre>&lt;!DOCTYPE html>
+&lt;html>
+  &lt;head>
+  &lt;meta charset="utf-8">
+  &lt;title>css animation-delay&lt;/title>
+  &lt;style type="text/css">
+/* Описание анимации */
+@-webkit-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@-moz-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@-o-keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+@keyframes flash {
+	0%, 50% 100% { opacity:1; }
+	25%, 75% { opacity:0; }
+	0%, 20%, 40%, 60%, 80%, 100% { padding-left:20px; }
+	10%, 30%, 50%, 70%, 90% { padding-left:0px; }
+}
+/* Привязка и настройка анимации */
+.flash {
+	/* Привязка анимации к калссу */
+	-webkit-animation-name:flash;-moz-animation-name:flash;-o-animation-name:flash;animation-name:flash;
+	/* Задержка перед началом */
+	-webkit-animation-delay:1s;-moz-animation-delay:1s;-o-animation-delay:1s;animation-delay:1s;
+	/* Продолжительность анимации */
+	-webkit-animation-duration:1s;-moz-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;
+	/* Зацикливание */
+	-webkit-animation-iteration-count:infinite;-moz-animation-iteration-count:infinite;-o-animation-iteration-count:infinite;animation-iteration-count:infinite;
+}
+&lt;/style>
+  &lt;/head>
+  &lt;body>
+  &lt;h1 class="flash">Hello, world!&lt;/h1>
+  &lt;pre>&lt;/pre>
+&lt;/body>
+&lt;/html></pre>
+
+<h2>фиксирует конечный результат</h2>
+<pre>/* фиксирует конечный результат */
+		-webkit-animation-fill-mode: forwards;
+		-moz-animation-fill-mode: forwards;
+		animation-fill-mode: forwards;</pre>
+
+</body>
+</html>
