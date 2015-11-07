@@ -1,0 +1,155 @@
+/* Лого */
+#logo { display:block; width:270px; height:0; padding-top:163px; overflow:hidden; position:absolute; left:0; top:0; background:url(../img/logo.jpg) 0 0 no-repeat transparent; }
+
+#phn { position:absolute; top:13px; right:19px; background:url(../img/phn.png) 0 0 no-repeat; height:0; padding-top:49px; width:488px; overflow:hidden; }
+
+/* Верхнее меню */
+#topmenu { position:absolute; top:75px; right:19px; width:641px; background:url(../mmenu/menu-line.png) 0 34px no-repeat; }
+#topmenu a { display:block; float:left; height:0; width:201px; padding-top:37px; overflow:hidden; background-position:0 -32px; background-repeat:no-repeat; margin-left:19px; }
+#topmenu a.current { background-position:0 0; }
+#topmenu a:hover { background-position:0 0; }
+#topmenu #menu04 { position:absolute; left:0; top:20px; }
+
+
+
+
+/* Главное меню */
+#mainmenu { position:absolute; right:19px; top:75px; margin:0; z-index:150; width:641px; background:url(../mmenu/menu-line.png) 0 34px no-repeat; }
+#mainmenu li { float:left; margin:0; padding:0; background-image:none; list-style:none outside none; }
+#mainmenu a { display:block; height:0px; padding-top:37px; width:201px; margin-right:19px; background-position:0 -32px; background-repeat:no-repeat; }
+#mainmenu a:hover { background-position:0 0; }
+#mainmenu a.selected { background-position:0 0; }
+
+/* Главное меню уровень 2*/
+#mainmenu ul { display:none; position:absolute; top:auto; left:auto; margin:0; }
+#mainmenu ul li { display:block; clear:both; margin:0; padding:0; }
+#mainmenu ul li a { display:block; width:171px; height:auto; padding:8px 15px; color:#FFFFFF; line-height:1.3em; background:url(../img/bg2.jpg) 0 0 repeat; margin-bottom:1px; }
+#mainmenu ul li a:hover { background:none #FFF500; color:#3060d0; }
+#mainmenu ul li span { color:#005595; padding:0 10px; }
+#mmenu1 li { width:150px; } #mmenu1 li a { width:130px; }
+#mmenu3 li { width:200px; } #mmenu3 li a { width:180px; }
+#mmenu4 li { width:300px; } #mmenu4 li a { width:280px; }
+
+
+
+/* advertisment */
+#advprev { position:absolute; left:0; top:250px; width:25px; height:38px; background:url(../img/prev.png) 0 0 no-repeat; cursor:pointer; }
+#advnext { position:absolute; right:0; top:250px; width:25px; height:38px; background:url(../img/next.png) 0 0 no-repeat; cursor:pointer; }
+#advprev:hover { background-position:0 -38px;}
+#advnext:hover { background-position:0 -38px;}
+
+#advimg { position:absolute; left:25px; top:0; overflow:hidden; width:1060px; height:535px; background:url(../img/adv-bg.png) 0 0 no-repeat; z-index:5; }
+#advimg .advi { position:absolute; width:1060px; height:525px; opacity:0; z-index:8; opacity:0.0; }
+#advimg .current { z-index:10; opacity:1.0; }
+#advimg .last-active { z-index:8; }
+
+#advtext { position:absolute; left:65px; top:65px; overflow:hidden; width:425px; height:500px; z-index:15; }
+#advtext .advtxt { width:425px; height:500px; position:absolute; left:-425px; top:auto; }
+#advtext .advtxt a { display:block; width:221px; height:68px; position:absolute; left:auto; top:300px; background:url(../img/p.png) 0 0 no-repeat; }
+#advtext .current { left:0; }
+
+
+
+/* Рекламма */
+/*--Main Container--*/
+.main_view { position: absolute; left:0px; padding:40px 40px 0; width:980px; height:535px; background:url(../img/adv-bg.png) 0 0 no-repeat; }
+/*--Window/Masking Styles--*/
+.window { width: 547px; height:392px;
+	overflow: hidden; /*--Hides anything outside of the set width/height--*/
+	position: relative;
+	top:31px;
+	left:433px;
+}
+.image_reel { position: absolute; top: 0; left: 0; z-index:50; }
+.image_reel img { float: left; border:0 none; } 
+.window-text { width: 425px; height:300px; margin:auto;
+	overflow: hidden; /*--Hides anything outside of the set width/height--*/
+	position: absolute; top:71px; left:40px;
+}
+.window-text a { display:block; width:425px; height:300px; position:absolute; left:-425px;
+}
+.window-text img { border:0 none; }
+
+/*--Paging Styles--*/
+.paging { position: absolute; top:480px; right:50px; width:auto; height:18px;
+	text-align: right; line-height: 18px;
+	display: none; /*--Hidden by default, will be later shown with jQuery--*/
+}
+.paging a { display:block; float:left; background-color:#FFFFFF; width:18px; height:18px; margin:0 5px;
+-moz-border-radius: 9px;
+-khtml-border-radius: 9px;
+-webkit-border-radius: 9px;
+}
+.paging a.active { background-color:#3060d0; }
+.paging a:hover { background-color:#3060d0; }
+
+
+
+
+
+#basket { position:absolute; width:241px; height:37px; top:25px; right:0;
+color:#FFFFFF; line-height:37px; text-align:right; }
+
+#whereami { position:absolute; left:0; top:125px; font-size:11px; }
+
+/* Все что в главной колонке */
+#mainbar .itemmenu { float:left; width:180px; margin-right:45px; }
+#mainbar .end { margin-right:0; }
+.clear { clear:both; }
+
+#mainbar .itemmenu div { width:160px; height:160px; border:solid 5px #3060d0; background-position:0 0; background-repeat:no-repeat; position:relative; }
+#mainbar .itemmenu a.iimg { display:block; width:160px; height:160px; border:solid 5px #FFFFFF; position:absolute; left:-5px; top:-5px; }
+
+#mainbar .itemmenu a.iheader { display:block; margin:15px 0 25px; }
+#mainbar .itemmenu a.iheader:hover { text-decoration:underline; }
+
+#mainbar .itemmenu div.iprop { width:198px; border:solid 1px #d7cebb; background-color:#faf9f3; padding:5px; }
+#mainbar .itemmenu div.iprop p { float:left; width:50%; margin:0; font-size:11px; color:#5A5B5C; }
+#mainbar .itemmenu a.cena { display:block; margin:15px 0 25px; color:#2f406f; text-decoration:none; font-size:36px; font-family:"Times New Roman"; }
+#mainbar h2 { font-size:24px; font-weight:normal; color:#2f406f; }
+
+#temp a.iheader { height:20px; margin-bottom:0; }
+
+/* Левое меню */
+#leftmenu { margin-left:20px; }
+#leftmenu li { list-style:disc outside none; margin:0; padding:0; color:#FFFFFF; }
+#leftmenu a { display:block; padding:3px 5px 3px 5px; }
+#leftmenu a:hover { }
+#leftmenu li ul { margin-left:20px; }
+#leftbar #categories { display:block; width:225px; height:0; padding-top:67px; overflow:hidden; background:url(../img/categories.png) 0 0 no-repeat; }
+#leftbar #rasprodaja { display:block; width:257px; height:0; padding-top:67px; overflow:hidden; background:url(../img/rasprodaja.png) 0 20px no-repeat; }
+
+#rasprodaja-content { width:250px; height:320px; position:relative; background:url(../img/bg2.jpg) 0 0 repeat; }
+#rasprodaja-content div { width:199px; height:199px; position:relative; left:20px; top:20px; border:solid 5px #3060d0; background:url(../img/r.jpg) 0 0 no-repeat; }
+#rasprodaja-content a { width:199px; height:199px; border:solid 5px #FFFFFF; display:block; position:absolute; left:-5px; top:-5px; }
+
+/* Поиск */
+#search { position:absolute; right:0; top:58px;
+width:248px; height:30px;
+text-align:left;
+}
+#search form { margin:0; padding:0; display:inline-block; float:right; }
+#search input { padding:0; margin:0; display:block; float:right; 
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+#search input[type="text"] {
+height:22px;
+width:180px;
+border: none 0;
+background-color:#FFFFFF;
+}
+#search input[type="submit"] {
+padding:2px 8px 3px;
+font-size:12px;
+margin-left:2px;
+background-color:#292980;
+color:#FFFFFF;
+border:none 0;
+}
+#advanced-search { position:absolute; right:0; top:88px;
+width:150px; height:60px;
+text-align:right;
+}
+

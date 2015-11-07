@@ -1,0 +1,81 @@
+/* Лого */
+#logo { display:block; width:439px; height:0; padding-top:83px; overflow:hidden; position:absolute; left:0; top:30px; background:url(../img/logo.png) 0 0 no-repeat transparent; }
+
+/* Верхнее меню */
+#mainmenu { position:absolute; top:1px; left:0; width:600px; height:30px; }
+#mainmenu a { display:block; float:left; height:28px; line-height:24px; padding:0px 20px; background:url(../img/bordermenu.png) right top no-repeat;
+color:#f5f7ff; text-decoration:none; font-family:"Times New Roman", Times, serif; /*text-transform:uppercase;*/ font-size:13px; }
+#mainmenu a.current { color:#c0c8ea; }
+#mainmenu a:hover { color:#c0c8ea; }
+
+#mainmenu2 { position:absolute; top:1px; right:0; width:300px; height:30px; text-align:left; }
+#mainmenu2 a { display:block; float:right; height:28px; line-height:24px; padding:0px 20px; background:url(../img/bordermenu.png) left top no-repeat;
+color:#f5f7ff; text-decoration:none; font-family:"Times New Roman", Times, serif; /*text-transform:uppercase;*/ font-size:13px; }
+#mainmenu a.current { color:#c0c8ea; }
+#mainmenu a:hover { color:#c0c8ea; }
+
+#basket { position:absolute; width:241px; height:37px; top:25px; right:0;
+color:#FFFFFF; line-height:37px; text-align:right; }
+
+#whereami { position:absolute; left:0; top:125px; font-size:11px; }
+
+/* Все что в главной колонке */
+#mainbar .itemmenu { float:left; width:160px; margin-right:20px; }
+#mainbar .end { margin-right:0; }
+.clear { clear:both; }
+
+#mainbar .itemmenu a.iimg { display:block; width:160px; height:160px; background-position:0 0; background-repeat:no-repeat; }
+#mainbar .itemmenu a.iimg div { position:relative; width:160px; height:160px; background:url(../img/item.png) 0 0 no-repeat; }
+#mainbar .itemmenu a.iheader { display:block; margin:15px 5px 25px; color:#3D291F; text-decoration:none; text-align:center; }
+#mainbar .itemmenu a.iheader:hover { text-decoration:underline; }
+#mainbar .itemmenu div.iprop { border:solid 1px #d7cebb; background-color:#faf9f3; padding:5px; }
+#mainbar .itemmenu div.iprop p { float:left; width:50%; margin:0; font-size:11px; color:#5A5B5C; }
+#mainbar .itemmenu a.cena { display:block; margin:15px 0 25px; color:#292980; text-decoration:none; font-size:36px; font-family:"Times New Roman"; }
+#mainbar h2 { font-size:20px; font-weight:normal; color:#293780; }
+
+#temp a.iheader { height:20px; margin-bottom:0; }
+
+/* Левое меню */
+#leftmenu { margin-left:20px; }
+#leftmenu li { list-style:disc outside none; margin:0; padding:0; color:#d7cebb; }
+#leftmenu a { display:block; padding:3px 5px 3px 5px; color:#3D291F; }
+#leftmenu a:hover { text-decoration:underline; }
+#leftmenu li ul { margin-left:20px; }
+#leftbar h2 { font-size:20px; font-weight:normal; color:#293780; }
+
+#leftbar .iclients a.iimg { display:block; width:180px; height:180px; }
+#leftbar .iclients a.iimg div { width:180px; height:180px; border:solid 1px #e7e2df; background-color:#faf9f3; background-position:9px 9px; background-repeat:no-repeat; }
+#leftbar .iclients a.iheader { display:block; margin:15px 0; color:#3D291F; text-decoration:none; }
+#leftbar .iclients a.iheader:hover { text-decoration:underline; }
+
+
+/* Поиск */
+#search { position:absolute; right:0; top:58px;
+width:248px; height:30px;
+text-align:left;
+}
+#search form { margin:0; padding:0; display:inline-block; float:right; }
+#search input { padding:0; margin:0; display:block; float:right; 
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+#search input[type="text"] {
+height:22px;
+width:180px;
+border: none 0;
+background-color:#FFFFFF;
+}
+#search input[type="submit"] {
+padding:2px 8px 3px;
+font-size:12px;
+margin-left:2px;
+background-color:#292980;
+color:#FFFFFF;
+border:none 0;
+}
+#advanced-search { position:absolute; right:0; top:88px;
+width:150px; height:60px;
+text-align:right;
+}
+

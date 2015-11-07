@@ -1,0 +1,154 @@
+/* Логотип */
+#logotype { display:block; width:242px; height:0px; position:absolute; padding-top:60px; overflow:hidden; left:40px; top:22px;
+background:url(../img/logotype-bogacho.png) no-repeat scroll 0px 0px transparent; }
+
+
+#phone-number { position:absolute; right:40px; top:22px; text-align:right; font-size:1.4em; }
+
+
+#form-search { position:absolute; right:40px; top:50px; }
+#form-search input[name="search"] { display:block; float:left; width:158px; height:23px;
+padding:0;
+background:url(../img/bg-search.png) 0 0 no-repeat transparent; border:none; }
+#form-search div { float:left; width:31px; height:23px; background:url(../img/bg-search-bttn.png) 0 0 no-repeat; }
+
+
+#whereami { position:absolute; z-index:20; left:29px; top:0; width:960px; background-color:#321000; line-height:1.8em; font-size:.9em;
+border: solid 1px #260c00;
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90); /* IE 5.5+*/
+-moz-opacity: 0.9; /* Mozilla 1.6 и ниже */
+-khtml-opacity: 0.9; /* Konqueror 3.1, Safari 1.1 */
+opacity: 0.9; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+}
+#whereami a { text-transform:uppercase; }
+#historyback { display:block; width:20px; height:20px; float:left; background:url(../img/historyback.png) 5px 5px no-repeat; border-right:1px solid #260c00;}
+#historyback:hover { background-position:5px -15px;}
+
+
+#mainbar .item { width:311px; height:151px; background:url(../img/bg-items.png) 0 0 no-repeat; float:left; padding-right:10px; overflow:hidden; }
+#mainbar .item.close { width:310px; height:151px; background:url(../img/bg-items.png) 0 0 no-repeat; float:left; }
+#mainbar .item h2 div { background:url(../img/h2.png) bottom right no-repeat; padding-bottom:10px; padding-left:10px; padding-right:5px; display:inline-block; }
+#mainbar .item h2 { padding-top:10px; }
+#mainbar .item p { color:#321000; padding-left:10px; padding-right:10px; }
+#mainbar .item a:link { color:#321000; }
+#mainbar .item a:visited { color:#321000; }
+#mainbar .item a:hover { color:#ffebce; }
+#mainbar .item a:active { color:#321000; }
+
+#footer .item { float:left; width:300px; padding:0 10px; }
+#footer .item h3 { color:#cead96; }
+
+
+
+/*REELL*/
+/*#win {
+	width:962px;height:400px;
+	overflow: hidden;
+	position: relative;
+}
+
+.reel {
+	position: absolute;
+	top: 0; left: 0;
+}
+.reel img {float: left;}
+*/
+
+
+/****
+MENU
+****/
+/* Главное меню уровень 1*/
+#mainmenu { position:absolute; left:29px; top:106px; margin:0; z-index:200; }
+#mainmenu a { display:block; height:24px; float:left; padding-left:22px; padding-right:27px; line-height:20px;
+ text-decoration:none; background:url(../img/main-menu.png) right 0 no-repeat;}
+#mainmenu a.end { background:none; }
+#mainmenu ul li a { background:none; }
+#mainmenu li { float: left; zoom: 1; margin:0; padding:0;}
+#mainmenu li:before { content: ""; }
+
+/* Главное меню уровень 2*/
+#mainmenu ul { visibility: hidden; position: absolute; top: 100%; left:0; z-index:100;
+margin:0; background:url(../img/bg-mainmenu.png) 0 0 repeat;
+width:481px;height:400px;
+}
+#mainmenu ul li { clear:both; }
+                                    /* IE 6 & 7 Needs Inline Block */
+#mainmenu ul li span { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:24px; line-height:20px; cursor:pointer; }
+#mainmenu ul li span:hover { background-color:#280400; color:#ffebce; } 
+
+#mainmenu ul li a { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:24px; line-height:20px; cursor:pointer; }
+#mainmenu ul li a:hover { background-color:#280400; } 
+
+/* Главное меню уровень 3*/
+#mainmenu ul ul { left: 100%; top: 0; }
+#mainmenu ul ul span { padding-left:0; }
+#mainmenu li:hover > ul { visibility: visible; }
+
+
+/****
+PRODUCTS
+****/
+#products { position:relative; width:962px; overflow:hidden; }
+#products.pshow { visibility:visible; border-top:1px solid #260c00; }
+#products.phide { visibility:hidden; }
+
+#products .psi { position:absolute; height:375px; width:962px; }
+#products .psi.psishow { visibility:visible; }
+#products .psi.psihide { visibility:hidden; }
+
+#products .closeprod { display:block; width:20px; height:20px; background:url(../img/closeproducts.png) 5px 5px no-repeat; }
+#products .closeprod:hover { background-position:5px -15px; }
+
+#products .rightprod { display:block; width:20px; height:20px; position:absolute; top:168px; background:url(../img/rightproducts.png) 5px 5px no-repeat; }
+#products .rightprod:hover { background-position:5px -15px; }
+
+#products .leftprod { display:block; width:20px; height:20px; position:absolute; top:188px; background:url(../img/historyback.png) 5px 5px no-repeat; }
+#products .leftprod:hover { background-position:5px -15px; }
+
+#products .reel { position:absolute; left:0px; top:0; }
+#products .ireel { float:left; width:939px; height:375px; }
+
+#products a.item { display:block; float:left; width:167px; height:167px; padding:10px;
+background-color:#cead96; border-right:1px solid #260c00; line-height:14px; color:#321000;
+filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70); /* IE 5.5+*/
+-moz-opacity: 0.7; /* Mozilla 1.6 и ниже */
+-khtml-opacity: 0.7; /* Konqueror 3.1, Safari 1.1 */
+opacity: 0.7; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+}
+#products a.item:hover { color:#ffebce; }
+#products a.item.end { border-right:none; }
+
+
+/****
+PRODUCT ITEM
+****/
+#productitem { width:902px; height:340px; padding:30px; background-color:#cead96; line-height:1.2em; color:#321000; }
+
+
+#sovet { position:absolute; z-index:20; left:29px; top:380px; width:962px; height:20px; line-height:1.8em; font-size:.9em;
+border-top: solid 1px #260c00;
+background:url(../img/bg-mainmenu.png) 0 0 repeat;
+}
+#sovet a { text-transform:uppercase; }
+
+
+
+/* Главное меню уровень 1*/
+#escho { position:absolute; margin:0; z-index:200; }
+#escho li { float: left; margin:0; padding:0; }
+#escho li:before { content: ""; }
+#escho li span { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:20px; line-height:18px; cursor:pointer; }
+#escho li a { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:20px; line-height:18px; cursor:pointer; }
+
+/* Главное меню уровень 2*/
+#escho ul { visibility: hidden; position: absolute; bottom:100%; left:0; z-index:100; margin:0; background:url(../img/bg-mainmenu.png) 0 0 repeat;
+width:481px;
+}
+#escho ul li { clear:both; }
+                                    /* IE 6 & 7 Needs Inline Block */
+#escho ul li span { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:24px; line-height:20px; cursor:pointer; }
+#escho ul li span:hover { background-color:#280400; color:#ffebce; } 
+
+#escho ul li a { width:459px; display: inline-block; padding-left:22px; padding-right:0; height:24px; line-height:20px; cursor:pointer; }
+#escho ul li a:hover { background-color:#280400; } 

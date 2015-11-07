@@ -1,0 +1,75 @@
+/* «аголовки */
+body { font:12px Arial,Verdana,Tahoma,sans-serif; color:#cead96; }
+fieldset, legend, input, select, option, textarea, label { font:inherit; color:#cead96; }
+
+
+h1 { color:#321000; font-size: 24px; line-height: 1.2em; }
+h2 { color:#321000; font-size: 20px; line-height: 1.2em; }
+h3 { font-size: 18px; line-height: 1em; margin:.6em 0; padding-top:.9em; color:#321000; }
+
+/* —сылки */
+a { text-decoration:none; }
+a:link { color:#cead96; }
+a:visited { color:#cead96; }
+a:hover { color:#ffebce; }
+a:active { color:#cead96; }
+
+/* »зображени€ */
+img {border: 0;}
+
+/* ѕараграфы */
+p { line-height: 1.2em; margin:1.2em 0; }
+blockquote { margin:0 2.5em; }
+blockquote p { font-style:italic; }
+small { font-size:.75em; color:#959595; }
+address { padding:1.2em 0; font-size:.85em; font-style:italic; color:#777777; }
+hr { color: #000; /*дл€ IE */ background-color:#000; /*дл€ Firefox, Opera, Safari*/ border:0px none; height:3px; /* высота 1px IE, Firefox, Opera, Safari */ }
+
+/* —писки */
+ol { margin:1.2em 0 1.2em 2.5em; }
+ol li { line-height: 1.1em; margin-bottom:.3em; list-style:decimal outside none; }
+
+ul { margin:1.2em 0 1.2em 1.5em; }
+ul li { line-height: 1.1em; margin-bottom:.3em; list-style:none outside none; }
+ul li:before { content: "Ч "; }
+
+dl { margin:1.2em 0; }
+dl dt { margin-top:1.2em; }
+dl dt:after { content:" Ч"; }
+dl dd { margin-left:2.5em; margin-bottom:1.2em; }
+
+/* ‘ормы */
+fieldset { border: 1px dotted #706f69; padding:0 2em; }
+legend { padding:0 .5em; }
+
+input, textarea, select { padding:.1em; vertical-align:bottom; } /* отступ текста, выравнивание по низу если lable в несколько строк */
+input[type="radio"], input[type="checkbox"] { margin-bottom:.3em; } /* фикс от выравнивани€ по низу */
+label { display:inline-block; width:40%; text-align:right; vertical-align:top; line-height:1.4em; } /* подпись к элементу формы */
+input[type="submit"] { margin-left:40%; padding:.1em .5em; }
+
+/*  оды */
+pre { margin:1.2em 0; }
+pre code { font:14px "Courier New", Courier, monospace; }
+
+/* “аблицы */
+table { margin:.3em 0; border:solid 1px #999999; border-collapse:collapse; }
+table caption { font-size:.85em; color:#777777; margin-bottom:.5em; }
+table thead tr { border-bottom: 1px dashed #CCCCCC; }
+table thead tr th { border-right: 1px dotted #CCCCCC; padding:0 .5em; }
+table thead tr th p { text-align:inherit; }
+table tbody tr { border-bottom: 1px dashed #CCCCCC; }
+table tbody tr:nth-child(odd) { background-color:#F2F2F2; }
+table tbody tr td { border-right: 1px dotted #CCCCCC; padding:0 .5em; }
+table tbody tr td p { text-align:inherit; }
+
+/* Ќј¬»√ј÷»я */
+.wherei { font-size:.84em; margin-bottom:.6em; }
+
+/* ѕќ—“–јЌ»„Ќјя Ќј¬»√ј÷»я */
+.navigation span { display:inline-block; text-align: center; padding: 1px 3px; margin: 0px 1px 0px 0px; }
+.navigation a { display:inline-block; text-align: center; padding: 1px 5px; margin: 0px 1px 0px 0px; color:#ad2d24; text-decoration:none; border-bottom: 3px solid #EEE; }
+.navigation a:hover { border-bottom: 3px solid #000; }
+.navigation a.thispage { color:#000; border-bottom: 3px solid #FFF; }
+.navigation a.thispage:hover { border-bottom: 3px solid #000; }
+
+

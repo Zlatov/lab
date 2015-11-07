@@ -1,0 +1,19 @@
+* { margin: 0; padding: 0; }
+html { height: 100%; background-color:#FFFFFF; }
+body { min-height:100%; height: 100%; background-color:#FFFFFF; }
+#page { height: auto !important; min-height:100%; height:100%; }
+#footer_guarantor { height:100px; clear:both; }
+#footer { height:100px; clear:both; margin-top:-100px; }
+
+#page { background:url(../img/page.png) 0 0 repeat #fefcef; }
+#header { height:160px; background:url(../img/header.png) center 0 repeat-x; }
+#header-content { width:950px; margin:0 auto; position:relative; }
+#main { margin-top:-11px; background:url(../img/mainborder.png) 0 0 repeat-x; }
+#main-content { width:950px; margin:0 auto; }
+#leftbar { float:left; width:230px; margin-top:25px; margin-right:20px; }
+#mainbar { float:left; width:700px; margin-top:25px; }
+#footer { background:url(../img/footer.png) 0 0 repeat-x; }
+#footer-content { width:930px; margin:0 auto; height:80px; padding:20px 10px 0; color:#f5f7ff; }
+
+
+

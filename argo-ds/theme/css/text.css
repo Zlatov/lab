@@ -1,0 +1,44 @@
+/* –азмеры шрифтов */
+html, body, th, td { font: 12px/1.3em Arial, Helvetica, sans-serif; color:#3D291F; }
+
+h1 { font-size:16px; }
+h2 { font-size:14px; }
+h3 { font-size:12px; }
+
+/* —сылки */
+a { color:#2f406f; text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* —писки */
+ul { margin-left:3em; }
+ol { margin-left:4em; }
+
+li { margin:.3em 0; padding-left:0; }
+
+ol li { list-style:decimal outside none; }
+ul li { list-style:disc outside none; }
+
+/*ul li:before { content: "Ч "; }*/
+dl dt { margin-top:1.3em; }
+
+dl dt:after { content:" Ч"; }
+dl dd { margin-left:2.5em; margin-bottom:1.3em; }
+
+/* ќтступы */
+h1, h2, h3 { line-height: 1.3em; margin:1.3em 0 .6em; }
+p, ol, ul, li, dl, form, pre, table { line-height: 1.3em; margin:.6em 0; }
+h1:first-child, h2:first-child, h3:first-child { margin-top:0; }
+
+/* ÷вета отличные от основного */
+h1, h2, h3, legend { color:#353434; }
+
+
+/* ‘ормы */
+legend { padding:0 .5em; }
+fieldset { border: 1px dotted #706f69; padding:0 2em; }
+p label { display:inline-block; width:40%; padding:.2em .5em .2em 0; text-align:right; vertical-align:top; }
+input, select, textarea { padding:.2em; }
+p input, p textarea, p select { vertical-align:bottom; }
+p input[type="radio"], p input[type="checkbox"] { margin-bottom:.3em; }
+p input[type="submit"] { margin-left:40%; padding:.1em .5em; }
+
