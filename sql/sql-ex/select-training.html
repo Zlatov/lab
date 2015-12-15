@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Упражнения обучающего этапа (SELECT)</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					
+
+
+
+
+<h1>Упражнения обучающего этапа (SELECT)</h1>
+<h2>Условие задачи</h2>
+<p>Краткая информация о базе данных "Компьютерная фирма":</p>
+<p>Схема БД состоит из четырех таблиц:</p>
+<ul>
+    <li>Product
+        <ul>
+            <li>maker ('A', 'B', 'C', 'D' или 'E')</li>
+            <li>model (uk)</li>
+            <li>type ('PC', 'Laptop' или 'Printer')</li>
+        </ul>
+    </li>
+    <li>PC
+        <ul>
+            <li>code</li>
+            <li>model</li>
+            <li>speed</li>
+            <li>ram</li>
+            <li>hd</li>
+            <li>cd ('4x', '8x', '16x', '32x'…)</li>
+            <li>price</li>
+        </ul>
+    </li>
+    <li>Laptop
+        <ul>
+            <li>code</li>
+            <li>model</li>
+            <li>speed</li>
+            <li>ram</li>
+            <li>hd</li>
+            <li>price</li>
+            <li>screen</li>
+        </ul>
+    </li>
+    <li>Printer
+        <ul>
+            <li>code</li>
+            <li>model</li>
+            <li>color ('y' — если цветной)</li>
+            <li>type ('Laser', 'Jet' или 'Matrix')</li>
+            <li>price</li>
+        </ul>
+    </li>
+</ul>
+<p>Таблица Product представляет производителя (maker), номер модели (model) и тип ('PC' - ПК, 'Laptop' - ПК-блокнот или 'Printer' - принтер). Предполагается, что номера моделей в таблице Product уникальны для всех производителей и типов продуктов. В таблицеPC для каждого ПК, однозначно определяемого уникальным кодом – code, указаны модель – model (внешний ключ к таблице Product), скорость - speed (процессора в мегагерцах), объем памяти - ram (в мегабайтах), размер диска - hd (в гигабайтах), скорость считывающегоустройства - cd (например, '4x') и цена - price. Таблица Laptop аналогична таблице РС за исключением того, что вместо скорости CD содержит размер экрана -screen (в дюймах). В таблице Printer для каждой модели принтера указывается, является ли он цветным- color ('y', если цветной), тип принтера - type (лазерный – 'Laser', струйный – 'Jet' или матричный – 'Matrix') и цена - price.</p>
+<h2>Задания и решения</h2>
+
+
+
+<h3>Задача № 1</h3>
+<p>Найдите номер модели, скорость и размер жесткого диска для всех ПК стоимостью менее 500 дол. Вывести: model, speed и hd</p>
+<pre class="prettyprint lang-sql">select
+    p.model,
+    c.speed,
+    c.hd
+from
+    pc c
+left join
+    product p on p.model = c.model
+where
+    c.price < 500
+</pre>
+
+
+
+<h3>Задача № 2</h3>
+<p>Найдите производителей принтеров. Вывести: maker</p>
+<pre class="prettyprint lang-sql">select
+    pro.maker
+from
+    product pro
+where
+    pro.type = 'Printer'
+group by
+    pro.maker
+</pre>
+
+
+
+<h3>Задача № 3</h3>
+<p>Найдите номер модели, объем памяти и размеры экранов ПК-блокнотов, цена которых превышает 1000 дол.</p>
+<pre class="prettyprint lang-sql">select
+    p.model,
+    p.ram,
+    p.screen
+from
+    laptop p
+where
+    p.price > 1000
+</pre>
+
+
+
+<h3>Задача № 4</h3>
+<p>Найдите все записи таблицы Printer для цветных принтеров.</p>
+<pre class="prettyprint lang-sql">select
+    a.*
+from
+    printer a
+where
+    a.color = 'y'
+</pre>
+
+
+
+<h3>Задача № 5</h3>
+<p>Найдите номер модели, скорость и размер жесткого диска ПК, имеющих 12x или 24x CD и цену менее 600 дол.</p>
+<pre class="prettyprint lang-sql">select
+    a.model,
+    a.speed,
+    a.hd
+from
+    pc a
+where
+    (a.cd = '12x' or a.cd = '24x') and a.price < 600</pre>
+
+
+
+<h3>Задача № 6</h3>
+<p>Для каждого производителя, выпускающего ПК-блокноты c объёмом жесткого диска не менее 10 Гбайт, найти скорости таких ПК-блокнотов. Вывод: производитель, скорость.</p>
+<pre class="prettyprint lang-sql">select
+    distinct b.maker,
+    a.speed
+from
+    laptop a
+left join
+    product b on b.model = a.model
+where
+    a.hd >= 10</pre>
+
+
+
+<h3>Задача № 7</h3>
+<p>Найдите номера моделей и цены всех продуктов (любого типа), выпущенных производителем B (латинская буква).</p>
+<pre class="prettyprint lang-sql">select
+    a.model,
+    a.price
+from
+    (
+        select model, price
+        from pc
+        union
+        select model, price
+        from laptop
+        union
+        select model, price
+        from printer
+    ) as a
+left join
+    product p on p.model = a.model
+where
+    p.maker = 'B'</pre>
+
+
+
+<h3>Задача № 8</h3>
+<p>Найдите производителя, выпускающего ПК, но не ПК-блокноты.</p>
+<pre class="prettyprint lang-sql">select
+    distinct a.maker
+from
+    product a
+left join (
+    select
+        b.maker
+    from
+        product b
+    where
+        b.type = 'laptop'
+) as c on c.maker = a.maker
+where
+    a.type = 'pc'
+    and c.maker is null</pre>
+
+
+
+<h3>Задача № 9</h3>
+<p>Найдите производителей ПК с процессором не менее 450 Мгц. Вывести: Maker</p>
+<pre class="prettyprint lang-sql">select
+ distinct a.maker
+from
+ product a
+left join
+ pc b on b.model = a.model
+where
+ b.speed >= 450
+</pre>
+
+
+
+<h3>Задача № 10</h3>
+<p>Найдите модели принтеров, имеющих самую высокую цену. Вывести: model, price</p>
+<pre class="prettyprint lang-sql">select top 1 with ties model, price
+from printer
+order by price desc</pre>
+
+
+
+<h3>Задача № 11</h3>
+<p>Найдите среднюю скорость ПК.</p>
+<pre class="prettyprint lang-sql">select
+ avg(a.speed) as avg
+from
+ pc a
+</pre>
+
+
+
+<h3>Задача № 12</h3>
+<p>Найдите среднюю скорость ПК-блокнотов, цена которых превышает 1000 дол.</p>
+<pre class="prettyprint lang-sql">select
+ avg(a.speed) as avg
+from
+ laptop a
+where
+ a.price > 1000</pre>
+
+
+
+<h3>Задача № 13</h3>
+<p>Найдите среднюю скорость ПК, выпущенных производителем A.</p>
+<pre class="prettyprint lang-sql">select
+ avg(a.speed) as avg
+from
+ pc a
+inner join
+ product b on b.model = a.model
+where
+ b.maker = 'A'
+</pre>
+
+
+
+<h3>Задача № 14</h3>
+<p>Найти производителей, которые выпускают более одной модели, при этом все выпускаемые производителем модели являются продуктами одного типа. Вывести: maker, type</p>
+<pre class="prettyprint lang-sql">select a.maker, max(a.type)
+from product a
+group by a.maker
+having count(a.model)>1 and count(distinct a.type) =1</pre>
+
+
+
+<h3>Задача № 15</h3>
+<p>Найдите размеры жестких дисков, совпадающих у двух и более PC. Вывести: HD</p>
+<pre class="prettyprint lang-sql">select
+ a.hd
+from
+ pc a
+group by
+ a.hd
+having
+ count(a.hd) >1
+</pre>
+
+
+
+<h3>Задача № 16</h3>
+<p>Найдите пары моделей PC, имеющих одинаковые скорость и RAM. В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.</p>
+<pre class="prettyprint lang-sql">select
+ distinct a.model, b.model,
+ a.speed, a.ram
+from
+ pc a, pc b
+where
+ a.speed = b.speed
+ and a.ram = b.ram
+ and a.model > b.model</pre>
+
+
+
+<h3>Задача № 17</h3>
+<p>Найдите модели ПК-блокнотов, скорость которых меньше скорости любого из ПК. 
+Вывести: type, model, speed</p>
+<pre class="prettyprint lang-sql">select
+ distinct b.type,
+ a.model,
+ a.speed
+from
+ laptop a
+left join
+ product b on b.model = a.model
+where
+ a.speed < ( select min(distinct speed) from pc )</pre>
+
+
+
+<h3>Задача № 18</h3>
+<p>Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price</p>
+<pre class="prettyprint lang-sql">select
+ distinct product.maker,
+ printer.price
+from
+ printer, product
+where
+ printer.model = product.model
+ and printer.color = 'y'
+ and printer.price = (
+  select min(price)
+  from printer
+  where printer.color = 'y'
+ )</pre>
+
+
+
+<h3>Задача № 19</h3>
+<p>Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов. Вывести: maker, средний размер экрана.</p>
+<pre class="prettyprint lang-sql">select
+ product.maker,
+ avg(laptop.screen)
+from
+ product
+right join
+ laptop on laptop.model = product.model
+group by
+ product.maker</pre>
+
+
+
+<h3>Задача № 20</h3>
+<p>Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.</p>
+<pre class="prettyprint lang-sql">select
+ a.maker,
+ count(a.model)
+from
+ product a
+where
+ a.type = 'pc'
+group by
+ a.maker
+having
+ count(a.model) >= 3</pre>
+
+
+
+<h3>Задача № 21</h3>
+<p>Найдите максимальную цену ПК, выпускаемых каждым производителем, у которого есть модели в таблице PC. Вывести: maker, максимальная цена.</p>
+<pre class="prettyprint lang-sql">select
+ product.maker,
+ max(pc.price)
+from
+ product, pc
+where
+ product.model = pc.model
+group by
+ product.maker
+</pre>
+
+
+
+<h3>Задача № 22</h3>
+<p>Для каждого значения скорости ПК, превышающего 600 МГц, определите среднюю цену ПК с такой же скоростью. Вывести: speed, средняя цена.</p>
+<pre class="prettyprint lang-sql">select
+ a.speed,
+ avg(a.price)
+from
+ pc a
+where
+ a.speed > 600
+group by
+ a.speed
+</pre>
+
+
+
+<h3>Задача № 23</h3>
+<p>Найдите производителей, которые производили бы как ПК
+со скоростью не менее 750 МГц, так и ПК-блокноты со скоростью не менее 750 МГц. Вывести: Maker</p>
+<pre class="prettyprint lang-sql">select distinct p.maker
+from product p
+left join pc a on a.model = p.model
+where
+ a.speed >= 750
+ and p.maker in
+(
+select p.maker
+from product p
+left join laptop l on l.model = p.model 
+where l.speed >= 750
+)
+</pre>
+
+
+
+<h3>Задача № 24</h3>
+<p>Перечислите номера моделей любых типов, имеющих самую высокую цену по всей имеющейся в базе данных продукции.</p>
+<pre class="prettyprint lang-sql">select model
+from
+(
+select model, price
+from pc
+union
+select model, price
+from laptop
+union
+select model, price
+from printer
+) as a
+where
+ price = (
+  select
+   max(b.price)
+  from
+  (
+   select max(price) as price
+   from pc
+   union
+   select max(price) as price
+   from laptop
+   union
+   select max(price) as price
+   from printer
+  ) as b
+)
+</pre>
+
+
+
+<h3>Задача № 25</h3>
+<p>Найдите производителей принтеров, которые производят ПК с наименьшим объемом RAM и с самым быстрым процессором среди всех ПК, имеющих наименьший объем RAM. Вывести: Maker</p>
+<pre class="prettyprint lang-sql">select distinct maker
+from product
+where model in
+(
+
+ select model
+ from pc 
+ where
+  ram =
+  ( 
+  select min(ram) 
+  from pc 
+  )
+  and speed = 
+  ( 
+  select max(speed) 
+  from pc 
+  where ram = 
+   (
+   select min(ram)
+   from pc
+   )
+  )
+ )
+ and maker in
+ (
+ select maker
+ from product
+ where type = 'printer'
+ )
+</pre>
+
+
+
+<h3>Задача № 26</h3>
+<p>Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A (латинская буква). Вывести: одна общая средняя цена.</p>
+<pre class="prettyprint lang-sql">select avg(price)
+from
+(
+select price from pc, product
+where pc.model = product.model and product.maker = 'A'
+union all
+select price from laptop, product
+where laptop.model = product.model and product.maker = 'A'
+) as t
+</pre>
+
+
+
+<h3>Задача № 27</h3>
+<p>Найдите средний размер диска ПК каждого из тех производителей, которые выпускают и принтеры. Вывести: maker, средний размер HD.</p>
+<pre class="prettyprint lang-sql">select m.maker, g.avg
+from
+(
+select distinct maker
+from product
+where type = 'printer'
+) as m
+inner join
+(
+select a.maker, avg(b.hd) as avg
+from product a
+inner join pc b on b.model = a.model
+group by a.maker
+) as g on g.maker = m.maker
+</pre>
+
+
+<h2>Новое условие</h2>
+
+<p>Схема базы данных состоит из трех отношений:</p>
+<p>utQ (Q_ID int, Q_NAME varchar(35)); utV (V_ID int, V_NAME varchar(35), V_COLOR char(1)); utB (B_Q_ID int, B_V_ID int, B_VOL tinyint, B_DATETIME datetime).</p>
+<p>Таблица utQ содержит идентификатор и название квадрата, цвет которого первоначально черный.</p>
+<p>Таблица utV содержит идентификатор, название и цвет баллончика с краской.</p>
+<p>Таблица utB содержит информацию об окраске квадрата баллончиком: идентификатор квадрата, идентификатор баллончика, количество краски и время окраски.</p>
+<p>При этом следует иметь в виду, что:</p>
+<p>- баллончики с краской могут быть трех цветов - красный V_COLOR='R', зеленый V_COLOR='G', голубой V_COLOR='B' (латинские буквы).</p>
+<p>- объем баллончика равен 255 и первоначально он полный;</p>
+<p>- цвет квадрата определяется по правилу RGB, т.е. R=0,G=0,B=0 - черный, R=255, G=255, B=255 - белый;</p>
+<p>- запись в таблице закрасок utB уменьшает количество краски в баллончике на величину B_VOL и соответственно увеличивает количество краски в квадрате на эту же величину;</p>
+<p>- значение 0 < B_VOL <= 255;</p>
+<p>- количество краски одного цвета в квадрате не превышает 255, а количество краски в баллончике не может быть меньше нуля;</p>
+<p>- время окраски B_DATETIME дано с точностью до секунды, т.е. не содержит миллисекунд.</p>
+
+<h3>Задача № 28</h3>
+
+<p>C точностью до двух десятичных знаков определить среднее количество краски на квадрате.</p>
+<pre class="prettyprint lang-sql">select
+ cast(
+  (
+  cast( isnull(sum(b_vol),0) as decimal(15,2) )
+  / (select count(1) from utQ)
+  )
+  as decimal(15,2) 
+ )
+from utB
+</pre>
+
+
+
+<h3>Задача № 29</h3>
+<p></p>
+<pre class="prettyprint lang-sql"></pre>
+
+
+
+<h3>Задача № 30</h3>
+<p></p>
+<pre class="prettyprint lang-sql"></pre>
+
+
+
+				</div>
+			</div>
+		</div>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Подсветка синтаксиса кода -->
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	</body>
+</html>
+
