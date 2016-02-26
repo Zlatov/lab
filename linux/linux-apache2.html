@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>усановка Apache</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					
+
+
+					<h1 class="text-center">усановка Apache</h1>
+
+<h2>усановка Apache</h2>
+<pre>sudo apt-get update
+sudo apt-get install apache2</pre>
+
+<p>Теперь приконнектим к новоиспеченному апачу php5, вместе с библиотеками для работы с MySQL и графикой:</p>
+<pre>sudo apt-get install php5 libapache2-mod-php5 libapache2-mod-auth-mysql php5-mysql php-image-graph imagemagick</pre>
+
+<p>Старт/Стоп/Перезапуск сервера Apache под Linux в терминале</p>
+<pre>/etc/init.d/apache2 {restart}{stop}{start}</pre>
+<p>ну или что-то вроде</p>
+<pre>sudo service httpd {restart}{stop}{start}
+sudo service apache2 {restart}{stop}{start}</pre>
+
+<p>владелец директорий - root-пользователь. Если мы хотим, чтобы обычные пользователи могли изменять файлы в веб-директориях, мы можем изменить их владельца:</p>
+<pre>sudo chown -R $USER:$USER /var/www/example.com/public_html</pre>
+<p>так же необходимо немного отредактировать права доступа, чтобы убедиться, что доступ на чтение разрешен к общей веб-директории и всем файлам и папкам, содержащимся в ней</p>
+<pre>sudo chmod -R 755 /var/www</pre>
+
+<p>а лучше</p>
+<pre>sudo find dir/ -type d -exec chmod 755 {} \;
+sudo find dir/ -type f -exec chmod 644 {} \;</pre>
+
+<p>и еще лучше:</p>
+
+<pre>sudo find . -type d ! -perm 755 -exec chmod 755 {} \;
+sudo find . -type f ! -perm 644 -exec chmod 644 {} \;</pre>
+
+<p>Добавляем строку в начало файла <code>/etc/apache2/apache2.conf</code> для того, чтобы избежать ошибки <code>AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message</code></p>
+<pre>ServerName localhost</pre>
+
+<p>Создание файлов виртуального хоста</p>
+<p>создаем и редактируем файл <code>/etc/apache2/sites-available/test.loc.conf</code></p>
+<pre>
+&lt;VirtualHost *:80>
+
+	ServerName test.loc
+	ServerAlias test.loc www.test.loc
+
+	ServerAdmin zlatov@test.loc
+	
+	DocumentRoot /media/yadfeshhm/PROJECTS/my/test.loc/www
+	
+	&lt;Directory /media/yadfeshhm/PROJECTS/my/test.loc/www>
+		#Options Indexes FollowSymLinks MultiViews
+		#AllowOverride None
+		#Order allow,deny
+		#allow from all
+
+		#Require all granted
+		
+		Options Indexes FollowSymLinks Includes
+		AllowOverride All
+		Order deny,allow
+		Allow from all
+
+	&lt;/Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+&lt;/VirtualHost>
+</pre>
+
+<p>Включение новых виртуальных хостов (a2ensite, a2dissite)</p>
+<pre>sudo a2ensite test.loc.conf</pre>
+<p>После необходимо перезапустить Apache, чтобы изменения вступили в силу</p>
+<pre>sudo service apache2 restart</pre>
+
+	
+<pre>sudo nano /etc/hosts</pre>
+<pre>127.0.0.1	test.loc</pre>
+
+<hr>
+<p>Не работает команда chmod или запись на NTFS пользователем</p>
+<p>Нужно монтировать с опцией umask=0</p>
+<p>NTFS не поддерживает разграничение прав пользователей в формате UNIX (всегда будет 700).</p>
+
+
+
+
+
+<h2>Подключаем модуль Mod rewrite</h2>
+<p>Перейдите в каталог /etc/apache2/mods-available и убедитесь, что там есть файл rewrite.load отвечающий за загрузку модуля Mod rewrite. Для этого выполните в консоли следующие команды:</p>
+
+<pre>cd /etc/apache2/mods-available
+ls</pre>
+<p>В списке файлов должен присутствовать файл с именем rewrite.load.</p>
+
+<p>Теперь перейдем в каталог /etc/apache2/mods-enabled и создадим символьную ссылку на файл rewrite.load. Для этого выполните команды:</p>
+
+<pre>cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/rewrite.load rewrite.load</pre>
+
+
+<p>Изменяем настройки виртуального хоста</p>
+
+<pre>AllowOverride All</pre>
+
+
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="Hello World"></script>
+	</body>
+</html>
