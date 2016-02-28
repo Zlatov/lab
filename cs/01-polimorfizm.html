@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Полиморфизм</title>
+    <meta charset="UTF-8">
+    <title>Полиморфизм</title>
 </head>
 <body>
 <!-- <pre class="prettyprint lang-cs">public class Shape
@@ -89,9 +89,13 @@ class Program
 <p><code class="prettyprint lang-cs">public int day;</code> - тупое поле (переменная).</p>
 <p><code class="prettyprint lang-cs">public int day { get{return day;} set{day = 100;} }</code> - свойство, не "переменная", использовать преимущественно для хранения данных из БД, так как могут выполнять действия при изменении данных, что может быть полезным.</p>
 <p>Дурной тон делать вычисления в <code>get</code> перед его возвращением.</p>
+
+<hr>
 <h2>Немного полиморфизма</h2>
 <p><code class="prettyprint lang-cs">virtual</code> - виртуальные _методы _свойства _события и _индексаторы могут быть переопределены в производном классе</p>
+<p>Модификатор <strong>virtual</strong> нельзя использовать с модификаторами <strong>static</strong>, <strong>abstract</strong>, <strong>private</strong> или <strong>override</strong>.</p>
 <p>тупые _поля не могут быть виртуальными, потому что они тупые.</p>
+<hr>
 <p><code class="prettyprint lang-cs">override</code> - переопределение в производном классе</p>
 <p>и чтоб ты не делал:</p>
 <pre class="prettyprint lang-cs">
@@ -111,6 +115,7 @@ B.DoWork();  // Calls the new method.
 BaseClass A = (BaseClass)B;
 A.DoWork();  // Calls the old method.
 </pre>
+<hr>
 <h3>Хватит уже наследовать</h3>
 <pre class="prettyprint lang-cs">
 public class C : B
@@ -122,10 +127,10 @@ public class C : B
 <p>Но метод по-прежнему виртуален для C, B и A.</p>
 <p>Если <code>DoWork()</code> вызывается с помощью переменной типа:</p>
 <ul>
-	<li>D - вызывается новый DoWork</li>
-	<li>C - реализацию DoWork на классе C</li>
-	<li>B - реализацию DoWork на классе C</li>
-	<li>A - реализацию DoWork на классе C</li>
+    <li>D - вызывается новый DoWork</li>
+    <li>C - реализацию DoWork на классе C</li>
+    <li>B - реализацию DoWork на классе C</li>
+    <li>A - реализацию DoWork на классе C</li>
 </ul>
 <h3>Всетаки дайте старое</h3>
 <p>с помощью ключевого слова <code>base</code></p>
@@ -145,6 +150,14 @@ public class Derived : Base
     }
 }
 </pre>
+
+<hr>
+
+<pre class="prettyprint lang-cs">using (object1) { /**/ }</pre>
+<p>эквивалентно</p>
+<pre class="prettyprint lang-cs">try {} finally { ((IDisposable)object1).Dispose(); }</pre>
+<p>что гарантирует вызов метода Dispose, даже если при вызове методов в объекте происходит исключение.</p>
+
 
 
 
