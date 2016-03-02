@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName 'Authorization...'
+AuthUserFile C:\projects\my\lab.zlatov.net\public_html\php\htaccess\.htpasswd
+Require valid-user
