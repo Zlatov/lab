@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>MySQL basic knowledge</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1 class="text-center" id="1">MySQL basic knowledge</h1>
+					<ul>
+						<li><a href="#1">Типы данных</a>
+							<ul>
+								<li><a href="#int">INT</a></li>
+								<li><a href="#smallint">SMALLINT</a></li>
+								<li><a href="#tinyint">TINYINT</a></li>
+								<li><a href="#decimal">DECIMAL</a></li>
+								<li><a href="#enum">ENUM</a></li>
+								<li><a href="#set">SET</a></li>
+							</ul>
+						</li>
+						<li><a href="#2">Операторы</a>
+							<ul>
+								<li><a href="#coalesce">COALESCE</a></li>
+							</ul>
+						</li>
+						<li><a href="#"></a></li>
+						<li><a href="#"></a></li>
+					</ul>
+					<h2>Типы данных</h2>
+					<h3 id="int">INT</h3>
+					<p><code>INT(11)</code> — сколько знаков будет при заполнении нулями (UNSIGNED). Если поле не UNSIGNED, то число ни на что не влияет, только доставляет неудобства при работе с внешними ключами. Диапазон со знаком от -2147483648 до 2147483647. Диапазон без знака от 0 до 4294967295.</p>
+					<h3 id="smallint">SMALLINT</h3>
+					<p>Диапазон со знаком от -32768 до 32767. Диапазон без знака от 0 до 65535.</p>
+					<h3 id="tinyint">TINYINT</h3>
+					<p>Диапазон со знаком от -128 до 127. Диапазон без знака от 0 до 255.</p>
+					<h3 id="decimal">DECIMAL</h3>
+					<p>DECIMAL(m,n) — лучшее для хранения цен.</p>
+					<h3 id="enum">ENUM</h3>
+					<p>— принимает значение из списка допустимых*. ENUM("один", "два", "три").</p>
+					<p>* — может принимать значение пустой строки если при INSERT было указано неверное. Если нет <code>NOT NULL</code>, то так же может принимать и NULL.</p>
+					<p>Можно сравнивать по номеру а не по значению <code>SELECT * FROM tbl_name WHERE enum_col=1</code> то же самое что и <code>SELECT * FROM tbl_name WHERE enum_col='один'</code>. Нумерация от 1, неверное значение (пустая строка) принимает номер 0, а NULL соответственно NULL.</p>
+					<h3 id="set">SET</h3>
+					<p>Подобие много ко многим бес смежной таблицы: <code>SET("один", "два") NOT NULL</code> — поле может принимать значения "", "один", "два" и "один,два". Максимум 64 различных элемента.</p>
+					<h2 id="2">Операторы</h2>
+					<h3 id="coalesce">COALESCE</h3>
+					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<script src="Hello World"></script>
+	</body>
+</html>
