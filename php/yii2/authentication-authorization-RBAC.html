@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Authentication, Authorization, and RBAC</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1 class="text-center">Authentication, Authorization, and RBAC</h1>
+					<div id="toc"></div>
+					<h2>HttpBasicAuth</h2>
+					<p>+ Просто</p>
+					<p>- Логин и пароль не шифруются и передаются в каждом запросе</p>
+					<p>Например в _модуле:</p>
+					<pre>public function behaviors()
+{
+	return [
+		'authenticator' => [
+			'class' => HttpBasicAuth::className(),
+			'realm' => 'Защищенная область приложения',
+			'auth' => function($username, $password) {
+				$user = User::findByUserName($username);
+				if ($user &amp;&amp; $user->validatePassword($password)) {
+					return $user;
+				} else {
+					return null;
+				}
+			}
+
+		],
+		'access' => [
+			'class' => ...
+			'rules' => ...
+		]
+	]
+}</pre>
+
+					<h2>QueryParamAuth</h2>
+					<p>loginByAccessToken</p>
+					<p>+ Просто</p>
+					<p>+ Передается токен</p>
+					<p>+ Не нужно мучаться с заголовками, подходит для любых сайтов</p>
+					<p>- Неочевидный способ аутентификации</p>
+					<p>- Токены можно перехватить</p>
+					<h2>HttpBearerAuth</h2>
+					<p>Как и HTTPBasicAuth но передается токен</p>
+					<h2>Фильтер AccessControl (ACF)</h2>
+					<p>поля AccessControl: only (или except), rules и если совя логика denyCallback.</p>
+					<p>поля AccessRule: allow, action, controllers, roles, ips, verbs и если совя логика matchCallback, denyCallback.</p>
+					<p>каждый элемент массива ['access']['rules'] преобразуется в объект класса AccessRule</p>
+					<p>вместо поля roles можно задавать IP-адреса: <code>'ips' => ['127.0.0.*',...]</code></p>
+					<p>или <code>'verbs' => ['GET',...]</code>, но не обязательно = для этого есть отдельный класс VerbFilter, для этого создается еще один массив ['access']['verbs']</p>
+					<p>Фильтр прост, работает только с пользователями авторизованными или не авторизованными ('@' и '?'), однако есть поле denyCallback в которое можно запихнуть анонимную функцию для расширения проверки.</p>
+					<p>Если проверки массивные и контроллеров много (необходимо фактически дублировать код из контроллера в контроллер), то необходимо провести инкапсуляцию, а именно применить роли (RBAC).</p>
+					<h2>RBAC</h2>
+					<p>RBAC представлен в двух реализациях PhpManager и DbManager</p>
+					<p>Рассмотрим компонент authManager (<code>Yii::$app->authManager;</code> или <code>Yii::$app->getAuthManager();</code>) на примере <code>vendor/yiisoft/yii2/rbac/BaseManager.php</code>.</p>
+					<p>Основной метод checkAccess() ... и основная роль defaultRoles - которая применяется ко всем пользователям (если это вообще необходимо).</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#toc").append('<p>Содержание:</p>');
+				$("#toc").append('<ul></ul>');
+				$("h2").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h2" + i);
+					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h3").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h3" + i);
+					var prevh2 = current.prevAll("h2").first();
+					var j = prevh2.attr("id").substring(2);
+					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h4").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h4" + i);
+					var prevh3 = current.prevAll("h3").first();
+					var j = prevh3.attr("id").substring(2);
+					alert
+					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h5").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h5" + i);
+					var prevh4 = current.prevAll("h4").first();
+					var j = prevh4.attr("id").substring(2);
+					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h6").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h6" + i);
+					var prevh5 = current.prevAll("h5").first();
+					var j = prevh5.attr("id").substring(2);
+					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+			});
+		</script>
+	</body>
+</html>

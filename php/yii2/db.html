@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MySQL basic knowledge</title>
+		<title>Yii2</title>
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -20,38 +20,20 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">MySQL basic knowledge</h1>
-					<div id="toc"></div>
-					<h2>Типы данных</h2>
-					<h3>INT</h3>
-					<p><code>INT(11)</code> — сколько знаков будет при заполнении нулями (UNSIGNED). Если поле не UNSIGNED, то число ни на что не влияет, только доставляет неудобства при работе с внешними ключами. Диапазон со знаком от -2147483648 до 2147483647. Диапазон без знака от 0 до 4294967295.</p>
-					<h3>SMALLINT</h3>
-					<p>Диапазон со знаком от -32768 до 32767. Диапазон без знака от 0 до 65535.</p>
-					<h3>TINYINT</h3>
-					<p>Диапазон со знаком от -128 до 127. Диапазон без знака от 0 до 255.</p>
-					<h3>DECIMAL</h3>
-					<p>DECIMAL(m,n) — лучшее для хранения цен.</p>
-					<h3>ENUM</h3>
-					<p>— принимает значение из списка допустимых*. ENUM("один", "два", "три").</p>
-					<p>* — может принимать значение пустой строки если при INSERT было указано неверное. Если нет <code>NOT NULL</code>, то так же может принимать и NULL.</p>
-					<p>Можно сравнивать по номеру а не по значению <code>SELECT * FROM tbl_name WHERE enum_col=1</code> то же самое что и <code>SELECT * FROM tbl_name WHERE enum_col='один'</code>. Нумерация от 1, неверное значение (пустая строка) принимает номер 0, а NULL соответственно NULL.</p>
-					<h3>SET</h3>
-					<p>Подобие много ко многим бес смежной таблицы: <code>SET("один", "два") NOT NULL</code> — поле может принимать значения "", "один", "два" и "один,два". Максимум 64 различных элемента.</p>
-					<h2>Операторы</h2>
-					<h3>COALESCE</h3>
-					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
-					<h2>Параметры</h2>
-					<h3>Для удаления связных данны</h3>
-					<p><code>SET AUTOCOMMIT = 0; SET FOREIGN_KEY_CHECKS = 0; SET UNIQUE_CHECKS = 0;</code></p>
-					<p><code>truncate `table`;</code> или другое удаление.</p>
-					<p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
-					<h2>Функции</h2>
-					<h3>Работа со строками</h3>
-					<h4>CHAR_LENGTH</h4>
-					<p><code>integer CHAR_LENGTH(str string)</code>возвращают длину строки. Поддерживает многобайтовые символы.</p>
+					<h1 class="text-center">Yii2</h1>
+					<h2>Работа с базами данных</h2>
+					<h3>Yii DAO (объекты доступа к данным)</h3>
+					<h4>Выполнение SQL запросов</h4>
+<pre>$posts = Yii::$app->db->createCommand('SELECT * FROM post')
+	->queryAll();
+$product = Yii::$app->db->createCommand('call product_view(:id);')
+	->bindValue(':id', $_GET['id'])
+	->queryOne();</pre>
+
 				</div>
 			</div>
 		</div>
+
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->

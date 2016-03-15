@@ -75,6 +75,32 @@ if ($fh) {
 }
 */
 
+$fh = fopen('./file.txt', 'r');
+if ($fh) {
+	// echo "SET AUTOCOMMIT = 0; SET FOREIGN_KEY_CHECKS = 0; SET UNIQUE_CHECKS = 0;";
+	while (!feof($fh)) {
+		$s1 = fgets($fh);
+		$s1 = str_replace("\n",'',$s1);
+		echo "START TRANSACTION;".PHP_EOL;
+
+		echo "INSERT INTO `product` (`header`,`price`,`category_id`) VALUES (";
+		$array = preg_split("/[\s]+/",$s1);
+		$header = $array[0] . (isset($array[1])?" ".$array[1]:'') . (isset($array[2])?" ".$array[2]:''). (isset($array[3])?" ".$array[3]:'') . "&#8230;";
+		echo "'" . addslashes($header) . "', ";
+		$price = rand(10,200) * .01;
+		echo "" . addslashes($price) . ", ";
+		echo "1);".PHP_EOL;
+
+		$s1 = addslashes($s1);
+		echo "INSERT INTO `fish` (`product_id`,`paragraph`,`html`,`strong`,`em`,`content`) VALUES (LAST_INSERT_ID(),1,0,0,0,'{$s1}');".PHP_EOL;
+
+		echo "COMMIT;".PHP_EOL;
+		echo PHP_EOL;
+	}
+	// echo "SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;";
+}
+
+
 /*
 echo "REPLACE INTO `webhobru_yii`.`news`
 (`id`,
