@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Title Page</title>
+        <style type="text/css">
+            table .c { color: red }
+            .a .c { color: green }
+        </style>
+    </head>
+    <body>
+        <table id="t">
+            <tr>
+                <td class="c">Текст</td>
+            </tr>
+        </table>
+        <!-- <script src="//code.jquery.com/jquery.js"></script> -->
+        <script type="text/javascript">
+$(document).ready(function(){
+    $("table .c").parent().addClass("a");
+});
+$(document).ready(function(){
+    $("table .c").attr("style", "color:green;")
+});
+document.getElementById('t').setAttribute('class', 'a');
+var elem = document.getElementById('t');
+if (elem) {
+    var elems = elem.getElementsByTagName('tr')
+    for(var i=0; i<elems.length; i++) {
+        elems[i].setAttribute('class', 'a');
+    }
+}
+        </script>
+    </body>
+</html>
