@@ -21,6 +21,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 class="text-center">Yii2</h1>
+					<div id="toc"></div>
 					<h2>Работа с базами данных</h2>
 					<h3>Yii DAO (объекты доступа к данным)</h3>
 					<h4>Выполнение SQL запросов</h4>
@@ -29,6 +30,18 @@
 $product = Yii::$app->db->createCommand('call product_view(:id);')
 	->bindValue(':id', $_GET['id'])
 	->queryOne();</pre>
+					<h2>Models</h2>
+					<h3>rules</h3>
+					<pre>
+    public function rules()
+    {
+        return [
+            [['count', 'user_id', 'product_id'], 'required'],
+			[['count', 'user_id', 'product_id'], 'integer'],
+			[['count', 'user_id', 'product_id'], 'compare', 'compareValue' => 0, 'operator' => '>'],
+        ];
+    }
+					</pre>
 
 				</div>
 			</div>
