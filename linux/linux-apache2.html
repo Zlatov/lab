@@ -134,6 +134,21 @@ sudo ln -s ../mods-available/rewrite.load rewrite.load</pre>
 
 <pre>AllowOverride All</pre>
 
+<p>и рестартим <code>udo service apache2 restart</code>.</p>
+
+<h3>After git clone</h3>
+<pre>sudo chown -R iadfeshchm:www-data ./
+sudo find . -type d ! -perm 775 -exec chmod 775 {} \;
+sudo find . -type f ! -perm 664 -exec chmod 664 {} \;
+
+0 000
+1 001
+2 010
+3 011
+4 100
+5 101
+6 110
+7 111</pre>
 
 
 
@@ -269,7 +284,8 @@ cd ..
 	Although the CGI script permission might look correct, the actual binary specified in the shebang might not have the proper permissions to be run. (Or some directory on its path, check with namei as explained above.)
 </p>
 
-
+<h3>Internal server error</h3>
+<p>А в логах что-то в роде: <code>.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration</code> - тогда идем и ставим модуль Mod rewrite</p>
 
 
 
