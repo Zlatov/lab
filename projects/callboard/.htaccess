@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName 'Authorization...'
+AuthUserFile /home/iadfeshchm/projects/my/lab.zlatov.net/public_html/projects/callboard/.htpasswd
+<Files admin.php>
+Require valid-user
+</Files>
