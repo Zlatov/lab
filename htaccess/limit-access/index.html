@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Ограничение доступа с помощью файла .htaccess</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+					<h1 class="text-center">Ограничение доступа с помощью файла .htaccess</h1>
+
+<div id="toc"></div>
+
+<h2>Доступ на просмотр/запуск без пароля</h2>
+
+<h3>Описание директив</h3>
+
+<ul>
+	<li><code>deny</code> &#8212; отказать (запретить);</li>
+	<li><code>allow</code> &#8212; позволять (разрешить);</li>
+	<li><code>order</code> &#8212; порядок (порядок директив);</li>
+	<li><code>&lt;Files some.file&gt;&lt;/Files&gt;</code> &#8212; применить группу директив к файлу/-ам;</li>
+	<li><code>&lt;Files ~ &quot;some.file&quot;&gt;&lt;/Files&gt;</code> &#8212; знак <code>~</code> включает регулярные выражения.</li>
+</ul>
+
+<h3>Примеры</h3>
+
+<p>Запретить просмотр/запуск всего в папке и подпапках:</p>
+<pre class="prettyprint lang-apache">deny from all</pre>
+<p>Закрыть доступ определенному IP:</p>
+<pre class="prettyprint lang-apache">order allow deny
+allow from all
+deny from 000.000.000.000</pre>
+<p>Открыть досутп только определенному IP:</p>
+<pre class="prettyprint lang-apache">order deny allow
+deny from all
+allow from 000.000.000.000</pre>
+<p>Закрыть доступ только к файлу access.json:</p>
+<pre class="prettyprint lang-apache">&lt;Files access.json&gt;
+deny from all
+&lt;/Files&gt;</pre>
+<p>Закрыть доступ к нескольким файлам:</p>
+<pre class="prettyprint lang-apache">&lt;Files ~ &quot;one.file|file.next&quot;&gt;
+deny from all
+&lt;/Files&gt;</pre>
+<p>Закрыть доступ к файлам по маске:</p>
+<pre class="prettyprint lang-apache">&lt;Files ~ &quot;\.(json|php)$&quot;&gt;
+deny from all
+&lt;/Files&gt;</pre>
+
+<h2>Доступ на просмотр/запуск c паролем</h2>
+
+<h3>Создаем .htaccess</h3>
+
+<p>В папке, к которой хотим ограничить доступ, создаем файл .htaccess:</p>
+<pre class="prettyprint lang-apache">AuthType Basic
+AuthName 'Authorization...'
+AuthUserFile /home/mysite.ru/public/.htpasswd
+Require valid-user</pre>
+<p>Обратите внимание на путь <code>AuthUserFile</code>. Это путь к файлу с паролями <strong>от корня сервера</strong> (<mark>не от корня сайта</mark>). Если вы его не знаете (не помните) — выполните PHP скрипт phpinfo() и ищите там DOCUMENT_ROOT. Ну или echo $_SERVER['DOCUMENT_ROOT'];</p>
+
+<h3>Создаем .htpasswd</h3>
+
+<p>Пароль в этом файле зашифрован (по слухам) с помощью md5. Я сразу кинулся в PHP к функции <code>md5();</code>, и круто обломался. Видимо все там по-другому. Так что содержимое этого файла нужно сгенерировать другими средствами:</p>
+
+<h4>Способ раз</h4>
+
+<p>Файл с паролями (.htpasswd) будем хранить в корне сайта. Его содержимое формируется утилитой, входящей в поставку Apache — htpasswd. Она обычно находится в каталоге bin (/usr/local/bin/htpasswd), ага. Коннектимся по SSH, ls, cd, ls, cd,... И выполняем команду:</p>
+<pre class="prettyprint lang-bsh">htpasswd -mbc .htpasswd login1 myfavoritepassword123</pre>
+<p>Чтобы добавить в уже существующий файл нового пользователя: <code>htpasswd .htpasswd login2</code></p>
+
+<h4>Способ два</h4>
+
+<p><a href="https://www.google.ru/search?q=htpasswd+generator" target="_blank">https://www.google.ru/search?q=htpasswd+generator</a>.</p>
+
+<h4>Способ три</h4>
+
+<p>Скачать apache/установить или отдельно скачать утилиту htpasswd (тоже можно найти) и (если вы под виндой) выполнить через cmd следующую команду:</p>
+<pre class="prettyprint lang-bsh">htpasswd.exe -mc .htpasswd user1</pre>
+<p>И для добавление в уже существующий: <code>htpasswd.exe -m .htpasswd user2</code></p>
+
+				</div>
+			</div>
+		</div>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<script src="Hello World"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#toc").append('<p>Содержание:</p>');
+				$("#toc").append('<ul></ul>');
+				$("h2").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h2" + i);
+					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+						i + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h3").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h3" + i);
+					var prevh2 = current.prevAll("h2").first();
+					var j = prevh2.attr("id").substring(2);
+					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+						i + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h4").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h4" + i);
+					var prevh3 = current.prevAll("h3").first();
+					var j = prevh3.attr("id").substring(2);
+					alert
+					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+						i + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h5").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h5" + i);
+					var prevh4 = current.prevAll("h4").first();
+					var j = prevh4.attr("id").substring(2);
+					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+						i + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h6").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h6" + i);
+					var prevh5 = current.prevAll("h5").first();
+					var j = prevh5.attr("id").substring(2);
+					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+						i + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+			});
+		</script>
+	</body>
+</html>
