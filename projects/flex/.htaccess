@@ -10,3 +10,7 @@ DirectoryIndex index.php index.html
 php_flag magic_quotes_gpc 0
 php_flag magic_quotes_runtime 0
 php_flag magic_quotes_sybase 0
+
+<Files params.json>
+deny from all
+</Files>
