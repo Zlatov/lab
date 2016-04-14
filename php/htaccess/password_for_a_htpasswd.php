@@ -21,37 +21,57 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 class="text-center"><a href="">Кодирование пароля для htpasswd</a></h1>
-					<h2>Логин и пароль</h2>
+					<h2>Логин и пароль для доступа к папке ./test/</h2>
 					<form action="" method="POST" role="form">
 						<div class="form-group">
-							<input name="user" type="text" class="form-control" id="" placeholder="Логин">
+							<input name="user" type="text" class="form-control" id="" placeholder="Логин" value="test">
 						</div>
 						<div class="form-group">
 							<input name="password" type="password" class="form-control" id="" placeholder="Пароль">
 						</div>
 						<button type="submit" class="btn btn-primary">Кодировать</button>
 					</form>
+
 					<?php if (isset($_POST['password'])): ?>
-						<?php 
-							$username = trim($_POST['user']);
+
+						<?php
+
+						try {
+							$username = strip_tags(trim($_POST['user']));
 							$password = trim($_POST['password']);
 							$encoded_password = base64_encode(sha1($password, true));
 							$echo = $username . ':{SHA}' . $encoded_password;
-							file_put_contents('./.htpasswd', $echo);
+							$file_put_contents = file_put_contents('./test/.htpasswd', $echo);
+							if ($file_put_contents===false) {
+								throw new Exception("ошибка записи в файл .htpasswd, новый пароль нельзя протестировать.", 1);
+							}
+							echo "<hr><h2>Содержимое ./test/.htpasswd</h2>";
+							echo "<pre>$echo</pre>";
+							echo "<h2>Проверить</h2>";
+							echo "<p><a href=\"./test/test.html\" target=\"_blank\">./test/test.html</a></p>";
+						} catch(Exception $e) {
+							printf("<p>Ошибка: %s</p>", $e->getMessage());
+							echo "<hr><h2>В файл ./test/.htpasswd необходимо записать строку</h2>";
+							echo "<pre>$echo</pre>";
+						} 
+
 						?>
-						<hr>
-						<h2>Содержимое ./.htpasswd</h2>
-						<pre><?= $echo ?></pre>
+						
 					<?php endif ?>
+
 					<hr>
-					<h2>Содержимое ./test/.htaccess</h2>
+					
+					<h2>Пример файла ./test/.htaccess</h2>
+					
 					<pre>AuthType Basic
 AuthName 'Authorization...'
-AuthUserFile C:\projects\my\lab.zlatov.net\public_html\php\htaccess\.htpasswd
-Require valid-user</pre>
+AuthUserFile /absolute/pathname/to/.htpasswd
+#Require valid-user
+# or
+Require user test
+</pre>
 					<hr>
-					<h2>Проверить</h2>
-					<p><a href="./test/test.html" target="_blank">./test/test.html</a></p>
+					
 				</div>
 			</div>
 		</div>
