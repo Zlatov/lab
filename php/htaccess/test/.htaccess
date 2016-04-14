@@ -1,6 +1,0 @@
-AuthType Basic
-AuthName 'Authorization...'
-AuthUserFile /home/iadfeshchm/projects/my/lab.zlatov.net/public_html/php/htaccess/test/.htpasswd
-#Require valid-user
-# or
-Require user test
