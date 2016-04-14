@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName 'Authorization...'
+AuthUserFile /absolute/pathname/to/.htpasswd
+#Require valid-user
+# or
+Require user test
