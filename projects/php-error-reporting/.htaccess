@@ -1,0 +1,8 @@
+php_flag log_errors off
+php_value error_log /home/w/webhobru/zlatov.net/public_html/PHP_errors.log
+php_value log_errors_max_len 1280
+php_value error_reporting 32767
+php_flag display_errors on
+php_flag html_errors on
+php_flag ignore_repeated_errors on
+php_flag ignore_repeated_source on
