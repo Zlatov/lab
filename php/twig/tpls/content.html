@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block title %}{{projectName}}{% endblock %}
+
+{% block content %}
+	{% for item in content %}
+		<p>{{ item }}</p>
+	{% endfor %}
+
+	{% set foo = 'foo' %}
+	{#% set foo = [1, 2] %#}
+	{#% set foo = {'foo': 'bar'} %#}
+
+	{{foo}}
+
+	{% include 'testphp.php' %}
+
+{% endblock %}
