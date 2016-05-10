@@ -41,10 +41,14 @@
 					<h3>COALESCE</h3>
 					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
 					<h2>Параметры</h2>
+					<h3>Просмотр какого ибо параметра</h3>
+					<pre>SHOW VARIABLES LIKE 'sql_safe_updates'</pre>
 					<h3>Для удаления связных данны</h3>
 					<p><code>SET AUTOCOMMIT = 0; SET FOREIGN_KEY_CHECKS = 0; SET UNIQUE_CHECKS = 0;</code></p>
 					<p><code>truncate `table`;</code> или другое удаление.</p>
 					<p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
+					<h3>Для удаления всей таблицы</h3>
+					<pre>SET SQL_SAFE_UPDATES = 0;</pre>
 					<h2>Функции</h2>
 					<h3>Работа со строками</h3>
 					<h4>CHAR_LENGTH</h4>
