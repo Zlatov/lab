@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Yii2</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1 class="text-center">Yii2 all</h1>
+					<div id="toc"></div>
+					<h2>Model</h2>
+					<h3>Rules</h3>
+<pre>
+            [['file'], 'required', 'on' => ['create','createfotos']],
+            [['file'], 'safe', 'on' => ['update']],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => ['create']],
+            [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'maxFiles' => 10, 'on' => ['createfotos']],
+
+            [['file'], 'file', 
+                'skipOnEmpty' => true, 
+                'extensions' => 'png, jpg', 
+                'maxSize' => 9*1024*1024, 
+                'mimeTypes' => 'image/jpeg, image/png',
+            ],
+            [['del_img'], 'boolean'],
+
+			['status', 'default', 'value' => self::STATUS_ACTIVE],
+			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+			[['updated_at', 'created_at'], 'safe'],
+			[['sid', 'header'], 'string', 'max' => 160],
+
+			[['callfrom', 'callto'], 'string', 'max' => 4],
+			[['callfrom'],'default','value'=>'0000'],
+			[['callto'],'default','value'=>'2359'],
+
+            [['order'], 'default', 'value'=>'100','when'=> function($model){ return $model->isNewRecord; }],
+            [['order'], 'integer', 'min' => 0, 'max' => 65535,],
+
+</pre>
+					<h2>View</h2>
+					<h3>ActiveForm</h3>
+<pre>
+    &lt;?php if ($model-&gt;iconsrc &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;iconsrc))): ?&gt;
+        &lt;p&gt;Аватар: &lt;/p&gt;
+        &lt;?= Html::img(Yii::getAlias('@webfrontend') . $model-&gt;iconsrc, ['class'=&gt;'img-responsive']) ?&gt;
+        &lt;div class=&quot;btn-group&quot; data-toggle=&quot;buttons&quot;&gt;
+            &lt;?= Html::activeCheckbox($model,'del_file',['uncheck' =&gt; null, 'label' =&gt; 'Удалить аватар', 'labelOptions' =&gt; ['class'=&gt;&quot;btn btn-primary&quot;]]) ?&gt;
+        &lt;/div&gt;
+    &lt;?php endif ?&gt;
+
+    &lt;?php $form = ActiveForm::begin(['options' =&gt; ['enctype' =&gt; 'multipart/form-data']]); ?&gt;
+    &lt;?= $form-&gt;field($model, 'user_id')-&gt;hiddenInput(['value'=&gt;$user-&gt;id])-&gt;label(false) ?&gt;
+
+    &lt;?= $form-&gt;field($modelform, 'email')-&gt;textInput(['type'=&gt;'email']) ?&gt;
+    &lt;?php if ($modelform-&gt;isNewRecord): ?&gt;
+        &lt;?= $form-&gt;field($modelform, 'password')-&gt;passwordInput() ?&gt;
+    &lt;?php endif ?&gt;
+    &lt;?= $form-&gt;field($modelform, 'status')-&gt;radioList([
+        USER::STATUS_DELETED =&gt; 'Удален',
+        USER::STATUS_ACTIVE =&gt; 'Активен',
+    ]) ?&gt;
+    &lt;?= $form-&gt;field($model, 'created_at')-&gt;textInput(['placeholder' =&gt; date('Y-m-d h:i:s')]) ?&gt;
+    &lt;?= $form-&gt;field($model, 'selectedKitchen')-&gt;dropDownList($kitchenList,['multiple' =&gt; 'true','size'=&gt;10]) ?&gt;
+    &lt;?= $form-&gt;field($model, 'costmin')-&gt;textInput(['maxlength' =&gt; true, 'value' =&gt; is_null($model-&gt;costmin)?100:$model-&gt;costmin]) ?&gt;
+    &lt;?= $form-&gt;field($model, 'callfrom')-&gt;textInput(['maxlength' =&gt; true, 'placeholder' =&gt; '0000', 'value' =&gt; is_null($model-&gt;callfrom)?'0000':$model-&gt;callfrom]) ?&gt;
+    &lt;div class=&quot;form-group field-news-selectednewstag&quot;&gt;
+    &lt;label class=&quot;control-label&quot; for=&quot;news-selectednewstag&quot;&gt;Теги новости&lt;/label&gt;
+    &lt;div id=&quot;news-selectednewstag&quot;&gt;
+        &lt;?= Html::checkboxList('News[selectedNewstag]', $newsTagAll, $newsTagAll, ['tag'=&gt;false]); ?&gt;
+    &lt;!-- &lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;News[selectedNewstag][]&quot; value=&quot;Акцизы&quot;&gt; Акцизы&lt;/label&gt; --&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+
+    
+    &lt;?= $form-&gt;field($model, 'file[]')-&gt;fileInput(['multiple' =&gt; true, 'accept' =&gt; 'image/*'])-&gt;label('Добавить фотографии') ?&gt;
+
+    &lt;?php
+    if($model-&gt;src &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;src)))
+    {
+        echo Html::tag('p', 'Изображение: ');
+        echo Html::img(Yii::getAlias('@webfrontend') . $model-&gt;src, ['class'=&gt;'img-responsive']);
+        // echo $form-&gt;field($model,'del_img')-&gt;checkBox(['class'=&gt;'span-1']);
+    }
+    ?&gt;
+    &lt;?= $form-&gt;field($model, 'dishmode_id')-&gt;radioList($dishmodes) ?&gt;
+    &lt;?= $form-&gt;field($model, 'dishmode_id')-&gt;radioList($dishmodes) ?&gt;
+
+    &lt;?= $form-&gt;field($model, 'diet_id')-&gt;dropDownList($diets,['prompt' =&gt; 'Выберите вид диеты…']) ?&gt;
+
+    &lt;?= $form-&gt;field($model, 'kitchens')-&gt;dropDownList($kitchens,['multiple' =&gt; 'true','size'=&gt;8]) ?&gt;
+    &lt;?= $form-&gt;field($model, 'foto_id')-&gt;radioList(
+        ArrayHelper::map($model-&gt;fotos, 'id', 'src'),
+        [
+            'item' =&gt; function($index, $label, $name, $checked, $value) {
+                return '&lt;label style=&quot;display:inline&quot;&gt;' .
+                    '&lt;input type=&quot;radio&quot; name=&quot;' . $name . '&quot; value=&quot;' . $value . '&quot;&gt;' .
+                    '&lt;i&gt;&lt;/i&gt;' .
+                    '&lt;span&gt;' . Html::img(Yii::getAlias('@webfrontend') . $label, []) . '&lt;/span&gt;';
+                    '&lt;/label&gt;';
+            },
+        ]
+    ) ?&gt;
+</pre>
+					<h3>DetailView</h3>
+<pre>
+            'email:email',
+            [
+                'label' => 'Статус',
+                'value' => USER::$statusName[$model->status],
+            ],
+            [
+                'label' => 'Создан',
+                'value' => date('Y-m-d h:i:s', $model->created_at),
+            ],
+            [
+                'label' => 'Имя пользователя',
+                // if code in controller: $user = $model->getUser()->asArray()->all(); // но так делать не надо:
+                // 'value' => $user[0]['username'],
+                // or
+                'value' => $model->user->username,
+            ],
+            [
+                'label' => 'Предпочтение к кухням',
+                'value' => implode(', ',ArrayHelper::getColumn($model->user->kitchen,'header')),
+            ],
+            [
+                'attribute'=>'Изображение',
+                'value'=>Yii::getAlias('@webfrontend') . $model->imgsrc,
+                'format' => ['image',['width'=>News::IMG_WIDTH,'height'=>News::IMG_HEIGHT]],
+                'visible' => $model->imgsrc? true:false,
+            ],
+            [
+                'attribute'=>'Фотография',
+                'value'=>Yii::getAlias('@webfrontend') . $model->src,
+                'format' => ['image',],
+                'visible' => $model->src? true:false,
+            ],
+            [
+                'label' =&gt; 'Диета',
+                // 'value' =&gt; $model-&gt;diet-&gt;header,
+                'value' =&gt; $model-&gt;diet? $model-&gt;diet-&gt;header : Html::encode('&lt;span class=&quot;not-set&quot;&gt;(не задано)&lt;/span&gt;'),
+            ],
+            [
+                'label' => 'Фотографии альбома ' . 
+                    Html::a('Добавить фотографии', ['foto/createfotos', 'id' => $model->id], ['class' => 'btn btn-success btn-xs']),
+                'value' => $model->listImg,
+                'format' => 'raw'
+            ],
+
+</pre>
+					<h3>GridView</h3>
+<pre>
+            'product.header',
+            'product.price',
+            'product.pricesale',
+            'product.time',
+            // 'user.username',
+            [
+                'label' => 'Имя пользователя',
+                'value' => 'user.username',
+                'attribute' => 'user_name',
+            ],
+            // 'user.username',
+            [
+                'label' => 'Имя пользователя',
+                'attribute'=>'username',
+                'value' => function($data)
+                {
+                    return $data->user->username;
+                }
+            ],
+            'email:email',
+            [
+                'attribute'=>'status',
+                'value' => function($data)
+                {
+                    return User::$statusName[$data->status];
+                }
+            ],
+
+            [
+                'attribute'=>'created_at',
+                'value'=>function($data)
+                {
+                    return date('Y-m-d h:i:s', $data->created_at);
+                },
+            ],
+            [
+                'format' => 'image',
+                'label' => '80x80',
+                'value' => function($data) { return Yii::getAlias('@webfrontend') . $data->src80; },
+            ],
+</pre>
+				</div>
+			</div>
+		</div>
+
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<script src="Yii2 all"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#toc").append('<p>Содержание:</p>');
+				$("#toc").append('<ul></ul>');
+				$("h2").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h2" + i);
+					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h3").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h3" + i);
+					var prevh2 = current.prevAll("h2").first();
+					var j = prevh2.attr("id").substring(2);
+					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h4").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h4" + i);
+					var prevh3 = current.prevAll("h3").first();
+					var j = prevh3.attr("id").substring(2);
+					alert
+					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h5").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h5" + i);
+					var prevh4 = current.prevAll("h4").first();
+					var j = prevh4.attr("id").substring(2);
+					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h6").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h6" + i);
+					var prevh5 = current.prevAll("h5").first();
+					var j = prevh5.attr("id").substring(2);
+					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+			});
+		</script>
+	</body>
+</html>
