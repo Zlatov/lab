@@ -51,6 +51,16 @@
             [['order'], 'integer', 'min' => 0, 'max' => 65535,],
 
 </pre>
+                    <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
+<pre>
+// сценарий задается как свойство
+$model = new User;
+$model->scenario = User::SCENARIO_LOGIN;
+
+// сценарий задается через конфигурацию
+$model = new User(['scenario' => User::SCENARIO_LOGIN]);
+</pre>
+
 					<h2>View</h2>
 					<h3>ActiveForm</h3>
 <pre>
@@ -204,6 +214,56 @@
                 'label' => '80x80',
                 'value' => function($data) { return Yii::getAlias('@webfrontend') . $data->src80; },
             ],
+</pre>
+                    <h4>Добавление фильтра</h4>
+                    <h5>Фильтр новостей по тегам</h5>
+                    <p>Необходим список всех тегов. В контроллере получим и передадим во вьюху</p>
+<pre>
+        $tags = ArrayHelper::map(NewsTag::find()->all(), 'id' ,'header');
+</pre>
+                    <p>Во вьюхе укажим фильтр <code>'filter' => $tags,</code>, ну и вывод <code>'format' => 'raw',</code> и т.д.</p>
+<pre>
+            [
+                'attribute'=>'tag',
+                'label' => 'Теги',
+                'value' => function($data) {
+                    if (count($data->newsTag)) {
+                        $return = [];
+                        foreach ($data->newsTag as $newsTag) {
+                            $return[] = $newsTag->header;
+                        }
+                        return implode(' ', $return);
+                    } else {
+                        return null;
+                    }
+                },
+                'format' => 'raw',
+                'filter' => $tags,
+            ],
+</pre>
+                    <p>Главное в ModelSearch.php</p>
+                    <p>Создать переменную</p>
+<pre>
+    public $tag;
+</pre>
+                    <p>Добавить в рулес</p>
+<pre>
+            ['tag', 'safe'],
+</pre>
+                    <p>Отредактировать запрос поиска добавив связанную таблицу</p>
+<pre>
+        $query->joinWith(['newsTag']);
+</pre>
+                    <p>Указать условия сортировки по данному полю</p>
+<pre>
+        $dataProvider->sort->attributes['tag'] = [
+            'asc' => ['news_tag.header' => SORT_ASC],
+            'desc' => ['news_tag.header' => SORT_DESC],
+        ];
+</pre>
+                    <p>Добавим фильтр по полю так (не как like, а как по id)</p>
+<pre>
+            'news_tag.id' => $this->tag,
 </pre>
 				</div>
 			</div>
