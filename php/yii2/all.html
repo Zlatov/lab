@@ -24,7 +24,7 @@
 					<div id="toc"></div>
 					<h2>Model</h2>
 					<h3>Rules</h3>
-<pre>
+<pre class="prettyprint lang-php">
             [['file'], 'required', 'on' => ['create','createfotos']],
             [['file'], 'safe', 'on' => ['update']],
             [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => ['create']],
@@ -52,7 +52,7 @@
 
 </pre>
                     <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
-<pre>
+<pre class="prettyprint lang-php">
 // сценарий задается как свойство
 $model = new User;
 $model->scenario = User::SCENARIO_LOGIN;
@@ -63,7 +63,7 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 
 					<h2>View</h2>
 					<h3>ActiveForm</h3>
-<pre>
+<pre class="prettyprint lang-php">
     &lt;?php if ($model-&gt;iconsrc &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;iconsrc))): ?&gt;
         &lt;p&gt;Аватар: &lt;/p&gt;
         &lt;?= Html::img(Yii::getAlias('@webfrontend') . $model-&gt;iconsrc, ['class'=&gt;'img-responsive']) ?&gt;
@@ -126,7 +126,7 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
     ) ?&gt;
 </pre>
 					<h3>DetailView</h3>
-<pre>
+<pre class="prettyprint lang-php">
             'email:email',
             [
                 'label' => 'Статус',
@@ -173,7 +173,7 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 
 </pre>
 					<h3>GridView</h3>
-<pre>
+<pre class="prettyprint lang-php">
             'product.header',
             'product.price',
             'product.pricesale',
@@ -218,11 +218,11 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
                     <h4>Добавление фильтра</h4>
                     <h5>Фильтр новостей по тегам</h5>
                     <p>Необходим список всех тегов. В контроллере получим и передадим во вьюху</p>
-<pre>
+<pre class="prettyprint lang-php">
         $tags = ArrayHelper::map(NewsTag::find()->all(), 'id' ,'header');
 </pre>
                     <p>Во вьюхе укажим фильтр <code>'filter' => $tags,</code>, ну и вывод <code>'format' => 'raw',</code> и т.д.</p>
-<pre>
+<pre class="prettyprint lang-php">
             [
                 'attribute'=>'tag',
                 'label' => 'Теги',
@@ -243,27 +243,95 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 </pre>
                     <p>Главное в ModelSearch.php</p>
                     <p>Создать переменную</p>
-<pre>
+<pre class="prettyprint lang-php">
     public $tag;
 </pre>
                     <p>Добавить в рулес</p>
-<pre>
+<pre class="prettyprint lang-php">
             ['tag', 'safe'],
 </pre>
                     <p>Отредактировать запрос поиска добавив связанную таблицу</p>
-<pre>
+<pre class="prettyprint lang-php">
         $query->joinWith(['newsTag']);
 </pre>
                     <p>Указать условия сортировки по данному полю</p>
-<pre>
+<pre class="prettyprint lang-php">
         $dataProvider->sort->attributes['tag'] = [
             'asc' => ['news_tag.header' => SORT_ASC],
             'desc' => ['news_tag.header' => SORT_DESC],
         ];
 </pre>
                     <p>Добавим фильтр по полю так (не как like, а как по id)</p>
-<pre>
+<pre class="prettyprint lang-php">
             'news_tag.id' => $this->tag,
+</pre>
+                    <h2>Access</h2>
+                    <h3>Аутентификация</h3>
+                    <p>Настройка</p>
+<pre class="prettyprint lang-php">
+return [
+    'components' => [
+        'user' => [
+            'identityClass' => 'app\models\User',
+            'enableAutoLogin' => true,
+            // 'loginUrl' => ['site/login'],
+        ],
+    ],
+];
+</pre>
+                    <p>Определение</p>
+<pre class="prettyprint lang-php">
+// `identity` текущего пользователя. `Null`, если пользователь не аутентифицирован.
+$identity = Yii::$app->user->identity;
+
+// ID текущего пользователя. `Null`, если пользователь не аутентифицирован.
+$id = Yii::$app->user->id;
+
+// проверка на то, что текущий пользователь гость (не аутентифицирован)
+$isGuest = Yii::$app->user->isGuest;
+</pre>
+                    <p>Для залогинивания пользователя вы можете использовать следующий код:</p>
+
+<pre class="prettyprint lang-php">
+// найти identity с указанным username.
+// замечание: также вы можете проверить и пароль, если это нужно
+$identity = User::findOne(['username' => $username]);
+
+// логиним пользователя
+Yii::$app->user->login($identity);
+</pre>
+                    <p>Для выхода пользователя, просто вызовите</p>
+<pre class="prettyprint lang-php">
+Yii::$app->user->logout();
+</pre>
+                    <h3>AccessControl</h3>
+                    <p>Если достаточно только ролей, то можно обойтись без RBAC, используя matchCallback в AccessControl, например: "Если пользователь залогинен и являетсмя админом" :</p>
+<pre class="prettyprint lang-php">
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['view'],
+                // Или
+                // 'except' => ['view'],
+                'rules' => [
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return User::isUserAdmin(Yii::$app->user->identity->username);
+                            // Или
+                            //return Yii::$app->user->identity->admin;
+                            // Или
+                            //return Yii::$app->user->identity->role === User::ROLE_USER;
+                        }
+                    ],
+                ],
+            ],
+        ];
+    }
 </pre>
 				</div>
 			</div>
@@ -275,6 +343,9 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
  		<script src="Yii2 all"></script>
+        <!-- Подсветка синтаксиса кода -->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <!-- toc -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#toc").append('<p>Содержание:</p>');
