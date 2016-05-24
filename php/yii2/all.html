@@ -333,6 +333,85 @@ Yii::$app->user->logout();
         ];
     }
 </pre>
+                    <h3>RBAC (AuthManager)</h3>
+                    <p>- это компонент, задаем в конфиге:</p>
+<pre>
+    'components' => [
+        ...
+        'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            // 'loginUrl' => ['site/login'],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            // 'defaultRoles' => ['guest'],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+        ...
+</pre>
+                    <p>Компонент может быть зада классом yii\rbac\PhpManager или yii\rbac\DbManager (хранить в файле или бд)</p>
+                    <p>Главный метод checkAccess</p>
+                    <h4>Добавление PhpManager</h4>
+                    <p>authManager настройка frontend/config/main.php :</p>
+<pre>
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            // 'defaultRoles' => ['guest'],
+            'itemFile' => '@frontend/components/rbac/items.php',
+            'assignmentFile' => '@frontend/components/rbac/assignments.php',
+            'ruleFile' => '@frontend/components/rbac/rules.php',
+        ],
+</pre>
+                    <p>Соответственно создал папку @frontend/components/rbac/</p>
+                    <p>настройка для работы с консолью console/config/main.php :</p>
+<pre>
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            // 'defaultRoles' => ['guest'],
+            'itemFile' => '@frontend/components/rbac/items.php',
+            'assignmentFile' => '@frontend/components/rbac/assignments.php',
+            'ruleFile' => '@frontend/components/rbac/rules.php',
+        ],
+        'user' => [
+            'class' => 'yii\web\User',
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => false,
+            'enableSession' => false,
+        ],
+</pre>
+                    <p>Создали контроллер для консоли:</p>
+<pre>
+<?php
+namespace console\controllers;
+
+use Yii;
+use \yii\web\User;
+use \yii\console\Controller;
+
+class RbacController extends Controller
+{
+
+    public function actionInit()
+    {
+        $auth = Yii::$app->getAuthManager();
+        $auth->removeAll();
+
+        $user = $auth->createRole('user');
+        $auth->add($user);
+
+        $admin = $auth->createRole('admin');
+        $auth->add($admin);
+
+        $auth->addChild($admin,$user);
+
+        $this->stdout('Done' . PHP_EOL);
+    }
+
+}
+</pre>
+                    <p>Запускаем команду <code>php yii rbac/init</code> - получаем три файла там где и ожидали.</p>
 				</div>
 			</div>
 		</div>
