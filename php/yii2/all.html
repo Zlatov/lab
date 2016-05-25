@@ -334,8 +334,9 @@ Yii::$app->user->logout();
     }
 </pre>
                     <h3>RBAC (AuthManager)</h3>
+                    <h4>Подключение (настройка)</h4>
                     <p>- это компонент, задаем в конфиге:</p>
-<pre>
+<pre class="prettyprint lang-php">
     'components' => [
         ...
         'user' => [
@@ -355,7 +356,7 @@ Yii::$app->user->logout();
                     <p>Главный метод checkAccess</p>
                     <h4>Добавление PhpManager</h4>
                     <p>authManager настройка frontend/config/main.php :</p>
-<pre>
+<pre class="prettyprint lang-php">
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             // 'defaultRoles' => ['guest'],
@@ -366,7 +367,7 @@ Yii::$app->user->logout();
 </pre>
                     <p>Соответственно создал папку @frontend/components/rbac/</p>
                     <p>настройка для работы с консолью console/config/main.php :</p>
-<pre>
+<pre class="prettyprint lang-php">
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             // 'defaultRoles' => ['guest'],
@@ -382,36 +383,273 @@ Yii::$app->user->logout();
         ],
 </pre>
                     <p>Создали контроллер для консоли:</p>
-<pre>
-<?php
+<pre class="prettyprint lang-php">
+&lt;?php
 namespace console\controllers;
 
 use Yii;
-use \yii\web\User;
+// use \yii\web\User;
+use common\models\User;
 use \yii\console\Controller;
+use \yii\helpers\ArrayHelper;
 
 class RbacController extends Controller
 {
 
     public function actionInit()
     {
+        $auth = Yii::$app-&gt;getAuthManager();
+        $auth-&gt;removeAll();
+
+        $user = $auth-&gt;createRole('user');
+        $auth-&gt;add($user);
+
+        $admin = $auth-&gt;createRole('admin');
+        $auth-&gt;add($admin);
+
+        $auth-&gt;addChild($admin,$user);
+
+        $this-&gt;stdout('Done' . PHP_EOL);
+    }
+
+}
+</pre>
+                    <p>Запускаем команду <code>php yii rbac/init</code> - получаем три файла там где и ожидали.</p>
+                    <h4>Тестирование</h4>
+                    <p>создаем пользователя, логиним, разлогиним (В консольном контроллере создаем actionTest)</p>
+<pre class="prettyprint lang-php">
+    public function actionTest()
+    {
+        Yii::$app->set('request', new \yii\web\Request());
+
+        $user = new User(['id' => 1, 'username' => 'Username']);
+        // $user = new User();
+        // $user->id = 1;
+        // $user->username = 'Username';
+
+        var_dump(Yii::$app->user->id);
+        var_dump(Yii::$app->user->identity);
+
+        Yii::$app->user->login($user);
+        
+        var_dump(Yii::$app->user);
+        var_dump(Yii::$app->user->identity);
+        // var_dump(Yii::$app->user->id);
+        // var_dump(Yii::$app->user->identity->id);
+
+        Yii::$app->user->logout();
+
+        var_dump(Yii::$app->user->id);
+        var_dump(Yii::$app->user->identity);
+    }
+</pre>
+                    <p>Создаем пользователя, удаляем все роли, привязываем роли, выводим роли</p>
+<pre class="prettyprint lang-php">
+    public function actionTest()
+    {
+        Yii::$app->set('request', new \yii\web\Request());
+
+        $user = new User(['id' => 1, 'username' => 'Username']);
         $auth = Yii::$app->getAuthManager();
+
+        $auth->revokeAll($user->id);
+
+        echo 'Roles for user ' . PHP_EOL;
+        print_r($auth->getRolesByUser($user->id));
+
+        $auth->assign($auth->getRole('user'),$user->id);
+        $auth->assign($auth->getRole('admin'),$user->id);
+
+        echo 'New Roles for user ' . PHP_EOL;
+        print_r($auth->getRolesByUser($user->id));
+
+        echo 'New Roles for user ' . PHP_EOL;
+        print_r(implode(', ', ArrayHelper::map($auth->getRolesByUser($user->id), 'name', 'name')));
+
+        echo PHP_EOL;
+    }
+</pre>
+                    <p>Логинимся пользователем и проверяем, обратить внимание на метод проверки can()</p>
+<pre class="prettyprint lang-php">
+    public function actionTest()
+    {
+        Yii::$app->set('request', new \yii\web\Request());
+
+        $user = new User(['id' => 1, 'username' => 'Username']);
+
+        Yii::$app->user->login($user);
+
+        var_dump(Yii::$app->user->can('admin'));
+        // Или // Но тогда это не кешируется, а ->can() - кешируется
+        // var_dump(Yii::$app->authManager->checkAccess($user->id,'admin'));
+
+        echo PHP_EOL;
+    }
+</pre>
+                    <h4>Работаем разрешениями и прикрепленным к ним правилам</h4>
+<pre class="prettyprint lang-php">
+    public function actionInit()
+    {
+        $auth = Yii::$app->getAuthManager();
+        // Удаляем роли (и разрешения) и правила
         $auth->removeAll();
 
+        // Создаем роли
         $user = $auth->createRole('user');
         $auth->add($user);
 
         $admin = $auth->createRole('admin');
         $auth->add($admin);
 
-        $auth->addChild($admin,$user);
+        // Роль admin - наследник
+        $auth->addChild($admin, $user);
+
+        // Создаем разрешения
+        $createPublication = $auth->createPermission('Создать публикацию');
+        $createPublication->description = 'Создать публикацию';
+        $auth->add($createPublication);
+
+        $updatePublication = $auth->createPermission('Редактировать публикацию');
+        $updatePublication->description = 'Редактировать публикацию';
+        $auth->add($updatePublication);
+
+        // Создаем правило
+        $updateOwnPublicationRule = new \frontend\components\rbac\rules\UpdateOwnPublicationRule();
+        $auth->add($updateOwnPublicationRule);
+
+        // Создаем разрешение
+        $updateOwnPublication = $auth->createPermission('Редактировать свою публикацию');
+        $updateOwnPublication->description = 'Редактировать свою публикацию';
+        // Добавляем правило к разрешению
+        $updateOwnPublication->ruleName = $updateOwnPublicationRule->name;
+        $auth->add($updateOwnPublication);
+
+        $auth->addChild($updateOwnPublication, $updatePublication);
+
+        $auth->addChild($user, $createPublication);
+        $auth->addChild($user, $updateOwnPublication);
+
+        $auth->addChild($admin, $updatePublication);
+
 
         $this->stdout('Done' . PHP_EOL);
     }
 
-}
+    public function actionTest()
+    {
+        Yii::$app->set('request', new \yii\web\Request());
+        $auth = Yii::$app->getAuthManager();
+        
+        $user = new User(['id' => 1, 'username' => 'Username']);
+        $admin = new User(['id' => 2, 'username' => 'Adminname']);
+
+        $auth->revokeAll($user->id);
+        $auth->revokeAll($admin->id);
+
+        $auth->assign($auth->getRole('user'),$user->id);
+        $auth->assign($auth->getRole('admin'),$admin->id);
+
+        // ############################################
+        
+        $publication = new Publication([
+            'header' => 'header',
+            'sid' => 'sid',
+            'user_id' => $user->id,
+        ]);
+
+        $publication2 = new Publication([
+            'header' => 'header2',
+            'sid' => 'sid2',
+            'user_id' => $admin->id,
+        ]);
+
+        // ############################################
+
+        $this->stdout('Проверка разрешений для ' . $user->username . ' и первой публикации' . PHP_EOL, Console::FG_BLUE);
+        Yii::$app->user->login($user);
+
+        $this->stdout('Создание публикации ' . (string)Yii::$app->user->can('Создать публикацию') . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование публикации ' . (string)Yii::$app->user->can('Редактировать публикацию', [
+            'publication' => $publication,
+        ]) . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование своей публикации ' . (string)Yii::$app->user->can('Редактировать свою публикацию', [
+            'publication' => $publication,
+        ]) . PHP_EOL, Console::FG_GREEN);
+
+        // ############################################
+
+        $this->stdout('Проверка разрешений для ' . $admin->username . ' и первой публикации' . PHP_EOL, Console::FG_BLUE);
+        Yii::$app->user->login($admin);
+
+        $this->stdout('Создание публикации ' . (string)Yii::$app->user->can('Создать публикацию') . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование публикации ' . (string)Yii::$app->user->can('Редактировать публикацию', [
+            'publication' => $publication,
+        ]) . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование своей публикации ' . (string)Yii::$app->user->can('Редактировать свою публикацию', [
+            'publication' => $publication,
+        ]) . PHP_EOL, Console::FG_GREEN);
+
+        // ############################################
+
+        $this->stdout('Проверка разрешений для ' . $user->username . ' и второй публикации' . PHP_EOL, Console::FG_BLUE);
+        Yii::$app->user->login($user);
+
+        $this->stdout('Создание публикации ' . (string)Yii::$app->user->can('Создать публикацию') . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование публикации ' . (string)Yii::$app->user->can('Редактировать публикацию', [
+            'publication' => $publication2,
+        ]) . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование своей публикации ' . (string)Yii::$app->user->can('Редактировать свою публикацию', [
+            'publication' => $publication2,
+        ]) . PHP_EOL, Console::FG_GREEN);
+
+        // ############################################
+
+        $this->stdout('Проверка разрешений для ' . $admin->username . ' и второй публикации' . PHP_EOL, Console::FG_BLUE);
+        Yii::$app->user->login($admin);
+
+        $this->stdout('Создание публикации ' . (string)Yii::$app->user->can('Создать публикацию') . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование публикации ' . (string)Yii::$app->user->can('Редактировать публикацию', [
+            'publication' => $publication2,
+        ]) . PHP_EOL, Console::FG_GREEN);
+        $this->stdout('Редактирование своей публикации ' . (string)Yii::$app->user->can('Редактировать свою публикацию', [
+            'publication' => $publication2,
+        ]) . PHP_EOL, Console::FG_GREEN);
+
+    }
+
 </pre>
-                    <p>Запускаем команду <code>php yii rbac/init</code> - получаем три файла там где и ожидали.</p>
+                    <p>Должно вывести это:</p>
+<pre>
+Проверка разрешений для Username и первой публикации
+Создание публикации 1
+Редактирование публикации 1
+Редактирование своей публикации 1
+Проверка разрешений для Adminname и первой публикации
+Создание публикации 1
+Редактирование публикации 1
+Редактирование своей публикации 
+Проверка разрешений для Username и второй публикации
+Создание публикации 1
+Редактирование публикации 
+Редактирование своей публикации 
+Проверка разрешений для Adminname и второй публикации
+Создание публикации 1
+Редактирование публикации 1
+Редактирование своей публикации 1
+</pre>
+                    <h4>Проверить алгоритм</h4>
+                    <p>можно залезть в vendor/yii.../rbac/PhpManager.php@checkAccessRecursive(..., $i = 1) {}. Добавить первой строкой: echo str_repeat('&gt; ',$i) . $itemName . PHP_EOL; И </p>
+                    <h4>На живом примере</h4>
+                    <p>В контроллере новостей</p>
+<pre>
+use yii\web\ForbiddenHttpException;
+
+....
+
+        if (!Yii::$app->user->can('Просмотреть новость')) {
+            throw new ForbiddenHttpException();
+        }
+</pre>
 				</div>
 			</div>
 		</div>
