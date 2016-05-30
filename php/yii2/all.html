@@ -50,6 +50,40 @@
             [['order'], 'default', 'value'=>'100','when'=> function($model){ return $model->isNewRecord; }],
             [['order'], 'integer', 'min' => 0, 'max' => 65535,],
 
+
+
+            ['username', 'filter', 'filter' =&gt; 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' =&gt; '\common\models\User', 'message' =&gt; 'Это имя пользователя уже занято.', 'on' =&gt; ['create']],
+            ['username', 'string', 'min' =&gt; 6, 'max' =&gt; 35],
+
+            ['email', 'filter', 'filter' =&gt; 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'string', 'max' =&gt; 255],
+            ['email', 'unique', 'targetClass' =&gt; '\common\models\User', 'message' =&gt; 'Этот адрес электронной почты уже используется.', 'on' =&gt; ['create']],
+
+            // ['password', 'required'],
+            // ['password', 'string', 'min' =&gt; 6],
+
+            ['newpassword', 'required', 'on' =&gt; ['create']],
+            ['newpassword', 'string', 'on' =&gt; ['create'], 'min' =&gt; 8, 'skipOnEmpty' =&gt; false],
+            // ['newpasswordrepeat', 'compare', 'on' =&gt; ['create'], 'compareAttribute' =&gt; 'newpassword'],
+
+            ['newpassword', 'safe', 'on' =&gt; ['update']],
+            ['newpassword', 'string', 'on' =&gt; ['update'], 'min' =&gt; 8, 'skipOnEmpty' =&gt; true],
+            // ['newpasswordrepeat', 'compare', 'on' =&gt; ['update'], 'compareAttribute' =&gt; 'newpassword'],
+
+            ['newpasswordrepeat', 'compare', 'compareAttribute' =&gt; 'newpassword'],
+
+            ['usertype', 'required'],
+            ['usertype', 'in', 'range' =&gt; [User::TYPE_COOK, User::TYPE_USER]],
+
+            ['status', 'required'],
+            ['status', 'in', 'range' =&gt; [User::STATUS_DELETED, User::STATUS_ACTIVE]],
+
+            ['role', 'required'],
+            ['role', 'in', 'range' =&gt; [User::ROLE_USER, User::ROLE_ADMIN]],
 </pre>
                     <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
 <pre class="prettyprint lang-php">
@@ -124,6 +158,21 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
             },
         ]
     ) ?&gt;
+</pre>
+                    <h3>Не ActiveForm =)</h3>
+                    <p>Если bad request (#400) не удалось проверить переданные данные, то наверняка забыли про CSRF</p>
+<pre class="prettyprint lang-php">
+&lt;input type=&quot;hidden&quot; name=&quot;_csrf&quot; value=&quot;&lt;?=Yii::$app-&gt;request-&gt;getCsrfToken()?&gt;&quot; /&gt;
+</pre>
+                    <p>Или отключить CSRF проверку, в контроллере</p>
+<pre class="prettyprint lang-php">
+...
+public $enableCsrfValidation = true;
+...
+// Или прям в экшене контроллера:
+...
+$this->enableCsrfValidation = false;
+...
 </pre>
 					<h3>DetailView</h3>
 <pre class="prettyprint lang-php">
