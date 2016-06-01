@@ -84,6 +84,17 @@
 
             ['role', 'required'],
             ['role', 'in', 'range' =&gt; [User::ROLE_USER, User::ROLE_ADMIN]],
+            
+
+            ['kitchens', 'each', 'rule' =&gt; ['string']],
+            ['kitchens', 'each', 'rule' =&gt; [
+                    'exist',
+                    'skipOnError' =&gt; false,
+                    'targetClass' =&gt; Kitchen::className(),
+                    'targetAttribute' =&gt; 'header',
+                    'message' =&gt; 'Кухни с таким наименованием не найдено.',
+                ]
+            ],
 </pre>
                     <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
 <pre class="prettyprint lang-php">
