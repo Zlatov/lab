@@ -23,11 +23,50 @@
 					<h1 class="text-center">CentOS all</h1>
 					<div id="toc"></div>
 					<h2>LAMP</h2>
+<pre>
+yum install httpd
+// проверим успешность установки Apache
+rpm -qa | grep -i httpd
+// зададим автоматическую загрузку при старте системы для сервера Apache
+chkconfig httpd on
+// запустим Apache
+service httpd start
+
+----------yum install mysql-server
+yum -y install mariadb-server mariadb
+systemctl start mariadb.service
+systemctl enable mariadb.service
+// установка пароль mysql
+mysql_secure_installation
+
+yum -y install php
+systemctl restart httpd.service
+
+yum -y install php-mysql
+yum -y install php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
+
+
+
+</pre>
 					<h3>Your IP from console</h3>
 <pre class="prettyprint lang-bsh">wget -O - -q icanhazip.com</pre>
+					<h2>User ang Group</h2>
+					<h3>Add del user</h3>
+<pre>adduser username
+passwd username
+gpasswd -a username wheel // добавить пользователю sudo
+lid // выводит список групп
+lid -g wheel // список членов какой-либо группы
+
+userdel username
+userdel - r username // и пользователя и его файлы
+
+usermod -a -G &lt;groupname&gt; username // добавление пользователяв группу
+</pre>
 					<h2>Other programms</h2>
 					<h3>mc</h3>
 <pre class="prettyprint lang-bsh">yum install mc</pre>
+<pre class="prettyprint lang-bsh">mc</pre>
 				</div>
 			</div>
 		</div>
