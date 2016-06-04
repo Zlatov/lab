@@ -325,6 +325,42 @@ $this->enableCsrfValidation = false;
 <pre class="prettyprint lang-php">
             'news_tag.id' => $this->tag,
 </pre>
+                    <h3>Assets</h3>
+                    <p>Model</p>
+<pre class="prettyprint lang-php">
+namespace frontend\assets;
+
+use yii\web\AssetBundle;
+
+/**
+ * @author Qiang Xue <qiang.xue@gmail.com>
+ * @since 2.0
+ */
+class AppAsset extends AssetBundle
+{
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
+    public $css = [
+        // 'css/site.css',
+    ];
+    public $js = [
+    ];
+    public $depends = [
+        // 'yii\web\YiiAsset',
+        // 'yii\bootstrap\BootstrapAsset',
+    ];
+}
+</pre>
+                    <p>In view</p>
+<pre class="prettyprint lang-php">
+use frontend\assets\MainAsset;
+MainAsset::register($this);
+</pre>
+                    <p>Register JS or CSS file depend Asset (in view):</p>
+<pre class="prettyprint lang-php">
+use frontend\assets\MainAsset;
+$this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
+</pre>
                     <h2>Access</h2>
                     <h3>Аутентификация</h3>
                     <p>Настройка</p>

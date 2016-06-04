@@ -22,6 +22,21 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 class="text-center">Js all</h1>
 					<div id="toc"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					<h2>Variable</h2>
 					<h3>Type of variable</h3>
 <pre class="prettyprint lang-js">
@@ -80,6 +95,41 @@ typeof function(){} === 'function';
 typeof class C {} === 'function';
 typeof Math.sin === 'function';
 </pre>
+					<h2>Function</h2>
+					<h3>Event</h3>
+<pre class="prettyprint lang-js">
+$('#js_add').keyup(function(event){
+	console.log(event.);
+	console.log(event.target);
+
+    event.preventDefault();
+    // Или
+	// return false;
+</pre>
+					<h3>Key Kode - Event</h3>
+<pre class="prettyprint lang-js">
+$('#searchnewstag').keyup(function(event){
+    if (
+        event.keyCode == 37 || 
+        event.keyCode == 38 || 
+        event.keyCode == 39 || 
+        event.keyCode == 40
+    )
+    {
+        return false;
+    }
+    ...
+
+$('#searchnewstag').keypress(function(event){
+    if(event.keyCode == 13)
+    {
+</pre>
+					<h3>Debag (print_r var_dump)</h3>
+<pre>
+console.log(variable)
+// or
+alert(variable);
+</pre>
 					<h2>String</h2>
 					<h3>Replace</h3>
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
@@ -88,6 +138,35 @@ typeof Math.sin === 'function';
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
 					<h3>Push to array</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>
+					<h2>jQuery</h2>
+					<h3>if element</h3>
+<pre class="prettyprint lang-js">
+var element = $('#element');
+if (element.length) {
+	...
+}
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				</div>
 			</div>
 		</div>
