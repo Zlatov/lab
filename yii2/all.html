@@ -105,6 +105,16 @@ $model->scenario = User::SCENARIO_LOGIN;
 // сценарий задается через конфигурацию
 $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 </pre>
+                    <h3>ActiveRecors</h3>
+                    <h4>link()</h4>
+<pre class="prettyprint lang-php">
+// Delete all relations in this model User:
+$user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen()
+// The secon option force the delete row from the binding table
+
+// Add relation to model Kitchen:
+$kitchen->link('users', $user); // HasMany function in model Kitchen: getUsers()
+</pre>
 
 					<h2>View</h2>
 					<h3>ActiveForm</h3>
