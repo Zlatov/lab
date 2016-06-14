@@ -116,6 +116,10 @@ $user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen
 $kitchen->link('users', $user); // HasMany function in model Kitchen: getUsers()
 </pre>
 
+                    <h3>deleteAll</h3>
+<pre class="prettyprint lang-php">
+Foto::deleteAll(['album_id' => $this->id]); // Не перебирает модели (не выполняет $model->delete, соответственно beforeDelete() и... тоже)
+</pre>
 					<h2>View</h2>
 					<h3>ActiveForm</h3>
 <pre class="prettyprint lang-php">
