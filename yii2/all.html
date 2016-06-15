@@ -760,6 +760,10 @@ use yii\web\ForbiddenHttpException;
             throw new ForbiddenHttpException();
         }
 </pre>
+                    <h2>Errors</h2>
+                    <h3>The use statement with non-compound name 'Yii' has no effect</h3>
+                    <p>Эта ошибка возникает если в глобальном неймспейсе использовать <code>use Yii;</code> - глобальный неймспейс.</p>
+                    <p>Ошибка наиболее распространена во вьюхах (они в глобале), а я по привычке там фигачу <code>use Yii;</code></p>
 				</div>
 			</div>
 		</div>
