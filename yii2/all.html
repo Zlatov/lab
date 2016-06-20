@@ -751,7 +751,7 @@ class RbacController extends Controller
                     <p>можно залезть в vendor/yii.../rbac/PhpManager.php@checkAccessRecursive(..., $i = 1) {}. Добавить первой строкой: echo str_repeat('&gt; ',$i) . $itemName . PHP_EOL; И </p>
                     <h4>На живом примере</h4>
                     <p>В контроллере новостей</p>
-<pre>
+<pre class="prettyprint lang-php">
 use yii\web\ForbiddenHttpException;
 
 ....
@@ -759,6 +759,19 @@ use yii\web\ForbiddenHttpException;
         if (!Yii::$app->user->can('Просмотреть новость')) {
             throw new ForbiddenHttpException();
         }
+</pre>
+                    <h2>Pjax</h2>
+                    <h3>Параметры</h3>
+                    <h4>enablePushState</h4>
+                    <p>Параметр enablePushState = true - получим изменение адреса в адресной строке браузера.</p>
+<pre class="prettyprint lang-php">
+&lt;?php
+use yii\widgets\Pjax;
+?&gt;
+&lt;?= $this-&gt;render('_profile', ['model' =&gt; $model]) ?&gt;
+&lt;?php Pjax::begin(['enablePushState' =&gt; false]); ?&gt;
+    &lt;?= $this-&gt;render('_addresses', ['model' =&gt; $model]) ?&gt;
+&lt;?php Pjax::end(); ?&gt;
 </pre>
                     <h2>Errors</h2>
                     <h3>The use statement with non-compound name 'Yii' has no effect</h3>
