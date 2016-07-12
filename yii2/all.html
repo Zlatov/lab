@@ -115,13 +115,64 @@ $user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen
 // Add relation to model Kitchen:
 $kitchen->link('users', $user); // HasMany function in model Kitchen: getUsers()
 </pre>
+                    <h4>show ActiveRecord query</h4>
+<pre class="prettyprint lang-php">
+$query = Message::find()
+    -&gt;with(['author'])
+    -&gt;where(['or', ['and', 'author_id =' . $user-&gt;id,'recipient_id =' . $messagesLast[0]-&gt;author_id], ['and', 'author_id =' . $messagesLast[0]-&gt;author_id,'recipient_id =' . $user-&gt;id]])
+    -&gt;orderBy('message.created_at asc');
+echo &quot;&lt;pre&gt;&quot;;
+print_r($query-&gt;createCommand()-&gt;sql);
+print_r($query-&gt;createCommand()-&gt;getRawSql());
+echo &quot;&lt;/pre&gt;&quot;;
+die();
+</pre>
+                    <h4>ActiveRecord queries</h4>
+<pre class="prettyprint lang-php">
+    return Kitchen::find()
+        -&gt;select('kitchen.*')
+        -&gt;innerJoin('dish_kitchen dk', 'dk.kitchen_id = kitchen.id')
+        -&gt;innerJoin('dish d', 'd.product_id = dk.dish_id')
+        -&gt;innerJoin('product p', 'p.id = d.product_id')
+        -&gt;where(['p.user_id' =&gt; $this-&gt;id])
+        -&gt;groupBy('kitchen.id')
+        -&gt;all();
+</pre>
+                    <h4>Code and queries with Pagination</h4>
+<pre class="prettyprint lang-php">
+        $limit = 10;
+        $page = (is_null(Yii::$app-&gt;request-&gt;get('page')))?1:Yii::$app-&gt;request-&gt;get('page');
+        $offset = ((int)$page-1)*$limit;
 
-                    <h3>deleteAll</h3>
+        $order = ['created_at' =&gt; SORT_DESC,'id' =&gt; SORT_DESC];
+
+        $blogs = Publication::find()
+            -&gt;orderBy($order)
+            -&gt;offset($offset)
+            -&gt;limit($limit)
+            -&gt;all();
+
+        $pagination = new Pagination([
+            'totalCount' =&gt; Publication::find()-&gt;count(), 
+            'pageSize' =&gt; $limit,
+        ]);
+
+        $pagination-&gt;pageSizeParam = false;
+</pre>
+                    <h4>deleteAll</h4>
 <pre class="prettyprint lang-php">
 Foto::deleteAll(['album_id' => $this->id]); // Не перебирает модели (не выполняет $model->delete, соответственно beforeDelete() и... тоже)
 </pre>
-					<h2>View</h2>
-					<h3>ActiveForm</h3>
+
+                    <h3>Yii DAO (объекты доступа к данным)</h3>
+                    <h4>Выполнение SQL запросов</h4>
+<pre>$posts = Yii::$app->db->createCommand('SELECT * FROM post')
+    ->queryAll();
+$product = Yii::$app->db->createCommand('call product_view(:id);')
+    ->bindValue(':id', $_GET['id'])
+    ->queryOne();</pre>
+                    <h2>View</h2>
+                    <h3>ActiveForm</h3>
 <pre class="prettyprint lang-php">
     &lt;?php if ($model-&gt;iconsrc &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;iconsrc))): ?&gt;
         &lt;p&gt;Аватар: &lt;/p&gt;
