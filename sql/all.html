@@ -37,11 +37,6 @@
 					<p>Можно сравнивать по номеру а не по значению <code>SELECT * FROM tbl_name WHERE enum_col=1</code> то же самое что и <code>SELECT * FROM tbl_name WHERE enum_col='один'</code>. Нумерация от 1, неверное значение (пустая строка) принимает номер 0, а NULL соответственно NULL.</p>
 					<h3>SET</h3>
 					<p>Подобие много ко многим бес смежной таблицы: <code>SET("один", "два") NOT NULL</code> — поле может принимать значения "", "один", "два" и "один,два". Максимум 64 различных элемента.</p>
-					<h2>Операторы</h2>
-					<h3>COALESCE</h3>
-					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
-					<h3>LAST_INSERT_ID()</h3>
-					<p>Возвращает последний вставленный id</p>
 					<h2>Параметры</h2>
 					<h3>Просмотр какого ибо параметра</h3>
 					<pre>SHOW VARIABLES LIKE 'sql_safe_updates'</pre>
@@ -51,10 +46,33 @@
 					<p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
 					<h3>Для удаления всей таблицы</h3>
 					<pre>SET SQL_SAFE_UPDATES = 0;</pre>
-					<h2>Функции</h2>
+					<h2>Функции и Операторы</h2>
+					<h3>COALESCE</h3>
+					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
+					<h3>LAST_INSERT_ID()</h3>
+					<p>Возвращает последний вставленный id</p>
 					<h3>Работа со строками</h3>
 					<h4>CHAR_LENGTH</h4>
 					<p><code>integer CHAR_LENGTH(str string)</code>возвращают длину строки. Поддерживает многобайтовые символы.</p>
+					<h3>if ifnull nullif</h3>
+					<h4>if</h4>
+					<p><code>IF(expr1,expr2,expr3)</code>. Если expr1 равно значению ИСТИНА (expr1 &lt;&gt; 0 и expr1 &lt;&gt; NULL), то функция IF() возвращает expr2, в противном случае - expr3.</p>
+<pre class="prettyprint lang-sql">
+	where
+		`p`.`price` &gt;= param_from
+		and `p`.`price` &lt;= param_to
+		and if(param_dishtype &lt;&gt; 0, `d`.`dishtype_id` = param_dishtype, 1)
+</pre>
+					<h4>ifnull</h4>
+					<p><code>IFNULL(expr1,expr2)</code>. Если expr1 не равно NULL, то функция IFNULL() возвращает значение expr1, в противном случае - expr2.</p>
+<pre class="prettyprint lang-sql">
+	where
+		`p`.`price` &gt;= param_from
+		and `p`.`price` &lt;= param_to
+		and ifnull(`d`.`dishtype_id` = param_dishtype, 1)
+</pre>
+					<h4>nullif</h4>
+					<p><code>NULLIF(expr1,expr2)</code>. Если выражение expr1 = expr2 истинно, то возвращает NULL, в противном случае - expr1.</p>
 					<h2>Console</h2>
 					<pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
 					<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
@@ -67,6 +85,10 @@
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<script src="IE10 viewport hack for Surface"></script>
+        <!-- Подсветка синтаксиса кода -->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#toc").append('<p>Содержание:</p>');
