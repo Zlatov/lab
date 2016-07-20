@@ -146,8 +146,16 @@ if (element.length) {
 	...
 }
 </pre>
-
-
+					<h3>DOM Element to jQuery object and jQuery object to DOM Element</h3>
+					<p>jQuery to DOM</p>
+<pre class="prettyprint lang-js">
+$( "#foo" )[ 0 ]; // Equivalent to document.getElementById( "foo" )
+$( "#foo" ).get( 0 ); // Identical to above, only slower.
+</pre>
+					<p>DOM to jQuery</p>
+<pre class="prettyprint lang-js">
+$( event.target );
+</pre>
 
 
 

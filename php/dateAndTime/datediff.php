@@ -149,6 +149,29 @@ if ($interval>0) printf("До конца акции %s %s %s %s %s %s %s %s",
 echo "<br>";
 
 
+$datetime1 = new DateTime('2009-10-11 23:00:00');
+$datetime2 = new DateTime('2009-10-12 06:00:00');
+$interval = $datetime2->diff($datetime1);
+echo $interval->format('%R%a дней');
+echo "<br>";
+
+$datetime1 = new DateTime('2009-10-11 6:00:00');
+$datetime2 = new DateTime('2009-10-12 23:00:00');
+$interval = $datetime2->diff($datetime1);
+echo $interval->format('%R%a дней');
+echo "<br>";
+
+$datetime1 = new DateTime('2009-10-11 6:00:00');
+$datetime2 = new DateTime('2009-10-12 23:00:00');
+$interval = $datetime1->diff($datetime2); // dt2 - dt1
+echo $interval->format('%R%a дней');
+echo "<br>";
+
+$datetime1 = new DateTime('2009-10-11');
+$datetime2 = new DateTime('2009-10-12');
+$interval = $datetime1->diff($datetime2);
+echo $interval->format('%R%a дней');
+echo "<br>";
 
 
 
