@@ -47,6 +47,18 @@
 					<h3>Для удаления всей таблицы</h3>
 					<pre>SET SQL_SAFE_UPDATES = 0;</pre>
 					<h2>Функции и Операторы</h2>
+					<h3>UPDATE</h3>
+<pre class="prettyprint lang-sql">
+UPDATE [LOW_PRIORITY] [IGNORE] tbl_name
+    SET col_name1=expr1 [, col_name2=expr2 ...]
+    [WHERE where_definition]
+    [ORDER BY ...]
+    [LIMIT rows]
+или
+UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
+    SET col_name1=expr1 [, col_name2=expr2 ...]
+    [WHERE where_definition]
+</pre>
 					<h3>COALESCE</h3>
 					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
 					<h3>LAST_INSERT_ID()</h3>
@@ -78,6 +90,12 @@
 					<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
 					<pre>mysql -uroot -p -e "show databases"</pre>
 					<pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
+					<h2>Ошибки</h2>
+					<h3>1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences</h3>
+<pre class="prettyprint lang-sql">
+SET SQL_SAFE_UPDATES = 0;
+SET SQL_SAFE_UPDATES = 1;
+</pre>
 					<h2>Примеры процедур ага</h2>
 <pre class="prettyprint lang-sql">
 use `food`;
