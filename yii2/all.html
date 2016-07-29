@@ -24,8 +24,8 @@
 					<div id="toc"></div>
 
 
-
-                    <h2>Dev or Prod</h2>
+                    <h2>Config</h2>
+                    <h3>Dev or Prod</h3>
                     <p>In <code>web/index.php</code>:</p>
 <pre class="prettyprint lang-php">
 /*
@@ -37,9 +37,7 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 </pre>
                     <p>These changes affect the type of error.</p>
-
-					<h2>Model</h2>
-					<h3>Rules</h3>
+                    <h3>Rules</h3>
 <pre class="prettyprint lang-php">
             [['file'], 'required', 'on' => ['create','createfotos']],
             [['file'], 'safe', 'on' => ['update']],
@@ -54,14 +52,14 @@ defined('YII_ENV') or define('YII_ENV', 'prod');
             ],
             [['del_img'], 'boolean'],
 
-			['status', 'default', 'value' => self::STATUS_ACTIVE],
-			['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
-			[['updated_at', 'created_at'], 'safe'],
-			[['sid', 'header'], 'string', 'max' => 160],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['updated_at', 'created_at'], 'safe'],
+            [['sid', 'header'], 'string', 'max' => 160],
 
-			[['callfrom', 'callto'], 'string', 'max' => 4],
-			[['callfrom'],'default','value'=>'0000'],
-			[['callto'],'default','value'=>'2359'],
+            [['callfrom', 'callto'], 'string', 'max' => 4],
+            [['callfrom'],'default','value'=>'0000'],
+            [['callto'],'default','value'=>'2359'],
 
             [['order'], 'default', 'value'=>'100','when'=> function($model){ return $model->isNewRecord; }],
             [['order'], 'integer', 'min' => 0, 'max' => 65535,],
@@ -121,6 +119,39 @@ $model->scenario = User::SCENARIO_LOGIN;
 // сценарий задается через конфигурацию
 $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 </pre>
+
+                    <h3>Mailer</h3>
+                    <p><code>config/main.php</code></p>
+<pre class="prettyprint lang-php">
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@frontend/mail',
+            'useFileTransport' => false,//set this property to false to send mails to real email addresses
+            //comment the following array to send mail using php's mail function
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'yourAccauntMail@gmail.com',
+                'password' => 'yuorAccauntPassword',
+                'port' => '587',
+                // 'port' => '465', // с оффициальной страницы, ага.
+                'encryption' => 'tls',
+            ],
+        ],
+</pre>
+                    <h4>Errors</h4>
+                    <p><code>Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted.</code></p>
+                    <p>You need to authorize the external application use of gmail, I think.</p>
+                    <p>Follow the next steps and authorize to make it:</p>
+                    <ul>
+                        <li>First, go to your Google Account Management page</li>
+                        <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
+                    </ul>
+                    
+
+
+
+					<h2>Model</h2>
                     <h3>ActiveRecors</h3>
                     <h4>link()</h4>
 <pre class="prettyprint lang-php">

@@ -138,6 +138,49 @@ alert(variable);
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
 					<h3>Push to array</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>
+					<h2>JSON</h2>
+					<h3>Encode</h3>
+<pre class="prettyprint lang-js">
+var str = JSON.stringify(objects);
+</pre>
+					<h3>Decode</h3>
+					<p><code>var data2 = JSON.parse(text);</code></p>
+<pre class="prettyprint lang-js">
+&lt;?php
+	$array = [
+		&quot;ActionScript&quot;,
+		&quot;AppleScript&quot;,
+		&quot;Asp&quot;,
+		&quot;BASIC&quot;,
+		&quot;C&quot;,
+		&quot;C++&quot;,
+		&quot;Clojure&quot;,
+		&quot;COBOL&quot;,
+		&quot;ColdFusion&quot;,
+		&quot;Erlang&quot;,
+		&quot;Fortran&quot;,
+		&quot;Groovy&quot;,
+		&quot;Haskell&quot;,
+		&quot;Java&quot;,
+		&quot;JavaScript&quot;,
+		&quot;Lisp&quot;,
+		&quot;Perl&quot;,
+		&quot;PHP&quot;,
+		&quot;Python&quot;,
+		&quot;Ruby&quot;,
+		&quot;Scala&quot;,
+		&quot;Scheme&quot;
+	];
+	$json = json_encode($array);
+?&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+	var text = '&lt;?= $json ?&gt;';
+	var data = eval(&quot;(&quot; + text + &quot;)&quot;);
+	var data2 = JSON.parse(text);
+	console.log(data);
+	console.log(data2);
+&lt;/script&gt;
+</pre>
 					<h2>jQuery</h2>
 					<h3>if element</h3>
 <pre class="prettyprint lang-js">
