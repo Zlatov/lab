@@ -85,6 +85,42 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
 </pre>
 					<h4>nullif</h4>
 					<p><code>NULLIF(expr1,expr2)</code>. Если выражение expr1 = expr2 истинно, то возвращает NULL, в противном случае - expr1.</p>
+					<h3><code>MATCH () AGAINST ()</code> - Natural Language Full-Text Searches / Полтонектовый поиск (для InnoDB начиная с версии mysql 5.6)</h3>
+					<p>Тест (подробнее <a href="http://dev.mysql.com/doc/refman/5.7/en/fulltext-natural-language.html">тут</a>):</p>
+<pre class="prettyprint lang-sql">
+mysql&gt; CREATE TABLE articles (
+      id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+      title VARCHAR(200),
+      body TEXT,
+      FULLTEXT (title,body)
+    ) ENGINE=InnoDB;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql&gt; INSERT INTO articles (title,body) VALUES
+    ('MySQL Tutorial','DBMS stands for DataBase ...'),
+    ('How To Use MySQL Well','After you went through a ...'),
+    ('Optimizing MySQL','In this tutorial we will show ...'),
+    ('1001 MySQL Tricks','1. Never run mysqld as root. 2. ...'),
+    ('MySQL vs. YourSQL','In the following database comparison ...'),
+    ('MySQL Security','When configured properly, MySQL ...');
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql&gt; SELECT * FROM articles
+    WHERE MATCH (title,body)
+    AGAINST ('database' IN NATURAL LANGUAGE MODE);
++----+-------------------+------------------------------------------+
+| id | title             | body                                     |
++----+-------------------+------------------------------------------+
+|  1 | MySQL Tutorial    | DBMS stands for DataBase ...             |
+|  5 | MySQL vs. YourSQL | In the following database comparison ... |
++----+-------------------+------------------------------------------+
+2 rows in set (0.00 sec)
+</pre>
+
+
+
+
 					<h2>Console</h2>
 					<pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
 					<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
@@ -93,6 +129,18 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
 
 
 					<h2>Administration</h2>
+					<h3>Version of mysql</h3>
+<pre class="prettyprint lang-sh">
+mysql -V
+## not: mysql -<mark>v</mark>
+</pre>
+					<h3>Start Stop Restart Status</h3>
+<pre class="prettyprint lang-sh">sudo service mysql <mark>start</mark>
+sudo service mysql <mark>stop</mark>
+sudo service mysql <mark>restart</mark>
+sudo service mysql <mark>status</mark>
+# or mysqld, or su<kbd>Enter</kbd> password<kbd>Enter</kbd> service mysql start
+</pre>
 					<h3>Viewing mysql users</h3>
 					<pre>SELECT User, Host FROM mysql.user;</pre>
 					<h3>Create user</h3>
