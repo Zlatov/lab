@@ -188,6 +188,13 @@ SHOW GRANTS FOR 'userLogin'@'localhost';
 SET SQL_SAFE_UPDATES = 0;
 SET SQL_SAFE_UPDATES = 1;
 </pre>
+					<h2>Метопрограммирование</h2>
+					<h3>Найти таблицы зная имя поля</h3>
+<pre class="prettyprint lang-sql">
+SELECT TABLE_NAME
+FROM information_schema.`COLUMNS`
+WHERE TABLE_SCHEMA="auctionru_2013" AND COLUMN_NAME LIKE 'access%'
+</pre>
 					<h2>Примеры процедур ага</h2>
 <pre class="prettyprint lang-sql">
 use `food`;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+
+<h3>split</h3>
+<p>разделить файл на части</p>
+<p>split [-l число_строк] [-a длина_суффикса] [файл [префикс]] <br>
+split -b число_байт[K|k|M|m|G|g] [-a длина_суффикса] [файл [префикс]] <br>
+split -p шаблон [-a длина_суффикса] [файл [префикс]]</p>
+
+<h3>replace (от MySQL)</h3>
+<p>Во-первых, в состав MySQL входит замечательная утилита replace, которая замечательна тем, что умеет производить замену прямо в файле:</p>
+<p><code>replace 'hello' 'bye, bye!' -- myfile</code></p>
+<p>Самое замечательное, что она умеет менять пары подстрок, что позволяет производить такие замены:</p>
+<pre>bolk-dev ~ $ echo ABBA | replace A B B A  --
+BAAB</pre>
+
+</body>
+</html>
