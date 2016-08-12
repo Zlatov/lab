@@ -119,6 +119,39 @@ mysql&gt; SELECT * FROM articles
 </pre>
 
 
+					<h2>Кодировка</h2>
+<p>CHARACTER SET — это некий набор символов, называемых кодировкой.</p>
+<p>COLLATION — способ, с помощью которого следует упорядочивать и сравнивать данные в БД.</p>
+<p>Для одного и того же CHARACTER SET существует как правило несколько COLLATION. Например: cp1251_general_ci — сравнение не чувствительное к регистру, cp1251_bin — чувствительное к регистру.</p>
+<h3>Способы задания кодировок</h3>
+
+1) Для всего сервера при компиляции, определив параметры --with-charset и --with-collation:
+<pre class="prettyprint lang-sh">./configure --with-charset=cp1251 --with-collation=cp1251_general_ci</pre>
+
+2) Для всего сервера при запуске mysqld, определив параметры --character-set-server и --collation-server:
+<pre class="prettyprint lang-sh">mysqld --character-set-server=cp1251 --collation-server=cp1251_bin</pre>
+
+3) При создании БД:
+<pre class="prettyprint lang-sql">CREATE DATABASE dbname DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre>
+
+4) При создании таблиц:
+<pre class="prettyprint lang-sql">CREATE TABLE tblname ( col INT ) DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre>
+
+5) В определениях столбцов:
+<pre class="prettyprint lang-sql">
+CREATE TABLE tblname (
+	column1 varchar(255),
+	column2 varchar(255) CHARACTER SET cp1251 COLLATE cp1251_general_ci
+) DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;
+</pre>
+
+Для того чтобы посмотреть к какой кодировке привязана структура данных можно воспользоваться оператором SHOW CREATE:
+<pre class="prettyprint lang-sql">
+mysql > SHOW CREATE TABLE tree_nodes;
+| tree_nodes | CREATE TABLE `tree_nodes` (
+	...
+) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
+</pre>
 
 
 					<h2>Console</h2>
