@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+<meta charset="UTF-8">
+<title>Document</title>
 </head>
 <body>
 
@@ -19,6 +19,24 @@ split -p шаблон [-a длина_суффикса] [файл [префикс
 <p>Самое замечательное, что она умеет менять пары подстрок, что позволяет производить такие замены:</p>
 <pre>bolk-dev ~ $ echo ABBA | replace A B B A  --
 BAAB</pre>
+
+
+<h3>file -bi [filename]</h3>
+<p>Определить Кодировку Файла</p>
+<p>Опция Описание</p>
+<p>-b, --brief Не печатать имя файла (краткий режим)</p>
+<p>-i, --mime Определить тип файла и кодировку</p>
+
+<h3>iconv</h3>
+<p>Перекодировать файл в другую кодировку и сохранить:</p>
+<pre>cat temp.html|iconv -f utf8 -tcp1251 > tempcp1251.html
+</pre>
+
+<h3>grep - поиск по файлу</h3>
+<pre>
+grep 'win1251' FORUM.SQL
+</pre>
+
 
 </body>
 </html>

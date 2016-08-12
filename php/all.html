@@ -33,6 +33,22 @@ post_max_size = 210M
 </pre>
 <pre>sudo service apache2 restart</pre>
 
+					<h2>Функции</h2>
+					<h3>iconv - изменение кодировки строки</h3>
+<pre class="prettyprint lang-php">
+$s = 'Р’РёРЅРёР»РѕРІР°СЏ Р°РїРїР»РёРєР°С†РёСЏ РІ РЅРѕС‡РЅРѕРј РєР»СѓР±Рµ - С„Р»СЋРѕСЂ';
+$s = iconv('utf8', 'cp1251', $s);
+echo &quot;&lt;pre&gt;&quot;;
+var_dump($s);
+echo &quot;&lt;/pre&gt;&quot;;
+
+$s = 'Виниловая аппликация в ночном клубе - флюор';
+$s = iconv('cp1251', 'utf8', $s);
+echo &quot;&lt;pre&gt;&quot;;
+var_dump($s);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+
 
 					<h2>PHP in console</h2>
 <pre class="prettyprint lang-php">
