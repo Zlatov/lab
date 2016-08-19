@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Sublime Text 3 all</title>
+		<title>SSH all</title>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
@@ -22,49 +22,39 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">Sublime Text 3 all</h1>
+					<h1 class="text-center">SSH all</h1>
 					<div id="toc"></div>
 
-					<h2>Keyboard shortcuts</h2>
-<pre>[
-	// Закрытие проекта
-	{ &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
-	// Поиск в выделенном
-	{ &quot;keys&quot;: [ &quot;alt+s&quot; ], &quot;command&quot;: &quot;toggle_in_selection&quot;, &quot;context&quot;:
-		[
-			{ &quot;key&quot;: &quot;setting.is_widget&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: true }
-		]
-	},
-	// Удали системные клавиши и разлогинься-залогинься, чтобы работало:
-	{ &quot;keys&quot;: [&quot;ctrl+alt+up&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: false} },
-	{ &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
-]
+
+
+					<h2>SSH через Proxy</h2>
+					<h2>SSH к гитхаб через Proxy</h2>
+<pre>
+Host *
+    ProxyCommand corkscrew proxy.company.ru 3128 %h %p
+Host github
+	User git
+	Port 443
+	Hostname ssh.github.com
+	IdentityFile ~/.ssh/id_rsa_myRsa
 </pre>
-					<ul>
-						<li><kbd>Ctrl + P</kbd> - </li>
-						<li><kbd>Ctrl + Shift + P</kbd> - </li>
-						<li><kbd>Ctrl + Alt + P</kbd> - </li>
 
-						<li><kbd>Ctrl + R</kbd> - </li>
-						<li><kbd>Ctrl + G</kbd> - </li>
 
-						<li><kbd>Alt + -</kbd> - переход к предыдущему месту редактирования;</li>
 
-						<li><kbd>Ctrl + Alt + LMB</kbd> - чтобы свернуть все папки в сайдбаре сублима достаточно кликнуть ЛКМ по корневой папке с зажатым Ctrl и Alt (в Windows только с Alt).</li>
-
-						<li><kbd>Ctrl + D</kbd> - </li>
-						<li><kbd>Ctrl + Shift + D</kbd> - </li>
-						<li><kbd>Ctrl + Shift + G</kbd> - </li>
-						<li><kbd>Ctrl + Shift + A</kbd> - </li>
-					</ul>
 
 				</div>
 			</div>
 		</div>
+
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+ 		<script src="Yii2 all"></script>
+        <!-- Подсветка синтаксиса кода -->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <!-- toc -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#toc").append('<p>Содержание:</p>');
