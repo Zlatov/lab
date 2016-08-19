@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>PHP all</title>
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<h1 class="text-center">PHP all</h1>
+					<div id="toc"></div>
+
+
+					<h2>Весь контент</h2>
+<pre class="prettyprint lang-apache">
+# #####################
+# ##                 ##
+# ##    Кодировка    ##
+# ##                 ##
+# #####################
+
+# Кодировка
+#AddDefaultCharset UTF-8
+
+# Если mod_charset есть на сервере
+&lt;IfModule mod_charset.c&gt;
+	# Отключаем перекодировку
+	CharsetDisable On
+    	
+	# Кодировка, в которой документы хранятся на диске
+	CharsetSourceEnc utf-8
+    	
+	# Кодировка по-умолчанию для данного сервера
+	CharsetDefault utf-8
+&lt;/IfModule&gt;
+
+# #################
+# ##             ##
+# ##    Index    ##
+# ##             ##
+# #################
+
+# Первостепенность поиска индексных файлов при указании директории
+DirectoryIndex index.php index.html
+
+# Запрещает (-Indexes) или разрешает (+Indexes) отображение содеримого директории.
+Options -Indexes
+
+# ######################################
+# ##                                  ##
+# ##    PHP переменные и обработка    ##
+# ##                                  ##
+# ######################################
+
+# Само собой
+# Внимание! Данная возможность была помечена УСТАРЕВШЕЙ начиная с версии PHP 5.3.0 и была УДАЛЕНА в версии PHP 5.4.0.
+php_flag register_globals off
+
+# Волшебные кавычки для входных данных GET/POST/Cookie
+# В php.ini опция записывается так: magic_quotes_gpc = Off
+php_flag magic_quotes_gpc Off
+
+# Волшебные кавычки для данных, поступающих во время выполнения (из SQL, exec(), ...)
+# В php.ini опция записывается так: magic_quotes_runtime = Off
+php_flag magic_quotes_runtime Off
+
+# ######################
+# ##                  ##
+# ##    Ошибки PHP    ##
+# ##                  ##
+# ######################
+
+# Запись ошибок в логи
+php_flag log_errors on
+
+# В какие логи писать, например,
+# в том же месте ге скрипт с ошибкой: &quot;php_value error_log PHP-errors.log&quot;, что не очень удобно
+# или в одном файле на проект: &quot;/path/to/public_html/PHP-errors.log&quot; (с DOCUMENT_ROOT)
+# под виндой &quot;D:/path/to/public_html/PHP-errors.log&quot;
+php_value error_log /home/path/public_html/domain/PHP_errors.log
+
+# Задание максимальной длины log_errors в байтах. Значение по умолчанию 1024. Установка значения в 0 позволяет снять ограничение на длину log_errors.
+php_value log_errors_max_len 1024
+
+# Определяет типы выводимых ошибок по маске
+# &quot;E_ERROR&quot; - 1
+# &quot;E_WARNING&quot; - 2
+# &quot;E_PARSE&quot; - 4
+# &quot;E_NOTICE&quot; - 8
+# &quot;E_CORE_ERROR&quot; - 16
+# &quot;E_CORE_WARNING&quot; - 32
+# &quot;E_COMPILE_ERROR&quot; - 64
+# &quot;E_COMPILE_WARNING&quot; - 128
+# &quot;E_USER_ERROR&quot; - 256
+# &quot;E_USER_WARNING&quot; - 512
+# &quot;E_USER_NOTICE&quot; - 1024
+# &quot;E_STRICT&quot; - 2048
+# &quot;E_RECOVERABLE_ERROR&quot; - 4096
+# &quot;E_DEPRECATED&quot; - 8192
+# &quot;E_USER_DEPRECATED&quot; - 16384
+# &quot;E_ALL&quot; - 32767
+php_value error_reporting 2047
+
+# Включает / выключает вывод ошибок в браузер (php_flag display_errors), если сайт рабочий ошибки нужно писать в логи
+php_flag display_errors on
+
+# Отключает / включает HTML тэги в сообщениях об ошибках. Ссылки на страницы с описаниями ошибок. За такие ссылки ответственны docref_root и docref_ext.
+php_flag html_errors on
+
+# #####################
+# ##                 ##
+# ##    Остальное    ##
+# ##                 ##
+# #####################
+
+
+
+#
+#ErrorDocument 404 /404/
+#ErrorDocument 403 /404/
+
+# ##############################
+# ##                          ##
+# ##    Модуль mod_rewrite    ##
+# ##                          ##
+# ##############################
+
+# Если mod_rewrite есть на сервере
+&lt;IfModule mod_rewrite.c&gt;
+
+	# Включаем модуль mod_rewrite выполняющий URL преобразования на лету.
+	RewriteEngine on
+
+	# Если системный администратор запрещает использование 'Options +FollowSymlinks' — не сможем ограничить использование mod_rewrite для отдельных каталогов, вместо этого изменения будут действовать на весь сервер.
+	# если с этой директивой выдает ошибку - комментируем (в зависимости от хостера)
+	Options +FollowSymlinks
+
+	# Устанавливает базовый URL для преобразований в каталоге.
+	RewriteBase /
+
+	# Блокируем доступ к файлам .htaccess
+	RewriteRule ^.htaccess$ - [F]
+
+	# 301 редиректы (перемещена постоянно) со страницы на страницу. Примеры:
+	# Работает
+	#RewriteCond %{REQUEST_URI} ^/i6\.html$
+	#RewriteRule ^.*$ http://www.zlatov.net/publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+	# Работает -http://www.zlatov.net
+	#RewriteCond %{REQUEST_URI} ^/i8\.html$
+	#RewriteRule ^.*$ /publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+	# Работает -/
+	#RewriteCond %{REQUEST_URI} ^/i9\.html$
+	#RewriteRule ^.*$ publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+
+	# Перенаправление адреса содеражащего текст &quot;text&quot; на страницу /404/
+	#RewriteCond %{QUERY_STRING} ^text.+$
+	#RewriteRule ^.*$ 404/
+
+	# Перенаправление с адреса без www на адрес с www.
+	# Перенаправление с явным указанием переменной:
+	RewriteCond %{HTTP_HOST} !^www\. [NC]
+	RewriteCond %{HTTP_HOST} !^$
+	RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+	# Перенаправление вручную:
+	#RewriteCond %{HTTP_HOST} ^domain.ru [NC]
+	#RewriteCond %{HTTP_HOST} !^$
+	#RewriteRule ^(.*)$ http://www.domain.ru/$1 [R=301,L]
+
+	# Перенаправление с адреса с www на адрес без www:
+	#RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+	#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+	# Убираем множественные слэши в середине запроса:
+	RewriteCond %{REQUEST_URI} ^(.*)/{2,}(.*)$
+	RewriteRule .* %1/%2 [R=301,L]
+
+	# Убираем множественные слэши в начале и/или в конце запроса:
+	RewriteCond %{THE_REQUEST} ^[A-Z]+\s//+(.*)\sHTTP/[0-9.]+$ [OR]
+	RewriteCond %{THE_REQUEST} ^[A-Z]+\s(.*/)/+\sHTTP/[0-9.]+$
+	RewriteRule .* http://%{HTTP_HOST}/%1 [R=301,L]
+
+	# Добавляем слэшь в конце папок:
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !(.*)/$
+	RewriteRule ^(.*)$ $1/ [R=301,L]
+
+	# Переадресуем /index.php* на / (для SEO, т.е. отсутствия дублей по index.php?category=contacts)
+	RewriteCond %{THE_REQUEST} ^.*/index\.php
+	RewriteRule ^(.*)index.php /$1 [R=301,L]
+
+	## Последнее перенаправление
+	## Если запрашиваем реальная папка или файл - ничего не делаем, иначе &quot;заворачиваем&quot; все запросы на index.php, который лежит в RewriteBase
+	#RewriteCond %{REQUEST_FILENAME} !-f
+	#RewriteCond %{REQUEST_FILENAME} !-d
+	#RewriteRule ^(.*)$ /index.php [L,QSA]
+
+	# Или для статического ЧПУ
+		
+	# Админка
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^admin/([^/\.]+)/?$ /admin/index.php?category=$1 [L,QSA]
+	
+	# Сайт
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/?$ index.php?category=$1 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([0-9]+)/?$ index.php?category=$1&amp;page=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([^/\.]+)/?$ index.php?category=$1$section=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([^/\.]+)/([0-9]+)/?$ index.php?category=$1$section=$2&amp;page=$3 [L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([^/\.]+)/([^/\.]+)\.html$ index.php?category=$1&amp;element=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^theme/lorem/([^/\.]+)\.html$ theme/lorem/$1.html [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([^/\.]+)/([^/\.]+)/([^/\.]+)\.html$ index.php?category=$1$section=$2&amp;element=$3 [L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^.*$ index.php?category=404
+
+&lt;/IfModule&gt;
+
+# Шпаргалка
+
+# RewriteCond
+# — условие, при котором срабатывают правила перенаправления.
+# условий может быть несколько (по лдному в каждой строке), между условиями нужно ставить [OR] (в конце верхнего условия).
+#RewriteCond … [NC, OR]
+#RewriteCond … [NC]
+# RewriteCond [flags]:
+# 'nocase|NC' - регистронезависимо
+# 'ornext|OR' - либо следующее условие
+# '-d' является ли каталогом
+# '-f' является ли обычным файлом
+# '-s' является ли обычным файлом с ненулевым размером
+# '-l' является ли символической ссылкой
+# '-F' проверка существования файла через подзапрос
+# '-U' проверка существования URL через подзапрос
+
+
+# RewriteRule
+# — основная директива преобразований.
+# R[=code] - вызывает редирект.
+# L - чтобы не преобразовывать текущий URL другими правилами преобразований.
+# QSA - добавлять строку запроса.
+
+</pre>
+
+
+
+				</div>
+			</div>
+		</div>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- Подсветка синтаксиса кода -->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        <!-- toc -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#toc").append('<p>Содержание:</p>');
+				$("#toc").append('<ul></ul>');
+				$("h2").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h2" + i);
+					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h3").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h3" + i);
+					var prevh2 = current.prevAll("h2").first();
+					var j = prevh2.attr("id").substring(2);
+					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h4").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h4" + i);
+					var prevh3 = current.prevAll("h3").first();
+					var j = prevh3.attr("id").substring(2);
+					alert
+					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h5").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h5" + i);
+					var prevh4 = current.prevAll("h4").first();
+					var j = prevh4.attr("id").substring(2);
+					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+				$("h6").each(function(i) {
+					var current = $(this);
+					current.attr("id", "h6" + i);
+					var prevh5 = current.prevAll("h5").first();
+					var j = prevh5.attr("id").substring(2);
+					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+						i + "' title='" + current.attr("tagName") + "'>" +
+						current.html() + "</a><ul></ul></li>");
+				});
+			});
+		</script>
+	</body>
+</html>
