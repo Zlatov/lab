@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.parent {
+  display: flex;
+  height: 25%;
+
+  background-color: #AFAFAF;
+}
+
+.child {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+
+  background-color: #FF0000;
+}
+
+.parent_float {
+  height: 25%;
+
+  position: relative;
+
+  background-color: #A0A0A0;
+}
+
+.child_float {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+
+  top: 50%;
+  margin-top: -50px;
+  left: 50%;
+  margin-left: -50px;
+
+  background-color: #FF0000;
+}
+
+.parent2 {
+  display: flex;
+  height: 25%;
+
+  background-color: #AFAFAF;
+}
+
+.child2 {
+  width: 100px;
+  /*height: 100px;*/
+  margin: auto;
+
+  background-color: #FF0000;
+}
+
+.parent2_float {
+  height: 25%;
+  width: 100%;
+
+  display: table-cell;
+  vertical-align: middle;
+
+
+  background-color: #A0A0A0;
+}
+
+.child2_float {
+  width: 100px;
+  display: inline-block;
+
+  background-color: #FF0000;
+}
+
+
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-item {
+  background: tomato;
+  padding: 5px;
+  width: 200px;
+  height: 150px;
+  margin-top: 10px;
+  
+  line-height: 150px;
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}
+
+
+	</style>
+</head>
+<body>
+
+	<div class="parent">
+		<div class="child">a</div>
+	</div>
+
+	<div class="parent_float">
+		<div class="child_float">b</div>
+	</div>
+
+	<div class="parent2">
+		<div class="child2">a</div>
+	</div>
+
+	<div class="parent2_float">
+		<div class="child2_float">b</div>
+	</div>
+
+<ul class="flex-container">
+  <li class="flex-item">1</li>
+  <li class="flex-item">2</li>
+  <li class="flex-item">3</li>
+  <li class="flex-item">4</li>
+  <li class="flex-item">5</li>
+  <li class="flex-item">6</li>
+</ul>
+
+</body>
+</html>
