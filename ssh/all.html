@@ -27,9 +27,9 @@
 
 
 
-					<h2>SSH через Proxy</h2>
-					<h2>SSH к гитхаб через Proxy</h2>
-<pre>
+					<h2>через Proxy</h2>
+					<h3>GitHub через Proxy</h3>
+<pre class="prettyprint lang-sh">
 Host *
     ProxyCommand corkscrew proxy.company.ru 3128 %h %p
 Host github
@@ -39,6 +39,9 @@ Host github
 	IdentityFile ~/.ssh/id_rsa_myRsa
 </pre>
 
+					<p>
+						при этом необходимо в гит ссылку на удаленный репозиторий указывать следующим образом: <code>github:Zlatov/testbootstrap.git</code>
+					</p>
 
 
 
