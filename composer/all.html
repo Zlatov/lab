@@ -24,6 +24,68 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 class="text-center">Composer All</h1>
 					<div id="toc"></div>
+
+
+
+<h2>Установка</h2>
+<h3>Windows</h3>
+<h4>Если на локальной машине — XAMPP</h4>
+<ul>
+<li>Скачиваем установочный пакет для Windows с официального сайта <a href="https://getcomposer.org/download/">https://getcomposer.org/download/</a>. Устанавливаем. Перезагружаем комп.</li>
+<li><code>composer global require "fxp/composer-asset-plugin:~1.1"</code> — для установки любых пакетов с packagist.org. Правильную версию берем из домашней страницы пакета на гитхабе.</li>
+</ul>
+<p>Теперь так просто установить себе, например, PHPUnit: <code>composer global require "phpunit/phpunit=5.2.*"</code>.</p>
+
+<h4>Если у вас денвер</h4>
+<p>Вообще, пора и вам отказаться от denwer…</p>
+<hr>
+<p>отредактировать файл <code>P:\denwer\usr\local\php5\php.ini</code> указав абсолютные пути к:</p>
+<pre>extension_dir = "P:/denwer/usr/local/php5/ext"
+session.save_path = "P:/denwer/tmp"
+zend_extension="P:\denwer\usr\local\php5\ext\php_xdebug-2.2.0-5.3-vc9.dll"</pre>
+<p>Но композер все же отказывается устанавливаться и требует библиотеку OpenSSL, оказалось в моей сборке денвера её не было. Скачал, установил и указал к ней абсолютный путь:</p>
+<pre>extension = "P:\denwer\usr\local\php5\ext\php_openssl.dll"</pre>
+<p>Все, композер встал.</p>
+<hr>
+<p>Раз уж руки добрались до ини, поднастрою-ка кодировку:</p>
+<pre>default_charset = "utf-8"</pre>
+И тут ещё <code>P:\denwer\usr\local\mysql-5.5\my.ini</code>
+<pre>character-set-server = utf8
+init-connect = "set names utf8"</pre>
+
+<h3>Linux</h3>
+<h4>На хостинге sweb</h4>
+<p>Установка на удаленный хостинг (у меня на sweb по умолчанию срабатывает пых 5.2, поэтому указываю версию): <code>curl -sS https://getcomposer.org/installer | php5.6</code></p>
+<p>Вызвать composer: <code>php5.6 ../../../composer.phar instal</code> (так как в корень встал)</p>
+<h4>На локальной машине</h4>
+<p>Глобальная установка/обновление composer</p>
+<pre>cd ~
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/bin/composer
+composer global require "fxp/composer-asset-plugin:~1.1.1"</pre>
+
+
+<h3>Install или Update?</h3>
+<p>Запуск composer install сделает следующее:</p>
+<ul>
+	<li>Проверит существует ли composer.lock файл</li>
+	<li>Если его нет, то выполнит composer update и создаст его</li>
+	<li>Если файл уже существует, то установит указанные версии пакетов из lock файла</li>
+</ul>
+
+<p>Запуск composer update выполнит:</p>
+<ul>
+	<li>Проверит composer.json</li>
+	<li>Составит список пакетов, которые следует обновить, основываясь на указанные версии пакетов</li>
+	<li>Установит последние обновления</li>
+	<li>Обновит файл composer.lock</li>
+</ul>
+
+
+
+
+
+
 				</div>
 			</div>
 		</div>
