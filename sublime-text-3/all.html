@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Sublime Text 3 all</title>
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sublime Text 3 all</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">Sublime Text 3 all</h1>
-					<div id="toc"></div>
+</head>
 
-					<h2>Keyboard shortcuts</h2>
-<pre>[
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="text-center">Sublime Text 3 all</h1>
+                <div id="toc"></div>
+                <h2>Keyboard shortcuts</h2>
+                <pre>[
 	// Закрытие проекта
 	{ &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
 	// Поиск в выделенном
@@ -40,80 +39,187 @@
 	{ &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
 ]
 </pre>
-					<ul>
-						<li><kbd>Ctrl + P</kbd> - </li>
-						<li><kbd>Ctrl + Shift + P</kbd> - </li>
-						<li><kbd>Ctrl + Alt + P</kbd> - </li>
+                <ul>
+                    <li>
+                        <kbd>Ctrl + P</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + Shift + P</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + Alt + P</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + R</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + G</kbd> - </li>
+                    <li>
+                        <kbd>Alt + -</kbd> - переход к предыдущему месту редактирования;</li>
+                    <li>
+                        <kbd>Ctrl + Alt + LMB</kbd> - чтобы свернуть все папки в сайдбаре сублима достаточно кликнуть ЛКМ по корневой папке с зажатым Ctrl и Alt (в Windows только с Alt).</li>
+                    <li>
+                        <kbd>Ctrl + D</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + Shift + D</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + Shift + G</kbd> - </li>
+                    <li>
+                        <kbd>Ctrl + Shift + A</kbd> - </li>
+                </ul>
+                <h2>Установленные плагины</h2>
+                <ul>
+                    <li><strong>Package Control</strong> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</li>
+                    <li><strong>ApacheConf.tmLanguage</strong> — Apache Conf Syntax Highlighting - подсветка синтаксиса .htaccess;</li>
+                    <li><a href="#AutoFileName"><strong>AutoFileName</strong></a> — выпадающие списки для быстрого выбора и ввода пути к файлу в img[src] link[href]&#133;;</li>
+                    <li><strong>FuzzyFilePath</strong> — выпадающие списки файлов с почти нечетким поиском;</li>
+                    <li>CSS Extended Completions — выпадающие списки существующих стилей (нужно дабавить в кэш CSS файлы или всю папку по
+                        <kbd>ПКМ</kbd> в «сайдбаре» и наслаждаться);</li>
+                    <li><strong>CSS Format</strong> — упаковывает CSS или наоборот в удобочитаемый;</li>
+                    <li><strong>Emmet — обязательный плагин</strong> не нуждается в комментариях;</li>
+                    <li><strong><a href="#PyV8">PyV8</a></strong> — необходим для работы плагина Emmet,
+                        <del>устанавливается самостоятельно при установке Emmet</del>;</li>
+                    <li>Emmet CSS snippets — пока и без этого неплохо снипится все;</li>
+                    <li><strong>StringUtilities</strong> — HTML сущности в символы, наоборот и другие полезности;</li>
+                    <li><strong>Bootstrap 3 Snippets</strong> — A sublime plugin complete with Bootstrap 3 snippets;</li>
+                    <li><strong>Gist</strong>;</li>
+                    <li>Git – плагин для работы с Git через ST;</li>
+                    <li><strong><a href="#GitGutter">GitGutter</a></strong> — подсветка изменений в файле;</li>
+                    <li>Modific – тоже что и Git​Gutter;</li>
+                    <li><strong>Goto-CSS-Declaration</strong> — переход к классу в css файл;</li>
+                    <li><strong>Sublime-HTMLPrettify</strong> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</li>
+                    <li><strong>CodeFormatter</strong> — понятно для чего, немного по вкусу настроить и все;</li>
+                    <li><strong>SFTP</strong> — передача файлов через SSH, так что всё в порядке;</li>
+                    <li><strong>SideBarEnhancements</strong> — расширение функционала левого меню;</li>
+                    <li><strong>MoveTab</strong> — перемещение вкладок по горячей клавише;</li>
+                    <li><a href="#SublimeCodeIntel"><strong>SublimeCodeIntel</strong></a> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</li>
+                    <li>Tag — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
+                        <del>использую</del> из-за отличной работы с атрибутами тегов;</li>
+                    <li><strong>View In Browser</strong> — открыть файл в браузере;</li>
+                    <li>sublime-yii-snippets (Yii Framework Snippets);</li>
+                    <li>SideBarGit —
+                        <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</li>
+                    <li>rsub — править удаленные файлы через ssh;</li>
+                    <li>livestyle-sublime — рабочий плагин, но мне не очень нужен;</li>
+                    <li><strong>BracketHighlighter</strong> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</li>
+                    <li><a href="#Terminal">Sublime Terminal</a> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</li>
+                    <li><strong>DocBlockr</strong> – документирование /**
+                        <kbd>Tab</kbd>.</li>
+                </ul>
+                <h2>Настройки плагинов</h2>
+                <h3 id="Terminal">Terminal</h3>
+                <p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
+                <pre>
+"terminal": "C:\\Program Files (x86)\\Git\\bin\\sh.exe",
+"parameters": ["--login", "-i"],</pre>
+                <p>Желаемого можно добиться по разному, ещё прокатывает вот так (без параметров):</p>
+                <pre>{
+    "terminal": "C:\\Program Files\\Git\\git-bash.exe",
+}</pre>
+                <p>А для терминала поставляемого вместе с Cygwin:</p>
+                <pre>
+"terminal": "C:\\cygwin64\\bin\\mintty.exe",
+"parameters": ["-i", "C:\\cygwin64\\Cygwin-Terminal.ico"],</pre>
+                <h3 id="AutoFileName">AutoFileName</h3>
+                <p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
+                <p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
+                <p>Вместо данного плагина рекомендуют использовать FuzzyFilePath, <a href="https://github.com/sagold/FuzzyFilePath">FuzzyFilePath</a> неплох, но своеобразен, оставил пока оба плагина.</p>
+                <h3 id="GitGutter">GitGutter</h3>
+                <h5>Установка win</h5>
+                <p>
+                    <kbd>win</kbd> +
+                    <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
+                    <q>Переменные среды</q> &rarr;
+                    <q>Системные переменные</q> &rarr;
+                    <q>Path</q>.
+                </p>
+                <p>После этого добавляем плагин через PackageControl.</p>
+                <h3 id="SublimeCodeIntel">SublimeCodeIntel</h3>
+                <p>Парсил yii2 минуты три, хотя SSD…</p>
+                <pre>    "codeintel_language_settings": {
+        // "Python3": {
+        //     "python3": "/usr/local/bin/python3.3",
+        //     "codeintel_scan_extra_dir": [
+        //         "/Applications/Sublime Text.app/Contents/MacOS",
+        //         "~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/arch",
+        //         "~/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/libs"
+        //     ],
+        //     "codeintel_scan_files_in_project": true,
+        //     "codeintel_selected_catalogs": []
+        // },
+        // "JavaScript": {
+        //     "codeintel_scan_extra_dir": [],
+        //     "codeintel_scan_exclude_dir":["/build/", "/min/"],
+        //     "codeintel_scan_files_in_project": false,
+        //     "codeintel_max_recursive_dir_depth": 2,
+        //     "codeintel_selected_catalogs": ["jQuery"]
+        // },
+        "PHP": {
+            // Абсолютный путь к exe!:
+            "php": "C:\\xampp\\php\\php.exe",
+            "codeintel_scan_extra_dir": [],
+            "codeintel_scan_files_in_project": true,
+            "codeintel_max_recursive_dir_depth": 15,
+            "codeintel_scan_exclude_dir":[],
+            // В edafult_settings этой строки нет, есть в инструкции на домашней странице пакета:
+            "phpConfigFile": "php.ini"
+        }</pre>
+                <h3 id="PyV8">PyV8</h3>
+                <p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
+                    <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#toc").append('<p>Содержание:</p>');
+        $("#toc").append('<ul></ul>');
+        $("h2").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h2" + i);
+            $("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h3").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h3" + i);
+            var prevh2 = current.prevAll("h2").first();
+            var j = prevh2.attr("id").substring(2);
+            $("#linkh2" + j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h4").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h4" + i);
+            var prevh3 = current.prevAll("h3").first();
+            var j = prevh3.attr("id").substring(2);
+            alert
+            $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h5").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h5" + i);
+            var prevh4 = current.prevAll("h4").first();
+            var j = prevh4.attr("id").substring(2);
+            $("#linkh4" + j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h6").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h6" + i);
+            var prevh5 = current.prevAll("h5").first();
+            var j = prevh5.attr("id").substring(2);
+            $("#linkh5" + j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+    });
+    </script>
+</body>
 
-						<li><kbd>Ctrl + R</kbd> - </li>
-						<li><kbd>Ctrl + G</kbd> - </li>
-
-						<li><kbd>Alt + -</kbd> - переход к предыдущему месту редактирования;</li>
-
-						<li><kbd>Ctrl + Alt + LMB</kbd> - чтобы свернуть все папки в сайдбаре сублима достаточно кликнуть ЛКМ по корневой папке с зажатым Ctrl и Alt (в Windows только с Alt).</li>
-
-						<li><kbd>Ctrl + D</kbd> - </li>
-						<li><kbd>Ctrl + Shift + D</kbd> - </li>
-						<li><kbd>Ctrl + Shift + G</kbd> - </li>
-						<li><kbd>Ctrl + Shift + A</kbd> - </li>
-					</ul>
-
-				</div>
-			</div>
-		</div>
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#toc").append('<p>Содержание:</p>');
-				$("#toc").append('<ul></ul>');
-				$("h2").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h2" + i);
-					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h3").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h3" + i);
-					var prevh2 = current.prevAll("h2").first();
-					var j = prevh2.attr("id").substring(2);
-					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h4").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h4" + i);
-					var prevh3 = current.prevAll("h3").first();
-					var j = prevh3.attr("id").substring(2);
-					alert
-					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h5").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h5" + i);
-					var prevh4 = current.prevAll("h4").first();
-					var j = prevh4.attr("id").substring(2);
-					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h6").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h6" + i);
-					var prevh5 = current.prevAll("h5").first();
-					var j = prevh5.attr("id").substring(2);
-					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-			});
-		</script>
-	</body>
 </html>
