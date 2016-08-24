@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Bootstrap all</title>
+		<title>PHP all</title>
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
@@ -17,51 +17,25 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-
-		<style type="text/css">
-		.table-nonfluid {
-		    width: auto !important;
-		}
-		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">Bootstrap all</h1>
+					<h1 class="text-center">PHP all</h1>
 					<div id="toc"></div>
 
-					<h2>CSS</h2>
-					<h3>Grid</h3>
-					<h4>Media size</h4>
-					<table class="table table-nonfluid">
-					    <thead>
-					        <tr>
-					            <th>xs</th><th>sm</th><th>md</th><th>lg</th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr>
-					            <td>...-767</td><td>768-991</td><td>992-1199</td><td>1200-...</td>
-					        </tr>
-					    </tbody>
-					</table>
+					<h2>media</h2>
+					<p>min-width: 768px === Правило применяется к браузеру, ширина которого больше значения, указанного в запросе.</p>
+					<p>max-width: 1024px === Правило применяется к браузеру, ширина которого меньше значения, указанного в запросе.</p>
 <pre class="prettyprint lang-css">
-@media (min-width: 768px) and (max-width: 991px) {
-...
+/*@media (min-width: 768px) and (max-width: 991px) {*/
+@media (min-width: 768px) {
+    .navbar-nav li:first-child a {
+        padding-left: 0;
+    }
+}
 </pre>
-					<h3>Table</h3>
-					<h4>table width nonfluid</h4>
-<pre class="prettyprint lang-html">
-&lt;style type=&quot;text/css&quot;&gt;
-	.table-nonfluid {
-	    width: auto !important;
-	}
-&lt;/style&gt;
-&lt;table class=&quot;table table-nonfluid&quot;&gt;
-...
-</pre>
-
 
 				</div>
 			</div>
