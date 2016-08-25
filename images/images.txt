@@ -73,7 +73,7 @@ Main ratios:
 	3-4
 	9-16
 Syntax of image names:
-[ratiox-ratioy]_pixelsx-pixelsy_color.extension
+[ratiox-ratioy_]pixelsx-pixelsy_color.extension
 Exaples of image names:
 4-3_640-480_black.jpg
 
