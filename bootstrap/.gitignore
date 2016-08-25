@@ -9,5 +9,5 @@ bootstrap-sass-3.3.7/**/*.ttf
 bootstrap-sass-3.3.7/**/*.eot
 bootstrap-sass-3.3.7/**/*.woff2
 
-
+vendor/
 
