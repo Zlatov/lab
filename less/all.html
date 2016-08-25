@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Less all</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="text-center">Less all</h1>
+                <div id="toc"></div>
+                <h2>Urls to documentations...</h2>
+                <ul>
+                    <li><a href="http://lesscss.org/">http://lesscss.org/</a></li>
+                </ul>
+                <h2>Convert to css</h2>
+                <h3>lessc</h3>
+                <p>install package <em>core-less</em> for use <code>lessc</code> command in console</p>
+                <pre class="prettyprint lang-sh">lessc example.less example.css</pre>
+                <p>When many .less files, we can use one .less file whith code:</p>
+                <pre class="prettyprint lang-css">@import &quot;variables.less&quot;;
+@import &quot;example.less&quot;;
+...</pre>
+                <h3>less.min.js</h3>
+                <p>Simply! In template we use .less:</p>
+                <pre class="prettyprint lang-html">&lt;link rel=&quot;stylesheet/less&quot; type=&quot;text/css&quot; href=&quot;less/bootstrap.less&quot;&gt;</pre>
+                <p>and before <code>&lt;/body&gt;</code> use:</p>
+                <pre class="prettyprint lang-html">&lt;script src=&quot;less.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</pre>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Подсветка синтаксиса кода -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- toc -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#toc").append('<p>Содержание:</p>');
+        $("#toc").append('<ul></ul>');
+        $("h2").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h2" + i);
+            $("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h3").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h3" + i);
+            var prevh2 = current.prevAll("h2").first();
+            var j = prevh2.attr("id").substring(2);
+            $("#linkh2" + j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h4").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h4" + i);
+            var prevh3 = current.prevAll("h3").first();
+            var j = prevh3.attr("id").substring(2);
+            alert
+            $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h5").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h5" + i);
+            var prevh4 = current.prevAll("h4").first();
+            var j = prevh4.attr("id").substring(2);
+            $("#linkh4" + j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h6").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h6" + i);
+            var prevh5 = current.prevAll("h5").first();
+            var j = prevh5.attr("id").substring(2);
+            $("#linkh5" + j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+    });
+    </script>
+</body>
+
+</html>
