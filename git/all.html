@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Git all</title>
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Git all</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">Git all</h1>
-					<div id="toc"></div>
-					<h2>Отменить</h2>
-					<h3>Отменить fetch</h3>
-<pre class="prettyprint lang-bsh">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="text-center">Git all</h1>
+                <div id="toc"></div>
+                <h2>Отменить</h2>
+                <h3>Отменить fetch</h3>
+                <pre class="prettyprint lang-bsh">
 git remote add origin server:~/errorprojectpath/
 git fetch origin master
 # вот черт, какую-то фигню затянул
@@ -35,80 +35,120 @@ git remote remove origin
 git remote add origin server:~/projectpath/
 git fetch origin master
 </pre>
-					<p>Такое ощущение что это не отмена а какая-то перезапись.</p>
+                <p>Такое ощущение что это не отмена а какая-то перезапись.</p>
+                <h2>Ветки</h2>
+                <h3>Запушить ветку в бар</h3>
+                <pre class="prettyprint lang-bsh">git push -u origin local</pre>
+                <p>это отправляет ветку local в удаленный репозиторий и автоматом делает нашу локальную ветку local отслеживаемой с origin/local :)</p>
+                <h2>ignore</h2>
+                <h3>Methods</h3>
+                <p>Есть различные ситуации, в каждой может применяться свой способ игнорирования. Разберу способы.</p>
+                <h4><code>.gitignore</code> — исключения в репозитории для всех</h4>
+                <p>Игнорирование с помощью создания файла <code>.gitignore</code> прямо в содержимом репозитория приводит к тому, что:</p>
+                <ol>
+                    <li>гит будет игнорировать изменения в файлах указанных в <code>.gitignore</code>;</li>
+                    <li>сам файл <code>.gitignore</code> будет проиндексирован гитом, и это хорошо;</li>
+                    <li>все разработчики проекта в результате <code>clone/pull</code> получат файл <code>.gitignore</code> и будут видеть изменения в нем.</li>
+                </ol>
+                <p>Например, запуливаем в очередной раз к себе на машину проект, настройки („config“) указанные в <code>.gitignore</code> — не скачались, и великолепно, так как настройки подключения к БД на нашей машине другие. И при этом скачались „config-example“, которые могут подсказать, что не так в наших старых настройках.</p>
+                <p><code>.gitignore</code> применяется в тех случаях, когда функционирование проекта без скрытых файлов не возможно, но эти файлы не являются обновляемым „ядром“ проекта. Возможно, это файлы настроек проекта, отображения (шаблоны) ну или файлы базы данных, например <code>sqlite.db</code>.</p>
+                <p><strong>Применять для:</strong> настройки проекта, БД, шаблоны…</p>
+                <h4><code>.git/info/exclude</code> — исключения в репозитории, для исключения мусора проекта (проект тоже мусорит, ага)</h4>
+                <p>Отредактировав файл .git/info/exclude мы получаем следующий эффект:</p>
+                <ol>
+                    <li>гит будет игнорировать изменения в файлах указанных в <code>.git/info/exclude</code>;</li>
+                    <li>изменения в файле <code>.git/info/exclude</code> не индексируются гитом, и это хорошо;</li>
+                    <li>никто из разработчиков проекта в результате <code>clone/pull</code> не получит измененный файл <code>.git/info/exclude</code> и не будет видеть изменения в нем.</li>
+                </ol>
+                <p>Если проект рабочий, а не на гитхабе и прямо в рабочей папке создан репозиторий, то сам проект создает кеш, логи и другие вспомогательные файлы. При необходимости стащить рабочее ядро проекта, для запуска копии или подобного проекта мы пуляем себе на машину ядро, и нам не зачем тащить логи кеш старого проекта. И мы даже не узнаем, что всё это ранее существовало. Для получения именно такого эффекта указываем исключения в данной настройке.</p>
+                <p><strong>Применять для:</strong> кеш, логи…</p>
+                <h4><code>~/.gitconfig</code>, <code>~/.gitexcludes</code> — исключения вне репозитория, для исключения мусора разработчиков</h4>
+                <p>На машиене, на которой вы работаете, вы можете настроить скрытия „под себя“. Чтобы настроить гит на восприятия файла <code>~/.gitexcludes</code> как файла с вашими исключениями, выполните команду для настройки: <code>git config --global core.excludesfile ~/.gitexcludes</code> или в ручную: внесите изменения в файл <code>~/.gitconfig</code>: в раздел [core] добавить строку <code>excludesfile = ~/.gitexcludes</code> В результате настроек мы получим:</p>
+                <ol>
+                    <li>гит будет игнорировать изменения в файлах указанных в <code>~/.gitexcludes</code>;</li>
+                    <li>изменения в файле <code>~/.gitexcludes</code> не индексируются гитом, это понятно, он же не в репозитории;</li>
+                    <li>никто из разработчиков проекта в результате вашего <code>push</code> не получит измененный файл <code>~/.gitexcludes</code> и не увидит изменений в нём (ну ессесно!).</li>
+                </ol>
+                <p>Во время вашей работы (программирования) могут создаваться вспомогательные файлы не относящиеся к проекту (настройки ваших программ, заметки…).</p>
+                <p><strong>Применять для:</strong> настройки IDE, ваши личные заметки…</p>
+                <hr>
+                <p>ЗЫ: вы же понимаете, что если файл уже был в репозитории и мы только сейчас решили его исключить (и так что бы он не появлялся при pull), то необходимо его удалить из индекса. Я часто находил этот вопрос при гуглении вместо своих вопросов, типа: „почему файл всё равно закачивается, хотя я его добавил в игнор?“</p>
+                <pre>git rm --cached path/to/file</pre>
+                <h3>syntax</h3>
+<pre>
+somefile
+*.someextensionoffiles
+somefolder/
+**/anyfoldersnameinproject
 
-					<h2>Ветки</h2>
-					<h3>Запушить ветку в бар</h3>
-<pre class="prettyprint lang-bsh">git push -u origin local</pre>
-					<p>это отправляет ветку local в удаленный репозиторий и автоматом делает нашу локальную ветку local отслеживаемой с origin/local :)</p>
+#comment in git ignore
+#combined syntax:
 
+some/path/*/onelevel
+some/path/**/anylevel/*.thisfiles
+</pre>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="Yii2 all"></script>
+    <!-- Подсветка синтаксиса кода -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- toc -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#toc").append('<p>Содержание:</p>');
+        $("#toc").append('<ul></ul>');
+        $("h2").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h2" + i);
+            $("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h3").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h3" + i);
+            var prevh2 = current.prevAll("h2").first();
+            var j = prevh2.attr("id").substring(2);
+            $("#linkh2" + j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h4").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h4" + i);
+            var prevh3 = current.prevAll("h3").first();
+            var j = prevh3.attr("id").substring(2);
+            alert
+            $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h5").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h5" + i);
+            var prevh4 = current.prevAll("h4").first();
+            var j = prevh4.attr("id").substring(2);
+            $("#linkh4" + j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+        $("h6").each(function(i) {
+            var current = $(this);
+            current.attr("id", "h6" + i);
+            var prevh5 = current.prevAll("h5").first();
+            var j = prevh5.attr("id").substring(2);
+            $("#linkh5" + j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
+                i + "' title='" + current.attr("tagName") + "'>" +
+                current.html() + "</a><ul></ul></li>");
+        });
+    });
+    </script>
+</body>
 
-
-
-
-
-				</div>
-			</div>
-		</div>
-
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Yii2 all"></script>
-        <!-- Подсветка синтаксиса кода -->
-        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-        <!-- toc -->
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#toc").append('<p>Содержание:</p>');
-				$("#toc").append('<ul></ul>');
-				$("h2").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h2" + i);
-					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h3").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h3" + i);
-					var prevh2 = current.prevAll("h2").first();
-					var j = prevh2.attr("id").substring(2);
-					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h4").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h4" + i);
-					var prevh3 = current.prevAll("h3").first();
-					var j = prevh3.attr("id").substring(2);
-					alert
-					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h5").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h5" + i);
-					var prevh4 = current.prevAll("h4").first();
-					var j = prevh4.attr("id").substring(2);
-					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h6").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h6" + i);
-					var prevh5 = current.prevAll("h5").first();
-					var j = prevh5.attr("id").substring(2);
-					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-			});
-		</script>
-	</body>
 </html>
