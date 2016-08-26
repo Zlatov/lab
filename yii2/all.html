@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Yii2</title>
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yii2</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">Yii2 all</h1>
-					<div id="toc"></div>
-
-
-                    <h2>Config</h2>
-                    <h3>Dev or Prod</h3>
-                    <p>In <code>web/index.php</code>:</p>
-<pre class="prettyprint lang-php">
+<body data-spy="scroll" data-target="#toc">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="text-center">Yii2 all</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                <div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+                <h2>Config</h2>
+                <h3>Dev or Prod</h3>
+                <p>In <code>web/index.php</code>:</p>
+                <pre class="prettyprint lang-php">
 /*
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'dev');
@@ -38,9 +42,9 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 </pre>
-                    <p>These changes affect the type of error.</p>
-                    <h3>Rules</h3>
-<pre class="prettyprint lang-php">
+                <p>These changes affect the type of error.</p>
+                <h3>Rules</h3>
+                <pre class="prettyprint lang-php">
             [['file'], 'required', 'on' => ['create','createfotos']],
             [['file'], 'safe', 'on' => ['update']],
             [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg', 'on' => ['create']],
@@ -112,8 +116,8 @@ defined('YII_ENV') or define('YII_ENV', 'prod');
                 ]
             ],
 </pre>
-                    <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
-<pre class="prettyprint lang-php">
+                <p>Модель может использоваться в нескольких контроллерах... - Модель использует свойство [[yii\base\Model::scenario]], чтобы отслеживать сценарий, в котором она используется. По умолчанию, модель поддерживает только один сценарий с именем default. В следующем коде показано два способа установки сценария модели:</p>
+                <pre class="prettyprint lang-php">
 // сценарий задается как свойство
 $model = new User;
 $model->scenario = User::SCENARIO_LOGIN;
@@ -121,10 +125,9 @@ $model->scenario = User::SCENARIO_LOGIN;
 // сценарий задается через конфигурацию
 $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 </pre>
-
-                    <h3>Mailer</h3>
-                    <p><code>config/main.php</code></p>
-<pre class="prettyprint lang-php">
+                <h3>Mailer</h3>
+                <p><code>config/main.php</code></p>
+                <pre class="prettyprint lang-php">
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@frontend/mail',
@@ -141,22 +144,18 @@ $model = new User(['scenario' => User::SCENARIO_LOGIN]);
             ],
         ],
 </pre>
-                    <h4>Errors</h4>
-                    <p><code>Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted.</code></p>
-                    <p>You need to authorize the external application use of gmail, I think.</p>
-                    <p>Follow the next steps and authorize to make it:</p>
-                    <ul>
-                        <li>First, go to your Google Account Management page</li>
-                        <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
-                    </ul>
-                    
-
-
-
-					<h2>Model</h2>
-                    <h3>ActiveRecors</h3>
-                    <h4>link()</h4>
-<pre class="prettyprint lang-php">
+                <h4>Errors</h4>
+                <p><code>Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted.</code></p>
+                <p>You need to authorize the external application use of gmail, I think.</p>
+                <p>Follow the next steps and authorize to make it:</p>
+                <ul>
+                    <li>First, go to your Google Account Management page</li>
+                    <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
+                </ul>
+                <h2>Model</h2>
+                <h3>ActiveRecors</h3>
+                <h4>link()</h4>
+                <pre class="prettyprint lang-php">
 // Delete all relations in this model User:
 $user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen()
 // The secon option force the delete row from the binding table
@@ -164,8 +163,8 @@ $user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen
 // Add relation to model Kitchen:
 $kitchen->link('users', $user); // HasMany function in model Kitchen: getUsers()
 </pre>
-                    <h4>show ActiveRecord query</h4>
-<pre class="prettyprint lang-php">
+                <h4>show ActiveRecord query</h4>
+                <pre class="prettyprint lang-php">
 $query = Message::find()
     -&gt;with(['author'])
     -&gt;where(['or', ['and', 'author_id =' . $user-&gt;id,'recipient_id =' . $messagesLast[0]-&gt;author_id], ['and', 'author_id =' . $messagesLast[0]-&gt;author_id,'recipient_id =' . $user-&gt;id]])
@@ -176,8 +175,8 @@ print_r($query-&gt;createCommand()-&gt;getRawSql());
 echo &quot;&lt;/pre&gt;&quot;;
 die();
 </pre>
-                    <h4>ActiveRecord queries</h4>
-<pre class="prettyprint lang-php">
+                <h4>ActiveRecord queries</h4>
+                <pre class="prettyprint lang-php">
     return Kitchen::find()
         -&gt;select('kitchen.*')
         -&gt;innerJoin('dish_kitchen dk', 'dk.kitchen_id = kitchen.id')
@@ -187,8 +186,8 @@ die();
         -&gt;groupBy('kitchen.id')
         -&gt;all();
 </pre>
-                    <h4>Code and queries with Pagination</h4>
-<pre class="prettyprint lang-php">
+                <h4>Code and queries with Pagination</h4>
+                <pre class="prettyprint lang-php">
         $limit = 10;
         $page = (is_null(Yii::$app-&gt;request-&gt;get('page')))?1:Yii::$app-&gt;request-&gt;get('page');
         $offset = ((int)$page-1)*$limit;
@@ -208,21 +207,20 @@ die();
 
         $pagination-&gt;pageSizeParam = false;
 </pre>
-                    <h4>deleteAll</h4>
-<pre class="prettyprint lang-php">
+                <h4>deleteAll</h4>
+                <pre class="prettyprint lang-php">
 Foto::deleteAll(['album_id' => $this->id]); // Не перебирает модели (не выполняет $model->delete, соответственно beforeDelete() и... тоже)
 </pre>
-
-                    <h3>Yii DAO (объекты доступа к данным)</h3>
-                    <h4>Выполнение SQL запросов</h4>
-<pre>$posts = Yii::$app->db->createCommand('SELECT * FROM post')
+                <h3>Yii DAO (объекты доступа к данным)</h3>
+                <h4>Выполнение SQL запросов</h4>
+                <pre>$posts = Yii::$app->db->createCommand('SELECT * FROM post')
     ->queryAll();
 $product = Yii::$app->db->createCommand('call product_view(:id);')
     ->bindValue(':id', $_GET['id'])
     ->queryOne();</pre>
-                    <h2>View</h2>
-                    <h3>ActiveForm</h3>
-<pre class="prettyprint lang-php">
+                <h2>View</h2>
+                <h3>ActiveForm</h3>
+                <pre class="prettyprint lang-php">
     &lt;?php if ($model-&gt;iconsrc &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;iconsrc))): ?&gt;
         &lt;p&gt;Аватар: &lt;/p&gt;
         &lt;?= Html::img(Yii::getAlias('@webfrontend') . $model-&gt;iconsrc, ['class'=&gt;'img-responsive']) ?&gt;
@@ -284,13 +282,13 @@ $product = Yii::$app->db->createCommand('call product_view(:id);')
         ]
     ) ?&gt;
 </pre>
-                    <h3>Не ActiveForm =)</h3>
-                    <p>Если bad request (#400) не удалось проверить переданные данные, то наверняка забыли про CSRF</p>
-<pre class="prettyprint lang-php">
+                <h3>Не ActiveForm =)</h3>
+                <p>Если bad request (#400) не удалось проверить переданные данные, то наверняка забыли про CSRF</p>
+                <pre class="prettyprint lang-php">
 &lt;input type=&quot;hidden&quot; name=&quot;_csrf&quot; value=&quot;&lt;?=Yii::$app-&gt;request-&gt;getCsrfToken()?&gt;&quot; /&gt;
 </pre>
-                    <p>Или отключить CSRF проверку, в контроллере</p>
-<pre class="prettyprint lang-php">
+                <p>Или отключить CSRF проверку, в контроллере</p>
+                <pre class="prettyprint lang-php">
 ...
 public $enableCsrfValidation = true;
 ...
@@ -299,8 +297,8 @@ public $enableCsrfValidation = true;
 $this->enableCsrfValidation = false;
 ...
 </pre>
-					<h3>DetailView</h3>
-<pre class="prettyprint lang-php">
+                <h3>DetailView</h3>
+                <pre class="prettyprint lang-php">
             'email:email',
             [
                 'label' => 'Статус',
@@ -346,8 +344,8 @@ $this->enableCsrfValidation = false;
             ],
 
 </pre>
-					<h3>GridView</h3>
-<pre class="prettyprint lang-php">
+                <h3>GridView</h3>
+                <pre class="prettyprint lang-php">
             'product.header',
             'product.price',
             'product.pricesale',
@@ -389,14 +387,14 @@ $this->enableCsrfValidation = false;
                 'value' => function($data) { return Yii::getAlias('@webfrontend') . $data->src80; },
             ],
 </pre>
-                    <h4>Добавление фильтра</h4>
-                    <h5>Фильтр новостей по тегам</h5>
-                    <p>Необходим список всех тегов. В контроллере получим и передадим во вьюху</p>
-<pre class="prettyprint lang-php">
+                <h4>Добавление фильтра</h4>
+                <h5>Фильтр новостей по тегам</h5>
+                <p>Необходим список всех тегов. В контроллере получим и передадим во вьюху</p>
+                <pre class="prettyprint lang-php">
         $tags = ArrayHelper::map(NewsTag::find()->all(), 'id' ,'header');
 </pre>
-                    <p>Во вьюхе укажим фильтр <code>'filter' => $tags,</code>, ну и вывод <code>'format' => 'raw',</code> и т.д.</p>
-<pre class="prettyprint lang-php">
+                <p>Во вьюхе укажим фильтр <code>'filter' => $tags,</code>, ну и вывод <code>'format' => 'raw',</code> и т.д.</p>
+                <pre class="prettyprint lang-php">
             [
                 'attribute'=>'tag',
                 'label' => 'Теги',
@@ -415,33 +413,33 @@ $this->enableCsrfValidation = false;
                 'filter' => $tags,
             ],
 </pre>
-                    <p>Главное в ModelSearch.php</p>
-                    <p>Создать переменную</p>
-<pre class="prettyprint lang-php">
+                <p>Главное в ModelSearch.php</p>
+                <p>Создать переменную</p>
+                <pre class="prettyprint lang-php">
     public $tag;
 </pre>
-                    <p>Добавить в рулес</p>
-<pre class="prettyprint lang-php">
+                <p>Добавить в рулес</p>
+                <pre class="prettyprint lang-php">
             ['tag', 'safe'],
 </pre>
-                    <p>Отредактировать запрос поиска добавив связанную таблицу</p>
-<pre class="prettyprint lang-php">
+                <p>Отредактировать запрос поиска добавив связанную таблицу</p>
+                <pre class="prettyprint lang-php">
         $query->joinWith(['newsTag']);
 </pre>
-                    <p>Указать условия сортировки по данному полю</p>
-<pre class="prettyprint lang-php">
+                <p>Указать условия сортировки по данному полю</p>
+                <pre class="prettyprint lang-php">
         $dataProvider->sort->attributes['tag'] = [
             'asc' => ['news_tag.header' => SORT_ASC],
             'desc' => ['news_tag.header' => SORT_DESC],
         ];
 </pre>
-                    <p>Добавим фильтр по полю так (не как like, а как по id)</p>
-<pre class="prettyprint lang-php">
+                <p>Добавим фильтр по полю так (не как like, а как по id)</p>
+                <pre class="prettyprint lang-php">
             'news_tag.id' => $this->tag,
 </pre>
-                    <h3>Assets</h3>
-                    <p>Model</p>
-<pre class="prettyprint lang-php">
+                <h3>Assets</h3>
+                <p>Model</p>
+                <pre class="prettyprint lang-php">
 namespace frontend\assets;
 
 use yii\web\AssetBundle;
@@ -465,20 +463,20 @@ class AppAsset extends AssetBundle
     ];
 }
 </pre>
-                    <p>In view</p>
-<pre class="prettyprint lang-php">
+                <p>In view</p>
+                <pre class="prettyprint lang-php">
 use frontend\assets\MainAsset;
 MainAsset::register($this);
 </pre>
-                    <p>Register JS or CSS file depend Asset (in view):</p>
-<pre class="prettyprint lang-php">
+                <p>Register JS or CSS file depend Asset (in view):</p>
+                <pre class="prettyprint lang-php">
 use frontend\assets\MainAsset;
 $this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
 </pre>
-                    <h2>Access</h2>
-                    <h3>Аутентификация</h3>
-                    <p>Настройка</p>
-<pre class="prettyprint lang-php">
+                <h2>Access</h2>
+                <h3>Аутентификация</h3>
+                <p>Настройка</p>
+                <pre class="prettyprint lang-php">
 return [
     'components' => [
         'user' => [
@@ -489,8 +487,8 @@ return [
     ],
 ];
 </pre>
-                    <p>Определение</p>
-<pre class="prettyprint lang-php">
+                <p>Определение</p>
+                <pre class="prettyprint lang-php">
 // `identity` текущего пользователя. `Null`, если пользователь не аутентифицирован.
 $identity = Yii::$app->user->identity;
 
@@ -500,9 +498,8 @@ $id = Yii::$app->user->id;
 // проверка на то, что текущий пользователь гость (не аутентифицирован)
 $isGuest = Yii::$app->user->isGuest;
 </pre>
-                    <p>Для залогинивания пользователя вы можете использовать следующий код:</p>
-
-<pre class="prettyprint lang-php">
+                <p>Для залогинивания пользователя вы можете использовать следующий код:</p>
+                <pre class="prettyprint lang-php">
 // найти identity с указанным username.
 // замечание: также вы можете проверить и пароль, если это нужно
 $identity = User::findOne(['username' => $username]);
@@ -510,13 +507,13 @@ $identity = User::findOne(['username' => $username]);
 // логиним пользователя
 Yii::$app->user->login($identity);
 </pre>
-                    <p>Для выхода пользователя, просто вызовите</p>
-<pre class="prettyprint lang-php">
+                <p>Для выхода пользователя, просто вызовите</p>
+                <pre class="prettyprint lang-php">
 Yii::$app->user->logout();
 </pre>
-                    <h3>AccessControl</h3>
-                    <p>Если достаточно только ролей, то можно обойтись без RBAC, используя matchCallback в AccessControl, например: "Если пользователь залогинен и являетсмя админом" :</p>
-<pre class="prettyprint lang-php">
+                <h3>AccessControl</h3>
+                <p>Если достаточно только ролей, то можно обойтись без RBAC, используя matchCallback в AccessControl, например: "Если пользователь залогинен и являетсмя админом" :</p>
+                <pre class="prettyprint lang-php">
     public function behaviors()
     {
         return [
@@ -543,10 +540,10 @@ Yii::$app->user->logout();
         ];
     }
 </pre>
-                    <h3>RBAC (AuthManager)</h3>
-                    <h4>Подключение (настройка)</h4>
-                    <p>- это компонент, задаем в конфиге:</p>
-<pre class="prettyprint lang-php">
+                <h3>RBAC (AuthManager)</h3>
+                <h4>Подключение (настройка)</h4>
+                <p>- это компонент, задаем в конфиге:</p>
+                <pre class="prettyprint lang-php">
     'components' => [
         ...
         'user' => [
@@ -562,11 +559,11 @@ Yii::$app->user->logout();
             'enablePrettyUrl' => true,
         ...
 </pre>
-                    <p>Компонент может быть зада классом yii\rbac\PhpManager или yii\rbac\DbManager (хранить в файле или бд)</p>
-                    <p>Главный метод checkAccess</p>
-                    <h4>Добавление PhpManager</h4>
-                    <p>authManager настройка frontend/config/main.php :</p>
-<pre class="prettyprint lang-php">
+                <p>Компонент может быть зада классом yii\rbac\PhpManager или yii\rbac\DbManager (хранить в файле или бд)</p>
+                <p>Главный метод checkAccess</p>
+                <h4>Добавление PhpManager</h4>
+                <p>authManager настройка frontend/config/main.php :</p>
+                <pre class="prettyprint lang-php">
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             // 'defaultRoles' => ['guest'],
@@ -575,9 +572,9 @@ Yii::$app->user->logout();
             'ruleFile' => '@frontend/components/rbac/rules.php',
         ],
 </pre>
-                    <p>Соответственно создал папку @frontend/components/rbac/</p>
-                    <p>настройка для работы с консолью console/config/main.php :</p>
-<pre class="prettyprint lang-php">
+                <p>Соответственно создал папку @frontend/components/rbac/</p>
+                <p>настройка для работы с консолью console/config/main.php :</p>
+                <pre class="prettyprint lang-php">
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
             // 'defaultRoles' => ['guest'],
@@ -592,8 +589,8 @@ Yii::$app->user->logout();
             'enableSession' => false,
         ],
 </pre>
-                    <p>Создали контроллер для консоли:</p>
-<pre class="prettyprint lang-php">
+                <p>Создали контроллер для консоли:</p>
+                <pre class="prettyprint lang-php">
 &lt;?php
 namespace console\controllers;
 
@@ -624,10 +621,10 @@ class RbacController extends Controller
 
 }
 </pre>
-                    <p>Запускаем команду <code>php yii rbac/init</code> - получаем три файла там где и ожидали.</p>
-                    <h4>Тестирование</h4>
-                    <p>создаем пользователя, логиним, разлогиним (В консольном контроллере создаем actionTest)</p>
-<pre class="prettyprint lang-php">
+                <p>Запускаем команду <code>php yii rbac/init</code> - получаем три файла там где и ожидали.</p>
+                <h4>Тестирование</h4>
+                <p>создаем пользователя, логиним, разлогиним (В консольном контроллере создаем actionTest)</p>
+                <pre class="prettyprint lang-php">
     public function actionTest()
     {
         Yii::$app->set('request', new \yii\web\Request());
@@ -653,8 +650,8 @@ class RbacController extends Controller
         var_dump(Yii::$app->user->identity);
     }
 </pre>
-                    <p>Создаем пользователя, удаляем все роли, привязываем роли, выводим роли</p>
-<pre class="prettyprint lang-php">
+                <p>Создаем пользователя, удаляем все роли, привязываем роли, выводим роли</p>
+                <pre class="prettyprint lang-php">
     public function actionTest()
     {
         Yii::$app->set('request', new \yii\web\Request());
@@ -679,8 +676,8 @@ class RbacController extends Controller
         echo PHP_EOL;
     }
 </pre>
-                    <p>Логинимся пользователем и проверяем, обратить внимание на метод проверки can()</p>
-<pre class="prettyprint lang-php">
+                <p>Логинимся пользователем и проверяем, обратить внимание на метод проверки can()</p>
+                <pre class="prettyprint lang-php">
     public function actionTest()
     {
         Yii::$app->set('request', new \yii\web\Request());
@@ -696,8 +693,8 @@ class RbacController extends Controller
         echo PHP_EOL;
     }
 </pre>
-                    <h4>Работаем разрешениями и прикрепленным к ним правилам</h4>
-<pre class="prettyprint lang-php">
+                <h4>Работаем разрешениями и прикрепленным к ним правилам</h4>
+                <pre class="prettyprint lang-php">
     public function actionInit()
     {
         $auth = Yii::$app->getAuthManager();
@@ -828,8 +825,8 @@ class RbacController extends Controller
     }
 
 </pre>
-                    <p>Должно вывести это:</p>
-<pre>
+                <p>Должно вывести это:</p>
+                <pre>
 Проверка разрешений для Username и первой публикации
 Создание публикации 1
 Редактирование публикации 1
@@ -847,11 +844,11 @@ class RbacController extends Controller
 Редактирование публикации 1
 Редактирование своей публикации 1
 </pre>
-                    <h4>Проверить алгоритм</h4>
-                    <p>можно залезть в vendor/yii.../rbac/PhpManager.php@checkAccessRecursive(..., $i = 1) {}. Добавить первой строкой: echo str_repeat('&gt; ',$i) . $itemName . PHP_EOL; И </p>
-                    <h4>На живом примере</h4>
-                    <p>В контроллере новостей</p>
-<pre class="prettyprint lang-php">
+                <h4>Проверить алгоритм</h4>
+                <p>можно залезть в vendor/yii.../rbac/PhpManager.php@checkAccessRecursive(..., $i = 1) {}. Добавить первой строкой: echo str_repeat('&gt; ',$i) . $itemName . PHP_EOL; И </p>
+                <h4>На живом примере</h4>
+                <p>В контроллере новостей</p>
+                <pre class="prettyprint lang-php">
 use yii\web\ForbiddenHttpException;
 
 ....
@@ -860,11 +857,11 @@ use yii\web\ForbiddenHttpException;
             throw new ForbiddenHttpException();
         }
 </pre>
-                    <h2>Pjax</h2>
-                    <h3>Параметры</h3>
-                    <h4>enablePushState</h4>
-                    <p>Параметр enablePushState = true - получим изменение адреса в адресной строке браузера.</p>
-<pre class="prettyprint lang-php">
+                <h2>Pjax</h2>
+                <h3>Параметры</h3>
+                <h4>enablePushState</h4>
+                <p>Параметр enablePushState = true - получим изменение адреса в адресной строке браузера.</p>
+                <pre class="prettyprint lang-php">
 &lt;?php
 use yii\widgets\Pjax;
 ?&gt;
@@ -873,72 +870,23 @@ use yii\widgets\Pjax;
     &lt;?= $this-&gt;render('_addresses', ['model' =&gt; $model]) ?&gt;
 &lt;?php Pjax::end(); ?&gt;
 </pre>
-                    <h2>Errors</h2>
-                    <h3>The use statement with non-compound name 'Yii' has no effect</h3>
-                    <p>Эта ошибка возникает если в глобальном неймспейсе использовать <code>use Yii;</code> - глобальный неймспейс.</p>
-                    <p>Ошибка наиболее распространена во вьюхах (они в глобале), а я по привычке там фигачу <code>use Yii;</code></p>
-				</div>
-			</div>
-		</div>
+                <h2>Errors</h2>
+                <h3>The use statement with non-compound name 'Yii' has no effect</h3>
+                <p>Эта ошибка возникает если в глобальном неймспейсе использовать <code>use Yii;</code> - глобальный неймспейс.</p>
+                <p>Ошибка наиболее распространена во вьюхах (они в глобале), а я по привычке там фигачу <code>use Yii;</code></p>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="Yii2 all"></script> -->
+    <!-- Подсветка синтаксиса кода -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- toc -->
+    <script src="/js.js" type="text/javascript"></script>
+</body>
 
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Yii2 all"></script>
-        <!-- Подсветка синтаксиса кода -->
-        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-        <!-- toc -->
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#toc").append('<p>Содержание:</p>');
-				$("#toc").append('<ul></ul>');
-				$("h2").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h2" + i);
-					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h3").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h3" + i);
-					var prevh2 = current.prevAll("h2").first();
-					var j = prevh2.attr("id").substring(2);
-					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h4").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h4" + i);
-					var prevh3 = current.prevAll("h3").first();
-					var j = prevh3.attr("id").substring(2);
-					alert
-					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h5").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h5" + i);
-					var prevh4 = current.prevAll("h4").first();
-					var j = prevh4.attr("id").substring(2);
-					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h6").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h6" + i);
-					var prevh5 = current.prevAll("h5").first();
-					var j = prevh5.attr("id").substring(2);
-					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-			});
-		</script>
-	</body>
 </html>
