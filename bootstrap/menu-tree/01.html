@@ -17,80 +17,61 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
-    /*#toc {
-            position: fixed;
-            top: auto;
-        }*/
+        @media (min-width: 1200px) {
+            #toc {
+                width: 360px;
+            }
+        }
+        @media (min-width: 992px) and (max-width: 1199px) {
+            #toc {
+                width: 293px;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 991px) {
+            #toc {
+                width: 220px;
+            }
+        }
+        @media (max-width: 767px) {
+            #toc {
+                position: static;
+                width: auto;
+            }
+        }
+        #toc ul ul {
+            padding-left: 20px;
+            display: none;
+        }
+        #toc li.active>ul {
+            display: block;
+        }
     </style>
 </head>
 
-<body data-spy="scroll" data-target="#totoc">
+<body data-spy="scroll" data-target="#toc">
     <div class="container">
         <div class="row">
-            <div class="col-md-4" id="totoc">
-                <hr>
-                <!-- <div class="list-group" id="toc">
-                    <a href="#c1" class="list-group-item active clearfix">
-                        <div class="pull-right">
-                            <button class="btn btn-xs btn-warning dropdown-toggle" data-toggle="collapse" data-target="#d1">
-                                <span class="caret"></span>
-                            </button>
-                        </div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </a>
-                    <div id="d1" class="collapse">
-                        <a href="#c1-1" class="list-group-item clearfix">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        </a>
-                        <a href="#c1-2" class="list-group-item clearfix">
-                            <div class="pull-right">
-                                <button class="btn btn-xs btn-warning dropdown-toggle" data-toggle="collapse" data-target="#d1-2">
-                                    <span class="caret"></span>
-                                </button>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        </a>
-                        <div id="d1-2" class="collapse">
-                            <a href="#c1-2-1" class="list-group-item clearfix">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </a>
-                            <a href="#c1-2-2" class="list-group-item clearfix">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </a>
-                        </div>
-                    </div>
-                    <a href="#c2" class="list-group-item clearfix">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </a>
-                </div> -->
-                <ul id="toc" class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="16">
-                    <!-- <ul id="toc" class="nav nav-pills nav-stacked"> -->
-                    <li>
-                        <a href="#c1">c1 
-                            <div class="pull-right">
-                                <span class="btn btn-xs btn-default dropdown-toggle" data-toggle="collapse" data-target="#d1"><span class="caret"></span></span>
-                            </div>
-                        </a>
-                        
-                        <ul class="nav nav-pills nav-stacked collapse" id="d1">
-                            <li><a href="#c1-1">c1-1</a></li>
-                            <li><a href="#c1-2">c1-2
-                                <div class="pull-right">
-                                    <span class="btn btn-xs btn-default dropdown-toggle" data-toggle="collapse" data-target="#d1-2"><span class="caret"></span></span>
-                                </div>
-                            </a>
-                                <ul class="nav nav-pills nav-stacked collapse" id="d1-2">
-                                    <li><a href="#c1-2-1">c1-2-1</a></li>
-                                    <li><a href="#c1-2-2">c1-2-2</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#c2">c2</a></li>
-                </ul>
-
+            <div class="col-sm-4">
+                <div id="toc" data-spy="affix" data-offset-top="16">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="#c1">c1</a>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#c1-1">c1-1</a></li>
+                                <li>
+                                    <a href="#c1-2">c1-2</a>
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#c1-2-1">c1-2-1</a></li>
+                                        <li><a href="#c1-2-2">c1-2-2</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#c2">c2</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-sm-8">
                 <h2 id="c1">c1</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -152,71 +133,6 @@
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    // $(function() {
-    //     // var $affixElement = $('div[data-spy="affix"]');
-    //     // $affixElement.width($affixElement.parent().width());
-
-    //     // $(window).resize(function () {
-    //     //     var $affixElement = $('div[data-spy="affix"]');
-    //     //     $affixElement.width($affixElement.parent().width());
-
-    //     // });
-    // });
-
-
-
-
-
-jQuery(document).ready(function() {
-    var offset = 70;
-    
-    // Function to handle affix width and classes in affix menu on page loading, scrolling or resizing 
-    function affix() {
-        
-        // Fit affix width to its parent's width
-        var $affixElement = $('div[data-spy="affix"]');
-        $affixElement.width($affixElement.parent().width());
- 
-        // Position of vertical scrollbar 
-        var position = $(window).scrollTop();
-        if (position >= offset) {
-            $('.wrapper .section').each(function(i) {
-                // Current content block's position less body padding
-                var current = $(this).offset().top - offset - 1;
-                
-                // Add active class to corresponding affix menu while removing the same from siblings as per position) of current block
-                if (current <= position) {
-                    $('a', $affixElement).eq(i).addClass('active').siblings().removeClass('active');
-                }
-            });
-        } else {
-            $('a', $affixElement).find('.active').removeClass('active').end().find(":first").addClass('active');
-        }
-    };
-  
-    // Call to function on DOM ready
-    affix();
-    
-    // Call on scroll or resize
-    $(window).on('scroll resize', function() {
-        affix();
- 
-    });
- 
-    // Smooth scrolling at click on nav menu item
-    $('a[href*=#]:not([href=#])').click(function() {
-        var target = $(this.hash);
-        $('html,body').animate({
-            scrollTop: target.offset().top - offset
-        }, 500);
-        return false;
-    });
-});
-
-
-
-    </script>
 </body>
 
 </html>
