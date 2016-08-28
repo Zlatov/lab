@@ -1,3 +1,49 @@
+<?php
+include_once('voting.php');
+$voting1 = new Voting(['id'=>1,'header'=>'Как нам провести корпоратив?',]);
+// $voting1->setVariants([
+// 	'Как скажут так и проведем',
+// 	'В ресторане с самодеятельностью',
+// 	'В ресторане с групповыми играми',
+// 	'Активный вид спорта',
+// 	'Не проводить корпоратив, отпустить домой к родным',
+// ]);
+// $voting1->setVotes([
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// ]);
+$voting2 = new Voting(['id'=>2,'header'=>'В каком составе?',]);
+// $voting2->setVariants([
+// 	'я один(одна) пойду',
+// 	'(+1)',
+// 	'(+2)',
+// 	'не пойду по уважительной причине',
+// ]);
+// $voting2->setVotes([
+// 	0,
+// 	0,
+// 	0,
+// 	0,
+// ]);
+
+// $voting1->delCookie();
+// $voting1->resetVotes();
+// $voting2->resetVotes();
+
+// echo "<pre>";
+// print_r($_COOKIE);
+// echo "</pre>";
+
+
+if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
+	$votingId = (int)$_POST['votingId'];
+	${"voting".$votingId}->addVote($_POST['vote']);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -28,99 +74,32 @@
 				<h1><a href="index.php">Голосование</a></h1>
 <?php
 
-include_once('voting.php');
+// if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
 
-$voting1 = new Voting(['id'=>1,'header'=>'Как нам провести корпоратив?',]);
+// 	if ($votingId===1) {
+// 		echo $voting1->render('result');
+// 	} else {
+// 		echo $voting1->render('voting');
+// 	}
 
-$variants = [
-	'Как скажут так и проведем',
-	'В ресторане с самодеятельностью',
-	'В ресторане с групповыми играми',
-	'Активный вид спорта',
-	'Не проводить корпоратив, отпустить домой к родным',
-];
-$voting1->setVariants($variants);
-$variants = $voting1->getVariants();
-// echo "<pre>";
-// print_r($variants);
-// echo "</pre>";
-$votes = [
-	1,
-	2,
-	3,
-	4,
-	5,
-];
-$voting1->setVotes($votes);
-$votes = $voting1->getVotes();
-// echo "<pre>";
-// print_r($votes);
-// echo "</pre>";
+// 	if ($votingId===2) {
+// 		echo $voting2->render('result');
+// 	} else {
+// 		echo $voting2->render('voting');
+// 	}
 
-$voting2 = new Voting(['id'=>2,'header'=>'В каком составе?',]);
-
-$variants = [
-	'я один(одна) пойду',
-	'(+1)',
-	'(+2)',
-	'не пойду по уважительной причине',
-];
-$voting2->setVariants($variants);
-$variants = $voting2->getVariants();
-// echo "<pre>";
-// print_r($variants);
-// echo "</pre>";
-
-
-$votes = [
-	4,
-	3,
-	2,
-	1,
-];
-$voting2->setVotes($votes);
-$votes = $voting2->getVotes();
-// echo "<pre>";
-// print_r($votes);
-// echo "</pre>";
-
-
-
-
-
-
-
-
-
-
-$voting1->addVote("1");
-
-$votes = $voting1->getVotes();
-// echo "<pre>";
-// print_r($votes);
-// echo "</pre>";
-
-
-if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
-	$votingId = (int)$_POST['votingId'];
-	${"voting".$votingId}->addVote($_POST['vote']);
-
-	if ($votingId===1) {
+// } else {
+	if ( $voting1->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==1) ) ) {
 		echo $voting1->render('result');
 	} else {
 		echo $voting1->render('voting');
 	}
-
-	if ($votingId===2) {
+	if ( $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==2) ) ) {
 		echo $voting2->render('result');
 	} else {
 		echo $voting2->render('voting');
 	}
-
-} else {
-	echo $voting1->render('voting');
-	echo $voting2->render('voting');
-}
+// }
 
 ?>
 

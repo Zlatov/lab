@@ -98,6 +98,13 @@ class Voting
 		$this->insertIntoFile($value, $this->votesPath);
 	}
 
+	public function resetVotes()
+	{
+		$variants = $this->getVariants();
+		$value = array_fill(0, count($variants), 0);
+		$this->insertIntoFile($value, $this->votesPath);
+	}
+
 	public function getVotes()
 	{
 		if (filesize($this->votesPath) === 0) {
@@ -109,14 +116,48 @@ class Voting
 
 	public function addVote($value)
 	{
+		if ($this->cookieIsSet()) {
+			return;
+		}
 		$value = (int)$value;
 		$votes = $this->getVotes();
 		foreach ($votes as $k => $v) {
 			if ($value === $k) {
 				$votes[$k]++;
+				break;
 			}
 		}
 		$this->setVotes($votes);
+		$this->addCookie();
+	}
+
+	private function addCookie()
+	{
+		if ( isset($_COOKIE) && isset($_COOKIE['voting']) ) {
+			$cookieVoting = unserialize($_COOKIE['voting']);
+		} else {
+			$cookieVoting = [];
+		}
+		$cookieVoting[$this->id] = true;
+		setcookie("voting", serialize($cookieVoting), time()+60*60*24*7, "/");
+	}
+
+	public function cookieIsSet()
+	{
+		if ( isset($_COOKIE) && isset($_COOKIE['voting']) ) {
+			$cookieVoting = unserialize($_COOKIE['voting']);
+			if ( isset($cookieVoting[$this->id]) && ($cookieVoting[$this->id] === true) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public function delCookie()
+	{
+		if ( isset($_COOKIE) && isset($_COOKIE['voting']) ) {
+			setcookie("voting", null, time()-60*60*24, "/");
+		}
 	}
 
 	public function render($view)
