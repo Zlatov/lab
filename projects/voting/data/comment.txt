@@ -1,0 +1,4 @@
+{"text":"comment 1","datetime":{"date":"2016-08-28 21:28:53","timezone_type":3,"timezone":"Europe\/Moscow"},"username":null}
+{"text":"comment 1","datetime":{"date":"2016-08-28 21:29:03","timezone_type":3,"timezone":"Europe\/Moscow"},"username":null}
+{"text":"comment 1","datetime":{"date":"2016-08-28 21:29:21","timezone_type":3,"timezone":"Europe\/Moscow"},"username":null}
+{"text":"comment 1","datetime":{"date":"2016-08-28 21:29:29","timezone_type":3,"timezone":"Europe\/Moscow"},"username":null}

@@ -1,5 +1,6 @@
 <?php
 include_once('voting.php');
+include_once('comment.php');
 $voting1 = new Voting(['id'=>1,'header'=>'Как нам провести корпоратив?',]);
 // $voting1->setVariants([
 // 	'Как скажут так и проведем',
@@ -43,6 +44,12 @@ if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
 	${"voting".$votingId}->addVote($_POST['vote']);
 }
 
+if (isset($_POST)&&!empty($_POST)&&isset($_POST['commentadd'])) {
+    Comment::addComment($_POST['text']);
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -74,32 +81,20 @@ if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
 				<h1><a href="index.php">Голосование</a></h1>
 <?php
 
-// if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
+if ( $voting1->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==1) ) ) {
+	echo $voting1->render('result');
+} else {
+	echo $voting1->render('voting');
+}
+if ( $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==2) ) ) {
+	echo $voting2->render('result');
+} else {
+	echo $voting2->render('voting');
+}
 
-// 	if ($votingId===1) {
-// 		echo $voting1->render('result');
-// 	} else {
-// 		echo $voting1->render('voting');
-// 	}
+echo Comment::template('form');
+Comment::render('list');
 
-// 	if ($votingId===2) {
-// 		echo $voting2->render('result');
-// 	} else {
-// 		echo $voting2->render('voting');
-// 	}
-
-// } else {
-	if ( $voting1->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==1) ) ) {
-		echo $voting1->render('result');
-	} else {
-		echo $voting1->render('voting');
-	}
-	if ( $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==2) ) ) {
-		echo $voting2->render('result');
-	} else {
-		echo $voting2->render('voting');
-	}
-// }
 
 ?>
 
