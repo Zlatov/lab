@@ -119,6 +119,10 @@ class Voting
 		if ($this->cookieIsSet()) {
 			return;
 		}
+		$value = intval($value);
+		if ($value === false) {
+			return;
+		}
 		$value = (int)$value;
 		$votes = $this->getVotes();
 		foreach ($votes as $k => $v) {

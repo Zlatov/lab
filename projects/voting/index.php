@@ -45,7 +45,13 @@ if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
 }
 
 if (isset($_POST)&&!empty($_POST)&&isset($_POST['commentadd'])) {
-    Comment::addComment($_POST['text']);
+    $text = htmlspecialchars(strip_tags(trim($_POST['text'])));
+    if (empty($text)) {
+        Comment::addFormError('Сообщение не должно быть пустым.');
+    } else {
+        Comment::addComment($_POST['text'], $_POST['username']);
+        header('Location: index.php');
+    }
 }
 
 
@@ -93,6 +99,7 @@ if ( $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId
 }
 
 echo Comment::template('form');
+Comment::render('error');
 Comment::render('list');
 
 
