@@ -33,12 +33,12 @@
 			</div>
 			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 				<h2>php.ini</h2>
-				<pre>
+				<pre class="prettyprint lang-apache">
 upload_max_filesize = 10M
 max_file_uploads = 20
 post_max_size = 210M
 </pre>
-				<pre>sudo service apache2 restart</pre>
+				<pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
 				<h2>Функции</h2>
 				<h3>iconv - изменение кодировки строки</h3>
 				<pre class="prettyprint lang-php">
@@ -79,9 +79,74 @@ $input_text = htmlspecialchars($input_text);
 $input_text = mysql_escape_string($input_text);
 </pre>
 				<p>Если сразу массив данных</p>
-				<pre>$checkbox_arr = array_map('intval', $_POST['checkbox']);</pre>
+				<pre class="prettyprint lang-php">$checkbox_arr = array_map('intval', $_POST['checkbox']);</pre>
+				<h3>"Запрет" повторной отправки формы по F5</h3>
+				<pre class="prettyprint lang-php">header('Location: index.php');</pre>
+				<h2>Cookie</h2>
+				<h3>Установка и чтение cookie</h3>
+				<pre class="prettyprint lang-php">setcookie("voting", $cookieVoting, time()+60*60*24*7, "/");
+if ( isset($_COOKIE) &amp;&amp; isset($_COOKIE['voting']) ) {
+	$cookieVoting = $_COOKIE['voting'];</pre>
+				<h3>Удаление cookie</h3>
+				<p><code>unset($_COOKIE['voting'])</code> - удаляет переменную на сервере (<mark>не удаляет из браузера!</mark>)</p>
+				<p>Удалить из браузера пользователя:</p>
+				<pre class="prettyprint lang-php">setcookie("voting", null, time()-60*60*24*7, "/");</pre>
+				<h3>Проверка включены ли куки в браузере</h3>
+				<pre class="prettyprint lang-php">&lt;?php
+// Recommended way for versions of PHP &gt;= 5.4.0
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+//For versions of PHP &lt; 5.4.0
+// if(session_id() == '') {
+//     session_start();
+// }
+
+
+// Если нет проверочного гет запроса,
+// но нет флага от второго прохождения прохождения
+// то запекаем печенье ()
+// скармливаем браузеру (пересылаем header()-ом с проверочным гет запросом)
+if ( !isset($_GET['checkCookie']) &amp;&amp; !isset($_SESSION['cookieIsChecked']) ) {
+    // сохраняем ссылку в сессию, если печеньки работаю, то мы сможем восстановить ссылку позже
+    $_SESSION['QUERY_STRING'] = $_SERVER['QUERY_STRING'];
+    // запекаем
+    setcookie('foo', 'bar', time() + 60*60*24);
+    // redirecting to the same page to check 
+    if (empty($_SERVER['QUERY_STRING'])) {
+	    header(&quot;location: {$_SERVER['PHP_SELF']}?checkCookie=true&quot;);
+    } else {
+	    header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&amp;checkCookie=true&quot;);
+    }
+}
+
+// Если есть проверочный гет,
+// и нет флага второго прохождения
+// проверяем печеньки съедины или нет
+// если печеньки работают, то восстанавливаем исходный урл методом header()-а (перед этим установив флаг второго прохождения)
+// если печеньки не работаю
+if ( isset($_GET['checkCookie']) &amp;&amp; ($_GET['checkCookie'] == true) &amp;&amp; !isset($_SESSION['cookieIsChecked']) ) {
+    if (isset($_COOKIE['foo']) &amp;&amp; $_COOKIE['foo'] == 'bar') {
+    	setcookie('foo', 'bar', time() - 60*60*24);
+        $_SESSION['cookieIsChecked'] = true;
+        if (!isset($_SESSION['QUERY_STRING']) || empty($_SESSION['QUERY_STRING'])) {
+    		header(&quot;location: {$_SERVER['PHP_SELF']}&quot;);
+        } else {
+    		header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&quot;);
+        }
+    } else {
+    }
+}
+
+if (isset($_SESSION['cookieIsChecked']) &amp;&amp; $_SESSION['cookieIsChecked'] === true) {
+	define('COOKIE_ENABLED', true);
+}
+if (!defined('COOKIE_ENABLED')) {
+    define('COOKIE_ENABLED', false);
+}
+</pre>
 				<h2>Комментирование</h2>
-				<pre>&lt;!-- html  --&gt;&lt;?php // echo 'asd'; ?&gt;&lt;!--  html --&gt;
+				<pre class="prettyprint lang-php">&lt;!-- html  --&gt;&lt;?php // echo 'asd'; ?&gt;&lt;!--  html --&gt;
 &lt;!-- html  --&gt;&lt;?php //= 'asd'; ?&gt;&lt;!--  html --&gt;</pre>
 			</div>
 		</div>
