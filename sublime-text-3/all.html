@@ -9,34 +9,42 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../theme/bootstrap/css/bootstrap.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!-- TOC -->
+    <link rel="stylesheet" type="text/css" href="../theme/toc/css/css.css">
 </head>
 
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <h1 class="text-center">Sublime Text 3 all</h1>
-                <div id="toc"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                <div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                 <h2>Keyboard shortcuts</h2>
                 <pre>[
-	// Закрытие проекта
-	{ &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
-	// Поиск в выделенном
-	{ &quot;keys&quot;: [ &quot;alt+s&quot; ], &quot;command&quot;: &quot;toggle_in_selection&quot;, &quot;context&quot;:
-		[
-			{ &quot;key&quot;: &quot;setting.is_widget&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: true }
-		]
-	},
-	// Удали системные клавиши и разлогинься-залогинься, чтобы работало:
-	{ &quot;keys&quot;: [&quot;ctrl+alt+up&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: false} },
-	{ &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
+    // Закрытие проекта
+    { &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
+    // Поиск в выделенном
+    { &quot;keys&quot;: [ &quot;alt+s&quot; ], &quot;command&quot;: &quot;toggle_in_selection&quot;, &quot;context&quot;:
+        [
+            { &quot;key&quot;: &quot;setting.is_widget&quot;, &quot;operator&quot;: &quot;equal&quot;, &quot;operand&quot;: true }
+        ]
+    },
+    // Удали системные клавиши и разлогинься-залогинься, чтобы работало:
+    { &quot;keys&quot;: [&quot;ctrl+alt+up&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: false} },
+    { &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
 ]
 </pre>
                 <ul>
@@ -64,62 +72,64 @@
                         <kbd>Ctrl + Shift + A</kbd> - </li>
                 </ul>
                 <h2>Установленные плагины</h2>
-<h3><strong>Package Control</strong></h3>
-<p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
-<h3><strong>ApacheConf.tmLanguage</strong></h3>
-<p> — Apache Conf Syntax Highlighting - подсветка синтаксиса .htaccess;</p>
-<h3><strong>AutoFileName</strong> img[src] link[href]&#133;;</h3>
-<p> — для пошагового ввода пути к файлу посредством выпадающих списков</p>
-<h3>FuzzyFilePath</h3>
-<p> — выпадающие списки файлов с почти нечетким поиском;</p>
-<h3>CSS Extended Completions</h3>
-<p> — выпадающие списки существующих стилей (нужно дабавить в кэш CSS файлы или всю папку по <kbd>ПКМ</kbd> в «сайдбаре» и наслаждаться);</p>
-<h3><strong>CSS Format</strong></h3>
-<p> — упаковывает CSS или наоборот в удобочитаемый;</p>
-<h3><strong>Emmet — обязательный плагин</strong></h3>
-<p> не нуждается в комментариях;</p>
-<h3><strong>PyV8</strong></h3>
-<p>Устанавливается "Почти" автоматически при установке Emmet; (необходим для работы плагина)</p>
-<h3>Emmet CSS snippets — пока и без этого неплохо снипится все;</h3>
-<h3><strong>StringUtilities</strong></h3>
-<p> — HTML сущности в символы, наоборот и другие полезности;</p>
-<h3><strong>Bootstrap 3 Snippets</strong></h3>
-<p> — A sublime plugin complete with Bootstrap 3 snippets;</p>
-<h3><strong>Gist</strong></h3>
-<h3>Git</h3>
-<p> – плагин для работы с Git через ST;</p>
-<h3><strong>GitGutter</strong></h3>
-<p> — подсветка изменений в файле;</p>
-<h3>Modific</h3>
-<p> – тоже что и Git​Gutter;</p>
-<h3><strong>Goto-CSS-Declaration</strong></h3>
-<p> — переход к классу в css файл;</p>
-<h3><strong>Sublime-HTMLPrettify</strong></h3>
-<p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
-<pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
+                <h3><strong>Package Control</strong></h3>
+                <p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
+                <h3><strong>ApacheConf.tmLanguage</strong></h3>
+                <p> — Apache Conf Syntax Highlighting - подсветка синтаксиса .htaccess;</p>
+                <h3><strong>AutoFileName</strong> img[src] link[href]&#133;;</h3>
+                <p> — для пошагового ввода пути к файлу посредством выпадающих списков</p>
+                <h3>FuzzyFilePath</h3>
+                <p> — выпадающие списки файлов с почти нечетким поиском;</p>
+                <h3>CSS Extended Completions</h3>
+                <p> — выпадающие списки существующих стилей (нужно дабавить в кэш CSS файлы или всю папку по
+                    <kbd>ПКМ</kbd> в «сайдбаре» и наслаждаться);</p>
+                <h3><strong>CSS Format</strong></h3>
+                <p> — упаковывает CSS или наоборот в удобочитаемый;</p>
+                <h3><strong>Emmet — обязательный плагин</strong></h3>
+                <p> не нуждается в комментариях;</p>
+                <h3><strong>PyV8</strong></h3>
+                <p>Устанавливается "Почти" автоматически при установке Emmet; (необходим для работы плагина)</p>
+                <h3>Emmet CSS snippets — пока и без этого неплохо снипится все;</h3>
+                <h3><strong>StringUtilities</strong></h3>
+                <p> — HTML сущности в символы, наоборот и другие полезности;</p>
+                <h3><strong>Bootstrap 3 Snippets</strong></h3>
+                <p> — A sublime plugin complete with Bootstrap 3 snippets;</p>
+                <h3><strong>Gist</strong></h3>
+                <h3>Git</h3>
+                <p> – плагин для работы с Git через ST;</p>
+                <h3><strong>GitGutter</strong></h3>
+                <p> — подсветка изменений в файле;</p>
+                <h3>Modific</h3>
+                <p> – тоже что и Git​Gutter;</p>
+                <h3><strong>Goto-CSS-Declaration</strong></h3>
+                <p> — переход к классу в css файл;</p>
+                <h3><strong>Sublime-HTMLPrettify</strong></h3>
+                <p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
+                <pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
 ...
 &quot;indent_size&quot;: 1, // Indentation size
 </pre>
-<h3><strong>CodeFormatter</strong></h3>
-<p> — понятно для чего, немного по вкусу настроить и все;</p>
-<h3><strong>SFTP</strong></h3>
-<p> — передача файлов через SSH, так что всё в порядке;</p>
-<h3><strong>SideBarEnhancements</strong></h3>
-<p> — расширение функционала левого меню;</p>
-<h3><strong>MoveTab</strong></h3>
-<p> — перемещение вкладок по горячей клавише;</p>
-<h3><strong>SublimeCodeIntel</strong></h3>
-<p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
-<h3>Tag — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная) <del>использую</del> из-за отличной работы с атрибутами тегов;</h3>
-<h3><strong>View In Browser</strong></h3>
-<p> — открыть файл в браузере;</p>
-<h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
-<h3>SideBarGit — <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</h3>
-<h3>rsub — править удаленные файлы через ssh;</h3>
-<h3>livestyle-sublime — рабочий плагин, но мне не очень нужен;</h3>
-<h3><strong>BracketHighlighter</strong></h3>
-<p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
-<h3><a href="#Terminal">Sublime Terminal</a> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</h3>
+                <h3><strong>CodeFormatter</strong></h3>
+                <p> — понятно для чего, немного по вкусу настроить и все;</p>
+                <p>Использует php 5.6! Настроить в конфиге!</p>
+                <h3><strong>SFTP</strong></h3>
+                <p> — передача файлов через SSH, так что всё в порядке;</p>
+                <h3><strong>SideBarEnhancements</strong></h3>
+                <p> — расширение функционала левого меню;</p>
+                <h3><strong>MoveTab</strong></h3>
+                <p> — перемещение вкладок по горячей клавише;</p>
+                <h3><strong>SublimeCodeIntel</strong></h3>
+                <p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
+                <h3>Tag — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная) <del>использую</del> из-за отличной работы с атрибутами тегов;</h3>
+                <h3><strong>View In Browser</strong></h3>
+                <p> — открыть файл в браузере;</p>
+                <h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
+                <h3>SideBarGit — <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</h3>
+                <h3>rsub — править удаленные файлы через ssh;</h3>
+                <h3>livestyle-sublime — рабочий плагин, но мне не очень нужен;</h3>
+                <h3><strong>BracketHighlighter</strong></h3>
+                <p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
+                <h3><a href="#Terminal">Sublime Terminal</a> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</h3>
                 <h4>Настройки</h4>
                 <p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
                 <pre>
@@ -133,13 +143,9 @@
                 <pre>
 "terminal": "C:\\cygwin64\\bin\\mintty.exe",
 "parameters": ["-i", "C:\\cygwin64\\Cygwin-Terminal.ico"],</pre>
-<h3><strong>DocBlockr</strong></h3>
-<p> – документирование <code>/**</code><kbd>Tab</kbd>.</p>
-
-
-
-
-
+                <h3><strong>DocBlockr</strong></h3>
+                <p> – документирование <code>/**</code>
+                    <kbd>Tab</kbd>.</p>
                 <h3 id="AutoFileName">AutoFileName</h3>
                 <p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
                 <p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
@@ -193,57 +199,11 @@
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#toc").append('<p>Содержание:</p>');
-        $("#toc").append('<ul></ul>');
-        $("h2").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h2" + i);
-            $("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h3").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h3" + i);
-            var prevh2 = current.prevAll("h2").first();
-            var j = prevh2.attr("id").substring(2);
-            $("#linkh2" + j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h4").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h4" + i);
-            var prevh3 = current.prevAll("h3").first();
-            var j = prevh3.attr("id").substring(2);
-            alert
-            $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h5").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h5" + i);
-            var prevh4 = current.prevAll("h4").first();
-            var j = prevh4.attr("id").substring(2);
-            $("#linkh4" + j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h6").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h6" + i);
-            var prevh5 = current.prevAll("h5").first();
-            var j = prevh5.attr("id").substring(2);
-            $("#linkh5" + j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-    });
-    </script>
+    <script type="text/javascript" src="../theme/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Подсветка синтаксиса кода -->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <!-- TOC -->
+    <script src="../theme/toc/js/js.js" type="text/javascript"></script>
 </body>
 
 </html>

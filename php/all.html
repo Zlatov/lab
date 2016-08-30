@@ -54,11 +54,17 @@ echo &quot;&lt;pre&gt;&quot;;
 var_dump($s);
 echo &quot;&lt;/pre&gt;&quot;;
 </pre>
+				<h2>Константы</h2>
+				<pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
+    define('COOKIE_ENABLED', false);
+}</pre>
 				<h2>PHP in console</h2>
 				<pre class="prettyprint lang-php">
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
 				<h2>Наработки</h2>
+				<h3>IP адрес пользователя</h3>
+				<p><code>$_SERVER['REMOTE_ADDR']</code>, остальное - фуфло. Все что начинается с <code>$_SERVER['HTML_...</code> - это заголовки, их можно подделать!</p>
 				<h3>Фильтрация данных пользователя</h3>
 				<p><strong>Коротко список используемых функций:</strong></p>
 				<ul>
