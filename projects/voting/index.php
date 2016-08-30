@@ -106,11 +106,6 @@ if ( !COOKIE_ENABLED || $voting2->cookieIsSet() || ( isset($_POST['votingId']) &
 	echo $voting2->render('voting');
 }
 
-echo Comment::template('form');
-Comment::render('error');
-Comment::render('list');
-
-
 ?>
 
 <?php if (COOKIE_ENABLED): ?>
