@@ -1,6 +1,7 @@
 <?php
 include_once('voting.php');
 include_once('comment.php');
+include_once('check-cookie.php');
 $voting1 = new Voting(['id'=>1,'header'=>'Как нам провести корпоратив?',]);
 // $voting1->setVariants([
 // 	'Как скажут так и проведем',
@@ -39,12 +40,13 @@ $voting2 = new Voting(['id'=>2,'header'=>'В каком составе?',]);
 // echo "</pre>";
 
 
-if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])) {
+if (isset($_POST)&&!empty($_POST)&&isset($_POST['votingId'])&&COOKIE_ENABLED) {
 	$votingId = (int)$_POST['votingId'];
 	${"voting".$votingId}->addVote($_POST['vote']);
+    header('Location: index.php');
 }
 
-if (isset($_POST)&&!empty($_POST)&&isset($_POST['commentadd'])) {
+if (isset($_POST)&&!empty($_POST)&&isset($_POST['commentadd'])&&COOKIE_ENABLED) {
     $text = htmlspecialchars(strip_tags(trim($_POST['text'])));
     if (empty($text)) {
         Comment::addFormError('Сообщение не должно быть пустым.');
@@ -85,14 +87,20 @@ if (isset($_POST)&&!empty($_POST)&&isset($_POST['commentadd'])) {
 		<div class="row">
 			<div class="col-sm-12">
 				<h1><a href="index.php">Голосование</a></h1>
+
+<?php if (!COOKIE_ENABLED): ?>
+    <div class="alert alert-danger">Ой! Невозможно проголосовать из-за отключенных в браузере кук. Вы можете включить их в настройках браузера. А пока, можете просмотреть результаты голосования.</div>
+<?php endif ?>
+
+
 <?php
 
-if ( $voting1->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==1) ) ) {
+if ( !COOKIE_ENABLED || $voting1->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==1) ) ) {
 	echo $voting1->render('result');
 } else {
 	echo $voting1->render('voting');
 }
-if ( $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==2) ) ) {
+if ( !COOKIE_ENABLED || $voting2->cookieIsSet() || ( isset($_POST['votingId']) && ($_POST['votingId']==2) ) ) {
 	echo $voting2->render('result');
 } else {
 	echo $voting2->render('voting');
@@ -104,6 +112,15 @@ Comment::render('list');
 
 
 ?>
+
+<?php if (COOKIE_ENABLED): ?>
+    <?= Comment::template('form') ?>
+<?php endif ?>
+<?php Comment::render('error'); ?>
+<h2>Комментарии:</h2>
+<?php Comment::render('list'); ?>
+
+
 
 			</div>
 		</div>
