@@ -23,16 +23,23 @@
 <body data-spy="scroll" data-target="#toc">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h1 class="text-center">Sublime Text 3 all</h1>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <h1>Sublime Text 3 all</h1>
             </div>
         </div>
         <div class="row">
             <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                <ol class="breadcrumb">
+                    <li><a href="/">Lab</a></li>
+                    <li class="active">Sublime Text 3 all</li>
+                </ol>
                 <div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
             </div>
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                 <h2>Keyboard shortcuts</h2>
+                <h3>Мой конфиг</h3>
                 <pre>[
     // Закрытие проекта
     { &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
@@ -47,6 +54,7 @@
     { &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
 ]
 </pre>
+                <h3>Список</h3>
                 <ul>
                     <li>
                         <kbd>Ctrl + P</kbd> - </li>
@@ -71,7 +79,7 @@
                     <li>
                         <kbd>Ctrl + Shift + A</kbd> - </li>
                 </ul>
-                <h2>Установленные плагины</h2>
+                <h2>Плагины</h2>
                 <h3><strong>Package Control</strong></h3>
                 <p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
                 <h3><strong>ApacheConf.tmLanguage</strong></h3>
@@ -103,7 +111,7 @@
                 <p> – тоже что и Git​Gutter;</p>
                 <h3><strong>Goto-CSS-Declaration</strong></h3>
                 <p> — переход к классу в css файл;</p>
-                <h3><strong>Sublime-HTMLPrettify</strong></h3>
+                <h3><strong>HTML-CSS-JS Prettify</strong></h3>
                 <p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
                 <pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
 ...
@@ -120,16 +128,23 @@
                 <p> — перемещение вкладок по горячей клавише;</p>
                 <h3><strong>SublimeCodeIntel</strong></h3>
                 <p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
-                <h3>Tag — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная) <del>использую</del> из-за отличной работы с атрибутами тегов;</h3>
+                <h3>Tag</h3>
+                <p> — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
+                    <del>использую</del> из-за отличной работы с атрибутами тегов;</p>
                 <h3><strong>View In Browser</strong></h3>
                 <p> — открыть файл в браузере;</p>
                 <h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
-                <h3>SideBarGit — <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</h3>
-                <h3>rsub — править удаленные файлы через ssh;</h3>
-                <h3>livestyle-sublime — рабочий плагин, но мне не очень нужен;</h3>
+                <h3>SideBarGit</h3>
+                <p> —
+                    <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</p>
+                <h3>rsub</h3>
+                <p> — править удаленные файлы через ssh;</p>
+                <h3>livestyle-sublime</h3>
+                <p> — рабочий плагин, но мне не очень нужен;</p>
                 <h3><strong>BracketHighlighter</strong></h3>
                 <p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
-                <h3><a href="#Terminal">Sublime Terminal</a> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</h3>
+                <h3>Sublime Terminal</h3>
+                <p> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</p>
                 <h4>Настройки</h4>
                 <p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
                 <pre>
@@ -146,12 +161,12 @@
                 <h3><strong>DocBlockr</strong></h3>
                 <p> – документирование <code>/**</code>
                     <kbd>Tab</kbd>.</p>
-                <h3 id="AutoFileName">AutoFileName</h3>
+                <h3>AutoFileName</h3>
                 <p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
                 <p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
                 <p>Вместо данного плагина рекомендуют использовать FuzzyFilePath, <a href="https://github.com/sagold/FuzzyFilePath">FuzzyFilePath</a> неплох, но своеобразен, оставил пока оба плагина.</p>
-                <h3 id="GitGutter">GitGutter</h3>
-                <h5>Установка win</h5>
+                <h3>GitGutter</h3>
+                <h4>Установка win</h4>
                 <p>
                     <kbd>win</kbd> +
                     <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
@@ -160,7 +175,7 @@
                     <q>Path</q>.
                 </p>
                 <p>После этого добавляем плагин через PackageControl.</p>
-                <h3 id="SublimeCodeIntel">SublimeCodeIntel</h3>
+                <h3>SublimeCodeIntel</h3>
                 <p>Парсил yii2 минуты три, хотя SSD…</p>
                 <pre>    "codeintel_language_settings": {
         // "Python3": {
@@ -190,7 +205,7 @@
             // В edafult_settings этой строки нет, есть в инструкции на домашней странице пакета:
             "phpConfigFile": "php.ini"
         }</pre>
-                <h3 id="PyV8">PyV8</h3>
+                <h3>PyV8</h3>
                 <p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
                     <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
             </div>
