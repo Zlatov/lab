@@ -1,6 +1,7 @@
 #Запрещает (-Indexes) или разрешает (+Indexes) отображение содеримого директории, тоже для симилинков:
 Options +Indexes
 Options +FollowSymLinks
+IndexIgnore /argo-ds /bogacho /vendor composer.json composer.lock
 
 IndexOptions Charset=UTF-8
 #AddDefaultCharset UTF-8
