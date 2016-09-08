@@ -25,6 +25,10 @@
 					<h1 class="text-center">PHP all</h1>
 					<div id="toc"></div>
 
+					<h2>Функции</h2>
+<pre class="prettyprint lang-php">
+$remote_addr = $request->variable('REMOTE_ADDR', '', false, \phpbb\request\request_interface::SERVER);
+</pre>
 					<h2>Файловая структура</h2>
 
 <pre>
@@ -53,12 +57,30 @@ vendor/
 
 
 					<h2>БД</h2>
-					<h3>Подтверждение пользователя ручками в БД</h3>
+					<h3>Пользователь</h3>
+					<h4>Подтверждение email пользователя запросом</h4>
 
 <pre class="prettyprint lang-sql">
-UPDATE forum_users set user_type = 0 where username = 'ТестовыйЮзер';
+UPDATE
+	`forum_users`
+SET
+	`user_type` = 0,
+	`user_inactive_reason` = 0,
+	`user_inactive_time` = 0,
+	`user_permissions` = ''
+WHERE
+	user_id = ...;
 </pre>
-
+					<h4>Сделать пользователя основателем ресурса</h4>
+<pre class="prettyprint lang-sql">
+UPDATE
+	`forum_users`
+SET
+	`user_type` = 3,
+	`user_permissions` = ''
+WHERE
+	user_id = ...;
+</pre>
 
 
 

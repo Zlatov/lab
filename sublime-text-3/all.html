@@ -122,6 +122,14 @@
                 <h3><strong>CodeFormatter</strong></h3>
                 <p> — понятно для чего, немного по вкусу настроить и все;</p>
                 <p>Использует php 5.6! Настроить в конфиге!</p>
+                <h3>SqlBeautifier</h3>
+                <p>
+                    <kbd>Ctrl + k, Ctrl + f</kbd>
+                </p>
+                <h3>Super Calculator</h3>
+                <p>
+                    <kbd>Alt + c</kbd>
+                </p>
                 <h3><strong>SFTP</strong></h3>
                 <p> — передача файлов через SSH, так что всё в порядке;</p>
                 <h3><strong>SideBarEnhancements</strong></h3>
@@ -210,6 +218,54 @@
                 <h3>PyV8</h3>
                 <p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
                     <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
+                <h2>Автокомлит</h2>
+                <h3>Снипеты</h3>
+                <h3>Завершения (Completions)</h3>
+                <p>В sublime text можно заменить XCompose (ИксСоставление) Completions (завершениями).</p>
+                <p>
+                    Создаем файл <code>~/.config/sublime-text-3/Packages/User/my-completions.sublime-complations</code> с примерно таким содержанием:
+                </p>
+                <pre class="prettyprint lang-js">{
+    &quot;completions&quot;: [
+        {
+            &quot;contents&quot;: &quot;–&quot;,
+            &quot;trigger&quot;: &quot;utf8minus&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;—&quot;,
+            &quot;trigger&quot;: &quot;utf8tire&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;«»&quot;,
+            &quot;trigger&quot;: &quot;utf8kavichkiElki&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;„“&quot;,
+            &quot;trigger&quot;: &quot;utf8kavichkiLapki&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;‘’&quot;,
+            &quot;trigger&quot;: &quot;utf8kavichkiPalchiki&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;&lt;a href=\&quot;$1\&quot;&gt;$0&lt;/a&gt;&quot;, 
+            &quot;trigger&quot;: &quot;a&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;&lt;abbr&gt;$0&lt;/abbr&gt;&quot;, 
+            &quot;trigger&quot;: &quot;abbr&quot;
+        }, 
+        {
+            &quot;contents&quot;: &quot;&lt;acronym&gt;$0&lt;/acronym&gt;&quot;, 
+            &quot;trigger&quot;: &quot;acronym&quot;
+        }, 
+        &quot;ninja&quot;, 
+        &quot;robot&quot;, 
+        &quot;pizza&quot;
+    ]
+}
+                        
+                </pre>
             </div>
         </div>
     </div>

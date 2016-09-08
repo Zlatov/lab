@@ -21,7 +21,7 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<asd class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h1 class="text-center">Linux Mint All</h1>
 
 
@@ -48,6 +48,27 @@ fi
 
 					<h2>Параметры системы</h2>
 					<h3>Клавиатура</h3>
+					<h4>Compose Key - ввод произвольных символов</h4>
+					<p>Настройки - Клавиатура - Раскладки - Параметры - Position of Compose key - Right Alt</p>
+					после этого отказывается работать переключение раскладки поэтому:
+					<p>Настройки - Клавиатура - Раскладки - Параметры - Switch to another layout - Alt Shift</p>
+					<p>/etc/X11/xorg.conf. Например, так:</p>
+					<pre>Section "InputDevice"
+Driver "kbd"
+Option "CoreKeyboard"
+Option "XkbRules" "xorg"
+Option "XkbModel" "pc105"
+Option "XkbLayout" "us,ru"
+Option "XkbOptions" "grp:alt_shift_toggle,grp_led:scroll,compose:ralt" 
+EndSection</pre>
+					Сочетания по умолчанию лежат в файле /usr/share/X11/locale/en_US.UTF-8/Compose. 
+					создаём файл ~/.XCompose и будем описывать там свои сочетания клавиш, которые отменят все стандартные.
+Синтаксис файла прост: каждая строка описывает сочетание, комментарии начинаются с символа '#'. Рассмотрим на примере: добавляем в пустой файл ~/.XCompose строку:
+<pre></pre>
+					<p>XServer игнорирует этот файл =(</p>
+					<p>Узнать название клавишь для Compose Key - Открываем консоль, и выполняем следующее:</p>
+					<pre>xev | fgrep "keysym"</pre>
+					<p>В sublime text можно заменить XCompose (ИксСоставление) Completions (завершениями).</p>
 					<h4>Комбинации клавишь</h4>
 					<p>Переназнач комбинации клавишь <kbd>ctrl+alt+up</kbd> (<kbd>alt+F1</kbd>), <kbd>ctrl+alt+down</kbd> (на <kbd>ctrl+alt+tab</kbd>) для удобной работы в SublimeText3</p>
 					<h2>Programms settings</h2>
@@ -90,7 +111,7 @@ SELECTED_EDITOR="/usr/bin/subl"
 						<li>Set to run this application with the system.</li>
 						<li>Customize hotkey printskrin to run the application in selection screen area mode: </li>
 					</ul>
-				</div>
+				</asd>
 			</div>
 		</div>
 		<!-- jQuery -->
