@@ -61,6 +61,9 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
     SET col_name1=expr1 [, col_name2=expr2 ...]
     [WHERE where_definition]
 </pre>
+					<h3>TRUNCATE</h3>
+					<p>— удаляет и воссоздает таблицу, операция является нетранзакционной, не возвращает количество удаленных строк.</p>
+					<pre>TRUNCATE TABLE table_name</pre>
 					<h3>COALESCE</h3>
 					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
 					<h3>LAST_INSERT_ID()</h3>
@@ -161,6 +164,8 @@ mysql > SHOW CREATE TABLE tree_nodes;
 					<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
 					<pre>mysql -uroot -p -e "show databases"</pre>
 					<pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
+					<p>Прям выполнить sql файл</p>
+					<pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
 
 
 					<h2>Administration</h2>
