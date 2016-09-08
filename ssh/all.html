@@ -28,19 +28,29 @@
 
 
 					<h2>через Proxy</h2>
-					<h3>GitHub через Proxy</h3>
+					<h3>GitHub и BitBucket через Proxy по 433 порту</h3>
 <pre class="prettyprint lang-sh">
-Host *
-    ProxyCommand corkscrew proxy.company.ru 3128 %h %p
+<del>Host *
+    ProxyCommand corkscrew proxy.company.ru 3128 %h %p</del>
 Host github
 	User git
 	Port 443
-	Hostname ssh.github.com
+	## Hostname github.com
+	Hostname <mark>ssh.</mark>github.com
 	IdentityFile ~/.ssh/id_rsa_myRsa
+	ProxyCommand corkscrew proxy.company.ru 3128 %h %p
+
+Host bitbucket
+	User git
+	Port 443
+	#Hostname bitbucket.org
+	Hostname <mark>altssh.</mark>bitbucket.org
+	IdentityFile ~/.ssh/id_rsa_myRsa
+	ProxyCommand corkscrew proxy.company.ru 3128 %h %p
 </pre>
 
 					<p>
-						при этом необходимо в гит ссылку на удаленный репозиторий указывать следующим образом: <code>github:Zlatov/testbootstrap.git</code>
+						при использовании алиаса сервера ссылка на удаленный репозиторий выглядит следующим образом: <code>github:Zlatov/testbootstrap.git</code>.
 					</p>
 
 
