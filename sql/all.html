@@ -49,6 +49,17 @@
 					<h3>Для удаления всей таблицы</h3>
 					<pre>SET SQL_SAFE_UPDATES = 0;</pre>
 					<h2>Функции и Операторы</h2>
+					<h3>INSERT</h3>
+					<pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
+        [INTO] tbl_name [(col_name,...)]
+        VALUES (expression,...),(...),...
+        [ ON DUPLICATE KEY UPDATE col_name=expression, ... ]</pre>
+        			<pre class="prettyprint lang-sql">
+INSERT INTO
+	`forum_advt` (`link`, `show`)
+VALUES
+	('/', '1'),
+	('/', '1');</pre>
 					<h3>UPDATE</h3>
 <pre class="prettyprint lang-sql">
 UPDATE [LOW_PRIORITY] [IGNORE] tbl_name

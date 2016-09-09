@@ -63,6 +63,8 @@ echo &quot;&lt;/pre&gt;&quot;;
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
 				<h2>Наработки</h2>
+				<h3>Загрузка файла на сервер</h3>
+				<pre class="prettyprint lang-php">$ext = pathinfo($_FILES['name'], PATHINFO_EXTENSION); // Расширение файла</pre>
 				<h3>IP адрес пользователя</h3>
 				<p><code>$_SERVER['REMOTE_ADDR']</code>, остальное - фуфло. Все что начинается с <code>$_SERVER['HTML_...</code> - это заголовки, их можно подделать!</p>
 				<h3>Фильтрация данных пользователя</h3>
