@@ -1,0 +1,37 @@
+<h2>CDN</h2>
+<p>
+    CDN (Content Delivery Network - Сеть Доставки Контента), посмотреть последнее тут: <a href="https://code.jquery.com/">https://code.jquery.com/</a>
+</p>
+<p><strong>3.*:</strong></p>
+<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.1.0.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>2.*:</strong></p>
+<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>1.*:</strong></p>
+<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h2>Начало (start)</h2>
+<pre class="prettyprint lang-js">
+&lt;script type=&quot;text/javascript&quot;&gt;
+$(document).ready(function(){
+	$(&quot;#someId&quot;).css(&quot;color&quot;,&quot;red&quot;);
+});
+&lt;/script&gt;
+</pre>
+<h2>Наработки</h2>
+<h3>Нашелся ли элемент селектором (if element)</h3>
+<pre class="prettyprint lang-js">
+var element = $('#element');
+if (element.length) {
+	...
+}
+</pre>
+<h3>DOM в jQuery и обратно</h3>
+<p><strong>DOM Element to jQuery object and jQuery object to DOM Element</strong></p>
+<h4>jQuery to DOM</h4>
+<pre class="prettyprint lang-js">
+$( "#foo" )[ 0 ]; // Equivalent to document.getElementById( "foo" )
+$( "#foo" ).get( 0 ); // Identical to above, only slower.
+</pre>
+<h4>DOM to jQuery</h4>
+<pre class="prettyprint lang-js">
+$( event.target );
+</pre>
