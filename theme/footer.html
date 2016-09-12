@@ -16,17 +16,39 @@ document.getElementsByTagName('tr')[1].className = 'parent';
 $(document).ready(function(){
 	$("tr>td:first-child>a").attr('tabindex', -1);
 	$("tr.indexhead a").attr('tabindex', -1);
-	$('a').keydown(function(event) {
-		if ( (event.keyCode == 40) && event.altKey ) {
-	        $(this).next('a').focus();
-			console.log('asd');
+	$('body').keyup(function(event) {
+		var afs = $("a:focus");
+		if (!afs.length) {
+			if ( (event.keyCode == 40) && event.altKey ) {
+	        	var first = $('#indexlist tr:nth-child(2) td:nth-child(2) a');
+				console.log('bsd');
+		        if (first.length) {
+		        	first.focus();
+		        }
+			}
+			if ( (event.keyCode == 38) && event.altKey ) {
+		        var last = $('#indexlist tr:last-of-type td:nth-child(2) a');
+		        if (last.length) {
+			        last.focus();
+		        }
+			}
 		}
-	    // if (e.keyCode==40) {
-	    //     $(this).next('input').focus();
-	    // }
-	    // http://api.jquery.com/event.which/
-	    // http://stackoverflow.com/questions/12407093/focus-the-next-input-with-down-arrow-key-as-with-the-tab-key
-	    // https://css-tricks.com/snippets/javascript/javascript-keycodes/
+	});
+	$('a').keydown(function(event) {
+        var parent = $(this).parents("tr");
+		console.log("parent.length " + parent.length);
+		if ( (event.keyCode == 40) && event.altKey ) {
+	        var next = parent.next("tr").find("td:nth-child(2) a");
+	        if (next.length) {
+	        	next.focus();
+	        }
+		}
+		if ( (event.keyCode == 38) && event.altKey ) {
+	        var prev = parent.prev("tr").find("td:nth-child(2) a");
+	        if (prev.length) {
+		        prev.focus();
+	        }
+		}
 	});
 });
 </script>

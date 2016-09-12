@@ -6,6 +6,14 @@ IndexIgnore /argo-ds /bogacho /vendor composer.json composer.lock
 IndexOptions Charset=UTF-8
 #AddDefaultCharset UTF-8
 
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	RewriteBase /
+
+	RewriteCond %{REQUEST_URI} ^/[^/]+/all\.html$
+	RewriteRule ^.*$ /theme/index.php [L]
+</IfModule>
+
 # <Files ~ "^.*\.([Hh][Tt][Aa])">
 # 	order allow,deny
 # 	deny from all
@@ -41,17 +49,6 @@ IndexOptions Charset=UTF-8
 
 # # иконка для следующих типов файлов
 # #AddIcon /путь/list_images.png .png .gif .tiff .jpg .jpeg
-
-
-
-
-
-
-
-
-
-
-
 
 
 
