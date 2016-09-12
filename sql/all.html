@@ -1,66 +1,61 @@
-<!DOCTYPE html>
-<html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>MySQL all</title>
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">MySQL all</h1>
-					<div id="toc"></div>
-					<h2>Типы данных</h2>
-					<h3>INT</h3>
-					<p><code>INT(11)</code> — сколько знаков будет при заполнении нулями (UNSIGNED). Если поле не UNSIGNED, то число ни на что не влияет, только доставляет неудобства при работе с внешними ключами. Диапазон со знаком от -2147483648 до 2147483647. Диапазон без знака от 0 до 4294967295.</p>
-					<h3>SMALLINT</h3>
-					<p>Диапазон со знаком от -32768 до 32767. Диапазон без знака от 0 до 65535.</p>
-					<h3>TINYINT</h3>
-					<p>Диапазон со знаком от -128 до 127. Диапазон без знака от 0 до 255.</p>
-					<h3>DECIMAL</h3>
-					<p>DECIMAL(m,n) — лучшее для хранения цен.</p>
-					<h3>ENUM</h3>
-					<p>— принимает значение из списка допустимых*. ENUM("один", "два", "три").</p>
-					<p>* — может принимать значение пустой строки если при INSERT было указано неверное. Если нет <code>NOT NULL</code>, то так же может принимать и NULL.</p>
-					<p>Можно сравнивать по номеру а не по значению <code>SELECT * FROM tbl_name WHERE enum_col=1</code> то же самое что и <code>SELECT * FROM tbl_name WHERE enum_col='один'</code>. Нумерация от 1, неверное значение (пустая строка) принимает номер 0, а NULL соответственно NULL.</p>
-					<h3>SET</h3>
-					<p>Подобие много ко многим бес смежной таблицы: <code>SET("один", "два") NOT NULL</code> — поле может принимать значения "", "один", "два" и "один,два". Максимум 64 различных элемента.</p>
-					<h2>Параметры</h2>
-					<h3>Просмотр какого ибо параметра</h3>
-					<pre>SHOW VARIABLES LIKE 'sql_safe_updates'</pre>
-					<h3>Для удаления связных данны</h3>
-					<p><code>SET AUTOCOMMIT = 0; SET FOREIGN_KEY_CHECKS = 0; SET UNIQUE_CHECKS = 0;</code></p>
-					<p><code>truncate `table`;</code> или другое удаление.</p>
-					<p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
-					<h3>Для удаления всей таблицы</h3>
-					<pre>SET SQL_SAFE_UPDATES = 0;</pre>
-					<h2>Функции и Операторы</h2>
-					<h3>INSERT</h3>
-					<pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
+<h2>Типы данных</h2>
+<h3>INT</h3>
+<p><code>INT(11)</code> — сколько знаков будет при заполнении нулями (UNSIGNED). Если поле не UNSIGNED, то число ни на что не влияет, только доставляет неудобства при работе с внешними ключами. Диапазон со знаком от -2147483648 до 2147483647. Диапазон без знака от 0 до 4294967295.</p>
+<h3>SMALLINT</h3>
+<p>Диапазон со знаком от -32768 до 32767. Диапазон без знака от 0 до 65535.</p>
+<h3>TINYINT</h3>
+<p>Диапазон со знаком от -128 до 127. Диапазон без знака от 0 до 255.</p>
+<h3>DECIMAL</h3>
+<p>DECIMAL(m,n) — лучшее для хранения цен.</p>
+<h3>ENUM</h3>
+<p>— принимает значение из списка допустимых*. ENUM("один", "два", "три").</p>
+<p>* — может принимать значение пустой строки если при INSERT было указано неверное. Если нет <code>NOT NULL</code>, то так же может принимать и NULL.</p>
+<p>Можно сравнивать по номеру а не по значению <code>SELECT * FROM tbl_name WHERE enum_col=1</code> то же самое что и <code>SELECT * FROM tbl_name WHERE enum_col='один'</code>. Нумерация от 1, неверное значение (пустая строка) принимает номер 0, а NULL соответственно NULL.</p>
+<h3>SET</h3>
+<p>Подобие много ко многим бес смежной таблицы: <code>SET("один", "два") NOT NULL</code> — поле может принимать значения "", "один", "два" и "один,два". Максимум 64 различных элемента.</p>
+<h2>Параметры</h2>
+<h3>Просмотр какого ибо параметра</h3>
+<pre>SHOW VARIABLES LIKE 'sql_safe_updates'</pre>
+<h3>Для удаления связных данны</h3>
+<p><code>SET AUTOCOMMIT = 0; SET FOREIGN_KEY_CHECKS = 0; SET UNIQUE_CHECKS = 0;</code></p>
+<p><code>truncate `table`;</code> или другое удаление.</p>
+<p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
+<h3>Для удаления всей таблицы</h3>
+<pre>SET SQL_SAFE_UPDATES = 0;</pre>
+<h2>Функции и Операторы</h2>
+<h3>INSERT</h3>
+<pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
         [INTO] tbl_name [(col_name,...)]
         VALUES (expression,...),(...),...
         [ ON DUPLICATE KEY UPDATE col_name=expression, ... ]</pre>
-        			<pre class="prettyprint lang-sql">
+<pre class="prettyprint lang-sql">
 INSERT INTO
 	`forum_advt` (`link`, `show`)
 VALUES
 	('/', '1'),
 	('/', '1');</pre>
-					<h3>UPDATE</h3>
+<h3>DELETE</h3>
+<pre class="prettyprint lang-sql">DELETE [LOW_PRIORITY] [QUICK] FROM table_name
+	       [WHERE where_definition]
+	       [ORDER BY ...]
+	       [LIMIT rows]</pre>
+<p>или</p>
+<pre class="prettyprint lang-sql">DELETE [LOW_PRIORITY] [QUICK] table_name[.*] [, table_name[.*] ...]
+	       FROM table-references
+	       [WHERE where_definition]</pre>
+<p>или</p>
+<pre class="prettyprint lang-sql">DELETE [LOW_PRIORITY] [QUICK]
+	       FROM table_name[.*] [, table_name[.*] ...]
+	       USING table-references
+	       [WHERE where_definition]</pre>
+<p><strong>Пример</strong></p>
+<pre>
+DELETE FROM
+	`advt`
+WHERE
+	`id` = 1;
+</pre>
+<h3>UPDATE</h3>
 <pre class="prettyprint lang-sql">
 UPDATE [LOW_PRIORITY] [IGNORE] tbl_name
     SET col_name1=expr1 [, col_name2=expr2 ...]
@@ -72,37 +67,37 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
     SET col_name1=expr1 [, col_name2=expr2 ...]
     [WHERE where_definition]
 </pre>
-					<h3>TRUNCATE</h3>
-					<p>— удаляет и воссоздает таблицу, операция является нетранзакционной, не возвращает количество удаленных строк.</p>
-					<pre>TRUNCATE TABLE table_name</pre>
-					<h3>COALESCE</h3>
-					<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
-					<h3>LAST_INSERT_ID()</h3>
-					<p>Возвращает последний вставленный id</p>
-					<h3>Работа со строками</h3>
-					<h4>CHAR_LENGTH</h4>
-					<p><code>integer CHAR_LENGTH(str string)</code>возвращают длину строки. Поддерживает многобайтовые символы.</p>
-					<h3>if ifnull nullif</h3>
-					<h4>if</h4>
-					<p><code>IF(expr1,expr2,expr3)</code>. Если expr1 равно значению ИСТИНА (expr1 &lt;&gt; 0 и expr1 &lt;&gt; NULL), то функция IF() возвращает expr2, в противном случае - expr3.</p>
+<h3>TRUNCATE</h3>
+<p>— удаляет и воссоздает таблицу, операция является нетранзакционной, не возвращает количество удаленных строк.</p>
+<pre>TRUNCATE TABLE table_name</pre>
+<h3>COALESCE</h3>
+<p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
+<h3>LAST_INSERT_ID()</h3>
+<p>Возвращает последний вставленный id</p>
+<h3>Работа со строками</h3>
+<h4>CHAR_LENGTH</h4>
+<p><code>integer CHAR_LENGTH(str string)</code>возвращают длину строки. Поддерживает многобайтовые символы.</p>
+<h3>if ifnull nullif</h3>
+<h4>if</h4>
+<p><code>IF(expr1,expr2,expr3)</code>. Если expr1 равно значению ИСТИНА (expr1 &lt;&gt; 0 и expr1 &lt;&gt; NULL), то функция IF() возвращает expr2, в противном случае - expr3.</p>
 <pre class="prettyprint lang-sql">
 	where
 		`p`.`price` &gt;= param_from
 		and `p`.`price` &lt;= param_to
 		and if(param_dishtype &lt;&gt; 0, `d`.`dishtype_id` = param_dishtype, 1)
 </pre>
-					<h4>ifnull</h4>
-					<p><code>IFNULL(expr1,expr2)</code>. Если expr1 не равно NULL, то функция IFNULL() возвращает значение expr1, в противном случае - expr2.</p>
+<h4>ifnull</h4>
+<p><code>IFNULL(expr1,expr2)</code>. Если expr1 не равно NULL, то функция IFNULL() возвращает значение expr1, в противном случае - expr2.</p>
 <pre class="prettyprint lang-sql">
 	where
 		`p`.`price` &gt;= param_from
 		and `p`.`price` &lt;= param_to
 		and ifnull(`d`.`dishtype_id` = param_dishtype, 1)
 </pre>
-					<h4>nullif</h4>
-					<p><code>NULLIF(expr1,expr2)</code>. Если выражение expr1 = expr2 истинно, то возвращает NULL, в противном случае - expr1.</p>
-					<h3><code>MATCH () AGAINST ()</code> - Natural Language Full-Text Searches / Полтонектовый поиск (для InnoDB начиная с версии mysql 5.6)</h3>
-					<p>Тест (подробнее <a href="http://dev.mysql.com/doc/refman/5.7/en/fulltext-natural-language.html">тут</a>):</p>
+<h4>nullif</h4>
+<p><code>NULLIF(expr1,expr2)</code>. Если выражение expr1 = expr2 истинно, то возвращает NULL, в противном случае - expr1.</p>
+<h3><code>MATCH () AGAINST ()</code> - Natural Language Full-Text Searches / Полтонектовый поиск (для InnoDB начиная с версии mysql 5.6)</h3>
+<p>Тест (подробнее <a href="http://dev.mysql.com/doc/refman/5.7/en/fulltext-natural-language.html">тут</a>):</p>
 <pre class="prettyprint lang-sql">
 mysql&gt; CREATE TABLE articles (
       id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -133,120 +128,102 @@ mysql&gt; SELECT * FROM articles
 +----+-------------------+------------------------------------------+
 2 rows in set (0.00 sec)
 </pre>
-
-
-					<h2>Кодировка</h2>
+<h2>Кодировка</h2>
 <p>CHARACTER SET — это некий набор символов, называемых кодировкой.</p>
 <p>COLLATION — способ, с помощью которого следует упорядочивать и сравнивать данные в БД.</p>
 <p>Для одного и того же CHARACTER SET существует как правило несколько COLLATION. Например: cp1251_general_ci — сравнение не чувствительное к регистру, cp1251_bin — чувствительное к регистру.</p>
-<h3>Способы задания кодировок</h3>
-
-1) Для всего сервера при компиляции, определив параметры --with-charset и --with-collation:
-<pre class="prettyprint lang-sh">./configure --with-charset=cp1251 --with-collation=cp1251_general_ci</pre>
-
-2) Для всего сервера при запуске mysqld, определив параметры --character-set-server и --collation-server:
-<pre class="prettyprint lang-sh">mysqld --character-set-server=cp1251 --collation-server=cp1251_bin</pre>
-
-3) При создании БД:
-<pre class="prettyprint lang-sql">CREATE DATABASE dbname DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre>
-
-4) При создании таблиц:
-<pre class="prettyprint lang-sql">CREATE TABLE tblname ( col INT ) DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre>
-
-5) В определениях столбцов:
+<h3>Способы задания кодировок</h3> 1) Для всего сервера при компиляции, определив параметры --with-charset и --with-collation:
+<pre class="prettyprint lang-sh">./configure --with-charset=cp1251 --with-collation=cp1251_general_ci</pre> 2) Для всего сервера при запуске mysqld, определив параметры --character-set-server и --collation-server:
+<pre class="prettyprint lang-sh">mysqld --character-set-server=cp1251 --collation-server=cp1251_bin</pre> 3) При создании БД:
+<pre class="prettyprint lang-sql">CREATE DATABASE dbname DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre> 4) При создании таблиц:
+<pre class="prettyprint lang-sql">CREATE TABLE tblname ( col INT ) DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;</pre> 5) В определениях столбцов:
 <pre class="prettyprint lang-sql">
 CREATE TABLE tblname (
 	column1 varchar(255),
 	column2 varchar(255) CHARACTER SET cp1251 COLLATE cp1251_general_ci
 ) DEFAULT CHARACTER SET cp1251 COLLATE cp1251_bin;
-</pre>
-
-Для того чтобы посмотреть к какой кодировке привязана структура данных можно воспользоваться оператором SHOW CREATE:
+</pre> Для того чтобы посмотреть к какой кодировке привязана структура данных можно воспользоваться оператором SHOW CREATE:
 <pre class="prettyprint lang-sql">
 mysql > SHOW CREATE TABLE tree_nodes;
 | tree_nodes | CREATE TABLE `tree_nodes` (
 	...
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
 </pre>
-
-
-					<h2>Console</h2>
-					<pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
-					<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
-					<pre>mysql -uroot -p -e "show databases"</pre>
-					<pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
-					<p>Прям выполнить sql файл</p>
-					<pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
-
-
-					<h2>Administration</h2>
-					<h3>Version of mysql</h3>
+<h2>Console</h2>
+<pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
+<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
+<pre>mysql -uroot -p -e "show databases"</pre>
+<pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
+<p>Прям выполнить sql файл</p>
+<pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
+<h2>Administration</h2>
+<h3>Version of mysql</h3>
 <pre class="prettyprint lang-sh">
 mysql -V
 ## not: mysql -<mark>v</mark>
 </pre>
-					<h3>Start Stop Restart Status</h3>
+<h3>Start Stop Restart Status</h3>
 <pre class="prettyprint lang-sh">sudo service mysql <mark>start</mark>
 sudo service mysql <mark>stop</mark>
 sudo service mysql <mark>restart</mark>
 sudo service mysql <mark>status</mark>
 # or mysqld, or su<kbd>Enter</kbd> password<kbd>Enter</kbd> service mysql start
 </pre>
-					<h3>Viewing mysql users</h3>
-					<pre>SELECT User, Host FROM mysql.user;</pre>
-					<h3>Create user</h3>
+<h3>Viewing mysql users</h3>
+<pre>SELECT User, Host FROM mysql.user;</pre>
+<h3>Create user</h3>
 <pre class="prettyprint lang-sql">CREATE USER 'userLogin'@'localhost' IDENTIFIED BY 'userPassword';</pre>
-					<h3>Delete mysql user</h3>
+<h3>Delete mysql user</h3>
 <pre class="prettyprint lang-sql">DROP USER 'userLogin'@'localhost';</pre>
-					<h3>Grant Permissions to a MySQL User on Linux via Command Line</h3>
+<h3>Grant Permissions to a MySQL User on Linux via Command Line</h3>
 <pre class="prettyprint lang-sql">GRANT permission ON database.table TO 'userLogin'@'localhost';
 GRANT CREATE ON *.* TO 'userLogin'@'localhost';
 GRANT DROP ON testdatabase.* TO 'userLogin'@'localhost';
 </pre>
-					<p>Here is a short list of commonly used permissions:</p>
-					<ul>
-						<li>ALL – Allow complete access to a specific database. If a database is not specified, then allow complete access to the entirety of MySQL.</li>
-						<li>CREATE – Allow a user to create databases and tables.</li>
-						<li>DELETE – Allow a user to delete rows from a table.</li>
-						<li>DROP – Allow a user to drop databases and tables.</li>
-						<li>EXECUTE – Allow a user to execute stored routines.</li>
-						<li>GRANT OPTION – Allow a user to grant or remove another user’s privileges.</li>
-						<li>INSERT – Allow a user to insert rows from a table.</li>
-						<li>SELECT – Allow a user to select data from a database.</li>
-						<li>SHOW DATABASES- Allow a user to view a list of all databases.</li>
-						<li>UPDATE – Allow a user to update rows in a table.</li>
-					</ul>
-					<h3>FLUSH!</h3>
-					<p>When finished making your permission changes, it’s good practice to reload all the privileges with the flush command!</p>
+<p>Here is a short list of commonly used permissions:</p>
+<ul>
+    <li>ALL – Allow complete access to a specific database. If a database is not specified, then allow complete access to the entirety of MySQL.</li>
+    <li>CREATE – Allow a user to create databases and tables.</li>
+    <li>DELETE – Allow a user to delete rows from a table.</li>
+    <li>DROP – Allow a user to drop databases and tables.</li>
+    <li>EXECUTE – Allow a user to execute stored routines.</li>
+    <li>GRANT OPTION – Allow a user to grant or remove another user’s privileges.</li>
+    <li>INSERT – Allow a user to insert rows from a table.</li>
+    <li>SELECT – Allow a user to select data from a database.</li>
+    <li>SHOW DATABASES- Allow a user to view a list of all databases.</li>
+    <li>UPDATE – Allow a user to update rows in a table.</li>
+</ul>
+<h3>FLUSH!</h3>
+<p>When finished making your permission changes, it’s good practice to reload all the privileges with the flush command!</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
-					<h3>Viewing permissions</h3>
+<h3>Viewing permissions</h3>
 <pre class="prettyprint lang-sql">
 -- for a logged user:
 SHOW GRANTS;
 -- and for the specified user:
 SHOW GRANTS FOR 'userLogin'@'localhost';
 </pre>
-					<h3>Remove permission</h3>
+<h3>Remove permission</h3>
 <pre class="prettyprint lang-sql">REVOKE <mark>permission</mark> ON database.table FROM 'user'@'localhost';</pre>
 <pre class="prettyprint lang-sql">REVOKE CREATE ON <mark>*.*</mark> FROM 'testuser'@'localhost';</pre>
 <pre class="prettyprint lang-sql">REVOKE DROP ON <mark>tutorial_database.*</mark> FROM 'testuser'@'localhost';</pre>
-					<p>Do not forget <mark>FLUSH</mark>!</p>
+<p>Do not forget
+    <mark>FLUSH</mark>!</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
-
-					<h2>Ошибки</h2>
-					<h3>1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences</h3>
+<h2>Ошибки</h2>
+<h3>1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences</h3>
 <pre class="prettyprint lang-sql">
 SET SQL_SAFE_UPDATES = 0;
 SET SQL_SAFE_UPDATES = 1;
 </pre>
-					<h2>Метопрограммирование</h2>
-					<h3>Найти таблицы зная имя поля</h3>
+<h2>Метопрограммирование</h2>
+<h3>Найти таблицы зная имя поля</h3>
 <pre class="prettyprint lang-sql">
 SELECT TABLE_NAME
 FROM information_schema.`COLUMNS`
 WHERE TABLE_SCHEMA="auctionru_2013" AND COLUMN_NAME LIKE 'access%'
 </pre>
-					<h2>Примеры процедур ага</h2>
+<h2>Примеры процедур ага</h2>
 <pre class="prettyprint lang-sql">
 use `food`;
 drop procedure if exists `cook_menu_all`;
@@ -445,66 +422,3 @@ begin
 	limit param_offset, param_rows;
 end;;
 </pre>
-				</div>
-			</div>
-		</div>
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="IE10 viewport hack for Surface"></script>
-        <!-- Подсветка синтаксиса кода -->
-        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#toc").append('<p>Содержание:</p>');
-				$("#toc").append('<ul></ul>');
-				$("h2").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h2" + i);
-					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h3").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h3" + i);
-					var prevh2 = current.prevAll("h2").first();
-					var j = prevh2.attr("id").substring(2);
-					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h4").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h4" + i);
-					var prevh3 = current.prevAll("h3").first();
-					var j = prevh3.attr("id").substring(2);
-					alert
-					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h5").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h5" + i);
-					var prevh4 = current.prevAll("h4").first();
-					var j = prevh4.attr("id").substring(2);
-					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h6").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h6" + i);
-					var prevh5 = current.prevAll("h5").first();
-					var j = prevh5.attr("id").substring(2);
-					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-			});
-		</script>
-	</body>
-</html>

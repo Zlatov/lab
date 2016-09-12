@@ -1,50 +1,10 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sublime Text 3 all</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="../theme/bootstrap/css/bootstrap.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-    <!-- TOC -->
-    <link rel="stylesheet" type="text/css" href="../theme/toc/css/css.css">
-</head>
-
-<body data-spy="scroll" data-target="#toc">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            </div>
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <h1>Sublime Text 3 all</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
-                <ol class="breadcrumb">
-                    <li><a href="/">Lab</a></li>
-                    <li class="active">Sublime Text 3 all</li>
-                </ol>
-                <div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                <h2>Основы</h2>
-                <h3>Проекты</h3>
-                <p><strong>Очистить список проектов в „Switch Project“:</strong></p>
-                <p>Project → Open Recent → Clear Items</p>
-                <h2>Keyboard shortcuts</h2>
-                <h3>Мой конфиг</h3>
-                <pre>[
+<h2>Основы</h2>
+<h3>Проекты</h3>
+<p><strong>Очистить список проектов в „Switch Project“:</strong></p>
+<p>Project → Open Recent → Clear Items</p>
+<h2>Keyboard shortcuts</h2>
+<h3>Мой конфиг</h3>
+<pre>[
     // Закрытие проекта
     { &quot;keys&quot;: [ &quot;ctrl+alt+w&quot; ], &quot;command&quot;: &quot;close_workspace&quot; },
     // Поиск в выделенном
@@ -58,140 +18,140 @@
     { &quot;keys&quot;: [&quot;ctrl+alt+down&quot;], &quot;command&quot;: &quot;select_lines&quot;, &quot;args&quot;: {&quot;forward&quot;: true} },
 ]
 </pre>
-                <h3>Список</h3>
-                <ul>
-                    <li>
-                        <kbd>Ctrl + P</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + Shift + P</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + Alt + P</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + R</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + G</kbd> - </li>
-                    <li>
-                        <kbd>Alt + -</kbd> - переход к предыдущему месту редактирования;</li>
-                    <li>
-                        <kbd>Ctrl + Alt + LMB</kbd> - чтобы свернуть все папки в сайдбаре сублима достаточно кликнуть ЛКМ по корневой папке с зажатым Ctrl и Alt (в Windows только с Alt).</li>
-                    <li>
-                        <kbd>Ctrl + D</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + Shift + D</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + Shift + G</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + Shift + A</kbd> - </li>
-                    <li>
-                        <kbd>Ctrl + J</kbd> - добавить следующую строку (с вычетом отступа следующей строки) к текущей через пробел</li>
-                </ul>
-                <h2>Плагины</h2>
-                <h3><strong>Package Control</strong></h3>
-                <p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
-                <h3><strong>ApacheConf.tmLanguage</strong></h3>
-                <p> — Apache Conf Syntax Highlighting - подсветка синтаксиса .htaccess;</p>
-                <h3><strong>AutoFileName</strong> img[src] link[href]&#133;;</h3>
-                <p> — для пошагового ввода пути к файлу посредством выпадающих списков</p>
-                <h3>FuzzyFilePath</h3>
-                <p> — выпадающие списки файлов с почти нечетким поиском;</p>
-                <h3>CSS Extended Completions</h3>
-                <p> — выпадающие списки существующих стилей (нужно дабавить в кэш CSS файлы или всю папку по
-                    <kbd>ПКМ</kbd> в «сайдбаре» и наслаждаться);</p>
-                <h3><strong>CSS Format</strong></h3>
-                <p> — упаковывает CSS или наоборот в удобочитаемый;</p>
-                <h3><strong>Emmet — обязательный плагин</strong></h3>
-                <p> не нуждается в комментариях;</p>
-                <h3><strong>PyV8</strong></h3>
-                <p>Устанавливается "Почти" автоматически при установке Emmet; (необходим для работы плагина)</p>
-                <h3>Emmet CSS snippets — пока и без этого неплохо снипится все;</h3>
-                <h3><strong>StringUtilities</strong></h3>
-                <p> — HTML сущности в символы, наоборот и другие полезности;</p>
-                <h3><strong>Bootstrap 3 Snippets</strong></h3>
-                <p> — A sublime plugin complete with Bootstrap 3 snippets;</p>
-                <h3><strong>Gist</strong></h3>
-                <h3>Git</h3>
-                <p> – плагин для работы с Git через ST;</p>
-                <h3><strong>GitGutter</strong></h3>
-                <p> — подсветка изменений в файле;</p>
-                <h3>Modific</h3>
-                <p> – тоже что и Git​Gutter;</p>
-                <h3><strong>Goto-CSS-Declaration</strong></h3>
-                <p> — переход к классу в css файл;</p>
-                <h3><strong>HTML-CSS-JS Prettify</strong></h3>
-                <p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
-                <pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
+<h3>Список</h3>
+<ul>
+    <li>
+        <kbd>Ctrl + P</kbd> - </li>
+    <li>
+        <kbd>Ctrl + Shift + P</kbd> - </li>
+    <li>
+        <kbd>Ctrl + Alt + P</kbd> - </li>
+    <li>
+        <kbd>Ctrl + R</kbd> - </li>
+    <li>
+        <kbd>Ctrl + G</kbd> - </li>
+    <li>
+        <kbd>Alt + -</kbd> - переход к предыдущему месту редактирования;</li>
+    <li>
+        <kbd>Ctrl + Alt + LMB</kbd> - чтобы свернуть все папки в сайдбаре сублима достаточно кликнуть ЛКМ по корневой папке с зажатым Ctrl и Alt (в Windows только с Alt).</li>
+    <li>
+        <kbd>Ctrl + D</kbd> - </li>
+    <li>
+        <kbd>Ctrl + Shift + D</kbd> - </li>
+    <li>
+        <kbd>Ctrl + Shift + G</kbd> - </li>
+    <li>
+        <kbd>Ctrl + Shift + A</kbd> - </li>
+    <li>
+        <kbd>Ctrl + J</kbd> - добавить следующую строку (с вычетом отступа следующей строки) к текущей через пробел</li>
+</ul>
+<h2>Плагины</h2>
+<h3><strong>Package Control</strong></h3>
+<p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
+<h3><strong>ApacheConf.tmLanguage</strong></h3>
+<p> — Apache Conf Syntax Highlighting - подсветка синтаксиса .htaccess;</p>
+<h3><strong>AutoFileName</strong> img[src] link[href]&#133;;</h3>
+<p> — для пошагового ввода пути к файлу посредством выпадающих списков</p>
+<h3>FuzzyFilePath</h3>
+<p> — выпадающие списки файлов с почти нечетким поиском;</p>
+<h3>CSS Extended Completions</h3>
+<p> — выпадающие списки существующих стилей (нужно дабавить в кэш CSS файлы или всю папку по
+    <kbd>ПКМ</kbd> в «сайдбаре» и наслаждаться);</p>
+<h3><strong>CSS Format</strong></h3>
+<p> — упаковывает CSS или наоборот в удобочитаемый;</p>
+<h3><strong>Emmet — обязательный плагин</strong></h3>
+<p> не нуждается в комментариях;</p>
+<h3><strong>PyV8</strong></h3>
+<p>Устанавливается "Почти" автоматически при установке Emmet; (необходим для работы плагина)</p>
+<h3>Emmet CSS snippets — пока и без этого неплохо снипится все;</h3>
+<h3><strong>StringUtilities</strong></h3>
+<p> — HTML сущности в символы, наоборот и другие полезности;</p>
+<h3><strong>Bootstrap 3 Snippets</strong></h3>
+<p> — A sublime plugin complete with Bootstrap 3 snippets;</p>
+<h3><strong>Gist</strong></h3>
+<h3>Git</h3>
+<p> – плагин для работы с Git через ST;</p>
+<h3><strong>GitGutter</strong></h3>
+<p> — подсветка изменений в файле;</p>
+<h3>Modific</h3>
+<p> – тоже что и Git​Gutter;</p>
+<h3><strong>Goto-CSS-Declaration</strong></h3>
+<p> — переход к классу в css файл;</p>
+<h3><strong>HTML-CSS-JS Prettify</strong></h3>
+<p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
+<pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
 ...
 &quot;indent_size&quot;: 1, // Indentation size
 </pre>
-                <h3><strong>CodeFormatter</strong></h3>
-                <p> — понятно для чего, немного по вкусу настроить и все;</p>
-                <p>Использует php 5.6! Настроить в конфиге!</p>
-                <h3>SqlBeautifier</h3>
-                <p>
-                    <kbd>Ctrl + k, Ctrl + f</kbd>
-                </p>
-                <h3>Super Calculator</h3>
-                <p>
-                    <kbd>Alt + c</kbd>
-                </p>
-                <h3><strong>SFTP</strong></h3>
-                <p> — передача файлов через SSH, так что всё в порядке;</p>
-                <h3><strong>SideBarEnhancements</strong></h3>
-                <p> — расширение функционала левого меню;</p>
-                <h3><strong>MoveTab</strong></h3>
-                <p> — перемещение вкладок по горячей клавише;</p>
-                <h3><strong>SublimeCodeIntel</strong></h3>
-                <p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
-                <h3>Tag</h3>
-                <p> — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
-                    <del>использую</del> из-за отличной работы с атрибутами тегов;</p>
-                <h3><strong>View In Browser</strong></h3>
-                <p> — открыть файл в браузере;</p>
-                <h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
-                <h3>SideBarGit</h3>
-                <p> —
-                    <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</p>
-                <h3>rsub</h3>
-                <p> — править удаленные файлы через ssh;</p>
-                <h3>livestyle-sublime</h3>
-                <p> — рабочий плагин, но мне не очень нужен;</p>
-                <h3><strong>BracketHighlighter</strong></h3>
-                <p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
-                <h3>Sublime Terminal</h3>
-                <p> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</p>
-                <h4>Настройки</h4>
-                <p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
-                <pre>
+<h3><strong>CodeFormatter</strong></h3>
+<p> — понятно для чего, немного по вкусу настроить и все;</p>
+<p>Использует php 5.6! Настроить в конфиге!</p>
+<h3>SqlBeautifier</h3>
+<p>
+    <kbd>Ctrl + k, Ctrl + f</kbd>
+</p>
+<h3>Super Calculator</h3>
+<p>
+    <kbd>Alt + c</kbd>
+</p>
+<h3><strong>SFTP</strong></h3>
+<p> — передача файлов через SSH, так что всё в порядке;</p>
+<h3><strong>SideBarEnhancements</strong></h3>
+<p> — расширение функционала левого меню;</p>
+<h3><strong>MoveTab</strong></h3>
+<p> — перемещение вкладок по горячей клавише;</p>
+<h3><strong>SublimeCodeIntel</strong></h3>
+<p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
+<h3>Tag</h3>
+<p> — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
+    <del>использую</del> из-за отличной работы с атрибутами тегов;</p>
+<h3><strong>View In Browser</strong></h3>
+<p> — открыть файл в браузере;</p>
+<h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
+<h3>SideBarGit</h3>
+<p> —
+    <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</p>
+<h3>rsub</h3>
+<p> — править удаленные файлы через ssh;</p>
+<h3>livestyle-sublime</h3>
+<p> — рабочий плагин, но мне не очень нужен;</p>
+<h3><strong>BracketHighlighter</strong></h3>
+<p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
+<h3>Sublime Terminal</h3>
+<p> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</p>
+<h4>Настройки</h4>
+<p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
+<pre>
 "terminal": "C:\\Program Files (x86)\\Git\\bin\\sh.exe",
 "parameters": ["--login", "-i"],</pre>
-                <p>Желаемого можно добиться по разному, ещё прокатывает вот так (без параметров):</p>
-                <pre>{
+<p>Желаемого можно добиться по разному, ещё прокатывает вот так (без параметров):</p>
+<pre>{
     "terminal": "C:\\Program Files\\Git\\git-bash.exe",
 }</pre>
-                <p>А для терминала поставляемого вместе с Cygwin:</p>
-                <pre>
+<p>А для терминала поставляемого вместе с Cygwin:</p>
+<pre>
 "terminal": "C:\\cygwin64\\bin\\mintty.exe",
 "parameters": ["-i", "C:\\cygwin64\\Cygwin-Terminal.ico"],</pre>
-                <h3><strong>DocBlockr</strong></h3>
-                <p> – документирование <code>/**</code>
-                    <kbd>Tab</kbd>.</p>
-                <h3>AutoFileName</h3>
-                <p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
-                <p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
-                <p>Вместо данного плагина рекомендуют использовать FuzzyFilePath, <a href="https://github.com/sagold/FuzzyFilePath">FuzzyFilePath</a> неплох, но своеобразен, оставил пока оба плагина.</p>
-                <h3>GitGutter</h3>
-                <h4>Установка win</h4>
-                <p>
-                    <kbd>win</kbd> +
-                    <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
-                    <q>Переменные среды</q> &rarr;
-                    <q>Системные переменные</q> &rarr;
-                    <q>Path</q>.
-                </p>
-                <p>После этого добавляем плагин через PackageControl.</p>
-                <h3>SublimeCodeIntel</h3>
-                <p>Парсил yii2 минуты три, хотя SSD…</p>
-                <pre>    "codeintel_language_settings": {
+<h3><strong>DocBlockr</strong></h3>
+<p> – документирование <code>/**</code>
+    <kbd>Tab</kbd>.</p>
+<h3>AutoFileName</h3>
+<p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
+<p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
+<p>Вместо данного плагина рекомендуют использовать FuzzyFilePath, <a href="https://github.com/sagold/FuzzyFilePath">FuzzyFilePath</a> неплох, но своеобразен, оставил пока оба плагина.</p>
+<h3>GitGutter</h3>
+<h4>Установка win</h4>
+<p>
+    <kbd>win</kbd> +
+    <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
+    <q>Переменные среды</q> &rarr;
+    <q>Системные переменные</q> &rarr;
+    <q>Path</q>.
+</p>
+<p>После этого добавляем плагин через PackageControl.</p>
+<h3>SublimeCodeIntel</h3>
+<p>Парсил yii2 минуты три, хотя SSD…</p>
+<pre>    "codeintel_language_settings": {
         // "Python3": {
         //     "python3": "/usr/local/bin/python3.3",
         //     "codeintel_scan_extra_dir": [
@@ -219,17 +179,17 @@
             // В edafult_settings этой строки нет, есть в инструкции на домашней странице пакета:
             "phpConfigFile": "php.ini"
         }</pre>
-                <h3>PyV8</h3>
-                <p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
-                    <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
-                <h2>Автокомлит</h2>
-                <h3>Снипеты</h3>
-                <h3>Завершения (Completions)</h3>
-                <p>В sublime text можно заменить XCompose (ИксСоставление) Completions (завершениями).</p>
-                <p>
-                    Создаем файл <code>~/.config/sublime-text-3/Packages/User/my-completions.sublime-complations</code> с примерно таким содержанием:
-                </p>
-                <pre class="prettyprint lang-js">{
+<h3>PyV8</h3>
+<p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
+    <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
+<h2>Автокомлит</h2>
+<h3>Снипеты</h3>
+<h3>Завершения (Completions)</h3>
+<p>В sublime text можно заменить XCompose (ИксСоставление) Completions (завершениями).</p>
+<p>
+    Создаем файл <code>~/.config/sublime-text-3/Packages/User/my-completions.sublime-complations</code> с примерно таким содержанием:
+</p>
+<pre class="prettyprint lang-js">{
     &quot;completions&quot;: [
         {
             &quot;contents&quot;: &quot;–&quot;,
@@ -254,17 +214,3 @@
         &quot;iadfeshchm&quot;
     ]
 }</pre>
-            </div>
-        </div>
-    </div>
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script type="text/javascript" src="../theme/bootstrap/js/bootstrap.min.js"></script>
-    <!-- Подсветка синтаксиса кода -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <!-- TOC -->
-    <script src="../theme/toc/js/js.js" type="text/javascript"></script>
-</body>
-
-</html>

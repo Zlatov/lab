@@ -1,127 +1,314 @@
-<!DOCTYPE html>
-<html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>bash all</title>
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-
-		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<h1 class="text-center">bash all</h1>
-					<div id="toc"></div>
+<h2>Команды</h2>
+<h3>ls</h3>
+<ul>
+	<li><code>-a</code> — выводит список всех файлов каталога, в том числе скрытые файлы. <code>..</code> и <code>.</code> в верхней части списка относятся к каталогу на уровень выше текущего и текущему, соответственно;</li>
+	<li><code>-l</code> — выводит информацию о содержимом каталога, включая права доступа, владельца, группу, размер, время создания, является ли файл символьной ссылкой на другой файл и на какой именно;</li>
+	<li><code>-F</code> — добавляет символ в конце строк вывода: <code>/</code> — означает каталог, <code>@</code> — символьную ссылку на другой файл и <code>*</code> — означает, что файл является исполняемым;</li>
+	<li><code>-r</code> — выводит список содержимого каталога в обратном порядке;</li>
+	<li><code>-R</code> — будет выведено также содержимое всех подкаталогов текущего каталога рекурсивным образом;</li>
+	<li><code>-S</code> — сортирует файлы по размеру;</li>
+	<li><code>-x</code> — вывод в 4 колонки;</li>
+	<li><code>-t</code> — имена файлов сортируются не по алфавиту, а по времени последнего изменения;</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>ls</code></p>
+<p><code>ls -la</code></p>
 
 
 
-<h2>bash file .sh</h2>
-<p>start line in bash file</p>
+
+<h3>cd</h3>
+<p><strong>Примеры</strong></p>
+<p><code>cd ~</code></p>
+<p><code>cd .</code></p>
+<p><code>cd ..</code></p>
+<p><code>cd ~/foo</code></p>
+<p><code>cd foo</code></p>
+<p><code>cd ../foo/bar/baz</code></p>
+<p><code>cd ../..</code></p>
+
+
+
+
+
+<h3>mkdir</h3>
+<ul>
+	<li><code>-m</code> — установить код доступа (как в chmod);</li>
+	<li><code>-p</code> — не выдавать ошибок если существует, создавать родительские каталоги если необходимо;</li>
+	<li><code>-v</code> — печатать сообщение о каждом созданном каталоге;</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>mkdir foo</code> — создает каталог foo в текущем каталоге.</p>
+<p><code>mkdir -p foo/bar/baz qux</code> — создает каталоги foo, qux в текущем каталоге и подкаталоги bar/baz в foo, без вывода предупреждений о несуществовании или существовании оных.</p>
+<p><code>mkdir -m 644 my42</code>.</p>
+
+
+
+
+<h3>chmod</h3>
+<p>Права записываются одной строкой сразу для трёх типов пользователей: владелец, группа, остальные. Права могут быть записаны в числовом ([0-7][0-7][0-7]) и в символьном виде ([r-][w-][x-][r-][w-][x-][r-][w-][x-]).</p>
+<p>Права числовым видом <code>644</code> и в символьном виде: <code>rw-r--r--</code>. В двоичном виде эти права выглядели бы так <code>110100100</code>, что означает: владелец имеет право на чтение и запись, а группа и остальные имеют право только на чтение.</p>
+<p><strong>Примеры</strong></p>
+<p><code>chmod 600 ~/.ssh/config</code>.</p>
+
+
+<h3>cat</h3>
+<p>Команду cat удобно использовать для создания коротких файлов или добавления Небольшого объема текста в существующий файл (просто создать пустой файл: <code>touch filename</code>).</p>
+<p><strong>Примеры</strong></p>
+<p><code>cat filename</code> или <code>cat &lt; filename</code> — открывает filename на чтение, выводится все содержимое файла.</p>
+<p><code>cat &gt; filename</code> — открывает / создаёт файл для перезаписи. Если файл существует, он обнулится! Пишем <q>Hello World!</q> жмём <kbd>Enter</kbd> и <kbd>Ctrl</kbd> + <kbd>Z</kbd> или <kbd>Ctrl</kbd> + <kbd>D</kbd>.</p>
+<p>Ввод буферизован: накопление 512 (обычно) знаков и потом ввод. Небуферизованный (лучше, на случай сбоев) ввод: с ключом -u (unbuffered).</p>
+<p><code>cat &gt;&gt; filename</code> — открывает файл для записи в конец файла.</p>
+
+
+
+
+<h3>less</h3>
+<ul>
+	<li><code>-g</code> — highlights just the current match of any searched string;</li>
+	<li><code>-I</code> — case-insensitive searches;</li>
+	<li><code>-M</code> — shows more detailed prompt, including file position;</li>
+	<li><code>-N</code> — shows line numbers (useful for source code viewing);</li>
+	<li><code>-S</code> — disables line wrap ("chop long lines"). Long lines can be seen by side scrolling;</li>
+	<li><code>-?</code> — shows help;</li>
+	<li><code>+F</code> — follow mode for log;</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<pre>less -M readme.txt					# Read "readme.txt."
+less +F /var/log/mail.log			# Follow mode for log
+file * | less						# Easier file analysis.
+less -I -p void *.c					# Case insensitive search for "void" in all .c files</pre>
+<p><a href="https://en.wikipedia.org/wiki/Less_(Unix)" title="Подробнее о программе less на wiki">Подробнее на Wiki</a>.</p>
+
+
+<h3>find</h3>
+<ul>
+	<li><code>-name</code> — искать по имени файла, при использовании подстановочных образцов параметр заключается в кавычки.</li>
+	<li><code>-type</code> — тип искомого: f=файл, d=каталог, l=ссылка (link), p=канал (pipe), s=сокет.</li>
+	<li><code>-user</code> — владелец: имя пользователя или UID.</li>
+	<li><code>-group</code> — владелец: группа пользователя или GID.</li>
+	<li><code>-perm</code> — указываются права доступа.</li>
+	<li><code>-size</code> — размер: указывается в 512-байтных блоках или байтах (признак байтов — символ «c» за числом).</li>
+	<li><code>-atime</code> — время последнего обращения к файлу (в днях).</li>
+	<li><code>-amin</code> — время последнего обращения к файлу (в минутах).</li>
+	<li><code>-ctime</code> — время последнего изменения владельца или прав доступа к файлу (в днях).</li>
+	<li><code>-cmin</code> — время последнего изменения владельца или прав доступа к файлу (в минутах).</li>
+	<li><code>-mtime</code> — время последнего изменения файла (в днях).</li>
+	<li><code>-mmin</code> — время последнего изменения файла (в минутах).</li>
+	<li><code>-newer</code> другой_файл — искать файлы созданные позже, чем другой_файл.</li>
+	<li><code>-delete</code> — удалять найденные файлы.</li>
+	<li><code>-ls</code> — генерирует вывод как команда ls -dgils.</li>
+	<li><code>-print</code> — показывает на экране найденные файлы.</li>
+	<li><code>-exec</code> command {} \; — выполняет над найденным файлом указанную команду; обратите внимание на синтаксис.</li>
+	<li><code>-ok</code> — перед выполнением команды указанной в -exec, выдаёт запрос.</li>
+	<li><code>-depth</code> или -d — начинать поиск с самых глубоких уровней вложенности, а не с корня каталога.</li>
+	<li><code>-maxdepth</code> — максимальный уровень вложенности для поиска. «-maxdepth 0» ограничивает поиск текущим каталогом.</li>
+	<li><code>-prune</code> — используется, когда вы хотите исключить из поиска определённые каталоги.</li>
+	<li><code>-mount</code> или -xdev — не переходить на другие файловые системы.</li>
+	<li><code>-regex</code> — искать по имени файла используя регулярные выражения.</li>
+	<li><code>-regextype</code> тип — указание типа используемых регулярных выражений.</li>
+	<li><code>-P</code> — не разворачивать символические ссылки (поведение по умолчанию).</li>
+	<li><code>-L</code> — разворачивать символические ссылки.</li>
+	<li><code>-empty</code> — только пустые каталоги.</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>find . -name '_notes' -type d -exec rm -rf {} \;</code> — найти в текущем каталоге (и подкаталогах) каталоги с именем <code>_notes</code> и выполнить над ними команду: рекурсивно удалить без вопросов.</p>
+
+
+
+
+<h3>rm</h3>
+<ul>
+	<li><code>-r</code> — обрабатывать все вложенные подкаталоги. Данный ключ необходим, если удаляемый файл является каталогом, пусть даже пустым. Если удаляемый файл не является каталогом, то ключ <code>-r</code> не влияет на команду rm.</li>
+	<li><code>-i</code> — выводить запрос на подтверждение каждой операции удаления.</li>
+	<li><code>-f</code> — не возвращать код ошибочного завершения, если ошибки были вызваны несуществующими файлами; не запрашивать подтверждения операций.</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>rm -r ./*</code> — рекурсивно удалить всё из папки (не удаляет .htaccess)</p>
+<p><code>rm .htaccess</code> — удалить файл .htaccess</p>
+<p><code>rm -rf mydir</code> — рекурсивно удалить без подтверждения и кода ошибочного завершения файл (или директорию) mydir.</p>
+
+
+
+
+
+<h3>mv</h3>
+<ul>
+	<li><code>–f</code>, не запрашивать подтверждения операций.</li>
+	<li><code>–i</code>, выводить запрос на подтверждение операции, когда существует файл, в который происходит переименование или перемещение.</li>
+	<li><code>––</code>, завершает список ключей. Применяется для использования с файлами, имена которых начинаются на <code>–</code>.</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>mv foo bar</code> — переименовывает файл foo в bar.</p>
+<p><code>mv foobar ./baz/</code> — перемещает файл 'foobar' в 'baz' относительно текущего каталога.</p>
+<p><code>mv ./foo baz</code> — перемещает каталог 'foo' в каталог 'baz'.</p>
+
+
+<h3>cp</h3>
+<ul>
+<li><code>-r</code> — копировать директории рекурсивно (то есть все поддиректории и все файлы в поддиректориях).</li>
+<li><code>-f</code> — разрешает удаление целевого файла, в который производится копирование, если он не может быть открыт для записи.</li>
+<li><code>-H</code> — используйте этот ключ, чтобы копировать символические ссылки. По умолчанию команда переходит по символическим ссылкам и копирует файлы, на которые те указывают.</li>
+<li><code>-i</code> — команда будет запрашивать, следует ли перезаписывать конечный файл, имя которого совпадает с именем исходного, то есть если в параметре <i>целевой_каталог</i> или <i>целевой_файл</i> встречается такое же имя файла, какое было задано в параметре <i>исходный_файл</i> или <i>исходная_директория</i>, то запрашивается подтверждение. Для того, чтобы перезаписать файл, следует ввести <b>y</b> или его эквивалент для данной локали. Ввод любого другого символа приведёт к отмене перезаписи данного файла.</li>
+</ul>
+<p>в некоторых системах назначен alias cp='cp -i', т.е. по умолчанию команда cp будет спрашивать о перезаписи</p>
+<ul>
+<li><code>-p</code> — повторяет следующие свойства исходного файла или директории у целевого файла или директории:
+<ul>
+<li>Время последнего изменения и последнего доступа.</li>
+<li>Идентификатор пользователя и группы.</li>
+<li>Права доступа и биты SUID и SGID.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Примеры</strong></p>
+<p><code>cp foo bar</code> — сделать копию foo с именем bar.</p>
+<p><code>cp foo bar baz</code> или <code>cp foo bar ./baz</code> — скопировать файл или файлы (foo и bar) в другой каталог (baz).</p>
+<p><code>cp -r ./baz ./qux</code> — скопировать каталог baz в другой каталог qux (./qux/baz).</p>
+
+
+<h3>ln</h3>
+<p><code>ln -s /path_to_folder /path_from_folder/linkName</code></p>
+<ul>
+<li>/path_to_folder - на что будем указывать</li>
+<li>/path_from_folder_link - папка в которой создадим ссылку</li>
+<li>/linkName - название ссылки</li>
+</ul>
+<p>Если в названии пути есть пробелы, то их необходимо экранировать обратным слешем.</p>
+<p>Подробно о ключах и форматах <code>ln --help</code>.</p>
+
+<h3>tar</h3>
+<ul>
+	<li><code>-c</code> — создать архив;</li>
+	<li><code>-f</code> — на диске, а не на магнитной ленте;</li>
+	<li><code>-x</code> — извлекать файлы из архива;</li>
+	<li><code>-z</code> — через gzip (.tar.gz, .tgz, .tar.gzip);</li>
+	<li><code>-j</code> — через bzip2 (.tar.bz2, .tar.bzip2, .tbz2, .tb2, .tbz);</li>
+	<li><code>-v</code> — вывод информации во время обработки;</li>
+	<li><code>-t</code> — просмотреть содержимое архива;</li>
+	<li><code>-r</code> — добавить в архив;</li>
+</ul>
+
+<p><strong>Примеры</strong></p>
+<p><code>tar -cf filename.tar</code> — создать несжатый архив.</p>
+<p><code>tar -czf filename.tar.gz</code> — создать сжатый gzip-ом архив.</p>
+<p><code>tar -xf filename.tar.gz</code> — извлечь.</p>
+
+
+
+<h3>scp</h3>
+<p><strong>Примеры</strong></p>
+<p><code>scp username@hostname:~/filename.tar.gz ./web.tar.gz</code> — копирования файла filename.tar.gz с удалённого хоста к себе спереименованием.</p>
+<p><code>scp filename.tar.gz username@hostname:~/folder/name</code> — копирования локального файла filename.tar.gz на удалённый хост.</p>
+
+<h3>ssh</h3>
+<pre>ssh MYHOST -t 'cd MYPATH; bash --login'</pre>
+<pre>#!/bin/bash
+ssh user@remote_host -L localhost:3303:127.0.0.1:3306</pre>
+<p>ssh туннель – проброс локального порта localhost:3303 на удаленную машину remote_host, на удаленной машине выход 127.0.0.1:3306</p>
+
+<h3>help</h3>
+<pre>$ help
+$ help help #### )))))))
+$ help alias
+$ ssh --help
+$ scp --help
+$ scp --?
+$ scp help #### проходит не у всех команд, юзать --help
+$ scp ?
+</pre>
+
+<h3>apt</h3>
+<p>Часто используемые команды <code>apt-get</code>:</p>
+<ul>
+    <li>
+        <p>Обновить список пакетов, имеющихся в источниках:</p> <pre> apt-get update</pre>
+        <p>(вы должны регулярно запускать эту команду для обновления списка пакетов)</p>
+    </li>
+</ul>
+<ul>
+    <li>
+        <p>Обновить все пакеты в системе (без установки дополнительных пакетов или удаления пакетов):</p> <pre> apt-get upgrade</pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Установить пакет <var>foo</var> и все его зависимости:</p> <pre> apt-get install foo</pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Удалить пакет из системы:</p> <pre> apt-get remove foo</pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Удалить из системы пакет и все его файлы настроек:</p> <pre> apt-get --purge remove foo</pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Обновить все установленные в системе пакеты с установкой или удалением дополнительных пакетов, если это потребуется для обновления какого-то пакета:</p> <pre> apt-get dist-upgrade</pre>
+        <p>(Команда
+            <samp>upgrade</samp> оставит старую установленную версию пакета, если для разрешения новых зависимостей при обновлении потребуется установка дополнительных пакетов. Команда
+            <samp>dist-upgrade</samp> менее консервативна.)</p>
+    </li>
+</ul>
+<p>Учтите, что для выполнения каких бы то ни было команд для изменения пакетов в системе вам нужно иметь права суперпользователя.</p>
+<p>Обратите внимание, что в настоящее время <code>apt-get</code> по умолчанию устанавливает рекомендуемые пакеты, и эта программа является предпочтительной для управления пакетами из консоли при выполнении установки или больших обновлений системы вследствие её ошибкоустойчивости.</p>
+<p>В комплект инструментов apt входит также программа для обработки запросов по списку пакетов <code>apt-cache</code>. Её можно использовать для поиска пакетов, имеющих определённую функциональность, с помощью простых текстовых запросов или регулярных выражений, а также для получения списка зависимостей из системы управления пакетами. Часто используемые команды <code>apt-cache</code>:</p>
+<ul>
+    <li>
+        <p>Найти пакеты, содержащие в своём описании <var>слово</var>:</p> <pre> apt-cache search <var>слово</var></pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Показать подробную информацию о пакете:</p> <pre> apt-cache show <var>пакет</var></pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Показать зависимости пакета:</p> <pre> apt-cache depends <var>пакет</var></pre> </li>
+</ul>
+<ul>
+    <li>
+        <p>Показать подробную информацию о доступных версиях пакета и о пакетах, от него зависящих (об обратных зависимостях пакета):</p> <pre> apt-cache showpkg <var>пакет</var></pre> </li>
+</ul>
+
+<h3>pwd</h3>
+
+<p>Вывести полный путь до текущей директории.</p>
+<p><strong>Примеры</strong></p>
+<pre>user@server ~/some/path/from/user/folder $ pwd
+/home/user/some/path/from/user/folder</pre>
+
+<h2>Наработки</h2>
+<h3>Первая строчка в исполняемом bash файле</h3>
 <pre class="prettyprint lang-sh">#!/bin/bash</pre>
-<h3>split</h3>
-<p>разделить файл на части</p>
+
+<h3>Манипуляции с файлами</h3>
+<h4>split - разделить файл на части</h4>
 <p>split [-l число_строк] [-a длина_суффикса] [файл [префикс]] <br>
 split -b число_байт[K|k|M|m|G|g] [-a длина_суффикса] [файл [префикс]] <br>
 split -p шаблон [-a длина_суффикса] [файл [префикс]]</p>
+<h4>iconv</h4>
+<p>Перекодировать файл в другую кодировку и сохранить:</p>
+<pre>cat temp.html|iconv -f utf8 -tcp1251 > tempcp1251.html
+</pre>
+<h4>file -bi [filename]</h4>
+<p>Определить Кодировку Файла</p>
+<p>Опция Описание</p>
+<p>-b, --brief Не печатать имя файла (краткий режим)</p>
+<p>-i, --mime Определить тип файла и кодировку</p>
 
-<h3>replace (от MySQL)</h3>
+
+<h3>Манипуляции с текстом</h3>
+<h4>Замена в файле replace (от MySQL)</h4>
 <p>Во-первых, в состав MySQL входит замечательная утилита replace, которая замечательна тем, что умеет производить замену прямо в файле:</p>
 <p><code>replace 'hello' 'bye, bye!' -- myfile</code></p>
 <p>Самое замечательное, что она умеет менять пары подстрок, что позволяет производить такие замены:</p>
 <pre>bolk-dev ~ $ echo ABBA | replace A B B A  --
 BAAB</pre>
 
-
-<h3>file -bi [filename]</h3>
-<p>Определить Кодировку Файла</p>
-<p>Опция Описание</p>
-<p>-b, --brief Не печатать имя файла (краткий режим)</p>
-<p>-i, --mime Определить тип файла и кодировку</p>
-
-<h3>iconv</h3>
-<p>Перекодировать файл в другую кодировку и сохранить:</p>
-<pre>cat temp.html|iconv -f utf8 -tcp1251 > tempcp1251.html
-</pre>
-
-<h3>grep - поиск по файлу</h3>
+<h4>grep - поиск по файлу</h4>
 <pre>
 grep 'win1251' FORUM.SQL
 </pre>
 
 <h3>which</h3>
 <p>узнает где бинарник программы</p>
-
-
-
-
-				</div>
-			</div>
-		</div>
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#toc").append('<p>Содержание:</p>');
-				$("#toc").append('<ul></ul>');
-				$("h2").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h2" + i);
-					$("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h3").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h3" + i);
-					var prevh2 = current.prevAll("h2").first();
-					var j = prevh2.attr("id").substring(2);
-					$("#linkh2"+j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h4").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h4" + i);
-					var prevh3 = current.prevAll("h3").first();
-					var j = prevh3.attr("id").substring(2);
-					alert
-					$("#linkh3"+j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h5").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h5" + i);
-					var prevh4 = current.prevAll("h4").first();
-					var j = prevh4.attr("id").substring(2);
-					$("#linkh4"+j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-				$("h6").each(function(i) {
-					var current = $(this);
-					current.attr("id", "h6" + i);
-					var prevh5 = current.prevAll("h5").first();
-					var j = prevh5.attr("id").substring(2);
-					$("#linkh5"+j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-						i + "' title='" + current.attr("tagName") + "'>" +
-						current.html() + "</a><ul></ul></li>");
-				});
-			});
-		</script>
-	</body>
-</html>

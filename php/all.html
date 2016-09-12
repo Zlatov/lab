@@ -1,47 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>PHP all</title>
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="../theme/bootstrap/css/bootstrap.css">
-	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	<!-- TOC -->
-	<link rel="stylesheet" type="text/css" href="../theme/toc/css/css.css">
-</head>
-
-<body data-spy="scroll" data-target="#toc">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1 class="text-center">PHP all</h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
-				<div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
-			</div>
-			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-				<h2>php.ini</h2>
-				<pre class="prettyprint lang-apache">
+<h2>php.ini</h2>
+<pre class="prettyprint lang-apache">
 upload_max_filesize = 10M
 max_file_uploads = 20
 post_max_size = 210M
 </pre>
-				<pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
-				<h2>Функции</h2>
-				<h3>iconv - изменение кодировки строки</h3>
-				<pre class="prettyprint lang-php">
+<pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
+<h2>Функции</h2>
+<h3>iconv - изменение кодировки строки</h3>
+<pre class="prettyprint lang-php">
 $s = 'Р’РёРЅРёР»РѕРІР°СЏ Р°РїРїР»РёРєР°С†РёСЏ РІ РЅРѕС‡РЅРѕРј РєР»СѓР±Рµ - С„Р»СЋРѕСЂ';
 $s = iconv('utf8', 'cp1251', $s);
 echo &quot;&lt;pre&gt;&quot;;
@@ -54,53 +20,56 @@ echo &quot;&lt;pre&gt;&quot;;
 var_dump($s);
 echo &quot;&lt;/pre&gt;&quot;;
 </pre>
-				<h2>Константы</h2>
-				<pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
+<h2>Константы</h2>
+<pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }</pre>
-				<h2>PHP in console</h2>
-				<pre class="prettyprint lang-php">
+<h2>PHP in console</h2>
+<pre class="prettyprint lang-php">
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
-				<h2>Наработки</h2>
-				<h3>Загрузка файла на сервер</h3>
-				<pre class="prettyprint lang-php">$ext = pathinfo($_FILES['name'], PATHINFO_EXTENSION); // Расширение файла</pre>
-				<h3>IP адрес пользователя</h3>
-				<p><code>$_SERVER['REMOTE_ADDR']</code>, остальное - фуфло. Все что начинается с <code>$_SERVER['HTML_...</code> - это заголовки, их можно подделать!</p>
-				<h3>Фильтрация данных пользователя</h3>
-				<p><strong>Коротко список используемых функций:</strong></p>
-				<ul>
-					<li><a href="http://php.net/manual/ru/function.intval.php">intval</a></li>
-					<li><a href="http://php.net/manual/ru/function.strip-tags.php">strip_tags</a></li>
-					<li><a href="http://php.net/manual/ru/function.htmlspecialchars.php">htmlspecialchars</a></li>
-				</ul>
-				<h4>Интеджер</h4>
-				<pre class="prettyprint lang-php">$number = intval($_GET['input_number']);
+<h2>Наработки</h2>
+<h3>Загрузка файла на сервер</h3>
+<pre class="prettyprint lang-php">$ext = pathinfo($_FILES['name'], PATHINFO_EXTENSION); // Расширение файла</pre>
+<h3>IP адрес пользователя</h3>
+<p><code>$_SERVER['REMOTE_ADDR']</code>, остальное - фуфло. Все что начинается с <code>$_SERVER['HTML_...</code> - это заголовки, их можно подделать!</p>
+<h3>Фильтрация данных пользователя</h3>
+<p><strong>Коротко список используемых функций:</strong></p>
+<ul>
+    <li><a href="http://php.net/manual/ru/function.intval.php">intval</a></li>
+    <li><a href="http://php.net/manual/ru/function.strip-tags.php">strip_tags</a></li>
+    <li><a href="http://php.net/manual/ru/function.htmlspecialchars.php">htmlspecialchars</a></li>
+</ul>
+<h4>Интеджер</h4>
+<pre class="prettyprint lang-php">$number = intval($_GET['input_number']);
 if ($number)
 {
 ... выполняем SQL запрос ...
 }</pre>
-				<h4>Стринг</h4>
-				<p>Не предполагаем вхождение html тегов:</p>
-				<pre class="prettyprint lang-php">$input_text = strip_tags($_GET['input_text']);
+<h4>Стринг</h4>
+<p>Не предполагаем вхождение html тегов:</p>
+<pre class="prettyprint lang-php">$input_text = strip_tags($_GET['input_text']);
 $input_text = htmlspecialchars($input_text);
 $input_text = mysql_escape_string($input_text);
 </pre>
-				<p>Если сразу массив данных</p>
-				<pre class="prettyprint lang-php">$checkbox_arr = array_map('intval', $_POST['checkbox']);</pre>
-				<h3>"Запрет" повторной отправки формы по F5</h3>
-				<pre class="prettyprint lang-php">header('Location: index.php');</pre>
-				<h2>Cookie</h2>
-				<h3>Установка и чтение cookie</h3>
-				<pre class="prettyprint lang-php">setcookie("voting", $cookieVoting, time()+60*60*24*7, "/");
+<p>Если сразу массив данных</p>
+<pre class="prettyprint lang-php">$checkbox_arr = array_map('intval', $_POST['checkbox']);</pre>
+<h3>"Запрет" повторной отправки формы по F5</h3>
+<pre class="prettyprint lang-php">header('Location: index.php');</pre>
+<p>или проще:</p>
+<pre class="prettyprint lang-php">header('Refresh:0');</pre>
+<h2>Cookie</h2>
+<h3>Установка и чтение cookie</h3>
+<pre class="prettyprint lang-php">setcookie("voting", $cookieVoting, time()+60*60*24*7, "/");
 if ( isset($_COOKIE) &amp;&amp; isset($_COOKIE['voting']) ) {
 	$cookieVoting = $_COOKIE['voting'];</pre>
-				<h3>Удаление cookie</h3>
-				<p><code>unset($_COOKIE['voting'])</code> - удаляет переменную на сервере (<mark>не удаляет из браузера!</mark>)</p>
-				<p>Удалить из браузера пользователя:</p>
-				<pre class="prettyprint lang-php">setcookie("voting", null, time()-60*60*24*7, "/");</pre>
-				<h3>Проверка включены ли куки в браузере</h3>
-				<pre class="prettyprint lang-php">&lt;?php
+<h3>Удаление cookie</h3>
+<p><code>unset($_COOKIE['voting'])</code> - удаляет переменную на сервере (
+    <mark>не удаляет из браузера!</mark>)</p>
+<p>Удалить из браузера пользователя:</p>
+<pre class="prettyprint lang-php">setcookie("voting", null, time()-60*60*24*7, "/");</pre>
+<h3>Проверка включены ли куки в браузере</h3>
+<pre class="prettyprint lang-php">&lt;?php
 // Recommended way for versions of PHP &gt;= 5.4.0
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -153,20 +122,6 @@ if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }
 </pre>
-				<h2>Комментирование</h2>
-				<pre class="prettyprint lang-php">&lt;!-- html  --&gt;&lt;?php // echo 'asd'; ?&gt;&lt;!--  html --&gt;
+<h2>Комментирование</h2>
+<pre class="prettyprint lang-php">&lt;!-- html  --&gt;&lt;?php // echo 'asd'; ?&gt;&lt;!--  html --&gt;
 &lt;!-- html  --&gt;&lt;?php //= 'asd'; ?&gt;&lt;!--  html --&gt;</pre>
-			</div>
-		</div>
-	</div>
-	<!-- jQuery -->
-	<script src="//code.jquery.com/jquery.js"></script>
-	<!-- Bootstrap JavaScript -->
-	<script type="text/javascript" src="../theme/bootstrap/js/bootstrap.min.js"></script>
-	<!-- Подсветка синтаксиса кода -->
-	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-	<!-- TOC -->
-	<script src="../theme/toc/js/js.js" type="text/javascript"></script>
-</body>
-
-</html>

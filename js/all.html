@@ -1,52 +1,5 @@
-<!DOCTYPE html>
-<html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>JS all</title>
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-	    <!-- Bootstrap CSS -->
-	    <link rel="stylesheet" type="text/css" href="../theme/bootstrap/css/bootstrap.css">
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-	    <!-- TOC -->
-	    <link rel="stylesheet" type="text/css" href="../theme/toc/css/css.css">
-	</head>
-	<body data-spy="scroll" data-target="#toc">
-		<div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h1 class="text-center">JS all</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
-                <div id="toc" data-spy="affix" data-offset-top="0" data-offset-bottom="0"></div>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<h2>Variable</h2>
-					<h3>Type of variable</h3>
+<h2>Variable</h2>
+<h3>Type of variable</h3>
 <pre class="prettyprint lang-js">
 // Numbers
 typeof 37 === 'number';
@@ -103,8 +56,8 @@ typeof function(){} === 'function';
 typeof class C {} === 'function';
 typeof Math.sin === 'function';
 </pre>
-					<h2>Function</h2>
-					<h3>Event</h3>
+<h2>Function</h2>
+<h3>Event</h3>
 <pre class="prettyprint lang-js">
 $('#js_add').keyup(function(event){
 	console.log(event.);
@@ -114,7 +67,7 @@ $('#js_add').keyup(function(event){
     // Или
 	// return false;
 </pre>
-					<h3>Key Kode - Event</h3>
+<h3>Key Kode - Event</h3>
 <pre class="prettyprint lang-js">
 $('#searchnewstag').keyup(function(event){
     if (
@@ -132,27 +85,27 @@ $('#searchnewstag').keypress(function(event){
     if(event.keyCode == 13)
     {
 </pre>
-					<h3>Debag (print_r var_dump)</h3>
+<h3>Debag (print_r var_dump)</h3>
 <pre>
 console.log(variable)
 // or
 alert(variable);
 </pre>
-					<h2>String</h2>
-					<h3>Replace</h3>
+<h2>String</h2>
+<h3>Replace</h3>
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
-					<h2>Array</h2>
-					<h3>Maximum from array</h3>
+<h2>Array</h2>
+<h3>Maximum from array</h3>
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
-					<h3>Push to array</h3>
+<h3>Push to array</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>
-					<h2>JSON</h2>
-					<h3>Encode</h3>
+<h2>JSON</h2>
+<h3>Encode</h3>
 <pre class="prettyprint lang-js">
 var str = JSON.stringify(objects);
 </pre>
-					<h3>Decode</h3>
-					<p><code>var data2 = JSON.parse(text);</code></p>
+<h3>Decode</h3>
+<p><code>var data2 = JSON.parse(text);</code></p>
 <pre class="prettyprint lang-js">
 &lt;?php
 	$array = [
@@ -189,14 +142,17 @@ var str = JSON.stringify(objects);
 	console.log(data2);
 &lt;/script&gt;
 </pre>
-
-					<h2>Плагины</h2>
-
-					<h3>Подсветка синтаксиса кода google-code-prettify</h3>
-<p><del><code class="prettyprint lang-html">&lt;script src=&quot;https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js&quot;&gt;&lt;/script&gt;</code></del></p>
+<h2>Наработки</h2>
+<h3>Подтверждение действия confirm()</h3>
+<p><strong>Например, подтвердить удаление:</strong></p>
+<pre>&lt;a href=&quot;...&quot; onclick=&quot;return confirm('Удалить?')?true:false;&quot;&gt;Удалить&lt;/a&gt;</pre>
+<h2>Плагины</h2>
+<h3>Подсветка синтаксиса кода google-code-prettify</h3>
+<p>
+    <del><code class="prettyprint lang-html">&lt;script src=&quot;https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js&quot;&gt;&lt;/script&gt;</code></del>
+</p>
 <p><code class="prettyprint lang-html">&lt;script src=&quot;https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js&quot;&gt;&lt;/script&gt;</code></p>
 <p>Встраиваемые в &lt;pre&gt;/&lt;code&gt; классы:</p>
-
 <pre class="prettyprint lang-css"> class=&quot;prettyprint lang-html&quot;
  class=&quot;prettyprint lang-css&quot;
  class=&quot;prettyprint lang-js&quot;
@@ -204,33 +160,3 @@ var str = JSON.stringify(objects);
  class=&quot;prettyprint lang-apache&quot;
  class=&quot;prettyprint lang-sh&quot;
  class=&quot;prettyprint lang-sql&quot;</pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				</div>
-			</div>
-		</div>
-
-		<!-- jQuery -->
-		<script src="//code.jquery.com/jquery.js"></script>
-		<!-- Bootstrap JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Yii2 all"></script>
-        <!-- Подсветка синтаксиса кода -->
-        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-	    <!-- TOC -->
-    	<script src="../theme/toc/js/js.js" type="text/javascript"></script>
-	</body>
-</html>
