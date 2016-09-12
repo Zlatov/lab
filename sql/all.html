@@ -22,6 +22,16 @@
 <p><code>SET AUTOCOMMIT = 1; SET FOREIGN_KEY_CHECKS = 1; SET UNIQUE_CHECKS = 1;</code></p>
 <h3>Для удаления всей таблицы</h3>
 <pre>SET SQL_SAFE_UPDATES = 0;</pre>
+<h2>Переменные</h2>
+<pre class="prettyprint lang-sql">
+SET @count = 12;
+SELECT @count; -- 12
+</pre>
+<p>В селекте:</p>
+<pre class="prettyprint lang-sql">
+SELECT @count := COUNT(*) FROM forum_advt; -- return count rows
+SELECT @count; -- 12
+</pre>
 <h2>Функции и Операторы</h2>
 <h3>INSERT</h3>
 <pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
@@ -67,6 +77,10 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
     SET col_name1=expr1 [, col_name2=expr2 ...]
     [WHERE where_definition]
 </pre>
+
+<h3>CREATE TABLE</h3>
+<pre>CREATE TABLE `forum_advt` ()</pre>
+<pre>CREATE TABLE IF NOT EXISTS `forum_advt`</pre>
 <h3>TRUNCATE</h3>
 <p>— удаляет и воссоздает таблицу, операция является нетранзакционной, не возвращает количество удаленных строк.</p>
 <pre>TRUNCATE TABLE table_name</pre>
@@ -216,6 +230,49 @@ SHOW GRANTS FOR 'userLogin'@'localhost';
 SET SQL_SAFE_UPDATES = 0;
 SET SQL_SAFE_UPDATES = 1;
 </pre>
+<h2>Наработки</h2>
+<h3>Выбрать одну случайную запись</h3>
+<pre class="prettyprint lang-sql">SELECT
+	r1.id
+FROM
+	forum_advt AS r1
+JOIN
+	(
+		SELECT CEIL( 
+			RAND()
+			*
+			(
+				SELECT MAX(id) FROM forum_advt
+			) 
+		) AS id
+	) AS r2
+WHERE
+	r1.id &gt;= r2.id
+	and `show` &lt;&gt; 0
+ORDER BY
+	r1.id ASC
+LIMIT 1;</pre>
+Для получения определенного количества уникальных записей: будем выполнять запрос
+<pre class="prettyprint lang-php">$advt_ids = [];
+while (count($advt_ids) <= 5) {
+	$result = $db->sql_query($sql);
+	$row = $db->sql_fetchrow($result);
+	$db->sql_freeresult($result);
+	if ($row['id']) {
+		if (in_array($row['id'], $advt_ids)) {
+			continue;
+		}
+		$advt_ids[] = $row['id'];
+		$advt_row = array(
+			'ID'        => $row['id'],
+			'LINK'      => $row['link'],
+			'FILE_NAME' => $row['file_name'],
+	    );
+		$template->assign_block_vars('advts', $advt_row);
+	}
+}
+</pre>
+
 <h2>Метопрограммирование</h2>
 <h3>Найти таблицы зная имя поля</h3>
 <pre class="prettyprint lang-sql">
