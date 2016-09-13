@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Git all</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h1 class="text-center">Git all</h1>
-                <div id="toc"></div>
-                <h2>Команды</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h2>Команды</h2>
 <h3>git clone</h3>
 <p>
     — копирует репозиторий и устанавливает настройки для наблюдения за оригиналом (применяются в командах fetch, push, pull).</p>
@@ -54,14 +11,8 @@
 <p>— скопирует репозиторий в папку simpleparser.</p>
 <pre>$ git clone git@github.com:/zlatov/simpleparser.git temp</pre>
 <p>— скопирует репозиторий в папку temp.</p>
-
-
-
 <h3>git status</h3>
 <p>— показывает текущее состояние репозитория.</p>
-
-
-
 <h3>git init</h3>
 <p>— создаёт новый репозиторий.</p>
 <pre>$ git init --bare</pre>
@@ -72,9 +23,6 @@
 <p>— аналогично предыдущему примеру, но создаётся „голый“ репозиторий.</p>
 <p><strong>Примечания по бар репозиториям</strong></p>
 <p>Можно связать два бар репозитория, указав remote репозиторий, однако выполнять команду pull не дает: <code>git-pull cannot be used without a working tree.</code> Дает делать fetch (pull - составная команда) и вталкивать (push) в другой бар репозиторий.</p>
-
-
-
 <h3>git add</h3>
 <p>— добавляет файл или группу файлов в index (staging area).</p>
 <pre>$ git add .</pre>
@@ -84,17 +32,12 @@
 <pre>$ git add .
 $ git add -u</pre>
 <p>— добавляем в индекс измененные и новые и удаляем из индекса удаленные файлы</p>
-
-
 <h3>git commit</h3>
 <p>— переносит изменения из index (staging area) в local repo.</p>
 <pre>$ git commit -m "comment"</pre>
 <p>— фиксирует изменения, добавленные в staging area.</p>
 <pre>$ git commit -a -m "comment"</pre>
 <p>— фиксирует все изменения, сделанные в рабочей директории. Особенность <code>-a</code> в том, что перед этой командой ней не нужно выполнять команду <code>git add .</code> (это не распространяется на новые файлы, которые ещё никогда ранее не добавлялись).</p>
-
-
-
 <h3>git checkout</h3>
 <p>— загрузить любое состояние репозитория (checkout можно выполнить, только тогда, когда у нет никаких изменений в текущем состоянии). При каждой операции checkout ссылка HEAD указывает на текущее положение (читать как: метка HEAD — это текущее состояние репозитория, т.е. переносится чекаутом).</p>
 <pre>$ git checkout branchNameOrCommitHash</pre>
@@ -111,8 +54,6 @@ $ git add -u</pre>
 <p>— переключиться на три фиксации назад относительно фиксации с именем, начинающимся на "a71b72".</p>
 <pre>$ git checkout -b branchName branchNameOrCommitHash</pre>
 <p>— переключается на фиксацию branchNameOrCommitHash и тут же создаёт от неё новую ветвь branchName и переключается на эту ветвь. Примечание: если переключиться назад, то команда git log не покажет историю "будущего", но история не потерена, выполните команду git log --all, чтобы увидеть и узнать hash последнего коммита и перейти к нему, если неоходимо; или выполните команду git checkout master, чтобы сразу перейти на верхушку ветки.</p>
-
-
 <h3>git branch</h3>
 <p>— просмотр, создание и удаление ветвей разработки.</p>
 <pre>$ git branch</pre>
@@ -131,8 +72,6 @@ $ git add -u</pre>
 $ git merge testing
 $ git branch -d testing</pre>
 <p>— после выполненных работы в ветке testing сольём с рабочей веткой master, после чего не забываем удалить ненужную ветвь.</p>
-
-
 <h3>git diff</h3>
 <p>— увидеть изменения между work tree и index или между index и local repo.</p>
 <pre>$ git diff</pre>
@@ -141,7 +80,6 @@ $ git branch -d testing</pre>
 <p>— изменения между index и local repo (проиндексированные изменения, но не закомичены).</p>
 <pre>$ git diff master~2..master</pre>
 <p>— изменения при перемещении от фиксации master~2 к фиксации master. Возможно указание фиксаций в обратном порядке при этом логика изменений поменяется. Возможно указание разных веток.</p>
-
 <h3>git log</h3>
 <p>— история фиксаций.</p>
 <pre>$ git log</pre>
@@ -158,69 +96,55 @@ $ git branch -d testing</pre>
 <p>— от места совпадения HEAD и FETCH_HEAD, и до конца истории.</p>
 <pre>$ git log HEAD...FETCH_HEAD</pre>
 <p>— общая историю от места совпадения HEAD и FETCH_HEAD, и до конца истории.</p>
-
-
 <h3>git remote</h3>
 <p>— наблюдения за удаленными репозиториями.</p>
 <pre>$ git remote</pre>
 <p>— список существующих.</p>
 <pre>$ git remote add name path</pre>
 <p>— добавляет с именем name расположенного по пути path.</p>
-
-
 <p><strong class="btn btn-primary" data-toggle="collapse" data-target="#git_remote_add_name_path_alias">Если настроен ssh алиас к серверу с репозиторием <span class="caret"></span></strong></p>
 <div id="git_remote_add_name_path_alias" class="collapse">
-<p>то синтаксис пути репозитория в команде добавления выглядит следующим образом:</p>
-<p><code>git remote add origin github:Zlatov/testbootstrap.git</code></p>
-<p><code>git remote add origin bitbucket:Zlatov/newzlatov.git</code></p>
+    <p>то синтаксис пути репозитория в команде добавления выглядит следующим образом:</p>
+    <p><code>git remote add origin github:Zlatov/testbootstrap.git</code></p>
+    <p><code>git remote add origin bitbucket:Zlatov/newzlatov.git</code></p>
 </div>
-
-
 <pre>$ git remote rm name</pre>
 <p>— удаляет с именем name.</p>
 <pre>$ git remote rename remoteNameOld remoteNameNew</pre>
 <p>— переименовывает из remoteNameOld в remoteNameNew.</p>
-
 <h3>git fetch</h3>
 <p>— загрузить удалённый репозиторий в раздел "наблюдения" локального репозитория. Загрузить репозиторий - ещё не значит "слиться" с ним. Для слияния используется команда git merge.</p>
 <pre>$ git fetch</pre>
 <p>— подгружает данные по текущей ветке из соответствующей ветки удалённого репозитория, или подгружает данные из соседней ветки локального репозитория (подтянутся изменения, но не закоммитятся).</p>
 <pre>$ git fetch repo branch</pre>
 <p>— подгружает содержимое ветки branch репозитория repo в объект состояния FETCH_HEAD.</p>
-
 <h3>git merge</h3>
 <p>— слияние двух состояний HEAD и FETCH_HEAD в новое HEAD состояние. Если происходит конфликт изменений, то эти файлы выходят из index (staging area), до тех пор, пока вы не исправите конфликт и не поместите их обратно в index командой <code>git add .</code>. Команда слияния всегда занимает отдельную фиксацию, при слиянии не допускается изменение каких-либо файлов.</p>
 <pre>$ git merge branch</pre>
 <p>— слить ветку branch с текущей веткой.</p>
-
 <h3>git pull</h3>
 <p>— подгрузка и слияние. Данная операция аналогична последовательному выполнению двух операций: git fetch и git merge.</p>
 <pre>$ git pull</pre>
 <p>— обновить текущую ветку репозитория до состояния другой локальной или удалённой текущей ветки репозитория.</p>
 <pre>$ git pull repoName branchName</pre>
 <p>— обновить ветку branchName локального репозитория до состояния удалённой ветки branchName репозитория repoName.</p>
-
 <h3>git push</h3>
 <p>— втолкнуть изменения текущего репозитория в удалённый. По умолчанию, вталкивать данные можно только в "голые" репозитории.</p>
 <pre>$ git push</pre>
 <p>— вталкивает данные всего локального репозитория в соответствующие ветки удалённого репозитория.</p>
 <pre>$ git push origin master</pre>
 <p>— вталкивает данные текущей ветви в ветвь master удалённого репозитория origin. Если ветвь master не существует в удалённом репозитории, она будет создана. Если для удалённой ветви невозможно выполнить FAST-FORWARD слияние, то данные не будут "втолкнуты" (об этом будет сообщено). Данный способ вызова команды является первым при первой фиксации в пустой удалённый репозиторий.</p>
-
 <p><strong>Параметры</strong></p>
 <p><strong>-u</strong></p>
 <p><code>git push -u origin master</code></p>
 <p>В том случае, <em>если ветка</em> master (или branch_name) <em>не является отслеживаемой веткой</em> origin/master (или origin/branch_name), а вы хотите сделать её таковой.</p>
 <p>Выполнив команду <code>git push -u origin master</code> вы устанавливаете связь между той веткой, в которой вы находитесь и веткой master на удалённом сервере. Команду требуется выполнить единожды.</p>
-
-
 <h3>git reset</h3>
 <p>— откатить изменения или неудачное слияние до последнего стабильного состояния (до последней фиксации).</p>
 <pre>$ git reset</pre>
 <p>— отменит операцию слияния, но оставит изменения в конфликтующих файлах и/или в index области. При этом состоянии Git будет ожидать от вас фиксации или полной отмены изменений.</p>
 <pre>$ git reset --hard</pre>
 <p>— отменит операцию слияния, очистит index область и вернёт все файлы work tree до состояния последней фиксации по текущей ветви.</p>
-
 <h3>git tag</h3>
 <p>— отметить текущее состояние, как некоторое конечное состояние для новой версии вашего проекта. Используется для создания списка стабильных версий проекта. Имя метки tag может использоваться в командах checkout и других командах, на ровне с именами фиксаций, именами ссылок (HEAD, FETCH_HEAD) и именами веток (master и т.п.).</p>
 <pre>$ git tag</pre>
@@ -229,30 +153,9 @@ $ git branch -d testing</pre>
 <p>— создать метку tag для текущего состояния (на текущей ветке) с именем tagname.</p>
 <pre>$ git tag -d tagname</pre>
 <p>— удалить метку tag с именем tagname</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <h2>Отменить</h2>
-                <h3>Отменить fetch</h3>
-                <pre class="prettyprint lang-bsh">
+<h2>Отменить</h2>
+<h3>Отменить fetch</h3>
+<pre class="prettyprint lang-bsh">
 git remote add origin server:~/errorprojectpath/
 git fetch origin master
 # вот черт, какую-то фигню затянул
@@ -261,46 +164,46 @@ git remote remove origin
 git remote add origin server:~/projectpath/
 git fetch origin master
 </pre>
-                <p>Такое ощущение что это не отмена а какая-то перезапись.</p>
-                <h2>Ветки</h2>
-                <h3>Запушить ветку в бар</h3>
-                <pre class="prettyprint lang-bsh">git push -u origin local</pre>
-                <p>это отправляет ветку local в удаленный репозиторий и автоматом делает нашу локальную ветку local отслеживаемой с origin/local :)</p>
-                <h2>ignore</h2>
-                <h3>Methods</h3>
-                <p>Есть различные ситуации, в каждой может применяться свой способ игнорирования. Разберу способы.</p>
-                <h4><code>.gitignore</code> — исключения в репозитории для всех</h4>
-                <p>Игнорирование с помощью создания файла <code>.gitignore</code> прямо в содержимом репозитория приводит к тому, что:</p>
-                <ol>
-                    <li>гит будет игнорировать изменения в файлах указанных в <code>.gitignore</code>;</li>
-                    <li>сам файл <code>.gitignore</code> будет проиндексирован гитом, и это хорошо;</li>
-                    <li>все разработчики проекта в результате <code>clone/pull</code> получат файл <code>.gitignore</code> и будут видеть изменения в нем.</li>
-                </ol>
-                <p>Например, запуливаем в очередной раз к себе на машину проект, настройки („config“) указанные в <code>.gitignore</code> — не скачались, и великолепно, так как настройки подключения к БД на нашей машине другие. И при этом скачались „config-example“, которые могут подсказать, что не так в наших старых настройках.</p>
-                <p><code>.gitignore</code> применяется в тех случаях, когда функционирование проекта без скрытых файлов не возможно, но эти файлы не являются обновляемым „ядром“ проекта. Возможно, это файлы настроек проекта, отображения (шаблоны) ну или файлы базы данных, например <code>sqlite.db</code>.</p>
-                <p><strong>Применять для:</strong> настройки проекта, БД, шаблоны…</p>
-                <h4><code>.git/info/exclude</code> — исключения в репозитории, для исключения мусора проекта (проект тоже мусорит, ага)</h4>
-                <p>Отредактировав файл .git/info/exclude мы получаем следующий эффект:</p>
-                <ol>
-                    <li>гит будет игнорировать изменения в файлах указанных в <code>.git/info/exclude</code>;</li>
-                    <li>изменения в файле <code>.git/info/exclude</code> не индексируются гитом, и это хорошо;</li>
-                    <li>никто из разработчиков проекта в результате <code>clone/pull</code> не получит измененный файл <code>.git/info/exclude</code> и не будет видеть изменения в нем.</li>
-                </ol>
-                <p>Если проект рабочий, а не на гитхабе и прямо в рабочей папке создан репозиторий, то сам проект создает кеш, логи и другие вспомогательные файлы. При необходимости стащить рабочее ядро проекта, для запуска копии или подобного проекта мы пуляем себе на машину ядро, и нам не зачем тащить логи кеш старого проекта. И мы даже не узнаем, что всё это ранее существовало. Для получения именно такого эффекта указываем исключения в данной настройке.</p>
-                <p><strong>Применять для:</strong> кеш, логи…</p>
-                <h4><code>~/.gitconfig</code>, <code>~/.gitexcludes</code> — исключения вне репозитория, для исключения мусора разработчиков</h4>
-                <p>На машиене, на которой вы работаете, вы можете настроить скрытия „под себя“. Чтобы настроить гит на восприятия файла <code>~/.gitexcludes</code> как файла с вашими исключениями, выполните команду для настройки: <code>git config --global core.excludesfile ~/.gitexcludes</code> или в ручную: внесите изменения в файл <code>~/.gitconfig</code>: в раздел [core] добавить строку <code>excludesfile = ~/.gitexcludes</code> В результате настроек мы получим:</p>
-                <ol>
-                    <li>гит будет игнорировать изменения в файлах указанных в <code>~/.gitexcludes</code>;</li>
-                    <li>изменения в файле <code>~/.gitexcludes</code> не индексируются гитом, это понятно, он же не в репозитории;</li>
-                    <li>никто из разработчиков проекта в результате вашего <code>push</code> не получит измененный файл <code>~/.gitexcludes</code> и не увидит изменений в нём (ну ессесно!).</li>
-                </ol>
-                <p>Во время вашей работы (программирования) могут создаваться вспомогательные файлы не относящиеся к проекту (настройки ваших программ, заметки…).</p>
-                <p><strong>Применять для:</strong> настройки IDE, ваши личные заметки…</p>
-                <hr>
-                <p>ЗЫ: вы же понимаете, что если файл уже был в репозитории и мы только сейчас решили его исключить (и так что бы он не появлялся при pull), то необходимо его удалить из индекса. Я часто находил этот вопрос при гуглении вместо своих вопросов, типа: „почему файл всё равно закачивается, хотя я его добавил в игнор?“</p>
-                <pre>git rm --cached path/to/file</pre>
-                <h3>syntax</h3>
+<p>Такое ощущение что это не отмена а какая-то перезапись.</p>
+<h2>Ветки</h2>
+<h3>Запушить ветку в бар</h3>
+<pre class="prettyprint lang-bsh">git push -u origin local</pre>
+<p>это отправляет ветку local в удаленный репозиторий и автоматом делает нашу локальную ветку local отслеживаемой с origin/local :)</p>
+<h2>ignore</h2>
+<h3>Methods</h3>
+<p>Есть различные ситуации, в каждой может применяться свой способ игнорирования. Разберу способы.</p>
+<h4><code>.gitignore</code> — исключения в репозитории для всех</h4>
+<p>Игнорирование с помощью создания файла <code>.gitignore</code> прямо в содержимом репозитория приводит к тому, что:</p>
+<ol>
+    <li>гит будет игнорировать изменения в файлах указанных в <code>.gitignore</code>;</li>
+    <li>сам файл <code>.gitignore</code> будет проиндексирован гитом, и это хорошо;</li>
+    <li>все разработчики проекта в результате <code>clone/pull</code> получат файл <code>.gitignore</code> и будут видеть изменения в нем.</li>
+</ol>
+<p>Например, запуливаем в очередной раз к себе на машину проект, настройки („config“) указанные в <code>.gitignore</code> — не скачались, и великолепно, так как настройки подключения к БД на нашей машине другие. И при этом скачались „config-example“, которые могут подсказать, что не так в наших старых настройках.</p>
+<p><code>.gitignore</code> применяется в тех случаях, когда функционирование проекта без скрытых файлов не возможно, но эти файлы не являются обновляемым „ядром“ проекта. Возможно, это файлы настроек проекта, отображения (шаблоны) ну или файлы базы данных, например <code>sqlite.db</code>.</p>
+<p><strong>Применять для:</strong> настройки проекта, БД, шаблоны…</p>
+<h4><code>.git/info/exclude</code> — исключения в репозитории, для исключения мусора проекта (проект тоже мусорит, ага)</h4>
+<p>Отредактировав файл .git/info/exclude мы получаем следующий эффект:</p>
+<ol>
+    <li>гит будет игнорировать изменения в файлах указанных в <code>.git/info/exclude</code>;</li>
+    <li>изменения в файле <code>.git/info/exclude</code> не индексируются гитом, и это хорошо;</li>
+    <li>никто из разработчиков проекта в результате <code>clone/pull</code> не получит измененный файл <code>.git/info/exclude</code> и не будет видеть изменения в нем.</li>
+</ol>
+<p>Если проект рабочий, а не на гитхабе и прямо в рабочей папке создан репозиторий, то сам проект создает кеш, логи и другие вспомогательные файлы. При необходимости стащить рабочее ядро проекта, для запуска копии или подобного проекта мы пуляем себе на машину ядро, и нам не зачем тащить логи кеш старого проекта. И мы даже не узнаем, что всё это ранее существовало. Для получения именно такого эффекта указываем исключения в данной настройке.</p>
+<p><strong>Применять для:</strong> кеш, логи…</p>
+<h4><code>~/.gitconfig</code>, <code>~/.gitexcludes</code> — исключения вне репозитория, для исключения мусора разработчиков</h4>
+<p>На машиене, на которой вы работаете, вы можете настроить скрытия „под себя“. Чтобы настроить гит на восприятия файла <code>~/.gitexcludes</code> как файла с вашими исключениями, выполните команду для настройки: <code>git config --global core.excludesfile ~/.gitexcludes</code> или в ручную: внесите изменения в файл <code>~/.gitconfig</code>: в раздел [core] добавить строку <code>excludesfile = ~/.gitexcludes</code> В результате настроек мы получим:</p>
+<ol>
+    <li>гит будет игнорировать изменения в файлах указанных в <code>~/.gitexcludes</code>;</li>
+    <li>изменения в файле <code>~/.gitexcludes</code> не индексируются гитом, это понятно, он же не в репозитории;</li>
+    <li>никто из разработчиков проекта в результате вашего <code>push</code> не получит измененный файл <code>~/.gitexcludes</code> и не увидит изменений в нём (ну ессесно!).</li>
+</ol>
+<p>Во время вашей работы (программирования) могут создаваться вспомогательные файлы не относящиеся к проекту (настройки ваших программ, заметки…).</p>
+<p><strong>Применять для:</strong> настройки IDE, ваши личные заметки…</p>
+<hr>
+<p>ЗЫ: вы же понимаете, что если файл уже был в репозитории и мы только сейчас решили его исключить (и так что бы он не появлялся при pull), то необходимо его удалить из индекса. Я часто находил этот вопрос при гуглении вместо своих вопросов, типа: „почему файл всё равно закачивается, хотя я его добавил в игнор?“</p>
+<pre>git rm --cached path/to/file</pre>
+<h3>syntax</h3>
 <pre>
 somefile
 *.someextensionoffiles
@@ -313,68 +216,3 @@ somefolder/
 some/path/*/onelevel
 some/path/**/anylevel/*.thisfiles
 </pre>
-            </div>
-        </div>
-    </div>
-    <!-- jQuery -->
-    <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="Yii2 all"></script>
-    <!-- Подсветка синтаксиса кода -->
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <!-- toc -->
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#toc").append('<p>Содержание:</p>');
-        $("#toc").append('<ul></ul>');
-        $("h2").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h2" + i);
-            $("#toc").children("ul").append("<li><a id='linkh2" + i + "' href='#h2" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h3").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h3" + i);
-            var prevh2 = current.prevAll("h2").first();
-            var j = prevh2.attr("id").substring(2);
-            $("#linkh2" + j).next("ul").append("<li><a id='linkh3" + i + "' href='#h3" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h4").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h4" + i);
-            var prevh3 = current.prevAll("h3").first();
-            var j = prevh3.attr("id").substring(2);
-            alert
-            $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h5").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h5" + i);
-            var prevh4 = current.prevAll("h4").first();
-            var j = prevh4.attr("id").substring(2);
-            $("#linkh4" + j).next("ul").append("<li><a id='linkh5" + i + "' href='#h5" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-        $("h6").each(function(i) {
-            var current = $(this);
-            current.attr("id", "h6" + i);
-            var prevh5 = current.prevAll("h5").first();
-            var j = prevh5.attr("id").substring(2);
-            $("#linkh5" + j).next("ul").append("<li><a id='linkh6" + i + "' href='#h6" +
-                i + "' title='" + current.attr("tagName") + "'>" +
-                current.html() + "</a><ul></ul></li>");
-        });
-    });
-    </script>
-</body>
-
-</html>
