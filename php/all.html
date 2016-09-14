@@ -58,11 +58,180 @@ $input_text = mysql_escape_string($input_text);
 <pre class="prettyprint lang-php">header('Location: index.php');</pre>
 <p>или проще:</p>
 <pre class="prettyprint lang-php">header('Refresh:0');</pre>
+<h2>PDO</h2>
+<h3>Соединение</h3>
+<pre class="prettyprint lang-php">
+$user = 'user';
+$password = 'password';
+$host = 'localhost';
+$dbName = 'test';
+$charset = 'utf8';
+$dsn = &quot;mysql:host=$host;dbname=$dbName;charset=$charset&quot;;
+$opt = array(
+    PDO::ATTR_ERRMODE            =&gt; PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE =&gt; PDO::FETCH_ASSOC
+);
+$pdo = new PDO($dsn, $user, $password, $opt);
+</pre>
+<p><code>PDO::ATTR_ERRMODE</code> - Режим сообщений об ошибках.</p>
+<p><code>PDO::ERRMODE_EXCEPTION</code> - Выбрасывать исключения.</p>
+<p><code>PDO::ATTR_DEFAULT_FETCH_MODE</code> - Задает режим выборки данных по умолчанию.</p>
+<p><code>PDO::FETCH_ASSOC</code> - возвращает массив, индексированный именами столбцов результирующего набора.</p>
+<h3>Выполнение запросов</h3>
+<pre class="prettyprint lang-php">
+$stmt = $pdo-&gt;query('SELECT header FROM test');
+while ($row = $stmt-&gt;fetch())
+{
+    echo $row['header'] . &quot;\n&quot;;
+}
+</pre>
+<h3>Подготовленные выражения</h3>
+<p>Двумя сопособами (позиционные и именованные плейсхолдеры):</p>
+<pre class="prettyprint lang-php">$sql = 'SELECT name FROM users WHERE email = ?';
+$sql = 'SELECT name FROM users WHERE email = :email';</pre>
+<p>prepare() - подготавливает запрос.</p>
+<p>execute() - выполнить запрос.</p>
+<p>Передать параметры в запрос можно двумя способами:</p>
+<ol>
+    <li>передать в execute() параметром;</li>
+    <li>привязать к запросу с помощью bindValue() / bindParam().</li>
+</ol>
+<h4>Передать в execute()</h4>
+<pre class="prettyprint lang-php">$id = 1;
+$stmt = $pdo-&gt;prepare('SELECT header FROM test WHERE id = ?');
+$stmt-&gt;execute(array($id));
+
+$stmt = $pdo-&gt;prepare('SELECT header FROM test WHERE id = :id');
+$stmt-&gt;execute(array('id' =&gt; $id));</pre>
+<h4>С помощью bindValue() / bindParam()</h4>
+<pre class="prettyprint lang-php">$id = 1;
+$header = 'qwer';
+
+$sth = $pdo-&gt;prepare('SELECT header FROM test WHERE id = ? AND header = ?');
+$sth-&gt;bindValue(1, $id, PDO::PARAM_INT);
+$sth-&gt;bindValue(2, $header, PDO::PARAM_STR);
+$sth-&gt;execute();
+
+$sth = $pdo-&gt;prepare('SELECT header FROM test WHERE id = :id AND header = :header');
+$sth-&gt;bindValue(':id', $id, PDO::PARAM_INT);
+$sth-&gt;bindValue(':header', $header, PDO::PARAM_STR);
+$sth-&gt;execute();</pre>
+<h3>Множественное выполнение подготовленного выражения</h3>
+<pre class="prettyprint lang-php">$data = array(
+1 =&gt; 'tyui',
+5 =&gt; 'ghjk',
+9 =&gt; 'bnm',
+);
+
+$stmt = $pdo-&gt;prepare('INSERT INTO test (header) VALUES (?);');
+foreach ($data as $id =&gt; $header)
+{
+    $stmt-&gt;execute([$header]);
+}
+</pre>
+<h3>Получение данных</h3>
+<h4>fetch()</h4>
+<pre class="prettyprint lang-php">
+$stmt = $pdo-&gt;prepare('SELECT id, header FROM test WHERE id &gt; ?');
+$stmt-&gt;execute([3]);
+echo &quot;&lt;pre&gt;&quot;;
+while ($row = $stmt-&gt;fetch(PDO::FETCH_LAZY))
+{
+    echo $row[0] . &quot; &quot;;
+    echo $row['header'] . &quot; &quot;;
+    echo $row-&gt;header . PHP_EOL;
+}
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<p>В этом режиме (<code>PDO::FETCH_LAZY</code>) не тратится лишняя память, и к тому же к колонкам можно обращаться любым из трех способов - через индекс, имя, или свойство.</p>
+<h4>fetchColumn()</h4>
+<p>Одно поле</p>
+<pre>
+$id = 4;
+$stmt = $pdo-&gt;prepare(&quot;SELECT header FROM test WHERE id=?&quot;);
+$stmt-&gt;execute(array($id));
+$header = $stmt-&gt;fetchColumn();
+echo &quot;&lt;pre&gt;&quot;;
+print_r($header);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<h4>fetchAll()</h4>
+<p><strong>Одна колонка.</strong></p>
+<pre class="prettyprint lang-php">
+$data = $pdo-&gt;query('SELECT header FROM test')-&gt;fetchAll(PDO::FETCH_COLUMN);
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<p><strong>Индексированная колонка.</strong></p>
+<pre class="prettyprint lang-php">
+$data = $pdo-&gt;query('SELECT id, header FROM test')-&gt;fetchAll(PDO::FETCH_KEY_PAIR);
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<p><strong>Индексированный массив.</strong></p>
+<pre class="prettyprint lang-php">
+$data = $pdo-&gt;query('SELECT * FROM test')-&gt;fetchAll(PDO::FETCH_UNIQUE);
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<h3>LIKE</h3>
+<pre class="prettyprint lang-php">
+$name = 'sd';
+$name = &quot;%$name%&quot;;
+$stm  = $pdo-&gt;prepare(&quot;SELECT * FROM test WHERE header LIKE ?&quot;);
+$stm-&gt;execute(array($name));
+$data = $stm-&gt;fetchAll();
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<h3>LIMIT</h3>
+<p><strong>Либо отключить режим эмуляции:</strong></p>
+<pre class="prettyprint lang-php">
+$pdo-&gt;setAttribute( PDO::ATTR_EMULATE_PREPARES, false );
+$stm = $pdo-&gt;prepare('SELECT * FROM test LIMIT ?, ?');
+$stm-&gt;bindValue(1, 0);
+$stm-&gt;bindValue(2, 10);
+$stm-&gt;execute();
+$data = $stm-&gt;fetchAll();
+
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<p><strong>или:</strong></p>
+<pre class="prettyprint lang-php">
+$stm = $pdo-&gt;prepare('SELECT * FROM test LIMIT ?, ?');
+$stm-&gt;bindValue(1, 0, PDO::PARAM_INT);
+$stm-&gt;bindValue(2, 10, PDO::PARAM_INT);
+$stm-&gt;execute();
+$data = $stm-&gt;fetchAll();
+
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
+<h3>IN</h3>
+<pre class="prettyprint lang-php">
+echo &quot;&lt;h2&gt;IN&lt;/h2&gt;&quot;;
+$arr = array(1,2,3);
+$in  = str_repeat('?,', count($arr) - 1) . '?';
+$sql = &quot;SELECT * FROM test WHERE id IN ($in)&quot;;
+$stm = $pdo-&gt;prepare($sql);
+$stm-&gt;execute($arr);
+$data = $stm-&gt;fetchAll();
+echo &quot;&lt;pre&gt;&quot;;
+print_r($data);
+echo &quot;&lt;/pre&gt;&quot;;
+</pre>
 <h2>Cookie</h2>
 <h3>Установка и чтение cookie</h3>
 <pre class="prettyprint lang-php">setcookie("voting", $cookieVoting, time()+60*60*24*7, "/");
 if ( isset($_COOKIE) &amp;&amp; isset($_COOKIE['voting']) ) {
-	$cookieVoting = $_COOKIE['voting'];</pre>
+    $cookieVoting = $_COOKIE['voting'];</pre>
 <h3>Удаление cookie</h3>
 <p><code>unset($_COOKIE['voting'])</code> - удаляет переменную на сервере (
     <mark>не удаляет из браузера!</mark>)</p>
@@ -91,9 +260,9 @@ if ( !isset($_GET['checkCookie']) &amp;&amp; !isset($_SESSION['cookieIsChecked']
     setcookie('foo', 'bar', time() + 60*60*24);
     // redirecting to the same page to check 
     if (empty($_SERVER['QUERY_STRING'])) {
-	    header(&quot;location: {$_SERVER['PHP_SELF']}?checkCookie=true&quot;);
+        header(&quot;location: {$_SERVER['PHP_SELF']}?checkCookie=true&quot;);
     } else {
-	    header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&amp;checkCookie=true&quot;);
+        header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&amp;checkCookie=true&quot;);
     }
 }
 
@@ -104,19 +273,19 @@ if ( !isset($_GET['checkCookie']) &amp;&amp; !isset($_SESSION['cookieIsChecked']
 // если печеньки не работаю
 if ( isset($_GET['checkCookie']) &amp;&amp; ($_GET['checkCookie'] == true) &amp;&amp; !isset($_SESSION['cookieIsChecked']) ) {
     if (isset($_COOKIE['foo']) &amp;&amp; $_COOKIE['foo'] == 'bar') {
-    	setcookie('foo', 'bar', time() - 60*60*24);
+        setcookie('foo', 'bar', time() - 60*60*24);
         $_SESSION['cookieIsChecked'] = true;
         if (!isset($_SESSION['QUERY_STRING']) || empty($_SESSION['QUERY_STRING'])) {
-    		header(&quot;location: {$_SERVER['PHP_SELF']}&quot;);
+            header(&quot;location: {$_SERVER['PHP_SELF']}&quot;);
         } else {
-    		header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&quot;);
+            header(&quot;location: {$_SERVER['PHP_SELF']}?{$_SESSION['QUERY_STRING']}&quot;);
         }
     } else {
     }
 }
 
 if (isset($_SESSION['cookieIsChecked']) &amp;&amp; $_SESSION['cookieIsChecked'] === true) {
-	define('COOKIE_ENABLED', true);
+    define('COOKIE_ENABLED', true);
 }
 if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);

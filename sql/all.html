@@ -164,12 +164,39 @@ mysql > SHOW CREATE TABLE tree_nodes;
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
 </pre>
 <h2>Console</h2>
+<h3>mysql</h3>
 <pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
 <pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
 <pre>mysql -uroot -p -e "show databases"</pre>
 <pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
 <p>Прям выполнить sql файл</p>
 <pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
+<h3>Создание резервной копии утилитой mysqldump</h3>
+<p>config.sh</p>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+DBHOST=localhost
+DBUSER=qsllogin
+DBPASS=qslpassword
+DBNAME=sqldbname
+</pre>
+<p>backup.sh</p>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+. ../config.sh
+echo "Confg included successfully."
+
+# DBDATE=`date +%Y-%m-%d`;
+DBDATE=`date +%Y-%m-%d-%H-%M-%S`
+
+# mysqldump --skip-opt --quick -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME | gzip -c > $DBNAME-$DBDATE.gz
+mysqldump --skip-opt --quick -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME > $DBNAME-$DBDATE.sql
+tar -czf $DBNAME-$DBDATE.tar.gz $DBNAME-$DBDATE.sql
+rm ./$DBNAME-$DBDATE.sql
+
+echo "End of the script."
+</pre>
+
 <h2>Administration</h2>
 <h3>Version of mysql</h3>
 <pre class="prettyprint lang-sh">
