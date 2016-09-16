@@ -171,7 +171,22 @@ mysql > SHOW CREATE TABLE tree_nodes;
 <pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
 <p>Прям выполнить sql файл</p>
 <pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
-<h3>Создание резервной копии утилитой mysqldump</h3>
+<h3>Резервное копирование и восстановление (bash)</h3>
+<h4>Создание резервной копии</h4>
+<p>Необходимо обратить внимание на параметры mysqldump</p>
+
+<pre>--opt
+или
+--skip-opt</pre>
+
+<p>Проверить !!! mysqldump --skip-extended-insert --net_buffer_length=50000 myschema > gigantic_file.sql</p>
+
+<p><code>--extended-insert</code></p>
+<p>- создаст мультистроковые вставки в INSERT</p>
+
+<p>вопрос - какой величины, если таблица очень большая то размер запроса может превысить параметр:</p>
+<pre>SHOW VARIABLES LIKE 'max_allowed_packet';</pre>
+
 <p>config.sh</p>
 <pre class="prettyprint lang-sh">
 #!/bin/bash
@@ -184,17 +199,40 @@ DBNAME=sqldbname
 <pre class="prettyprint lang-sh">
 #!/bin/bash
 . ../config.sh
-echo "Confg included successfully."
+echo &quot;Confg included successfully.&quot;
 
-# DBDATE=`date +%Y-%m-%d`;
 DBDATE=`date +%Y-%m-%d-%H-%M-%S`
 
-# mysqldump --skip-opt --quick -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME | gzip -c > $DBNAME-$DBDATE.gz
-mysqldump --skip-opt --quick -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME > $DBNAME-$DBDATE.sql
+mysqldump --opt -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME &gt; $DBNAME-$DBDATE.sql
 tar -czf $DBNAME-$DBDATE.tar.gz $DBNAME-$DBDATE.sql
 rm ./$DBNAME-$DBDATE.sql
 
-echo "End of the script."
+echo &quot;End of the script.&quot;
+</pre>
+<h4>Удалить/Создать базу данных</h4>
+<p>(перед восстановлением)</p>
+<pre>
+#!/bin/bash
+. ../config.sh
+echo &quot;Config included successfully.&quot;
+
+mysql --user=$DBUSER --password=&quot;$DBPASS&quot; --execute=&quot;DROP DATABASE $DBNAME;&quot;
+mysql --user=$DBUSER --password=&quot;$DBPASS&quot; --execute=&quot;CREATE SCHEMA $DBNAME DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;&quot;
+
+echo &quot;End of the script.&quot;
+</pre>
+<h4>Восстановление из резервной копии</h4>
+<p>Использовать так:</p>
+<p><code>./restoreFromArchive.sh newforum-2016-09-15-09-43-10.tar.gz</code></p>
+<p>restoreFromArchive.sh</p>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+. ../config.sh
+echo &quot;Config included successfully.&quot;
+
+tar -xzOf &quot;$1&quot; | mysql -u&quot;$DBUSER&quot; -p&quot;$DBPASS&quot; &quot;$DBNAME&quot;
+
+echo &quot;End of the script.&quot;
 </pre>
 
 <h2>Administration</h2>
