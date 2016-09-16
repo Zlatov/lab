@@ -78,7 +78,7 @@ Require valid-user</pre>
 <p>Пароль в этом файле зашифрован (по слухам) с помощью md5. Я сразу кинулся в PHP к функции <code>md5();</code>, и круто обломался. Видимо все там по-другому. Так что содержимое этого файла нужно сгенерировать другими средствами:</p>
 
 <h4>Способ раз</h4>
-
+<pre>sudo apt-get install apache2-utils</pre>
 <p>Файл с паролями (.htpasswd) будем хранить в корне сайта. Его содержимое формируется утилитой, входящей в поставку Apache — htpasswd. Она обычно находится в каталоге bin (/usr/local/bin/htpasswd), ага. Коннектимся по SSH, ls, cd, ls, cd,... И выполняем команду:</p>
 <pre class="prettyprint lang-bsh">htpasswd -mbc .htpasswd login1 myfavoritepassword123</pre>
 <p>Чтобы добавить в уже существующий файл нового пользователя: <code>htpasswd .htpasswd login2</code></p>
