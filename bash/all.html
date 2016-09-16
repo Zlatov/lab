@@ -187,13 +187,14 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 	<li><code>-v</code> — вывод информации во время обработки;</li>
 	<li><code>-t</code> — просмотреть содержимое архива;</li>
 	<li><code>-r</code> — добавить в архив;</li>
+	<li><code>-O, --to-stdout</code> — extract files to standard output;</li>
 </ul>
 
 <p><strong>Примеры</strong></p>
 <p><code>tar -cf filename.tar</code> — создать несжатый архив.</p>
 <p><code>tar -czf filename.tar.gz</code> — создать сжатый gzip-ом архив.</p>
 <p><code>tar -xf filename.tar.gz</code> — извлечь.</p>
-
+<p><code>tar -xzOf archive.tar.gz | mysql -uUSERNAME -pPASSWORD databaseName</code></p>
 
 
 <h3>scp</h3>
@@ -280,6 +281,21 @@ $ scp ?
 <h2>Наработки</h2>
 <h3>Первая строчка в исполняемом bash файле</h3>
 <pre class="prettyprint lang-sh">#!/bin/bash</pre>
+
+<h3>Передача параметров скрипту</h3>
+<p>Script parameters in Bash</p>
+<pre>
+ocrscript.sh /home/kristoffer/test.png /home/kristoffer/test.txt
+</pre>
+<p>Then you'll have:</p>
+<pre>
+$1    # /home/kristoffer/test.png
+$2    # /home/kristoffer/test.txt
+</pre>
+<p>Then you can do:</p>
+<pre>
+/usr/local/bin/abbyyocr9 -rl Swedish -if &quot;$1&quot; -of &quot;$2&quot; 2&gt;&amp;1
+</pre>
 
 <h3>Манипуляции с файлами</h3>
 <h4>split - разделить файл на части</h4>

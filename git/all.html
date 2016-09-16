@@ -203,7 +203,12 @@ git fetch origin master
 <hr>
 <p>ЗЫ: вы же понимаете, что если файл уже был в репозитории и мы только сейчас решили его исключить (и так что бы он не появлялся при pull), то необходимо его удалить из индекса. Я часто находил этот вопрос при гуглении вместо своих вопросов, типа: „почему файл всё равно закачивается, хотя я его добавил в игнор?“</p>
 <pre>git rm --cached path/to/file</pre>
-<h3>syntax</h3>
+После этого в гит статус покажет:
+<pre>Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</pre>
+Ну и:
+<pre>git reset HEAD config.php</pre>
+<h3>Syntax gitignore</h3>
 <pre>
 somefile
 *.someextensionoffiles
