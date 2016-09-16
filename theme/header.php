@@ -29,6 +29,7 @@ $header = $last?'All ' . $last:'All';
 	<div class="container">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            	<p><a href="/">Lab</a></p>
             </div>
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
                 <h1><?= $header ?></h1>
