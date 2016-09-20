@@ -1,21 +1,31 @@
+<a href="">ct</a>
 <form method="post">
+	<fieldset>
+		<legend>Пересоздать базу</legend>
+		<button type="submit" name="submitForm" value="createDb">Пересоздать</button>
+	</fieldset>
+	<fieldset>
+		<legend>Пересоздать таблицы</legend>
+		<button type="submit" name="submitForm" value="createTables">Пересоздать</button>
+	</fieldset>
+	<fieldset>
+		<legend>Добавить тестовые данные</legend>
+		<button type="submit" name="submitForm" value="addTest">Добавить</button>
+	</fieldset>
 	<fieldset>
 		<legend>Добавление</legend>
 		<input type="text" name="header">
-		<input type="hidden" name="action" value="add">
-		<input type="submit" name="submitForm" value="Добавить">
+		<button type="submit" name="submitForm" value="add">Добавить</button>
 	</fieldset>
 	<fieldset>
 		<legend>Выбор предков</legend>
 		<input type="text" name="id">
-		<input type="hidden" name="action" value="selectParents">
-		<input type="submit" name="submitForm" value="Выбрать">
+		<button type="submit" name="submitForm" value="selectParents">Выбрать</button>
 	</fieldset>
 	<fieldset>
 		<legend>Выбор потомков</legend>
 		<input type="text" name="id">
-		<input type="hidden" name="action" value="selectChildrens">
-		<input type="submit" name="submitForm" value="Выбрать">
+		<button type="submit" name="submitForm" value="selectChildrens">Выбрать</button>
 	</fieldset>
 </form>
 
@@ -34,13 +44,25 @@ $pdo = new PDO($dsn, $user, $password, $opt);
 
 // Логика
 if (isset($_POST['submitForm'])) {
-	switch ($_POST['action']) {
+	switch ($_POST['submitForm']) {
+		case 'createDb':
+			createDb();
+			break;
+
+		case 'createTables':
+			createTables();
+			break;
+
+		case 'addTest':
+			addTest();
+			break;
+
 		case 'add':
 			break;
-		
+
 		case 'selectParents':
 			break;
-		
+
 		case 'selectChildrens':
 			break;
 	}
@@ -49,6 +71,29 @@ if (isset($_POST['submitForm'])) {
 // Вывод дерева
 $tree = fullTree();
 
+function createDb()
+{
+	global $pdo, $dbName;
+	$sql = file_get_contents('./sql/c_db.sql');
+	eval("\$sql = \"$sql\";");
+	$stmt = $pdo->query($sql);
+	// $stmt = $pdo->prepare($sql);
+	// $stmt->execute(['dbName' => $dbName]);
+}
+
+function createTables()
+{
+	global $pdo;
+	$sql = file_get_contents('./sql/c_tables.sql');
+	$stmt = $pdo->query($sql);
+}
+
+function addTest()
+{
+	global $pdo;
+	$sql = file_get_contents('./sql/i_test.sql');
+	$stmt = $pdo->query($sql);
+}
 function fullTree()
 {
 	global $pdo;
