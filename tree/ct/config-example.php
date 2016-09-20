@@ -1,3 +1,6 @@
 <?php
 $user = 'root';
-$password = 'password';
+$password = '';
+$host = 'localhost';
+$dbName = 'test';
+$charset = 'utf8';
