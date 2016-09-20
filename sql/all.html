@@ -88,6 +88,14 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
 <p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
 <h3>LAST_INSERT_ID()</h3>
 <p>Возвращает последний вставленный id</p>
+<pre>
+-- Только для скрипта:
+SET @lastID := LAST_INSERT_ID();
+-- или вывод результата:
+select last_insert_id() as last_insert_id;
+-- или и то и другое:
+select @test := last_insert_id() as last_insert_id;
+</pre>
 <h3>Работа со строками</h3>
 <h4>CHAR_LENGTH</h4>
 <p><code>integer CHAR_LENGTH(str string)</code>возвращают длину строки. Поддерживает многобайтовые символы.</p>
