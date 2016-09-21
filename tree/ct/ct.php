@@ -102,9 +102,10 @@ function fullTree()
 	while ($row = $stmt->fetch(PDO::FETCH_LAZY))
 	{
 	    echo $row->id . " ";
-	    echo $row->header . " ";
 	    echo $row->pid . " ";
-	    echo $row->cid . " ";
+	    echo $row->header . " ";
+	    echo $row->aid . " ";
+	    echo $row->did . " ";
 	    echo '<br>';
 	}
 }
