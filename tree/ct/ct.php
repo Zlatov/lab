@@ -1,4 +1,4 @@
-<a href="">ct</a>
+<h1><a href="">ct</a></h1>
 <form method="post">
 	<fieldset>
 		<legend>Пересоздать базу</legend>
@@ -38,7 +38,8 @@ include_once 'config.php';
 $dsn = "mysql:host=$host;dbname=$dbName;charset=$charset";
 $opt = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
 );
 $pdo = new PDO($dsn, $user, $password, $opt);
 
@@ -64,12 +65,32 @@ if (isset($_POST['submitForm'])) {
 			break;
 
 		case 'selectChildrens':
+			selectChildrens();
 			break;
 	}
 }
 
 // Вывод дерева
 $tree = fullTree();
+
+function selectChildrens()
+{
+	global $pdo;
+	$sql = file_get_contents('./sql/s_childrens.sql');
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
+	$stmt->execute();
+	$array = $stmt->fetchAll();
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
+	$tree = transformToTree($array);
+	echo "<pre>";
+	print_r($tree);
+	echo "</pre>";
+	$html = treeForPrint($tree);
+	echo $html;
+}
 
 function createDb()
 {
@@ -99,13 +120,83 @@ function fullTree()
 	global $pdo;
 	$sql = file_get_contents('./sql/s_all.sql');
 	$stmt = $pdo->query($sql);
+	$tree = [];
 	while ($row = $stmt->fetch(PDO::FETCH_LAZY))
 	{
-	    echo $row->id . " ";
-	    echo $row->pid . " ";
-	    echo $row->header . " ";
-	    echo $row->aid . " ";
-	    echo $row->did . " ";
-	    echo '<br>';
+		$tree[] = [
+			'id'     => $row->id,
+			'pid'    => $row->pid,
+			'header' => $row->header,
+		];
+	    // echo $row->id . " ";
+	    // echo $row->pid . " ";
+	    // echo $row->header . " ";
+	    // echo '<br>';
 	}
+	$tree = transformToTree($tree);
+	// echo "<pre>";
+	// print_r($tree);
+	// echo "</pre>";
+	$html = treeForPrint($tree);
+	echo $html;
+}
+
+// Преобразование
+function transformToTree($array) {
+	$result = [];
+	$pid[$level] = $level = 0;
+	while ($level >= 0) {
+		if ( $e = each($array) ) {
+			if ($e[1]['pid'] === $pid[$level]) {
+				$e[1]['level'] = $level;
+				$result[] = $e[1];
+				unset($array[$e[0]]);
+				foreach ($t = $array as $val) {
+					if ( $val['pid'] === $e[1]['id'] ) {
+						$pid[++$level] = $e[1]['id'];
+						reset($array);
+						break;
+					}
+				}
+			}
+		} else {
+			$level--;
+			reset($array);
+		}
+	}
+	return $result;
+}
+
+function treeForPrint($tree)
+{
+	$html = "<ul class='tree'>";
+	$tplUlBegin = "<ul>";
+	$tplUlEnd = "</ul>";
+	$tplLiBegin = "<li>??header?? #??id??";
+	$tplLiEnd = "</li>";
+
+	foreach ($tree as $key => $val) {
+		$replace = [];
+		foreach ($val as $key2 => $val2 ) { $replace["??$key2??"] = $val2; }
+		$html .= str_replace(array_keys($replace),$replace,$tplLiBegin);
+		if ( isset($tree[$key+1]) ) {
+			if ($tree[$key+1]['level']>$val['level']) { $html .= $tplUlBegin; }
+			if ($tree[$key+1]['level']==$val['level']) { $html .= $tplLiEnd; }
+			if ($tree[$key+1]['level']<$val['level']) {
+				$k = $val['level'] - $tree[$key+1]['level'];
+				for ( $i=0; $i<$k; $i++ ) {
+					$html .= $tplLiEnd.$tplUlEnd;
+				}
+			}
+		} else {
+			$html .= $tplLiEnd;
+			$k = $val['level'];
+			for ( $i=0; $i<$k; $i++ )
+			{
+				$html .= $tplUlEnd.$tplLiEnd;
+			}
+		}
+	}
+	$html .= $tplUlEnd;
+	return $html;
 }

@@ -1,4 +1,6 @@
 -- Выбрать всех потомков
-SELECT * FROM tree.ct_tree t
-JOIN tree.ct_tree_rel r ON (r.cid = t.id)
-WHERE r.pid = :parent
+select t.*
+from ct_tree_rel r
+left join ct_tree t on t.id = r.did
+where r.aid = :id
+

@@ -10,6 +10,14 @@ IndexOptions Charset=UTF-8
 	RewriteEngine on
 	RewriteBase /
 
+	RewriteCond %{REQUEST_URI} ^/support/$ [NC]
+	RewriteRule ^.*$ http://www.флаг-шток.рф/support/ [R=301,L]
+
+
+	# RewriteCond %{HTTP_HOST} ^lab.local$
+	# RewriteCond %{REQUEST_URI} ^/css/all\.html$
+	# RewriteRule ^.*$ http://www.test.net/php/all.html [R=301,L]
+
 	RewriteCond %{REQUEST_URI} ^/[^/]+/all\.html$
 	RewriteRule ^.*$ /theme/index.php [L]
 </IfModule>
