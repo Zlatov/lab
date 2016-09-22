@@ -83,6 +83,20 @@ $input_text = mysql_escape_string($input_text);
 <p>или проще:</p>
 <pre class="prettyprint lang-php">header('Refresh:0');</pre>
 <h2>PDO</h2>
+<h3>Поддержка типа данных integer извлекаемых данных</h3>
+<pre class="prettyprint lang-sh">sudo apt-get install php5-mysqlnd
+sudo service apache2 restart</pre>
+<p>Далее перед запросом</p>
+<pre>$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</pre>
+<p>или при соединении</p>
+<pre>$dsn = "mysql:host=$host;dbname=$dbName;charset=$charset";
+$opt = array(
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+);
+$pdo = new PDO($dsn, $user, $password, $opt);</pre>
+
 <h3>Соединение</h3>
 <pre class="prettyprint lang-php">
 $user = 'user';
