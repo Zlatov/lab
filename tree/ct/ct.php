@@ -84,10 +84,7 @@ function selectChildrens()
 	echo "<pre>";
 	print_r($array);
 	echo "</pre>";
-	$tree = transformToTree($array);
-	echo "<pre>";
-	print_r($tree);
-	echo "</pre>";
+	$tree = transformToTree($array,(integer)$_POST['id']);
 	$html = treeForPrint($tree);
 	echo $html;
 }
@@ -128,23 +125,20 @@ function fullTree()
 			'pid'    => $row->pid,
 			'header' => $row->header,
 		];
-	    // echo $row->id . " ";
-	    // echo $row->pid . " ";
-	    // echo $row->header . " ";
-	    // echo '<br>';
 	}
+	echo "<pre>";
+	print_r($tree);
+	echo "</pre>";
 	$tree = transformToTree($tree);
-	// echo "<pre>";
-	// print_r($tree);
-	// echo "</pre>";
 	$html = treeForPrint($tree);
 	echo $html;
 }
 
 // Преобразование
-function transformToTree($array) {
+function transformToTree($array, $parentIdOfZeroLevel = 0) {
 	$result = [];
-	$pid[$level] = $level = 0;
+	$level = 0;
+	$pid[$level] = $parentIdOfZeroLevel;
 	while ($level >= 0) {
 		if ( $e = each($array) ) {
 			if ($e[1]['pid'] === $pid[$level]) {
