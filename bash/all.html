@@ -1,4 +1,6 @@
 <h2>Команды</h2>
+<h3>Узнать собственно какой SHELL ипользуется в консоли</h3>
+<pre class="prettyprint lang-sh">echo $SHELL</pre>
 <h3>ls</h3>
 <ul>
 	<li><code>-a</code> — выводит список всех файлов каталога, в том числе скрытые файлы. <code>..</code> и <code>.</code> в верхней части списка относятся к каталогу на уровень выше текущего и текущему, соответственно;</li>
@@ -279,6 +281,11 @@ $ scp ?
 /home/user/some/path/from/user/folder</pre>
 
 <h2>Наработки</h2>
+<h3>Удалить всё кроме find -delete</h3>
+<p>Удалить все в текущем каталоге кроме нескольких файлов</p>
+<pre class="prettyprint lang-sh">
+find . ! -name "index\.htm" -a ! -name "\.htaccess" -delete
+</pre>
 <h3>Первая строчка в исполняемом bash файле</h3>
 <pre class="prettyprint lang-sh">#!/bin/bash</pre>
 
