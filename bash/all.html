@@ -15,6 +15,7 @@
 <p><strong>Примеры</strong></p>
 <p><code>ls</code></p>
 <p><code>ls -la</code></p>
+<p><code>ls | wc -l</code> - количество файлов и папок в текущей директории.</p>
 <h3>cd</h3>
 <p><strong>Примеры</strong></p>
 <p><code>cd ~</code></p>
@@ -268,6 +269,161 @@ $ scp ?
 <pre>user@server ~/some/path/from/user/folder $ pwd
 /home/user/some/path/from/user/folder</pre>
 <h2>Наработки</h2>
+<h3>Копировать большое количество файлов по scp (ssh)</h3>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+function large_scp ()
+{
+    i=1
+    nFilesInOneArchive=500
+    let &quot;n = $i - 1 + $nFilesInOneArchive&quot;
+    nameOfArchive=&quot;$n&quot;'.tar'
+    lastArchiveIsSended=0
+
+    while read line
+    do
+        let &quot;o = i % nFilesInOneArchive&quot;
+
+        if [[ &quot;$o&quot; -eq 0 ]]
+        then
+            tar -rvf $nameOfArchive &quot;$line&quot;
+            scp $nameOfArchive servertest:~/test/
+            ssh -T servertest &quot;cd ~/test/; tar -xf $nameOfArchive; rm $nameOfArchive&quot; &amp;
+            rm $nameOfArchive
+            lastArchiveIsSended=1
+        else
+            let &quot;k = (i - 1) % nFilesInOneArchive&quot;
+            let &quot;n = (i - 1) + nFilesInOneArchive&quot;
+
+            if [[ &quot;$k&quot; -eq 0 ]]
+            then
+                nameOfArchive=&quot;$n&quot;'.tar'
+                tar -cvf $nameOfArchive &quot;$line&quot;
+                lastArchiveIsSended=0
+            else
+                tar -rvf $nameOfArchive &quot;$line&quot;
+                lastArchiveIsSended=0
+            fi
+
+        fi
+
+        let &quot;i++&quot;
+    done
+
+    if [[ &quot;$lastArchiveIsSended&quot; -eq 0 ]]; then
+        cp $nameOfArchive ~/test/
+        scp $nameOfArchive servertest:~/test/
+        ssh -T servertest &quot;cd ~/test/; tar -xf $nameOfArchive; rm $nameOfArchive&quot; &amp;
+        rm $nameOfArchive
+    fi
+}
+# cd ../conversion/advt/
+cd ../files/
+ls -1 | large_scp
+</pre>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+
+# scp ../files/* servertest:~/projects/forum/files/
+
+# cd ../
+# tar -cf - ./files/ | ssh servertest &quot;cd ~/test/; tar -xf -&quot;
+
+
+# cd ../conversion/
+# tar -cvzf - ./advt/ | split --bytes=1MB - files.tar.gz.
+
+# cd ../conversion/advt/
+# ls -1 | xargs -I {} -t mv {} ./fuckup/{}
+# ls -1 | xargs -I {} tar -cf - {} | ssh servertest &quot;cd ~/test/; tar -xf -&quot;
+# ls -1 | xargs -I {} scp {} servertest:~/test/
+
+# scp * servertest:~/project/forum/files/
+
+# for i in ./YouFolder/*; do rm -rf $i; done
+
+
+
+
+
+function large_scp ()
+{
+    i=1
+    nFilesInOneArchive=500
+    let &quot;n = $i - 1 + $nFilesInOneArchive&quot;
+    nameOfArchive=&quot;$n&quot;'.tar'
+    lastArchiveIsSended=0
+
+    while read line
+    do
+        let &quot;o = i % nFilesInOneArchive&quot;
+
+        if [[ &quot;$o&quot; -eq 0 ]]
+        then
+            # 100-ый файл, добавляем и отправляем готовый архив
+            # echo &quot;$i $nameOfArchive ----------------- &quot;
+            tar -rvf $nameOfArchive &quot;$line&quot;
+
+            # cp $nameOfArchive ~/test/
+
+            scp $nameOfArchive servertest:~/test/
+            ssh -T servertest &quot;cd ~/test/; tar -xf $nameOfArchive; rm $nameOfArchive&quot; &amp;
+
+            # ssh servertest &quot;cd ~/test/; tar -xf $nameOfArchive&quot;
+
+            # pwd=`pwd`
+            # cd ~/test/
+            # tar -xvf $nameOfArchive
+            # rm $nameOfArchive
+            # cd $pwd
+
+            rm $nameOfArchive
+            lastArchiveIsSended=1
+        else
+            # 1-ый после 10-ого файл или просто перый, создаем новый архив
+            let &quot;k = (i - 1) % nFilesInOneArchive&quot;
+            let &quot;n = (i - 1) + nFilesInOneArchive&quot;
+
+            if [[ &quot;$k&quot; -eq 0 ]]
+            then
+                nameOfArchive=&quot;$n&quot;'.tar'
+                # echo &quot;$i $nameOfArchive первый после 10&quot;
+                tar -cvf $nameOfArchive &quot;$line&quot;
+                lastArchiveIsSended=0
+            else
+                # echo &quot;$i $nameOfArchive обычный&quot;
+                tar -rvf $nameOfArchive &quot;$line&quot;
+                lastArchiveIsSended=0
+            fi
+
+        fi
+
+        # ((i++))
+        let &quot;i++&quot;
+        # echo $i
+    done
+
+    if [[ &quot;$lastArchiveIsSended&quot; -eq 0 ]]; then
+        cp $nameOfArchive ~/test/
+
+        scp $nameOfArchive servertest:~/test/
+        ssh -T servertest &quot;cd ~/test/; tar -xf $nameOfArchive; rm $nameOfArchive&quot; &amp;
+
+        # pwd=`pwd`
+        # cd ~/test/
+        # tar -xvf $nameOfArchive
+        # rm $nameOfArchive
+        # cd $pwd
+
+        rm $nameOfArchive
+    fi
+}
+# cd ../conversion/advt/
+cd ../files/
+ls -1 | large_scp
+
+
+</pre>
 <h3>Удалить всё кроме find -delete</h3>
 <p>Удалить все в текущем каталоге кроме нескольких файлов</p>
 <pre class="prettyprint lang-sh">
