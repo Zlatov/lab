@@ -182,16 +182,18 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
     <li><code>-O, --to-stdout</code> — extract files to standard output;</li>
 </ul>
 <p><strong>Примеры</strong></p>
-<p><code>tar -cf filename.tar</code> — создать несжатый архив.</p>
-<p><code>tar -czf filename.tar.gz</code> — создать сжатый gzip-ом архив.</p>
-<p><code>tar -xf filename.tar.gz</code> — извлечь.</p>
-<p><code>tar -xzOf archive.tar.gz | mysql -uUSERNAME -pPASSWORD databaseName</code></p>
+<p><code>tar -cf tarName.tar filename</code> — создать несжатый архив.</p>
+<p><code>tar -rf tarName.tar filename</code> — добавить в несжатый архив.</p>
+<p><code>tar -czf tarName.tar.gz filename</code> — создать сжатый gzip-ом архив.</p>
+<p><code>tar -xf tarName.tar.gz</code> — извлечь.</p>
+<p><code>tar -xzOf tarName.tar.gz | mysql -uUSERNAME -pPASSWORD databaseName</code></p>
 <h3>scp</h3>
 <p><strong>Примеры</strong></p>
 <p><code>scp username@hostname:~/filename.tar.gz ./web.tar.gz</code> — копирования файла filename.tar.gz с удалённого хоста к себе спереименованием.</p>
 <p><code>scp filename.tar.gz username@hostname:~/folder/name</code> — копирования локального файла filename.tar.gz на удалённый хост.</p>
 <h3>ssh</h3>
 <pre>ssh MYHOST -t 'cd MYPATH; bash --login'</pre>
+<h4>Тунелироваине, проброс порта</h4>
 <pre>#!/bin/bash
 ssh user@remote_host -L localhost:3303:127.0.0.1:3306</pre>
 <p>ssh туннель – проброс локального порта localhost:3303 на удаленную машину remote_host, на удаленной машине выход 127.0.0.1:3306</p>
