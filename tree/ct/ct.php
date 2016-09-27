@@ -1,3 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CT</title>
+	<style type="text/css">
+		.tree { padding-left:25px; }
+		.tree ul { margin:0; padding-left:6px; }
+		.tree li { position:relative; list-style:none outside none; border-left:solid 1px #999; margin:0; padding:0 0 0 19px; line-height:23px; }
+		.tree li:before { content:''; display:block; border-bottom:solid 1px #999; position:absolute; width:18px; height:11px; left:0; top:0; }
+		.tree li:last-child { border-left:0 none; }
+		.tree li:last-child:before { border-left:solid 1px #999; }		
+	</style>
+</head>
+<body>
 <h1><a href="">ct</a></h1>
 <form method="post">
 	<fieldset>
@@ -10,11 +25,12 @@
 	</fieldset>
 	<fieldset>
 		<legend>Добавить тестовые данные</legend>
-		<button type="submit" name="submitForm" value="addTest">Добавить</button>
+		<button type="submit" name="submitForm" value="addTestValues">Добавить</button>
 	</fieldset>
 	<fieldset>
 		<legend>Добавление</legend>
-		<input type="text" name="header">
+		<input type="text" name="pid" placeholder="pid (0|1|..)">
+		<input type="text" name="header" placeholder="header">
 		<button type="submit" name="submitForm" value="add">Добавить</button>
 	</fieldset>
 	<fieldset>
@@ -54,11 +70,12 @@ if (isset($_POST['submitForm'])) {
 			createTables();
 			break;
 
-		case 'addTest':
-			addTest();
+		case 'addTestValues':
+			addTestValues();
 			break;
 
 		case 'add':
+			add();
 			break;
 
 		case 'selectParents':
@@ -73,6 +90,18 @@ if (isset($_POST['submitForm'])) {
 // Вывод дерева
 $tree = fullTree();
 
+function add()
+{
+	global $pdo;
+	if (isset($_POST)) {
+		$sql = file_get_contents('./sql/i_new.sql');
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
+		$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
+		$stmt->execute();
+		header('Refresh:0');
+	}
+}
 function selectChildrens()
 {
 	global $pdo;
@@ -86,7 +115,6 @@ function selectChildrens()
 	echo "</pre>";
 	$tree = transformToTree($array,(integer)$_POST['id']);
 	$html = treeForPrint($tree);
-	echo $html;
 }
 
 function createDb()
@@ -94,7 +122,10 @@ function createDb()
 	global $pdo, $dbName;
 	$sql = file_get_contents('./sql/c_db.sql');
 	eval("\$sql = \"$sql\";");
-	$stmt = $pdo->query($sql);
+	echo "$sql";
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute();
+	// $stmt = $pdo->query($sql);
 	// $stmt = $pdo->prepare($sql);
 	// $stmt->execute(['dbName' => $dbName]);
 }
@@ -104,13 +135,15 @@ function createTables()
 	global $pdo;
 	$sql = file_get_contents('./sql/c_tables.sql');
 	$stmt = $pdo->query($sql);
+	header('Refresh:0');
 }
 
-function addTest()
+function addTestValues()
 {
 	global $pdo;
 	$sql = file_get_contents('./sql/i_test.sql');
 	$stmt = $pdo->query($sql);
+	header('Refresh:0');
 }
 function fullTree()
 {
@@ -126,9 +159,9 @@ function fullTree()
 			'header' => $row->header,
 		];
 	}
-	echo "<pre>";
-	print_r($tree);
-	echo "</pre>";
+	// echo "<pre>";
+	// print_r($tree);
+	// echo "</pre>";
 	$tree = transformToTree($tree);
 	$html = treeForPrint($tree);
 	echo $html;
@@ -166,7 +199,7 @@ function treeForPrint($tree)
 	$html = "<ul class='tree'>";
 	$tplUlBegin = "<ul>";
 	$tplUlEnd = "</ul>";
-	$tplLiBegin = "<li>??header?? #??id??";
+	$tplLiBegin = "<li>??header?? <small>#??id??</small>";
 	$tplLiEnd = "</li>";
 
 	foreach ($tree as $key => $val) {
@@ -194,3 +227,6 @@ function treeForPrint($tree)
 	$html .= $tplUlEnd;
 	return $html;
 }
+?>
+</body>
+</html>

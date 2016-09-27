@@ -310,6 +310,20 @@ SET SQL_SAFE_UPDATES = 0;
 SET SQL_SAFE_UPDATES = 1;
 </pre>
 <h2>Наработки</h2>
+<h3>Обновить колонку таблицы из другой таблицы</h3>
+<pre class="prettyprint lang-sql">
+SET SQL_SAFE_UPDATES = 0; -- Только для mysqlWorkbench
+
+UPDATE
+	newforum.forum_users
+INNER JOIN
+	forumoldutf8.forum_users ON forumoldutf8.forum_users.user_id = newforum.forum_users.user_id
+SET newforum.forum_users.user_reputation = forumoldutf8.forum_users.user_reputation
+WHERE
+	forumoldutf8.forum_users.user_reputation &lt;&gt; 0;
+
+SET SQL_SAFE_UPDATES = 1; -- Только для mysqlWorkbench
+</pre>
 <h3>Выбрать одну случайную запись</h3>
 <pre class="prettyprint lang-sql">SELECT
 	r1.id

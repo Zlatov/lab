@@ -1,21 +1,25 @@
 -- Вставка нового элемента
 
 -- Данные элемента
-SET @header = 'new1';
+SET @header = :header;
 -- Указываем родителя
-SET @parentId = 4;
+SET @parentId = :pid;
 
 -- Вставляем данные
-INSERT INTO tree.ct_tree (header)
-VALUES (@header);
+INSERT INTO tree.ct_tree (pid, header)
+VALUES (@parentId, @header);
 
 -- Определяем id нового элемента
 SET @lastID := LAST_INSERT_ID();
 -- Вставляем связи
-INSERT INTO tree.ct_tree_rel (pid, cid)
-	-- Выбираем всех родителей
-	SELECT pid, @lastID
-	FROM tree.ct_tree_rel
-    WHERE cid = @parentId
-    UNION ALL
-    SELECT @lastID, @lastID
+INSERT INTO tree.ct_tree_rel (aid, did)
+	-- Выбираем всех родителей (did = id нашего предока)
+	-- и вставляем записи типа: idПредка, нашId
+	SELECT
+		aid, @lastID
+	FROM
+		tree.ct_tree_rel
+    WHERE
+		did = @parentId
+--     UNION ALL
+--     SELECT @lastID, @lastID
