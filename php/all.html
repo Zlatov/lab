@@ -152,6 +152,9 @@ while ($row = $stmt-&gt;fetch())
     echo $row['header'] . &quot;\n&quot;;
 }
 </pre>
+<p>
+    Кстати <code>DELIMITER ;;</code> в PDO не работает, поэтому, для разделения процедур создания хранимых процедур ;) (stored procedures) необходимо использовать обычный делимитр <code>;</code>
+</p>
 <h3>Подготовленные выражения</h3>
 <p>Двумя сопособами (позиционные и именованные плейсхолдеры):</p>
 <pre class="prettyprint lang-php">$sql = 'SELECT name FROM users WHERE email = ?';

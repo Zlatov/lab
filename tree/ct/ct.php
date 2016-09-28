@@ -29,8 +29,8 @@
 	</fieldset>
 	<fieldset>
 		<legend>Добавление</legend>
-		<input type="text" name="pid" placeholder="pid (0|1|..)">
-		<input type="text" name="header" placeholder="header">
+		<input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
+		<input type="text" name="header" placeholder="header" value=")))">
 		<button type="submit" name="submitForm" value="add">Добавить</button>
 	</fieldset>
 	<fieldset>
@@ -51,12 +51,14 @@
 include_once 'config.php';
 
 // Коннект
-$opt = array(
+$opt = [
+    // PDO::ATTR_ERRMODE            => PDO::ERRMODE_SILENT,
+    // PDO::ATTR_ERRMODE            => PDO::ERRMODE_WARNING,
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false, // За обработку подготовленных выражений отвечает сам PDO.
     PDO::ATTR_STRINGIFY_FETCHES => false, // Преобразовывать числовые значения в строки во время выборки.
-);
+];
 // $pdo = new PDO('mysql:host=$host;dbname=$dbName;charset=$charset', $user, $password, $opt);
 $pdo = new PDO("mysql:host=$host;charset=$charset", $user, $password, $opt);
 $stmt = $pdo->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbName'");
@@ -93,15 +95,21 @@ if (isset($_POST['submitForm'])) {
 	}
 }
 
-// Вывод дерева
-$tree = fullTree();
+$db = $pdo->query('select database()')->fetchColumn();
+if ($db) {
+	$dbTable1 = $pdo->query("SHOW TABLES LIKE 'ct_tree'")->fetchColumn();
+	$dbTable2 = $pdo->query("SHOW TABLES LIKE 'ct_tree_rel'")->fetchColumn();
+	if ($dbTable1&&$dbTable2) {
+		// Вывод дерева
+		$tree = fullTree();
+	}
+}
 
 function add()
 {
 	global $pdo;
 	if (isset($_POST)) {
-		$sql = file_get_contents('./sql/i_new.sql');
-		$stmt = $pdo->prepare($sql);
+		$stmt = $pdo->prepare('CALL tree_ct_add(:pid, :header)');
 		$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
 		$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
 		$stmt->execute();
@@ -135,8 +143,28 @@ function createTables()
 {
 	global $pdo;
 	$sql = file_get_contents('./sql/c_tables.sql');
-	$stmt = $pdo->exec($sql);
-	header('Refresh:0');
+	$intOrFalse = $pdo->exec($sql);
+	$sql = file_get_contents('./sql/procedures.sql');
+	// $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	try {
+		$intOrFalse = $pdo->exec($sql);
+		echo "<pre>";
+		var_dump($pdo->query("SHOW WARNINGS")->fetch());
+		echo "</pre>";
+	} catch (PDOException $e) {
+		echo "PDOException: <pre>";
+		echo $e->getMessage();
+		echo "</pre>";
+		die();
+	}
+	if ($intOrFalse === false) {
+		die(
+			"Errors: " . 
+			print_r($pdo->errorInfo(), true) . 
+			"Warnings: " . 
+			print_r($pdo->query("SHOW WARNINGS")->fetch(), true)
+		);
+	}
 }
 
 function addTestValues()
