@@ -1,3 +1,18 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by file type specific settings.
+{
+    "fallback_encoding": "Cyrillic (Windows 1251)",
+    "font_size": 12,
+    "ignored_packages":
+    [
+        "Vintage"
+    ],
+    "show_encoding": true,
+    "update_check": false
+}
+
+
+
 <h2>Основы</h2>
 <h3>Проекты</h3>
 <p><strong>Очистить список проектов в „Switch Project“:</strong></p>
@@ -62,6 +77,7 @@
 <h3><strong>Emmet — обязательный плагин</strong></h3>
 <p> не нуждается в комментариях;</p>
 <h3><strong>PyV8</strong></h3>
+<p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code> <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
 <p>Устанавливается "Почти" автоматически при установке Emmet; (необходим для работы плагина)</p>
 <h3>Emmet CSS snippets — пока и без этого неплохо снипится все;</h3>
 <h3><strong>StringUtilities</strong></h3>
@@ -102,56 +118,9 @@
 <p> — перемещение вкладок по горячей клавише;</p>
 <h3><strong>SublimeCodeIntel</strong></h3>
 <p> — смотреть настройки, лишнее убрать: например HTML - с ним легко справляются другие плагины;</p>
-<h3>Tag</h3>
-<p> — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
-    <del>использую</del> из-за отличной работы с атрибутами тегов;</p>
-<h3><strong>View In Browser</strong></h3>
-<p> — открыть файл в браузере;</p>
-<h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
-<h3>SideBarGit</h3>
-<p> —
-    <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</p>
-<h3>rsub</h3>
-<p> — править удаленные файлы через ssh;</p>
-<h3>livestyle-sublime</h3>
-<p> — рабочий плагин, но мне не очень нужен;</p>
-<h3><strong>BracketHighlighter</strong></h3>
-<p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
-<h3>Sublime Terminal</h3>
-<p> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</p>
-<h4>Настройки</h4>
-<p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
-<pre>
-"terminal": "C:\\Program Files (x86)\\Git\\bin\\sh.exe",
-"parameters": ["--login", "-i"],</pre>
-<p>Желаемого можно добиться по разному, ещё прокатывает вот так (без параметров):</p>
-<pre>{
-    "terminal": "C:\\Program Files\\Git\\git-bash.exe",
-}</pre>
-<p>А для терминала поставляемого вместе с Cygwin:</p>
-<pre>
-"terminal": "C:\\cygwin64\\bin\\mintty.exe",
-"parameters": ["-i", "C:\\cygwin64\\Cygwin-Terminal.ico"],</pre>
-<h3><strong>DocBlockr</strong></h3>
-<p> – документирование <code>/**</code>
-    <kbd>Tab</kbd>.</p>
-<h3>AutoFileName</h3>
-<p>Плагин имеет недостаток, под виндой не определяет коренвую папку проекта и после печати слэша <code>img src="/"</code> в выпадающем списке представлены список имен жестких дисков C:/, D:/…</p>
-<p>Однако плагин позволяет манипулировать относительными путями что немного спасает ситуацию.</p>
-<p>Вместо данного плагина рекомендуют использовать FuzzyFilePath, <a href="https://github.com/sagold/FuzzyFilePath">FuzzyFilePath</a> неплох, но своеобразен, оставил пока оба плагина.</p>
-<h3>GitGutter</h3>
-<h4>Установка win</h4>
-<p>
-    <kbd>win</kbd> +
-    <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
-    <q>Переменные среды</q> &rarr;
-    <q>Системные переменные</q> &rarr;
-    <q>Path</q>.
-</p>
-<p>После этого добавляем плагин через PackageControl.</p>
-<h3>SublimeCodeIntel</h3>
 <p>Парсил yii2 минуты три, хотя SSD…</p>
-<pre>    "codeintel_language_settings": {
+<pre>
+    "codeintel_language_settings": {
         // "Python3": {
         //     "python3": "/usr/local/bin/python3.3",
         //     "codeintel_scan_extra_dir": [
@@ -178,10 +147,51 @@
             "codeintel_scan_exclude_dir":[],
             // В edafult_settings этой строки нет, есть в инструкции на домашней странице пакета:
             "phpConfigFile": "php.ini"
-        }</pre>
-<h3>PyV8</h3>
-<p>При ручной установке (<a href="https://github.com/emmetio/pyv8-binaries#manual-installation">https://github.com/emmetio/pyv8-binaries#manual-installation</a>) архив необходимо распаковать по пути <code>~/.config/sublime-text-3/Packages/PyV8/...</code>
-    <mark>И!</mark> по пути <code>~/.config/sublime-text-3/Installed Packages/PyV8/...</code>.</p>
+        }
+</pre>
+<h3>Tag</h3>
+<p> — закрывать тэг по /, отступы (автоматическая расстановка отступов просто ужасная)
+    <del>использую</del> из-за отличной работы с атрибутами тегов;</p>
+<h3><strong>View In Browser</strong></h3>
+<p> — открыть файл в браузере;</p>
+<h3>sublime-yii-snippets (Yii Framework Snippets);</h3>
+<h3>SideBarGit</h3>
+<p> —
+    <del>прекрасный</del> плагин для работы с Git через ST (кому то может не понравиться что через мышь);</p>
+<h3>rsub</h3>
+<p> — править удаленные файлы через ssh;</p>
+<h3>livestyle-sublime</h3>
+<p> — рабочий плагин, но мне не очень нужен;</p>
+<h3><strong>BracketHighlighter</strong></h3>
+<p> — подсветка парных скобок и тегов, и без него подсвечивается вроде как;</p>
+<h3><strong>Terminal</strong></h3>
+<p> – открывает терминал, текущий путь терминала такой же как и у редактируемого в Sublime Text файле;</p>
+<h4>Настройки</h4>
+<p>Настройки в файле <code>C:\Users\maksim\AppData\Roaming\Sublime Text 3\Packages\User\Terminal.sublime-settings</code>, для терминала MINGW32 поставляемого c «<a href="http://git-scm.com/">Домашней страницы проекта Git</a>»:</p>
+<pre>
+"terminal": "C:\\Program Files (x86)\\Git\\bin\\sh.exe",
+"parameters": ["--login", "-i"],</pre>
+<p>Желаемого можно добиться по разному, ещё прокатывает вот так (без параметров):</p>
+<pre>{
+    "terminal": "C:\\Program Files\\Git\\git-bash.exe",
+}</pre>
+<p>А для терминала поставляемого вместе с Cygwin:</p>
+<pre>
+"terminal": "C:\\cygwin64\\bin\\mintty.exe",
+"parameters": ["-i", "C:\\cygwin64\\Cygwin-Terminal.ico"],</pre>
+<h3><strong>DocBlockr</strong></h3>
+<p> – документирование <code>/**</code>
+    <kbd>Tab</kbd>.</p>
+<h3><strong>GitGutter</strong></h3>
+<h4>Установка win</h4>
+<p>
+    <kbd>win</kbd> +
+    <kbd>r</kbd> &rarr; <code>cmd</code> &rarr; <code>git --exec-path</code> &rarr; добавляем путь к
+    <q>Переменные среды</q> &rarr;
+    <q>Системные переменные</q> &rarr;
+    <q>Path</q>.
+</p>
+<p>После этого добавляем плагин через PackageControl.</p>
 <h2>Автокомлит</h2>
 <h3>Снипеты</h3>
 <h3>Завершения (Completions)</h3>
