@@ -5,21 +5,30 @@ max_file_uploads = 20
 post_max_size = 210M
 </pre>
 <pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
-<h3>Переменные окружения</h3>
-Если $_ENV пуст - проверить variables_order в php.ini (/etc/php5/apache2/php.ini) (Должно быть E в строке)
+<h3>Переменные окружения</h3> Если $_ENV пуст - проверить variables_order в php.ini (/etc/php5/apache2/php.ini) (Должно быть E в строке)
 <pre>;variables_order = "GPCS"
 variables_order = "EGPCS"</pre>
 <p>
-        Sets the order of the EGPCS (<em>E</em>nvironment,
-        <em>G</em>et, <em>P</em>ost,
-        <em>C</em>ookie, and <em>S</em>erver) variable
-        parsing. For example, if variables_order
-        is set to <em>"SP"</em> then PHP will create the
-        <a href="language.variables.predefined.php">superglobals</a> <var><var><a href="reserved.variables.server.php">$_SERVER</a></var></var> and
-        <var><var><a href="reserved.variables.post.php">$_POST</a></var></var>, but not create
-        <var><var><a href="reserved.variables.environment.php">$_ENV</a></var></var>, <var><var><a href="reserved.variables.get.php">$_GET</a></var></var>, and
-        <var><var><a href="reserved.variables.cookies.php">$_COOKIE</a></var></var>.  Setting to "" means no
-        <a href="language.variables.predefined.php">superglobals</a> will be set.
+    Sets the order of the EGPCS (<em>E</em>nvironment,
+    <em>G</em>et, <em>P</em>ost,
+    <em>C</em>ookie, and <em>S</em>erver) variable parsing. For example, if variables_order is set to <em>"SP"</em> then PHP will create the
+    <a href="language.variables.predefined.php">superglobals</a>
+    <var>
+        <var><a href="reserved.variables.server.php">$_SERVER</a></var>
+    </var> and
+    <var>
+        <var><a href="reserved.variables.post.php">$_POST</a></var>
+    </var>, but not create
+    <var>
+        <var><a href="reserved.variables.environment.php">$_ENV</a></var>
+    </var>,
+    <var>
+        <var><a href="reserved.variables.get.php">$_GET</a></var>
+    </var>, and
+    <var>
+        <var><a href="reserved.variables.cookies.php">$_COOKIE</a></var>
+    </var>. Setting to "" means no
+    <a href="language.variables.predefined.php">superglobals</a> will be set.
 </p>
 <h4>Через apache (модуль mod_env)</h4>
 <p><a href="http://httpd.apache.org/docs/current/mod/mod_env.html">http://httpd.apache.org/docs/current/mod/mod_env.html</a></p>
@@ -87,16 +96,19 @@ $input_text = mysql_escape_string($input_text);
 <pre class="prettyprint lang-sh">sudo apt-get install php5-mysqlnd
 sudo service apache2 restart</pre>
 <p>Далее перед запросом</p>
-<pre>$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);</pre>
+<pre>
+$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+$pdo->setAttribute(PDO::ATTR_STRINGIFY_FETCHES, false);
+</pre>
 <p>или при соединении</p>
 <pre>$dsn = "mysql:host=$host;dbname=$dbName;charset=$charset";
 $opt = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
+    PDO::ATTR_EMULATE_PREPARES => false, // За обработку подготовленных выражений отвечает сам PDO.
+    PDO::ATTR_STRINGIFY_FETCHES => false, // Преобразовывать числовые значения в строки во время выборки.
 );
 $pdo = new PDO($dsn, $user, $password, $opt);</pre>
-
 <h3>Соединение</h3>
 <pre class="prettyprint lang-php">
 $user = 'user';
@@ -115,6 +127,23 @@ $pdo = new PDO($dsn, $user, $password, $opt);
 <p><code>PDO::ERRMODE_EXCEPTION</code> - Выбрасывать исключения.</p>
 <p><code>PDO::ATTR_DEFAULT_FETCH_MODE</code> - Задает режим выборки данных по умолчанию.</p>
 <p><code>PDO::FETCH_ASSOC</code> - возвращает массив, индексированный именами столбцов результирующего набора.</p>
+<p>Можно и без базы</p>
+<pre class="prettyprint lang-php">
+$pdo = new PDO("mysql:host=$host;charset=$charset", $user, $password, $opt);
+</pre>
+<p>Выбрать базу можно если она есть</p>
+<pre class="prettyprint lang-php">
+$stmt = $pdo->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbName'");
+$db = $stmt->fetchColumn();
+if ($db) {
+    $pdo->exec("USE $dbName");
+}
+</pre>
+<h3>Кратко о функциях</h3>
+<ul>
+<li><code>$pdo->exec($sql);</code> - возвращает количество строк;</li>
+<li><code>$pdo->query($sql);</code> - возвращает объект stmt.</li>
+</ul>
 <h3>Выполнение запросов</h3>
 <pre class="prettyprint lang-php">
 $stmt = $pdo-&gt;query('SELECT header FROM test');

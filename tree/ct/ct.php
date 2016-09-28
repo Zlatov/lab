@@ -51,13 +51,19 @@
 include_once 'config.php';
 
 // Коннект
-$dsn = "mysql:host=$host;dbname=$dbName;charset=$charset";
 $opt = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
+    PDO::ATTR_EMULATE_PREPARES => false, // За обработку подготовленных выражений отвечает сам PDO.
+    PDO::ATTR_STRINGIFY_FETCHES => false, // Преобразовывать числовые значения в строки во время выборки.
 );
-$pdo = new PDO($dsn, $user, $password, $opt);
+// $pdo = new PDO('mysql:host=$host;dbname=$dbName;charset=$charset', $user, $password, $opt);
+$pdo = new PDO("mysql:host=$host;charset=$charset", $user, $password, $opt);
+$stmt = $pdo->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbName'");
+$db = $stmt->fetchColumn();
+if ($db) {
+	$pdo->exec("USE $dbName");
+}
 
 // Логика
 if (isset($_POST['submitForm'])) {
@@ -122,19 +128,14 @@ function createDb()
 	global $pdo, $dbName;
 	$sql = file_get_contents('./sql/c_db.sql');
 	eval("\$sql = \"$sql\";");
-	echo "$sql";
-	$stmt = $pdo->prepare($sql);
-	$stmt->execute();
-	// $stmt = $pdo->query($sql);
-	// $stmt = $pdo->prepare($sql);
-	// $stmt->execute(['dbName' => $dbName]);
+	$pdo->exec($sql);
 }
 
 function createTables()
 {
 	global $pdo;
 	$sql = file_get_contents('./sql/c_tables.sql');
-	$stmt = $pdo->query($sql);
+	$stmt = $pdo->exec($sql);
 	header('Refresh:0');
 }
 
@@ -142,7 +143,7 @@ function addTestValues()
 {
 	global $pdo;
 	$sql = file_get_contents('./sql/i_test.sql');
-	$stmt = $pdo->query($sql);
+	$stmt = $pdo->exec($sql);
 	header('Refresh:0');
 }
 function fullTree()
@@ -159,9 +160,6 @@ function fullTree()
 			'header' => $row->header,
 		];
 	}
-	// echo "<pre>";
-	// print_r($tree);
-	// echo "</pre>";
 	$tree = transformToTree($tree);
 	$html = treeForPrint($tree);
 	echo $html;
