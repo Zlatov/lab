@@ -35,7 +35,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Выбор предков</legend>
-		<input type="text" name="id">
+		<input type="text" name="did">
 		<button type="submit" name="submitForm" value="selectParents">Выбрать</button>
 	</fieldset>
 	<fieldset>
@@ -87,6 +87,7 @@ if (isset($_POST['submitForm'])) {
 			break;
 
 		case 'selectParents':
+			selectParents();
 			break;
 
 		case 'selectChildrens':
@@ -116,6 +117,20 @@ function add()
 		header('Refresh:0');
 	}
 }
+
+function selectParents()
+{
+	global $pdo;
+	$sql = file_get_contents('./sql/s_parents.sql');
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindValue(':did', $_POST['did'], PDO::PARAM_INT);
+	$stmt->execute();
+	$array = $stmt->fetchAll();
+	$tree = transformToTree($array);
+	$html = treeForPrint($tree);
+	echo $html;
+}
+
 function selectChildrens()
 {
 	global $pdo;
@@ -124,11 +139,9 @@ function selectChildrens()
 	$stmt->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
 	$stmt->execute();
 	$array = $stmt->fetchAll();
-	echo "<pre>";
-	print_r($array);
-	echo "</pre>";
 	$tree = transformToTree($array,(integer)$_POST['id']);
 	$html = treeForPrint($tree);
+	echo $html;
 }
 
 function createDb()

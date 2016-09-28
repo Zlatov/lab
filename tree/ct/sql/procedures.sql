@@ -1,13 +1,7 @@
 use `tree`;
+
 drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
-drop procedure if exists `tree_ct_add`;
+
 create procedure `tree_ct_add`(
 	in param_parent_id int(11),
 	in param_header varchar(255)
@@ -24,14 +18,15 @@ BEGIN
 
 	-- Вставляем связи
 	INSERT INTO `ct_tree_rel` (aid, did)
-		-- Выбираем всех родителей (did = id нашего предока)
+		-- Выбираем связи предков с родителем (did = idРодителя)
 		-- и вставляем записи типа: idПредка, нашId
 		SELECT
-			`aid`, `last_id`
+			`aid`, last_id
 		FROM
 			`ct_tree_rel`
 	    WHERE
-			`did` = param_parent_id;
-	--     UNION ALL
-	--     SELECT @lastID, @lastID
+			`did` = param_parent_id
+		-- Родитель тоже предок
+	    UNION ALL
+	    SELECT param_parent_id, last_id;
 END;

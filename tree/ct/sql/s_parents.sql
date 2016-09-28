@@ -1,5 +1,5 @@
--- SELECT * FROM tree.ct_tree
 -- Выбрать всех предков
-SELECT * FROM tree.ct_tree t
-JOIN tree.ct_tree_rel r ON (r.pid = t.id)
-WHERE r.cid = 10
+SELECT t.*
+FROM ct_tree_rel r
+JOIN ct_tree t ON t.id = r.aid
+WHERE r.did = :did
