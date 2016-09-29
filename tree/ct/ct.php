@@ -29,7 +29,7 @@
 	</fieldset>
 	<fieldset>
 		<legend>Добавление</legend>
-		id: <input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
+		в id: <input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
 		header: <input type="text" name="header" placeholder="header" value=")))">
 		<button type="submit" name="submitForm" value="add">Добавить</button>
 	</fieldset>
@@ -48,6 +48,12 @@
 		id: <input type="text" name="eid">
 		в id: <input type="text" name="tid">
 		<button type="submit" name="submitForm" value="move">Переместить</button>
+	</fieldset>
+	<fieldset>
+		<legend>Удалить элемент</legend>
+		id: <input type="text" name="delid" placeholder="pid (0|1|..)" value="5">
+		рекурсивно: <input type="hidden" name="recursively" value="0"><input type="checkbox" name="recursively" value="1">
+		<button type="submit" name="submitForm" value="del">Удалить</button>
 	</fieldset>
 </form>
 
@@ -92,6 +98,10 @@ if (isset($_POST['submitForm'])) {
 			add();
 			break;
 
+		case 'del':
+			del();
+			break;
+
 		case 'move':
 			move();
 			break;
@@ -122,6 +132,16 @@ function add()
 	$stmt = $pdo->prepare('CALL tree_ct_add(:pid, :header)');
 	$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
 	$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
+	$stmt->execute();
+	header('Refresh:0');
+}
+
+function del()
+{
+	global $pdo;
+	$stmt = $pdo->prepare('CALL tree_ct_del(:delid, :recursively)');
+	$stmt->bindValue(':delid', $_POST['delid'], PDO::PARAM_INT);
+	$stmt->bindValue(':recursively', $_POST['recursively'], PDO::PARAM_BOOL);
 	$stmt->execute();
 	header('Refresh:0');
 }

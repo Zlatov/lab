@@ -18,18 +18,32 @@ BEGIN
 	SET last_id = LAST_INSERT_ID();
 
 	-- Вставляем связи
-	INSERT INTO `ct_tree_rel` (aid, did)
+	INSERT INTO `ct_tree_rel` (`aid`, `did`)
 		-- Выбираем связи предков с родителем (did = idРодителя)
 		-- и вставляем записи типа: idПредка, нашId
-		SELECT
-			`aid`, last_id
-		FROM
-			`ct_tree_rel`
-	    WHERE
-			`did` = param_parent_id
+		SELECT `aid`, last_id
+		FROM `ct_tree_rel`
+	    WHERE `did` = param_parent_id
 		-- Родитель тоже предок
 	    UNION ALL
 	    SELECT param_parent_id, last_id;
+END;
+
+CREATE PROCEDURE `tree_ct_del`(
+	in param_id int(11),
+	in param_r tinyint(1)
+)
+procedure_label:BEGIN
+	DECLARE count_descendant INT DEFAULT 0;
+	SELECT count()
+	INTO count_descendant
+	FROM `ct_tree_rel`
+	WHERE `aid` = param_id
+
+	IF count_descendant > 0 THEN
+		SELECT 'count_descendant'
+		LEAVE procedure_label
+	END IF;
 END;
 
 CREATE PROCEDURE `tree_ct_move`(
@@ -61,4 +75,18 @@ procedure_label:BEGIN
 		SELECT 'into descendant';
 		LEAVE procedure_label;
 	END IF;
+
+	UPDATE `ct_tree`
+	SET `pid` = param_tid
+	WHERE `id` = param_eid;
+
+	DElETE FROM `ct_tree_rel`
+	WHERE `did` = param_eid;
+
+	INSERT INTO `ct_tree_rel` (`aid`, `did`)
+		SELECT `aid`, param_eid
+		FROM `ct_tree_rel`
+		WHERE `did` = param_tid
+		UNION ALL
+		SELECT param_tid, param_eid;
 END;
