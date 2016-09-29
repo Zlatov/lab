@@ -29,8 +29,8 @@
 	</fieldset>
 	<fieldset>
 		<legend>Добавление</legend>
-		<input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
-		<input type="text" name="header" placeholder="header" value=")))">
+		id: <input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
+		header: <input type="text" name="header" placeholder="header" value=")))">
 		<button type="submit" name="submitForm" value="add">Добавить</button>
 	</fieldset>
 	<fieldset>
@@ -42,6 +42,12 @@
 		<legend>Выбор потомков</legend>
 		<input type="text" name="id">
 		<button type="submit" name="submitForm" value="selectChildrens">Выбрать</button>
+	</fieldset>
+	<fieldset>
+		<legend>Переместить элемент</legend>
+		id: <input type="text" name="eid">
+		в id: <input type="text" name="tid">
+		<button type="submit" name="submitForm" value="move">Переместить</button>
 	</fieldset>
 </form>
 
@@ -86,6 +92,10 @@ if (isset($_POST['submitForm'])) {
 			add();
 			break;
 
+		case 'move':
+			move();
+			break;
+
 		case 'selectParents':
 			selectParents();
 			break;
@@ -109,13 +119,24 @@ if ($db) {
 function add()
 {
 	global $pdo;
-	if (isset($_POST)) {
-		$stmt = $pdo->prepare('CALL tree_ct_add(:pid, :header)');
-		$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
-		$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
-		$stmt->execute();
-		header('Refresh:0');
-	}
+	$stmt = $pdo->prepare('CALL tree_ct_add(:pid, :header)');
+	$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
+	$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
+	$stmt->execute();
+	header('Refresh:0');
+}
+
+function move()
+{
+	global $pdo;
+	$stmt = $pdo->prepare('call tree_ct_move(:eid, :tid)');
+	$stmt->bindValue(':eid', $_POST['eid'], PDO::PARAM_INT);
+	$stmt->bindValue(':tid', $_POST['tid'], PDO::PARAM_INT);
+	$stmt->execute();
+	$array = $stmt->fetchAll();
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
 }
 
 function selectParents()

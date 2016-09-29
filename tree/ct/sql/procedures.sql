@@ -1,8 +1,9 @@
-use `tree`;
+USE `tree`;
 
-drop procedure if exists `tree_ct_add`;
+DROP PROCEDURE if exists `tree_ct_add`;
+DROP PROCEDURE if exists `tree_ct_move`;
 
-create procedure `tree_ct_add`(
+CREATE PROCEDURE `tree_ct_add`(
 	in param_parent_id int(11),
 	in param_header varchar(255)
 )
@@ -29,4 +30,35 @@ BEGIN
 		-- Родитель тоже предок
 	    UNION ALL
 	    SELECT param_parent_id, last_id;
+END;
+
+CREATE PROCEDURE `tree_ct_move`(
+	in param_eid int(11),
+	in param_tid int(11)
+)
+procedure_label:BEGIN
+	DECLARE count_descendant INT DEFAULT 0;
+
+	-- tid <> eid
+	IF param_eid = param_tid THEN
+		SELECT 'into itself';
+		LEAVE procedure_label;
+	END IF;
+
+	-- tid нет среди потомков eid
+	SELECT
+		count(*)
+	INTO
+		count_descendant
+	FROM
+		`ct_tree_rel` r
+	WHERE
+		r.`aid` = param_eid
+		AND r.`did` = param_tid;
+
+	IF count_descendant > 0
+	THEN
+		SELECT 'into descendant';
+		LEAVE procedure_label;
+	END IF;
 END;
