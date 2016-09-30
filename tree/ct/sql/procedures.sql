@@ -1,6 +1,7 @@
 USE `tree`;
 
 DROP PROCEDURE if exists `tree_ct_add`;
+DROP PROCEDURE if exists `tree_ct_del`;
 DROP PROCEDURE if exists `tree_ct_move`;
 
 CREATE PROCEDURE `tree_ct_add`(
@@ -9,6 +10,8 @@ CREATE PROCEDURE `tree_ct_add`(
 )
 BEGIN
 	DECLARE last_id INT(11);
+
+	START TRANSACTION;
 
 	-- Вставляем данные
 	INSERT INTO `ct_tree` (`pid`, `header`)
@@ -27,6 +30,8 @@ BEGIN
 		-- Родитель тоже предок
 	    UNION ALL
 	    SELECT param_parent_id, last_id;
+
+	COMMIT;
 END;
 
 CREATE PROCEDURE `tree_ct_del`(
@@ -35,15 +40,26 @@ CREATE PROCEDURE `tree_ct_del`(
 )
 procedure_label:BEGIN
 	DECLARE count_descendant INT DEFAULT 0;
-	SELECT count()
+
+	START TRANSACTION;
+
+	SELECT count(`did`)
 	INTO count_descendant
 	FROM `ct_tree_rel`
-	WHERE `aid` = param_id
+	WHERE `aid` = param_id;
 
-	IF count_descendant > 0 THEN
-		SELECT 'count_descendant'
-		LEAVE procedure_label
+	IF count_descendant > 0 AND param_r = 0 THEN
+		SELECT count_descendant;
+		LEAVE procedure_label;
 	END IF;
+
+	DElETE FROM `ct_tree_rel`
+	WHERE `aid` = param_id OR `did` = param_id;
+
+	DElETE FROM `ct_tree`
+	WHERE `id` = param_id;
+
+	COMMIT;
 END;
 
 CREATE PROCEDURE `tree_ct_move`(
@@ -52,6 +68,8 @@ CREATE PROCEDURE `tree_ct_move`(
 )
 procedure_label:BEGIN
 	DECLARE count_descendant INT DEFAULT 0;
+
+	START TRANSACTION;
 
 	-- tid <> eid
 	IF param_eid = param_tid THEN
@@ -89,4 +107,6 @@ procedure_label:BEGIN
 		WHERE `did` = param_tid
 		UNION ALL
 		SELECT param_tid, param_eid;
+
+	COMMIT;
 END;

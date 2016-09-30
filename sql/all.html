@@ -32,6 +32,19 @@ SELECT @count; -- 12
 SELECT @count := COUNT(*) FROM forum_advt; -- return count rows
 SELECT @count; -- 12
 </pre>
+В процедурах немного по другому
+<pre class="prettyprint lang-sql">
+...
+BEGIN
+	DECLARE last_id INT(11);
+	DECLARE count_descendant INT DEFAULT 0;
+	...
+	SET last_id = LAST_INSERT_ID();
+	...
+	SELECT count(`did`)
+	INTO count_descendant
+	...
+</pre>
 <h2>Функции и Операторы</h2>
 <h3>INSERT</h3>
 <pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
@@ -177,6 +190,48 @@ mysql > SHOW CREATE TABLE tree_nodes;
 	...
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
 </pre>
+<h2>Транзакции</h2>
+<p>Совсем всегда использовать транзакции - отключить режим autocommit:</p>
+<p><code>SET AUTOCOMMIT=0</code></p>
+<p>Если необходимо переключиться из режима AUTOCOMMIT только для выполнения одной последовательности команд (<code>BEGIN;</code> или <code>BEGIN WORK;</code>):</p>
+<pre>BEGIN;
+SELECT @A:=SUM(salary) FROM table1 WHERE type=1;
+UPDATE table2 SET summmary=@A WHERE type=1;
+COMMIT;</pre>
+<p>В каком режиме работаем?:</p>
+<p><code>SHOW VARIABLES LIKE 'AUTOCOMMIT'</code></p>
+<p>Следующие команды автоматически завершают транзакцию (<code>COMMIT;</code>):</p>
+<p>
+	<code>ALTER TABLE</code>, <code>BEGIN</code>, <code>CREATE INDEX</code>, <code>DROP DATABASE</code>, <code>DROP TABLE</code>, <code>RENAME TABLE</code>, <code>TRUNCATE</code>
+</p>
+<h3>Уровни изоляции транзакций InnoDB</h3>
+<p>можно настроить в <code>my.cnf</code>:</p>
+<pre>transaction-isolation = {READ-UNCOMMITTED | READ-COMMITTED | REPEATABLE-READ | SERIALIZABLE}</pre>
+<p>или задать командой:</p>
+<pre>SET [SESSION | GLOBAL] TRANSACTION ISOLATION LEVEL {READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE}</pre>
+<p>узнать текущий уровень изоляции</p>
+<pre>SELECT @@global.tx_isolation;
+SELECT @@tx_isolation;</pre>
+<p><strong>READ UNCOMMITTED</strong> (самый слабый уровень)</p>
+<p>Внутри транзакции, после INSERT (или ...) данные сразу-же станут доступны для чтения (Грязное, грязное чтение).</p>
+<p>Все запросы SELECT читают в неблокирующей манере. Изменения незавершенной транзакции могут быть прочитаны в других транзакциях, а изменения эти могут быть еще и впоследствии откачены. Это так называемое «грязное чтение» (несогласованное).</p>
+<p>В остальном все так же, как и при READ COMMITED.</p>
+<p><strong>READ COMMTITED</strong></p>
+<p>Прочитать данные возможно только после вызова COMMIT. Внутри транзакции данные тоже будут еще не доступны.</p>
+<p>Согласованное чтение ничего не блокирует, но каждый раз происходит из свежего снэпшота.</p>
+<p>Блокирующее чтение (SELECT… FOR UPDATE/LOCK IN SHARE MODE), UPDATE и DELETE блокирует только искомые индексные записи (record lock). Таким образом возможна вставка параллельным потоком записей в промежутки между индексами. Промежутки блокируются (gap lock) только при проверках внешних ключей и дублирующихся ключей. Также блокировки просканированных строк (record lock), не удовлетворяющих WHERE, снимаются сразу же после обработки WHERE.</p>
+<p><strong>REPEATABLE READ</strong> (значение по умолчанию)</p>
+<p>Добавленные данные уже будут доступны внутри транзакции, но не будут доступны до подтверждения извне.</p>
+<p>Проблема «фантомного чтения»: когда внутри одной транзакции происходит чтение данных, другая транзакция в этот момент вставляет новые данные, а первая транзакция снова читает те-же самые данные.</p>
+<p>Согласованное чтение (SELECT) ничего не блокирует, читает строки из снэпшота, который создается при первом чтении в транзакции. Одинаковые запросы всегда вернут одинаковый результат.</p>
+<p>Для блокирующего чтения (SELECT… FOR UPDATE/LOCK IN SHARE MODE), UPDATE и DELETE блокировка будет зависит от типа условия. Если условие уникально (WHERE id=42), то блокируется только найденная индексная запись (record lock). Если условие с диапазоном (WHERE id > 42), то блокируются весь диапазон (gap lock или next-key lock).</p>
+<p><strong>SERIALIZABLE</strong> (самый строгий уровень)</p>
+<p>На данном уровне MySQL блокирует каждую строку над которой происходит какое либо действие, это исключает появление проблемы «фантомов».</p>
+<p>Аналогичен REPEATABLE READ, за исключением одного момента. Если autocommit выключен (а при явном старте транзакции он выключен), то все простые запросы SELECT неявно превращаются в SELECT… LOCK IN SHARE MODE, если включен — каждый SELECT идет в отдельной транзакции. Используется, как правило, для того чтобы превратить все запросы чтения в SELECT… LOCK IN SHARE MODE, если этого нельзя сделать в коде приложения.</p>
+<h3>Блокировки</h3>
+<p><code>SELECT… LOCK IN SHARE MODE</code> — блокирует считываемые строки на запись.</p>
+<p>Другие сессии могут читать, но ждут окончания транзакции для изменения затронутых строк. Если же в момент такого SELECT'а строка уже изменена другой транзакцией, но еще не зафиксирована, то запрос ждет окончания транзакции и затем читает свежие данные. Данная конструкция нужна, как правило, для того чтобы получить свежайшие данные (независимо от времени жизни транзакции) и заодно убедиться в том, что их никто не изменит.</p>
+<p><code>SELECT… FOR UPDATE</code> — блокирует считываемые строки на чтение. Точно такую же блокировку ставит обычный UPDATE, когда считывает данные для обновления.</p>
 <h2>Console</h2>
 <h3>mysql</h3>
 <pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
