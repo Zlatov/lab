@@ -1,8 +1,9 @@
 USE `tree`;
 
-DROP PROCEDURE if exists `tree_ct_add`;
-DROP PROCEDURE if exists `tree_ct_del`;
-DROP PROCEDURE if exists `tree_ct_move`;
+DROP PROCEDURE IF EXISTS `tree_ct_add`;
+DROP PROCEDURE IF EXISTS `tree_ct_del`;
+DROP PROCEDURE IF EXISTS `tree_ct_move`;
+DROP TRIGGER IF EXISTS `tai_cttree`;
 
 CREATE PROCEDURE `tree_ct_add`(
 	in param_parent_id int(11),
@@ -13,25 +14,30 @@ BEGIN
 
 	START TRANSACTION;
 
+	-- Проверить родителя и заблокировать его на удаление/изменение!
+
 	-- Вставляем данные
 	INSERT INTO `ct_tree` (`pid`, `header`)
 	VALUES (param_parent_id, param_header);
 
-	-- Определяем id нового элемента
-	SET last_id = LAST_INSERT_ID();
-
-	-- Вставляем связи
-	INSERT INTO `ct_tree_rel` (`aid`, `did`)
-		-- Выбираем связи предков с родителем (did = idРодителя)
-		-- и вставляем записи типа: idПредка, нашId
-		SELECT `aid`, last_id
-		FROM `ct_tree_rel`
-	    WHERE `did` = param_parent_id
-		-- Родитель тоже предок
-	    UNION ALL
-	    SELECT param_parent_id, last_id;
-
 	COMMIT;
+END;
+
+CREATE TRIGGER `tai_cttree` AFTER INSERT ON `ct_tree`
+FOR EACH ROW
+BEGIN
+	IF @disable_triggers IS NULL THEN
+		-- Вставляем связи
+		INSERT INTO `ct_tree_rel` (`aid`, `did`)
+			-- Выбираем связи предков с родителем (did = idРодителя)
+			-- и вставляем записи типа: idПредка, нашId
+			SELECT `aid`, NEW.`id`
+			FROM `ct_tree_rel`
+		    WHERE `did` = NEW.`pid`
+			-- Родитель тоже предок
+		    UNION ALL
+		    SELECT NEW.`pid`, NEW.`id`;
+	END IF;
 END;
 
 CREATE PROCEDURE `tree_ct_del`(

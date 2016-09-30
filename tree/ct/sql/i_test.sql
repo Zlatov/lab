@@ -1,3 +1,5 @@
+SET @disable_triggers = 1;
+
 INSERT INTO `ct_tree`
 (`id`,`pid`,`header`)
 VALUES
@@ -39,3 +41,5 @@ VALUES
 (7,9),
 (4,9),
 (1,9);
+
+SET @disable_triggers = NULL;
