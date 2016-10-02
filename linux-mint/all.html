@@ -18,11 +18,6 @@ pip --proxy proxy.newstar.ru:3128 install --upgrade pip
 
 
 
-Google Chrome
-в ярлык добавить  --password-store=basic
-/usr/bin/google-chrome-stable %U --password-store=basic
-
-
 <p>
     <a href="http://bashrcgenerator.com/">http://bashrcgenerator.com/</a>
 </p>
@@ -36,6 +31,12 @@ if [[ -n $SSH_CONNECTION ]] ; then
 fi
 </pre>
 <h2>Параметры системы</h2>
+<h3>Отключить Связки ключей</h3>
+<h4>Только для одного приложения (Google Chrome)</h4>
+<p>в ярлык добавить  <code>--password-store=basic</code></p>
+<pre>/usr/bin/google-chrome-stable %U --password-store=basic</pre>
+<h4>Отключить полностью</h4>
+<p><kbd>Win</kbd> -> <code>Пароли и ключи</code> -> <kbd>ПКМ</kbd> на <q>Связка ключей по умолчанию</q> -> <q>Изменить пароль</q> -> Ввести старый, новый оставить пустым, перезайти пользователем.</p>
 <h3>Клавиатура</h3>
 <h4>Compose Key - ввод произвольных символов</h4>
 <p>Настройки - Клавиатура - Раскладки - Параметры - Position of Compose key - Right Alt</p>
