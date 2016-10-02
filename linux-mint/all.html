@@ -37,6 +37,47 @@ fi
 <pre>/usr/bin/google-chrome-stable %U --password-store=basic</pre>
 <h4>Отключить полностью</h4>
 <p><kbd>Win</kbd> -> <code>Пароли и ключи</code> -> <kbd>ПКМ</kbd> на <q>Связка ключей по умолчанию</q> -> <q>Изменить пароль</q> -> Ввести старый, новый оставить пустым, перезайти пользователем.</p>
+<h3>Чувствительность мыши</h3>
+<pre class="prettyprint lang-sh">
+$ xinput --list --short
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ Logitech Gaming Mouse G502                id=8    [slave  pointer  (2)]
+⎜   ↳ Logitech Gaming Mouse G502                id=9    [slave  pointer  (2)]
+⎣ Virtual core keyboard                     id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+    ↳ Power Button                              id=6    [slave  keyboard (3)]
+    ↳ Power Button                              id=7    [slave  keyboard (3)]
+    ↳ AT Translated Set 2 keyboard              id=10   [slave  keyboard (3)]
+$ xinput --list-props 8
+Device 'Logitech Gaming Mouse G502':
+Device Enabled (142):   1
+Coordinate Transformation Matrix (144): 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+Device Accel Profile (274): 0
+Device Accel Constant Deceleration (275):   1.500000
+Device Accel Adaptive Deceleration (276):   1.700000
+Device Accel Velocity Scaling (277):    10.000000
+Device Product ID (263):    1133, 49277
+Device Node (264):  "/dev/input/event3"
+Evdev Axis Inversion (278): 0, 0
+Evdev Axes Swap (280):  0
+Axis Labels (281):  "Rel X" (152), "Rel Y" (153), "Rel Horiz Wheel" (272), "Rel Vert Wheel" (273)
+Button Labels (282):    "Button Left" (145), "Button Middle" (146), "Button Right" (147), "Button Wheel Up" (148), "Button Wheel Down" (149), "Button Horiz Wheel Left" (150), "Button Horiz Wheel Right" (151), "Button Side" (267), "Button Extra" (268), "Button Forward" (269), "Button Back" (270), "Button Task" (271), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266), "Button Unknown" (266)
+Evdev Scrolling Distance (283): 1, 1, 1
+Evdev Middle Button Emulation (284):    1
+Evdev Middle Button Timeout (285):  50
+Evdev Third Button Emulation (286): 0
+Evdev Third Button Emulation Timeout (287): 1000
+Evdev Third Button Emulation Button (288):  3
+Evdev Third Button Emulation Threshold (289):   20
+Evdev Wheel Emulation (290):    0
+Evdev Wheel Emulation Axes (291):   0, 0, 4, 5
+Evdev Wheel Emulation Inertia (292):    10
+Evdev Wheel Emulation Timeout (293):    200
+Evdev Wheel Emulation Button (294): 4
+Evdev Drag Lock Buttons (295):  0
+$ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7</pre>
+
 <h3>Клавиатура</h3>
 <h4>Compose Key - ввод произвольных символов</h4>
 <p>Настройки - Клавиатура - Раскладки - Параметры - Position of Compose key - Right Alt</p>
