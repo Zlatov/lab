@@ -9,12 +9,23 @@ CREATE PROCEDURE `tree_ct_add`(
 	in param_parent_id int(11),
 	in param_header varchar(255)
 )
-BEGIN
-	DECLARE last_id INT(11);
+procedure_label:BEGIN
+	DECLARE is_parent_exist INT DEFAULT 0;
 
 	START TRANSACTION;
 
-	-- Проверить родителя и заблокировать его на удаление/изменение!
+	-- Проверить родителя и заблокировать его на удаление/изменение.
+	IF param_parent_id <> 0 THEN
+		SELECT count(`id`) INTO is_parent_exist
+		FROM `ct_tree`
+		WHERE `id` = param_parent_id
+		LOCK IN SHARE MODE;
+		IF is_parent_exist = 0 THEN
+			SELECT 'parent not exist';
+			ROLLBACK;
+			LEAVE procedure_label;
+		END IF;
+	END IF;
 
 	-- Вставляем данные
 	INSERT INTO `ct_tree` (`pid`, `header`)
@@ -23,8 +34,7 @@ BEGIN
 	COMMIT;
 END;
 
-CREATE TRIGGER `tai_cttree` AFTER INSERT ON `ct_tree`
-FOR EACH ROW
+CREATE TRIGGER `tai_cttree` AFTER INSERT ON `ct_tree` FOR EACH ROW
 BEGIN
 	IF @disable_triggers IS NULL THEN
 		-- Вставляем связи
@@ -41,31 +51,48 @@ BEGIN
 END;
 
 CREATE PROCEDURE `tree_ct_del`(
-	in param_id int(11),
-	in param_r tinyint(1)
+	in param_id int(11)
+	-- ,in param_r tinyint(1)
 )
 procedure_label:BEGIN
-	DECLARE count_descendant INT DEFAULT 0;
+	DECLARE is_element_exist INT DEFAULT 0;
+	DECLARE count_childrens INT DEFAULT 0;
 
 	START TRANSACTION;
 
-	SELECT count(`did`)
-	INTO count_descendant
-	FROM `ct_tree_rel`
-	WHERE `aid` = param_id;
-
-	IF count_descendant > 0 AND param_r = 0 THEN
-		SELECT count_descendant;
+	-- Проверить существование элемента и заблокировать его на чтение.
+	SELECT count(`id`) INTO is_element_exist
+	FROM `ct_tree`
+	WHERE `id` = param_id
+	FOR UPDATE;
+	IF is_element_exist = 0 THEN
+		SELECT 'element not exist';
+		ROLLBACK;
 		LEAVE procedure_label;
 	END IF;
 
-	DElETE FROM `ct_tree_rel`
-	WHERE `aid` = param_id OR `did` = param_id;
+	-- Проверить существование наследников.
+	SELECT count(`id`)
+	INTO count_childrens
+	FROM `ct_tree`
+	WHERE `pid` = param_id;
+
+	IF count_childrens > 0 THEN
+		SELECT 'element has children';
+		ROLLBACK;
+		LEAVE procedure_label;
+	END IF;
 
 	DElETE FROM `ct_tree`
 	WHERE `id` = param_id;
 
 	COMMIT;
+END;
+
+CREATE TRIGGER `tbd_cttree` BEFORE DElETE ON `ct_tree` FOR EACH ROW
+BEGIN
+		DElETE FROM `ct_tree_rel`
+		WHERE `aid` = OLD.`id` OR `did` = OLD.`id`;
 END;
 
 CREATE PROCEDURE `tree_ct_move`(
@@ -74,22 +101,48 @@ CREATE PROCEDURE `tree_ct_move`(
 )
 procedure_label:BEGIN
 	DECLARE count_descendant INT DEFAULT 0;
+	DECLARE is_tid_exist INT DEFAULT 0;
 
 	START TRANSACTION;
 
-	-- tid <> eid
+	-- Нельзя перемещать в себя
 	IF param_eid = param_tid THEN
 		SELECT 'into itself';
 		LEAVE procedure_label;
 	END IF;
 
-	-- tid нет среди потомков eid
-	SELECT
-		count(*)
-	INTO
-		count_descendant
-	FROM
-		`ct_tree_rel` r
+	-- Нельзя перемещать несуществующий
+	-- Блокируем на обновление/удаление
+	SELECT count(*)
+	INTO is_tid_exist
+	FROM `ct_tree`
+	WHERE `id` = param_eid
+	LOCK IN SHARE MODE;
+
+	IF is_tid_exist < 1 THEN
+		SELECT 'eid not exist';
+		ROLLBACK;
+		LEAVE procedure_label;
+	END IF;
+
+	-- Нельзя перемещать в несуществующий
+	-- Блокируем на обновление/удаление
+	SELECT count(*)
+	INTO is_tid_exist
+	FROM `ct_tree`
+	WHERE `id` = param_tid
+	LOCK IN SHARE MODE;
+
+	IF is_tid_exist < 1 THEN
+		SELECT 'tid not exist';
+		ROLLBACK;
+		LEAVE procedure_label;
+	END IF;
+
+	-- Нельзя перемещать в своих потомков
+	SELECT count(*)
+	INTO count_descendant
+	FROM `ct_tree_rel` r
 	WHERE
 		r.`aid` = param_eid
 		AND r.`did` = param_tid;
@@ -104,15 +157,26 @@ procedure_label:BEGIN
 	SET `pid` = param_tid
 	WHERE `id` = param_eid;
 
-	DElETE FROM `ct_tree_rel`
-	WHERE `did` = param_eid;
-
-	INSERT INTO `ct_tree_rel` (`aid`, `did`)
-		SELECT `aid`, param_eid
-		FROM `ct_tree_rel`
-		WHERE `did` = param_tid
-		UNION ALL
-		SELECT param_tid, param_eid;
-
 	COMMIT;
+END;
+
+CREATE TRIGGER `tbu_cttree` BEFORE UPDATE ON `ct_tree` FOR EACH ROW
+BEGIN
+	-- Если родитель изменился.
+	IF OLD.`pid` <> NEW.`pid` THEN
+		-- Удаляем связи элемента с предками.
+		DElETE FROM `ct_tree_rel`
+		WHERE `did` = OLD.`pid`;
+
+		-- Удалить связи потомков элемента со старыми предками!
+		-- Вставить связи между потомками элемента с новыми предками!
+
+		-- Вставляем связи элемента с новыми предками.
+		INSERT INTO `ct_tree_rel` (`aid`, `did`)
+			SELECT `aid`, OLD.`pid`
+			FROM `ct_tree_rel`
+			WHERE `did` = NEW.`pid`
+			UNION ALL
+			SELECT NEW.`pid`, OLD.`pid`;
+	END IF;
 END;

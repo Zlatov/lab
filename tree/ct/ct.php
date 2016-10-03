@@ -139,9 +139,10 @@ function add()
 function del()
 {
 	global $pdo;
-	$stmt = $pdo->prepare('CALL tree_ct_del(:delid, :recursively)');
+	// $stmt = $pdo->prepare('CALL tree_ct_del(:delid, :recursively)');
+	$stmt = $pdo->prepare('CALL tree_ct_del(:delid)');
 	$stmt->bindValue(':delid', $_POST['delid'], PDO::PARAM_INT);
-	$stmt->bindValue(':recursively', $_POST['recursively'], PDO::PARAM_BOOL);
+	// $stmt->bindValue(':recursively', $_POST['recursively'], PDO::PARAM_BOOL);
 	$stmt->execute();
 	header('Refresh:0');
 }
