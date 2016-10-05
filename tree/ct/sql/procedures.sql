@@ -35,11 +35,15 @@ procedure_label:BEGIN
 END;
 
 CREATE TRIGGER `tai_cttree` AFTER INSERT ON `ct_tree` FOR EACH ROW
-BEGIN
+trigger_label:BEGIN
 	IF @disable_triggers IS NULL THEN
+		-- Если вставляем элемент в корень, то связи не добавляем
+		IF NEW.`pid` = 0 THEN
+			LEAVE trigger_label;
+		END IF;
 		-- Вставляем связи
 		INSERT INTO `ct_tree_rel` (`aid`, `did`)
-			-- Выбираем связи предков с родителем (did = idРодителя)
+			-- Выбираем предков указанного родителя (did = idРодителя)
 			-- и вставляем записи типа: idПредка, нашId
 			SELECT `aid`, NEW.`id`
 			FROM `ct_tree_rel`
@@ -165,73 +169,37 @@ BEGIN
 	-- Если родитель изменился.
 	IF OLD.`pid` <> NEW.`pid` THEN
 
-		-- Удалить связи потомков элемента со старыми предками!
+		-- Удалить связи потомков перемещаемого элемента с предками перемещаемого элемента
 		DElETE r2 FROM `ct_tree_rel` r1
-		-- Присоединим всех родителей (потомков узла)
+		-- Присоединим всех предков найденных потомков (r2.aid)
 		LEFT JOIN `ct_tree_rel` r2 ON r2.`did` = r1.`did`
 		-- Присоединим только тех предков, которые являются предком для узла
 		INNER JOIN `ct_tree_rel` r3 ON r3.`aid` = r2.`aid` and r3.`did` = OLD.`id`
-		-- Условие нахождения потомков узла
+		-- Условие нахождения потомков элемента (r1.did)
 		WHERE r1.`aid` = OLD.`id`;
 
-		-- Удаляем связи элемента с предками.
+		-- Удаляем связи с перемещаемого элемента с предками.
 		DElETE FROM `ct_tree_rel`
 		WHERE `did` = OLD.`id`;
 
-		-- Вставить связи между потомками элемента с новыми предками!
+		-- Вставляем связи между перемещаемым элементом с новыми предками
 		INSERT INTO `ct_tree_rel` (`aid`, `did`)
-			SELECT r1.`aid`, r2.`did`
-			FROM `ct_tree_rel` r1
-			LEFT JOIN `ct_tree_rel` r2 on r2.`aid` = OLD.`id` -- Потомки элемента
-			WHERE r1.`did` = NEW.`pid` -- Предки нового родителя
-			-- Новый родитель тоже предок
-			UNION ALL
-			SELECT NEW.`pid`, r1.`did`
-			FROM `ct_tree_rel` r1
-			WHERE r1.`aid` = OLD.`pid`;
-
-		-- Вставляем связи элемента с новыми предками.
-		INSERT INTO `ct_tree_rel` (`aid`, `did`)
-			SELECT `aid`, OLD.`pid`
+			SELECT `aid`, OLD.`id`
 			FROM `ct_tree_rel`
 			WHERE `did` = NEW.`pid`
 			UNION ALL
-			SELECT NEW.`pid`, OLD.`pid`;
+			SELECT NEW.`pid`, OLD.`id`;
+
+		-- Вставляем связи между предками нового родителя и потомками перемещаемго элемента
+		INSERT INTO `ct_tree_rel` (`aid`, `did`)
+			SELECT r1.`aid`, r2.`did`
+			FROM `ct_tree_rel` r1
+			CROSS JOIN `ct_tree_rel` r2
+			WHERE r1.`did` = NEW.`pid` AND r2.`aid` = OLD.`id`
+			-- А так же связи между новым родителем перемещаемого элемента и его потомками
+			UNION ALL
+			SELECT NEW.`pid`, r1.`did`
+			FROM `ct_tree_rel` r1
+			WHERE r1.`aid` = OLD.`id`;
 	END IF;
 END;
-
-
--- SET @OLDpid = 1;
--- SET @NEWpid = 2;
--- SET @OLDid = 3;
-
--- 		-- Удалить связи потомков элемента со старыми предками!
--- 		DElETE r2 FROM `ct_tree_rel` r1
--- 		LEFT JOIN `ct_tree_rel` r2 ON r2.`did` = r1.`did` -- Присоединим всех родителей (потомков узла)
--- 		INNER JOIN `ct_tree_rel` r3 ON r3.`aid` = r2.`aid` and r3.`did` = @OLDid -- Присоединим только тех предков, которые являются предком для узла
--- 		WHERE r1.`aid` = @OLDid; -- Условие нахождения потомков узла
-
--- 		-- Удаляем связи элемента с предками.
--- 		DElETE FROM `ct_tree_rel`
--- 		WHERE `did` = @OLDid;
-
--- 		-- Вставить связи между потомками элемента с новыми предками!
--- 		INSERT INTO `ct_tree_rel` (`aid`, `did`)
--- 			SELECT r1.`aid`, r2.`did`
--- 			FROM `ct_tree_rel` r1
--- 			LEFT JOIN `ct_tree_rel` r2 on r2.`aid` = @OLDid -- Потомки старого родителя
--- 			WHERE r1.`did` = @NEWpid -- Предки нового родителя
--- 			-- Новый родитель тоже предок
--- 			UNION ALL
--- 			SELECT @NEWpid, r1.`did`
--- 			FROM `ct_tree_rel` r1
--- 			WHERE r1.`aid` = @OLDpid;
-
--- 		-- Вставляем связи элемента с новыми предками.
--- 		INSERT INTO `ct_tree_rel` (`aid`, `did`)
--- 			SELECT `aid`, @OLDpid
--- 			FROM `ct_tree_rel`
--- 			WHERE `did` = @NEWpid
--- 			UNION ALL
--- 			SELECT @NEWpid, @OLDpid;
-
