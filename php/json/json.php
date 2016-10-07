@@ -67,6 +67,13 @@
 			"Scheme"
 		];
 		$json = json_encode($array);
+		echo "json_encode:<pre>";
+		print_r($json);
+		echo "</pre>";
+		$jsondecode = json_decode($json);
+		echo "json_decode:<pre>";
+		print_r($jsondecode);
+		echo "</pre>";
 	?>
 	<script type="text/javascript">
 		var text = '<?= $json ?>';
@@ -74,6 +81,8 @@
 		var data2 = JSON.parse(text);
 		console.log(data);
 		console.log(data2);
+		alert(data);
+		alert(data2);
 	</script>
 </body>
 </html>
