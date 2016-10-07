@@ -28,6 +28,10 @@
 		<button type="submit" name="submitForm" value="addTestValues">Добавить</button>
 	</fieldset>
 	<fieldset>
+		<legend>Добавить рандомное дерево</legend>
+		<button type="submit" name="submitForm" value="addRandValues">Добавить</button>
+	</fieldset>
+	<fieldset>
 		<legend>Добавление</legend>
 		в id: <input type="text" name="pid" placeholder="pid (0|1|..)" value="5">
 		header: <input type="text" name="header" placeholder="header" value=")))">
@@ -94,6 +98,10 @@ if (isset($_POST['submitForm'])) {
 			addTestValues();
 			break;
 
+		case 'addRandValues':
+			addRandValues();
+			break;
+
 		case 'add':
 			add();
 			break;
@@ -154,10 +162,6 @@ function move()
 	$stmt->bindValue(':eid', $_POST['eid'], PDO::PARAM_INT);
 	$stmt->bindValue(':tid', $_POST['tid'], PDO::PARAM_INT);
 	$stmt->execute();
-	$array = $stmt->fetchAll();
-	echo "<pre>";
-	print_r($array);
-	echo "</pre>";
 }
 
 function selectParents()
@@ -229,6 +233,40 @@ function addTestValues()
 	$stmt = $pdo->exec($sql);
 	header('Refresh:0');
 }
+
+function addRandValues()
+{
+	global $pdo;
+	$stmt = $pdo->prepare('CALL tree_ct_add(:pid, :header)');
+	// 5 = 5
+	// 5 + 5*2 = 15
+	// 5 + 5*2 + 5*2*2 = 35
+	// 5 + 5*2 + 5*2*2 + 5*2*2*2 = 75
+	// 5 + 5*2 + 5*2*2 + 5*2*2*2 + 5*2*2*2*1 = 115
+	for ($i=1; $i <= 115; $i++) {
+		switch (true) {
+			case $i<=5:
+				$pid = 0;
+				break;
+			case $i<=15:
+				$pid = mt_rand(1,5);
+				break;
+			case $i<=35:
+				$pid = mt_rand(6,15);
+				break;
+			case $i<=75:
+				$pid = mt_rand(16,35);
+				break;
+			default:
+				$pid = mt_rand(36,75);
+				break;
+		}
+		$stmt->bindValue(':header', 'e'.$i, PDO::PARAM_STR);
+		$stmt->bindValue(':pid', $pid, PDO::PARAM_INT);
+		$stmt->execute();
+	}
+}
+
 function fullTree()
 {
 	global $pdo;
