@@ -14,6 +14,8 @@
 </head>
 <body>
 <h1><a href="">ct</a></h1>
+<h2>добавить ордер</h2>
+<h2>желательно добавить level</h2>
 <form method="post">
 	<fieldset>
 		<legend>Пересоздать базу</legend>
@@ -281,12 +283,17 @@ function fullTree()
 			'header' => $row->header,
 		];
 	}
+	shuffle($tree);
+	echo "<pre>";
+	print_r($tree);
+	echo "</pre>";
+	// die();
 	$tree = transformToTree($tree);
 	$html = treeForPrint($tree);
 	echo $html;
 }
 
-// Преобразование
+// Преобразование массива в упорядоченное дерево с помощью рекурсивного обхода
 function transformToTree($array, $parentIdOfZeroLevel = 0) {
 	$result = [];
 	$level = 0;
@@ -311,6 +318,13 @@ function transformToTree($array, $parentIdOfZeroLevel = 0) {
 		}
 	}
 	return $result;
+}
+
+// Преобразование массива в упорядоченное дерево за 1 проход
+function toMultidimensionalTree($array) {
+	foreach ($array as $key => $value) {
+		# code...
+	}
 }
 
 function treeForPrint($tree)
