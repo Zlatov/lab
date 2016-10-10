@@ -284,13 +284,16 @@ function fullTree()
 		];
 	}
 	shuffle($tree);
-	echo "<pre>";
-	print_r($tree);
-	echo "</pre>";
+	// echo "<pre>";
+	// print_r($tree);
+	// echo "</pre>";
 	// die();
-	$tree = transformToTree($tree);
-	$html = treeForPrint($tree);
-	echo $html;
+	$a = transformToTree($tree);
+	$html1 = treeForPrint($a);
+	$a = toMultidimensionalTree($tree);
+	$html2 = echoMultidimensionalTree($a);
+	echo $html1;
+	echo $html2;
 }
 
 // Преобразование массива в упорядоченное дерево с помощью рекурсивного обхода
@@ -321,10 +324,112 @@ function transformToTree($array, $parentIdOfZeroLevel = 0) {
 }
 
 // Преобразование массива в упорядоченное дерево за 1 проход
-function toMultidimensionalTree($array) {
-	foreach ($array as $key => $value) {
-		# code...
-	}
+function toMultidimensionalTree($array)
+{
+    $return = [];
+    $cache = [];
+    // Для каждого элемента
+    foreach ($array as $key => $value) {
+        // Если нет родителя элемента, и элемент не корневой,
+        // тогда создаем родителя в возврат а ссылку в кэш
+        if (!isset($cache[$value['pid']]) && ($value['pid'] != 0)) {
+            $return[$value['pid']] = [
+                'id' => $value['pid'],
+                'header' => $value['header'],
+                'pid' => null,
+                'childrens' => [],
+            ];
+            $cache[$value['pid']] = &$return[$value['pid']];
+        }
+        // Если элемент уже был создан, значит он был чьим-то родителем, тогда
+        // обновим в нем информацию о его родителе
+        if (isset($cache[$value['id']])) {
+            $cache[$value['id']]['pid'] = $value['pid'];
+            // Если этот элемент не корневой,
+            // тогда переместим его в родителя, и обновим ссылку в кэш
+            if ($value['pid'] != 0) {
+                $cache[$value['pid']]['childrens'][$value['id']] = $return[$value['id']];
+                unset($return[$value['id']]);
+                $cache[$value['id']] = &$cache[$value['pid']]['childrens'][$value['id']];
+            }
+        }
+        // Иначе, элемент новый, родитель уже создан, добавим в родителя
+        else {
+            // Если элемент не корневой - вставляем в родителя беря его из кэш
+            if ($value['pid'] != 0) {
+                // Берем родителя из кэш и вставляем в "детей"
+                $cache[$value['pid']]['childrens'][$value['id']] = [
+                    'id' => $value['id'],
+                    'header' => $value['header'],
+                    'pid' => $value['pid'],
+                    'childrens' => [],
+                ];
+                // Вставляем в кэш ссылку на элемент
+                $cache[$value['id']] = &$cache[$value['pid']]['childrens'][$value['id']];
+            }
+            // Если элемент кокренвой, вставляем сразу в return
+            else {
+                $return[$value['id']] = [
+                    'id' => $value['id'],
+                    'header' => $value['header'],
+                    'pid' => $value['pid'],
+                    'childrens' => [],
+                ];
+                // Вставляем в кэш ссылку на элемент
+                $cache[$value['id']] = &$return[$value['id']];
+            }
+        }
+    }
+    return $return;
+}
+
+function echoMultidimensionalTree($array)
+{
+    $html = "<ul class='tree'>".PHP_EOL;
+	$tplUlBegin = "<ul>".PHP_EOL;
+	$tplUlEnd   = "</ul>".PHP_EOL;
+	$tplLiBegin = "<li>??header?? <small>#??id??</small>".PHP_EOL;
+	$tplLiEnd   = "</li>".PHP_EOL;
+
+    // $html = "&lt;ul class='tree'&gt;".PHP_EOL;
+    // $tplUlBegin = "&lt;ul&gt;".PHP_EOL;
+    // $tplUlEnd = "&lt;/ul&gt;".PHP_EOL;
+    // $tplLiBegin = "&lt;li&gt;??id??".PHP_EOL;
+    // $tplLiEnd = "&lt;/li&gt;".PHP_EOL;
+
+    $level = 0;
+    $parentArray[$level] = $array;
+    while ($level >= 0) {
+        $mode = each($parentArray[$level]);
+        if ($mode !== false) {
+
+            $replace["??id??"] = $mode[0];
+            $replace["??header??"] = $mode[1]['header'];
+            $html .= str_repeat("    ", $level*2 + 1) . str_replace(array_keys($replace),$replace,$tplLiBegin);
+
+            // echo "<pre>";
+            // echo str_repeat("   ", $level);
+            // echo $mode[1]['id'].PHP_EOL;
+            // echo "</pre>";
+            if (count($mode[1]['childrens'])) {
+                $level++;
+                $parentArray[$level] = $mode[1]['childrens'];
+                $html .= str_repeat("    ", $level*2) . "$tplUlBegin";
+            } else {
+                $html .= str_repeat("    ", $level*2 + 1) . "$tplLiEnd";
+            }
+        } else {
+            $html .= ($level>0)?str_repeat("    ", ($level)*2) . "$tplUlEnd":"$tplUlEnd";
+            $html .= ($level>0)?str_repeat("    ", ($level)*2 - 1) . "$tplLiEnd":'';
+            $level--;
+        }
+    }
+
+    return $html;
+
+    // echo "<pre>";
+    // print_r($html);
+    // echo "</pre>";
 }
 
 function treeForPrint($tree)
