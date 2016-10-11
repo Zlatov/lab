@@ -5,7 +5,8 @@ max_file_uploads = 20
 post_max_size = 210M
 </pre>
 <pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
-<h3>Переменные окружения</h3> Если $_ENV пуст - проверить variables_order в php.ini (/etc/php5/apache2/php.ini) (Должно быть E в строке)
+<h3>Переменные окружения</h3>
+<p>Если $_ENV пуст - проверить variables_order в php.ini (/etc/php5/apache2/php.ini) (Должно быть E в строке)</p>
 <pre>;variables_order = "GPCS"
 variables_order = "EGPCS"</pre>
 <p>
@@ -30,14 +31,18 @@ variables_order = "EGPCS"</pre>
     </var>. Setting to "" means no
     <a href="language.variables.predefined.php">superglobals</a> will be set.
 </p>
-<h4>Через apache (модуль mod_env)</h4>
+<h4>Переменные окружения среды</h4>
+<p>получить:</p>
+<pre>getenv('PATH')</pre>
+<h4>Переменные окружения apache (модуль mod_env)</h4>
 <p><a href="http://httpd.apache.org/docs/current/mod/mod_env.html">http://httpd.apache.org/docs/current/mod/mod_env.html</a></p>
-<p>Передать переменную окружения из shell (Passes environment variables from the shell)</p>
-<pre>PassEnv LD_LIBRARY_PATH
-</pre>
+<p>Передать переменную окружения из shell (Passes environment variables from the shell):</p>
+<pre>PassEnv LD_LIBRARY_PATH</pre>
 <p>Установить переменную окружения (Sets environment variables)</p>
 <pre>SetEnv SPECIAL_PATH /foo/bin
 </pre>
+<p>Получить переменную окружения apache:</p>
+<pre>$var = apache_getenv("SPECIAL_PATH");</pre>
 <h2>Функции</h2>
 <h3>iconv - изменение кодировки строки</h3>
 <pre class="prettyprint lang-php">
