@@ -335,7 +335,7 @@ function toMultidimensionalTree($array)
         if (!isset($cache[$value['pid']]) && ($value['pid'] != 0)) {
             $return[$value['pid']] = [
                 'id' => $value['pid'],
-                'header' => $value['header'],
+                'header' => null,
                 'pid' => null,
                 'childrens' => [],
             ];
@@ -345,6 +345,7 @@ function toMultidimensionalTree($array)
         // обновим в нем информацию о его родителе
         if (isset($cache[$value['id']])) {
             $cache[$value['id']]['pid'] = $value['pid'];
+            $cache[$value['id']]['header'] = $value['header'];
             // Если этот элемент не корневой,
             // тогда переместим его в родителя, и обновим ссылку в кэш
             if ($value['pid'] != 0) {

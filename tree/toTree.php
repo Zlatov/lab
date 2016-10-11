@@ -54,7 +54,7 @@ $array=[
     ],
 ];
 
-function toMultidimensionalTree($array)
+function toMultidimensionalTree($array, $idOfTheRoot = 0, $nameOfTheParentKey = 'pid')
 {
     $return = [];
     $cache = [];
@@ -62,44 +62,44 @@ function toMultidimensionalTree($array)
     foreach ($array as $key => $value) {
         // Если нет родителя элемента, и элемент не корневой,
         // тогда создаем родителя в возврат а ссылку в кэш
-        if (!isset($cache[$value['pid']]) && ($value['pid'] != 0)) {
-            $return[$value['pid']] = [
-                'id' => $value['pid'],
-                'pid' => null,
+        if (!isset($cache[$value[$nameOfTheParentKey]]) && ($value[$nameOfTheParentKey] != $idOfTheRoot)) {
+            $return[$value[$nameOfTheParentKey]] = [
+                'id' => $value[$nameOfTheParentKey],
+                $nameOfTheParentKey => null,
                 'childrens' => [],
             ];
-            $cache[$value['pid']] = &$return[$value['pid']];
+            $cache[$value[$nameOfTheParentKey]] = &$return[$value[$nameOfTheParentKey]];
         }
         // Если элемент уже был создан, значит он был чьим-то родителем, тогда
         // обновим в нем информацию о его родителе
         if (isset($cache[$value['id']])) {
-            $cache[$value['id']]['pid'] = $value['pid'];
+            $cache[$value['id']][$nameOfTheParentKey] = $value[$nameOfTheParentKey];
             // Если этот элемент не корневой,
             // тогда переместим его в родителя, и обновим ссылку в кэш
-            if ($value['pid'] != 0) {
-                $cache[$value['pid']]['childrens'][$value['id']] = $return[$value['id']];
+            if ($value[$nameOfTheParentKey] != $idOfTheRoot) {
+                $cache[$value[$nameOfTheParentKey]]['childrens'][$value['id']] = $return[$value['id']];
                 unset($return[$value['id']]);
-                $cache[$value['id']] = &$cache[$value['pid']]['childrens'][$value['id']];
+                $cache[$value['id']] = &$cache[$value[$nameOfTheParentKey]]['childrens'][$value['id']];
             }
         }
         // Иначе, элемент новый, родитель уже создан, добавим в родителя
         else {
             // Если элемент не корневой - вставляем в родителя беря его из кэш
-            if ($value['pid'] != 0) {
+            if ($value[$nameOfTheParentKey] != $idOfTheRoot) {
                 // Берем родителя из кэш и вставляем в "детей"
-                $cache[$value['pid']]['childrens'][$value['id']] = [
+                $cache[$value[$nameOfTheParentKey]]['childrens'][$value['id']] = [
                     'id' => $value['id'],
-                    'pid' => $value['pid'],
+                    $nameOfTheParentKey => $value[$nameOfTheParentKey],
                     'childrens' => [],
                 ];
                 // Вставляем в кэш ссылку на элемент
-                $cache[$value['id']] = &$cache[$value['pid']]['childrens'][$value['id']];
+                $cache[$value['id']] = &$cache[$value[$nameOfTheParentKey]]['childrens'][$value['id']];
             }
             // Если элемент кокренвой, вставляем сразу в return
             else {
                 $return[$value['id']] = [
                     'id' => $value['id'],
-                    'pid' => $value['pid'],
+                    $nameOfTheParentKey => $value[$nameOfTheParentKey],
                     'childrens' => [],
                 ];
                 // Вставляем в кэш ссылку на элемент
