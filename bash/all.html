@@ -163,6 +163,7 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 <p><code>cp -r ./baz ./qux</code> — скопировать каталог baz в другой каталог qux (./qux/baz).</p>
 <h3>ln</h3>
 <p><code>ln -s /path_to_folder /path_from_folder/linkName</code></p>
+<p>Скопировать <strong>Много</strong> файлов используя <var>ls</var> <var>xargs</var>: <code>ls -1 | xargs -I {} cp {} /home/production/project/web/base/files/{}</code></p>
 <ul>
     <li>/path_to_folder - на что будем указывать</li>
     <li>/path_from_folder_link - папка в которой создадим ссылку</li>
