@@ -6,6 +6,10 @@
     max-height: 500px;
 }
 
+#tocHome {
+    padding: 5px 10px;
+}
+
 #toc a {
     margin-top: 1px;
 }

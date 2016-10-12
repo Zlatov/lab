@@ -1,5 +1,6 @@
 $(document).ready(function() {
     // $("#toc").append('<p>Содержание:</p>');
+    $("#toc").append('<p id="tocHome"><a href="/">Lab</a></p>');
     $("#toc").append('<ul class="nav nav-pills nav-stacked"></ul>');
     $("h2").each(function(i) {
         var current = $(this);
