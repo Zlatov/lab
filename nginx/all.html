@@ -1,0 +1,18 @@
+<h2>Установка</h2>
+<h2>Настойки</h2>
+<h3>Разные версии php из-под разных пользователей для разных хостов</h3>
+<ul>
+	<li>Создаем pool в php-FPM</li>
+	<li>
+		<pre class="prettyprint lang-sh">service php5.6-fpm restart</pre>
+	</li>
+</ul>
+<h3>Передача переменных окружения через сокет (пул)</h3>
+<p><code class="prettyprint lang-sh">nano /etc/php5.6/fpm/pool.d/username.conf</code></p>
+<pre>
+env[SIGN-FORUM_DB_HOST] = localhost
+env[SIGN-FORUM_DB_PORT] = 
+env[SIGN-FORUM_DB_NAME] = ...
+env[SIGN-FORUM_DB_USER] = ...
+env[SIGN-FORUM_DB_PASS] = ...
+</pre>
