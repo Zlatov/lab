@@ -130,6 +130,7 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 <p><code>rm -r ./*</code> — рекурсивно удалить всё из папки (не удаляет .htaccess)</p>
 <p><code>rm .htaccess</code> — удалить файл .htaccess</p>
 <p><code>rm -rf mydir</code> — рекурсивно удалить без подтверждения и кода ошибочного завершения файл (или директорию) mydir.</p>
+Если файлов много, то либо с xargs: ls -1 /path/to/files/ | xargs -I rm /path/to/files/{}
 <h3>mv</h3>
 <ul>
     <li><code>–f</code>, не запрашивать подтверждения операций.</li>
@@ -270,6 +271,23 @@ $ scp ?
 <pre>user@server ~/some/path/from/user/folder $ pwd
 /home/user/some/path/from/user/folder</pre>
 <h2>Наработки</h2>
+<h3>Цветной вывод текста echo color</h3>
+<pre>
+TEXT_BOLD='\033[1m'
+COLOR_RED='\033[31m'
+COLOR_GREEN='\033[32m'
+STYLE_DEFAULT='\033[0m'
+
+# echo -en $COLOR_GREEN
+# echo -en $TEXT_BOLD
+echo -e "${TEXT_BOLD}adfsdfs asdv assd"
+# echo -en $STYLE_DEFAULT
+echo -en $COLOR_RED
+echo "sadgf fsdfgh"
+echo -en $STYLE_DEFAULT
+echo "$scriptPath"
+echo "dsac bdsbcdesc"
+</pre>
 <h3>Изменить заголовки окон программы Sublime Text</h3>
 <pre>
 #!/bin/bash

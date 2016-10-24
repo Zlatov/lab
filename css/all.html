@@ -76,3 +76,17 @@ span:nth-child(2n-3) {
 <h3>Стили для боксов</h3>
 <h3></h3>
 <h4></h4>
+<h2>Наработки</h2>
+<h3>Многоуровневая нумерация вложенных списков ol</h3>
+<pre class="prettyprint lang-css">
+ol>li{
+    display:block
+}
+ol>li:before{
+    content:counters(item,".") ". ";
+    counter-increment:item
+}
+ol{
+    counter-reset:item
+}
+</pre>

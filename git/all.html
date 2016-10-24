@@ -206,8 +206,48 @@ git fetch origin master
 После этого в гит статус покажет:
 <pre>Changes to be committed:
   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)</pre>
-Ну и:
-<pre>git reset HEAD config.php</pre>
+<p>Файл остался однако он удален из индекса, поэтому мы увидим две записи (файл удален, сделайте ресет для отмены удаления И есть неотслеживаемый файл):</p>
+<pre>
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+    deleted:    config.php
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    config.php
+</pre>
+<p>Далее два варианта, либо мы его физически удалим и вторая запись пропадет, либо мы внесем файл в .gitignore и вторая запись пропадет. (2):</p>
+<pre>
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+    deleted:    config.php
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+    modified:   .gitignore
+</pre>
+<p>Добавим изменения файла <var>.gitignore</var> в индекс:</p>
+<pre>
+git add .gitignore
+git status
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use &quot;git push&quot; to publish your local commits)
+
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+    modified:   .gitignore
+    deleted:    config.php
+</pre>
+<p>Закомитим и запушим что есть (удаление файла из индекса и изменения в .gitignore). После получения этих изменений удаленными репозиториям в них файл config.php будет удален!!!</p>
+
+
 <h3>Syntax gitignore</h3>
 <pre>
 somefile
