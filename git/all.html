@@ -250,14 +250,21 @@ Changes to be committed:
 
 <h3>Syntax gitignore</h3>
 <pre>
+# Комментарий
+
+# Проигнорировать все кроме файлов...:
+*
+!.gitignore
+
+# Проигнорировать файл:
 somefile
 *.someextensionoffiles
+# Проигнорировать все файлы в папке:
 somefolder/
+# Проигнорировать все файлы во всех папках с именем anyfoldersnameinproject:
 **/anyfoldersnameinproject
 
-#comment in git ignore
-#combined syntax:
-
+# Можно комбинировать:
 some/path/*/onelevel
 some/path/**/anylevel/*.thisfiles
 </pre>

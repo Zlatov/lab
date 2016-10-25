@@ -2,9 +2,32 @@
 <p><code>composer create-project --prefer-dist yiisoft/yii2-app-advanced ./</code></p>
 <p><code>composer create-project --prefer-dist yiisoft/yii2-app-basic ./</code></p>
 <p>Затем только <code>git init</code>, <code>git remote add...</code></p>
-<h2>Config</h2>
-<h3>Dev or Prod</h3>
-<p>In <code>web/index.php</code>:</p>
+<h2>Первичная настройка</h2>
+<h3>ЧПУ</h3>
+<p><var>.htaccess</var></p>
+<pre>RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php</pre>
+<p>В <var>.gitignore</var> добавить</p>
+<pre>.htaccess</pre>
+<p>
+    В файле <var>frontend/config/main.php</var> отредактировать <q>urlManager</q>
+</p>
+<pre>
+            'urlManager' =&gt; [
+                'enablePrettyUrl' =&gt; true,
+                'showScriptName' =&gt; false,
+                'enableStrictParsing' =&gt; true,
+                'rules' =&gt; [
+                    '' =&gt; 'site/index',
+                    '&lt;action&gt;' =&gt; 'site/&lt;action&gt;',
+                ],
+            ],
+</pre>
+<h3>Дебагер на Dev</h3>
+<p>В файле <var>web/index.php</var>:</p>
 <pre class="prettyprint lang-php">
 /*
 defined('YII_DEBUG') or define('YII_DEBUG', true);
@@ -14,6 +37,7 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 </pre>
+<h2>Конфигурация</h2>
 <p>These changes affect the type of error.</p>
 <h3>Rules</h3>
 <pre class="prettyprint lang-php">
