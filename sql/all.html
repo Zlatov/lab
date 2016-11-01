@@ -105,6 +105,16 @@ DROP TABLE IF EXISTS `ct_tree_rel`;
 </pre>
 <h3>COALESCE</h3>
 <p>Возвращает первый в списке элемент со значением, не равным NULL: <code>SELECT COALESCE(NULL,2,NULL,1) -> 2;</code></p>
+<h3>HAVING</h3>
+<p>HAVING – применяется для фильтрации функций и столбцов сгруппированных при помощи GROUP BY указанных в SELECT.</p>
+<p>Другими словами применяется для агрегатных функций(COUNT(), MAX() …) и столбцов указанных в выражении SELECT и обработанных GROUP BY.</p>
+<pre class="prettyprint lang-sql">
+SELECT t.topic_id, t.topic_title, count(p.post_id) as countpost
+FROM $dbName.forum_topics t
+LEFT JOIN $dbName.forum_posts p ON p.topic_id = t.topic_id
+GROUP BY t.topic_id
+HAVING countpost = 0
+</pre>
 <h3>LAST_INSERT_ID()</h3>
 <p>Возвращает последний вставленный id</p>
 <pre>

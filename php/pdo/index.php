@@ -13,12 +13,12 @@ $dsn = "mysql:host=$host;dbname=$dbName;charset=$charset";
 // Соединение
 $opt = array(
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+	// PDO::ATTR_ERRMODE - Режим сообщений об ошибках.
+	// PDO::ERRMODE_EXCEPTION - Выбрасывать исключения.
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+	// PDO::ATTR_DEFAULT_FETCH_MODE - Задает режим выборки данных по умолчанию.
+	// PDO::FETCH_ASSOC: возвращает массив, индексированный именами столбцов результирующего набора
 );
-// PDO::ATTR_ERRMODE - Режим сообщений об ошибках.
-// PDO::ERRMODE_EXCEPTION - Выбрасывать исключения.
-// PDO::ATTR_DEFAULT_FETCH_MODE - Задает режим выборки данных по умолчанию.
-// PDO::FETCH_ASSOC: возвращает массив, индексированный именами столбцов результирующего набора
 $pdo = new PDO($dsn, $user, $password, $opt);
 
 // Выполнение запросов

@@ -60,3 +60,15 @@ SET
 WHERE
     user_id = ...;
 </pre>
+<h2>Пользователь</h2>
+<pre class="prettyprint lang-php">
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include($phpbb_root_path . 'common.' . $phpEx);
+$user-&gt;session_begin();
+echo &quot;&lt;pre&gt;&quot;;
+print_r($user-&gt;data['session_id']);
+echo &quot;&lt;/pre&gt;&quot;;
+die();
+</pre>
