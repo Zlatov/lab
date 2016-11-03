@@ -244,10 +244,19 @@ SELECT @@tx_isolation;</pre>
 <p><code>SELECT… FOR UPDATE</code> — блокирует считываемые строки на чтение. Точно такую же блокировку ставит обычный UPDATE, когда считывает данные для обновления.</p>
 <h2>Console</h2>
 <h3>mysql</h3>
-<pre>mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
-<pre>mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
-<pre>mysql -uroot -p -e "show databases"</pre>
-<pre>mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
+<pre lang="prettyprint lang-sh">
+# Полные имена параметров
+mysql --host=localhost --port=3306 --database=webhobru_yii --user=root --password --execute="select * from user"</pre>
+<pre lang="prettyprint lang-sh">
+# Краткие имена параметров
+mysql -hlocalhost -P3306 -Dwebhobru_yii -uroot -p -e "select * from user"</pre>
+<pre lang="prettyprint lang-sh">
+# Вывести базы данных (доступные указанному пользователю!)
+mysql -uroot -p -e "show databases"</pre>
+<pre lang="prettyprint lang-sh">mysql -uroot --password="" -Dwebhobru_yii -e "call buy_list(1)"</pre>
+<pre lang="prettyprint lang-sh">
+# Не выводить имена полей (параметр -s):
+mysql --host=$DBHOST --port=3306 --user="$DBUSER" --password="$DBPASS" -s --execute="SELECT concat(\`1\`, '.', \`2\`, '.', \`3\`) as version FROM newzlatov.sqlversion LIMIT 1;"</pre>
 <p>Прям выполнить sql файл</p>
 <pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
 <h3>Резервное копирование и восстановление (bash)</h3>
