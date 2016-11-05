@@ -94,16 +94,45 @@ UPDATE [LOW_PRIORITY] [IGNORE] tbl_name [, tbl_name ...]
 <h3>CREATE TABLE</h3>
 <pre>CREATE TABLE `forum_advt` ()</pre>
 <pre>CREATE TABLE IF NOT EXISTS `forum_advt`</pre>
-<p><strong>Пример</strong></p>
+<p><strong>Примеры</strong></p>
 <pre class="prettyprint lang-sql">
+CREATE TABLE `pubsec` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `header` VARCHAR(160) NOT NULL,
+  `sid` VARCHAR(160) NOT NULL,
+  `title` VARCHAR(160) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `description` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `keywords` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_pubsec_sid` (`sid` ASC),
+  UNIQUE INDEX `uq_pubsec_header` (`header` ASC)
+)
+ENGINE InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+CREATE TABLE `tag` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `header` VARCHAR(160) NOT NULL,
+  `sid` VARCHAR(160) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_tag_sid` (`sid` ASC),
+  UNIQUE INDEX `uq_tag_header` (`header` ASC)
+)
+ENGINE InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
 CREATE TABLE `pub` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `pubsec_id` INT UNSIGNED NOT NULL,
   `header` VARCHAR(160) NOT NULL,
   `sid` VARCHAR(160) NOT NULL,
-  `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` TIMESTAMP NOT NULL DEFAULT '1970-01-02 00:00:01',
   `show` ENUM('true', 'false') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'true',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL,
   `introtext` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `text` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `title` VARCHAR(160) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -111,9 +140,26 @@ CREATE TABLE `pub` (
   `keywords` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `uq_pub_sid` (`sid` ASC),
-  UNIQUE INDEX `uq_pub_header` (`header` ASC),
-  KEY `ix_pub_pubsecid` (`pubsec_id`),
-  CONSTRAINT `fk_pub_pubsecid` FOREIGN KEY (`pubsec_id`) REFERENCES `pubsec` (`id`) ON UPDATE CASCADE
+  UNIQUE KEY `uq_pub_header` (`header` ASC),
+  INDEX `ix_pub_pubsecid` (`pubsec_id`),
+  CONSTRAINT `fk_pub_pubsecid` FOREIGN KEY (`pubsec_id`) REFERENCES `pubsec` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+ENGINE InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+CREATE TABLE `pub_tag` (
+  `pub_id` INT UNSIGNED NOT NULL,
+  `tag_id` INT UNSIGNED NOT NULL,
+  INDEX `ix_pubtag_pubid` (`pub_id` ASC),
+  INDEX `ix_pubtag_tagid` (`tag_id` ASC),
+  -- UNIQUE KEY `uq_pubtag_pubtagid` (`pub_id` ASC, `tag_id` ASC),
+  UNIQUE KEY `uq_pubtag_pubtagid` (`pub_id` ASC, `tag_id` ASC),
+  -- KEY `ix_pubtag_pubid` (`pub_id`),
+  CONSTRAINT `fk_pubtag_pubid` FOREIGN KEY (`pub_id`) REFERENCES `pub` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  -- KEY `ix_pubtag_tagid` (`tag_id`),
+  CONSTRAINT `fk_pubtag_tagid` FOREIGN KEY (`tag_id`) REFERENCES `pubsec` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
 )
 ENGINE InnoDB
 AUTO_INCREMENT 1
