@@ -451,6 +451,16 @@ SHOW GRANTS FOR 'userLogin'@'localhost';
 <p>Do not forget
     <mark>FLUSH</mark>!</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
+<h2>Тестирование</h2>
+<h3>Отключить кеширование для определения времени</h3>
+<pre class="prettyprint lang-sql">SELECT SQL_NO_CACHE ...</pre>
+<h3>Статус таблиц БД</h3>
+Сколько дискового пространства занимаю данные таблиц, ключи и другое...
+<pre class="prettyprint lang-sql">SHOW TABLE STATUS;
+SHOW TABLE STATUS FROM signforum_new;</pre>
+<h3>EXPLAIN</h3>
+<pre class="prettyprint lang-sql">EXPLAIN table_name; -- ключи...
+EXPLAIN SELECT ...; -- план выполнения запроса</pre>
 <h2>Ошибки</h2>
 <h3>1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column To disable safe mode, toggle the option in Preferences</h3>
 <pre class="prettyprint lang-sql">
