@@ -65,6 +65,8 @@
 	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 	<!-- TOC -->
 	<script src="../theme/toc/js/js.js" type="text/javascript"></script>
+	<!-- copyToClipboard -->
+	<script src="../theme/copyToClipboard/js.js" type="text/javascript"></script>
 </body>
 
 </html>

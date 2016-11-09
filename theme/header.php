@@ -23,6 +23,8 @@ $header = $last?'All ' . $last:'All';
 		<![endif]-->
 	<!-- TOC -->
 	<link rel="stylesheet" type="text/css" href="/theme/toc/css/css.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="/theme/font-awesome/css.css">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="/theme/css/custom.css">
 </head>
