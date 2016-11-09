@@ -214,8 +214,25 @@ Foto::deleteAll(['album_id' => $this->id]); // Не перебирает мод�
 $product = Yii::$app->db->createCommand('call product_view(:id);')
     ->bindValue(':id', $_GET['id'])
     ->queryOne();</pre>
-<h2>View</h2>
-<h3>ActiveForm</h3>
+<h2>Представления (view)</h2>
+<h3>Создание форм с помощью ActiveForm</h3>
+<h4>Выпадающие списки</h4>
+<p>Стандартное:</p>
+<pre class="prettyprint lang-html">
+    &lt;!-- Стандартное при генерации CRUD --&gt;
+    &lt;?= $form-&gt;field($model, 'show')-&gt;dropDownList([ 'true' =&gt; 'Показывать', 'false' =&gt; 'Прятать', ], ['prompt' =&gt; '']) ?&gt;
+</pre>
+<p>Получение списка для <code class="copyToClipboard">вывода в</code> контроллере:</p>
+<pre class="prettyprint lang-php copyToClipboard">
+
+    $pubsecs = Pubsec::find()->all();
+    $pubsecs = ArrayHelper::map($pubsecs, 'id', 'header');
+</pre>
+<p>Выыод во вьюхе:</p>
+<pre class="prettyprint lang-html">
+    &lt;?= $form-&gt;field($model, 'pubsec_id')-&gt;dropDownList($pubsecs, ['prompt' =&gt; 'Выберите секцию…']) ?&gt;
+</pre>
+<hr>
 <pre class="prettyprint lang-php">
     &lt;?php if ($model-&gt;iconsrc &amp;&amp; file_exists(Yii::getAlias('@frontend/web/', $model-&gt;iconsrc))): ?&gt;
         &lt;p&gt;Аватар: &lt;/p&gt;

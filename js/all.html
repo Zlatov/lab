@@ -57,7 +57,8 @@ typeof class C {} === 'function';
 typeof Math.sin === 'function';
 </pre>
 <h2>Function</h2>
-<h3>Event</h3>
+<h3>параметр Event (событие) в функии</h3>
+<p>Посмотреть что из себя представляет событие и элемент на котором оно сработало:</p>
 <pre class="prettyprint lang-js">
 $('#js_add').keyup(function(event){
 	console.log(event.);
@@ -66,6 +67,21 @@ $('#js_add').keyup(function(event){
     event.preventDefault();
     // Или
 	// return false;
+</pre>
+<p>Вот не всегда <var>event.target</var> срабатывает!</p>
+<pre>
+    $('body').on('click', &quot;.copyToClipboardBtn&quot;, function(event){
+        var i = $(event.target).prev().eq(0);
+        console.log(i.length);
+        var i = $(this).prev().eq(0);
+        console.log(i.length);
+        if (i.length) {
+            i = i[0];
+            console.log(i);
+            var succeed = copyToClipboard(i);
+            console.log(succeed);
+        }
+    });
 </pre>
 <h3>Key Kode - Event</h3>
 <pre class="prettyprint lang-js">
