@@ -170,7 +170,7 @@ git fetch origin master
 <pre class="prettyprint lang-bsh">git push -u origin local</pre>
 <p>это отправляет ветку local в удаленный репозиторий и автоматом делает нашу локальную ветку local отслеживаемой с origin/local :)</p>
 <h2>ignore</h2>
-<h3>Methods</h3>
+<h3>Способы игнорирования файлов</h3>
 <p>Есть различные ситуации, в каждой может применяться свой способ игнорирования. Разберу способы.</p>
 <h4><code>.gitignore</code> — исключения в репозитории для всех</h4>
 <p>Игнорирование с помощью создания файла <code>.gitignore</code> прямо в содержимом репозитория приводит к тому, что:</p>
@@ -248,7 +248,7 @@ Changes to be committed:
 <p>Закомитим и запушим что есть (удаление файла из индекса и изменения в .gitignore). После получения этих изменений удаленными репозиториям в них файл config.php будет удален!!!</p>
 
 
-<h3>Syntax gitignore</h3>
+<h3>Syntax (синтаксис) gitignore</h3>
 <pre>
 # Комментарий
 
@@ -268,3 +268,15 @@ somefolder/
 some/path/*/onelevel
 some/path/**/anylevel/*.thisfiles
 </pre>
+
+<h3>Игнорирование строк в файлах</h3>
+<p>С помощью фильтров.</p>
+<p>Глобальные настройки гита, файл <var>~/.gitconfig</var> добавляем фильтр:</p>
+<pre class="copyToClipboard">
+[filter "gitignore"]
+    clean = sed /gitignorethisline$/d
+    smudge = cat
+</pre>
+<p>Репозиторий гит, добавляем файл <var>.gitattributes</var> с содержимым:</p>
+<pre class="copyToClipboard">*.sublime-settings filter=gitignore</pre>
+
