@@ -4,6 +4,8 @@ DROP PROCEDURE IF EXISTS `tree_ct_add`;
 DROP PROCEDURE IF EXISTS `tree_ct_del`;
 DROP PROCEDURE IF EXISTS `tree_ct_move`;
 DROP TRIGGER IF EXISTS `tai_cttree`;
+DROP TRIGGER IF EXISTS `tbd_cttree`;
+DROP TRIGGER IF EXISTS `tbu_cttree`;
 
 CREATE PROCEDURE `tree_ct_add`(
 	in param_parent_id int(11),
