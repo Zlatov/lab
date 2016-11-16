@@ -29,3 +29,143 @@ sudo apt-get install build-essential
 <p><code class="copyToClipboard">rails g controller controller_name action_name</code></p>
 <p><code class="copyToClipboard">rails routes</code></p>
 <p><code class="copyToClipboard">rails generate scaffold HighScore game:string score:integer</code></p>
+
+<h3>Основные базовые функции операторы...</h3>
+<pre class="prettyprint lang-rb">
+while true
+  ...
+end
+# Эквивалентно:
+loop do
+  ...
+end
+</pre>
+
+<p><code>@var</code> - глобальная переменная</p>
+<p><code>:var</code> - символ</p>
+<p><code>var.inspect</code> - ...</p>
+<p><code>var.methods</code> - список всех доступных методов объекта / классса?...</p>
+<pre class="prettyprint lang-rb">
+puts "aaa" == "aaa"
+puts "aaa" === "aaa"
+puts "aaa".object_id === "aaa".object_id
+puts :aaa === :aaa
+puts "aaa".eql? "aaa"
+puts "aaa".equal? "aaa"
+puts :aaa.eql? :aaa
+puts :aaa.class
+</pre>
+<p><code>chomp</code> - удаляет перенос строки</p>
+<p><code>strip</code> - убирает невидимые символы с начала и с конца</p>
+<p><code>"string".reverse</code> - "переворачивает" строку</p>
+
+<h4>Регулярные выражение</h4>
+<p><code>/[123]+/ =~ gets.chomp</code> - возвращает 0 или nil</p>
+
+<h4>Массивы</h4>
+<p><code class="copyToClipboard prettyprint lang-rb">.compact</code> - удалить <var>nil</var> из массива</p>
+<p><code class="copyToClipboard prettyprint lang-rb">.reverse</code> - в обратном порядке</p>
+<p><code class="copyToClipboard prettyprint lang-rb">.uniq</code> - уникальные значения</p>
+<p><code class="copyToClipboard prettyprint lang-rb">.sample</code> - случайный элемент массива</p>
+<pre class="prettyprint lang-rb">
+arr = []
+arr = Array.new
+arr = Array.new(5)
+arr = Array.new(5,"aaaaa")
+arr << :a
+arr << :b
+arr << :c
+arr << :d
+p arr.sample
+arr = %w[asd asd asd]
+p arr
+</pre>
+
+<h4>Хэши</h4>
+<pre class="prettyprint lang-rb">
+# Хэши
+h = {
+  :r =&gt; &quot;Камень&quot;,
+  :arr =&gt; arr,
+  :Mike =&gt; 214134,
+  :jes =&gt; '1432352',
+  0 =&gt; ['asd'],
+}
+p h
+h[3] = '3'
+# h[:mike] = 'test'
+p h
+p h[:Mike]
+if h.key? :mike
+  p h[:mike]
+end
+p h[0]
+p h[3]
+
+h.each do |key,value|
+  print key.to_s + ' - '
+  print value.to_s
+  print &quot;\n&quot;
+end
+
+p h.count
+</pre>
+
+<h4>Куча</h4>
+<p><code>salary = 1000</code></p>
+<p><code>puts "Hello #{salary} #{salary + x - 1}"</code></p>
+<p><code>puts "your name is: " + myName</code></p>
+<p><code>age = gets.chomp</code></p>
+<p><code>answer = gets.to_i</code></p>
+<p><code>answer = rand(1..50)</code></p>
+<p><code>exit</code></p>
+<pre class="prettyprint lang-rb">
+print "1 " + rand(1..50).to_s
+print "\n"
+puts "2 " + rand(1..50).to_s
+</pre>
+<pre class="prettyprint lang-rb">
+if var == "Y"
+if var === 1
+if var === "Y"
+if var == "1" &amp;&amp; var == 1 # > >= < <=
+	puts "Some text"
+elseif var == "2"
+	puts "Some text"
+else
+	puts "Some text"
+end
+</pre>
+<pre class="prettyprint lang-rb">
+while 2+2==4
+	puts "Some text"
+	break
+	puts "Some text"
+end
+</pre>
+<pre class="prettyprint lang-rb">
+puts "======="
+(10..11).each do |variable|
+  puts variable
+end
+puts "======="
+(10...11).each do |variable|
+  puts variable
+end
+puts "======="
+("a".."g").each do |variable|
+  puts variable
+end
+puts "======="
+("aa"..."gg").each do |variable|
+  puts variable
+end
+puts "======="
+</pre>
+<pre class="prettyprint lang-rb">
+# делегаты
+add = lambda {
+  puts "add"
+}
+add.call
+</pre>
