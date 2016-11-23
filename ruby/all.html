@@ -1,5 +1,5 @@
-
 <h2>rbenv - управление версиями ruby</h2>
+
 <h3>Установка</h3>
 <p>из гит репозитория <a href="https://github.com/rbenv/rbenv">https://github.com/rbenv/rbenv</a></p>
 <p>так же установить плагин для rbenv для установки версий <a href="https://github.com/rbenv/ruby-build">https://github.com/rbenv/ruby-build</a></p>
@@ -19,26 +19,12 @@
 sudo apt-get install g++
 sudo apt-get install build-essential
 </pre>
+<h3>Полезные пакеты</h3>
+<p><code class="copyToClipboard">gem install awesome_print</code> - пакет для удобного вывода информации об объектах.</p>
+<p>Использование: <code>require "ap"; require "pp"; ap some_object; pp some_object</code></p>
 
-<h2>rails - фреймворк ruby</h2>
 
-<h3>Приложение</h3>
-<p><code class="copyToClipboard">rails new testApp</code></p>
-<p><code class="copyToClipboard">rails s</code></p>
-<p><code class="copyToClipboard">rails s -d</code></p>
-<p><code class="copyToClipboard">ps aux | grep process_name</code></p>
-<p><code class="copyToClipboard">kill -9 process_id</code></p>
-
-<h3>CRUD (scaffold)</h3>
-<p><code class="copyToClipboard">rails g controller controller_name action_name</code></p>
-<p><code class="copyToClipboard">rails routes</code></p>
-<p><code class="copyToClipboard">rails generate scaffold HighScore game:string score:integer</code></p>
-
-<h3>Задачи (task)</h3>
-<p><code>rails g task convertings test_tab_and_ajson</code></p>
-<p><code>rails convertings:test_tab_and_ajson</code></p>
-
-<h3>Основные базовые функции операторы...</h3>
+<h2>Конструкции, операторы...</h2>
 <pre class="prettyprint lang-rb">
 while true
   ...
@@ -67,10 +53,10 @@ puts :aaa.class
 <p><code>strip</code> - убирает невидимые символы с начала и с конца</p>
 <p><code>"string".reverse</code> - "переворачивает" строку</p>
 
-<h4>Регулярные выражение</h4>
+<h3>Регулярные выражение</h3>
 <p><code>/[123]+/ =~ gets.chomp</code> - возвращает 0 или nil</p>
 
-<h4>Массивы</h4>
+<h3>Массивы</h3>
 <p><code class="copyToClipboard prettyprint lang-rb">.compact</code> - удалить <var>nil</var> из массива</p>
 <p><code class="copyToClipboard prettyprint lang-rb">.reverse</code> - в обратном порядке</p>
 <p><code class="copyToClipboard prettyprint lang-rb">.uniq</code> - уникальные значения</p>
@@ -89,7 +75,7 @@ arr = %w[asd asd asd]
 p arr
 </pre>
 
-<h4>Хэши</h4>
+<h3>Хэши</h3>
 <pre class="prettyprint lang-rb">
 # Хэши
 h = {
@@ -119,7 +105,7 @@ end
 p h.count
 </pre>
 
-<h4>Куча</h4>
+<h3>Куча</h3>
 <p><code>salary = 1000</code></p>
 <p><code>puts "Hello #{salary} #{salary + x - 1}"</code></p>
 <p><code>puts "your name is: " + myName</code></p>
@@ -177,3 +163,151 @@ add = lambda {
 }
 add.call
 </pre>
+
+<h2>Ruby ООП</h2>
+<h3>Свойства</h3>
+<pre class="prettyprint lang-rb">
+class ClassName
+  @attr_instance # - свойство экземпляра к которому в данный момент нет доступа извне
+  @attr_instance = "string"
+  puts @instance_attr
+  @@attr_class # - свойство класса к которому в данный момент нет доступа извне
+  @@attr_class = "string"
+  puts @@attr_class
+end
+</pre>
+<pre class="prettyprint lang-rb">
+class ClassName
+  attr_accessor :attr_instance # геттер и сеттер для свойства экземпляра
+  # или так:
+  # attr_reader :attr_instance # геттрер и
+  # attr_writer :attr_instance # сеттер
+  attr_reader :attr_instance_2 # только геттер
+  attr_writer :attr_instance_3 # только сеттер
+  class << self
+    attr_accessor :attr_class # геттер и сеттер для свойства <del>класса</del> блять синглтона
+    attr_reader :attr_class_2 # ...
+    attr_writer :attr_class_3
+  end
+end
+</pre>
+<h3>Методы</h3>
+<pre class="prettyprint lang-rb">
+require &quot;ap&quot;
+require &quot;pp&quot;
+class Cl
+
+  class &lt;&lt; self # инициализация синглтона
+  # или так:
+  # class &lt;&lt; Cl
+    attr_accessor :c # геттер и сеттер синглтона
+    p self # синглтон класса (объект #&lt;Cl:...&gt;)
+  end
+
+  def self.c # геттер статического свойства класса
+    @@c
+  end
+
+  def method_i # метод экземпляра
+    @i = &quot;string_i&quot;
+    puts self # экземпляр класса (объект #&lt;Cl:...&gt;)
+    puts self.class # класс объекта
+    self.methods # последняя строчка - это return
+  end
+
+  def self.method_c # метод класса
+    @@c = &quot;c_class&quot; # устанавливаем значение для статического свойства класса
+    puts self # Класс
+    puts self.class # &quot;Class&quot; - класс нашего класса
+    puts self.c # Обращение к статическому свойству (свойству класса)
+    self.methods
+  end
+
+  # передаем хеш как параметр
+  def some_method some_attribute: nil, some_attribute_2: nil
+    p some_attribute
+  end
+
+  # передаем какие-то объекты как параметры (в том числе и хэш)
+  def some_method_2 var, var_2
+    p var
+    p var_2
+    p var[:some_attribute]
+    p var[:some_attribute_2] if var[:some_attribute_2]
+  end
+
+  attr_reader :a # геттер для свойства экземпляра класса
+
+end
+
+Cl.method_c
+p Cl.c
+
+a = Cl.new
+a.some_method :some_attribute =&gt; &quot;передаем часть хэш&quot;
+a.some_method :some_attribute_2 =&gt; &quot;...&quot;, :some_attribute =&gt; &quot;передаем весь хэш&quot;
+hash = {
+  :some_attribute =&gt; &quot;хэш автоматически распарсивается&quot;
+}
+a.some_method hash
+a.some_method({ :some_attribute =&gt; &quot;Окружить скобками если {}&quot; })
+a.some_method({ some_attribute: &quot;два синтаксиса описания хэш&quot; })
+a.some_method_2 hash, hash
+</pre>
+
+<h3>Различия синглтон, класс, инстанс</h3>
+<pre class="prettyprint lang-rb">
+class Foo  
+  def an_instance_method  
+    puts "I am an instance method"  
+  end  
+  def self.a_class_method  
+    puts "I am a class method"  
+  end  
+end
+
+foo = Foo.new
+
+def foo.a_singleton_method
+  puts "I am a singletone method"
+end
+</pre>
+<pre class="prettyprint lang-rb">
+foo = Foo.new
+
+class << foo
+  def a_singleton_method
+    puts "I am a singleton method"
+  end
+end
+</pre>
+<pre class="prettyprint lang-rb">
+class Foo
+  class << self
+    def a_singleton_and_class_method
+      puts "I am a singleton method for self and a class method for Foo"
+    end
+  end
+end
+</pre>
+
+<h3>Инициализация</h3>
+
+
+<pre class="prettyprint lang-rb">
+class Cl
+  def initialize # - констаруктор экземпляра
+    @attr_i = "initialize2?"
+  end
+  @attr_i = "initialize?" # - задали внутри класса, однако конструктор...
+  puts @attr_i
+  attr_reader :attr_i
+  protected
+    attr_writer :attr_i
+end
+
+a = Cl.new
+# a.attr_i = "sss"
+p a.attr_i
+</pre>
+

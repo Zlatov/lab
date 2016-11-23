@@ -553,7 +553,7 @@ Yii::$app->user->logout();
         ];
     }
 </pre>
-<h3>RBAC (AuthManager)</h3>
+<h3>RBAC (AuthManager) как PhpManager</h3>
 <h4>Подключение (настройка)</h4>
 <p>- это компонент, задаем в конфиге:</p>
 <pre class="prettyprint lang-php">
@@ -870,6 +870,77 @@ use yii\web\ForbiddenHttpException;
             throw new ForbiddenHttpException();
         }
 </pre>
+<h3>RBAC (AuthManager) как DbManager</h3>
+<h4>Прям как внедряю так и записую</h4>
+<p><var>common/config/main.php</var>:</p>
+<pre class="prettyprint lang-php copyToClipboard">
+
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
+</pre>
+<p><var>console/controllers/RbacController.php</var>:</p>
+<p><code class="copyToClipboard">./yii migrate --migrationPath=@yii/rbac/migrations</code> - в консоли</p>
+<pre class="prettyprint lang-php copyToClipboard">
+&lt;?php
+namespace console\controllers;
+
+use Yii;
+use yii\console\Controller;
+
+class RbacController extends Controller
+{
+    public function actionTest()
+    {
+        $auth = Yii::$app-&gt;authManager;
+
+        // добавляем разрешение &quot;createPost&quot;
+        $createPost = $auth-&gt;createPermission('createPost');
+        $createPost-&gt;description = 'Create a post';
+        $auth-&gt;add($createPost);
+
+        // добавляем разрешение &quot;updatePost&quot;
+        $updatePost = $auth-&gt;createPermission('updatePost');
+        $updatePost-&gt;description = 'Update post';
+        $auth-&gt;add($updatePost);
+
+        // добавляем роль &quot;author&quot; и даём роли разрешение &quot;createPost&quot;
+        $author = $auth-&gt;createRole('author');
+        $auth-&gt;add($author);
+        $auth-&gt;addChild($author, $createPost);
+
+        // добавляем роль &quot;admin&quot; и даём роли разрешение &quot;updatePost&quot;
+        // а также все разрешения роли &quot;author&quot;
+        $admin = $auth-&gt;createRole('admin');
+        $auth-&gt;add($admin);
+        $auth-&gt;addChild($admin, $updatePost);
+        $auth-&gt;addChild($admin, $author);
+
+        // Назначение ролей пользователям. 1 и 2 это IDs возвращаемые IdentityInterface::getId()
+        // обычно реализуемый в модели User.
+        $auth-&gt;assign($author, 2);
+        $auth-&gt;assign($admin, 1);
+    }
+}
+</pre>
+<p><code class="copyToClipboard">./yii rbac/test</code></p>
+<p>Меняем в файле <var>frontend/models/SignupForm.php</var> строчку:</p>
+<pre class="prettyprint lang-php">
+        return $user->save() ? $user : null;</pre>
+<p>на:</p>
+<pre class="prettyprint lang-php copyToClipboard">
+
+
+        $user = $user->save() ? $user : null;
+
+        // нужно добавить следующие три строки:
+        $auth = \Yii::$app->authManager;
+        $authorRole = $auth->getRole('author');
+        $auth->assign($authorRole, $user->getId());
+        
+        return $user;
+</pre>
+<p>Регистрируемя, смотрим результат в БД</p>
 <h2>Pjax</h2>
 <h3>Параметры</h3>
 <h4>enablePushState</h4>
