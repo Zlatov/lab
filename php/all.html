@@ -146,8 +146,8 @@ if ($db) {
 </pre>
 <h3>Кратко о функциях</h3>
 <ul>
-<li><code>$pdo->exec($sql);</code> - возвращает количество строк;</li>
-<li><code>$pdo->query($sql);</code> - возвращает объект stmt.</li>
+<li><code>$pdo->exec($sql);</code> - возвращает количество обработанных строк, она для DELETE, UPDATE, INSERT, CREATE TABLE, DROP DATABASE...;</li>
+<li><code>$pdo->query($sql);</code> - возвращает объект stmt (результирующий набор).</li>
 </ul>
 <h3>Выполнение запросов</h3>
 <pre class="prettyprint lang-php">

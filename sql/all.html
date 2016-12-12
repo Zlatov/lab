@@ -57,6 +57,16 @@ INSERT INTO
 VALUES
 	('/', '1'),
 	('/', '1');</pre>
+<pre class="copyToClipboard prettyprint lang-sql">
+INSERT INTO table2
+SELECT * FROM table1;
+</pre>
+<pre class="copyToClipboard prettyprint lang-sql">
+INSERT INTO table2
+(column_name(s))
+SELECT column_name(s)
+FROM table1;
+</pre>
 <h3>DELETE</h3>
 <pre class="prettyprint lang-sql">DELETE [LOW_PRIORITY] [QUICK] FROM table_name
 	       [WHERE where_definition]

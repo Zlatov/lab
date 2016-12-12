@@ -941,6 +941,20 @@ class RbacController extends Controller
         return $user;
 </pre>
 <p>Регистрируемя, смотрим результат в БД</p>
+<h4>Кратко при переезде</h4>
+<pre>
+./sql init
+./sql migrations
+./sql migrate
+./sql data
+cd ..
+./yii migrate --migrationPath=@yii/rbac/migrations
+./yii rbac/init
+
+# Регистрируем пользователя (admin) на сайте!
+
+./yii rbac/admin
+</pre>
 <h2>Pjax</h2>
 <h3>Параметры</h3>
 <h4>enablePushState</h4>
