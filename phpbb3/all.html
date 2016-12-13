@@ -1,7 +1,44 @@
 <h2>Шаблоны</h2>
+<h3>IF</h3>
+<p><strong>Операторы:</strong></p>
+<ul>
+    <li><code>==</code></li>
+    <li><code>!=</code></li>
+    <li><code>&lt;&gt;</code> (то же что и <code>!=</code>)</li>
+    <li><code>!==</code></li>
+    <li><code>===</code></li>
+    <li><code>&gt;</code></li>
+    <li><code>&lt;</code></li>
+    <li><code>&gt;=</code></li>
+    <li><code>&lt;=</code></li>
+    <li><code>&amp;&amp;</code></li>
+    <li><code>||</code></li>
+    <li><code>%</code> [mod]</li>
+    <li><code>!</code> [not]</li>
+    <li><code>+</code></li>
+    <li><code>-</code></li>
+    <li><code>*</code></li>
+    <li><code>/</code></li>
+    <li><code>&lt;&lt;</code> (bitwise shift left)</li>
+    <li><code>&gt;&gt;</code> (bitwise shift right)</li>
+    <li><code>|</code> (bitwise or)</li>
+    <li><code>^</code> (bitwise xor)</li>
+    <li><code>&amp;</code> (bitwise and)</li>
+    <li><code>~</code> (bitwise not)</li>
+    <li><code>is</code> (can be used to join comparison operations)</li>
+</ul>
+<p><strong>Конструкции:</strong></p>
+<pre class="prettyprint lang-html">
+&lt;!-- IF S_ACTION == 'create' --&gt;
+    CREATE
+&lt;!-- ELSEIF S_ACTION == 'index' --&gt;
+    INDEX
+&lt;!-- ENDIF --&gt;
+</pre>
+
 <h3>готовим вывод массива данных в шаблоне</h3>
 <p>
-    <a href="https://wiki.phpbb.com/Tutorial.Template_syntax">https://wiki.phpbb.com/Tutorial.Template_syntax</a>
+    <a href="https://wiki.phpbb.com/Tutorial.Template_syntax" target="_blank">https://wiki.phpbb.com/Tutorial.Template_syntax</a>
 </p>
 <h2>Функции</h2>
 <pre class="prettyprint lang-php">
@@ -30,7 +67,13 @@ vendor/
 </pre>
 <h2>Добавление своего</h2>
 <h3>Модуля</h3>
-<p><a href="https://wiki.phpbb.com/Creating_modules">https://wiki.phpbb.com/Creating_modules</a></p>
+<p><a href="https://wiki.phpbb.com/Creating_modules" target="_blank">https://wiki.phpbb.com/Creating_modules</a></p>
+<p><strong>Файлы crud модераторского модуля:</strong></p>
+<ul>
+    <li><a href="codes/mcp_mod_crud.html"><code>includes/mcp/mcp_modcrud.php</code></a></li>
+    <li><a href="codes/mcp_mod_crud_info.html"><code>includes/mcp/info/mcp_modcrud.php</code></a></li>
+    <li><a href="codes/mcp_mod_crud_html.html"><code>styles/prosilver/template/mcp_modcrud_list.html</code></a></li>
+</ul>
 <h2>БД</h2>
 <h3>Таблицы</h3>
 <p><strong>Добавиьт свою Стандартную</strong></p>

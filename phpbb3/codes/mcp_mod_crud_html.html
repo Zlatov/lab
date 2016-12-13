@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>header</title>
+</head>
+
+<body>
+
+<pre class="prettyprint lang-html">
+&lt;!-- INCLUDE mcp_header.html --&gt;
+
+&lt;h2&gt;{MODULE_HEADER}&lt;/h2&gt;
+
+&lt;div class=&quot;panel&quot;&gt;
+
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&quot;{U_ACT_INDEX}&quot;&gt;Список&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;{U_ACT_CREATE}&quot;&gt;Создать&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;!-- IF S_ACTION == 'index' --&gt;
+        &lt;!-- IF .rows --&gt;
+            &lt;table class=&quot;table1 zebra-table&quot;&gt;
+            &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;id&lt;/th&gt;
+                &lt;th&gt;Заголовок&lt;/th&gt;
+                &lt;th&gt;Управление&lt;/th&gt;
+            &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+            &lt;!-- BEGIN rows --&gt;
+            &lt;tr&gt;
+                &lt;td&gt;
+                    {rows.ID}
+                &lt;/td&gt;
+                &lt;td&gt;
+                    {rows.HEADER}
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;a href=&quot;{rows.U_ACT_UPDATE}&quot;&gt;Редактировать&lt;/a&gt; 
+                    &lt;a href=&quot;{rows.U_ACT_DELETE}&quot; data-ajax=&quot;row_delete&quot; onclick=&quot;return confirm('Удалить?')?true:false;&quot;&gt;Удалить&lt;/a&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;!-- END rows --&gt;
+            &lt;/tbody&gt;
+            &lt;/table&gt;
+            &lt;!-- IF .pagination --&gt;
+                &lt;div class=&quot;pagination&quot;&gt;
+                &lt;!-- INCLUDE pagination.html --&gt;
+                &lt;/div&gt;
+            &lt;!-- ENDIF --&gt;
+        &lt;!-- ELSE --&gt;
+            &lt;p&gt;Нет записей в БД.&lt;/p&gt;
+        &lt;!-- ENDIF --&gt;
+    &lt;!-- ELSEIF S_ACTION == 'create' --&gt;
+        &lt;form method=&quot;post&quot; action=&quot;{U_ACT_CREATE}&quot; enctype=&quot;multipart/form-data&quot;&gt;
+            &lt;fieldset&gt;
+
+                &lt;!-- IF .errors --&gt;
+                    &lt;div class=&quot;errorbox&quot;&gt;
+                        &lt;h3&gt;Внимание&lt;/h3&gt;
+                        &lt;!-- BEGIN errors --&gt;
+                            &lt;p&gt;{errors.MESSAGE}&lt;/p&gt;
+                        &lt;!-- END errors --&gt;
+                    &lt;/div&gt;
+                &lt;!-- ENDIF --&gt;
+
+                &lt;legend&gt;Создать&lt;/legend&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;ID:&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;text&quot; name=&quot;id&quot; value=&quot;{ID}&quot; disabled=&quot;disabled&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Заголовок:&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;text&quot; name=&quot;header&quot; value=&quot;{HEADER}&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Удалить&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;checkbox&quot; name=&quot;del_something&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Загрузить файл&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Показывать&lt;/dt&gt;
+                    &lt;dd&gt;
+                        &lt;label&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;show&quot; value=&quot;1&quot;&lt;!-- IF SHOW --&gt; checked=&quot;&quot;&lt;!-- ENDIF --&gt;&gt;
+                            Да
+                        &lt;/label&gt;
+                        &lt;label&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;show&quot; value=&quot;0&quot;&lt;!-- IF not SHOW --&gt; checked=&quot;&quot;&lt;!-- ENDIF --&gt;&gt;
+                            Нет
+                        &lt;/label&gt;
+                    &lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;p class=&quot;quick&quot;&gt;
+                    &lt;input class=&quot;button1&quot; type=&quot;submit&quot; name=&quot;submitform&quot; value=&quot;Создать&quot;&gt;
+                &lt;/p&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;!-- ELSEIF S_ACTION == 'update' --&gt;
+        &lt;form method=&quot;post&quot; action=&quot;{U_ACT_UPDATE}&quot; enctype=&quot;multipart/form-data&quot;&gt;
+            &lt;fieldset&gt;
+
+                &lt;!-- IF .errors --&gt;
+                    &lt;div class=&quot;errorbox&quot;&gt;
+                        &lt;h3&gt;Внимание&lt;/h3&gt;
+                        &lt;!-- BEGIN errors --&gt;
+                            &lt;p&gt;{errors.MESSAGE}&lt;/p&gt;
+                        &lt;!-- END errors --&gt;
+                    &lt;/div&gt;
+                &lt;!-- ENDIF --&gt;
+
+                &lt;legend&gt;Редактирование&lt;/legend&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;ID:&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;text&quot; name=&quot;id&quot; value=&quot;{ID}&quot; disabled=&quot;disabled&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Заголовок:&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;text&quot; name=&quot;header&quot; value=&quot;{HEADER}&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Удалить&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;checkbox&quot; name=&quot;del_something&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Загрузить файл&lt;/dt&gt;
+                    &lt;dd&gt;&lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;&lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;dl&gt;
+                    &lt;dt&gt;Показывать&lt;/dt&gt;
+                    &lt;dd&gt;
+                        &lt;label&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;show&quot; value=&quot;1&quot;&lt;!-- IF SHOW --&gt; checked=&quot;&quot;&lt;!-- ENDIF --&gt;&gt;
+                            Да
+                        &lt;/label&gt;
+                        &lt;label&gt;
+                            &lt;input type=&quot;radio&quot; name=&quot;show&quot; value=&quot;0&quot;&lt;!-- IF not SHOW --&gt; checked=&quot;&quot;&lt;!-- ENDIF --&gt;&gt;
+                            Нет
+                        &lt;/label&gt;
+                    &lt;/dd&gt;
+                &lt;/dl&gt;
+                &lt;p class=&quot;quick&quot;&gt;
+                    &lt;input class=&quot;button1&quot; type=&quot;submit&quot; name=&quot;submitform&quot; value=&quot;Отправить&quot;&gt;
+                &lt;/p&gt;
+            &lt;/fieldset&gt;
+        &lt;/form&gt;
+    &lt;!-- ELSEIF S_ACTION == 'view' --&gt;
+        &lt;table class=&quot;table1 zebra-table&quot;&gt;
+        &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Поле&lt;/th&gt;
+            &lt;th&gt;Значение&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                ID
+            &lt;/td&gt;
+            &lt;td&gt;
+                {ID}
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;
+                Заголовок
+            &lt;/td&gt;
+            &lt;td&gt;
+                {HEADER}
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;!-- ENDIF --&gt;
+
+&lt;/div&gt;
+
+&lt;!-- INCLUDE mcp_footer.html --&gt;
+
+</pre>
+	<!-- Подсветка синтаксиса кода -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

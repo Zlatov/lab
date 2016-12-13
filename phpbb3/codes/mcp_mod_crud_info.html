@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>header</title>
+</head>
+
+<body>
+
+<pre class="prettyprint lang-php">
+&lt;?php
+/**
+*
+* This file is part of the phpBB Forum Software package.
+*
+* @copyright (c) phpBB Limited &lt;https://www.phpbb.com&gt;
+* @license GNU General Public License, version 2 (GPL-2.0)
+*
+* For full copyright and license information, please see
+* the docs/CREDITS.txt file.
+*
+*/
+
+class mcp_modcrud_info
+{
+    function module()
+    {
+        return array(
+            'filename'  =&gt; 'mcp_modcrud',
+            'title'     =&gt; 'Мод CRUD',
+            'version'   =&gt; '1.0.0',
+            'modes'     =&gt; [
+                'list' =&gt; ['title' =&gt; 'CRUD списка', 'auth' =&gt; '', 'cat' =&gt; ['MCP_MODCRUD']],
+                'tree' =&gt; ['title' =&gt; 'CRUD дерева', 'auth' =&gt; '', 'cat' =&gt; ['MCP_MODCRUD']],
+            ],
+        );
+    }
+
+    function install()
+    {
+    }
+
+    function uninstall()
+    {
+    }
+}
+
+</pre>
+	<!-- Подсветка синтаксиса кода -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>header</title>
+</head>
+
+<body>
+
+<pre class="prettyprint lang-php">
+&lt;?php
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+class mcp_modcrud
+{
+    var $p_master;
+    var $u_action;
+
+    function mcp_modcrud(&amp;$p_master)
+    {
+        $this-&gt;p_master = &amp;$p_master;
+    }
+
+    public function getModLink()
+    {
+        return &quot;&lt;a href=\&quot;{$this-&gt;u_action}\&quot;&gt;к модулю&lt;/a&gt;&quot;;
+    }
+
+    function main($id, $mode)
+    {
+        global $phpEx, $phpbb_root_path, $config;
+        global $template, $db, $user, $auth, $phpbb_container;
+        global $request, $phpbb_dispatcher;
+        switch ($mode) {
+            case 'tree':
+                $this-&gt;tpl_name = 'mcp_modcrud_tree';
+                $this-&gt;module_header = 'CRUD дерева';
+                $this-&gt;mode = 'crudTree';
+                break;
+            case 'list':
+            default:
+                $this-&gt;tpl_name = 'mcp_modcrud_list';
+                $this-&gt;module_header = 'CRUD списка';
+                $this-&gt;mode = 'crudList';
+                break;
+        }
+        $template-&gt;assign_vars([
+            'MODULE_HEADER' =&gt; $this-&gt;module_header,
+            'U_ACT_CREATE'      =&gt; append_sid($this-&gt;u_action, 'action=create'),
+            'U_ACT_INDEX'       =&gt; append_sid($this-&gt;u_action, 'action=index'),
+        ]);
+        $this-&gt;{$this-&gt;mode}($id, $mode);
+    }
+
+    function crudTree($id, $mode)
+    {
+        global $phpEx, $phpbb_root_path, $config;
+        global $template, $db, $user, $auth, $phpbb_container;
+        global $request, $phpbb_dispatcher;
+    }
+
+    function crudList($id, $mode)
+    {
+        global $phpEx, $phpbb_root_path, $config;
+        global $template, $db, $user, $auth, $phpbb_container;
+        global $request, $phpbb_dispatcher;
+
+        $data = [
+            1 =&gt; ['id' =&gt; 1, 'header' =&gt; 'header 1', ],
+            2 =&gt; ['id' =&gt; 2, 'header' =&gt; 'header 2', ],
+            3 =&gt; ['id' =&gt; 3, 'header' =&gt; 'header 3', ],
+            4 =&gt; ['id' =&gt; 4, 'header' =&gt; 'header 4', ],
+            5 =&gt; ['id' =&gt; 5, 'header' =&gt; 'header 5', ],
+            6 =&gt; ['id' =&gt; 6, 'header' =&gt; 'header 6', ],
+            7 =&gt; ['id' =&gt; 7, 'header' =&gt; 'header 7', ],
+            8 =&gt; ['id' =&gt; 8, 'header' =&gt; 'header 8', ],
+            9 =&gt; ['id' =&gt; 9, 'header' =&gt; 'header 9', ],
+        ];
+
+        $pagination = $phpbb_container-&gt;get('pagination');
+        $start  = request_var('start', 0);
+        $limitList = 2;
+
+        $action = request_var('action', 'index');
+        $submitform = request_var('submitform', '');
+        $item_id = request_var('id', 0);
+
+        switch ($action) {
+            case 'create':
+                $template-&gt;assign_vars([
+                    'S_ACTION' =&gt; 'create',
+                ]);
+                if ( $submitform &amp;&amp; ($item_id = $this-&gt;create()) ) {
+                    header('Location: ' . append_sid($this-&gt;u_action, &quot;action=view&amp;id={$item_id}&quot;, false));
+                }
+                break;
+            case 'update':
+                $template-&gt;assign_vars([
+                    'S_ACTION' =&gt; 'update',
+                ]);
+                if (!$item_id) {
+                    trigger_error('Неправильная ссылка, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                if (!isset($data[$item_id])) {
+                    trigger_error('Нет такой записи, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                if ( $submitform &amp;&amp; $this-&gt;update() ) {
+                    header('Location: ' . append_sid($this-&gt;u_action, &quot;action=view&amp;id={$item_id}&quot;, false));
+                }
+                $dataItem = $data[$item_id];
+                if ($submitform) {
+                    $dataForm = [];
+                    $header = request_var('header', '');
+                    if ($header) {
+                        $dataForm['HEADER'] = $header;
+                    }
+                    $dataItem = array_merge($dataItem, $dataForm);
+                }
+                $template-&gt;assign_vars([
+                    'ID'     =&gt; $dataItem['id'],
+                    'HEADER' =&gt; $dataItem['header'],
+                    'SHOW' =&gt; true,
+                    'U_ACT_UPDATE' =&gt; append_sid($this-&gt;u_action, &quot;action=update&amp;amp;id={$dataItem['id']}&quot;),
+                    'U_ACT_DELETE' =&gt; append_sid($this-&gt;u_action, &quot;action=delete&amp;amp;id={$dataItem['id']}&quot;),
+                ]);
+                break;
+            case 'delete':
+                $template-&gt;assign_vars([
+                    'S_ACTION' =&gt; 'delete',
+                ]);
+                if (!$item_id) {
+                    trigger_error('Неправильная ссылка, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                if (!isset($data[$item_id])) {
+                    trigger_error('Нет такой записи, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                if ($this-&gt;delete($item_id)) {
+                    header('Location: ' . append_sid($this-&gt;u_action, &quot;action=index&amp;id={$item_id}&quot;, false));
+                }
+                break;
+            case 'view':
+                $template-&gt;assign_vars([
+                    'S_ACTION' =&gt; 'view',
+                ]);
+                if (!$item_id) {
+                    trigger_error('Неправильная ссылка, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                if (!isset($data[$item_id])) {
+                    trigger_error('Нет такой записи, ' . $this-&gt;getModLink() . '.', E_USER_WARNING);
+                }
+                $dataItem = $data[$item_id];
+                $template-&gt;assign_vars([
+                    'ID'     =&gt; $dataItem['id'],
+                    'HEADER' =&gt; $dataItem['header'],
+                    'SHOW' =&gt; true,
+                    'U_ACT_UPDATE' =&gt; append_sid($this-&gt;u_action, &quot;action=update&amp;amp;id={$dataItem['id']}&quot;),
+                    'U_ACT_DELETE' =&gt; append_sid($this-&gt;u_action, &quot;action=delete&amp;amp;id={$dataItem['id']}&quot;),
+                ]);
+                break;
+            case 'index':
+            default:
+                $template-&gt;assign_vars([
+                    'S_ACTION' =&gt; 'index',
+                ]);
+
+                $dataList = array_slice($data, $start, $limitList);
+                $sql_calc_found_rows = count($data);
+
+                $start = $pagination-&gt;validate_start($start, $limitList, $sql_calc_found_rows);
+                $pagination-&gt;generate_template_pagination($this-&gt;u_action, 'pagination', 'start', $sql_calc_found_rows, $limitList, $start);
+
+                foreach ($dataList as $key =&gt; $value) {
+                    $row = [
+                        'ID' =&gt; $value['id'],
+                        'HEADER' =&gt; $value['header'],
+                        'U_ACT_UPDATE' =&gt; append_sid($this-&gt;u_action, &quot;action=update&amp;amp;id={$value['id']}&quot; ),
+                        'U_ACT_DELETE' =&gt; append_sid($this-&gt;u_action, &quot;action=delete&amp;amp;id={$value['id']}&quot;),
+                    ];
+                    $template-&gt;assign_block_vars('rows', $row);
+                }
+                break;
+        }
+    }
+
+    function update()
+    {
+        global $phpEx, $phpbb_root_path, $config;
+        global $template, $db, $user, $auth, $phpbb_container;
+        global $request, $phpbb_dispatcher;
+        $formHasError = false;
+        if (true) {
+            $template-&gt;assign_block_vars('errors', [
+                'MESSAGE' =&gt; 'Какая-то ошибка формы.'
+            ]);
+            $formHasError = true;
+        }
+        return !$formHasError;
+    }
+
+    function create()
+    {
+        global $phpEx, $phpbb_root_path, $config;
+        global $template, $db, $user, $auth, $phpbb_container;
+        global $request, $phpbb_dispatcher;
+        $formHasError = false;
+        if (false) {
+            $template-&gt;assign_block_vars('errors', [
+                'MESSAGE' =&gt; 'Какая-то ошибка формы.'
+            ]);
+            $formHasError = true;
+        }
+        $item_id = 9;
+        return $formHasError?0:$item_id;
+    }
+}
+</pre>
+	<!-- Подсветка синтаксиса кода -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</body>
+</html>
