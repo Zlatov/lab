@@ -462,6 +462,19 @@ SHOW GRANTS FOR 'userLogin'@'localhost';
     <mark>FLUSH</mark>!</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
 <h2>Тестирование</h2>
+<h3>Полное логирование всех запросов</h3>
+<p>Эта операция затратна по объему создаваемого лога, так что предназначена скорее для тестирования на локальной машине. Для начала найдем настройки отвечающие за логирование ВСЕХ запросов (это переменные <var>general_log_file</var> и <var>general_log_file</var>):</p>
+<pre class="prettyprint lang-sql copyToClipboard">SHOW VARIABLES LIKE '%log%';</pre>
+<p>Чтобы включить логирование нужно выполнить <code>SET GLOBAL ...</code> так как настройка глобальная</p>
+<pre class="prettyprint lang-sql copyToClipboard">SET GLOBAL GENERAL_LOG = 1;</pre>
+<p>Далее потыкаем в приложение и пойдем посмотрим лог:</p>
+<pre class="prettyprint lang-sh">
+sudo cp /var/lib/mysql/iadfeshchm-pc.log ~
+sudo chown iadfeshchm:iadfeshchm iadfeshchm-pc.log
+subl iadfeshchm-pc.log
+</pre>
+<p>Не забываем отключить логирование, а то распухнет!</p>
+<pre class="prettyprint lang-sql copyToClipboard">SET GLOBAL GENERAL_LOG = 0;</pre>
 <h3>Отключить кеширование для определения времени</h3>
 <pre class="prettyprint lang-sql">SELECT SQL_NO_CACHE ...</pre>
 <h3>Статус таблиц БД</h3>
