@@ -147,11 +147,19 @@ $tree = fullTree();
 function add()
 {
 	global $pdo;
-	$stmt = $pdo->prepare('CALL tree_add(:pid, :header)');
-	$stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
-	$stmt->bindValue(':pid', $_POST['pid'], PDO::PARAM_INT);
-	$stmt->execute();
-	header('Refresh:0');
+    try {
+        $pdo->exec("START TRANSACTION;");
+        $stmt = $pdo->prepare('INSERT INTO `tree` (`pid`, `header`) VALUES (:pid, :header);');
+        $stmt->bindValue(':header', $_POST['header'], PDO::PARAM_STR);
+        $stmt->bindValue(':pid', $_POST['pid']?$_POST['pid']:NULL, PDO::PARAM_INT);
+        $stmt->execute();
+        $pdo->exec("COMMIT;");
+    } catch (PDOException $e) {
+        $pdo->exec("ROLLBACK;");
+        die("<p>" . $e->getMessage() . "</p>");
+    }
+    echo "<p>Что-то добавлено.</p>";
+	// header('Refresh:0');
 }
 
 function del()
@@ -177,13 +185,22 @@ function move()
 function selectParents()
 {
 	global $pdo;
-	$sql = file_get_contents('./sql/s_parents.sql');
-	$stmt = $pdo->prepare($sql);
+    if (!$_POST['did']) {
+        die('<p>Что-то выберите в конце концов.</p>');
+    }
+	// $sql = file_get_contents('./sql/s_parents.sql');
+	$stmt = $pdo->prepare('
+        SELECT t.*
+        FROM treerel r
+        JOIN tree t ON t.id = r.aid
+        WHERE r.did = :did;
+    ');
 	$stmt->bindValue(':did', $_POST['did'], PDO::PARAM_INT);
 	$stmt->execute();
 	$array = $stmt->fetchAll();
-	$tree = transformToTree($array);
-	$html = treeForPrint($tree);
+    $a = toMultidimensionalTree($array);
+    $html = echoMultidimensionalTree($a);
+    echo "<p>Предки:</p>";
 	echo $html;
 }
 
