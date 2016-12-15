@@ -219,6 +219,20 @@ select @test := last_insert_id() as last_insert_id;
 		and `p`.`price` &lt;= param_to
 		and if(param_dishtype &lt;&gt; 0, `d`.`dishtype_id` = param_dishtype, 1)
 </pre>
+<h4>if которого нет</h4>
+<pre class="prettyprint lang-sql">SET @sql = (SELECT IF(
+    (SELECT COUNT(*)
+        FROM INFORMATION_SCHEMA.COLUMNS WHERE
+        table_schema='newdb'
+         and table_name='persons' and column_name='id'
+    ) > 0,
+    "SELECT 0",
+    "alter table newdb.persons add id int;"
+));
+
+PREPARE stmt FROM @sql;
+EXECUTE stmt;
+</pre>
 <h4>ifnull</h4>
 <p><code>IFNULL(expr1,expr2)</code>. Если expr1 не равно NULL, то функция IFNULL() возвращает значение expr1, в противном случае - expr2.</p>
 <pre class="prettyprint lang-sql">
@@ -462,6 +476,17 @@ SHOW GRANTS FOR 'userLogin'@'localhost';
     <mark>FLUSH</mark>!</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
 <h2>Тестирование</h2>
+<h3>Ошибки, предупреждения и их количество</h3>
+<pre class="prettyprint lang-sql">
+SHOW COUNT(*) ERRORS;
+SHOW COUNT(*) WARNINGS;
+SELECT @@error_count;
+SELECT @@session.error_count;
+SELECT @@warning_count;
+SELECT @@session.warning_count;
+SHOW ERRORS;
+SHOW WARNINGS;
+</pre>
 <h3>Полное логирование всех запросов</h3>
 <p>Эта операция затратна по объему создаваемого лога, так что предназначена скорее для тестирования на локальной машине. Для начала найдем настройки отвечающие за логирование ВСЕХ запросов (это переменные <var>general_log_file</var> и <var>general_log_file</var>):</p>
 <pre class="prettyprint lang-sql copyToClipboard">SHOW VARIABLES LIKE '%log%';</pre>
