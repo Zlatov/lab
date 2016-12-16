@@ -97,6 +97,7 @@ procedure_label:BEGIN
 	IF is_tid_exist < 1 THEN
 		SELECT 'eid not exist';
 		ROLLBACK;
+		-- RESIGNAL;
 		LEAVE procedure_label;
 	END IF;
 

@@ -24,14 +24,46 @@ END;
 
 CREATE TRIGGER `tbd_tree` BEFORE DElETE ON `tree` FOR EACH ROW
 BEGIN
-		DElETE FROM `treerel`
-		WHERE `aid` = OLD.`id` OR `did` = OLD.`id`;
+	DECLARE count_childrens INT DEFAULT 0;
+
+	-- Проверить существование наследников.
+	SELECT count(`id`)
+	INTO count_childrens
+	FROM `tree`
+	WHERE `pid` = OLD.`id`;
+
+	IF count_childrens > 0 THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Нельзя удалять вместе с детьми.';
+	END IF;
+
+	DElETE FROM `treerel`
+	WHERE `aid` = OLD.`id` OR `did` = OLD.`id`;
 END;
 
 CREATE TRIGGER `tbu_tree` BEFORE UPDATE ON `tree` FOR EACH ROW
-BEGIN
+trigger_label:BEGIN
+	DECLARE count_descendant INT DEFAULT 0;
+
 	-- Если родитель изменился.
 	IF OLD.`pid` <> NEW.`pid` THEN
+
+		-- Нельзя перемещать в себя
+		IF OLD.`id` = NEW.`pid` THEN
+			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Нельзя перемещать в себя.';
+		END IF;
+
+		-- Нельзя перемещать в своих потомков
+		SELECT count(*)
+		INTO count_descendant
+		FROM `treerel` r
+		WHERE
+			r.`aid` = OLD.`id`
+			AND r.`did` = NEW.`pid`;
+
+		IF count_descendant > 0
+		THEN
+			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Нельзя перемещать в своих потомков.';
+		END IF;
 
 		-- Удалить связи потомков перемещаемого элемента с предками перемещаемого элемента
 		DElETE r2 FROM `treerel` r1

@@ -57,7 +57,9 @@
 	</fieldset>
 	<fieldset>
 		<legend>Удалить элемент</legend>
-		id: <input type="text" name="delid" placeholder="pid (0|1|..)" value="5">
+        <label>с id:
+            <input type="text" name="delid" placeholder="pid (0|1|..)" value="5">
+        </label>
 		рекурсивно: <input type="hidden" name="recursively" value="0"><input type="checkbox" name="recursively" value="1">
 		<button type="submit" name="submitForm" value="del">Удалить</button>
 	</fieldset>
@@ -164,27 +166,88 @@ function add()
 
 function del()
 {
-	global $pdo;
-	// $stmt = $pdo->prepare('CALL tree_del(:delid, :recursively)');
-	$stmt = $pdo->prepare('CALL tree_del(:delid)');
-	$stmt->bindValue(':delid', $_POST['delid'], PDO::PARAM_INT);
-	// $stmt->bindValue(':recursively', $_POST['recursively'], PDO::PARAM_BOOL);
-	$stmt->execute();
-	header('Refresh:0');
+    global $pdo;
+    try {
+        $pdo->exec("START TRANSACTION;");
+        $stmt = $pdo->prepare('
+            SELECT count(`id`) as `count`
+            FROM `tree`
+            WHERE `id` = :delid
+            FOR UPDATE;
+            -- Проверить существование элемента и заблокировать его на чтение.
+        ');
+        $stmt->bindValue(':delid', $_POST['delid'], PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_LAZY);
+        if ($row->count === 0) {
+            die("<p>Нечего удалять.</p>");
+        }
+        $stmt = $pdo->prepare('
+            DELETE FROM `tree`
+            WHERE `id` = :delid;
+        ');
+        $stmt->bindValue(':delid', $_POST['delid'], PDO::PARAM_INT);
+        $stmt->execute();
+        $pdo->exec("COMMIT;");
+    } catch (PDOException $e) {
+        $pdo->exec("ROLLBACK;");
+        die("<p>" . $e->getMessage() . " " . $e->getCode() . "</p>");
+    }
+    echo "<p>Что-то удалено.</p>";
 }
 
 function move()
 {
-	global $pdo;
-	$stmt = $pdo->prepare('call tree_move(:eid, :tid)');
-	$stmt->bindValue(':eid', $_POST['eid'], PDO::PARAM_INT);
-	$stmt->bindValue(':tid', $_POST['tid'], PDO::PARAM_INT);
-	$stmt->execute();
+    global $pdo;
+    try {
+        $pdo->exec("START TRANSACTION;");
+        $stmt = $pdo->prepare('
+            SELECT count(*) as `count`
+            FROM `tree`
+            WHERE `id` = :eid
+            LOCK IN SHARE MODE;
+            -- Нельзя перемещать несуществующий
+            -- Блокируем на обновление/удаление
+        ');
+        $stmt->bindValue(':eid', $_POST['eid'], PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_LAZY);
+        if ($row->count === 0) {
+            die("<p>Нельзя перемещать несуществующий.</p>");
+        }
+        $stmt = $pdo->prepare('
+            SELECT count(*) as `count`
+            FROM `tree`
+            WHERE `id` = :tid
+            LOCK IN SHARE MODE;
+            -- Нельзя перемещать в несуществующий
+            -- Блокируем на обновление/удаление
+        ');
+        $stmt->bindValue(':tid', $_POST['tid'], PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_LAZY);
+        if ($row->count === 0) {
+            die("<p>Нельзя перемещать в несуществующий.</p>");
+        }
+        $stmt = $pdo->prepare('
+            UPDATE `tree`
+            SET `pid` = :tid
+            WHERE `id` = :eid;
+        ');
+        $stmt->bindValue(':eid', $_POST['eid'], PDO::PARAM_INT);
+        $stmt->bindValue(':tid', $_POST['tid'], PDO::PARAM_INT);
+        $stmt->execute();
+        $pdo->exec("COMMIT;");
+    } catch (PDOException $e) {
+        $pdo->exec("ROLLBACK;");
+        die("<p>" . $e->getMessage() . " " . $e->getCode() . "</p>");
+    }
+    echo "<p>Что-то перемещено.</p>";
 }
 
 function selectParents()
 {
-	global $pdo;
+    global $pdo;
     if (!$_POST['did']) {
         die('<p>Что-то выберите в конце концов.</p>');
     }
@@ -207,13 +270,21 @@ function selectParents()
 function selectChildrens()
 {
 	global $pdo;
-	$sql = file_get_contents('./sql/s_childrens.sql');
-	$stmt = $pdo->prepare($sql);
+    if (!$_POST['id']) {
+        die('<p>Что-то выберите в конце концов.</p>');
+    }
+	$stmt = $pdo->prepare('
+        SELECT t.*
+        FROM treerel r
+        LEFT JOIN tree t ON t.id = r.did
+        WHERE r.aid = :id
+    ');
 	$stmt->bindValue(':id', $_POST['id'], PDO::PARAM_INT);
 	$stmt->execute();
 	$array = $stmt->fetchAll();
-	$tree = transformToTree($array,(integer)$_POST['id']);
-	$html = treeForPrint($tree);
+    $a = toMultidimensionalTree($array);
+    $html = echoMultidimensionalTree($a);
+    echo "<p>Потомки:</p>";
 	echo $html;
 }
 
