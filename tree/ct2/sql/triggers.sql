@@ -1,6 +1,25 @@
 DROP TRIGGER IF EXISTS `tai_tree`;
+DROP TRIGGER IF EXISTS `tbi_tree_addlevel`;
 DROP TRIGGER IF EXISTS `tbd_tree`;
 DROP TRIGGER IF EXISTS `tbu_tree`;
+
+CREATE TRIGGER `tbi_tree_addlevel` BEFORE INSERT ON `tree` FOR EACH ROW
+trigger_label:BEGIN
+	DECLARE level_of_parent INT DEFAULT 1;
+	IF @disable_triggers IS NULL THEN
+		-- Если вставляем элемент в корень, то уровень 1
+		IF NEW.`pid` IS NOT NULL THEN
+			-- SET level_of_parent = 1;
+			-- LEAVE trigger_label;
+		-- ELSE
+			-- SET NEW.`level` = 2;
+			SELECT `level` + 1 INTO level_of_parent
+			FROM `tree`
+			WHERE `id` = NEW.`pid`;
+		END IF;
+		SET NEW.`level` = level_of_parent;
+	END IF;
+END;
 
 CREATE TRIGGER `tai_tree` AFTER INSERT ON `tree` FOR EACH ROW
 trigger_label:BEGIN
@@ -43,6 +62,7 @@ END;
 CREATE TRIGGER `tbu_tree` BEFORE UPDATE ON `tree` FOR EACH ROW
 trigger_label:BEGIN
 	DECLARE count_descendant INT DEFAULT 0;
+	DECLARE delta_level INT DEFAULT 0;
 
 	-- Если родитель изменился.
 	IF OLD.`pid` <> NEW.`pid` THEN
@@ -97,5 +117,22 @@ trigger_label:BEGIN
 			SELECT NEW.`pid`, r1.`did`
 			FROM `treerel` r1
 			WHERE r1.`aid` = OLD.`id`;
+
+		-- Обновляем уровни перемещенных элементов
+		-- Определяем смещение по уровню
+		SELECT CAST(t.`level` AS SIGNED) - CAST(tt.`level` AS SIGNED) INTO delta_level
+		FROM tree t
+		LEFT JOIN tree tt ON tt.`id` = OLD.`id`
+		WHERE t.`id` = NEW.`pid`;
+
+		SET NEW.`level` = OLD.`level` + delta_level;
+
+		-- UPDATE tree t
+		-- LEFT JOIN treerel tr ON tr.`did` = t.`id`
+		-- SET `level` = `level` + delta_level
+		-- WHERE
+		-- 	tr.`aid` = element_id
+		-- 	OR t.`id` = element_id;
+
 	END IF;
 END;
