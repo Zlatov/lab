@@ -62,8 +62,13 @@ echo &quot;&lt;/pre&gt;&quot;;
 <pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }</pre>
-<h2>PHP in console</h2>
-<pre class="prettyprint lang-php">
+<h2>Консоль</h2>
+<p>Вывести phpinfo можно так, но</p>
+<pre class="prettyprint lang-sh">php -r "phpinfo();"</pre>
+<p>но лучше так</p>
+<pre class="prettyprint lang-sh copyToClipboard">php -i | grep ini</pre>
+<p>выполнить строку пыха</p>
+<pre class="prettyprint lang-sh">
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
 <h2>Наработки</h2>
