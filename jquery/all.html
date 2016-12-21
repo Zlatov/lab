@@ -16,6 +16,37 @@ $(document).ready(function(){
 });
 &lt;/script&gt;
 </pre>
+<h2>Потоки</h2>
+<p>Нет последовательного выполнения кроме как callback, например, в анимации slideDown передаем анонимную функцию, <strong>причем не передаем никаких параметров иначе ничего не работает!</strong></p>
+<pre class="prettyprint lang-js">
+	/**
+	 * Устанавливаем на кнопке флаг разрешающий запустить анимацию сворачивания/разворачивания
+	 */
+	var viewTreeStopListen = function () {
+		var button = $(this).parents(&quot;.viewTree&quot;).eq(0).prev().children(&quot;span.viewTreeToggleSlideButton&quot;)[0];
+		button.haveAnimate = false;
+	}
+
+	/**
+	 * Сворачиваем или разворачиваем всё дерево только в том случае, если дерево в данный момент не анимируется
+	 * jQuery.Event event событие при клике на кнопку
+	 */
+	var viewTreeSlider = function (event) {
+		console.log(event);
+		var button = $(event.target);
+		var tree = $(event.target).parent().eq(0).next(&quot;.viewTree&quot;);
+		if (!event.target.haveAnimate) {
+			event.target.haveAnimate = true; // Установим флаг запуска анимации
+			if ( button.text() === 'Развернуть' ) {
+				tree.find(&quot;ul&quot;).slideDown(400, <strong>viewTreeStopListen</strong> ).parents(&quot;li&quot;).children(&quot;div.drop&quot;).css({'background-position':&quot;-11px 0&quot;});
+				button.text('Свернуть');
+			} else {
+				tree.find(&quot;ul&quot;).slideUp(400, <strong>viewTreeStopListen</strong> ).parents(&quot;li&quot;).children(&quot;div.drop&quot;).css({'background-position':&quot;0 0&quot;});
+				button.text('Развернуть');
+			}
+		}
+	};
+</pre>
 <h2>Наработки</h2>
 <h3>Нашелся ли элемент селектором (if element)</h3>
 <pre class="prettyprint lang-js">
