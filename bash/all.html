@@ -52,6 +52,15 @@ grep -i -n hello ./example.cpp
 # egrep - с использованием символьных классов POSIX
 egrep -i 'Hel+' ./example.cpp
 </pre>
+<p><strong class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#vse_znaki_prepinaniya">Поиск по файлам в директории <span class="caret"></span></strong></p>
+<div id="vse_znaki_prepinaniya" class="collapse">
+<pre class="prettyprint lang-sh">
+# Во всех файлах текущей директории
+grep "BASH_VERSION" ./*
+# В скрытых файлах
+grep "BASH_VERSION" ./.*
+</pre>
+</div>
 <h3>sed</h3>
 <p>(от англ. Stream EDitor) — потоковый текстовый редактор, очень крут, самое краткое:</p>
 <pre class="prettyprint lang-sh">

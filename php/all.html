@@ -72,6 +72,27 @@ echo &quot;&lt;/pre&gt;&quot;;
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
 <h2>Наработки</h2>
+<h3>Парсим папку с файлами</h3>
+<pre class="prettyprint lang-php">
+$fileNames = [
+    'old_dgi.json',
+    'old_dilli.json',
+    'old_epson.json',
+    'old_vivid.json',
+    'old_zeon_net.json',
+];
+$fileNames = [];
+if ($handle = opendir(__DIR__)) {
+    while (false !== ($entry = readdir($handle))) {
+        if ($entry != &quot;.&quot; &amp;&amp; $entry != &quot;..&quot;) {
+            $pathinfo = pathinfo(__DIR__ . '/' . $entry);
+            if ($pathinfo['extension']==='json'&amp;&amp;$pathinfo['filename']!=='merged') {
+                $fileNames[] = $entry;
+            }
+        }
+    }
+}
+</pre>
 <h3>Загрузка файла на сервер</h3>
 <pre class="prettyprint lang-php">$ext = pathinfo($_FILES['name'], PATHINFO_EXTENSION); // Расширение файла</pre>
 <h3>IP адрес пользователя</h3>

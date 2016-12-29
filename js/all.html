@@ -1,5 +1,5 @@
-<h2>Variable</h2>
-<h3>Type of variable</h3>
+<h2>Переменные</h2>
+<h3>Типы переменных</h3>
 <pre class="prettyprint lang-js">
 // Numbers
 typeof 37 === 'number';
@@ -56,6 +56,37 @@ typeof function(){} === 'function';
 typeof class C {} === 'function';
 typeof Math.sin === 'function';
 </pre>
+<h3>Объявление переменных</h3>
+<p>Явно объявлять переменные можно и нужно ключевым словом <code>var</code></p>
+<p>Объявить глобальную переменную внутри ... (функции):</p>
+<pre class="prettyprint lang-js">window.a = 'переменная из функции';</pre>
+<p>при оборачивании какой-то поведенческой логики в объект надо помнить, что в создаваемых DOM-событиях значение this самого объекта теряется. </p>
+<pre class="prettyprint lang-js">
+function myObject() {
+  var _this = this; // сохраняем ссылку на родительский объект
+  var linkRemoved = false;
+
+  $('a').click(function() {
+    $(this).remove(); // this - это объект ссылки
+    _this.linkRemoved = true; // _this - это родительский объект
+  });
+}
+</pre>
+<h3>Проверка на существование</h3>
+<p><strong>Глобальная переменная</strong></p>
+<pre class="prettyprint lang-js">
+if (window.global_variable) {
+}
+// или
+if (window.global_variable !== undefined) {
+	console.log('window.global_variable !== undefined');
+}
+</pre>
+<p><strong>Локальная переменная</strong></p>
+<pre class="prettyprint lang-js copyToClipboard">
+
+if (typeof(local_variable) !== 'undefined') {
+}</pre>
 <h2>Function</h2>
 <h3>параметр Event (событие) в функии</h3>
 <p>Посмотреть что из себя представляет событие и элемент на котором оно сработало:</p>
@@ -159,9 +190,22 @@ var str = JSON.stringify(objects);
 &lt;/script&gt;
 </pre>
 <h2>Наработки</h2>
+<h3>Проверка на существование элемента в массиве со значением</h3>
+<pre class="prettyprint lang-js">
+Array.prototype.in_array = function(p_val) {
+  for(var i = 0, l = this.length; i &lt; l; i++) {
+    if(this[i] == p_val) {
+      return true;
+    }
+  }
+  return false;
+}
+someArray = ['someValue', 'nextValue'];
+console.log(someArray.in_array('someValue'));
+</pre>
 <h3>Подтверждение действия confirm()</h3>
 <p><strong>Например, подтвердить удаление:</strong></p>
-<pre>&lt;a href=&quot;...&quot; onclick=&quot;return confirm('Удалить?')?true:false;&quot;&gt;Удалить&lt;/a&gt;</pre>
+<pre class="prettyprint lang-html">&lt;a href=&quot;...&quot; onclick=&quot;return confirm('Удалить?')?true:false;&quot;&gt;Удалить&lt;/a&gt;</pre>
 <h2>Плагины</h2>
 <h3>Подсветка синтаксиса кода google-code-prettify</h3>
 <p>

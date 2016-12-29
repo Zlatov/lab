@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 - Привет, Мир!</title>
+		<style type="text/css">
+			article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+		</style>
+	</head>
+	<body>
+		<p>Привет, Мир!</p>
+		<script type="text/javascript">
+
+			// var global_variable;
+			// var global_variable = undefined;
+			// var global_variable = null;
+			// var global_variable = false;
+			// var global_variable = true;
+			// var global_variable = 0;
+			// var global_variable = 1;
+			// var global_variable = '';
+			// var global_variable = '0';
+			// var global_variable = '1';
+			// var global_variable = [];
+			// var global_variable = {};
+
+			if (window.global_variable) {
+				console.log('window.global_variable');
+			}
+			if (!window.global_variable) {
+				console.log('!window.global_variable');
+			}
+			if (window.global_variable == undefined) {
+				console.log('window.global_variable == undefined');
+			}
+			if (window.global_variable != undefined) {
+				console.log('window.global_variable != undefined');
+			}
+			if (window.global_variable == null) {
+				console.log('window.global_variable == null');
+			}
+			if (window.global_variable != null) {
+				console.log('window.global_variable != null');
+			}
+			if (window.global_variable === undefined) {
+				console.log('window.global_variable === undefined');
+			}
+			if (window.global_variable !== undefined) {
+				console.log('window.global_variable !== undefined');
+			}
+			if (window.global_variable === null) {
+				console.log('window.global_variable === null');
+			}
+			if (window.global_variable !== null) {
+				console.log('window.global_variable !== null');
+			}
+
+			function temp() {
+
+				// var local_variable;
+				// var local_variable = undefined;
+				// var local_variable = null;
+				// var local_variable = false;
+				// var local_variable = true;
+				// var local_variable = 0;
+				// var local_variable = 1;
+				// var local_variable = '';
+				// var local_variable = '0';
+				// var local_variable = '1';
+				// var local_variable = [];
+				// var local_variable = {};
+
+				if (typeof(local_variable) !== 'undefined') {
+					if (local_variable) {
+						console.log('local_variable');
+					}
+					if (!local_variable) {
+						console.log('!local_variable');
+					}
+					if (local_variable == undefined) {
+						console.log('local_variable == undefined');
+					}
+					if (local_variable != undefined) {
+						console.log('local_variable != undefined');
+					}
+					if (local_variable == null) {
+						console.log('local_variable == null');
+					}
+					if (local_variable != null) {
+						console.log('local_variable != null');
+					}
+					if (local_variable === undefined) {
+						console.log('local_variable === undefined');
+					}
+					if (local_variable !== undefined) {
+						console.log('local_variable !== undefined');
+					}
+					if (local_variable === null) {
+						console.log('local_variable === null');
+					}
+					if (local_variable !== null) {
+						console.log('local_variable !== null');
+					}
+				}
+			}
+
+			temp();
+
+		</script>
+	</body>
+</html>
