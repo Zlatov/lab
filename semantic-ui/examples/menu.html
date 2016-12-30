@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>HTML5 - Привет, Мир!</title>
+  <style type="text/css">
+    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+  </style>
+  <link rel="stylesheet" type="text/css" href="/theme/bower/semantic/dist/semantic.min.css">
+</head>
+<body>
+
+<div class="ui menu">
+  <div class="ui dropdown icon item">
+    <i class="wrench icon"></i>
+    <div class="menu">
+      <div class="item">
+        <i class="dropdown icon"></i>
+        <span class="text">New</span>
+        <div class="menu">
+          <div class="item">Document</div>
+          <div class="item">Image</div>
+        </div>
+      </div>
+      <div class="item">Open... </div>
+      <div class="item">Save... </div>
+      <div class="item">Edit Permissions</div>
+      <div class="divider"></div>
+      <div class="header">Export </div>
+      <div class="item">Share... </div>
+    </div>
+  </div>
+  <div class="right menu">
+    <div class="ui right aligned category search item">
+      <div class="ui transparent icon input">
+        <input class="prompt" type="text" placeholder="Search animals...">
+        <i class="search link icon"></i>
+      </div>
+      <div class="results"></div>
+    </div>
+  </div>
+</div>
+
+  <div class="ui two column grid container">
+    <div class="column">
+      <div class="ui segment">
+
+
+
+<div class="ui secondary vertical menu">
+  <a class="active item">Account </a>
+  <a class="item">Settings </a>
+  <div class="ui dropdown item"><i class="dropdown icon"></i> Display Options <div class="menu" id="asd">
+      <div class="header">Text Size</div>
+      <a class="item">Small</a>
+      <a class="item">Medium</a>
+      <a class="item">Large</a>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+    <div class="column">
+      <div class="ui segment">Content</div>
+    </div>
+    <div class="column">
+      <div class="ui segment">Content</div>
+    </div>
+    <div class="column">
+      <div class="ui segment">Content</div>
+    </div>
+    <div class="column">
+      <div class="ui segment">Content</div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/theme/bower/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="/theme/bower/semantic/dist/semantic.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      console.log('as');
+      $('.ui.dropdown').dropdown({
+        action: 'show',
+        direction: 'downward'
+      });
+      $('#asd').show();
+    });
+  </script>
+</body>
+</html>
