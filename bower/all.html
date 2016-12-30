@@ -1,0 +1,65 @@
+<p>Bower — пакетный менеджер для web.</p>
+
+<h2>Установка</h2>
+<p><code class="copyToClipboard prettyprint lang-sh">sudo npm install -g bower</code></p>
+<p>проверка:</p>
+<pre class="prettyprint lang-sh">
+bower -v
+/usr/bin/env: node: No such file or directory
+sudo ln -s "$(which nodejs)" /usr/bin/node
+bower -v
+1.8.0
+</pre>
+
+<h2>Команды</h2>
+<p><code>bower s jquery</code> - поиск пакета.</p>
+<p><code>bower info jquery</code> - информация о пакете.</p>
+<p><code>bower i jquery#3.1</code> - установка пакета.</p>
+<p><code>bower list</code> - список установленных пакетов.</p>
+<p><code>bower list --path</code> - список путей пакетов.</p>
+<p><code>boewr uninstall jquery</code> - удаление пакета.</p>
+
+<h2>Управление пакетами</h2>
+<p><code>bower init</code> - создание <var>bower.json</var></p>
+<p><code>bower i jquery#3.1 -S</code> (<code>--save</code>) - добавлние пакета в <var>production</var></p>
+<p><code>bower i jquery#3.1 -D</code> (<code>--save-dev</code>) - добавлние пакета в <var>dev</var></p>
+<p><code>boewr uninstall jquery -S</code> (<code>-D</code>) - удаление пакета с указание типа.</p>
+<p><code>boewr update jquery</code> - обновление пакета.</p>
+
+<h2>Версии пакетов</h2>
+<p><code>"jquery": "latest"</code> - последняя версия.</p>
+<p><code>#2.1.4</code> - <var>2.1.4</var>.</p>
+<p><code>#~2.1.4</code> - <var>2.1.4</var> <= версия < <var>2.2.0</var>.</p>
+<p><code>#^2.1.4</code> - <var>2.1.4</var> <= версия < <var>3.0.0</var>.</p>
+
+<h2>Место установки</h2>
+<p>Указывается в файле <var>.bowerrc</var></p>
+<p><code class="copyToClipboard prettyprint lang-sh">touch .bowerrc</code></p>
+<p><code class="copyToClipboard prettyprint lang-sh">subl .bowerrc</code></p>
+<pre class="copyToClipboard prettyprint lang-sh">
+{
+  "directory" : "theme/bower"
+}
+</pre>
+<p>В файл <code class="copyToClipboard">subl .gitignore</code> добавить <code class="copyToClipboard">theme/bower</code>.</p>
+
+<h2>Документация</h2>
+<p>Документация по bower.json: <a href="https://github.com/bower/bower.json-spec">https://github.com/bower/bower.json-spec</a></p>
+<p>Документация по .bowerrc: <a href="http://bower.io/docs/config/">http://bower.io/docs/config/</a></p>
+
+<h2>Объединить bower и composer</h2>
+<p>Каждый запуск <code>composer install</code> или <code>composer update</code> будет выполняться запуск <code>bower install</code>, который обновит все библиотеки.</p>
+<p>Добавляем в <var>composer.json</var></p>
+<pre class="copyToClipboard lang-js">
+{
+  // ...
+  "scripts": {
+      "post-install-cmd": [
+      "bower install"
+    ],
+      "post-update-cmd": [
+      "bower install"
+    ]
+  }
+}
+</pre>

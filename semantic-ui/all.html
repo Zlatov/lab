@@ -1,0 +1,25 @@
+<h2>Установка</h2>
+<p><code class="copyToClipboard prettyprint lang-sh">bower info semantic-ui</code> - узнать последнюю версию.</p>
+<p><code class="copyToClipboard prettyprint lang-sh">bower i semantic-ui#2.2.7 -S</code></p>
+<p><code class="copyToClipboard prettyprint lang-sh">bower list --path</code> - получить ссылки:</p>
+<pre class="prettyprint lang-sh">
+  semantic: [
+    'theme/bower/semantic/src/semantic.less',
+    'theme/bower/semantic/dist/semantic.js'
+  ]
+</pre>
+<p>Для <var>css</var> на самом деле есть файл по пути:</p>
+<pre class="prettyprint lang-sh">
+    'theme/bower/semantic/<strong>dist</strong>/semantic.css'
+    # или
+    'theme/bower/semantic/<strong>dist</strong>/semantic.min.css'
+</pre>
+<p>Примерно так:</p>
+<pre class="prettyprint lang-html">
+		&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/theme/bower/semantic/dist/semantic.min.css&quot;&gt;
+		&lt;script type=&quot;text/javascript&quot; src=&quot;/theme/bower/semantic/dist/semantic.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>Либо можно сконвертить свой scc из less...</p>
+
+<h2>Примеры</h2>
+<p><a href="examples/grid.html" target="q">Сетка</a></p>
