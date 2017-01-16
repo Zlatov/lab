@@ -1,3 +1,20 @@
+<h2>Языковые конструкции</h2>
+<h3>switch case</h3>
+<pre class="prettyprint lang-js">
+switch(x) {
+  case 'value1':  // if (x === 'value1')
+    ...
+    [break]
+
+  case 'value2':  // if (x === 'value2')
+    ...
+    [break]
+
+  default:
+    ...
+    [break]
+}
+</pre>
 <h2>Переменные</h2>
 <h3>Типы переменных</h3>
 <pre class="prettyprint lang-js">
@@ -138,20 +155,20 @@ console.log(variable)
 // or
 alert(variable);
 </pre>
-<h2>String</h2>
+<h2>Строки</h2>
 <h3>Replace</h3>
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
 <h2>Array</h2>
-<h3>Maximum from array</h3>
+<h3>Найти максимально значение в массив</h3>
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
-<h3>Push to array</h3>
+<h3>Добавление элемента в массив</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>
 <h2>JSON</h2>
-<h3>Encode</h3>
+<h3>Преобразовать объект js в строку формата JSON</h3>
 <pre class="prettyprint lang-js">
 var str = JSON.stringify(objects);
 </pre>
-<h3>Decode</h3>
+<h3>Преобразовать строку формата JSON в объект js</h3>
 <p><code>var data2 = JSON.parse(text);</code></p>
 <pre class="prettyprint lang-js">
 &lt;?php
@@ -189,7 +206,45 @@ var str = JSON.stringify(objects);
 	console.log(data2);
 &lt;/script&gt;
 </pre>
+<h2>Ассинхронность</h2>
+<pre class="prettyprint lang-js">
+var promise = new Promise(function(resolve, reject) {
+  // Эта функция будет вызвана автоматически
+
+  // В ней можно делать любые асинхронные операции,
+  // А когда они завершатся — нужно вызвать одно из:
+  // resolve(результат) при успешном выполнении
+  // reject(ошибка) при ошибке
+})
+</pre>
 <h2>Наработки</h2>
+<p>Сгенерировать и скачать файл</p>
+<pre class="prettyprint lang-js">
+/**
+ * Сгенерировать и скачать файл
+ * @param  {String} data
+ * @param  {String} filename
+ * @param  {String} type
+ * @return undefined
+ */
+function download(data, filename = 'tree.json', type = 'application/json') {
+    var a = document.createElement("a")
+    var file = new Blob([data], {type: type})
+    if (window.navigator.msSaveOrOpenBlob) // IE10+
+        window.navigator.msSaveOrOpenBlob(file, filename);
+    else { // Others
+        var url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);  
+        }, 0);
+    }
+}
+</pre>
 <h3>Проверка на существование элемента в массиве со значением</h3>
 <pre class="prettyprint lang-js">
 Array.prototype.in_array = function(p_val) {

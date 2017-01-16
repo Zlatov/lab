@@ -50,7 +50,8 @@
 <div class="ui secondary vertical menu">
   <a class="active item">Account </a>
   <a class="item">Settings </a>
-  <div class="ui dropdown item"><i class="dropdown icon"></i> Display Options <div class="menu" id="asd">
+  <div class="ui dropdown item" id="asdasd"><i class="dropdown icon"></i> Display Options
+    <div class="menu" id="asd">
       <div class="header">Text Size</div>
       <a class="item">Small</a>
       <a class="item">Medium</a>
@@ -63,7 +64,7 @@
       </div>
     </div>
     <div class="column">
-      <div class="ui segment">Content</div>
+      <div class="ui segment"><div class="ui button" id="test_button">button</div></div>
     </div>
     <div class="column">
       <div class="ui segment">Content</div>
@@ -84,7 +85,10 @@
         action: 'show',
         direction: 'downward'
       });
-      $('#asd').show();
+      $('#test_button').on('click', function() {
+        $('#asd').show().addClass('transition visible').removeClass('hidden');
+        $('#asdasd').addClass('active visible');
+      });
     });
   </script>
 </body>
