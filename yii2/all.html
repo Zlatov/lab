@@ -38,8 +38,36 @@ defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 </pre>
 <h2>Конфигурация</h2>
-<p>These changes affect the type of error.</p>
-<h3>Rules</h3>
+<h3>Mailer</h3>
+<p><code>config/main.php</code></p>
+<pre class="prettyprint lang-php">
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'viewPath' => '@frontend/mail',
+            'useFileTransport' => false,//set this property to false to send mails to real email addresses
+            //comment the following array to send mail using php's mail function
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'yourAccauntMail@gmail.com',
+                'password' => 'yuorAccauntPassword',
+                'port' => '587',
+                // 'port' => '465', // с оффициальной страницы, ага.
+                'encryption' => 'tls',
+            ],
+        ],
+</pre>
+<h4>Errors</h4>
+<p><code>Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted.</code></p>
+<p>You need to authorize the external application use of gmail, I think.</p>
+<p>Follow the next steps and authorize to make it:</p>
+<ul>
+    <li>First, go to your Google Account Management page</li>
+    <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
+</ul>
+<h2>Модели</h2>
+
+<h3>Rules (валидация полей модели)</h3>
 <pre class="prettyprint lang-php">
             [['file'], 'required', 'on' => ['create','createfotos']],
             [['file'], 'safe', 'on' => ['update']],
@@ -101,8 +129,9 @@ defined('YII_ENV') or define('YII_ENV', 'prod');
             ['role', 'required'],
             ['role', 'in', 'range' =&gt; [User::ROLE_USER, User::ROLE_ADMIN]],
             
-
+            // Поле должно быть массивом строк (array)
             ['kitchens', 'each', 'rule' =&gt; ['string']],
+            // Поле должно быть массивом существующих значений
             ['kitchens', 'each', 'rule' =&gt; [
                     'exist',
                     'skipOnError' =&gt; false,
@@ -121,34 +150,7 @@ $model->scenario = User::SCENARIO_LOGIN;
 // сценарий задается через конфигурацию
 $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 </pre>
-<h3>Mailer</h3>
-<p><code>config/main.php</code></p>
-<pre class="prettyprint lang-php">
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@frontend/mail',
-            'useFileTransport' => false,//set this property to false to send mails to real email addresses
-            //comment the following array to send mail using php's mail function
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'yourAccauntMail@gmail.com',
-                'password' => 'yuorAccauntPassword',
-                'port' => '587',
-                // 'port' => '465', // с оффициальной страницы, ага.
-                'encryption' => 'tls',
-            ],
-        ],
-</pre>
-<h4>Errors</h4>
-<p><code>Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted.</code></p>
-<p>You need to authorize the external application use of gmail, I think.</p>
-<p>Follow the next steps and authorize to make it:</p>
-<ul>
-    <li>First, go to your Google Account Management page</li>
-    <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
-</ul>
-<h2>Модели</h2>
+
 <h3>ActiveRecors</h3>
 <h4>link()</h4>
 <pre class="prettyprint lang-php">
