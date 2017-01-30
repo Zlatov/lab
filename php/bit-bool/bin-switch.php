@@ -8,31 +8,30 @@ define('D', 1<<3);
 define('E', 1<<4);
 define('F', 1<<5);
 
+printf("<p>Права:</p>");
 echo "<pre>";
-/*var_dump(A);*/echo 'A - '; printf('%b',A); echo ' // define(\'A\', 1);   ' . PHP_EOL;
-/*var_dump(B);*/echo 'B - '; printf('%b',B); echo ' // define(\'B\', 1&lt;&lt;1);' . PHP_EOL;
-/*var_dump(C);*/echo 'C - '; printf('%b',C); echo ' // define(\'C\', 1&lt;&lt;2);' . PHP_EOL;
-/*var_dump(D);*/echo 'D - '; printf('%b',D); echo ' // define(\'D\', 1&lt;&lt;3);' . PHP_EOL;
-/*var_dump(E);*/echo 'E - '; printf('%b',E); echo ' // define(\'E\', 1&lt;&lt;4);' . PHP_EOL;
-/*var_dump(F);*/echo 'F - '; printf('%b',F); echo ' // define(\'F\', 1&lt;&lt;5);' . PHP_EOL;
+printf("A = %b // define('A', 1);" . PHP_EOL, A);
+printf("B = %b // define('B', 1&lt;&lt;1);" . PHP_EOL, B);
+printf("C = %b // define('C', 1&lt;&lt;2);" . PHP_EOL, C);
+printf("D = %b // define('D', 1&lt;&lt;3);" . PHP_EOL, D);
+printf("E = %b // define('E', 1&lt;&lt;4);" . PHP_EOL, E);
+printf("F = %b // define('F', 1&lt;&lt;5);" . PHP_EOL, F);
 echo "</pre>";
 
-// combine opitons with bitwise or (|)
-$a = [1,1,0,1,0,0];
+printf("<p>Сохраняем свойства в \$a имеет свойства B, D, E:</p>");
+$a = B | D | E;
+echo "<pre>";
+printf("\$a = %1\$b | \$a = %1\$d // \$a = B | D | E;", $a);
+echo "</pre>";
+
+$a = [0,1,1,0,1,0];
 $a = bindec(implode('',$a));
 echo "<pre>";
-/*var_dump($c);*/printf('%b',$a); echo ' // $a = [1,1,0,1,0,0]; $a = bindec(implode(\'\',$a));';
+printf('$a = %b', $a); echo ' // $a = [0,1,1,0,1,0]; $a = bindec(implode(\'\',$a));';
 echo "</pre>";
 
-$c = C | E | F | A;
-echo "<pre>";
-/*var_dump($c);*/printf('%b',$c); echo ' // $c = C | E | F;';
-echo "</pre>";
 
-$d = A | C;
-echo "<pre>";
-/*var_dump($c);*/printf('%b',$d); echo ' // $d = A | C;';
-echo "</pre>";
+
 
 // compare with or'ed values to find the combination
 echo "<pre>";
