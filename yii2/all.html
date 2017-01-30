@@ -509,6 +509,10 @@ MainAsset::register($this);
 use frontend\assets\MainAsset;
 $this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
 </pre>
+<h2>Контроллер</h2>
+<p>Указать главный шаблон, в контроллере:</p>
+<pre class="prettyprint lang-php copyToClipboard">$this->layout = 'yourNewLayout';</pre>
+
 <h2>Access</h2>
 <h3>Аутентификация</h3>
 <p>Настройка</p>

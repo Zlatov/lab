@@ -34,33 +34,40 @@
 <p><code>mkdir -p foo/bar/baz qux</code> — создает каталоги foo, qux в текущем каталоге и подкаталоги bar/baz в foo, без вывода предупреждений о несуществовании или существовании оных.</p>
 <p><code>mkdir -m 644 my42</code>.</p>
 <h3>grep</h3>
-<pre class="prettyprint lang-sh">grep 'Hello world' ./example.cpp
+<ul>
+    <li><code>-i</code> - регистронезависимо;</li>
+    <li><code>-r</code> - рекурсивно обходя папки;</li>
+    <li><code>--include=*.php</code> - только файлы с шаблоном;</li>
+</ul>
+<pre class="prettyprint lang-sh">grep 'Hello world' ./example.cpp</pre>
+<p>Регистронезависимо:</p>
+<pre class="prettyprint lang-sh">grep -i sum ./example.cpp</pre>
+<p>Регулярка (но лучше использовать egrep):</p>
+<pre class="prettyprint lang-sh">grep -i N[ua]m1 ./example.cpp</pre>
+<ul>
+    <li>. - замена любого печатного символа</li>
+    <li>* - отсутствие или повторение символа</li>
+    <li>^ - начало строки</li>
+    <li>$ - конец строки</li>
+</ul>
 
-# Регистронезависимо:
-grep -i sum ./example.cpp
-
-# Регулярка (но лучше использовать egrep):
-grep -i N[ua]m1 ./example.cpp
-# . - замена любого печатного символа
-# * - отсутствие или повторение символа
-# ^ - начало строки
-# $ - конец строки
-
-# Вывести номер строки (ключ -n)
-grep -i -n hello ./example.cpp
-
-# egrep - с использованием символьных классов POSIX
-egrep -i 'Hel+' ./example.cpp
+<p>Вывести номер строки (ключ -n)</p>
+<pre class="prettyprint lang-sh">grep -i -n hello ./example.cpp</pre>
+<p>egrep - с использованием символьных классов POSIX</p>
+<pre class="prettyprint lang-sh">egrep -i 'Hel+' ./example.cpp
 </pre>
 <p><strong class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#vse_znaki_prepinaniya">Поиск по файлам в директории <span class="caret"></span></strong></p>
 <div id="vse_znaki_prepinaniya" class="collapse">
+<p>Во всех файлах текущей директории</p>
 <pre class="prettyprint lang-sh">
-# Во всех файлах текущей директории
 grep "BASH_VERSION" ./*
-# В скрытых файлах
+</pre>
+<p>В скрытых файлах</p>
+<pre class="prettyprint lang-sh">
 grep "BASH_VERSION" ./.*
 </pre>
 </div>
+
 <h3>sed</h3>
 <p>(от англ. Stream EDitor) — потоковый текстовый редактор, очень крут, самое краткое:</p>
 <pre class="prettyprint lang-sh">
