@@ -66,3 +66,11 @@ $( "#foo" ).get( 0 ); // Identical to above, only slower.
 <pre class="prettyprint lang-js">
 $( event.target );
 </pre>
+<h3>Пролистываени страницы к элементу</h3>
+<pre class="prettyprint lang-js copyToClipboard">
+$("#button").click(function() {
+    $('html, body').animate({
+        scrollTop: $("#elementtoScrollToID").offset().top
+    }, 2000);
+});
+</pre>

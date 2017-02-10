@@ -37,6 +37,20 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 defined('YII_DEBUG') or define('YII_DEBUG', false);
 defined('YII_ENV') or define('YII_ENV', 'prod');
 </pre>
+<p>ну и на локале, наверняка, при инициализации <var>dev</var> создался такой код в файле <var class="copyToClipboard">frontend/config/main-local.php</var>, комментируем его.</p>
+<pre class="prettyprint lang-php">
+if (!YII_ENV_TEST) {
+    // configuration adjustments for 'dev' environment
+    $config['bootstrap'][] = 'debug';
+    $config['modules']['debug'] = [
+        'class' =&gt; 'yii\debug\Module',
+    ];
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' =&gt; 'yii\gii\Module',
+    ];
+}
+</pre>
 <h2>Конфигурация</h2>
 <h3>Mailer</h3>
 <p><code>config/main.php</code></p>
