@@ -2,6 +2,9 @@
 $url = 'https://80.252.130.250/stats/?method=auth';
 
 $params = json_decode(file_get_contents(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'params.json'), true);
+if (!$params) {
+    die('no params');
+}
 
 $result = file_get_contents($url, false, stream_context_create(array(
     'http' => array(
