@@ -1,19 +1,3 @@
-<?php
-    $msg = '';
-
-    function getCurlData($url)
-    {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        curl_setopt($curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16");
-        $curlData = curl_exec($curl);
-        curl_close($curl);
-        return $curlData;
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -23,47 +7,69 @@
             article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
         </style>
         
-        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
         <p>Привет, Мир!</p>
+        <p><a href="./recaptcha.php">recaptcha.php</a></p>
 
-    <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $recaptcha = $_POST['g-recaptcha-response'];
-        if(!empty($recaptcha))
-        {
-            include("getCurlData.php");
-            $google_url = "https://www.google.com/recaptcha/api/siteverify";
-            $secret = '6Ld3wRIUAAAAAIYZLkVTcHCc3se8R-EmecxwZsHa';
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $url = $google_url."?secret=".$secret."&response=".$recaptcha."&remoteip=".$ip;
-            $res = getCurlData($url);
-            $res = json_decode($res, true);
-            //reCaptcha введена
-            if($res['success'])
+        <?php
+            function getCurlData($url, $opt = [])
             {
-                $msg = 'ura';
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl, CURLOPT_PROXY, 'proxy.newstar.ru:3128');
+                // curl_setopt($curl, CURLOPT_POSTFIELDS, "postvar1=value1&postvar2=value2&postvar3=value3");
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($opt));
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+                $curlData = curl_exec($curl);
+                if($curlData === false)
+                {
+                    echo "<pre>";
+                    printf('Ошибка curl: %s', curl_error($curl));
+                    echo "</pre>";
+                }
+                curl_close ($curl);
+                return $curlData;
             }
-            else
+
+            if($_SERVER["REQUEST_METHOD"] == "POST")
             {
-                $msg = "res is false.";
+                if(!empty($_POST['g-recaptcha-response']))
+                {
+                    $url = "https://www.google.com/recaptcha/api/siteverify";
+                    $opt = [
+                        'secret' => '6Ld3wRIUAAAAAIYZLkVTcHCc3se8R-EmecxwZsHa',
+                        'response' => $_POST['g-recaptcha-response'],
+                        'remoteip' => $_SERVER['REMOTE_ADDR']
+                    ];
+                    $res = getCurlData($url, $opt);
+                    echo "<pre>";
+                    var_dump($res);
+                    echo "</pre>";
+                    $res = json_decode($res, true);
+                    echo "<pre>";
+                    var_dump($res);
+                    echo "</pre>";
+                }
+                else
+                {
+                    echo "<pre>";
+                    var_dump($_POST['g-recaptcha-response']);
+                    echo "</pre>";
+                }
+            } else {
+                echo "<pre>";
+                var_dump($_SERVER["REQUEST_METHOD"]);
+                echo "</pre>";
             }
+        ?>
 
-        }
-        else
-        {
-            $msg = "post recaptch is false.";
-        }
-
-    }
-    ?>
-
-    <form action="" method="post">
-        <input type="submit" name="submitform" value="Войти" />
-        <p class='msg'><?php echo $msg; ?></p>
-        <div class="g-recaptcha" data-sitekey="6Ld3wRIUAAAAAFVBJxnqJNLBfDcg7dO32LlFbx0A"></div>
-    </form>
+        <form action="" method="post">
+            <input type="submit" name="submitform" value="Войти">
+            <div class="g-recaptcha" data-sitekey="6Ld3wRIUAAAAAFVBJxnqJNLBfDcg7dO32LlFbx0A"></div>
+        </form>
     </body>
 </html>

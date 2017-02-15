@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 // error_reporting(-1);
 $errLvl = error_reporting();
 for ($i = 0; $i < 15;  $i++ ) {
