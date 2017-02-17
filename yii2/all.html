@@ -79,6 +79,20 @@ if (!YII_ENV_TEST) {
     <li>First, go to your Google Account Management page</li>
     <li>Under the Security options, click Edit link of Authorizing applications &amp; sites</li>
 </ul>
+<h3>Алиасы</h3>
+<p>можно указывать в конфиге <var>common|frontend|backend/config/main.php</var>:</p>
+<pre class="prettyprint lang-php">
+return [
+    ...
+    'aliases' =&gt; [
+        '@mybootstrap' =&gt; '@common/bower/compiled',
+    ],
+];
+</pre>
+<p>или в <var>common|frontend|backend/config/bootstrap.php</var>:</p>
+<pre class="copyToClipboard prettyprint lang-php">
+Yii::setAlias('@myassets', dirname(__DIR__) . '/bower/compiled');
+</pre>
 <h2>Модели</h2>
 
 <h3>Rules (валидация полей модели)</h3>
@@ -487,7 +501,7 @@ $this->enableCsrfValidation = false;
 <pre class="prettyprint lang-php">
             'news_tag.id' => $this->tag,
 </pre>
-<h3>Assets</h3>
+<h3>Ассеты</h3>
 <p>Model</p>
 <pre class="prettyprint lang-php">
 namespace frontend\assets;
@@ -522,6 +536,30 @@ MainAsset::register($this);
 <pre class="prettyprint lang-php">
 use frontend\assets\MainAsset;
 $this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
+</pre>
+<h3>Отключение встроенного Bootstrap</h3>
+<p>К сожалению вырубить не просто, посмотреть внимательно ассеты и <var class="copyToClipboard">frontend/config/main.php</var></p>
+<pre class="prettyprint lang-php">
+return [
+    ...
+    'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js'=>[]
+                ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js'=>[]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [],
+                ],
+
+            ],
+        ],
+    ],
+    ...
+];
 </pre>
 <h2>Контроллер</h2>
 <p>Указать главный шаблон, в контроллере:</p>
