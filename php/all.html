@@ -44,6 +44,10 @@ variables_order = "EGPCS"</pre>
 <p>Получить переменную окружения apache:</p>
 <pre>$var = apache_getenv("SPECIAL_PATH");</pre>
 <h2>Функции</h2>
+<h3>header()</h3>
+<pre class="prettyprint lang-php">
+header('Content-Type: text/html; charset=utf-8');
+</pre>
 <h3>iconv - изменение кодировки строки</h3>
 <pre class="prettyprint lang-php">
 $s = 'Р’РёРЅРёР»РѕРІР°СЏ Р°РїРїР»РёРєР°С†РёСЏ РІ РЅРѕС‡РЅРѕРј РєР»СѓР±Рµ - С„Р»СЋРѕСЂ';

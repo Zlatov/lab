@@ -74,6 +74,55 @@ vendor/
     <li><a href="codes/mcp_mod_crud_info.html"><code>includes/mcp/info/mcp_modcrud.php</code></a></li>
     <li><a href="codes/mcp_mod_crud_html.html"><code>styles/prosilver/template/mcp_modcrud_list.html</code></a></li>
 </ul>
+<h3>Правило/rule в ролях</h3>
+<p>Вообще достаточно в базу добавить:</p>
+<pre class="prettyprint lang-sql">INSERT INTO `forum_acl_options` (`auth_option_id`, `auth_option`, `is_global`, `is_local`, `founder_only`) VALUES (NULL, 'u_changereputation', '1', '0', '0');</pre>
+и добавить языковой файл <var class="copyToClipboard">language/ru/mods/permissions_changereputation.php</var> (см другие шаблоны рядом):
+<pre class="prettyprint lang-php">
+&lt;?php
+/**
+* DO NOT CHANGE )))
+*/
+if (!defined('IN_PHPBB'))
+{
+    exit;
+}
+
+if (empty($lang) || !is_array($lang))
+{
+    $lang = array();
+}
+
+$lang = array_merge($lang, array(
+    // 'ACL_CAT_REPUTATION'         =&gt; 'Репутация',
+    // 'ACL_U_CHANGEREPUTATION'    =&gt; array('lang' =&gt; 'Может изменять репутацию', 'cat' =&gt; 'REPUTATION'),
+    'ACL_U_CHANGEREPUTATION'    =&gt; 'Может изменять репутацию',
+));
+?&gt;
+</pre>
+<p>Однако есть дурацкая проверка в движке (<var class="copyToClipboard">phpbb/permissions.php</var>), тоесть получается дублирование инфы базы данных в файле:</p>
+<pre class="prettyprint lang-php">
+    public function permission_defined($permission)
+    {
+        return isset($this->permissions[$permission]);
+    }
+
+    ...
+
+    protected $permissions = array(
+        // User Permissions
+
+        ...
+
+        'u_changereputation' => array('lang' => 'ACL_U_CHANGEREPUTATION', 'cat' => 'misc'),
+
+        ...
+
+    );
+</pre>
+<div class="alert alert-info">
+<p>Необходимо сбросить кеш вручную (файлы <var>data_acl_options.php</var>, <var>data_role_cache.php</var>)</p>
+</div>
 <h2>БД</h2>
 <h3>Таблицы</h3>
 <p><strong>Добавиьт свою Стандартную</strong></p>
