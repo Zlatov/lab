@@ -225,7 +225,25 @@ var promise = new Promise(function(resolve, reject) {
 })
 </pre>
 <h2>Наработки</h2>
-<p>Сгенерировать и скачать файл</p>
+<h3>Открытие новой вкладки</h3>
+<pre class="prettyprint lang-js">
+  window.open(url, '_blank')
+  // window.open(src,'lightbox_window','width=400,height=200,toolbar=yes,location=yes,directories=yes,status=yes,menubar=yes,scrollbars=yes,copyhistory=yes,resizable=yes')
+  window.focus()
+</pre>
+<p><strong>Тест</strong></p>
+<pre class="prettyprint lang-html">
+  &lt;a href=&quot;#&quot; onclick=&quot;window.open('#h313', 'test_window', 'width=800, height=600, toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=yes, copyhistory=yes, resizable=yes'); return false;&quot;&gt;тест&lt;/a&gt;
+</pre>
+<p><a href="#" onclick="window.open('#h313', 'test_window', 'width=800, height=600, toolbar=no, location=yes, directories=no, status=no, menubar=no, scrollbars=yes, copyhistory=yes, resizable=yes'); return false;">тест</a></p>
+<h3>Определение домена</h3>
+<pre class="prettyprint lang-js">
+  var domain = window.location.hostname
+  if (domain.indexOf("www.") === 0) {
+    domain = domain.substr(4)
+  }
+</pre>
+<h3>Сгенерировать и скачать файл</h3>
 <pre class="prettyprint lang-js">
 /**
  * Сгенерировать и скачать файл
