@@ -213,7 +213,8 @@ var str = JSON.stringify(objects);
 	console.log(data2);
 &lt;/script&gt;
 </pre>
-<h2>Ассинхронность</h2>
+<h2>Ассинхронность, задержка, очередь</h2>
+<h3>Ассинхронность</h3>
 <pre class="prettyprint lang-js">
 var promise = new Promise(function(resolve, reject) {
   // Эта функция будет вызвана автоматически
@@ -224,6 +225,8 @@ var promise = new Promise(function(resolve, reject) {
   // reject(ошибка) при ошибке
 })
 </pre>
+<h3>Задержка</h3>
+<pre>setTimeout(resize_topiclist_column_border, 500);</pre>
 <h2>Наработки</h2>
 <h3>Открытие новой вкладки</h3>
 <pre class="prettyprint lang-js">

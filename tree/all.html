@@ -1,11 +1,124 @@
 <h2>Основные шаблоны проектирования БД для иерархических структур</h2>
 <ul>
 	<li>Список смежности «AL» (Adjacency List)</li>
-	<li>Материализованный путь «MP» (Materialized Path)</li>
+	<li>Материализованный путь «MP» (Materialized Path, иногда Path Enumeration)</li>
 	<li>Вложенные множества «NS» (Nested Set)</li>
 	<li>Таблица связей «CT» (Closure Table)</li>
 </ul>
+<table class="table">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Adjacency List</th>
+			<th>Materialized Path</th>
+			<th>Nested Set</th>
+			<th>Closure Table</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Минимальное количество таблиц</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>Получение одного потомка</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-success">Просто</td>
+		</tr>
+		<tr>
+			<td>Получение иерархии поддерева</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-success">Просто</td>
+		</tr>
+		<tr>
+			<td>Удаление одного элемента</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-success">Просто</td>
+		</tr>
+		<tr>
+			<td>Добавление элемента</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-success">Просто</td>
+		</tr>
+		<tr>
+			<td>Перемещение поддерева</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-success">Просто</td>
+			<td class="bg-danger">Сложно</td>
+			<td class="bg-success">Просто</td>
+		</tr>
+		<tr>
+			<td>Обеспечение ссылочное целостности</td>
+			<td class="bg-success">Да</td>
+			<td class="bg-danger">Нет</td>
+			<td class="bg-danger">Нет</td>
+			<td class="bg-success">Да</td>
+		</tr>
+	</tbody>
+</table>
+<p>Детали реализации этих паттернов отлично рассмотрены в <a href="http://www.slideshare.net/billkarwin/models-for-hierarchical-data" target="_blank">презентации Билла Карвина (Bill Karwin)</a>.</p>
 <h2>Список смежности (Adjacency List)</h2>
+<p><var>parent_id</var> или <var>pid</var> и всё.</p>
 <h2>Материализованный путь (Materialized Path)</h2>
+<p>Использование оператора LIKE и поиск по шаблонам вида: „1/2/3/4%“</p>
 <h2>Вложенные множества (Nested Set)</h2>
+<p>Обход дерева с выставлением левого и правго номера (left - right, nsleft - nsright, left_id - right_id или ancestor - descendant)</p>
 <h2>Таблица связей (Closure Table)</h2>
+<h2>Создать свою древовидную структуру AL + CT</h2>
+<h3>Создадим таблицы</h3>
+<pre class="prettyprint lang-sql copyToClipboard">
+SET @table_name_structure = 'tree';
+SET @table_name_relations = 'treerel';
+
+SET @q = CONCAT('DROP TABLE IF EXISTS `',@table_name_relations,'`;');
+PREPARE stmt FROM @q; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+SET @q = CONCAT('DROP TABLE IF EXISTS `',@table_name_structure,'`;');
+PREPARE stmt FROM @q; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @q = CONCAT('
+CREATE TABLE IF NOT EXISTS `',@table_name_structure,'` (
+  `id` INT unsigned NOT NULL AUTO_INCREMENT,
+  `pid` INT unsigned NULL DEFAULT NULL,
+  `level` INT unsigned NOT NULL,
+  `header` VARCHAR(180) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_tree_header` (`header` ASC)
+)
+ENGINE InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+');
+PREPARE stmt FROM @q; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @q = CONCAT('
+ALTER TABLE `',@table_name_structure,'`
+  ADD CONSTRAINT `fk_',@table_name_structure,'_pid` FOREIGN KEY (`pid`) REFERENCES `',@table_name_structure,'` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT;
+');
+PREPARE stmt FROM @q; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+
+SET @q = CONCAT('
+CREATE TABLE IF NOT EXISTS `',@table_name_relations,'` (
+  `aid` INT unsigned NOT NULL,
+  `did` INT unsigned NOT NULL,
+  UNIQUE KEY `uq_',@table_name_relations,'_adid` (`aid` ASC, `did` ASC),
+  CONSTRAINT `fk_',@table_name_relations,'_aid` FOREIGN KEY (`aid`) REFERENCES `',@table_name_structure,'` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `fk_',@table_name_relations,'_did` FOREIGN KEY (`did`) REFERENCES `',@table_name_structure,'` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+ENGINE InnoDB
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+');
+PREPARE stmt FROM @q; EXECUTE stmt; DEALLOCATE PREPARE stmt;
+</pre>

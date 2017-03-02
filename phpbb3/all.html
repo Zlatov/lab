@@ -1,5 +1,14 @@
 <h2>Шаблоны</h2>
-<h3>IF</h3>
+<h3>Глобальные (предустановленные) переменные в шаблонах</h3>
+<p><a href="https://wiki.phpbb.com/Global_Template_Variables">https://wiki.phpbb.com/Global_Template_Variables</a></p>
+<p><code>ROOT_PATH</code> — путь к домашней директории. Пример: <code class="prettyprint lang-html copyToClipboard">&lt;a href=&quot;{ROOT_PATH}viewforum.php?f={forums.FORUMID}&quot;&gt;&lt;/a&gt;</code></p>
+
+
+<h3>Синтаксис в шаблонах</h3>
+<p>
+    <a href="https://wiki.phpbb.com/Tutorial.Template_syntax" target="_blank">https://wiki.phpbb.com/Tutorial.Template_syntax</a>
+</p>
+<h4>IF</h4>
 <p><strong>Операторы:</strong></p>
 <ul>
     <li><code>==</code></li>
@@ -35,11 +44,6 @@
     INDEX
 &lt;!-- ENDIF --&gt;
 </pre>
-
-<h3>готовим вывод массива данных в шаблоне</h3>
-<p>
-    <a href="https://wiki.phpbb.com/Tutorial.Template_syntax" target="_blank">https://wiki.phpbb.com/Tutorial.Template_syntax</a>
-</p>
 <h2>Функции</h2>
 <pre class="prettyprint lang-php">
 $remote_addr = $request->variable('REMOTE_ADDR', '', false, \phpbb\request\request_interface::SERVER);
@@ -169,4 +173,131 @@ echo &quot;&lt;pre&gt;&quot;;
 print_r($user-&gt;data['session_id']);
 echo &quot;&lt;/pre&gt;&quot;;
 die();
+</pre>
+<h3>Группы пользователя</h3>
+<pre class="prettyprint lang-php">
+    if ( !function_exists('group_memberships') )
+    {
+        include_once($phpbb_root_path . 'includes/functions_user.'.$phpEx);
+    }
+
+    $groups = group_memberships(false,$user->data['user_id']);
+</pre>
+<h2>Группы</h2>
+<pre class="prettyprint lang-php">
+    // Выбор всех групп
+    $sql = sprintf(
+        '
+            SELECT group_id, group_name, group_type
+            FROM %1$s
+            ORDER BY group_type DESC, group_name ASC
+        ',
+        GROUPS_TABLE
+    );
+    $result = $db-&gt;sql_query($sql);
+    $groups = [];
+    while ($row = $db-&gt;sql_fetchrow($result)) 
+    {
+        $groups[$row['group_id']] = [
+            'group_name' =&gt; $row['group_name'],
+            'group_type' =&gt; $row['group_type'],
+        ];
+    }
+</pre>
+<h2>Форумы</h2>
+<h3>Все форумы</h3>
+<pre class="prettyprint lang-php">
+    // Получаем форумы
+    $forums = make_forum_select(
+        $select_id = false,
+        $ignore_id = false,
+        $ignore_acl = true,
+        $ignore_nonpost = false,
+        $ignore_emptycat = false,
+        $only_acl_post = false,
+        $return_array = true
+    );
+
+    // Определяем уровни форумов
+    $right = 0;
+    $level = 0;
+    $level_store = ["0" => 0];
+    $store_prev = null;
+    foreach ($forums as $id => $forum) {
+        if ($forum['left_id'] < $right) {
+            $level++;
+            $level_store[$forum['parent_id']] = $level;
+        } else if ($forum['left_id'] > $right + 1) {
+            $level = (isset($level_store[$forum['parent_id']]))?$level_store[$forum['parent_id']]:0;
+        }
+        if ($store_prev) {
+            if ($store_prev['forum_id'] == $forum['parent_id']) {
+                $forums[$store_prev['forum_id']]['has_children'] = true;
+            }
+            if ($store_prev['level'] > $level) {
+                $forums[$store_prev['forum_id']]['last_children'] = true;
+                $parent_id = $store_prev['parent_id'];
+                $d = $store_prev['level'] - $level;
+                for ($l=0; $l < $d - 1; $l++) {
+                    $forums[$parent_id]['last_children'] = true;
+                    $parent_id = $forums[$parent_id]['parent_id'];
+                }
+            }
+        }
+        $forums[$id]['level'] = $level;
+        $forums[$id]['has_children'] = false;
+        $forums[$id]['last_children'] = false;
+        $right = $forum['right_id'];
+        $store_prev = $forums[$id];
+    }
+    unset($level_store);
+
+    // Определяем отступы форумов, псевдографику дерева, права пользователя
+    $level = 0;
+    $last_on_level[$level] = false;
+    foreach ($forums as $id => $forum) {
+        // Псевдографика
+        if ($forum['last_children']) {
+            $last_on_level[$forum['level']] = true;
+        } else {
+            $last_on_level[$forum['level']] = false;
+        }
+        $pre = '';
+        for ($l=0; $l < $forum['level']; $l++) {
+            $pre.= (isset($last_on_level[$l])&&$last_on_level[$l])?"   ":"┃  ";
+        }
+        $pre.= $forum['last_children']?"┗━":"┣━";
+        $pre.= $forum['has_children']?"━┳":"━━";
+
+        // Права
+        $m_ = false;
+        $f_read = false;
+        if ($user_defined && $rights) {
+            $m_ = ( 
+                (isset($rights[$id])&&isset($rights[$id]['m_'])) ||
+                (isset($rights[0])&&isset($rights[0]['m_']))
+            )?true:false;
+            $f_read = ( isset($rights[$id])&&isset($rights[$id]['f_read']) )?true:false;
+        }
+
+        // Вывод форума
+        $template->assign_block_vars('forums', array(
+            'FORUMID' => $forum['forum_id'],
+            'FORUMNAME' => $forum['forum_name'],
+            'FORUMLEVEL' => $forum['level'],
+            'FORUMPRE' => $pre,
+
+            'S_FORUM_MODER' => $m_,
+            'S_FORUM_READ' => $f_read,
+        ));
+    }
+</pre>
+
+<h2>Права</h2>
+<pre class="prettyprint lang-php">
+    // Права
+    $rights = [];
+    if ($user_defined) {
+        $rights = $auth-&gt;acl_get_list($user_id, ['f_read', 'm_'], false);
+    }
 </pre>

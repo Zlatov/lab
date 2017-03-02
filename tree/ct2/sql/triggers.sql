@@ -3,24 +3,23 @@ DROP TRIGGER IF EXISTS `tbi_tree_addlevel`;
 DROP TRIGGER IF EXISTS `tbd_tree`;
 DROP TRIGGER IF EXISTS `tbu_tree`;
 
+-- Перед вставкой в структуру устанавливаем уровень
 CREATE TRIGGER `tbi_tree_addlevel` BEFORE INSERT ON `tree` FOR EACH ROW
 trigger_label:BEGIN
 	DECLARE level_of_parent INT DEFAULT 1;
 	IF @disable_triggers IS NULL THEN
-		-- Если вставляем элемент в корень, то уровень 1
+		-- Если родитель указан - выбираем его уровень и плюс 1
 		IF NEW.`pid` IS NOT NULL THEN
-			-- SET level_of_parent = 1;
-			-- LEAVE trigger_label;
-		-- ELSE
-			-- SET NEW.`level` = 2;
 			SELECT `level` + 1 INTO level_of_parent
 			FROM `tree`
 			WHERE `id` = NEW.`pid`;
 		END IF;
+		-- Устанавливаем уровень в любом случае (1 если нет родителя)
 		SET NEW.`level` = level_of_parent;
 	END IF;
 END;
 
+-- После вставки в структуру добавляем связи
 CREATE TRIGGER `tai_tree` AFTER INSERT ON `tree` FOR EACH ROW
 trigger_label:BEGIN
 	IF @disable_triggers IS NULL THEN
@@ -41,6 +40,7 @@ trigger_label:BEGIN
 	END IF;
 END;
 
+-- Перед удалением из структуры удаляем связи
 CREATE TRIGGER `tbd_tree` BEFORE DElETE ON `tree` FOR EACH ROW
 BEGIN
 	DECLARE count_childrens INT DEFAULT 0;
@@ -59,6 +59,7 @@ BEGIN
 	WHERE `aid` = OLD.`id` OR `did` = OLD.`id`;
 END;
 
+-- Перед обновлением структуры обновляем связи
 CREATE TRIGGER `tbu_tree` BEFORE UPDATE ON `tree` FOR EACH ROW
 trigger_label:BEGIN
 	DECLARE count_descendant INT DEFAULT 0;
