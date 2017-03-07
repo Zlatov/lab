@@ -296,6 +296,9 @@ mysql > SHOW CREATE TABLE tree_nodes;
 	...
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
 </pre>
+<h2>Дата, время</h2>
+<h3>Способы хранения</h3>
+<h3>Преобразования</h3>
 <h2>Транзакции</h2>
 <p>Совсем всегда использовать транзакции - отключить режим autocommit:</p>
 <p><code>SET AUTOCOMMIT=0</code></p>
@@ -369,7 +372,7 @@ mysql -uroot -p -e "show databases"</pre>
 mysql --host=$DBHOST --port=3306 --user="$DBUSER" --password="$DBPASS" -s --execute="SELECT concat(\`1\`, '.', \`2\`, '.', \`3\`) as version FROM newzlatov.sqlversion LIMIT 1;"</pre>
 <p>Прям выполнить sql файл</p>
 <pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
-<h3>Резервное копирование и восстановление (bash)</h3>
+<h3>Резервное копирование и восстановление (дамп dump)</h3>
 <h4>Создание резервной копии</h4>
 <p>Необходимо обратить внимание на параметры mysqldump</p>
 
@@ -420,6 +423,7 @@ mysql --user=$DBUSER --password=&quot;$DBPASS&quot; --execute=&quot;CREATE SCHEM
 echo &quot;End of the script.&quot;
 </pre>
 <h4>Восстановление из резервной копии</h4>
+<h5>С помощью заготовленного скрипта</h5>
 <p>Использовать так:</p>
 <p><code>./restoreFromArchive.sh newforum-2016-09-15-09-43-10.tar.gz</code></p>
 <p>restoreFromArchive.sh</p>
@@ -432,6 +436,8 @@ tar -xzOf &quot;$1&quot; | mysql -u&quot;$DBUSER&quot; -p&quot;$DBPASS&quot; &qu
 
 echo &quot;End of the script.&quot;
 </pre>
+<h5>С помощью <var>pipe viewer</var> с просмотром прогресса</h5>
+<p><code class="copyToClipboard">pv forumsql-mysql.sql | mysql -u"$DB_USER" -p"$DB_PASS" "$DB_FORUM"</code></p>
 
 <h2>Administration</h2>
 <h3>Настроить mysql поможет</h3>
