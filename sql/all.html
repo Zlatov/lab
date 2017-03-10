@@ -439,7 +439,7 @@ echo &quot;End of the script.&quot;
 <h5>С помощью <var>pipe viewer</var> с просмотром прогресса</h5>
 <p><code class="copyToClipboard">pv forumsql-mysql.sql | mysql -u"$DB_USER" -p"$DB_PASS" "$DB_FORUM"</code></p>
 
-<h2>Administration</h2>
+<h2>Администирование</h2>
 <h3>Настроить mysql поможет</h3>
 <p><a href="http://mysqltuner.com/">http://mysqltuner.com/</a></p>
 <h3>Version of mysql</h3>
@@ -454,18 +454,18 @@ sudo service mysql <mark>restart</mark>
 sudo service mysql <mark>status</mark>
 # or mysqld, or su<kbd>Enter</kbd> password<kbd>Enter</kbd> service mysql start
 </pre>
-<h3>Viewing mysql users</h3>
+<h3>Просмотр пользователей mysql</h3>
 <pre>SELECT User, Host FROM mysql.user;</pre>
-<h3>Create user</h3>
+<h3>Добавление/создание пользователя</h3>
 <pre class="prettyprint lang-sql">CREATE USER 'userLogin'@'localhost' IDENTIFIED BY 'userPassword';</pre>
-<h3>Delete mysql user</h3>
+<h3>Удаление пользователя</h3>
 <pre class="prettyprint lang-sql">DROP USER 'userLogin'@'localhost';</pre>
-<h3>Grant Permissions to a MySQL User on Linux via Command Line</h3>
+<h3>Установка прав пользователям mysql</h3>
 <pre class="prettyprint lang-sql">GRANT permission ON database.table TO 'userLogin'@'localhost';
 GRANT CREATE ON *.* TO 'userLogin'@'localhost';
 GRANT DROP ON testdatabase.* TO 'userLogin'@'localhost';
 </pre>
-<p>Here is a short list of commonly used permissions:</p>
+<p>Краткий список часто используемых прав (permissions list):</p>
 <ul>
     <li>ALL – Allow complete access to a specific database. If a database is not specified, then allow complete access to the entirety of MySQL.</li>
     <li>CREATE – Allow a user to create databases and tables.</li>
@@ -478,23 +478,36 @@ GRANT DROP ON testdatabase.* TO 'userLogin'@'localhost';
     <li>SHOW DATABASES- Allow a user to view a list of all databases.</li>
     <li>UPDATE – Allow a user to update rows in a table.</li>
 </ul>
-<h3>FLUSH!</h3>
-<p>When finished making your permission changes, it’s good practice to reload all the privileges with the flush command!</p>
+<h3>Перезагрузить (применить) разрешения</h3>
+<p>Когда мы закончили изменять разрешения, хорошей практикой является перезагрузка всех привилегий с помощью команды flush.</p>
 <pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
-<h3>Viewing permissions</h3>
+<h3>Просотр разрешений</h3>
 <pre class="prettyprint lang-sql">
--- for a logged user:
+-- для залогиненного пользователя:
 SHOW GRANTS;
--- and for the specified user:
+-- и для указанного пользователя:
 SHOW GRANTS FOR 'userLogin'@'localhost';
 </pre>
-<h3>Remove permission</h3>
+<h3>Удаление разрешений</h3>
 <pre class="prettyprint lang-sql">REVOKE <mark>permission</mark> ON database.table FROM 'user'@'localhost';</pre>
 <pre class="prettyprint lang-sql">REVOKE CREATE ON <mark>*.*</mark> FROM 'testuser'@'localhost';</pre>
 <pre class="prettyprint lang-sql">REVOKE DROP ON <mark>tutorial_database.*</mark> FROM 'testuser'@'localhost';</pre>
-<p>Do not forget
-    <mark>FLUSH</mark>!</p>
-<pre class="prettyprint lang-sql">FLUSH PRIVILEGES;</pre>
+<p>Не забываем перезагрузить разрешения!</p>
+<pre class="prettyprint lang-sql copyToClipboard">FLUSH PRIVILEGES;</pre>
+<h3>Восстановление root (прав и пароля пользователя)</h3>
+<p>1. Добавим в файл <var class="copyToClipboard prettyprint lang-sh">subl /etc/mysql/my.cnf</var> строку <code class="copyToClipboard">skip-grant-tables</code> в раздел <var>[mysqld]</var>:</p>
+<pre class="prettyprint lang-sh">[mysqld]
+#
+# * Basic Settings
+#
+skip-grant-tables
+</pre>
+<p>2. Перезагрузим mysql: <code class="copyToClipboard prettyprint lang-sh">sudo service mysql restart</code></p>
+<p>3. Назначим права пользователю root:</p>
+<pre class="copyToClipboard lang-sh">mysql -uroot</pre>
+<pre class="copyToClipboard lang-sql">flush privileges;</pre>
+<pre class="copyToClipboard lang-sql">grant all ON *.* TO `root`@`localhost` identified by 'mypassword' with grant option;</pre>
+<p>4. Удалим <var>skip-grant-tables</var>, перезагрузим mysql.</p>
 <h2>Тестирование</h2>
 <h3>Ошибки, предупреждения и их количество</h3>
 <pre class="prettyprint lang-sql">
