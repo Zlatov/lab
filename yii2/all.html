@@ -214,6 +214,10 @@ die();
 </pre>
 <h4>Code and queries with Pagination</h4>
 <pre class="prettyprint lang-php">
+use yii\data\Pagination;
+
+...
+
         $limit = 10;
         $page = (is_null(Yii::$app-&gt;request-&gt;get('page')))?1:Yii::$app-&gt;request-&gt;get('page');
         $offset = ((int)$page-1)*$limit;
@@ -266,6 +270,37 @@ $product = Yii::$app->db->createCommand('call product_view(:id);')
 <p>Запипись (публикация) одной таблицы относится к нескольким записям другой таблицы (тегам). Связь хранится в смежной таблице.</p>
 
 <h2>Представления (view)</h2>
+<h3>Связь Контроллер-представление</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Контроллер
+            </th>
+            <th>
+                Представление
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <code>$this->layout = 'yourNewLayout';</code>
+            </td>
+            <td>
+                <code>меняем основной шаблон страницы</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>$this->view->title = Yii::$app->name;</code>
+            </td>
+            <td>
+                <code>$this->title;</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <h3>Создание форм с помощью ActiveForm</h3>
 <h4>Выпадающие списки</h4>
 <p>Стандартное:</p>
@@ -501,42 +536,6 @@ $this->enableCsrfValidation = false;
 <pre class="prettyprint lang-php">
             'news_tag.id' => $this->tag,
 </pre>
-<h3>Ассеты</h3>
-<p>Model</p>
-<pre class="prettyprint lang-php">
-namespace frontend\assets;
-
-use yii\web\AssetBundle;
-
-/**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
-class AppAsset extends AssetBundle
-{
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
-    public $css = [
-        // 'css/site.css',
-    ];
-    public $js = [
-    ];
-    public $depends = [
-        // 'yii\web\YiiAsset',
-        // 'yii\bootstrap\BootstrapAsset',
-    ];
-}
-</pre>
-<p>In view</p>
-<pre class="prettyprint lang-php">
-use frontend\assets\MainAsset;
-MainAsset::register($this);
-</pre>
-<p>Register JS or CSS file depend Asset (in view):</p>
-<pre class="prettyprint lang-php">
-use frontend\assets\MainAsset;
-$this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
-</pre>
 <h3>Отключение встроенного Bootstrap</h3>
 <p>К сожалению вырубить не просто, посмотреть внимательно ассеты и <var class="copyToClipboard">frontend/config/main.php</var></p>
 <pre class="prettyprint lang-php">
@@ -561,10 +560,187 @@ return [
     ...
 ];
 </pre>
+<h2>Ресурсы/ассеты (assets)</h2>
+<h3>Использование</h3>
+<p><strong>Добавление ресурсов во вьюхе и управление ресурсом:</strong></p>
+<pre class="prettyprint lang-php">
+use frontend\assets\MainAsset;
+MainAsset::register($this);
+
+// Динасмическое управление ресурсом
+$viewTreeAsset = ViewTreeAsset::register($this);
+if (is_array($options['assetDepends'])) {
+    $viewTreeAsset->depends = array_merge($viewTreeAsset->depends,$options['assetDepends']);
+}
+</pre>
+<p><strong>Добавление JS или CSS файла после определённого Ресурса:</strong></p>
+<pre class="prettyprint lang-php">
+use frontend\assets\MainAsset;
+$this-&gt;registerJsFile('/js/favoriteKitchen.js', ['depends' =&gt; [MainAsset::className()]]);
+</pre>
+
+<h3>Создание</h3>
+<p><strong>Создание ресурсов с файлами в публичном разделе:</strong></p>
+<pre class="prettyprint lang-php">
+namespace frontend\assets;
+
+use yii\web\AssetBundle;
+
+class AppAsset extends AssetBundle
+{
+    public $basePath = '@webroot'; // полный путь от корня сервера к публичной папке (предустановленый алиас)
+    public $baseUrl = '@web'; // Базовый URL текущего приложения (предустановленый алиас)
+    public $css = [
+        'css/site.css',
+    ];
+    public $js = [
+    ];
+    public $depends = [
+        'frontend\assets\MyAsset',
+    ];
+}
+</pre>
+<p><strong>Создание ресурсов с файлами в вендорах:</strong></p>
+<pre class="prettyprint lang-php">
+namespace frontend\assets;
+
+use yii\web\AssetBundle;
+
+class MyAsset extends AssetBundle
+{
+    public $sourcePath = '@myassets'; // место от которого происходит поиск файлов указанных в массивах $js, $css
+    public $css = [
+        'site.css',
+        'bootstrap/dist/bootstrap.css',
+    ];
+    public $js = [
+        'jquery/dist/jquery.js',
+        'bootstrap/dist/js/bootstrap.js',
+    ];
+    public $depends = [
+    ];
+}
+</pre>
+
+<h2>Виджеты (widgets)</h2>
+<h3>Использование</h3>
+<p>Во вьюхе:</p>
+<pre class="prettyprint lang-html">
+    &lt;?= ViewTree::widget([
+        'viewTree' =&gt; $pubsecs,
+        'options' =&gt; [
+            'admin' =&gt; true,
+        ],
+        'model' =&gt; $model
+    ]) ?&gt;
+</pre>
+<p>Или в местах типа контроллера:</p>
+<pre class="prettyprint lang-php">
+    return \Zlatov\yiiComponents\widgets\ViewTree::widget([
+        'viewTree' =&gt; $pubsecs,
+        'options' =&gt; [
+            'assetDepends' =&gt; ['frontend\assets\MyAsset'],
+        ],
+        'model' =&gt; null,
+    ]);
+</pre>
+<h3>Создание</h3>
+<pre class="prettyprint lang-php">
+&lt;?php
+namespace Zlatov\yiiComponents\widgets;
+
+use yii\base\Widget;
+
+class ViewTree extends Widget
+{
+    public $viewTree;
+    public $options;
+    public $model;
+
+    private static $defOptions = [
+        'childrens'    =&gt; 'childrens', // Тут хранятся дети
+        'echo'         =&gt; ['header'],  // Массив полей для вывода в интерфейс
+        'drop'         =&gt; true,        // Вывод дерева с плюсиками или нет
+        'toggleSlide'  =&gt; true,        // Вывод кнопки разворачивания/сворачивания всего дерева
+        'admin'        =&gt; false,       // Выводить ли кнопки администрирования
+        'actionUpdate' =&gt; 'update',
+        'actionDelete' =&gt; 'delete',
+        'actionView'   =&gt; 'view',
+        'modelId'      =&gt; 'id',
+        'assetDepends' =&gt; null,
+    ];
+
+    public function init()
+    {
+        parent::init();
+
+        if ($this-&gt;options === null) {
+            $this-&gt;options = self::$defOptions;
+        } else {
+            $this-&gt;options = array_merge(self::$defOptions, $this-&gt;options);
+        }
+    }
+
+    public function run()
+    {
+        return $this-&gt;render('viewtree/index',[
+            'viewTree' =&gt; $this-&gt;viewTree,
+            'options' =&gt; $this-&gt;options,
+            'model' =&gt; $this-&gt;model,
+        ]);
+    }
+}
+</pre>
 <h2>Контроллер</h2>
 <p>Указать главный шаблон, в контроллере:</p>
 <pre class="prettyprint lang-php copyToClipboard">$this->layout = 'yourNewLayout';</pre>
+<h2>Поведения, behaviors</h2>
+<p>Создание поведения Sid:</p>
+<pre class="prettyprint lang-php">
+// Тут неймспейс поведения
 
+use yii\base\Behavior;
+use yii\db\ActiveRecord;
+
+class Sid extends Behavior
+{
+    public $in_attribute = 'header'; // Обязательное свойство
+    public $out_attribute = 'sid'; // Обязательное свойство
+    public $translit = true; // Дополнительное свойство
+
+    // Связь методов поведений с событиями класса
+    public function events()
+    {
+        return [
+            ActiveRecord::EVENT_BEFORE_VALIDATE =&gt; 'genSid'
+        ];
+    }
+
+    // метод поведения
+    public function genSid($event)
+    {
+        if ( empty( $this-&gt;owner-&gt;{$this-&gt;out_attribute} ) ) {
+            $this-&gt;owner-&gt;{$this-&gt;out_attribute} = Text::translit( $this-&gt;owner-&gt;{$this-&gt;in_attribute} );
+        } else {
+            $this-&gt;owner-&gt;{$this-&gt;out_attribute} = Text::translit( $this-&gt;owner-&gt;{$this-&gt;out_attribute} );
+        }
+    }
+}
+</pre>
+<p>В классе использующем поведение Sid</p>
+<pre class="prettyprint lang-php">
+    public function behaviors()
+    {
+        return [
+            'sid' =&gt; [
+                'class' =&gt; Sid::className(),
+                'in_attribute' =&gt; 'header',
+                'out_attribute' =&gt; 'sid',
+                'translit' =&gt; true
+            ]
+        ];
+    }
+</pre>
 <h2>Access</h2>
 <h3>Аутентификация</h3>
 <p>Настройка</p>
@@ -1047,6 +1223,13 @@ use yii\widgets\Pjax;
     &lt;?= $this-&gt;render('_addresses', ['model' =&gt; $model]) ?&gt;
 &lt;?php Pjax::end(); ?&gt;
 </pre>
+<h2>Gii</h2>
+<h3>Создание контроллеров</h3>
+<ul>
+    <li><strong>Controller Class:</strong> <var class="copyToClipboard">frontend\controllers\PubController</var> </li>
+    <li><strong>Action IDs:</strong> <var class="copyToClipboard">list view</var></li>
+    <li><strong>View Path:</strong> <var class="copyToClipboard">@frontend/views/pub</var></li>
+</ul>
 <h2>Errors</h2>
 <h3>The use statement with non-compound name 'Yii' has no effect</h3>
 <p>Эта ошибка возникает если в глобальном неймспейсе использовать <code>use Yii;</code> - глобальный неймспейс.</p>
