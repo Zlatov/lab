@@ -213,12 +213,22 @@ select @test := last_insert_id() as last_insert_id;
 <h3>if ifnull nullif</h3>
 <h4>if</h4>
 <p><code>IF(expr1,expr2,expr3)</code>. Если expr1 равно значению ИСТИНА (expr1 &lt;&gt; 0 и expr1 &lt;&gt; NULL), то функция IF() возвращает expr2, в противном случае - expr3.</p>
+<div class="alert alert-success">
 <pre class="prettyprint lang-sql">
-	where
-		`p`.`price` &gt;= param_from
-		and `p`.`price` &lt;= param_to
-		and if(param_dishtype &lt;&gt; 0, `d`.`dishtype_id` = param_dishtype, 1)
+  where
+    `p`.`price` &gt;= param_from
+    and `p`.`price` &lt;= param_to
+    and if(param_dishtype &lt;&gt; 0, `d`.`dishtype_id` = param_dishtype, 1)
 </pre>
+</div>
+<div class="alert alert-danger alert-dismissable">
+  <p>Неправильное использование</p>
+  <pre class="prettyprint lang-sql">
+  select
+    if(null,'true','false') as nil, if(0,'true','false') as zero, if('','true','false') as emp_s,
+    if(-1,'true','false') as mone, if(' ','true','false') as spa, if('  ','true','false') as tab;
+  </pre>
+</div>
 <h4>if которого нет</h4>
 <pre class="prettyprint lang-sql">SET @sql = (SELECT IF(
     (SELECT COUNT(*)

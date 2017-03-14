@@ -189,7 +189,7 @@ $user->unlinkAll('kitchen', true); // HasMany function in model User: getKitchen
 // Add relation to model Kitchen:
 $kitchen->link('users', $user); // HasMany function in model Kitchen: getUsers()
 </pre>
-<h4>show ActiveRecord query</h4>
+<h4>Показать sql запрос генерируемый ActiveRecord</h4>
 <pre class="prettyprint lang-php">
 $query = Message::find()
     -&gt;with(['author'])
@@ -200,6 +200,20 @@ print_r($query-&gt;createCommand()-&gt;sql);
 print_r($query-&gt;createCommand()-&gt;getRawSql());
 echo &quot;&lt;/pre&gt;&quot;;
 die();
+
+
+        $query = Pubsec::find()-&gt;where(['sid' =&gt; 'programming']);
+        echo &quot;&lt;pre&gt;&quot;;
+        print_r($query-&gt;createCommand()-&gt;sql);
+        echo &quot;&lt;/pre&gt;&quot;;
+        echo &quot;&lt;pre&gt;&quot;;
+        print_r($query-&gt;createCommand()-&gt;getRawSql());
+        echo &quot;&lt;/pre&gt;&quot;;
+        echo &quot;&lt;pre&gt;&quot;;
+        print_r($query);
+        echo &quot;&lt;/pre&gt;&quot;;
+        die();
+
 </pre>
 <h4>ActiveRecord queries</h4>
 <pre class="prettyprint lang-php">
