@@ -1,4 +1,6 @@
 <h2>Команды</h2>
+<h3>diff</h3>
+<p><code>diff ./some_file ./another_file</code> — сравнить два файла.</p>
 <h3>ls</h3>
 <ul>
     <li><code>-A</code> — в том числе файлы начинающиеся с точки;</li>
@@ -219,16 +221,24 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 <p><code>cp foo bar</code> — сделать копию foo с именем bar.</p>
 <p><code>cp foo bar baz</code> или <code>cp foo bar ./baz</code> — скопировать файл или файлы (foo и bar) в другой каталог (baz).</p>
 <p><code>cp -r ./baz ./qux</code> — скопировать каталог baz в другой каталог qux (./qux/baz).</p>
-<h3>ln</h3>
-<p><code>ln -s /path_to_folder /path_from_folder/linkName</code></p>
 <p>Скопировать <strong>Много</strong> файлов используя <var>ls</var> <var>xargs</var>: <code>ls -1 | xargs -I {} cp {} /home/production/project/web/base/files/{}</code></p>
+<h3>ln</h3>
 <ul>
-    <li>/path_to_folder - на что будем указывать</li>
-    <li>/path_from_folder_link - папка в которой создадим ссылку</li>
-    <li>/linkName - название ссылки</li>
+    <li><code>-s</code> — создать символьную ссылку.</li>
+</ul>
+<p><code>ln -s /path_to_folder /path_from_folder/linkName</code></p>
+<ul>
+    <li><var>/path_to_folder</var> - на что будем указывать</li>
+    <li><var>/path_from_folder</var> - папка в которой создадим ссылку</li>
+    <li><var>/linkName</var> - название ссылки</li>
 </ul>
 <p>Если в названии пути есть пробелы, то их необходимо экранировать обратным слешем.</p>
 <p>Подробно о ключах и форматах <code>ln --help</code>.</p>
+<h4>Разница между символьной и жесткой ссылками</h4>
+<p>Жесткая ссылка — указатель на индексный дескриптор файла.</p>
+<p>Символьная (или мягкая) ссылка — указатель на имена файлов.</p>
+<p>При создании символьной ссылки необходимо указывать <var>абсолютный путь</var> к файлу ИЛИ указывать <var>относительный путь</var> от места использования ссылки (иначе будем получать сообщения: <q>No such file or directory</q>).</p>
+<p>Невозможно создать жесткую ссылку на каталог.</p>
 <h3>tar</h3>
 <ul>
     <li><code>-c</code> — создать архив;</li>
@@ -337,6 +347,12 @@ screen -r
 screen -r 2398.pts-0.webtest
 </pre>
 <p><kbd>Ctrl + A, D</kbd> - выйти из сессии</p>
+<h2>Программирование</h2>
+<h3>Пути/имена</h3>
+<p><code>echo `pwd`</code> —  абсолютный путь к текущему местоположению (место из которо запущена команда/исполняемый файл).</p>
+<p><code>echo $0</code> — имя утилиты или относительный путь к исполняемому файлу.</p>
+<p><code>echo $BASH_ARGV</code> — путь к файлу в котором написан сам код.</p>
+<p><code>echo `basename $BASH_ARGV`</code> — обрежет путь до имени файла.</p>
 <h2>Наработки</h2>
 <h3>Убить процесс</h3>
 <p><code class="copyToClipboard">kill -9 process_id</code></p>
