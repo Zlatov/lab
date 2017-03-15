@@ -52,6 +52,13 @@ if (!YII_ENV_TEST) {
 }
 </pre>
 <h2>Конфигурация</h2>
+<h3>Определение версии yii2</h3>
+<pre class="copyToClipboard prettyprint lang-php">
+echo "<pre>";
+print_r(Yii::getVersion());
+echo "</pre>";
+die();
+</pre>
 <h3>Mailer</h3>
 <p><code>config/main.php</code></p>
 <pre class="prettyprint lang-php">
@@ -225,31 +232,6 @@ die();
         -&gt;where(['p.user_id' =&gt; $this-&gt;id])
         -&gt;groupBy('kitchen.id')
         -&gt;all();
-</pre>
-<h4>Code and queries with Pagination</h4>
-<pre class="prettyprint lang-php">
-use yii\data\Pagination;
-
-...
-
-        $limit = 10;
-        $page = (is_null(Yii::$app-&gt;request-&gt;get('page')))?1:Yii::$app-&gt;request-&gt;get('page');
-        $offset = ((int)$page-1)*$limit;
-
-        $order = ['created_at' =&gt; SORT_DESC,'id' =&gt; SORT_DESC];
-
-        $blogs = Publication::find()
-            -&gt;orderBy($order)
-            -&gt;offset($offset)
-            -&gt;limit($limit)
-            -&gt;all();
-
-        $pagination = new Pagination([
-            'totalCount' =&gt; Publication::find()-&gt;count(), 
-            'pageSize' =&gt; $limit,
-        ]);
-
-        $pagination-&gt;pageSizeParam = false;
 </pre>
 <h4>deleteAll</h4>
 <pre class="prettyprint lang-php">
@@ -704,6 +686,52 @@ class ViewTree extends Widget
         ]);
     }
 }
+</pre>
+<h2>Пагинация</h2>
+<p><strong>Настройка по умолчанию в файле <var>frontend/config/main.php</var></strong></p>
+<pre class="prettyprint lang-php">
+    'container' =&gt; [
+        'definitions' =&gt; [
+            'yii\data\Pagination' =&gt; [
+                'pageSizeParam' =&gt; false,
+                'forcePageParam' =&gt; false,
+                'pageSize' =&gt; 10,
+            ],
+        ],
+    ],
+</pre>
+<ul>
+    <li><var>forcePageParam</var> — всегда указывать номер страницы (например, даже для первой);</li>
+    <li><var>pageSizeParam</var> — добавлять в url параметр хранящий размер страницы;</li>
+    <li><var>pageSize</var> — количество элементов на странице.</li>
+</ul>
+<p><strong>Создание объекта с настройками по умолчанию</strong></p>
+<pre class="prettyprint lang-php">
+    $... = Yii::$container-&gt;get(Pagination::className());
+</pre>
+<p><strong>Использование в контроллере</strong></p>
+<pre class="prettyprint lang-php">
+        $query = Pub::find()
+            -&gt;orderBy(...);
+
+        // Общее количество элементов пагинации
+        $this-&gt;pagination-&gt;totalCount = $query-&gt;count();
+
+        $pubs = $query
+            // С какого элемента начинаем выборку
+            -&gt;offset($this-&gt;pagination-&gt;offset)
+            // Сколько элементов выбираем (количество элементов на странице)
+            -&gt;limit($this-&gt;pagination-&gt;pageSize)
+            -&gt;all();
+
+        // Если пагинация должна ссылаться на другой контроллер
+        $this-&gt;pagination-&gt;route = Yii::$app-&gt;urlManager-&gt;createUrl(['pub/list']);
+        // Настройка при необходимости
+        $this-&gt;pagination-&gt;forcePageParam = true;
+</pre>
+<p><strong>Использование в представлении</strong></p>
+<pre class="prettyprint lang-html">
+    &lt;?= LinkPager::widget(['pagination' =&gt; $this-&gt;params['pagination'],]); ?&gt;
 </pre>
 <h2>Контроллер</h2>
 <p>Указать главный шаблон, в контроллере:</p>
