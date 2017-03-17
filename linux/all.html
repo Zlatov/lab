@@ -1,14 +1,9 @@
-synaptic - менеджер пакетов
-
-
-
-форматирование флешки
-проверим наличие нашего Flash-накопителя:
-
-# fdisk -l
-Выведет информацию о всех подключённых накопителях и их разделах. Обычно sda — это диск на котором установлена ОС, значит нас интересуют sdb, sdc и т.д. Зная объем своей флешки, в моем случае 4gb, я увидел следующее:
-
-Disk /dev/sdb: 3,8 GiB, 4055885824 bytes, 1980413 sectors
+<h2>synaptic - менеджер пакетов</h2>
+<h2>форматирование флешки</h2>
+<p>проверим наличие нашего Flash-накопителя:</p>
+<pre class="copyToClipboard">fdisk -l</pre>
+<p>Выведет информацию о всех подключённых накопителях и их разделах. Обычно sda — это диск на котором установлена ОС, значит нас интересуют sdb, sdc и т.д. Зная объем своей флешки, в моем случае 4gb, я увидел следующее:</p>
+<pre>Disk /dev/sdb: 3,8 GiB, 4055885824 bytes, 1980413 sectors
 Units: sectors of 1 * 2048 = 2048 bytes
 Sector size (logical/physical): 2048 bytes / 2048 bytes
 I/O size (minimum/optimal): 2048 bytes / 2048 bytes
@@ -16,43 +11,29 @@ Disklabel type: dos
 Disk identifier: 0x6f20736b
 Устр-во    Загрузочный Start Конец    Blocks   Id  System
 /dev/sdb1  *           512   1980412  3959802  7   HPFS/NTFS/exFAT
-/dev/sdb1 - это и есть та самая флешка с которой будем работать.
-
-Нужно проверить примонтирована ли флешка, сделать это можно командой df -h:
-
-# df -h /dev/sdb1
-Сама по себе, команда df -h, выводит весь список примонтированных устройств.
-
-Если флешка примонтирована, нужно отмонтировать:
-
-# umount /dev/sdb1
-Теперь можно форматировать, форматировать будем в ntfs командой mkfs:
-
-# mkfs.ntfs -L name /dev/sdb1
-mkfs — комада для форматирования.
-ntfs — файловая система.
--L — аргумент, позволяющий присвоить имя нашей флешки (недоступен для fat32).
-name — имя (метка) нашей флешки.
-/dev/sdb1 — путь к флешки.
-Команды для форматирования в другие файловые системы предназначенные для Flash-накопителей:
-
-mkfs.ntfs - NTFS
-mkfs.msdos - MSDOS
-mkfs.vfat - VFAT (расширенная FAT32)
-
-
-
-
-
-
+/dev/sdb1 - это и есть та самая флешка с которой будем работать.</pre>
+<p>Нужно проверить примонтирована ли флешка, сделать это можно командой <code>df -h</code>:</p>
+<pre class="copyToClipboard">df -h /dev/sdb1</pre>
+<p>Сама по себе, команда df -h, выводит весь список примонтированных устройств.</p>
+<p>Если флешка примонтирована, нужно отмонтировать:</p>
+<pre>umount /dev/sdb1</pre>
+<p>Теперь можно форматировать, форматировать будем в ntfs командой mkfs:</p>
+<pre>mkfs.ntfs -L name /dev/sdb1</pre>
+<code>mkfs</code> — комада для форматирования.
+<code>ntfs</code> — файловая система.
+<code>-L</code> — аргумент, позволяющий присвоить имя нашей флешки (недоступен для fat32).
+<code>name</code> — имя (метка) нашей флешки.
+<code>/dev/sdb1</code> — путь к флешки.
+<p>Команды для форматирования в другие файловые системы предназначенные для Flash-накопителей:</p>
+<p><code>mkfs.ntfs</code> - NTFS</p>
+<p><code>mkfs.msdos</code> - MSDOS</p>
+<p><code>mkfs.vfat</code> - VFAT (расширенная FAT32)</p>
 
 <h2>Console</h2>
 <h3>show</h3>
 <p><code>export PS1='$(whoami)@$(hostname):$(pwd)$ '</code></p>
 <p>or</p>
 <p><code>export PS1='$(whoami)@$(hostname):$(pwd)'</code></p>
-
-
 
 <h2>Обновления, установки...</h2>
 <h3>Upgrade mysql 5.5 to 5.6 ubuntu 14.04</h3>
@@ -82,3 +63,20 @@ sudo apt-get install mysql-server-5.6</pre>
 <li>Восстанавливаем бэкап</li>
 <pre>mysql -u root -p < dump.sql</pre>
 </ol>
+
+<h2>Переменные окружения</h2>
+<p>(переменные среды, environment variable)</p>
+<p>Посмотреть пути <code class="copyToClipboard">echo $PATH</code></p>
+<h3>Добавить в $PATH свою директорию (создать свои консольные команды)</h3>
+<pre class="prettyprint lang-sh">mkdir mkdir -p ~/bin
+touch ~/.profile
+chmod 754 ~/.profile
+nano ~/.profile
+</pre>
+<pre class="copyToClipboard prettyprint lang-sh">#!/bin/bash
+if [ -d &quot;$HOME/bin&quot; ]
+    then
+        PATH=&quot;$HOME/bin:$PATH&quot;
+fi
+</pre>
+<p class="alert alert-info">Незабыть выйти/зайти ssh (ну или новое окно терминала открыть).</p>

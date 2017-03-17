@@ -25,6 +25,15 @@ Host bitbucket
 	IdentityFile ~/.ssh/id_rsa_myRsa
 	ProxyCommand corkscrew proxy.company.ru 3128 %h %p
 </pre>
-<p>
-    при использовании алиаса сервера ссылка на удаленный репозиторий выглядит следующим образом: <code>github:Zlatov/testbootstrap.git</code>.
-</p>
+<p> при использовании алиаса сервера ссылка на удаленный репозиторий выглядит следующим образом: <code>github:Zlatov/testbootstrap.git</code>. </p>
+
+<h2>Через сервер</h2>
+<pre class="prettyprint lang-sh">ssh -tt промежуточныйПользователь@промежуточныйСервер ssh -tt конечныйПользователь@конечныйСервер</pre>
+<pre class="prettyprint lang-sh">
+Host конечныйСерверАлиас
+	HostName конечныйСервер
+	User пользователь
+	Port порт
+	IdentityFile ~/.ssh/id_rsa_ключ
+	ProxyCommand ssh промежуточныйПользователь@промежуточныйСервер nc %h %p
+</pre>
