@@ -228,6 +228,72 @@ var promise = new Promise(function(resolve, reject) {
 <h3>Задержка</h3>
 <pre>setTimeout(resize_topiclist_column_border, 500);</pre>
 <h2>Наработки</h2>
+<h3>Выделение на странице</h3>
+<p><a href="https://learn.javascript.ru/range-textrange-selection">Подробнее тут</a>.</p>
+<pre class="prettyprint lang-js">
+  function InsertQuote(a,c) {
+    if (InsertQuote.selection.toString().length&gt;0) {
+      alert(InsertQuote.selection.toString());
+    } else {
+      alert(&quot;Вы не выделили текст для цитирования&quot;);
+      return;
+    }
+  }
+  InsertQuote.prepare=function() {
+    if (document.getSelection) {
+      // Не IE
+      if (typeof(window.getSelection)!=&quot;undefined&quot;) {
+        var selection = window.getSelection()
+      } else {
+        var selection = document.getSelection()
+      }
+      InsertQuote.selection=selection.toString()
+      InsertQuote.parentNodeOfStartContainer=(InsertQuote.selection.length&gt;0)?
+        selection.anchorNode.parentNode:
+        null
+    } else {
+      // IE
+      InsertQuote.selection=document.selection.createRange().text;
+      InsertQuote.parentNodeOfStartContainer=(InsertQuote.selection.length&gt;0)?
+        document.selection.createRange().parentElement():
+        null
+    }
+  }
+
+  $('.button')
+    .hover(function(event) {
+      InsertQuote.prepare();
+    })
+    .on('click', function(event) {
+      // InsertQuote.prepare();
+      var postid = $(this).data('postid')
+      var username = $(this).data('username')
+      InsertQuote(username,postid)
+    })
+</pre>
+<div id="ex5" style="border:1px dashed #999; color:#666; background:#EEE; padding:2px 5px; margin:10px 0;">
+  Снова будем выделять <span>бабулю</span>, на этот раз без поиска.
+</div>
+<p>
+  <input onclick="setSelection()" type="button" value="Выделить бабулю">
+</p>
+<script>
+  function setSelection() {
+    var target = document.getElementById('ex5').getElementsByTagName('span')[0];
+    var rng, sel;
+    if (document.createRange) {
+      rng = document.createRange();
+      rng.selectNode(target)
+      sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(rng);
+    } else {
+      var rng = document.body.createTextRange();
+      rng.moveToElementText(target);
+      rng.select();
+    }
+  }
+</script>
 <h3>Открытие новой вкладки</h3>
 <pre class="prettyprint lang-js">
   window.open(url, '_blank')
@@ -245,6 +311,34 @@ var promise = new Promise(function(resolve, reject) {
   if (domain.indexOf("www.") === 0) {
     domain = domain.substr(4)
   }
+</pre>
+<h3>Открыть все внешние ссылки в новом окне</h3>
+<pre class="prettyprint lang-js">
+  $('a[href^=&quot;http://&quot;]').on('click', function(event) {
+    var url = $(this).attr('href')
+    var url_domain
+    if (url.indexOf(&quot;://&quot;) &gt; -1) {
+      url_domain = url.split('/')[2]
+    } else {
+      url_domain = url.split('/')[0]
+    }
+    if (url_domain.indexOf(&quot;www.&quot;) === 0) {
+      url_domain = url_domain.substr(4)
+    }
+    url_domain = url_domain.split(':')[0]
+    var domain = window.location.hostname
+    if (domain.indexOf(&quot;www.&quot;) === 0) {
+      domain = domain.substr(4)
+    }
+    if (url_domain !== domain) {
+      // console.log(url_domain)
+      // console.log(domain)
+      window.open(url, '_blank')
+      window.focus()
+      event.preventDefault()
+      return false
+    }
+  })
 </pre>
 <h3>Сгенерировать и скачать файл</h3>
 <pre class="prettyprint lang-js">

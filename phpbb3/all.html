@@ -301,3 +301,23 @@ die();
         $rights = $auth-&gt;acl_get_list($user_id, ['f_read', 'm_'], false);
     }
 </pre>
+<h2>Ббкоды</h2>
+<p>Это отдельная головная боль phpbb, очень интересный алгоритм преобразования, особенно если еще прикручен какой-нибудь WYSIWYG редактор.</p>
+<p>В кратце заметки:</p>
+<p>Файлы относящиеся так или иначе к bbcode:</p>
+<ul>
+    <li><var class="copyToClipboard">includes/bbcode.phpbb</var></li>
+    <li><var class="copyToClipboard">styles/prosilver/template/bbcode.html</var> — содержит шаблоны;</li>
+    <li><var class="copyToClipboard">viewtopic.php</var> — вызывает <var>generate_text_for_display()</var></li>
+    <li><var class="copyToClipboard">posting.php</var> — вызывает <var>format_display()</var></li>
+    <li><var class="copyToClipboard">includes/functions_content.php</var> — вызывает <var>bbcode_second_pass()</var> в <var>generate_text_for_display()</var></li>
+    <li><var class="copyToClipboard">includes/message_parser.php</var> — вызывает <var>bbcode_second_pass()</var> в <var>format_display()</var></li>
+</ul>
+<h3>WYSIWYG (WYSIBB)</h3>
+<ul>
+    <li><var class="copyToClipboard">styles/prosilver/template/overall_footer.html</var> - подключение, опции, инициализация;</li>
+    <li><var class="copyToClipboard">assets/wysibb/jquery.wysibb.js</var> - исходный код;</li>
+    <li><var class="copyToClipboard">styles/prosilver/template/posting_editor.html</var> - шаблон (вывод смайликов...);</li>
+    <li><var class="copyToClipboard">styles/prosilver/theme/custom.js</var> - insert_text();</li>
+    <li><var class="copyToClipboard">assets/javascript/editor.js</var> - тоже :-( insert_text().</li>
+</ul>

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>HTML5 - Привет, Мир!</title>
+        <style type="text/css">
+            article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+        </style>
+    </head>
+    <body>
+
+
 <pre class="prettyprint lang-php">
 <?php
 
@@ -94,3 +106,5 @@ var_dump($strFf) . PHP_EOL;
 
 <!-- Подсветка синтаксиса кода -->
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    </body>
+</html>
