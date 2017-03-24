@@ -1,18 +1,3 @@
-// Settings in here override those in "Default/Preferences.sublime-settings",
-// and are overridden in turn by file type specific settings.
-{
-    "fallback_encoding": "Cyrillic (Windows 1251)",
-    "font_size": 12,
-    "ignored_packages":
-    [
-        "Vintage"
-    ],
-    "show_encoding": true,
-    "update_check": false
-}
-
-
-
 <h2>Основы</h2>
 <h3>Проекты</h3>
 <p><strong>Очистить список проектов в „Switch Project“:</strong></p>
@@ -265,3 +250,47 @@
         &quot;iadfeshchm&quot;
     ]
 }</pre>
+<h2>Подсветка кода</h2>
+<p>Выбор синтаксиса из меню Sublime:</p>
+<p>
+    <q>View</q> → <q>Syntax</q> → <q>Open all with current extansion as...</q> → <var>Синтаксис</var>
+</p>
+<p>Приводит к созданию файла <code>~/.config/sublime-text-3/Packages/User/<var>Синтаксис</var>.sublime-settings</code> примерно с таким кодом:</p>
+<pre class="prettyprint lang-js">
+{
+    "extensions":
+    [
+        "css"
+    ]
+}
+</pre>
+<p>Можно донастроить:</p>
+<h3>Отсупы/табы</h3>
+<pre class="prettyprint lang-js">
+{
+    "extensions":
+    [
+        "css"
+    ],
+    "tab_size" : 4, // Устанавливает размер табов
+    "detect_indentation": false, // Разрешение автоматически определять чем делать отступ при нажатии клавиши Tab (пробелами или табом) - позволяет продолжить программировать в том же стиле если установлено true
+    "translate_tabs_to_spaces": true // Определяет нужно ли преобразовывать таб в пробелы при нажатии клавиши Tab ()
+}
+</pre>
+<p>Свойство "translate_tabs_to_spaces": true (отсупать пробелами) игнорируется в том случае если "detect_indentation": true и сублайм определит что в этом файле стиль отступа табами а не пробелами, однако если в какой-то строке сделать четыре пробела, а потом нажать Enter, то следующая строка автоматически сделает отступ в стиле пробелов.</p>
+<p>в общем жесть.</p>
+<h2>Build system — выполнить файл в консоли Sublime</h2>
+<p>Настроить под язык, например Ruby - создать файл <var>~/.config/sublime-text-3/Packages/User/RB.sublime-build</var>:</p>
+<pre class="prettyprint lang-js copyToClipboard">{
+    // "cmd": ["~/.rbenv/versions/2.3.1/bin/ruby", "$file"],
+    "cmd": ["ruby", "$file"],
+    "file_regex": "rb$"
+    // "selector": "source.rb"
+}</pre>
+<p>Находясь в файле *.rb жмём <kbd>Ctrl</kbd> + <kbd>B</kbd>.</p>
+<p>Если подвисли то предварительно нстроенный хоткей:</p>
+<pre class="prettyprint lang-js copyToClipboard">
+    // Build system
+    // kill process command: exec {"kill": true}
+    { "keys": ["ctrl+alt+b"], "command": "exec", "args": {"kill": true }},
+</pre>
