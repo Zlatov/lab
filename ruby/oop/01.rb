@@ -1,5 +1,7 @@
 class Cl
+  p self
 end
+p Cl
 
 instance1 = Cl.new
 instance2 = Cl.new

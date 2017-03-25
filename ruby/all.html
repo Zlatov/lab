@@ -24,6 +24,39 @@ sudo apt-get install build-essential
 <p><code class="copyToClipboard">gem install awesome_print</code> - пакет для удобного вывода информации об объектах.</p>
 <p>Использование: <code>require "ap"; require "pp"; ap some_object; pp some_object</code></p>
 
+<h2>Консоль</h2>
+<h3>Colorize, вывод в цвете</h3>
+<pre class="prettyprint lang-rb">
+class String
+  def colorize(color_code)
+    &quot;\e[#{color_code}m#{self}\e[0m&quot;
+  end
+
+  def red
+    colorize(31)
+  end
+
+  def green
+    colorize(32)
+  end
+
+  def yellow
+    colorize(33)
+  end
+
+  def blue
+    colorize(34)
+  end
+
+  def pink
+    colorize(35)
+  end
+
+  def light_blue
+    colorize(36)
+  end
+end
+</pre>
 
 <h2>Конструкции, операторы...</h2>
 <pre class="prettyprint lang-rb">

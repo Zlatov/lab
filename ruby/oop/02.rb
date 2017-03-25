@@ -1,29 +1,19 @@
-# require "pp"
-
 class Cl
-  # @var
   @var = 'value1'
   def initialize
-    # @var
-    @var = @var
-    # @var = 'value2'
+    @var = 'value2'
   end
-  attr_accessor :var
-  p @var
-  # @var = 'value'
-  # attr_reader :var
-  # attr_reader :some_reader_for_var
-  # def some_reader_for_var
-  #   @var
-  # end
+  attr_reader :var
   # def var
-  #   # @var
   #   @var = 'value2'
   # end
+  p @var
 end
 
 instance1 = Cl.new
 
-# p instance1
 p instance1.var
-# p instance1.some_reader_for_var
+p Cl.methods.include? :var
+p Cl.instance_methods.include? :var
+p Cl.singleton_methods.include? :var
+
