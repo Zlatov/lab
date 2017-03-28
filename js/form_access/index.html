@@ -1,0 +1,14 @@
+<body>
+  <form name="my">
+    <input name="one" value="1">
+    <input name="two" value="2">
+  </form>
+
+  <script>
+    var form = document.forms.my; // можно document.forms[0]
+
+    var elem = form.elements.one; // можно form.elements[0]
+
+    alert( elem.value ); // 1
+  </script>
+</body>
