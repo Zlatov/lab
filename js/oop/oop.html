@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 - Привет, Мир!</title>
+		<style type="text/css">
+			article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function Cl() {
+				// console.log(this) // this - инстанса
+				this.foo = 'foo'
+				this.bar = function() {
+					// console.log(this) // this - инстанса
+					// return this.foo
+					return 'bar'
+				}
+				// Неверно, така как вызывается только при инициализации:
+				// Cl.foo = 'baz'
+				// Cl.bar = function() {
+				// 	return 'quux'
+				// }
+			}
+			// Верно:
+			Cl.foo = 'baz'
+			Cl.bar = function() {
+				return 'quux'
+			}
+
+			// console.log( Cl.foo )
+			// console.log( Cl.bar() )
+			instance = new Cl()
+			instance2 = new Cl()
+			instance.foo = 2
+			console.log( instance.foo )
+			// console.log( instance.bar() )
+			console.log( instance2.foo )
+			// console.log( instance2.bar() )
+		</script>
+	</body>
+</html>
