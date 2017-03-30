@@ -20,6 +20,12 @@
  * 
  * i1 === i2 // true
  * 
+ * Размещение сообщений
+ * ====================
+ * Informer.get_instance('place_id').print('My message.')
+ * Informer.get_instance('place_id').print('No value.', 'warning')
+ * Informer.get_instance('place_id').print('Error!', {type:danger, show_time: null})
+ * 
  * Опции
  * =====
  * 
@@ -41,14 +47,13 @@ if (typeof(Array.prototype.in_array)==='undefined') {
 var Informer = (function () {
   var instances = {}
 
-  function create_instance(id,options) {
+  function create_instance(id, options) {
     var place = $('#'+id)
-    var instance_options = (typeof(options)!=='undefined' && options)?options:Informer.options
     var object = new Object({
 
       place: place,
 
-      options: instance_options,
+      options: (typeof(options)!=='undefined' && options)?options:Informer.options,
 
       print: function(text, options=null) {
         var type
@@ -67,20 +72,28 @@ var Informer = (function () {
             options = null
             break
         }
-        var message_id = this.generate_id()
-        var message = this.create_message(message_id, text, type, options)
-        this.add_message(message)
-        this.show_message(message_id)
-        return message_id
+        var id = this.create_message(text, type, options)
+        this.show_message(id)
+        return id
       },
 
-      create_message: function(id, text, type, options) {
+      create_message: function(text, type, options) {
+        var id = this.generate_id()
         if (!type) {
           type = Informer.types[0]
         }
-        var message = Informer.q_replace({id:id, type:type, text:text})
-        message = $(message)
-        return message
+        var message = $(Informer.q_replace({id:id, type:type, text:text}))
+        message.data('options', this.options_merge(options))
+        this.place.append(message)
+        return id
+      },
+
+      options_merge: function(options) {
+        if (options != null) {
+          return Object.assign(this.options, options)
+        } else {
+          return this.options
+        }
       },
 
       get_message: function(message_id) {
@@ -88,13 +101,11 @@ var Informer = (function () {
         return message
       },
 
-      add_message: function(message) {
-        this.place.append(message)
-      },
-
       show_message: function(message_id) {
         var message = this.get_message(message_id)
-        switch(typeof(this.options.print)) {
+        var message_options = message.data().options
+        // Эффект появления сообщения может быть задан стрингой и массивом стрингов
+        switch(typeof(message_options.print)) {
           case 'object':
             this.options.print.forEach((effect,index)=>{
               message.transition(effect)
@@ -107,9 +118,23 @@ var Informer = (function () {
             message.show()
             break
         }
+        // Прятать ли?
+        if (message_options.show_time) {
+          setTimeout(()=>{this.hide_message(message_id)}, message_options.show_time)
+        }
+      },
+
+      hide_message: function(message_id) {
+        var message = this.get_message(message_id)
+        message.transition({ scale: 0 }, ()=>{message.remove()})
       },
 
       remove_message: function(message_id) {
+        var message = this.get_message(message_id)
+        message.remove()
+      },
+
+      clear: function() {
         var message = this.get_message(message_id)
         message.remove()
       },
@@ -146,7 +171,8 @@ var Informer = (function () {
     options: {
       stack: true,
       // print: 'flash'
-      print: ['fly left', 'flash']
+      print: ['fly left', 'flash'],
+      show_time: 3000
     },
     q_replace: function(hash) {
       html = this.template.replace(/\?\?([a-z0-9_]+)\?\?/g, (full,part) => {
