@@ -28,6 +28,17 @@
  * 
  * Опции
  * =====
+ * Эффект появления:
+ * print: ['fly left', 'flash']
+ * отключить (появится мгновенно): print: null
+ *
+ * Максимальное количество сообщений (ограничение стека)
+ * max_count: 5
+ * не ограничивать стек сообщений: max_count: 0
+ *
+ * Время до исчезновения сообщения
+ * show_time: 5000
+ * показывать постоянно: show_time: 0
  * 
  */
 
@@ -53,7 +64,7 @@ var Informer = (function () {
 
       place: place,
 
-      options: (typeof(options)!=='undefined' && options)?options:Informer.options,
+      options: (options!=null)?Object.assign({},Informer.options,options):Informer.options,
 
       print: function(text, options=null) {
         var type
@@ -84,13 +95,29 @@ var Informer = (function () {
         }
         var message = $(Informer.q_replace({id:id, type:type, text:text}))
         message.data('options', this.options_merge(options))
+        var message_options = message.data().options
+
+        if (!message_options.stack) {
+          this.clear()
+        }
+        if (message_options.stack && message_options.max_count>0 && this.get_count_messages() >= message_options.max_count) {
+          this.lead_to_length(message_options.max_count)
+        }
         this.place.append(message)
         return id
       },
 
+      lead_to_length: function(lenght) {
+        var count = this.get_count_messages()
+        var l = count - lenght + 1
+        for (var i = 0; i < l; i++) {
+          this.remove_first_message()
+        }
+      },
+
       options_merge: function(options) {
         if (options != null) {
-          return Object.assign(this.options, options)
+          return Object.assign({}, this.options, options)
         } else {
           return this.options
         }
@@ -105,18 +132,22 @@ var Informer = (function () {
         var message = this.get_message(message_id)
         var message_options = message.data().options
         // Эффект появления сообщения может быть задан стрингой и массивом стрингов
-        switch(typeof(message_options.print)) {
-          case 'object':
-            this.options.print.forEach((effect,index)=>{
-              message.transition(effect)
-            })
-            break
-          case 'string':
-            message.transition(this.options.print)
-            break
-          default:
-            message.show()
-            break
+        if (this.options.print!=null) {
+          switch(typeof(message_options.print)) {
+            case 'object':
+                this.options.print.forEach((effect,index)=>{
+                  message.transition(effect)
+                })
+              break
+            case 'string':
+              message.transition(this.options.print)
+              break
+            default:
+              message.show()
+              break
+          }
+        } else {
+          message.show()
         }
         // Прятать ли?
         if (message_options.show_time) {
@@ -126,7 +157,7 @@ var Informer = (function () {
 
       hide_message: function(message_id) {
         var message = this.get_message(message_id)
-        message.transition({ scale: 0 }, ()=>{message.remove()})
+        message.transition({ scale: 0 }).on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){$(this).remove()} )
       },
 
       remove_message: function(message_id) {
@@ -134,9 +165,14 @@ var Informer = (function () {
         message.remove()
       },
 
-      clear: function() {
-        var message = this.get_message(message_id)
+      remove_first_message: function() {
+        var message = this.place.children().eq(0)
+        var message = this.place.children().first()
         message.remove()
+      },
+
+      clear: function() {
+        this.place.html('')
       },
 
       generate_id: function() {
@@ -166,16 +202,23 @@ var Informer = (function () {
   }
 
   return {
-    types: ['default','success','warning','danger'],
-    template: '<div data-id="??id??" data-type="??type??" class="ui compact message ??type??" style="display:none;"><p>??text??</p></div>',
+    types: ['default','info','success','warning','danger'],
+    assign_classes: {
+      default: '',
+      danger: 'error'
+    },
+    template: '<div data-id="??id??" class="ui compact mini message ??type??" style="display:none;"><p>??text??</p></div>',
     options: {
       stack: true,
-      // print: 'flash'
       print: ['fly left', 'flash'],
-      show_time: 3000
+      max_count: 5,
+      show_time: 5000
     },
     q_replace: function(hash) {
       html = this.template.replace(/\?\?([a-z0-9_]+)\?\?/g, (full,part) => {
+        if (part==='type'&&hash[part]!=null) {
+          return (this.assign_classes[hash[part]]!=null)?this.assign_classes[hash[part]]:hash[part]
+        }
         if (typeof(hash[part])==='undefined') {
           return ''
         }
@@ -183,12 +226,12 @@ var Informer = (function () {
       })
       return html
     },
-    get_instance: function (id) {
+    get_instance: function (id, options=null) {
       if (typeof(id)!=='string'||!id) {
         throw new Error('Необходим идентификатор места')
       }
       if (typeof(instances[id])==='undefined') {
-        instance = create_instance(id)
+        instance = create_instance(id, options)
         instances[id] = instance
       }
       return instances[id]
