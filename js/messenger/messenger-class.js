@@ -42,8 +42,6 @@
  * 
  */
 
-
-
 if (typeof(Array.prototype.in_array)==='undefined') {
   Array.prototype.in_array = function(p_val) {
     for(var i = 0, l = this.length; i < l; i++) {
@@ -60,6 +58,13 @@ var Informer = (function () {
 
   function create_instance(id, options) {
     var place = $('#'+id)
+    if (!place.length) {
+      // console.log('place: ', place)
+      throw new Error('Не найден DOM объект с идентификатором ' + id)
+    }
+    if (options!=null&&options.template!=null) {
+
+    }
     var object = new Object({
 
       place: place,
@@ -89,12 +94,13 @@ var Informer = (function () {
       },
 
       create_message: function(text, type, options) {
+        var message_options = this.options_merge(options)
         var id = this.generate_id()
         if (!type) {
-          type = Informer.types[0]
+          type = this.options.types[0]
         }
-        var message = $(Informer.q_replace({id:id, type:type, text:text}))
-        message.data('options', this.options_merge(options))
+        var message = $(this.q_replace({id:id, type:type, text:text}))
+        message.data('options', message_options)
         var message_options = message.data().options
 
         if (!message_options.stack) {
@@ -105,6 +111,19 @@ var Informer = (function () {
         }
         this.place.append(message)
         return id
+      },
+
+      q_replace: function(hash) {
+        html = this.options.template.replace(/\?\?([a-z0-9_]+)\?\?/g, (full,part) => {
+          if (part==='type'&&hash[part]!=null) {
+            return (this.options.assign_classes[hash[part]]!=null)?this.options.assign_classes[hash[part]]:hash[part]
+          }
+          if (typeof(hash[part])==='undefined') {
+            return ''
+          }
+          return hash[part]
+        })
+        return html
       },
 
       lead_to_length: function(lenght) {
@@ -202,29 +221,17 @@ var Informer = (function () {
   }
 
   return {
-    types: ['default','info','success','warning','danger'],
-    assign_classes: {
-      default: '',
-      danger: 'error'
-    },
-    template: '<div data-id="??id??" class="ui compact mini message ??type??" style="display:none;"><p>??text??</p></div>',
     options: {
+      types: ['default','info','success','warning','danger'],
+      assign_classes: {
+        default: '',
+        danger: 'error'
+      },
+      template: '<div data-id="??id??" class="ui compact mini message ??type??" style="display:none;"><p>??text??</p></div>',
       stack: true,
       print: ['fly left', 'flash'],
       max_count: 5,
       show_time: 5000
-    },
-    q_replace: function(hash) {
-      html = this.template.replace(/\?\?([a-z0-9_]+)\?\?/g, (full,part) => {
-        if (part==='type'&&hash[part]!=null) {
-          return (this.assign_classes[hash[part]]!=null)?this.assign_classes[hash[part]]:hash[part]
-        }
-        if (typeof(hash[part])==='undefined') {
-          return ''
-        }
-        return hash[part]
-      })
-      return html
     },
     get_instance: function (id, options=null) {
       if (typeof(id)!=='string'||!id) {
@@ -238,4 +245,3 @@ var Informer = (function () {
     }
   }
 })();
-
