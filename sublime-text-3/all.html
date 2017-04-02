@@ -294,3 +294,20 @@
     // kill process command: exec {"kill": true}
     { "keys": ["ctrl+alt+b"], "command": "exec", "args": {"kill": true }},
 </pre>
+<h2>Убрать значки папок в теме <q>Theme - Soda</q></h2>
+<p>Файлы темы установлены в архив <code>.config/sublime-text-3/Installed Packages/Theme - Soda.sublime-package</code>.</p>
+<p>Распакуем и отредактируем <q>Soda Dark 3.sublime-theme</q>, установив <q>content_margin</q> в указанные значения:</p>
+<pre class="prettyprint lang-js">
+   {
+       "class": "icon_file_type",
+       "content_margin": [0,0]
+   },
+   {
+       "class": "icon_folder",
+       "content_margin": [0,0]
+   },
+   {
+       "class": "icon_folder_loading",
+       "content_margin": [0,0]
+   }
+</pre>
