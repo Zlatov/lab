@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 - Привет, Мир!</title>
+		<style type="text/css">
+			article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+			#anime {
+				background-color: blue;
+				color:red;
+				font-size: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="panel">
+			Привет, Мир!
+		</div>
+		<div id="anime">0</div>
+		<div id="panel2">panel2</div>
+
+
+
+<h2>Выводы</h2>
+<p>ОБЕЩАНИЕ - это объект (new Promise), при создании которого (new Promise())</p>
+<p>мы передаем в качестве аргумента метод (new Promise(ggg=>{})),</p>
+<p>который будем называть РЕШЕНИЕм.</p>
+<p>В качестве аргументов РЕШЕНИЯ передаются одна или две функции (new Promise((ooo,ttt)=>{})).</p>
+<p>Внутри РЕШЕНИЯ мы должны разрешить проблему в каком состоянии мы вернем РЕШЕНИЕ,</p>
+<p>обычно это состояние успешного завершения ( new Promise((ooo,ttt)=>{ooo()}) )</p>
+<p>Внутри решения можно использовать как синхронные функции так и асинхронные:</p>
+<pre>
+new Promise((ooo,ttt)=>{
+  var x = 1 + 1 // синхр
+  someJquertObjec.css({color:"red"}) // синхр
+  ooo()
+})
+</pre>
+<p>В случа асинхронных функций, необходимо передать им функции управления ОБЕЩАНИЕМ (resolve и reject)</p>
+<p>и при получении ими результата вызвать (resolve() или reject())</p>
+<p>В случае "тяжелых" операций над DOM, при последовательных вызовах таких операций результат будет виден</p>
+<p>по завершению всех функций, поэтому для отображения промежуточных манипуляций можно "выбить" синхронный процесс</p>
+<p>в асинхронный:</p>
+<pre>
+new Promise(r=>{
+  setTimeout(()=>{
+    oneOperation()
+    r()
+  },0)
+}).then(result=>{
+  return new Promise(r=>{
+    setTimeout(()=>{
+      secontOperation()
+      r()
+    },0)
+  })
+}).then(result=>{
+  thirdOperation()
+})
+</pre>
+
+
+
+
+		<script type="text/javascript" src="/theme/bower/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="data.js"></script>
+		<script type="text/javascript" src="queue.js"></script>
+	</body>
+</html>

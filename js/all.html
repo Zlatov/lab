@@ -227,6 +227,39 @@ var promise = new Promise(function(resolve, reject) {
 </pre>
 <h3>Задержка</h3>
 <pre>setTimeout(resize_topiclist_column_border, 500);</pre>
+<h3>Очередь</h3>
+<p>ОБЕЩАНИЕ - это объект (new Promise), при создании которого (new Promise()) мы передаем в качестве аргумента метод (new Promise(ggg=>{})), который будем называть РЕШЕНИЕм.</p>
+<p>В качестве аргументов РЕШЕНИЯ передаются одна или две функции (new Promise((ooo,ttt)=>{})).</p>
+<p>Внутри РЕШЕНИЯ мы должны разрешить проблему в каком состоянии мы вернем РЕШЕНИЕ, обычно это состояние успешного завершения ( new Promise((ooo,ttt)=>{ooo()}) ).</p>
+<p>Внутри решения можно использовать как синхронные функции так и асинхронные:</p>
+<pre class="prettyprint lang-js">
+new Promise((ooo,ttt)=&gt;{
+  var x = 1 + 1 // синхр
+  someJquertObjec.css({color:&quot;red&quot;}) // синхр
+  ooo()
+})
+</pre>
+<p>В случа асинхронных функций, необходимо передать им функции управления ОБЕЩАНИЕМ (resolve и reject) и при получении ими результата вызвать (resolve() или reject()).</p>
+<p>В случае "тяжелых" операций над DOM, при последовательных вызовах таких операций результат будет виден по завершению всех функций, поэтому для отображения промежуточных манипуляций можно "выбить" синхронный процесс в асинхронный:</p>
+<pre class="prettyprint lang-js">
+new Promise(r=&gt;{
+  setTimeout(()=&gt;{
+    oneOperation()
+    r()
+  },0)
+}).then(result=&gt;{
+  return new Promise(r=&gt;{
+    setTimeout(()=&gt;{
+      secontOperation()
+      r()
+    },0)
+  })
+}).then(result=&gt;{
+  thirdOperation()
+})
+</pre>
+
+
 <h2>Наработки</h2>
 <h3>Выделение на странице</h3>
 <p><a href="https://learn.javascript.ru/range-textrange-selection">Подробнее тут</a>.</p>
