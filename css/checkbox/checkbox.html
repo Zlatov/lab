@@ -1,0 +1,48 @@
+<style>
+.zcheckbox input {
+  display: none;
+}
+
+.zcheckbox {
+  position: relative;
+  display: block;
+  width: 90px;
+  height: 10px;
+  padding: 15px;
+  border-radius: 50px;
+  line-height: 10px;
+  color: #31b3ff;
+  background: rgb(71, 71, 71);
+  cursor: pointer;
+}
+
+/*.zcheckbox:before {
+  content: "OFF";
+  position: absolute;
+  right: 15px;
+  color: #000;
+}
+*/
+.zcheckbox:after {
+  content: "";
+  position: absolute;
+  left: 5px; top: 5px;
+  display: block;
+  width: 50px;
+  height: 30px;
+  border-radius: 50px;
+  background: #ccc;
+  transition: .5s;
+}
+
+#payt2:checked ~ [for="payt2"]:after {
+  left: 65px;
+}
+
+.zcheckbox:has(input[type="checkbox"]:checked):after {
+  left: 65px;
+}
+
+</style>
+
+<label class="zcheckbox"><input type="checkbox"></label>

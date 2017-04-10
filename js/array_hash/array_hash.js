@@ -9,3 +9,6 @@ console.log('ab: ', ab)
 console.log('ad: ', ad)
 console.log('da: ', da)
 
+for (var key in b) {
+  console.log(b[key])
+}

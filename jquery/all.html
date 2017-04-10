@@ -56,11 +56,25 @@ if (element.length) {
 }
 </pre>
 <h3>DOM в jQuery и обратно</h3>
-<p><strong>DOM Element to jQuery object and jQuery object to DOM Element</strong></p>
-<h4>jQuery to DOM</h4>
+<p><strong>DOM элемент в jQuery объект и jQuery объекст в DOM элемент</strong></p>
+<h4>jQuery в DOM</h4>
 <pre class="prettyprint lang-js">
 $( "#foo" )[ 0 ]; // Equivalent to document.getElementById( "foo" )
 $( "#foo" ).get( 0 ); // Identical to above, only slower.
+</pre>
+<h4>jQuery список в массив из DOM</h4>
+<pre class="prettyprint lang-js">
+  var list = ['1','2']
+  console.log(list)
+  list.forEach(function(l,i) {
+    console.log(l)
+  })
+
+  var li = $('li')<strong>.toArray()</strong>
+  console.log(li)
+  li.forEach(function(l,i) {
+    console.log(l)
+  })
 </pre>
 <h4>DOM to jQuery</h4>
 <pre class="prettyprint lang-js">

@@ -122,7 +122,7 @@ $input_text = mysql_escape_string($input_text);
 </pre>
 <p>Если сразу массив данных</p>
 <pre class="prettyprint lang-php">$checkbox_arr = array_map('intval', $_POST['checkbox']);</pre>
-<h3>"Запрет" повторной отправки формы по F5</h3>
+<h3>"Запрет" повторной отправки формы по F5, переадресация перезагрузка</h3>
 <pre class="prettyprint lang-php">header('Location: index.php');</pre>
 <p>или проще:</p>
 <pre class="prettyprint lang-php">header('Refresh:0');</pre>

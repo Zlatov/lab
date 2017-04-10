@@ -158,15 +158,22 @@ alert(variable);
 <h2>Строки</h2>
 <h3>Replace</h3>
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
-<h2>Массивы</h2>
+<h2>Массивы, хэши</h2>
 <h3>Перебор массива</h3>
-<h4>forEach((item, i, arr) => {})</h4>
+<p>forEach((item, i, arr) => {})</p>
 <pre class="prettyprint lang-js">var arr = ["Яблоко", "Апельсин", "Груша"];
 
 arr.forEach(function(item, i, arr) {
   alert( i + ": " + item + " (массив:" + arr + ")" );
 });</pre>
-<h3>Найти максимально значение в массив</h3>
+<h3>Перебор хэша</h3>
+<pre class="prettyprint lang-js">
+hash = {"foo": 1, bar: "asd"}
+for (var key in hash) {
+  console.log(hash[key])
+}
+</pre>
+<h3>Найти максимально значение в массиве</h3>
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
 <h3>Добавление элемента в массив</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>

@@ -1,6 +1,9 @@
 <a href="">self</a><br>
 <form action="" method="post">
 	<!-- <input type="text" name="name" value="name"> -->
+	<input type="checkbox" name="multiplecheck[]" value="1">
+	<input type="checkbox" name="multiplecheck[]" value="1">
+	<input type="checkbox" name="multiplecheck[]" value="2">
 <br>
 		<input name="classMy[phonenumber][]" type="text" value="name">
 		<input name="classMy[viber][]" type="hidden" value="next">
