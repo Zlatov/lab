@@ -66,6 +66,23 @@ echo &quot;&lt;/pre&gt;&quot;;
 <pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }</pre>
+<h2>ООП</h2>
+<h3>Функции для работы с классами</h3>
+<h4>class_exists</h4>
+<pre class="prettyprint lang-php">
+// Проверяем существование класса перед его использованием
+if (class_exists('MyClass')) {
+    $myclass = new MyClass();
+}
+</pre>
+<h4>get_declared_classes</h4>
+<p>get_declared_classes — Возвращает массив с именами объявленных классов</p>
+<pre class="prettyprint lang-php copyToClipboard">
+echo &quot;&lt;pre&gt;&quot;;
+print_r(get_declared_classes());
+echo &quot;&lt;/pre&gt;&quot;;
+die();
+</pre>
 <h2>Консоль</h2>
 <p>Вывести phpinfo можно так, но</p>
 <pre class="prettyprint lang-sh">php -r "phpinfo();"</pre>

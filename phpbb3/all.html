@@ -127,6 +127,13 @@ $lang = array_merge($lang, array(
 <div class="alert alert-info">
 <p>Необходимо сбросить кеш вручную (файлы <var>data_acl_options.php</var>, <var>data_role_cache.php</var>)</p>
 </div>
+<h2>Ссылки url</h2>
+<pre class="prettyprint lang-php">
+$url = append_sid($phpbb_root_path.'viewtopic.'.$phpEx, 'f=69&amp;amp;t=1756785');
+$url = append_sid($phpbb_root_path.'viewtopic.'.$phpEx, ['f' =&gt; 69, 't' =&gt; '1756785']);
+$board_url = generate_board_url();
+$url = &quot;{$board_url}/memberlist.{$this-&gt;php_ext}?mode=viewprofile&amp;u={$from_user_id}&quot;;
+</pre>
 <h2>БД</h2>
 <h3>Таблицы</h3>
 <p><strong>Добавиьт свою Стандартную</strong></p>
