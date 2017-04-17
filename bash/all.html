@@ -55,10 +55,13 @@
     <li>$ - конец строки</li>
 </ul>
 
-<p>Вывести номер строки (ключ -n)</p>
+<p>Вывести <strong>номер строки</strong> (ключ -n)</p>
 <pre class="prettyprint lang-sh">grep -i -n hello ./example.cpp</pre>
-<p>egrep - с использованием символьных классов POSIX</p>
+<p><code>egrep</code> с использованием символьных классов POSIX (<strong>с привычными регулярными выражениями</strong>)</p>
 <pre class="prettyprint lang-sh">egrep -i 'Hel+' ./example.cpp
+</pre>
+<p><strong>Ограничить длинну выводимой (найденной) строки</strong></p>
+<pre class="prettyprint lang-sh">ps aux | egrep '(USER)|(nginx)' | cut -c -255
 </pre>
 <p><strong class="btn btn-primary btn-xs" data-toggle="collapse" data-target="#vse_znaki_prepinaniya">Поиск по файлам в директории <span class="caret"></span></strong></p>
 <div id="vse_znaki_prepinaniya" class="collapse">
@@ -282,21 +285,27 @@ $ scp ?
 <p><code>apt-get install -f</code> - используется для устранения сбоев в базе пакетов вызванных нарушенными зависимостями.</p>
 <ul>
     <li>
-        <p>Обновить список пакетов, имеющихся в источниках:</p> <pre> apt-get update</pre>
+        <p>Обновить список пакетов, имеющихся в источниках:</p>
+        <pre class="copyToClipboard">apt-get update</pre>
         <p>(вы должны регулярно запускать эту команду для обновления списка пакетов)</p>
     </li>
     <li>
-        <p>Обновить все пакеты в системе (без установки дополнительных пакетов или удаления пакетов):</p> <pre> apt-get upgrade</pre> </li>
+        <p>Обновить все пакеты в системе (без установки дополнительных пакетов или удаления пакетов):</p>
+        <pre class="copyToClipboard">apt-get upgrade</pre> </li>
     <li>
-        <p>Установить пакет <var>foo</var> и все его зависимости:</p> <pre> apt-get install foo</pre> </li>
+        <p>Установить пакет
+            <var>foo</var> и все его зависимости:</p>
+            <pre class="copyToClipboard">apt-get install foo</pre> </li>
     <li>
         <p>Удалить пакет из системы:</p>
-        <pre> apt-get remove foo</pre>
+        <pre class="copyToClipboard">apt-get remove foo</pre>
     </li>
     <li>
-        <p>Удалить из системы пакет и все его файлы настроек:</p> <pre> apt-get --purge remove foo</pre> </li>
+        <p>Удалить из системы пакет и все его файлы настроек:</p>
+        <pre class="copyToClipboard">apt-get --purge remove foo</pre> </li>
     <li>
-        <p>Обновить все установленные в системе пакеты с установкой или удалением дополнительных пакетов, если это потребуется для обновления какого-то пакета:</p> <pre> apt-get dist-upgrade</pre>
+        <p>Обновить все установленные в системе пакеты с установкой или удалением дополнительных пакетов, если это потребуется для обновления какого-то пакета:</p>
+        <pre class="copyToClipboard">apt-get dist-upgrade</pre>
         <p>(Команда
             <samp>upgrade</samp> оставит старую установленную версию пакета, если для разрешения новых зависимостей при обновлении потребуется установка дополнительных пакетов. Команда
             <samp>dist-upgrade</samp> менее консервативна.)</p>
@@ -308,7 +317,7 @@ $ scp ?
 <ul>
     <li>
         <p>Найти пакеты, содержащие в своём описании <var>слово</var>:</p>
-        <pre> apt-cache search <var>слово</var></pre>
+        <pre>apt-cache search <var>слово</var></pre>
     </li>
     <li>
         <p>Найти и перечислить все пакеты, имя которых начинается с
@@ -326,11 +335,13 @@ $ scp ?
 </ul>
 <ul>
     <li>
-        <p>Показать зависимости пакета:</p> <pre> apt-cache depends <var>пакет</var></pre> </li>
+        <p>Показать зависимости пакета:</p>
+        <pre>apt-cache depends <var>пакет</var></pre>
+    </li>
 </ul>
 <ul>
     <li>
-        <p>Показать подробную информацию о доступных версиях пакета и о пакетах, от него зависящих (об обратных зависимостях пакета):</p> <pre> apt-cache showpkg <var>пакет</var></pre> </li>
+        <p>Показать подробную информацию о доступных версиях пакета и о пакетах, от него зависящих (об обратных зависимостях пакета):</p> <pre>apt-cache showpkg <var>пакет</var></pre> </li>
 </ul>
 <h3>top</h3>
 <p><var class="copyToClipboard">top</var> (table of processes) — консольная команда, которая выводит список работающих в системе процессов и информации о них. По умолчанию она в реальном времени сортирует их по нагрузке на процессор.</p>

@@ -1,4 +1,9 @@
-<h2>Установка</h2>
+<h2>Установка, запуск</h2>
+<pre class="prettyprint lang-sh">
+sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+</pre>
 <h2>Настойки</h2>
 <h3>Разные версии php из-под разных пользователей для разных хостов</h3>
 <ul>
@@ -16,3 +21,23 @@ env[SIGN-FORUM_DB_NAME] = ...
 env[SIGN-FORUM_DB_USER] = ...
 env[SIGN-FORUM_DB_PASS] = ...
 </pre>
+<h2>php-fpm</h2>
+iadfeshchm@iadfeshchm-pc ~ $ sudo apt-get install php5-cli php5-common php5-mysql php5-gd php5-fpm php5-cgi php5-fpm php-pear php5-mcrypt
+Чтение списков пакетов… Готово
+Построение дерева зависимостей       
+Чтение информации о состоянии… Готово
+php5-cli is already the newest version.
+php5-common is already the newest version.
+php5-common установлен вручную.
+php5-gd is already the newest version.
+Будут установлены следующие дополнительные пакеты:
+  libmcrypt4
+Предлагаемые пакеты:
+  libmcrypt-dev mcrypt php5-dev
+Пакеты, которые будут УДАЛЕНЫ:
+  php5-mysqlnd
+НОВЫЕ пакеты, которые будут установлены:
+  libmcrypt4 php-pear php5-cgi php5-fpm php5-mcrypt php5-mysql
+обновлено 0, установлено 6 новых пакетов, для удаления отмечено 1 пакетов, и 0 пакетов не обновлено.
+Необходимо скачать 6 885 kБ архивов.
+После данной операции, объём занятого дискового пространства возрастёт на 29,8 MB.
