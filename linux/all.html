@@ -198,9 +198,6 @@ EndSection</pre> Сочетания по умолчанию лежат в фай
     <li>Размер терминала по умолчанию - сделай под себя</li>
     <li>Убрать - Включить клавишу для доступа в меню (F10 по умолчанию) - для удобной работы в терминаля с утилитой mc</li>
 </ul>
-<h2>Дополнительно</h2>
-<h3>Знак рубля не отображается</h3>
-<p>Загуглить, скачать, установить бесплатный шрифт Symbola вресией не ниже 7.17</p>
 <h3>mc midnight commander</h3>
 <h4>установка</h4>
 <pre class="prettyprint lang-sh">
@@ -245,3 +242,47 @@ SELECTED_EDITOR="/usr/bin/subl"
 <pre class="prettyprint lang-sh">pv sqlfile.sql | mysql -uxxx -pxxxx dbname</pre>
 <p>which will show a progress bar as the program runs.</p>
 
+<h2>Пользователи и группы</h2>
+<pre class="prettyprint lang-sh">
+# Список пользователей
+cut -d: -f1 /etc/passwd
+cut -d: -f1,3 /etc/passwd
+
+# Создание пользователя
+useradd -d /home/vasyapupkin -s /bin/false -g nogroup vasyapupkin
+# -d домашний каталог
+# -s не даст юзеру зайти под shell
+# -g группа
+# -r Создать системную учётную запись (без дом каталога, без устаревания пароля...) sudo useradd -r -s /bin/false fpm
+
+# Более «дружественный» вариант adduser
+adduser [-home &lt;домашняя_директория&gt;] [-shell &lt;ОБОЛОЧКА&gt;] [-ingroup &lt;ГРУППА&gt;] &lt;имя_пользователя&gt;
+
+# Удалить пользователя
+userdel &lt;имяпользователя&gt;
+
+# Задать пароль пользователю
+passwd vasyapupkin
+
+# Добавиьт пользователя в группу
+sudo usermod -a -G group user
+
+# Списко групп пользователя
+id -Gn iadfeshchm
+# или
+groups iadfeshchm
+# Основная группа пользователя
+getent group iadfeshchm
+
+# Добавиьт пользователю домашнюю директорию
+sudo mkdir /home/fpm
+sudo chown fpm:fpm /home/fpm
+
+# Разрешить пользователю использовать консоль
+sudo usermod -s /bin/bash fpm
+
+</pre>
+
+<h2>Дополнительно</h2>
+<h3>Знак рубля не отображается</h3>
+<p>Загуглить, скачать, установить бесплатный шрифт Symbola вресией не ниже 7.17</p>
