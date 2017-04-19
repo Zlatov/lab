@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+
 <h2>php.ini</h2>
 <pre class="prettyprint lang-apache">
 upload_max_filesize = 10M
@@ -43,6 +45,7 @@ variables_order = "EGPCS"</pre>
 </pre>
 <p>Получить переменную окружения apache:</p>
 <pre>$var = apache_getenv("SPECIAL_PATH");</pre>
+
 <h2>Функции</h2>
 <h3>header()</h3>
 <pre class="prettyprint lang-php">
@@ -62,10 +65,12 @@ echo &quot;&lt;pre&gt;&quot;;
 var_dump($s);
 echo &quot;&lt;/pre&gt;&quot;;
 </pre>
+
 <h2>Константы</h2>
 <pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }</pre>
+
 <h2>ООП</h2>
 <h3>Функции для работы с классами</h3>
 <h4>class_exists</h4>
@@ -83,6 +88,7 @@ print_r(get_declared_classes());
 echo &quot;&lt;/pre&gt;&quot;;
 die();
 </pre>
+
 <h2>Консоль</h2>
 <p>Вывести phpinfo можно так, но</p>
 <pre class="prettyprint lang-sh">php -r "phpinfo();"</pre>
@@ -92,6 +98,7 @@ die();
 <pre class="prettyprint lang-sh">
 php -r 'echo &quot;Hello&quot; . &quot; world&quot;;'
 </pre>
+
 <h2>Наработки</h2>
 <h3>Парсим папку с файлами</h3>
 <pre class="prettyprint lang-php">
@@ -143,6 +150,7 @@ $input_text = mysql_escape_string($input_text);
 <pre class="prettyprint lang-php">header('Location: index.php');</pre>
 <p>или проще:</p>
 <pre class="prettyprint lang-php">header('Refresh:0');</pre>
+
 <h2>PDO</h2>
 <h3>Поддержка типа данных integer извлекаемых данных</h3>
 <pre class="prettyprint lang-sh">sudo apt-get install php5-mysqlnd
@@ -349,6 +357,7 @@ echo &quot;&lt;pre&gt;&quot;;
 print_r($data);
 echo &quot;&lt;/pre&gt;&quot;;
 </pre>
+
 <h2>Cookie</h2>
 <h3>Установка и чтение cookie</h3>
 <pre class="prettyprint lang-php">setcookie("voting", $cookieVoting, time()+60*60*24*7, "/");
@@ -413,6 +422,7 @@ if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
 }
 </pre>
+
 <h2>Комментирование</h2>
 <pre class="prettyprint lang-php">&lt;!-- html  --&gt;&lt;?php // echo 'asd'; ?&gt;&lt;!--  html --&gt;
 &lt;!-- html  --&gt;&lt;?php //= 'asd'; ?&gt;&lt;!--  html --&gt;</pre>
