@@ -67,6 +67,7 @@
 	<script src="../theme/toc/js/js.js" type="text/javascript"></script>
 	<!-- copyToClipboard -->
 	<script src="../theme/copyToClipboard/js.js" type="text/javascript"></script>
+	<script src="../theme/js/custom.js" type="text/javascript"></script>
 </body>
 
 </html>

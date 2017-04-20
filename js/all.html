@@ -149,34 +149,82 @@ $('#searchnewstag').keypress(function(event){
     if(event.keyCode == 13)
     {
 </pre>
-<h3>Debag (print_r var_dump)</h3>
-<pre>
-console.log(variable)
-// or
-alert(variable);
+<h3>Debag byebug (print_r var_dump)</h3>
+<pre class="prettyprint lang-js eval_js">
+a = ''
+b = 0
+c = null
+d = undefined
+var e
+console.log(a)
+console.log(b)
+console.log(c)
+console.log(d)
+console.log(e)
+console.log('------------------')
+console.log(typeof(a))
+console.log(typeof(b))
+console.log(typeof(c))
+console.log(typeof(d))
+console.log(typeof(e))
+// или alert:
+// alert(variable)
 </pre>
+
+<h2>alert confirm prompt</h2>
+<pre class="prettyprint lang-js eval_js">
+var years = prompt('Сколько вам лет?', 100);
+
+if (years) {
+  alert('Вы ввели сколько вам лет.')
+}
+
+if (years) {
+  var c = confirm('Вы хотите узнать сколько вам лет')?true:false
+}
+
+if (years &amp;&amp; c) {
+  alert('Вам ' + years + ' лет!')
+}
+</pre>
+
 <h2>Строки</h2>
 <h3>Replace</h3>
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
-<h2>Массивы, хэши</h2>
-<h3>Перебор массива</h3>
-<p>forEach((item, i, arr) => {})</p>
-<pre class="prettyprint lang-js">var arr = ["Яблоко", "Апельсин", "Груша"];
 
+<h2>Массивы</h2>
+<p>Методы <code>push</code> и <code>pop</code> добавляют или вынимают значение с конца массива</p>
+<p>Методы <code>shift</code>/<code>unshift</code> делают то же самое, с начала массива.</p>
+<h3>Перебор</h3>
+<p>forEach((item, i, arr) => {})</p>
+<pre class="prettyprint lang-js eval_js">
+var arr = ["Яблоко", "Апельсин", "Груша"];
 arr.forEach(function(item, i, arr) {
   alert( i + ": " + item + " (массив:" + arr + ")" );
-});</pre>
-<h3>Перебор хэша</h3>
-<pre class="prettyprint lang-js">
-hash = {"foo": 1, bar: "asd"}
-for (var key in hash) {
-  console.log(hash[key])
+});
+</pre>
+<p>forEach((item, i, arr) => {})</p>
+<pre class="prettyprint lang-js eval_js">
+a = [1,2,3]
+l = a.length
+for (var i = 0; i < l; i++) {
+  console.log(i, a[i])
 }
 </pre>
 <h3>Найти максимально значение в массиве</h3>
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>
 <h3>Добавление элемента в массив</h3>
 <pre class="prettyprint lang-js">existKey.push($(element).data('addresskey'));</pre>
+
+<h2>Хэши</h2>
+<h3>Перебор</h3>
+<pre class="prettyprint lang-js">
+hash = {"foo": 1, bar: "asd"}
+for (var key in hash) {
+  console.log(hash[key])
+}
+</pre>
+
 <h2>JSON</h2>
 <h3>Преобразовать объект js в строку формата JSON</h3>
 <pre class="prettyprint lang-js">

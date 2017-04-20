@@ -67,3 +67,7 @@ h4 + h6 {
 h5 + h6 {
 	margin-top: 1.0000em
 }
+.eval_js {
+	background-color: #F9F2F2;
+	cursor: pointer;
+}
