@@ -1,6 +1,9 @@
 pre {
 	tab-size: 4;
 }
+pre.lang-js {
+	tab-size: 2;
+}
 h2 {
 	color: black;
 }

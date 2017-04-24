@@ -1,0 +1,129 @@
+<pre class="prettyprint lang-js eval_js">
+$('#example1').jstree({
+	core: {
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+		]
+	}
+})
+</pre>
+<div id="example1"></div>
+<h2>Плагины</h2>
+<h3>Подключение плагинов</h3>
+<pre class="prettyprint lang-js eval_js">
+$('#example1').jstree({
+	core: {
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+		]
+	},
+	plugins: ["search"]
+})
+</pre>
+<h2>Перемещение по jstree</h2>
+<h3>Получить ноду</h3>
+<pre class="prettyprint lang-js eval_js">
+tree = $('#example4').jstree({
+	core: {
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+			{ "id" : "ajson5", "parent" : "#", "text" : "Root node 3" },
+			{ "id" : "ajson6", "parent" : "ajson5", "text" : "Child 1" },
+		]
+	},
+	plugins: ["search"]
+})
+</pre>
+<pre class="eval_js">
+console.log(tree.jstree(true).get_node('ajson6'))
+</pre>
+<div id="example4"></div>
+
+
+<h3>Предок</h3>
+<pre class="prettyprint lang-js eval_js">
+tree = $('#example3').jstree({
+	core: {
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+			{ "id" : "ajson5", "parent" : "#", "text" : "Root node 3" },
+			{ "id" : "ajson6", "parent" : "ajson5", "text" : "Child 1" },
+		]
+	},
+	plugins: ["search"]
+})
+</pre>
+<pre class="eval_js">
+console.log(tree.jstree().get_parent('ajson3'))
+</pre>
+<pre class="eval_js">
+console.log(
+	tree.jstree().get_node( tree.jstree().get_parent('ajson3') )
+)
+</pre>
+<pre class="eval_js">
+console.log(
+	tree.jstree().get_node( tree.jstree().get_parent('ajson3') ).text
+)
+</pre>
+<div id="example3"></div>
+
+<h2>Поиск</h2>
+<pre class="eval_js prettyprint lang-js">
+tree = $('#example2').jstree({
+	core: {
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2 #335", type: 'file' },
+			{ "id" : "ajson5", "parent" : "#", "text" : "Root node 3" },
+			{ "id" : "ajson6", "parent" : "ajson5", "text" : "Child 1 #335", type: 'file' },
+		]
+	},
+	types: {
+	  file: {
+	    icon: 'jstree-file'
+	  }
+	},
+	plugins: ["search", 'types']
+})
+</pre>
+<pre class="eval_js">
+window.tree.jstree(true).search('s', false, true)
+</pre>
+<pre class="eval_js">
+window.tree.jstree(true).clear_search()
+</pre>
+<pre class="eval_js">
+window.tree.jstree(true).search('s')
+</pre>
+<pre class="eval_js">
+window.tree.jstree(true).search('335', false, true)
+</pre>
+<pre class="eval_js prettyprint lang-js">
+new Promise(function(resolver) {
+	window.tree.on('search.jstree', resolver, (event, data) => {
+		//console.log(data.nodes)
+		//console.log(data.str)
+		//console.log(data.res)
+		event.data(data.res)
+	})
+	window.tree.jstree(true).search('335', false, true)
+}).then(function(nnoo) {
+	console.log('vot! ', nnoo)
+})
+</pre>
+<div id="example2"></div>

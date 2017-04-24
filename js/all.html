@@ -15,6 +15,15 @@ switch(x) {
     [break]
 }
 </pre>
+<pre class="eval_js">
+var a = null || false || 1
+var a = null || 'false' || 10
+var a = false || 10 || 101
+var type
+var a = type || null
+console.log(a)
+</pre>
+
 <h2>Переменные</h2>
 <h3>Типы переменных</h3>
 <pre class="prettyprint lang-js">
@@ -269,6 +278,35 @@ var str = JSON.stringify(objects);
 &lt;/script&gt;
 </pre>
 <h2>Ассинхронность, задержка, очередь</h2>
+<pre class="eval_js">
+  asd = function(val) {
+    return new Promise((resolve, reject) => {
+      if (val < 5) {
+        reject('m5')
+        return
+      }
+      resolve('b5')
+    })
+  }
+  console.log(asd(6))
+</pre>
+<pre class="eval_js">
+  asd = function(val) {
+    var p = new Promise((resolve, reject) => {
+      if (val < 5) {
+        reject('m5')
+        return
+      }
+      resolve('b5')
+    })
+    return p.then(function(res) {
+      return res
+    })
+  }
+  console.log(asd(6))
+</pre>
+<pre class="eval_js">
+</pre>
 <h3>Ассинхронность</h3>
 <pre class="prettyprint lang-js">
 var promise = new Promise(function(resolve, reject) {
@@ -313,7 +351,57 @@ new Promise(r=&gt;{
   thirdOperation()
 })
 </pre>
-
+<pre class="eval_js prettyprint lang-js">
+new Promise(function(reshil){
+  console.log(1)
+  reshil('решение')
+}).then(function(parametr){
+  console.log(parametr)
+})
+</pre>
+<pre class="eval_js prettyprint lang-js">
+new Promise(function(reshil){
+  setTimeout(function(){
+    console.log(1)
+    reshil('решение')
+  }, 2000)
+}).then(function(parametr){
+  console.log(parametr)
+})
+</pre>
+<pre class="eval_js prettyprint lang-js">
+reshil = function(reshenie) {
+  return reshenie
+}
+new Promise(function(reshil){
+  setTimeout(function(){
+    console.log(1)
+    setTimeout(function(){
+      reshil('решение')
+    }, 3000)
+  }, 3000)
+}).then(function(parametr){
+  console.log('вот: ', parametr)
+})
+</pre>
+<pre class="eval_js prettyprint lang-js">
+reshil = function(reshenie) {
+  return reshenie
+}
+function reshimpotom(reshil) {
+  console.log(reshil)
+  reshil('решение')
+}
+new Promise(function(reshil){
+  console.log(1)
+  setTimeout(function(){
+    console.log(2)
+    reshimpotom(reshil)
+  }, 500)
+}).then(function(parametr){
+  console.log('вот: ', parametr)
+})
+</pre>
 
 <h2>Наработки</h2>
 <h3>Выделение на странице</h3>
