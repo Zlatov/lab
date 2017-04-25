@@ -113,6 +113,27 @@ if (window.global_variable !== undefined) {
 
 if (typeof(local_variable) !== 'undefined') {
 }</pre>
+
+<h3>Ссылка на переменную</h3>
+<pre class="prettyprint lang-js eval_js">
+a = 3
+b = a
+b++
+console.log(a)
+
+c = [11]
+d = c
+d[0]++
+console.log(c)
+</pre>
+<pre class="prettyprint lang-js eval_js">
+a = [11,[22,33]]
+b = a
+b[1][0]++
+console.log(a)
+</pre>
+
+
 <h2>Function</h2>
 <h3>параметр Event (событие) в функии</h3>
 <p>Посмотреть что из себя представляет событие и элемент на котором оно сработало:</p>
@@ -202,8 +223,25 @@ if (years &amp;&amp; c) {
 <pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
 
 <h2>Массивы</h2>
+<h3>Добавление, удаление элемента</h3>
 <p>Методы <code>push</code> и <code>pop</code> добавляют или вынимают значение с конца массива</p>
-<p>Методы <code>shift</code>/<code>unshift</code> делают то же самое, с начала массива.</p>
+<pre class="prettyprint lang-js eval_js">
+a = [11,22]
+a.push(33)
+console.log(a)
+b = a.pop()
+console.log(a)
+console.log(b)
+</pre>
+<p>Методы <code>unshift</code>/<code>shift</code> делают то же самое, с начала массива.</p>
+<pre class="prettyprint lang-js eval_js">
+a = [22,33]
+a.unshift(11)
+console.log(a)
+b = a.shift()
+console.log(a)
+console.log(b)
+</pre>
 <h3>Перебор</h3>
 <p>forEach((item, i, arr) => {})</p>
 <pre class="prettyprint lang-js eval_js">
