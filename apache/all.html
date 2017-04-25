@@ -1,8 +1,11 @@
 
-<h2>Усановка Apache</h2>
-<pre>sudo apt-get update
-sudo apt-get install apache2</pre>
+<h2>Усановка</h2>
+<pre class="prettyprint lang-sh">
+sudo apt-get update
+sudo apt-get install apache2
+</pre>
 
+<h2>Модули и нстройки</h2>
 <h3>Где логи и настройки</h3>
 <p><strong>Настройки</strong></p>
 <p><code>/etc/apache2/apache2.conf</code></p>
@@ -13,18 +16,14 @@ sudo apt-get install apache2</pre>
 <p><code>/var/log/apache2/other_vhosts_access.log</code></p>
 
 
-<h3>install php5 mysql</h3>
+<h3>Установка php5 mysql</h3>
 <p>Теперь приконнектим к новоиспеченному апачу php5, вместе с библиотеками для работы с MySQL и графикой:</p>
-<pre>sudo apt-get install php5 libapache2-mod-php5 libapache2-mod-auth-mysql php5-mysql php5-cli imagemagick mysql-server php5-gd php5-imagick</pre>
+<pre class="prettyprint lang-sh copyToClipboard">sudo apt-get install php5 libapache2-mod-php5 libapache2-mod-auth-mysql php5-mysql php5-cli imagemagick mysql-server php5-gd php5-imagick</pre>
 <p>Кстати, еще модуль <mark>php5-mysqlnd</mark> вместо <mark>php5-mysql</mark> для поддержки типа данных integer извлекаемых данных (с помощью PDO библиотеки PHP)</p>
-<pre class="prettyprint lang-sh">sudo apt-get install php5-mysqlnd
-sudo service apache2 restart</pre>
-
-<p>Старт/Стоп/Перезапуск сервера Apache под Linux в терминале</p>
-<pre>/etc/init.d/apache2 {restart}{stop}{start}</pre>
-<p>ну или что-то вроде</p>
-<pre>sudo service httpd {restart}{stop}{start}
-sudo service apache2 {restart}{stop}{start}</pre>
+<pre class="prettyprint lang-sh">
+sudo apt-get install php5-mysqlnd
+sudo service apache2 restart
+</pre>
 
 <p>владелец директорий - root-пользователь. Если мы хотим, чтобы обычные пользователи могли изменять файлы в веб-директориях, мы можем изменить их владельца:</p>
 <pre>sudo chown -R $USER:$USER /var/www/example.com/public_html</pre>
@@ -110,6 +109,32 @@ sudo ln -s ../mods-available/rewrite.load rewrite.load</pre>
 
 <p>и рестартим <code>udo service apache2 restart</code>.</p>
 
+<h3>Проксирование, перенаправление порта</h3>
+<p><strong>Добавление модуля proxy</strong></p>
+<pre class="prettyprint lang-sh">
+cd /etc/apache2/mods-available/
+ls | grep prox
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/proxy.load proxy.load
+</pre>
+<p><strong>Настройка перенаправления</strong></p>
+<pre class="prettyprint lang-apache">
+&lt;VirtualHost *:80&gt;
+	ServerName admin.zenonline.local
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http://localhost:3000/
+&lt;/VirtualHost&gt; 
+</pre>
+<pre class="prettyprint lang-sh">
+sudo service apache2 restart
+</pre>
+<p>Ошибка <code>No protocol handler was valid for the URL</code></p>
+<pre class="prettyprint lang-sh">
+sudo a2enmod proxy_http
+sudo service apache2 restart
+</pre>
+
 <h3>After git clone</h3>
 <pre>sudo chown -R iadfeshchm:www-data ./
 sudo find . -type d ! -perm 775 -exec chmod 775 {} \;
@@ -125,6 +150,13 @@ sudo find . -type f ! -perm 664 -exec chmod 664 {} \;
 7 111</pre>
 
 <h2>Упарвление, параметры, настройки...</h2>
+<h3>Старт/Стоп/Рестарт</h3>
+<pre>/etc/init.d/apache2 {restart}{stop}{start}</pre>
+<p>ну или что-то вроде</p>
+<pre class="prettyprint lang-sh">
+sudo service httpd &lt;restart|stop|start&gt;
+sudo service apache2 &lt;restart|stop|start&gt;
+</pre>
 <h3>Узнать количество работающих виртуальных хостов</h3>
 <pre>
 # ... -S например что-то из этого:
