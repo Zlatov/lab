@@ -264,6 +264,11 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 <p><strong>Примеры</strong></p>
 <p><code>scp username@hostname:~/filename.tar.gz ./web.tar.gz</code> — копирования файла filename.tar.gz с удалённого хоста к себе спереименованием.</p>
 <p><code>scp filename.tar.gz username@hostname:~/folder/name</code> — копирования локального файла filename.tar.gz на удалённый хост.</p>
+<pre class="prettyprint lang-sh">
+#!/bin/bash
+cd `dirname &quot;$0&quot;`
+scp -r admintest:~/app/admin/app/data/\{item,tree\} ../../db/fs
+</pre>
 <h3>ssh</h3>
 <pre>ssh MYHOST -t 'cd MYPATH; bash --login'</pre>
 <h4>Тунелироваине, проброс порта</h4>
@@ -360,6 +365,21 @@ screen -r 2398.pts-0.webtest
 <p><kbd>Ctrl + A, D</kbd> - выйти из сессии</p>
 <h2>Программирование</h2>
 <h3>Пути/имена</h3>
+<pre class="prettyprint lang-sh">
+echo $0                     # ./sh/pull_db_test.sh
+echo $(dirname "$0")        # ./sh
+echo $(pwd)                 # /home/iadfeshchm/projects/admin/temp
+echo $(readlink -f "$0")    # /home/iadfeshchm/projects/admin/temp/sh/pull_db_test.sh
+SCRIPT=$(readlink -f "$0")
+echo $(dirname "$SCRIPT")   # /home/iadfeshchm/projects/admin/temp/sh
+cd ..
+echo $0                     # ./sh/pull_db_test.sh
+echo $(dirname "$0")        # ./sh
+echo $(pwd)                 # /home/iadfeshchm/projects/admin
+echo $(readlink -f "$0")    # 
+SCRIPT=$(readlink -f "$0")
+echo $(dirname "$SCRIPT")   # .
+</pre>
 <p><code>echo `pwd`</code> —  абсолютный путь к текущему местоположению (место из которо запущена команда/исполняемый файл).</p>
 <p><code>echo $0</code> — имя утилиты или относительный путь к исполняемому файлу.</p>
 <p><code>echo $BASH_ARGV</code> — путь к файлу в котором написан сам код.</p>

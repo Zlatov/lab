@@ -23,6 +23,44 @@ var type
 var a = type || null
 console.log(a)
 </pre>
+<h3>while</h3>
+<pre class="prettyprint lang-js eval_js">
+Array.prototype.next = function() {
+  return this[this.current++]
+}
+Array.prototype.prev = function() {
+  return this[this.current--]
+}
+Array.prototype.current = 0
+
+var multi = [
+  {id:1,children:null},
+  {id:2,children:[
+    {id:3,children:null},
+    {id:4,children:[
+      {id:5,children:null},
+      {id:6,children:null},
+      {id:7,children:null}
+    ]}
+  ]},
+  {id:8,children:null}
+]
+var level = 0
+var array = []
+array[level] = multi
+while (level&gt;=0) {
+  var node = array[level].next()
+  if (node == null) {
+    level = level - 1
+  } else {
+    console.log(node)
+    if (node.children &amp;&amp; node.children.length) {
+      level = level + 1
+      array[level] = node.children
+    }
+  }
+}
+</pre>
 
 <h2>Переменные</h2>
 <h3>Типы переменных</h3>
