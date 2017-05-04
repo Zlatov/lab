@@ -1,63 +1,39 @@
 $(document).ready(function(){
-    $(".copyToClipboard").after(' <span class="btn btn-default btn-xs copyToClipboardBtn"><i class="fa fa-clipboard" aria-hidden="true"></i></span>');
 
-    function copyToClipboard(elem) {
-          // create hidden text element, if it doesn't already exist
-        var targetId = "_hiddenCopyText_";
-        var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
-        var origSelectionStart, origSelectionEnd;
-        if (isInput) {
-            // can just use the original source element for the selection and copy
-            target = elem;
-            origSelectionStart = elem.selectionStart;
-            origSelectionEnd = elem.selectionEnd;
-        } else {
-            // must use a temporary form element for the selection and copy
-            target = document.getElementById(targetId);
-            if (!target) {
-                var target = document.createElement("textarea");
-                target.style.position = "absolute";
-                target.style.left = "-9999px";
-                target.style.top = "0";
-                target.id = targetId;
-                document.body.appendChild(target);
-            }
-            target.textContent = elem.textContent;
-        }
-        // select the content
-        // var currentFocus = document.activeElement;
-        // target.focus();
-        target.setSelectionRange(0, target.value.length);
-        
-        // copy the selection
-        var succeed;
-        try {
-            succeed = document.execCommand("copy");
-        } catch(e) {
-            succeed = false;
-        }
-        // restore original focus
-        // if (currentFocus && typeof currentFocus.focus === "function") {
-        //     currentFocus.focus();
-        // }
-        
-        if (isInput) {
-            // restore prior selection
-            elem.setSelectionRange(origSelectionStart, origSelectionEnd);
-        } else {
-            // clear temporary content
-            target.textContent = "";
-        }
-        return succeed;
+  $(".copyToClipboard").after(' <span class="btn btn-default btn-xs copyToClipboardBtn"><i class="fa fa-clipboard" aria-hidden="true"></i></span>')
+
+  $('body').on('click', ".copyToClipboardBtn", function(event){
+    var wrapper = $(this).prev().eq(0)
+    if (wrapper.length) {
+      wrapper = wrapper[0]
+      var is_input = wrapper.tagName === "INPUT" || wrapper.tagName === "TEXTAREA"
+      var temp_id = 'hiddenCopyToClipboard'
+      var temp = document.getElementById(temp_id)
+      if (temp == null) {
+        var temp = document.createElement("textarea")
+        temp.style.position = "absolute"
+        temp.style.left = "-9999px"
+        temp.style.top = "0"
+        temp.id = temp_id
+        document.body.appendChild(temp)
+      }
+      if (is_input) {
+        temp.textContent = wrapper.value
+      } else {
+        temp.textContent = wrapper.textContent
+      }
+      var x = window.scrollX,
+        y = window.scrollY
+      temp.focus()
+      window.scrollTo(x, y)
+      temp.setSelectionRange(0, temp.value.length)
+      var done
+      try {
+        done = document.execCommand("copy")
+      } catch(e) {
+        done = false
+      }
     }
+  })
 
-    $('body').on('click', ".copyToClipboardBtn", function(event){
-        event.preventDefault();
-        var i = $(this).prev().eq(0);
-        if (i.length) {
-            i = i[0];
-            var succeed = copyToClipboard(i);
-            console.log(succeed);
-        }
-    });
-});
+})
