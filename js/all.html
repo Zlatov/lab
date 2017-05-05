@@ -152,17 +152,18 @@ if (window.global_variable !== undefined) {
 if (typeof(local_variable) !== 'undefined') {
 }</pre>
 
-<h3>Ссылка на переменную</h3>
+<h3>Ссылка на переменную / клонирование</h3>
+<p>Все <b>объекты</b> (typeof(some)==="object") при присваивании - присваиваются по ссылке (массивы, хеши...), числа и строки присваиваются по значению. Вот поясняющий пример:</p>
 <pre class="prettyprint lang-js eval_js">
-a = 3
-b = a
+ishodnik = 0
+b = ishodnik
 b++
-console.log(a)
+console.log(ishodnik, 'исходник неизменен')
 
-c = [11]
-d = c
-d[0]++
-console.log(c)
+ishodnik = [0]
+b = ishodnik
+b[0]++
+console.log(ishodnik, 'исходник изменён')
 </pre>
 <pre class="prettyprint lang-js eval_js">
 a = [11,[22,33]]
@@ -170,7 +171,17 @@ b = a
 b[1][0]++
 console.log(a)
 </pre>
-
+<h4>Клонирование массива</h4>
+<pre class="prettyprint lang-js eval_js">
+Array.prototype.clone = function() {
+  return this.slice(0)
+}
+ishodnik = [0]
+b = ishodnik.clone()
+b[0]++
+console.log(b)
+console.log(ishodnik, 'исходник неизменен')
+</pre>
 
 <h2>Function</h2>
 <h3>параметр Event (событие) в функии</h3>
