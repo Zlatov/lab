@@ -49,7 +49,28 @@ BEGIN
 	INTO count_descendant
 	...
 </pre>
-<h2>Функции и Операторы</h2>
+<h2>Операторы</h2>
+<h3>Отрицание</h3>
+<p>НЕ ВЕРНАЯ ФРАЗА!!!: <q>! – второй вариант записи NOT.</q> Подтверждение:</p>
+<pre>
+select ( ! null&lt;=&gt;null ) &lt;&gt; ( not null&lt;=&gt;null);
+  -&gt; 1
+</pre>
+<p>У NOT приоритет ниже, сначало сравнение, потом отрицание (<code>select not null <=> null -- 0</code>).</p>
+<p>У ! приоритет выше, сначало отрицание, потом сравнение (<code>select ! null <=> null -- 1</code>).</p>
+<h3>NULL-безопасное сравнение <=> (равно)</h3>
+<pre class="prettyprint lang-sql copyToClipboard">
+set @a1 = 1000, @b1 = 2000;
+set @a2 = null, @b2 = 2000;
+set @a3 = null, @b3 = null;
+set @a4 = 2000, @b4 = 2000;
+
+-- Не равно (добавлено &lt;&gt;1):
+select @a1&lt;=&gt;@b1&lt;&gt;1, @a2&lt;=&gt;@b2&lt;&gt;1, @a3&lt;=&gt;@b3&lt;&gt;1, @a4&lt;=&gt;@b4&lt;&gt;1;
+  -&gt; 1, 1, 0, 0
+</pre>
+
+<h2>Функции</h2>
 <h3>INSERT</h3>
 <pre>INSERT [LOW_PRIORITY | DELAYED] [IGNORE]
         [INTO] tbl_name [(col_name,...)]
