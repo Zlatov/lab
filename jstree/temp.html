@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 - Привет, Мир!</title>
+		<style type="text/css">
+			article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+		</style>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" type="text/css" href="/theme/font-awesome/css.css">
+		<!-- jstree -->
+		<link rel="stylesheet" href="/theme/bower/jstree/dist/themes/default/style.min.css" />
+	</head>
+	<body>
+		<div id="example_move_node"></div>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- jstree -->
+		<script src="/theme/bower/jstree/dist/jstree.min.js"></script>
+		<script src="https://rawgit.com/adamjimenez/jstree-table/master/jstreetable.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$.ajax({
+				type: 'POST',
+				url: '/jstree/temp.json',
+				data: null,
+				cache: false,
+				async: false,
+				contentType: false,
+				processData: false,
+				dataType: 'json',
+				beforeSend: function(jqXHR, settings){
+				},
+				success: function(data, textStatus, jqXHR){
+					tree = $('#example_move_node').jstree({
+						core: {
+							data: data,
+							check_callback: true
+						},
+						types: {
+							file: {
+								icon: 'jstree-file'
+							}
+						},
+						plugins: ['search', 'types', 'dnd', 'table'],
+					  table: {
+					    columns: [
+					      {width: 200, header: "Name"},
+					      {width: 150, value: "article", header: "article"}
+					    ],
+					    resizable: true,
+					    draggable: true,
+					    contextmenu: true,
+					    width: 500,
+					    height: 300
+					  }
+					})
+				},
+				fail: function(){
+					console.log('error')
+				}
+			})
+		</script>
+	</body>
+</html>

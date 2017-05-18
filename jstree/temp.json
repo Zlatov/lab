@@ -1,0 +1,370 @@
+[
+  {
+    "id": "1",
+    "text": "Принтеры для рекламных производств, запчасти и аксессуары",
+    "icon": true,
+    "data": {},
+    "children": [
+      {
+        "id": "2",
+        "text": "Широкоформатные УФ принтеры",
+        "icon": true,
+        "data": {},
+        "children": [
+          {
+            "id": "j9_76",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000011942"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_77",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000030720"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_78",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000065461"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_79",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000030721"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_80",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000011911"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_81",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000030719"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_1",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000095689"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_2",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000069874"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_3",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000039664"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_4",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000031843"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_5",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098099"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_6",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000088940"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_7",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098067"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_8",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098066"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_9",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000022958"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_10",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098952"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_11",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098069"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_12",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098068"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_13",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000095245"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_14",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000099865"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_15",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000084756"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_16",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000026979"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_17",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098953"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_18",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000060179"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_19",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000083256"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_20",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000031784"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_21",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000017894"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_22",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000095855"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_23",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000097458"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_24",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000096247"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_25",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000096249"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_26",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000020165"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_27",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000094625"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_28",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098197"
+            },
+            "children": [],
+            "type": "file"
+          },
+          {
+            "id": "j9_29",
+            "text": "",
+            "icon": "icon file outline",
+            "data": {
+              "article": "000098070"
+            },
+            "children": [],
+            "type": "file"
+          }
+        ],
+        "type": "default"
+      }
+    ],
+    "type": "default"
+  }
+]

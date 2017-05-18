@@ -65,6 +65,12 @@ while (level&gt;=0) {
 <h2>Переменные</h2>
 <h3>Типы переменных</h3>
 <pre class="prettyprint lang-js">
+Object.prototype.toString.call([]) === '[object Array]'
+Object.prototype.toString.call({}) === '[object Object]'
+Object.prototype.toString.call('') === '[object String]'
+Object.prototype.toString.call(10) === '[object Number]'
+Object.prototype.toString.call(/s/)=== '[object RegExp]'
+
 // Numbers
 typeof 37 === 'number';
 typeof 3.14 === 'number';
@@ -491,6 +497,76 @@ new Promise(function(reshil){
 </pre>
 
 <h2>Наработки</h2>
+<h3>Изменение прототипов</h3>
+<h4>Array</h4>
+<pre class="prettyprint lang-js copyToClipboard">
+Array.prototype.next = function() {
+  return this[this.current++]
+}
+Array.prototype.prev = function() {
+  return this[this.current--]
+}
+Array.prototype.reset = function() {
+  this.current = 0
+}
+Array.prototype.current = 0
+Array.prototype.clone = function() {
+  return this.slice(0)
+}
+Array.prototype.spliceArray = function(i, l, a) {
+  return Array.prototype.splice.apply(this, [i, l].concat(a))
+}
+Array.prototype.in_array = function(p_val) {
+  for(var i = 0, l = this.length; i &lt; l; i++) {
+    if(this[i] == p_val) {
+      return true
+    }
+  }
+  return false
+}
+Array.prototype.clean = function() {
+  this.splice(0, this.length)
+  return this
+}
+Array.prototype.unique = function() {
+  return this.filter((value, index, self)=&gt;{
+    return self.indexOf(value) === index
+  })
+}
+Array.prototype.to_flat = function(change_self=true, options=null) {
+  if (options==null) {
+    var options = {childrens:'children'}
+  }
+  var level = 0
+  var flat = []
+  var array = []
+  array[level] = this.clone()
+  array[level].reset()
+  while (level&gt;=0) {
+    var node = array[level].next()
+    if (node != null) {
+      flat.push(node)
+      if (
+        node[options.childrens]!=null &amp;&amp;
+        Object.prototype.toString.call(node[options.childrens]) === '[object Array]' &amp;&amp;
+        node.children.length
+      ) {
+        level = level + 1
+        array[level] = node[options.childrens]
+        array[level].reset()
+      }
+    } else {
+      level = level - 1
+    }
+  }
+  if (change_self) {
+    this.clean()
+    this.spliceArray(0, 0, flat)
+    return this
+  }
+  return flat
+}
+</pre>
 <h3>Выделение на странице</h3>
 <p><a href="https://learn.javascript.ru/range-textrange-selection">Подробнее тут</a>.</p>
 <pre class="prettyprint lang-js">

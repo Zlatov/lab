@@ -79,7 +79,51 @@ console.log(
 )
 </pre>
 <div id="example3"></div>
-
+<h2>Действия</h2>
+<h3>Переместить ноду</h3>
+<pre class="eval_js">
+$.ajax({
+	type: 'POST',
+	url: '/jstree/temp.json',
+	data: null,
+	cache: false,
+	async: false,
+	contentType: false,
+	processData: false,
+	dataType: 'json',
+	beforeSend: function(jqXHR, settings){
+	},
+	success: function(data, textStatus, jqXHR){
+		tree = $('#example_move_node').jstree({
+			core: {
+				data: data,
+				check_callback: true
+			},
+			types: {
+				file: {
+					icon: 'jstree-file'
+				}
+			},
+			plugins: ['search', 'types', 'dnd']
+		  table: {
+		    columns: [
+		      {width: 200, header: "Name"},
+		      {width: 150, value: "article", header: "article"}
+		    ],
+		    resizable: true,
+		    draggable: true,
+		    contextmenu: true,
+		    width: 500,
+		    height: 300
+		  }
+		})
+	},
+	fail: function(){
+		console.log('error')
+	}
+})
+</pre>
+<div id="example_move_node"></div>
 <h2>Поиск</h2>
 <pre class="eval_js prettyprint lang-js">
 tree = $('#example2').jstree({
@@ -94,9 +138,9 @@ tree = $('#example2').jstree({
 		]
 	},
 	types: {
-	  file: {
-	    icon: 'jstree-file'
-	  }
+		file: {
+			icon: 'jstree-file'
+		}
 	},
 	plugins: ["search", 'types']
 })
