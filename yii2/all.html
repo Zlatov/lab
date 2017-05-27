@@ -338,6 +338,42 @@ $product = Yii::$app->db->createCommand('call product_view(:id);')
 <h4>Много ко многим</h4>
 <p>Запипись (публикация) одной таблицы относится к нескольким записям другой таблицы (тегам). Связь хранится в смежной таблице.</p>
 
+<h2>Миграции БД</h2>
+<h3>Создание</h3>
+<p><code class="copyToClipboard">./yii migrate/create migration_name</code></p>
+<p>отредактировать файл <var class="copyToClipboard">console/migrations/ migration_name.php</var></p>
+<h3>Применение</h3>
+<p><code>yii migrate</code> — все доступные (не применялись до сих пор)</p>
+<p><code>yii migrate 3</code> — следующие три миграции из доступных</p>
+<p><code>yii migrate/to m150101_185401_create_news_table</code> — конкретную (будут применены все доступные до конкретной!)</p>
+<h3>Отмена</h3>
+<p><code>yii migrate/down</code> — отменяет самую последнюю применённую миграцию</p>
+<p><code>yii migrate/down 3</code> — отменяет 3 последних применённых миграции</p>
+<h3>Переприменение</h3>
+<p><code>yii migrate/redo</code> — перезагрузить последнюю применённую миграцию</p>
+<p><code>yii migrate/redo 3</code> — перезагрузить 3 последние применённые миграции</p>
+<h3>Список Миграций</h3>
+<p><code>yii migrate/history</code> — показать последних 10 применённых миграций</p>
+<p><code>yii migrate/history 5</code> — показать последних 5 применённых миграций</p>
+<p><code>yii migrate/history all</code> — показать все применённые миграции</p>
+
+<p><code>yii migrate/new</code> — показать первых 10 новых миграций</p>
+<p><code>yii migrate/new 5</code> — показать первых 5 новых миграций</p>
+<p><code>yii migrate/new all</code> — показать все новые миграции</p>
+<h3>Чистый mysql в миграции</h3>
+<pre class="prettyprint lang-php">
+    public function up()
+    {
+        $sql = '
+            CREATE TABLE `section` (
+              `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+              `pid` INT UNSIGNED NULL DEFAULT NULL,
+              `header` VARCHAR(160) NOT NULL,
+              ...
+        ';
+        \Yii::$app->db->createCommand($sql)->execute();
+</pre>
+
 <h2>Представления (view)</h2>
 <h3>Связь Контроллер-представление</h3>
 <table class="table">
@@ -1242,15 +1278,16 @@ use yii\web\ForbiddenHttpException;
 </pre>
 <h3>RBAC (AuthManager) как DbManager</h3>
 <h4>Прям как внедряю так и записую</h4>
-<p><var>common/config/main.php</var>:</p>
+<p>Добавляем в файл <var class="copyToClipboard">common/config/main.php</var> компоненту (<code>'components' => [...</code>):</p>
 <pre class="prettyprint lang-php copyToClipboard">
 
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
 </pre>
-<p><var>console/controllers/RbacController.php</var>:</p>
-<p><code class="copyToClipboard">./yii migrate --migrationPath=@yii/rbac/migrations</code> - в консоли</p>
+<p>Создаем консольный контроллер RBAC <code class="copyToClipboard">touch console/controllers/RbacController.php</code>.</p>
+<p>Создаем таблицы для RBAC миграцией <code class="copyToClipboard">./yii migrate --migrationPath=@yii/rbac/migrations</code></p>
+<p>Редактируем <var class="copyToClipboard">console/controllers/RbacController.php</var>:</p>
 <pre class="prettyprint lang-php copyToClipboard">
 &lt;?php
 namespace console\controllers;
@@ -1294,20 +1331,20 @@ class RbacController extends Controller
 }
 </pre>
 <p><code class="copyToClipboard">./yii rbac/test</code></p>
-<p>Меняем в файле <var>frontend/models/SignupForm.php</var> строчку:</p>
+<p>Устанавливаем роль по умолчанию при регистрации (файл <var class="copyToClipboard">frontend/models/SignupForm.php</var> функция <code>public function signup()</code>) меняем строку:</p>
 <pre class="prettyprint lang-php">
         return $user->save() ? $user : null;</pre>
 <p>на:</p>
 <pre class="prettyprint lang-php copyToClipboard">
 
 
-        $user = $user->save() ? $user : null;
+        $user = $user-&gt;save() ? $user : null;
 
-        // нужно добавить следующие три строки:
-        $auth = \Yii::$app->authManager;
-        $authorRole = $auth->getRole('author');
-        $auth->assign($authorRole, $user->getId());
-        
+        if ($user) {
+            $auth = \Yii::$app-&gt;authManager;
+            $auth-&gt;assign($auth-&gt;getRole('user'), $user-&gt;getId());
+        }
+
         return $user;
 </pre>
 <p>Регистрируемя, смотрим результат в БД</p>
