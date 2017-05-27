@@ -1,57 +1,130 @@
 <h2>Установка</h2>
-<p><code class="copyToClipboard">composer create-project --prefer-dist yiisoft/yii2-app-advanced ./</code></p>
-<p><code class="copyToClipboard">composer create-project --prefer-dist yiisoft/yii2-app-basic ./</code></p>
-<p>Затем только <code>git init</code>, <code>git remote add...</code></p>
+<ol>
+    <li>
+        <p><code class="copyToClipboard">composer create-project --prefer-dist yiisoft/yii2-app-advanced ./</code></p>
+        <p>или</p>
+        <p><code class="copyToClipboard">composer create-project --prefer-dist yiisoft/yii2-app-basic ./</code></p>
+    </li>
+    <li>
+        <p>
+            <code class="copyToClipboard">git init</code><br>
+            <code class="copyToClipboard">git add .</code><br>
+            <code class="copyToClipboard">git commit -m "first commit"</code><br>
+            <code class="copyToClipboard">git remote add origin &lt;repository_link&gt;</code><br>
+            <code class="copyToClipboard">git push -u origin master</code>
+        </p>
+    </li>
+    <li>
+        <p><code class="copyToClipboard">./init --env=Development --overwrite=All</code></p>
+        <p>или</p>
+        <p><code class="copyToClipboard">./init --env=Production --overwrite=All</code></p>
+    </li>
+</ol>
+
 <h2>Первичная настройка</h2>
 <h3>ЧПУ</h3>
-<p><var>.htaccess</var></p>
-<pre>RewriteEngine on
+<h4>1. Редактируем виртуальный хост апача (рекомендовано) или созаем <var>.htaccess</var> и игнорим его</h4>
+<p><strong>Редактирование виртуального хоста:</strong></p>
+<p><code class="copyToClipboard">subl /etc/apache2/sites-available/my.conf</code></p>
+<pre class="copyToClipboard">
+&lt;VirtualHost *:80&gt;
+    ServerName projectname.local
+    ServerAlias www.projectname.local
+    ServerAdmin adminname@projectname.local
+    DocumentRoot /projectpath/frontend/web
+    &lt;Directory /projectpath/frontend/web&gt;
+        Require all granted
+        Options Indexes FollowSymLinks Includes
+        AllowOverride All
+        Order deny,allow
+        Allow from all
+        &lt;IfModule mod_rewrite.c&gt;
+            RewriteEngine on
+            # RewriteBase / # RewriteBase выдаст ошибку при использовании в виртуальном хосте
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . index.php
+        &lt;/IfModule&gt;
+    &lt;/Directory&gt;
+    ErrorLog /projectpath/error.log
+    CustomLog /projectpath/access.log combined
+    #ErrorLog ${APACHE_LOG_DIR}/error.log
+    #CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;
+</pre>
+<p><strong>Создание <var>.htaccess</var> и его игнорирование командами:</strong></p>
+<p><code class="copyToClipboard">touch -c frontend/web/.htaccess</code></p>
+<p><code class="copyToClipboard">subl frontend/web/.htaccess</code></p>
+<pre class="copyToClipboard">RewriteEngine on
 RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php</pre>
-<p>В <var>.gitignore</var> добавить</p>
-<pre>.htaccess</pre>
-<p>
-    В файле <var>frontend/config/main.php</var> отредактировать <q>urlManager</q>
-</p>
-<pre>
-            'urlManager' =&gt; [
-                'enablePrettyUrl' =&gt; true,
-                'showScriptName' =&gt; false,
-                'enableStrictParsing' =&gt; true,
-                'rules' =&gt; [
-                    '' =&gt; 'site/index',
-                    '&lt;action&gt;' =&gt; 'site/&lt;action&gt;',
-                ],
+RewriteRule . index.php
+</pre>
+<p><code class="copyToClipboard">subl .gitignore</code></p>
+<pre class="copyToClipboard">
+.htaccess
+</pre>
+<h4>2. Настроить <q>urlManager</q></h4>
+<p><code class="copyToClipboard">subl frontend/config/main.php</code></p>
+<pre class="prettyprint lang-php copyToClipboard">
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true, // Только описанное в rules, иначае 404
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'site/index'
             ],
+        ],
 </pre>
-<h3>Дебагер на Dev</h3>
-<p>В файле <var>web/index.php</var>:</p>
-<pre class="prettyprint lang-php">
-/*
-defined('YII_DEBUG') or define('YII_DEBUG', true);
-defined('YII_ENV') or define('YII_ENV', 'dev');
-*/
-
-defined('YII_DEBUG') or define('YII_DEBUG', false);
-defined('YII_ENV') or define('YII_ENV', 'prod');
-</pre>
-<p>ну и на локале, наверняка, при инициализации <var>dev</var> создался такой код в файле <var class="copyToClipboard">frontend/config/main-local.php</var>, комментируем его.</p>
-<pre class="prettyprint lang-php">
-if (!YII_ENV_TEST) {
-    // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' =&gt; 'yii\debug\Module',
-    ];
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' =&gt; 'yii\gii\Module',
-    ];
-}
-</pre>
+<h3>БД</h3>
+<p>Настраиваем тут: <code class="copyToClipboard">subl common/config/main-local.php</code></p>
+<p>Создаем базу: <code class="copyToClipboard">mysql -uroot -p -e "CREATE DATABASE IF NOT EXISTS &lt;dbname&gt; DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"</code></p>
+<p>Выполняем миграции: <code class="copyToClipboard">./yii migrate</code></p>
 <h2>Конфигурация</h2>
+<h3>Правила Url менеджера (urlManager rules)</h3>
+<p>В примерах:</p>
+<pre>
+'/' =&gt; 'site/index',
+'about' =&gt; 'site/about',
+'contact' =&gt; 'site/contact',
+'login' =&gt; 'site/login',
+</pre>
+<pre>
+'/' =&gt; 'site/index',
+'&lt;action:\w+&gt;' =&gt; 'site/&lt;action&gt;',
+</pre>
+<pre>
+'&lt;module:cabinet&gt;/&lt;controller:\w+&gt;/&lt;id:\d+&gt;' =&gt; '&lt;module&gt;/&lt;controller&gt;/view',
+'&lt;module:cabinet&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;/&lt;id:\d+&gt;' =&gt; '&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;',
+'&lt;module:cabinet&gt;/&lt;controller:\w+&gt;/&lt;action:\w+&gt;' =&gt; '&lt;module&gt;/&lt;controller&gt;/&lt;action&gt;',
+</pre>
+<pre>
+[
+    'class' =&gt; 'yii\web\UrlRule',
+    'pattern' =&gt; '&lt;pubsec:[\w-]+&gt;/&lt;page:\d+&gt;',
+    'route' =&gt; 'pub/list',
+    'suffix' =&gt; '/',
+],
+[
+    'class' =&gt; 'yii\web\UrlRule',
+    'pattern' =&gt; '&lt;page:\d+&gt;',
+    'route' =&gt; 'pub/list',
+    'suffix' =&gt; '/',
+],
+[
+    'class' =&gt; 'yii\web\UrlRule',
+    'pattern' =&gt; '&lt;pubsec:[\w-]+&gt;',
+    'route' =&gt; 'pub/list',
+    'suffix' =&gt; '/',
+],
+[
+    'class' =&gt; 'yii\web\UrlRule',
+    'pattern' =&gt; '&lt;sid:[\w-]+&gt;',
+    'route' =&gt; 'pub/view',
+    'suffix' =&gt; '.html',
+],
+</pre>
 <h3>Определение версии yii2</h3>
 <pre class="copyToClipboard prettyprint lang-php">
 echo "<pre>";
