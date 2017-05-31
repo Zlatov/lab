@@ -49,6 +49,25 @@
     </li>
 </ul>
 <h2>Плагины</h2>
+<h3>ANSIescape</h3>
+<p>заставить работать плагин для колорирования текста в Build System:</p>
+<ol>
+<li>содержимое файла <var class="copyToClipboard">/home/user/.config/sublime-text-3/Packages/User/Ruby-color.sublime-build</var>:
+<pre class="copyToClipboard">
+{
+    &quot;cmd&quot;: [&quot;ruby&quot;, &quot;$file&quot;],
+    &quot;file_regex&quot;: &quot;rb$&quot;,
+    &quot;target&quot;: &quot;ansi_color_build&quot;,
+    &quot;syntax&quot;: &quot;Packages/ANSIescape/ANSI.tmLanguage&quot;
+}
+</pre>
+</li>
+<li>Tools -> Build With...</li>
+</ol>
+<p>Примечания:</p>
+<p>для руби печатать надо puts-ом</p>
+
+
 <h3><strong>Package Control</strong></h3>
 <p> — <a target="_blank" href="https://packagecontrol.io/installation">Package Control</a> =);</p>
 <h3><strong>ApacheConf.tmLanguage</strong></h3>

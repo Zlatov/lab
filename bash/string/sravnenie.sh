@@ -23,3 +23,4 @@ do
 	fi
 done
 
+echo -en "\e[34mtrue\e[0m"

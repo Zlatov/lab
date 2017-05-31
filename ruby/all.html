@@ -25,6 +25,10 @@ sudo apt-get install build-essential
 <p>Использование: <code>require "ap"; require "pp"; ap some_object; pp some_object</code></p>
 
 <h2>Консоль</h2>
+<h3>Запретить кешировать модули и классы для rails c</h3>
+<p>Добавить в .bashrc строку: <code class="copyToClipboard">export DISABLE_SPRING=1</code></p>
+<h3>Выполнить файл из консоли:</h3>
+<code class="copyToClipboard">load './somefile.rb'</code>
 <h3>Colorize, вывод в цвете</h3>
 <pre class="prettyprint lang-rb">
 class String
