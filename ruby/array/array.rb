@@ -16,7 +16,7 @@ arr.each do |item|
   p item
 end
 
-arr.each_with_index do |key, value|
+arr.each_with_index do |value, key|
   puts key.to_s, value
 end
 
