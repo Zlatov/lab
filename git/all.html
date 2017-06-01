@@ -98,6 +98,13 @@ $ git branch -d testing</pre>
 <p>— от места совпадения HEAD и FETCH_HEAD, и до конца истории.</p>
 <pre>$ git log HEAD...FETCH_HEAD</pre>
 <p>— общая историю от места совпадения HEAD и FETCH_HEAD, и до конца истории.</p>
+<p><strong>Алиасы для log</strong></p>
+<pre class="copyToClipboard">
+git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+</pre>
+<pre class="copyToClipboard">
+git config --global alias.hist 'log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+</pre>
 <h3>git remote</h3>
 <p>— наблюдения за удаленными репозиториями.</p>
 <pre>$ git remote</pre>
