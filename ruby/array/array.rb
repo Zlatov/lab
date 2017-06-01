@@ -16,4 +16,8 @@ arr.each do |item|
   p item
 end
 
+arr.each_with_index do |key, value|
+  puts key.to_s, value
+end
+
 p arr.count

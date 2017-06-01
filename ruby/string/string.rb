@@ -1,0 +1,1 @@
+p "date".slice 0, 2
