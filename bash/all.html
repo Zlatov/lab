@@ -387,6 +387,8 @@ echo $(dirname "$SCRIPT")   # .
 <p><code>echo $BASH_ARGV</code> — путь к файлу в котором написан сам код.</p>
 <p><code>echo `basename $BASH_ARGV`</code> — обрежет путь до имени файла.</p>
 <h2>Наработки</h2>
+<p>Алиас открыть проводник по текущеьу пути и закрыть консоль</p>
+<pre class="copyToClipboard">alias nemo='nemo ./ && exit'</pre>
 <h3>Убить процесс</h3>
 <p><code class="copyToClipboard">kill -9 process_id</code></p>
 <h3>Список процессов</h3>
