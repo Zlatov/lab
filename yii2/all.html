@@ -726,6 +726,18 @@ class MyAsset extends AssetBundle
     ];
 }
 </pre>
+<h3>Кэширование</h3>
+<p><strong>Отключение</strong> (файл нстройки main.php..., настройка компоненты):</p>
+<pre class="prettyprint lang-php">
+$config = [
+    'components' => [
+        ...
+        'assetManager' => [
+            'class' => 'yii\web\AssetManager',
+            'forceCopy' => true,
+        ],
+</pre>
+
 
 <h2>Виджеты (widgets)</h2>
 <h3>Использование</h3>
