@@ -1,3 +1,5 @@
+# !/home/iadfeshchm/.rbenv/shims/ruby -w
+
 # Запустить этот файл:
 # ruby ./file_get_content_url.rb
 
