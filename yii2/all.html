@@ -1,4 +1,5 @@
 <h2>Установка</h2>
+<h3>Новый проект</h3>
 <ol>
     <li>
         <p><code class="copyToClipboard">composer create-project --prefer-dist yiisoft/yii2-app-advanced ./</code></p>
@@ -19,6 +20,17 @@
         <p>или</p>
         <p><code class="copyToClipboard">./init --env=Production --overwrite=All</code></p>
     </li>
+</ol>
+<h3>Проект из репозитория</h3>
+<ol>
+    <li><code>git clone ...</code></li>
+    <li><code>composer install</code></li>
+    <li><code>./init</code></li>
+    <li><code>./yii migrate</code></li>
+    <li><code>./yii migrate --migrationPath=@yii/rbac/migrations</code></li>
+    <li><code>./yii rbac/init</code></li>
+    <li><code>На проекте регистрируем админа, берём его <var>#id</var></code></li>
+    <li><code>./yii rbac/set-admin <var>#id</var></code></li>
 </ol>
 
 <h2>Первичная настройка</h2>
