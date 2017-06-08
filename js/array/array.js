@@ -23,3 +23,13 @@ for (var i = 0; i < l; i++) {
   }
 }
 console.log(a)
+
+console.log('concat')
+a = ['1','2']
+b = ['3',4]
+c = a.concat(b)
+d = c.concat(a)
+console.log(a)
+console.log(b)
+console.log(c)
+console.log(d)
