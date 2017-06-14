@@ -27,5 +27,3 @@ class String
     colorize(36)
   end
 end
-
-puts 'a'.red

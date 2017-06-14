@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require_relative '../colorize/colorize'
 
 arr = []
 arr = Array.new
@@ -9,6 +10,8 @@ arr << :b
 arr << :c
 arr << :d
 p arr.sample
+puts 'Масси включает в себя `:b`?'.red
+p (arr.include?(:b)? 'y' : 'n')
 arr = ['asd', 'asd', 'asd']
 p arr
 arr = %w[asd asd asd]
@@ -24,7 +27,9 @@ end
 
 p arr.last
 
-a = 1..100
-a.each_with_index do |e, i|
-  p i, i%10
+puts 'Перебо, остаток от деления'.red
+a = 1..5
+a.each_with_index do |value, key|
+  puts "#{'ключ:'.light_blue} #{key.to_s}, #{'остаток от деления на 2:'.light_blue} #{(key%2).to_s}"
+  p 'значение: ' + value.to_s
 end
