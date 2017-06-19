@@ -31,6 +31,41 @@ $('#example1').jstree({
 	plugins: ["search"]
 })
 </pre>
+<h3>Перетаскивание</h3>
+<pre class="prettyprint lang-js eval_js">
+$('#example_dnd1').jstree({
+	core: {
+		check_callback: true,
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+		]
+	},
+	plugins: ["dnd"]
+})
+$('#example_dnd2').jstree({
+	core: {
+		check_callback: true,
+		data: [
+			{ "id" : "ajson1", "parent" : "#", "text" : "Simple root node" },
+			{ "id" : "ajson2", "parent" : "#", "text" : "Root node 2" },
+			{ "id" : "ajson3", "parent" : "ajson2", "text" : "Child 1" },
+			{ "id" : "ajson4", "parent" : "ajson2", "text" : "Child 2" },
+		]
+	},
+	plugins: ["dnd"]
+})
+</pre>
+<div class="row">
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<div id="example_dnd1"></div>
+	</div>
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<div id="example_dnd2"></div>
+	</div>
+</div>
 <h2>Перемещение по jstree</h2>
 <h3>Получить ноду</h3>
 <pre class="prettyprint lang-js eval_js">
