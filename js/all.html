@@ -189,7 +189,15 @@ console.log(b)
 console.log(ishodnik, 'исходник неизменен')
 </pre>
 
-<h2>Function</h2>
+<h2>Функция</h2>
+<h3>Параметры в массив и обратно</h3>
+<pre class="prettyprint lang-js">
+  modal: function() {
+    var args = [...arguments]
+    console.log('args: ', args)
+    this.place.modal(...args)
+  }
+</pre>
 <h3>параметр Event (событие) в функии</h3>
 <p>Посмотреть что из себя представляет событие и элемент на котором оно сработало:</p>
 <pre class="prettyprint lang-js">
