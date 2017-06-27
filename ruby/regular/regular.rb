@@ -12,3 +12,7 @@ p сontains_text 'asdf', 'as'
 p сontains_text 'asdf', 's'
 p сontains_text 'asdf', 'f'
 p сontains_text 'asdf', 'b'
+
+v = '123333.21452345.23453254a'
+is_version_format = !((v =~ /^\d+\.\d+\.\d+$/).nil?)
+p is_version_format
