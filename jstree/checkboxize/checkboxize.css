@@ -1,0 +1,32 @@
+.jstree-anchor.checkboxized {
+    position: relative;
+}
+.jstree-anchor.checkboxized:after {
+    content: "\f096";
+    font-family: Icons;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 0;
+    left: 3px;
+    margin-left: 100%;
+    transition: all .2s ease-in-out;
+}
+.jstree-anchor.checkboxized:hover:after {
+    transform: scale(1.2);
+}
+.jstree-anchor.checkboxized[data-checked]:after {
+    content: "\f046";
+}
+
+.jstree.only_checked .checkboxized:not([data-checked]) {
+	display: none;
+}
+.jstree.only_checked .group-checkboxized:not([data-has_checked]) {
+	display: none;
+}
