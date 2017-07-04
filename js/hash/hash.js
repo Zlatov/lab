@@ -27,3 +27,7 @@ for (var key in b) {
   console.log('b[key]: ', b[key])
 }
 
+console.log('Удаление свойства')
+console.log('a = {a:1}: ', a = {a:1})
+console.log('delete a.a: ', delete a.a)
+console.log('a: ', a)

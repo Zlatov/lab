@@ -36,7 +36,7 @@ Array.prototype.unique = function() {
 }
 Array.prototype.to_flat = function(change_self=true, options=null) {
   if (options==null) {
-    var options = {
+    options = {
       id: 'id',
       root_id: '#',
       childrens: 'children',
@@ -45,29 +45,30 @@ Array.prototype.to_flat = function(change_self=true, options=null) {
   }
   var level = 0
   var flat = []
-  var array = []
+  var cache = []
+  var parent = []
   parent[level] = options.root_id
-  array[level] = this.clone()
-  array[level].reset()
+  cache[level] = this.clone()
+  cache[level].reset()
   while (level>=0) {
-    var node = array[level].next()
+    var node = cache[level].next()
     if (node != null) {
       node = Object.assign({},node)
       node[options.parent] = parent[level]
       if (
         node[options.childrens]!=null &&
         Object.prototype.toString.call(node[options.childrens]) === '[object Array]' &&
-        node.children.length
+        node[options.childrens].length
       ) {
-        level = level + 1
+        level++
         parent[level] = node[options.id]
-        array[level] = node[options.childrens]
-        array[level].reset()
+        cache[level] = node[options.childrens].clone()
+        cache[level].reset()
       }
-      node[options.childrens] = null
+      delete node[options.childrens]
       flat.push(node)
     } else {
-      level = level - 1
+      level--
     }
   }
   if (change_self) {
