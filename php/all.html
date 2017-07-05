@@ -6,6 +6,11 @@ upload_max_filesize = 10M
 max_file_uploads = 20
 post_max_size = 210M
 </pre>
+посмотреть конкретные настройки php.ini пыхом:
+<pre class="prettyprint lang-php copyToClipboard">&lt;?php
+echo 'post_max_size = ' . ini_get('post_max_size') . &quot;\n&quot;;
+echo 'max_input_vars = ' . ini_get('max_input_vars') . &quot;\n&quot;;</pre>
+
 <pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
 <h3>Переменные окружения</h3>
 <p>Если $_ENV пуст - проверить variables_order в php.ini (/etc/php5/apache2/php.ini) (Должно быть E в строке)</p>
