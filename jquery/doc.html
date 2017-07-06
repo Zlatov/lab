@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="../theme/bower/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="../theme/bower/font-awesome/css/font-awesome.min.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="/theme/css/custom.css">
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-5">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Селекторы</h3>
+				  </div>
+				  <div class="panel-body">
+						<div class="row">
+							<div class="col-sm-4">
+							  <dl>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору" data-toggle="tooltip" data-placement="left" title="Tooltip on left">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								</dl>
+							</div>
+							<div class="col-sm-4">
+							  <dl>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								</dl>
+							</div>
+							<div class="col-sm-4">
+							  <dl>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								  <dt>Базовые</dt>
+								  <dd><a href="#Селектор по идентификатору">#id</a></dd>
+								  <dd><a href="#Селектор по классу">.class</a></dd>
+								  <dd><a href="#Селектор по имени тега">tagName</a></dd>
+								  <dd><a href="#Селектор всех элементов">*</a></dd>
+								</dl>
+							</div>
+						</div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Название панели</h3>
+				  </div>
+				  <div class="panel-body">
+				    Panel content
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Название панели</h3>
+				  </div>
+				  <div class="panel-body">
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Название панели</h3>
+				  </div>
+				  <div class="panel-body">
+				    Panel content
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="slided" style="left: 332px;">
+	<div id="selectors" class="itArea">
+		<h2>Селекторы</h2>
+		<div class="col">
+			<h4>Базовые</h4>
+			<div class="it">
+				<a href="#Селектор по идентификатору" target="_top">#id</a>
+				<span class="tx">Ищет элемент страницы с заданным идентификатором.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по классу" target="_top">.class</a>
+				<span class="tx">Ищет элементы страницы, принадлежащие заданному классу.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по имени тега" target="_top">tagName</a>
+				<span class="tx">Ищет элементы страницы по имени тега.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор всех элементов" target="_top">*</a>
+				<span class="tx">Ищет все элементы.</span>
+			</div>
+			<h4>Взаимодействия</h4>
+			<div class="it">
+				<a href="#Групповые селекторы" target="_top">first, second, ...</a>
+				<span class="tx">Ищет элементы страницы, которые удовлетворяют хотя бы одному из селекторов <i>first</i>, <i>second</i>, ...</span>
+			</div>
+			<div class="it">
+				<a href="#Нисходящие селекторы" target="_top">outer inner</a>
+				<span class="tx">Ищет элементы, удовлетворяющие селектору <i>inner</i>, внутри элементов, удовлетворяющих <i>outer</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Дочерние селекторы" target="_top">parent &gt; child</a>
+				<span class="tx">Ищет элементы, удовлетворяющие селектору <i>child</i>, которые при этом являются <b>прямыми</b> потомками элементов, удовлетворяющих <i>parent</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Смежные селекторы" target="_top">prev + next</a>
+				<span class="tx">Ищет элементы, удовлетворяющие селектору <i>next</i>, которые следуют <b>непосредственно</b> за элементами, удовлетворяющими <i>prev</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Следующие селекторы" target="_top">prev ~ next</a>
+				<span class="tx">Ищет элементы, удовлетворяющие селектору <i>next</i>, которые следуют за элементами, удовлетворяющими <i>prev</i>.</span>
+			</div>
+			<h4>По атрибутам</h4>
+			<div class="it">
+				<a href="#Селектор по наличию атрибута" target="_top">[name]</a>
+				<span class="tx">Ищет элементы, содержащие атрибут <i>name</i></span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по значению атрибута" target="_top">[name = value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> совпадает с <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по несовпадению с атрибутом" target="_top">[name != value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> не совпадает с <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по началу атрибута" target="_top">[name ^= value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> начинается с <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по концу атрибута" target="_top">[name $= value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> заканчивается на <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по подстроке в атрибуте" target="_top">[name *= value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> содержит подстроку <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по слову в атрибуте" target="_top">[name ~= value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> содержит слово <i>value</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по префиксу атрибута" target="_top">[name |= value]</a>
+				<span class="tx">Ищет элементы, у которых значение атрибута <i>name</i> имеют префикс <i>value</i> (равен value или имеет вид: "value-*").</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор по нескольким атрибутам" target="_top">[first][second][...</a>
+				<span class="tx">Ищет элементы, соответствующие всем заданным условиям на атрибуты одновременно.</span>
+			</div>
+		</div>
+		<div class="col">
+			<h4>Простые фильтры</h4>
+			<div class="it">
+				<a href="#Первый найденный элемент" target="_top">:first</a>
+				<span class="tx">Оставляет первый из найденных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Последний найденный элемент" target="_top">:last</a>
+				<span class="tx">Оставляет последний найденных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Элемент по индексу" target="_top">:eq(index)</a>
+				<span class="tx">Соответствует элементу, идущего под номером index в наборе выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Исключение из найденных элементов" target="_top">:not(selector)</a>
+				<span class="tx">Исключает из найденных элементов те, которые удовлетворяют селектору <i>selector</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Четные элементы" target="_top">:even</a>
+				<span class="tx">Оставляет только четные найденные элементы.</span>
+			</div>
+			<div class="it">
+				<a href="#Нечетные элементы" target="_top">:odd</a>
+				<span class="tx">Оставляет только нечетные найденные элементы.</span>
+			</div>
+			<div class="it">
+				<a href="#Элементы с индексом после n" target="_top">:gt(n)</a>
+				<span class="tx">Оставляет только те найденные элементы, чей индекс превосходит n.</span>
+			</div>
+			<div class="it">
+				<a href="#Элементы с индексом до n" target="_top">:lt(n)</a>
+				<span class="tx">Оставляет только те найденные элементы, чей индекс не превосходит n.</span>
+			</div>
+			<div class="it">
+				<a href="#Заголовки" target="_top">:header</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются заголовками (с тегами h1, h2 и.т.д.).</span>
+			</div>
+			<div class="it">
+				<a href="#Анимированные элементы" target="_top">:animated</a>
+				<span class="tx">Оставляет те найденные элементы, которые в данный момент задействованы в анимации.</span>
+			</div>
+			<div class="it">
+				<a href="#Невидимые элементы" target="_top">:hidden</a>
+				<span class="tx">Оставляет только невидимые элементы.</span>
+			</div>
+			<div class="it">
+				<a href="#Видимые элементы" target="_top">:visible</a>
+				<span class="tx">Соответствует элементам, в которых указан подходящий язык содержимого. В параметре language указывается код языка.</span>
+			</div>
+			<div class="it">
+				<a href="#Элементы с указанным языком содержимого" target="_top">:lang()</a>
+				<span class="tx">Оставляет только видимые элементы.</span>
+			</div>
+			<h4>Фильтры дочерних <br>элементов</h4>
+			<div class="it">
+				<a href="#Первые элементы в своих родителях" target="_top">:first-child</a>
+				<span class="tx">Оставляет те найденные элементы, которые расположены первыми в своих родительских элементах.</span>
+			</div>
+			<div class="it">
+				<a href="#Последние элементы в своих родителях" target="_top">:last-child</a>
+				<span class="tx">Оставляет те найденные элементы, которые расположены последними в своих родительских элементах.</span>
+			</div>
+			<div class="it">
+				<a href="#Заданные элементы в своих родителях" target="_top">:nth-child(conditions)</a>
+				<span class="tx">Оставляет те найденные элементы, которые расположены определенным образом в родительских элементах (четные, нечетные, идущие под заданным номером).</span>
+			</div>
+			<div class="it">
+				<a href="#Заданные элементы в своих родителях" target="_top">:nth-child-last(conditions)</a>
+				<span class="tx">Оставляет те найденные элементы, которые расположены определенным образом в родительских элементах (четные, нечетные, идущие под заданным номером).</span>
+			</div>
+			<div class="it">
+				<a href="#Единственные элементы в своих родителях" target="_top">:only-child</a>
+				<span class="tx">Оставляет те найденные элементы, которые являются единственными потомками в своих родительских элементах.</span>
+			</div>
+			<div class="it">
+				<a href="#Первые условные элементы в своих родителях" target="_top">:first-of-type</a>
+				<span class="tx">Фильтрует набор выбранных элементов, оставляя только те элементы, которые первыми будут встречены в своих родителях.</span>
+			</div>
+			<div class="it">
+				<a href="#Последние условные элементы в своих родителях" target="_top">:last-of-type</a>
+				<span class="tx">Фильтрует набор выбранных элементов, оставляя только те элементы, которые последними будут встречены в своих родителях.</span>
+			</div>
+		</div>
+		<div class="col" id="exp1">
+			<h4>Фильтры по содержимому</h4>
+			<div class="it">
+				<a href="#Селектор по тексту" target="_top">:contains(text)</a>
+				<span class="tx">Оставляет те найденные элементы, которые содержат заданный текст.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор отсутствия содержимого" target="_top">:empty</a>
+				<span class="tx">Оставляет те найденные элементы, у которых нет содержимого (текста и других элементов).</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор наличия конретных элементов" target="_top">:has(selector)</a>
+				<span class="tx">Оставляет те найденные элементы, которые содержат внутри хотя бы один элемент, удовлетворяющий селектору <i>selector</i>.</span>
+			</div>
+			<div class="it">
+				<a href="#Селектор наличия содержимого" target="_top">:parent</a>
+				<span class="tx">Оставляет непустые элементы из всех найденных.</span>
+			</div>
+			<h4>Фильтры форм</h4>
+			<div class="it">
+				<a href="#Только элементы формы" target="_top">:input</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются элементами формы (с тегами input, textarea или button).</span>
+			</div>
+			<div class="it">
+				<a href="#Только кнопки" target="_top">:button</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются кнопками (с тегом button или типом button).</span>
+			</div>
+			<div class="it">
+				<a href="#Только переключатели" target="_top">:radio</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются переключателями.</span>
+			</div>
+			<div class="it">
+				<a href="#Только флажки" target="_top">:checkbox</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются флажками.</span>
+			</div>
+			<div class="it">
+				<a href="#Только текстовые поля" target="_top">:text</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются текстовыми полями.</span>
+			</div>
+			<div class="it">
+				<a href="#Только поля ввода пароля" target="_top">:password</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются полями ввода пароля.</span>
+			</div>
+			<div class="it">
+				<a href="#Только поля загрузки файлов" target="_top">:file</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются полями загрузки файлов.</span>
+			</div>
+			<div class="it">
+				<a href="#Только кнопки отправки формы" target="_top">:submit</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются кнопками отправки формы.</span>
+			</div>
+			<div class="it">
+				<a href="#Только кнопки очистки формы" target="_top">:reset</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются кнопками очистки формы.</span>
+			</div>
+			<div class="it">
+				<a href="#Только изображения для отправки формы" target="_top">:image</a>
+				<span class="tx">Оставляет только те найденные элементы, которые являются изображениями для отправки формы (input типа image).</span>
+			</div>
+			<div class="it">
+				<a href="#Только элементы в фокусе" target="_top">:focus</a>
+				<span class="tx">Оставляет найденные элементы, находящиеся в данный момент в фокусе.</span>
+			</div>
+			<div class="it">
+				<a href="#Только выделенные элементы" target="_top">:selected</a>
+				<span class="tx">Оставляет найденные элементы со статусом selected. Это могут быть элементы типа <tt>&lt;option&gt;</tt>.</span>
+			</div>
+			<div class="it">
+				<a href="#Только выбранные элементы" target="_top">:checked</a>
+				<span class="tx">Оставляет найденные элементы со статусом checked. Это могут быть элементы типа <tt>&lt;checkbox&gt;</tt> или <tt>&lt;radio&gt;</tt>.</span>
+			</div>
+			<div class="it">
+				<a href="#Только активные элементы формы" target="_top">:enabled</a>
+				<span class="tx">Из всех выбранных элементов, оставляет только активные элементы формы (со статусом enabled).</span>
+			</div>
+			<div class="it">
+				<a href="#Только неактивные элементы формы" target="_top">:disabled</a>
+				<span class="tx">Из всех выбранных элементов, оставляет только неактивные элементы формы (со статусом disabled).</span>
+			</div>
+		</div>
+	</div>
+	<div id="events" class="itArea">
+		<h2>События</h2>
+		<div class="col">
+			<h4>Базовые</h4>
+			<div class="it">
+				<a href="#On" target="_top">.on()</a>
+				<span class="tx">Устанавливает обработчик события на выбранные элементы страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Установка обработчика событий" target="_top">.bind()</a>
+				<span class="tx">Устанавливает обработчик события на выбранные элементы страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Установка умного обработчика событий" target="_top">.live()</a>
+				<span class="tx">Устанавливает обработчик события на выбранные элементы страницы. Обработчик сработает и на элементах, появившихся после его установки.</span>
+			</div>
+			<div class="it">
+				<a href="#Установка обработчика с заданным контекстом" target="_top">.delegate()</a>
+				<span class="tx">Устанавливает обработчик события на выбранные элементы страницы. Элементы выбираются с помощью уточняющего селектора. Обработчик будет действовать и на элементах, появившихся после его установки.</span>
+			</div>
+			<div class="it">
+				<a href="#Установка разового обработчика событий" target="_top">.one()</a>
+				<span class="tx">Устанавливает обработчик события на выбранные элементы страницы, который сработает только по одному разу, на каждом из элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление обработчика событий" target="_top">.unbind()</a>
+				<span class="tx">Удаляет обработчик событий у выбранных элементов страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Off" target="_top">.off()</a>
+				<span class="tx">Удаляет обработчик событий (установленные с помощью метода .on()) у выбранных элементов страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление умного обработчика событий" target="_top">.die()</a>
+				<span class="tx">Удаляет обработчик событий, который был установлен с помощью live().</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление обработчика с заданным контекстом" target="_top">.undelegate()</a>
+				<span class="tx">Удаляет обработчик событий, который был установлен с помощью delegate().</span>
+			</div>
+			<div class="it">
+				<a href="#Вызов события" target="_top">.trigger()</a>
+				<span class="tx">Выполняет указанное событие и запускает его обработчик.</span>
+			</div>
+			<div class="it">
+				<a href="#Вызов обработчика" target="_top">.triggerHandler()</a>
+				<span class="tx">Запускает обработчик указанного события, без выполнения самого события.</span>
+			</div>
+			<div class="it">
+				<a href="#Изменение контекста функции" target="_top">jQuery.proxy()</a>
+				<span class="tx">По заданной функции, создает другую, внутри которой переменная <tt>this</tt> будет равна заданному значению.</span>
+			</div>
+			<div class="it">
+				<a href="#Объект event" target="_top">event</a>
+				<span class="tx">Объект, содержащий данные о текущем событии. Передается всем обработчикам событий.</span>
+			</div>
+			<h4>Мышь</h4>
+			<div class="it">
+				<a href="#Обработчик или источник события click" target="_top">.click()</a>
+				<span class="tx">Устанавливает обработчик "клика" мышью по элементу, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события dblclick" target="_top">.dblclick()</a>
+				<span class="tx">Устанавливает обработчик двойного "клика" мышью по элементу, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события hover" target="_top">.hover()</a>
+				<span class="tx">Устанавливает обработчик двух событий: появления/исчезновения курсора над элементом.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события mousedown" target="_top">.mousedown()</a>
+				<span class="tx">Устанавливает обработчик нажатия кнопки мыши, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события mouseup" target="_top">.mouseup()</a>
+				<span class="tx">Устанавливает обработчик поднятия кнопки мыши, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник появления курсора на элементе" target="_top">.mouseenter()</a>
+				<span class="tx">Устанавливает обработчик появления курсора в области элемента, либо, запускает это событие. Появление этого события, отработано лучше, чем стандартного mouseover.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник выхода курсора из элемента" target="_top">.mouseleave()</a>
+				<span class="tx">Устанавливает обработчик выхода курсора из области элемента, либо, запускает это событие. Появление этого события, отработано лучше, чем стандартного mouseout.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события mousemove" target="_top">.mousemove()</a>
+				<span class="tx">Устанавливает обработчик движения курсора в области элемента, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события mouseout" target="_top">.mouseout()</a>
+				<span class="tx">Устанавливает обработчик выхода курсора из области элемента, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события mouseover" target="_top">.mouseover()</a>
+				<span class="tx">Устанавливает обработчик появления курсора в области элемента, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Поочередное выполнение функций" target="_top">.toggle()</a>
+				<span class="tx">Поочередно выполняет одну из двух или более заданных функций, в ответ на "клик" по элементу.</span>
+			</div>
+		</div>
+		<div class="col" id="exp4">
+			<h4>Клавиатура</h4>
+			<div class="it">
+				<a href="#Обработчик или источник события keydown" target="_top">.keydown()</a>
+				<span class="tx">Устанавливает обработчик перехода клавиши клавиатуры в нажатое состояние, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события keyup" target="_top">.keyup()</a>
+				<span class="tx">Устанавливает обработчик возвращение клавиши клавиатуры в ненажатое состояние, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события keypress" target="_top">.keypress()</a>
+				<span class="tx">Устанавливает обработчик ввода символа с клавиатуры, либо, запускает это событие.</span>
+			</div>
+			<h4>Элементы формы</h4>
+			<div class="it">
+				<a href="#Обработчик или источник события focus" target="_top">.focus()</a>
+				<span class="tx">Устанавливает обработчик получения фокуса, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события blur" target="_top">.blur()</a>
+				<span class="tx">Устанавливает обработчик потери фокуса, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события focusin" target="_top">.focusin()</a>
+				<span class="tx">Устанавливает обработчик получения фокуса самим элементом или одним из его дочерних.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события focusout" target="_top">.focusout()</a>
+				<span class="tx">Устанавливает обработчик получения фокуса самим элементом или одним из его дочерних.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события select" target="_top">.select()</a>
+				<span class="tx">Устанавливает обработчик выделения текста, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события submit" target="_top">.submit()</a>
+				<span class="tx">Устанавливает обработчик отправки формы, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события change" target="_top">.change()</a>
+				<span class="tx">Устанавливает обработчик изменения элемента формы, либо, запускает это событие.</span>
+			</div>
+			<h4>Загрузка страницы</h4>
+			<div class="it">
+				<a href="#Обработчик готовности дерева DOM" target="_top">.ready()</a>
+				<span class="tx">Устанавливает обработчик готовности дерева DOM.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события load" target="_top">.load()</a>
+				<span class="tx">Устанавливает обработчик завершения загрузки элемента.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик события unload" target="_top">.unload()</a>
+				<span class="tx">Устанавливает обработчик ухода со страницы (при переходе по ссылке, закрытии браузера и.т.д.).</span>
+			</div>
+			<h4>События браузера</h4>
+			<div class="it">
+				<a href="#Обработчик события error" target="_top">.error()</a>
+				<span class="tx">Устанавливает обработчик ошибки при загрузке элементов (например отсутствие необходимой картинки на сервере).</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события resize" target="_top">.resize()</a>
+				<span class="tx">Устанавливает обработчик изменения размеров окна браузера, либо, запускает это событие.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработчик или источник события scroll" target="_top">.scroll()</a>
+				<span class="tx">Устанавливает обработчик "прокрутки" элементов документа, либо, запускает это событие.</span>
+			</div>
+		</div>
+	</div>
+	<div id="traversing" class="itArea">
+		<h2>Работа с набором элементов</h2>
+		<div class="col">
+			<h4>Перемещения по DOM</h4>
+			<div class="it">
+				<a href="#Поиск дочерних элементов" target="_top">.children()</a>
+				<span class="tx">Находит все дочерние элементы у выбранных элементов. При необходимости, можно указать селектор для фильтрации.</span>
+			</div>
+			<div class="it">
+				<a href="#Ближайший подходящий предок" target="_top">.closest()</a>
+				<span class="tx">Находит ближайший, соответствующий заданному селектору элемент, из числа следующих: сам выбранный элемент, его родитель, его прародитель, и так далее, до начало дерева DOM.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов внутри выбранных" target="_top">.find()</a>
+				<span class="tx">Находит элементы по заданному селектору, внутри выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов лежащих после выбранных" target="_top">.next()</a>
+				<span class="tx">Находит элементы, которые лежат '''непосредственно''' после каждого из выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск всех элементов лежащих после выбранных" target="_top">.nextAll()</a>
+				<span class="tx">Находит элементы, которые лежат после каждого из выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск части элементов лежащих после выбранных" target="_top">.nextUntil()</a>
+				<span class="tx">Находит элементы, которые лежат после каждого из выбранных, но не дальше элемента, удовлетворяющего заданному селектору.</span>
+			</div>
+			<div class="it">
+				<a href="#Спозиционированные родительские элементы" target="_top">.offsetParent()</a>
+				<span class="tx">Находит ближайшего предка c позиционированием, отличным от static (позиционирование по умолчанию).</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск родительского элемента" target="_top">.parent()</a>
+				<span class="tx">Находит родительские элементы у всех выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск всех предков" target="_top">.parents()</a>
+				<span class="tx">Находит всех предков у выбранных элементов, т.е. не только прямых родителей, но и прародителей, прапрародителей и так далее, до начало дерева DOM.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск почти всех предков" target="_top">.parentsUntil()</a>
+				<span class="tx">Находит предков, как и <tt>.parents()</tt>, но прекращает поиск перед элементом, удовлетворяющим заданному селектору.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов лежащих перед выбранными" target="_top">.prev()</a>
+				<span class="tx">Находит элементы, которые лежат '''непосредственно''' перед каждым из выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск всех элементов лежащих перед выбранными" target="_top">.prevAll()</a>
+				<span class="tx">Находит элементы, которые лежат перед каждым из выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск части элементов лежащих перед выбранными" target="_top">.prevUntil()</a>
+				<span class="tx">Находит элементы, которые лежат перед каждым из выбранных, но не дальше элемента, соответствующего заданному селектору.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов лежащих на одном уровне" target="_top">.siblings()</a>
+				<span class="tx">Находит все соседние элементы (под соседними понимаются элементы с общим родителем).</span>
+			</div>
+			<h4>Обход набора</h4>
+			<div class="it">
+				<a href="#Вызов функции для элементов набора" target="_top">.each()</a>
+				<span class="tx">Вызывает заданную функцию для каждого элемента набора.</span>
+			</div>
+			<div class="it">
+				<a href="#Работа функции с элементами набора" target="_top">.map()</a>
+				<span class="tx">Вызывает заданную функцию для каждого элемента набора, и в итоге создает новый набор, составленный из значений, возвращенных этой функцией.</span>
+			</div>
+		</div>
+		<div class="col" id="exp3">
+			<h4>Фильтрация набора</h4>
+			<div class="it">
+				<a href="#Поиск элемента с заданным номером" target="_top">.eq()</a>
+				<span class="tx">Находит элемент, идущий под заданным номером в наборе выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Фильтрация выбранных элементов" target="_top">.filter()</a>
+				<span class="tx">Фильтрует набор выбранных элементов с помощью заданного селектора или функции.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск первого элемента в наборе" target="_top">.first()</a>
+				<span class="tx">Находит первый элемент в наборе.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов с заданным содержимым" target="_top">.has()</a>
+				<span class="tx">Фильтрует набор выбранных элементов, оставляя те, которые имеют потомков, соответствующих селектору.</span>
+			</div>
+			<div class="it">
+				<a href="#Проверка наличия элемента" target="_top">.is()</a>
+				<span class="tx">Проверяет, содержится ли в наборе, хотя бы один элемент удовлетворяющий заданному селектору.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск последнего элемента в наборе" target="_top">.last()</a>
+				<span class="tx">Находит последний элемент в наборе.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов не соответствующих условиям" target="_top">.not()</a>
+				<span class="tx">Находит элементы, не соответствующие заданным условиям.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов с индексами из заданной области" target="_top">.slice()</a>
+				<span class="tx">Находит элементы с индексами из определенной области (например от 0 до 5).</span>
+			</div>
+			<h4>Другие методы</h4>
+			<div class="it">
+				<a href="#Добавление элементов в набор" target="_top">.add()</a>
+				<span class="tx">Добавляет заданные элементы в набор.</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление предыдущего набора" target="_top">.andSelf()</a>
+				<span class="tx">Добавляет элементы из предыдущего набора, к текущему (речь идет об одной цепочке методов).</span>
+			</div>
+			<div class="it">
+				<a href="#Специальный поиск содержащихся элементов" target="_top">.contents()</a>
+				<span class="tx">Находит все дочерние элементы у выбранных элементов. В результат, помимо элементов, включается и текст.</span>
+			</div>
+			<div class="it">
+				<a href="#Предыдущий набор элементов" target="_top">.end()</a>
+				<span class="tx">Возвращает предыдущий набор элементов в текущей цепочке методов.</span>
+			</div>
+		</div>
+	</div>
+	<div id="effects" class="itArea">
+		<h2>Эффекты</h2>
+		<div class="col" id="exp5">
+			<h4>Управление анимацией</h4>
+			<div class="it">
+				<a href="#Выполнение пользовательской анимации" target="_top">.animate()</a>
+				<span class="tx">Выполняет анимацию, которая была создана пользователем.</span>
+			</div>
+			<div class="it">
+				<a href="#Очередь предстоящих функций" target="_top">.queue()</a>
+				<span class="tx">Предоставляет/изменяет (в зависимости от параметров) очередь функций.</span>
+			</div>
+			<div class="it">
+				<a href="#Очищение очереди функций" target="_top">.clearQueue()</a>
+				<span class="tx">Очищает очередь функций.</span>
+			</div>
+			<div class="it">
+				<a href="#Запуск следующей функции в очереди" target="_top">.dequeue()</a>
+				<span class="tx">Начинает выполнение следующей функции в очереди.</span>
+			</div>
+			<div class="it">
+				<a href="#Прекращение текущей анимации" target="_top">.stop()</a>
+				<span class="tx">Останавливает выполнение текущей анимации.</span>
+			</div>
+			<div class="it">
+				<a href="#Временное приостановление дальнейших анимаций" target="_top">.delay()</a>
+				<span class="tx">Приостанавливает выполнение следующих анимаций на заданное время.</span>
+			</div>
+			<div class="it">
+				<a href="#Поочередное выполнение функций" target="_top">.toggle()</a>
+				<span class="tx">Поочередно выполняет вызов одной из нескольких заданных функций.</span>
+			</div>
+			<div class="it">
+				<a href="#Отмена выполнения всех анимаций" target="_top">$.fx.off</a>
+				<span class="tx">Отменяет выполнение всех анимаций.</span>
+			</div>
+			<div class="it">
+				<a href="#Длительность кадра анимаций" target="_top">$.fx.interval</a>
+				<span class="tx">Размер задержки между соседними кадрами анимации.</span>
+			</div>
+			<h4>Готовые анимации</h4>
+			<div class="it">
+				<a href="#Появление и иcчезновение элементов" target="_top">.hide()</a>
+				<span class="tx">Скрывает элементы на странице (за счет плавного изменения его размера и прозрачности).</span>
+			</div>
+			<div class="it">
+				<a href="#Появление и иcчезновение элементов" target="_top">.show()</a>
+				<span class="tx">Показывает элементы на странице (за счет плавного изменения его размера и прозрачности).</span>
+			</div>
+			<div class="it">
+				<a href="#Разворачивание и сворачивание элементов" target="_top">.slideUp()</a>
+				<span class="tx">Сворачивает элементы на странице (за счет плавного изменения высоты элементов).</span>
+			</div>
+			<div class="it">
+				<a href="#Разворачивание и сворачивание элементов" target="_top">.slideDown()</a>
+				<span class="tx">Разворачивает элементы на странице (за счет плавного изменения высоты элементов)</span>
+			</div>
+			<div class="it">
+				<a href="#Поочередное разворачивание и сворачивание элементов" target="_top">.slideToggle()</a>
+				<span class="tx">Поочередно разворачивает/сворачивает элементы на странице, как это делают .slideUp() и .slideDown().</span>
+			</div>
+			<div class="it">
+				<a href="#Появление и иcчезновение элементов за счет прозрачности" target="_top">.fadeIn()</a>
+				<span class="tx">Скрывает элементы на странице за счет плавного изменения прозрачности.</span>
+			</div>
+			<div class="it">
+				<a href="#Появление и иcчезновение элементов за счет прозрачности" target="_top">.fadeOut()</a>
+				<span class="tx">Показывает элементы на странице за счет плавного изменения прозрачности.</span>
+			</div>
+			<div class="it">
+				<a href="#Установка заданной прозрачности у элемента" target="_top">.fadeTo()</a>
+				<span class="tx">Плавно изменяет прозрачность элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Поочередное появление и скрытие элементов" target="_top">.fadeToggle()</a>
+				<span class="tx">Поочередно скрывает/показывает элементы на странице, как это делают .fadeIn() и .fadeOut().</span>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="manipulation" class="itArea">
+		<h2>Манипуляции</h2>
+		<div class="col">
+			<h4>Атрибуты</h4>
+			<div class="it">
+				<a href="#Работа с атрибутами" target="_top">.attr()</a>
+				<span class="tx">Позволяет получать и изменять значение атрибутов у элементов страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Работа со свойствами" target="_top">.prop()</a>
+				<span class="tx">Возвращает или изменяет значение свойств у выбранных элементов страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление атрибута" target="_top">.removeAttr()</a>
+				<span class="tx">Удаляет атрибуты у выбранных элементов страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление свойства" target="_top">.removeProp()</a>
+				<span class="tx">Удаляет свойства у выбранных элементах страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление класса" target="_top">.addClass()</a>
+				<span class="tx">Добавляет класс(ы) выбранным элементам страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление класса" target="_top">.removeClass()</a>
+				<span class="tx">Удаляет классы у выбранных элементов страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Варьировние наличия класса" target="_top">.toggleClass()</a>
+				<span class="tx">Изменяет наличие класса у выбранных элементов страницы на противоположное (добавляет/удаляет)</span>
+			</div>
+			<div class="it">
+				<a href="#Наличие класса" target="_top">.hasClass()</a>
+				<span class="tx">Проверяет наличие заданного класса хотя бы у одного из выбранных элементов</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с атрибутом value" target="_top">.val()</a>
+				<span class="tx">Позволяет получать и изменять значение атрибута <i>value</i> у элементов страницы</span>
+			</div>
+			<h4>Стили и параметры</h4>
+			<div class="it">
+				<a href="#Работа с CSS" target="_top">.css()</a>
+				<span class="tx">Позволяет получать и изменять css-значения у элементов страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с высотой элемента" target="_top">.height()</a>
+				<br>
+				<span class="tx">Позволяет получать и изменять значения высоты элемента (без учета отступов и толщины рамки)</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с высотой элемента" target="_top">.outerHeight()</a>
+				<br>
+				<span class="tx">Позволяет получить значения высоты элемента (с учетом внутренних отступов, рамки (border-width) и при необходимости внешних отступов (margin))</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с высотой элемента" target="_top">.innerHeight()</a>
+				<br>
+				<span class="tx">Позволяет получить значения высоты элемента (с учетом размера внутренних отступов (padding))</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с шириной элемента" target="_top">.width()</a>
+				<br>
+				<span class="tx">Позволяет получать и изменять значения ширины элемента (без учета отступов и толщины рамки)</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с шириной элемента" target="_top">.outerWidth()</a>
+				<br>
+				<span class="tx">Позволяет получить значения ширины элемента (с учетом внутренних отступов, рамки (border-width) и при необходимости внешних отступов (margin))</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с шириной элемента" target="_top">.innerWidth()</a>
+				<br>
+				<span class="tx">Позволяет получить значения ширины элемента (с учетом размера внутренних отступов (padding))</span>
+			</div>
+			<div class="it">
+				<a href="#Позиция элемента" target="_top">.offset()</a>
+				<span class="tx">Позволяет получать и изменять позицию элемента, относительно начала страницы</span>
+			</div>
+			<div class="it">
+				<a href="#Позиция элемента" target="_top">.position()</a>
+				<span class="tx">Позволяет получать и изменять позицию элемента, относительно ближайшего родственника</span>
+			</div>
+			<div class="it">
+				<a href="#Спозиционированные родительские элементы" target="_top">.offsetParent()</a>
+				<span class="tx">Возвращает ближайшего предка c позиционированием, отличным от static (позиционирование по умолчанию)</span>
+			</div>
+			<div class="it">
+				<a href="#Работа со скроллингом элементов" target="_top">.scrollTop()</a>
+				<span class="tx">Позволяет получать и изменять значения вертикальной прокрутки элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Работа со скроллингом элементов" target="_top">.scrollLeft()</a>
+				<span class="tx">Позволяет получать и изменять значения горизонтальной прокрутки элементов на странице</span>
+			</div>
+			<h4>Клонирование элементов</h4>
+			<div class="it">
+				<a href="#Клонирование элементов" target="_top">.clone()</a>
+				<span class="tx">Делает копию выбранных элементов страницы..</span>
+			</div>
+		</div>
+		<div class="col">
+			<h4>Замена элементов</h4>
+			<div class="it">
+				<a href="#Замена элементов" target="_top">.replaceWith()</a>
+				<span class="tx">Заменяет одни элементы страницы на другие (новые или уже существующие).</span>
+			</div>
+			<div class="it">
+				<a href="#Замена элементов" target="_top">.replaceAll()</a>
+				<span class="tx">Заменяет одни элементы страницы на другие (новые или уже существующие).</span>
+			</div>
+			<h4>Добавление содержимого</h4>
+			<div class="it">
+				<a href="#Работа с html-содержимым элемента" target="_top">.html()</a>
+				<span class="tx">Позволяет получать и изменять html-содержимое выбранных элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Работа с текстовым содержимым элемента" target="_top">.text()</a>
+				<span class="tx">Позволяет получать и изменять текст внутри выбранных элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого в конец элементов" target="_top">.append()</a>
+				<span class="tx">Добавляет заданное содержимое в конец элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого в конец элементов" target="_top">.appendTo()</a>
+				<span class="tx">Добавляет заданное содержимое в конец элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого в начало элементов" target="_top">.prepend()</a>
+				<span class="tx">Добавляет заданное содержимое в начало элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого в начало элементов" target="_top">.prependTo()</a>
+				<span class="tx">Добавляет заданное содержимое в начало элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого после элементов" target="_top">.after()</a>
+				<span class="tx">Добавляет заданное содержимое после выбранных элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого после элементов" target="_top">.insertAfter()</a>
+				<span class="tx">Добавляет заданное содержимое после выбранных элементов на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого перед элементами" target="_top">.before()</a>
+				<span class="tx">Добавляет заданное содержимое перед выбранными элементами на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Добавление содержимого перед элементами" target="_top">.insertBefore()</a>
+				<span class="tx">Добавляет заданное содержимое перед выбранными элементами на странице</span>
+			</div>
+			<div class="it">
+				<a href="#Обертывание элементов страницы" target="_top">.wrap()</a>
+				<span class="tx">Окружает элементы на странице заданными html-элементами</span>
+			</div>
+			<div class="it">
+				<a href="#Обертывание элементов страницы" target="_top">.wrapAll()</a>
+				<span class="tx">Окружает элементы на странице заданными html-элементами</span>
+			</div>
+			<div class="it">
+				<a href="#Обертывание содержимого элементов страницы" target="_top">.wrapInner()</a>
+				<span class="tx">Окружает содержимое выбранных элементов заданными html-элементами</span>
+			</div>
+			<h4>Удаление содержимого</h4>
+			<div class="it">
+				<a href="#Удаление объектов" target="_top">.remove()</a>
+				<span class="tx">Удаляет выбранные элементы на странице.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление объектов" target="_top">.detach()</a>
+				<span class="tx">Удаляет выбранные элементы на странице. Удаленные элементы могут быть восстановлены.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление содержимого у выбранных объектов" target="_top">.empty()</a>
+				<span class="tx">Удаляет содержимое элементов на странице.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление родительских объектов" target="_top">.unwrap()</a>
+				<span class="tx">Удаляет родительские элементы, при этом их содержимое остается на месте.</span>
+			</div>
+		</div>
+	</div>
+	<div id="iajax" class="itArea">
+		<h2>Ajax</h2>
+		<div class="col">
+			<h4>Запросы к серверу</h4>
+			<div class="it">
+				<a href="#Ajax запрос методом GET" target="_top">$.get()</a>
+				<span class="tx">Производит запрос к серверу методом GET.</span>
+			</div>
+			<div class="it">
+				<a href="#Ajax запрос методом POST" target="_top">$.post()</a>
+				<span class="tx">Производит запрос к серверу методом POST.</span>
+			</div>
+			<div class="it">
+				<a href="#Ajax запрос HTML-данных" target="_top">.load()</a>
+				<span class="tx">Производит запрос HTML-данных у сервера и помещает их в выбранные элементы страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Ajax запрос JSON-данных" target="_top">$.getJSON()</a>
+				<span class="tx">Производит запрос JSON-данных у сервера методом GET</span>
+			</div>
+			<div class="it">
+				<a href="#Ajax запрос js файла" target="_top">$.getScript()</a>
+				<span class="tx">Производит запрос файла javascript методом GET, а затем выполняет код из полученного файла.</span>
+			</div>
+			<h4>Низкоуровневые запросы</h4>
+			<div class="it">
+				<a href="#Ajax-запрос" target="_top">$.ajax()</a>
+				<span class="tx">Производит асинхронный ajax-запрос с установленными параметрами.</span>
+			</div>
+			<div class="it">
+				<a href="#Параметры ajax-запроса" target="_top">$.ajaxSetup()</a>
+				<span class="tx">Устанавливает параметры для ajax-запроса, которые будут использоваться по умолчанию.</span>
+			</div>
+			<h4>Ajax-события</h4>
+			<div class="it">
+				<a href="#Обработка отправления ajax-запроса" target="_top">.ajaxSend()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана при отправке ajax-запроса.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка завершения ajax-запроса" target="_top">.ajaxComplete()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана при завершении ajax-запроса.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка удачного завершения ajax-запроса" target="_top">.ajaxSuccess()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана при удачном завершении ajax-запроса.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка неудачного завершения ajax-запроса" target="_top">.ajaxError()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана при неудачном завершении ajax-запроса.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка первого ajax-запроса" target="_top">.ajaxStart()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана перед выполнением первого ajax-запроса.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка завершения всех ajax-запросов" target="_top">.ajaxStop()</a>
+				<span class="tx">Устанавливает пользовательскую функцию, которая будет вызвана после выполнения всех запущенных ajax-запросов.</span>
+			</div>
+			<h4>Вспомогательные функции</h4>
+			<div class="it">
+				<a href="#Преобразование объектов для использования в url" target="_top">$.param()</a>
+				<span class="tx">Преобразует массив объектов в строку, пригодную для использования в URL.</span>
+			</div>
+			<div class="it">
+				<a href="#Преобразование данных формы в строку" target="_top">.serialize()</a>
+				<span class="tx">Преобразует данные формы в строку, пригодную для использования в URL.</span>
+			</div>
+			<div class="it">
+				<a href="#Преобразование данных формы в массив" target="_top">.serializeArray()</a>
+				<span class="tx">Преобразует данные формы в массив объектов вида <tt>{name:"name", value:"val"}</tt></span>
+			</div>
+		</div>
+	</div>
+	<div id="callbacks" class="itArea">
+		<h2>Коллбэки</h2>
+		<div class="col">
+			<h4>Объекты Deferred</h4>
+			<div class="it">
+				<a href="#Объект deferred" target="_top">deferred</a>
+				<span class="tx">Объект, который хранит состояние выполнения пользовательских задач, а так же помогает отслеживать изменения этого состояния с помощью обработчиков.</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка выполнения deferred" target="_top">.done()</a>
+				<span class="tx">Устанавливает обработчик перехода объекта deferred в состояние "удачно выполнено".</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка выполнения deferred" target="_top">.fail()</a>
+				<span class="tx">Устанавливает обработчик перехода объекта deferred в состояние "ошибка выполнения".</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка выполнения deferred" target="_top">.then()</a>
+				<span class="tx">Устанавливает два обработчика смены состояния объекта deferred. Один будет реагировать на переход в "удачно выполнено", а второй в "ошибка выполнения".</span>
+			</div>
+			<div class="it">
+				<a href="#Обработка выполнения deferred" target="_top">.always()</a>
+				<span class="tx">Устанавливает один (общий) обработчик, реагирующий на переход объекта deferred в любое из двух состояний ("удачно выполнено" и "ошибка выполнения").</span>
+			</div>
+			<div class="it">
+				<a href="#Progress" target="_top">.progress()</a>
+				<span class="tx">установливает обработчики прогресса выполнения объекта deferred.</span>
+			</div>
+			<div class="it">
+				<a href="#Выполнение deferred" target="_top">.resolve()</a>
+				<span class="tx">Изменяет состояние объекта deferred на "удачно выполнено".</span>
+			</div>
+			<div class="it">
+				<a href="#Параметризованное выполнение deferred" target="_top">.resolveWith()</a>
+				<span class="tx">Изменяет состояние объекта deferred на "ошибка выполнения", с указанием контекста выполнения.</span>
+			</div>
+			<div class="it">
+				<a href="#Выполнение deferred" target="_top">.reject()</a>
+				<span class="tx">Изменяет состояние объекта deferred на "ошибка выполнения".</span>
+			</div>
+			<div class="it">
+				<a href="#Параметризованное выполнение deferred" target="_top">.rejectWith()</a>
+				<span class="tx">Изменяет состояние объекта deferred на "ошибка выполнения", с указанием контекста выполнения.</span>
+			</div>
+			<div class="it">
+				<a href="#Notify" target="_top">.notify()</a>
+				<span class="tx">Вызывает событие промежуточного выполнения deferred (прогресса выполнения).</span>
+			</div>
+			<div class="it">
+				<a href="#Deferred.notifyWith" target="_top">.notifyWith()</a>
+				<span class="tx">Вызывает событие промежуточного выполнения deferred (прогресса выполнения). При этом, есть возможность задать контекст выполнения в обработчике.</span>
+			</div>
+			<div class="it">
+				<a href="#Проверка состояний deferred" target="_top">.isResolved()</a>
+				<span class="tx">Проверяет находится ли объект deferred в состоянии удачного выполнения.</span>
+			</div>
+			<div class="it">
+				<a href="#Проверка состояний deferred" target="_top">.isRejected()</a>
+				<span class="tx">Проверяет находится ли объект deferred в состоянии ошибки выполнения.</span>
+			</div>
+			<div class="it">
+				<a href="#Deferred.state" target="_top">.state()</a>
+				<span class="tx">Возвращает текущее состояние объекта deffered в виде строки..</span>
+			</div>
+			<div class="it">
+				<a href="#Заместитель deferred" target="_top">.promise()</a>
+				<span class="tx">Создает promise-версию (заместителя) объекта deferred.</span>
+			</div>
+			<div class="it">
+				<a href="#Фильтрация параметров deferred-обработчиков" target="_top">.pipe()</a>
+				<span class="tx">Позволяет проводить предварительную обработку параметров, которые будут передаваться в обработчики смены состояния объекта deffered.</span>
+			</div>
+			<h4>Объекты Callbacks</h4>
+			<div class="it">
+				<a href="#Объект callbacks" target="_top">callbacks</a>
+				<span class="tx">Возвращяет DOM-элементы, хранящиеся в объекте jQuery.</span>
+			</div>
+			<div class="it">
+				<a href="#callbacks.add" target="_top">.add()</a>
+				<span class="tx">Добавляет заданную функцию/функции в список функций callbacks-объекта.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.disable" target="_top">.disable()</a>
+				<span class="tx">Блокирует текущий объект callbacks, отключая возможность выполнений его списка функций.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.empty" target="_top">.empty()</a>
+				<span class="tx">Очищает список функций в текущем объекте callbacks.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.fire" target="_top">.fire()</a>
+				<span class="tx">Выполняет все функции из списка функций callbacks-объекта.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.fireWith" target="_top">.fireWith()</a>
+				<span class="tx">Выполняет все функции из списка функций callbacks-объекта. При этом, в первом аргументе метода задается значение, которое будет доступно в переменной this, внутри всех вызываемых функций.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.fired" target="_top">.fired()</a>
+				<span class="tx">Проверяет, выполнялся ли текущий объект callbacks хотя бы один раз.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.has" target="_top">.has()</a>
+				<span class="tx">Проверяет наличие заданной функции в списке функций текущего объекта callbacks.</span>
+			</div>
+			<div class="it">
+				<a href="#Callbacks.remove" target="_top">.remove()</a>
+				<span class="tx">Удаляет заданную функцию/функции из списка функций текущего объекта callbacks.</span>
+			</div>
+		</div>
+	</div>
+	<div id="icore" class="itArea">
+		<h2>Остальное</h2>
+		<div class="col">
+			<h4>Функции ядра</h4>
+			<div class="it">
+				<a href="#Функция jQuery" target="_top">jQuery() или $()</a>
+				<span class="tx">Создает объект jQuery, который содержит список выбранных элементов и имеет массу методов, для работы с этими элементами.</span>
+			</div>
+			<div class="it">
+				<a href="#Предупреждение конфликтов" target="_top">$.noConflict()</a>
+				<span class="tx">Освобождает переменную $, чтобы избежать конфликтов имен.</span>
+			</div>
+			<div class="it">
+				<a href="#Копия jQuery" target="_top">$.sub()</a>
+				<span class="tx">Создает копию глобального объекта jQuery, давая возможность изменять методы и параметры созданной копии, не затрагивая оригинал.</span>
+			</div>
+			<div class="it">
+				<a href="#Групповой deferred" target="_top">$.when()</a>
+				<span class="tx">На основе нескольких заданных объектов (обычно deferred), функция $.when() создает новый deferred-объект, следящий за состоянием всех заданных.</span>
+			</div>
+			<h4>Работа с данными</h4>
+			<div class="it">
+				<a href="#Сохранение данных" target="_top">.data()</a>
+				<span class="tx">Устанавливает/возвращяет пользовательские переменные выбранным элементам страницы.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление данных" target="_top">.removeData()</a>
+				<span class="tx">Удаляет пользовательские переменные у выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Наличие данных" target="_top">$.hasData()</a>
+				<span class="tx">Проверяет, закреплены ли данные за указанным элементом страницы.</span>
+			</div>
+			<h4>Свойства</h4>
+			<div class="it">
+				<a href="#Тип браузера" target="_top">$.browser</a>
+				<span class="tx">Информация об используемом браузере (перед использованием этого свойства попробуйте найти интересующую вас особенность в свойстве support, эта информация будет более надежна).</span>
+			</div>
+			<div class="it">
+				<a href="#Особенности используемого браузера" target="_top">$.support</a>
+				<span class="tx">Особенности используемого браузера.</span>
+			</div>
+			<div class="it">
+				<a href="#Отмена выполнения всех анимаций" target="_top">$.fx.off</a>
+				<span class="tx">Отменяет выполнение всех анимаций.</span>
+			</div>
+			<div class="it">
+				<a href="#Длительность кадра анимаций" target="_top">$.fx.interval</a>
+				<span class="tx">Размер задержки между соседними кадрами анимации.</span>
+			</div>
+			<div class="it">
+				<a href="#Контекст выполнения" target="_top">.context</a>
+				<span class="tx">Контекст, заданный в методе <tt>$()</tt> (<tt>jQuery()</tt>).</span>
+			</div>
+			<div class="it">
+				<a href="#Число элементов в наборе" target="_top">.length</a>
+				<span class="tx">Число выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Текущий селектор" target="_top">.selector</a>
+				<span class="tx">Селектор, заданный в методе <tt>$()</tt> (<tt>jQuery()</tt>).</span>
+			</div>
+			<h4>Элементы набора</h4>
+			<div class="it">
+				<a href="#Элементы объекта jQuery" target="_top">.get()</a>
+				<span class="tx">Возвращяет DOM-элементы, хранящиеся в объекте jQuery.</span>
+			</div>
+			<div class="it">
+				<a href="#Конвертирование jQuery в массив" target="_top">.toArray()</a>
+				<span class="tx">Возвращяет все DOM-элементы, хранящиеся в объекте jQuery, в виде массива.</span>
+			</div>
+			<div class="it">
+				<a href="#Индекс элемента в наборе" target="_top">.index()</a>
+				<span class="tx">Возвращяет индекс заданного элемента в наборе.</span>
+			</div>
+			<div class="it">
+				<a href="#Размер набора" target="_top">.size()</a>
+				<span class="tx">Возвращяет количество выбранных элементов.</span>
+			</div>
+		</div>
+		<div class="col">
+			<h4>Утилиты</h4>
+			<div class="it">
+				<a href="#Наличие объекта" target="_top">$.contains()</a>
+				<span class="tx">Проверяет, содержится ли один элемент страницы внутри другого.</span>
+			</div>
+			<div class="it">
+				<a href="#Объединение объектов" target="_top">$.extend()</a>
+				<span class="tx">Объединяет содержимое двух или более заданных javascript-объектов. Результат объединения записывается в первый из этих объектов (он же будет возвращен в качестве результата выполнения функции).</span>
+			</div>
+			<div class="it">
+				<a href="#Глобальное выполнение скрипта" target="_top">$.globalEval()</a>
+				<span class="tx">Выполняет заданный скрипт в глобальной области видимости. Отличие от стандартного javascript-метода <tt>eval()</tt> заключается в глобальной области выполнения, что является важным нюансом, например, когда нужно выполнить динамически подгруженную библиотеку.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элементов массива" target="_top">$.grep()</a>
+				<span class="tx">Ищет в заданном массиве элементы, удовлетворяющие условиям фильтрующей функции. Возвращает массив с найденными элементами.</span>
+			</div>
+			<div class="it">
+				<a href="#Поиск элемента в массиве" target="_top">$.inArray()</a>
+				<span class="tx">Ищет заданный элемент в массиве. Возвращает индекс этого элемента или -1 в случае его отсутствия.</span>
+			</div>
+			<div class="it">
+				<a href="#Является ли элемент массивом" target="_top">$.isArray()</a>
+				<span class="tx">Проверяет, является ли заданный элемент массивом.</span>
+			</div>
+			<div class="it">
+				<a href="#Пуст ли объект" target="_top">$.isEmptyObject()</a>
+				<span class="tx">Проверяет, является ли заданный объект пустым.</span>
+			</div>
+			<div class="it">
+				<a href="#Является ли элемент функцией" target="_top">$.isFunction()</a>
+				<span class="tx">Проверяет, является ли заданный элемент функцией.</span>
+			</div>
+			<div class="it">
+				<a href="#Является ли элемент пользовательским объектом" target="_top">$.isPlainObject()</a>
+				<span class="tx">Проверяет, является ли заданный элемент пользовательским объектом, то есть он был задан пользователем именно в роли объекта (посредством "{}" или "new Object")(дело в том, что многие величины (например строки) в javascript являются объектами, однако они не задаются объектами явным образом).</span>
+			</div>
+			<div class="it">
+				<a href="#Является ли элемент объектом window" target="_top">$.isWindow()</a>
+				<span class="tx">Проверяет, является ли заданный элемент объектом типа window (объекты фреймов тоже принадлежат к этому типу).</span>
+			</div>
+			<div class="it">
+				<a href="#Является ли DOM-объект частью XML" target="_top">$.isXMLDoc()</a>
+				<span class="tx">Проверяет, находится ли DOM-объект внутри XML-документа (или сам является XML-документом).</span>
+			</div>
+			<div class="it">
+				<a href="#Конвертация объекта в массив" target="_top">$.makeArray()</a>
+				<span class="tx">Конвертирует массивоподобные объекты, в массивы.</span>
+			</div>
+			<div class="it">
+				<a href="#Объединение массивов" target="_top">$.merge()</a>
+				<span class="tx">Объединяет содержимое двух массивов. Результат объединения записывается в первый из этих массивов (он же будет возвращен в качестве результата выполнения функции). </span>
+			</div>
+			<div class="it">
+				<a href="#Пустая функция" target="_top">$.noop()</a>
+				<span class="tx">Пустая функция (т. е. которая ничего не делает).</span>
+			</div>
+			<div class="it">
+				<a href="#Парсинг json-данных" target="_top">$.parseJSON()</a>
+				<span class="tx">Конвертирует строку с json-данными в javascript-объект.</span>
+			</div>
+			<div class="it">
+				<a href="#Парсинг xml-строки" target="_top">$.parseXML()</a>
+				<span class="tx">Конвертирует строку с xml-данными в xml-документ.</span>
+			</div>
+			<div class="it">
+				<a href="#Удаление крайних пробелов" target="_top">$.trim()</a>
+				<span class="tx">Удаляет символы пробелов, табов и переносов строк из начала и конца строки.</span>
+			</div>
+			<div class="it">
+				<a href="#Определение класса элемента" target="_top">$.type()</a>
+				<span class="tx">Определяет класс заданного элемента (речь идет о внутренних классах javascript: string, boolean и т.д.).</span>
+			</div>
+			<div class="it">
+				<a href="#Упорядочивание DOM-элементов в массиве" target="_top">$.unique()</a>
+				<span class="tx">Сортирует массив с DOM-элементами, выстраивая их в порядке расположения в DOM, а так же удаляя повторения.</span>
+			</div>
+		</div>
+	</div>
+	<div id="jqueryui" class="itArea">
+		<h2>jQuery UI</h2>
+		<div class="col">
+			<h4>Плагины поведения</h4>
+			<div class="it">
+				<a href="#Перетаскиваемые элементы" target="_top">Draggable</a>
+				<span class="tx">Позволяет сделать элементы страницы перемещаемыми с помощью мыши.</span>
+			</div>
+			<div class="it">
+				<a href="#Ловящие элементы" target="_top">Droppable</a>
+				<span class="tx">Позволяет обрабатывать сброс перетаскиваемых (draggable) элементов в области выбранных элементов.</span>
+			</div>
+			<div class="it">
+				<a href="#Растягиваемые элементы" target="_top">Resizable</a>
+				<span class="tx">Позволяет сделать элементы страницы перемещаемыми с помощью мыши.</span>
+			</div>
+			<div class="it">
+				<a href="#Выбираемые элементы" target="_top">Selectable</a>
+				<span class="tx">Позволяет делать элементы страницы выделяемыми, подобно ярлыкам рабочего стола.</span>
+			</div>
+			<div class="it">
+				<a href="#Группируемые элементы" target="_top">Sortable</a>
+				<span class="tx">Позволяет сделать элементы страницы перемещаемыми с помощью мыши.</span>
+			</div>
+			<h4>Виджеты</h4>
+			<div class="it">
+				<a href="#Аккордеон" target="_top">Аккордеон</a>
+				<span class="tx">Позволяет превратить выбранные элементы страницы в виджеты, которые обычно называют аккордеонами. Они помогают разделить информацию на несколько блоков, обеспечивая легкий доступ к каждому из них и экономить место на странице.</span>
+			</div>
+			<div class="it">
+				<a href="#Вкладки UI" target="_top">Вкладки</a>
+				<span class="tx">Позволяет превратить выбранный элемент в систему вкладок, что помогает разделить информацию на несколько блоков, обеспечивая легкий доступ к каждому из них и экономить место на странице.</span>
+			</div>
+			<div class="it">
+				<a href="#Календарь UI" target="_top">Календарь</a>
+				<span class="tx">Позволяет добавить на ваши страницы календарь, который может быть использован для выбора и отображения дат.</span>
+			</div>
+			<div class="it">
+				<a href="#Диалоговое окно UI" target="_top">Диалоговое окно</a>
+				<span class="tx">Позволяет превращать блочные элементы (обычно div'ы) в всплывающие в центре экрана диалоговые окна.</span>
+			</div>
+			<div class="it">
+				<a href="#Автозаполнение" target="_top">Автозаполнение</a>
+				<span class="tx">Помогает пользователю заполнять текстовые поля, предлагая подходящие варианты по первым набранным им символам.</span>
+			</div>
+			<div class="it">
+				<a href="#Кнопки UI" target="_top">Кнопки</a>
+				<span class="tx">Позволяет стилизовать кнопоки на странице (элементы &lt;input&gt; с типами reset или submit, а так же элементы &lt;button&gt;). Кроме этого, с помощью этого плагина, можно превратить в кнопки элементы &lt;a href="#"&gt; (якори), флажки и переключатели (элементы &lt;input&gt; с типами checkbox и radio).</span>
+			</div>
+			<div class="it">
+				<a href="#Ползунок UI" target="_top">Ползунок</a>
+				<span class="tx">Позволяет превращать блочные элементы (обычно div'ы) в элементы управления, которые обычно называют ползунками.</span>
+			</div>
+			<div class="it">
+				<a href="#Индикатор выполнения UI" target="_top">Индикатор выполнения</a>
+				<span class="tx">Позволяет превращать блочные элементы (обычно div'ы) в индикаторы выполнения, которые отображают прогресс выполнения какой-либо задачи.</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+	<!-- jQuery -->
+	<script src="../theme/bower/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap JavaScript -->
+	<script src="../theme/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Подсветка синтаксиса кода -->
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<!-- copyToClipboard -->
+	<script src="../theme/copyToClipboard/js.js" type="text/javascript"></script>
+	<!--  -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+$("#someId").css("color","red");
+
+		});
+	</script>
+</body>
+</html>

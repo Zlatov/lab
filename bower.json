@@ -10,6 +10,8 @@
   "dependencies": {
     "jquery": "^2.2.4",
     "semantic": "semantic-ui#^2.2.7",
-    "jstree": "^3.3.4"
+    "jstree": "^3.3.4",
+    "bootstrap": "3.3.7",
+    "font-awesome": "^4.7.0"
   }
 }
