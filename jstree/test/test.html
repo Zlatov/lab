@@ -20,9 +20,191 @@
 		</div>
 		<script type="text/javascript" src="/theme/bower/jquery/dist/jquery.js"></script>
 		<script type="text/javascript" src="/theme/bower/semantic/dist/semantic.min.js"></script>
-		<script type="text/javascript" src="/theme/bower/jstree/dist/jstree.min.js"></script>
+		<script type="text/javascript" src="/theme/bower/jstree/dist/jstree.js"></script>
+		<script type="text/javascript">
+			// $.jstree
+			// console.log('$.jstree: ', $.jstree)
+			$.jstree.core.prototype.move_node = function (obj, par, pos, callback, is_loaded, skip_redraw, origin) {
+			skip_redraw = true
+			// console.log('obj: ', obj)
+			var t1, t2, old_par, old_pos, new_par, old_ins, is_multi, dpc, tmp, i, j, k, l, p;
+
+			par = this.get_node(par);
+			pos = pos === undefined ? 0 : pos;
+			if(!par) { return false; }
+			if(!pos.toString().match(/^(before|after)$/) && !is_loaded && !this.is_loaded(par)) {
+				return this.load_node(par, function () { this.move_node(obj, par, pos, callback, true, false, origin); });
+			}
+
+			if($.isArray(obj)) {
+				if(obj.length === 1) {
+					obj = obj[0];
+				}
+				else {
+					//obj = obj.slice();
+					// console.log('par: ', par)
+					this.close_node(par.id);
+					var d_par_id = par.id
+					for(t1 = 0, t2 = obj.length; t1 < t2; t1++) {
+						console.log('obj[t1]: ', obj[t1])
+						// console.log('pos: ', pos)
+						if((tmp = this.move_node(obj[t1], par, pos, callback, is_loaded, false, origin))) {
+							par = tmp;
+							pos = "after";
+						}
+					}
+					this.open_node(d_par_id);
+					// this.redraw();
+					this.redraw_node(d_par_id);
+					return true;
+				}
+			}
+			obj = obj && obj.id ? obj : this.get_node(obj);
+
+			if(!obj || obj.id === $.jstree.root) { return false; }
+
+			old_par = (obj.parent || $.jstree.root).toString();
+			new_par = (!pos.toString().match(/^(before|after)$/) || par.id === $.jstree.root) ? par : this.get_node(par.parent);
+			old_ins = origin ? origin : (this._model.data[obj.id] ? this : $.jstree.reference(obj.id));
+			is_multi = !old_ins || !old_ins._id || (this._id !== old_ins._id);
+			old_pos = old_ins && old_ins._id && old_par && old_ins._model.data[old_par] && old_ins._model.data[old_par].children ? $.inArray(obj.id, old_ins._model.data[old_par].children) : -1;
+			if(old_ins && old_ins._id) {
+				obj = old_ins._model.data[obj.id];
+			}
+
+			if(is_multi) {
+				if((tmp = this.copy_node(obj, par, pos, callback, is_loaded, false, origin))) {
+					if(old_ins) { old_ins.delete_node(obj); }
+					return tmp;
+				}
+				return false;
+			}
+			//var m = this._model.data;
+			if(par.id === $.jstree.root) {
+				if(pos === "before") { pos = "first"; }
+				if(pos === "after") { pos = "last"; }
+			}
+			switch(pos) {
+				case "before":
+					pos = $.inArray(par.id, new_par.children);
+					break;
+				case "after" :
+					pos = $.inArray(par.id, new_par.children) + 1;
+					break;
+				case "inside":
+				case "first":
+					pos = 0;
+					break;
+				case "last":
+					pos = new_par.children.length;
+					break;
+				default:
+					if(!pos) { pos = 0; }
+					break;
+			}
+			if(pos > new_par.children.length) { pos = new_par.children.length; }
+			if(!this.check("move_node", obj, new_par, pos, { 'core' : true, 'origin' : origin, 'is_multi' : (old_ins && old_ins._id && old_ins._id !== this._id), 'is_foreign' : (!old_ins || !old_ins._id) })) {
+				this.settings.core.error.call(this, this._data.core.last_error);
+				return false;
+			}
+			if(obj.parent === new_par.id) {
+				dpc = new_par.children.concat();
+				tmp = $.inArray(obj.id, dpc);
+				if(tmp !== -1) {
+					dpc = $.vakata.array_remove(dpc, tmp);
+					if(pos > tmp) { pos--; }
+				}
+				tmp = [];
+				for(i = 0, j = dpc.length; i < j; i++) {
+					tmp[i >= pos ? i+1 : i] = dpc[i];
+				}
+				tmp[pos] = obj.id;
+				new_par.children = tmp;
+				this._node_changed(new_par.id);
+				this.redraw(new_par.id === $.jstree.root);
+			}
+			else {
+				// clean old parent and up
+				tmp = obj.children_d.concat();
+				tmp.push(obj.id);
+				for(i = 0, j = obj.parents.length; i < j; i++) {
+					dpc = [];
+					p = old_ins._model.data[obj.parents[i]].children_d;
+					for(k = 0, l = p.length; k < l; k++) {
+						if($.inArray(p[k], tmp) === -1) {
+							dpc.push(p[k]);
+						}
+					}
+					old_ins._model.data[obj.parents[i]].children_d = dpc;
+				}
+				old_ins._model.data[old_par].children = $.vakata.array_remove_item(old_ins._model.data[old_par].children, obj.id);
+
+				// insert into new parent and up
+				for(i = 0, j = new_par.parents.length; i < j; i++) {
+					this._model.data[new_par.parents[i]].children_d = this._model.data[new_par.parents[i]].children_d.concat(tmp);
+				}
+				dpc = [];
+				for(i = 0, j = new_par.children.length; i < j; i++) {
+					dpc[i >= pos ? i+1 : i] = new_par.children[i];
+				}
+				dpc[pos] = obj.id;
+				new_par.children = dpc;
+				new_par.children_d.push(obj.id);
+				new_par.children_d = new_par.children_d.concat(obj.children_d);
+
+				// update object
+				obj.parent = new_par.id;
+				tmp = new_par.parents.concat();
+				tmp.unshift(new_par.id);
+				p = obj.parents.length;
+				obj.parents = tmp;
+
+				// update object children
+				tmp = tmp.concat();
+				for(i = 0, j = obj.children_d.length; i < j; i++) {
+					this._model.data[obj.children_d[i]].parents = this._model.data[obj.children_d[i]].parents.slice(0,p*-1);
+					Array.prototype.push.apply(this._model.data[obj.children_d[i]].parents, tmp);
+				}
+
+				if(old_par === $.jstree.root || new_par.id === $.jstree.root) {
+					this._model.force_full_redraw = true;
+				}
+				if(!this._model.force_full_redraw) {
+					this._node_changed(old_par);
+					this._node_changed(new_par.id);
+				}
+				if(!skip_redraw) {
+					this.redraw();
+				}
+			}
+			if(callback) { callback.call(this, obj, new_par, pos); }
+			/**
+			 * triggered when a node is moved
+			 * @event
+			 * @name move_node.jstree
+			 * @param {Object} node
+			 * @param {String} parent the parent's ID
+			 * @param {Number} position the position of the node among the parent's children
+			 * @param {String} old_parent the old parent of the node
+			 * @param {Number} old_position the old position of the node
+			 * @param {Boolean} is_multi do the node and new parent belong to different instances
+			 * @param {jsTree} old_instance the instance the node came from
+			 * @param {jsTree} new_instance the instance of the new parent
+			 */
+			this.trigger('move_node', { "node" : obj, "parent" : new_par.id, "position" : pos, "old_parent" : old_par, "old_position" : old_pos, 'is_multi' : (old_ins && old_ins._id && old_ins._id !== this._id), 'is_foreign' : (!old_ins || !old_ins._id), 'old_instance' : old_ins, 'new_instance' : this });
+			return obj.id;
+		}
+		</script>
 		<script type="text/javascript" src="/js/lib.js"></script>
 		<script type="text/javascript" src="config.js"></script>
 		<script type="text/javascript" src="test.js"></script>
 	</body>
 </html>
+<!--
+$('#struct_right').jstree(true).get_selected();
+
+$('#struct_left').jstree(true).open_node('000064000');$('#struct_left').jstree(true).open_node('000060901');$('#struct_right').jstree(true).open_node('000064000');$('#struct_right').jstree(true).open_node('000090510');$('#struct_right').jstree(true).select_node(["000090532","000090533","000090534","000090540","000090536","000090535","000090538","000090537","000090539","000090521","000090522","000090542","000090523","000090524","000090525","000090526","000090527","000090528","000090529","000090530","000090531","000090502","000090503","000090504","000090505","000090501","000090506","000090508","000090507","000090509","000090513","000090514","000090515","j1_2953","j1_2954","j1_2955","j1_2956","j1_2957","j1_2958","j1_2959","j1_2960","j1_2961","j1_2962","j1_2963","j1_2964","j1_2965","j1_2966","j1_2967","j1_2968","j1_2969","j1_2970","j1_2971","j1_2972","j1_2973","j1_2974","j1_2975","j1_2976","j1_2977","j1_2978","j1_2979","j1_2980","j1_2981","j1_2982","j1_2983","j1_2984","j1_2985","j1_2986","j1_2987","j1_2988","j1_2989","j1_2990","j1_2991","j1_2992","j1_2993","j1_2994","j1_2995","j1_2996","j1_2997","j1_2998","j1_2999","j1_3000","j1_3001","j1_3002","j1_3003","j1_3004","j1_3005","j1_3006","j1_3007","j1_3008","j1_3009","j1_3010","j1_3011","j1_3012","j1_3013","j1_3014","j2_3191","j2_3192","j2_3193","j2_3194","j2_3195","j2_3196","j2_3197","j2_3198","j2_3199","j2_3200","j2_3201","j2_3202","j2_3203","j2_3204","j2_3205","j2_3206","j2_3207","j2_3208","j2_3209","j2_3210","j2_3211","j2_3212","j2_3213","j2_3214","j2_3215","j2_3216","j2_3217","j2_3218","j2_3219","j2_3220","j2_3221","j2_3222","j2_3223","j2_3224","j2_3225","j2_3226","j2_3227","j2_3228","j2_3229","j2_3230","j2_3231","j2_3232","j2_3233","j2_3234","j2_3235","j2_3236","j2_3237","j2_3238","j2_3239","j2_3240","j2_3241","j2_3242","j2_3243","j2_3244","j2_3245","j2_3246","j2_3247","j2_3248","j2_3249","j2_3250","j2_3251","j2_3252","j2_3253","j2_3254","j2_3255","j2_3256","j2_3257","j2_3258","j2_3259","j2_3260","j2_3261","j1_3015"]);
+
+-->
+
+

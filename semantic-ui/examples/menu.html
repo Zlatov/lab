@@ -2,44 +2,145 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>HTML5 - Привет, Мир!</title>
-  <style type="text/css">
-    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-  </style>
   <link rel="stylesheet" type="text/css" href="/theme/bower/semantic/dist/semantic.min.css">
+  <style type="text/css">
+    .ui.icon.label>.icon {
+      margin-right: 0;
+    }
+    .ui.label>.icon.unmargin {
+      margin-right: 0;
+    }
+  </style>
 </head>
 <body>
 
-<div class="ui menu">
-  <div class="ui dropdown icon item">
-    <i class="wrench icon"></i>
-    <div class="menu">
-      <div class="item">
-        <i class="dropdown icon"></i>
-        <span class="text">New</span>
-        <div class="menu">
-          <div class="item">Document</div>
-          <div class="item">Image</div>
+  <div class="ui menu">
+    <div class="ui dropdown icon item">
+      <i class="wrench icon"></i>
+      <div class="menu">
+        <div class="item">
+          <i class="dropdown icon"></i>
+          <span class="text">New</span>
+          <div class="menu">
+            <div class="item">Document</div>
+            <div class="item">Image</div>
+          </div>
         </div>
+        <div class="item">Open... </div>
+        <div class="item">Save... </div>
+        <div class="item">Edit Permissions</div>
+        <div class="divider"></div>
+        <div class="header">Export </div>
+        <div class="item">Share... </div>
       </div>
-      <div class="item">Open... </div>
-      <div class="item">Save... </div>
-      <div class="item">Edit Permissions</div>
-      <div class="divider"></div>
-      <div class="header">Export </div>
-      <div class="item">Share... </div>
+    </div>
+    <div class="right menu">
+      <div class="ui right aligned category search item">
+        <div class="ui transparent icon input">
+          <input class="prompt" type="text" placeholder="Search animals...">
+          <i class="search link icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
     </div>
   </div>
-  <div class="right menu">
-    <div class="ui right aligned category search item">
-      <div class="ui transparent icon input">
-        <input class="prompt" type="text" placeholder="Search animals...">
-        <i class="search link icon"></i>
+
+  <div class="ui fluid container">
+    <div class="ui grid">
+      <div class="eight wide column">
+
+
+        <div class="ui top attached menu">
+          <div class="ui dropdown icon item">
+            <i class="wrench icon"></i>
+            <div class="menu">
+              <div class="item">
+                <i class="dropdown icon"></i>
+                <span class="text">New</span>
+                <div class="menu">
+                  <div class="item">Document</div>
+                  <div class="item">Image</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right menu">
+            <div class="ui right aligned category search item">
+              <div class="ui transparent icon input">
+                <input class="prompt" type="text" placeholder="Search animals...">
+                <i class="search link icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>
+            <div class="ui search item">
+              <div class="ui transparent input">
+                <input class="js_tree_search_input" type="text" placeholder="Поиск по артикулу">
+                <!-- <i class="search icon"></i> -->
+                <div class="ui label left pointing red">51</div>
+                <div class="ui icon label tag red"><i class="search icon"></i></div>
+                <div class="ui left pointing label blue"><i class="search icon link"></i><i class="reply icon"></i></div>
+                <div class="ui icon label tag red">51</div>
+              </div>
+            </div>
+            <a class="item icon">
+              <i class="reply icon"></i>
+              <!-- <div class="ui label tag red">51</div> -->
+            </a>
+          </div>
+        </div>
+        <div class="ui attached menu">
+          <div class="ui dropdown icon item">
+            <i class="wrench icon"></i>
+            <div class="menu">
+              <div class="item">
+                <i class="dropdown icon"></i>
+                <span class="text">New</span>
+                <div class="menu">
+                  <div class="item">Document</div>
+                  <div class="item">Image</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right menu">
+            <div class="ui search item">
+              <div class="ui transparent input">
+                <input class="js_tree_search_input" type="text" placeholder="Поиск">
+                <div class="ui left pointing label">
+                  <i class="search link icon unmargin"></i>
+                </div>
+              </div>
+            </div>
+            <div class="ui search item">
+              <div class="ui transparent input">
+                <input class="js_tree_search_input" type="text" placeholder="Поиск" value="asd">
+                <div class="ui left pointing label">
+                  <i class="search link icon"></i>
+                  <i class="reply link icon unmargin"></i>
+                </div>
+              </div>
+            </div>
+            <div class="ui search item">
+              <div class="ui transparent input">
+                <input class="js_tree_search_input" type="text" placeholder="Поиск" value="asd">
+                <div class="ui left pointing blue label">
+                  <i class="search link icon"></i>
+                  <i class="reply link icon unmargin"></i>
+                  <span>51</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui bottom attached segment">
+          <p>ads</p>
+        </div>
+
+
       </div>
-      <div class="results"></div>
     </div>
   </div>
-</div>
+
 
   <div class="ui two column grid container">
     <div class="column">
