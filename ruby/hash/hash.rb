@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require_relative '../colorize/colorize'
 
 arr = 'asd'
 h = {
@@ -39,3 +40,11 @@ p h.count
 h.delete("a")
 
 p nil&&nil
+
+# Преобразование в hash с фильтрацией
+puts 'Преобразование в hash с фильтрацией'.red
+p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
+  node != 2
+}.map{ |node|
+  [node, node]
+}]
