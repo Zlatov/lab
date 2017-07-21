@@ -282,8 +282,33 @@ if (years &amp;&amp; c) {
 </pre>
 
 <h2>Строки</h2>
-<h3>Replace</h3>
-<pre class="prettyprint lang-js">newAddressHtml = newAddressHtml.replace(/\?\?newkey\?\?/g, newKey);</pre>
+
+<h3>Базовые методы строк</h3>
+<p><strong>replace()</strong></p>
+<pre class="prettyprint lang-js eval_js">
+  alert('as??newkey??df'.replace(/\?\?newkey\?\?/g, '123'));
+</pre>
+
+<h3>Url</h3>
+<p><strong>encodeURI(str)</strong></p>
+<p>Неэкранируемые символы: <code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>, <code>0</code>-<code>9</code>, <code>-</code>, <code>_</code>, <code>.</code>, <code>!</code>, <code>~</code>, <code>*</code>, <code>'</code>, <code>(</code>, <code>)</code></p>
+<p>Зарезервированные символы: <code>;</code> <code>,</code> <code>/</code> <code>?</code> <code>:</code> <code>@</code> <code>&amp;</code> <code>=</code> <code>+</code> <code>$</code></p>
+<pre class="prettyprint lang-js eval_js">
+  alert(encodeURI('https://www.скм.рф/uri/docs.php?company=Собаки&amp;Кошки+Мышьки#life'));
+</pre>
+<p><strong>decodeURI(encodedURI)</strong></p>
+<pre class="prettyprint lang-js eval_js">
+  alert(decodeURI("https://developer.mozilla.org/ru/docs/JavaScript_%D1%88%D0%B5%D0%BB%D0%BB%D1%8B"));
+</pre>
+<p><strong>encodeURIComponent(str);</strong></p>
+<p>Неэкранируемые символы: <code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>, <code>0</code>-<code>9</code>, <code>-</code>, <code>_</code>, <code>.</code>, <code>!</code>, <code>~</code>, <code>*</code>, <code>'</code>, <code>(</code>, <code>)</code></p>
+<pre class="prettyprint lang-js eval_js">
+  alert(encodeURIComponent('https://www.скм.рф/uri/docs.php?company=Собаки&amp;Кошки+Мышьки#life'));
+</pre>
+<p><strong>decodeURIComponent(encodedURI)</strong></p>
+<pre class="prettyprint lang-js eval_js">
+  alert(decodeURIComponent('https://developer.mozilla.org/ru/docs/JavaScript_%D1%88%D0%B5%D0%BB%D0%BB%D1%8B'));
+</pre>
 
 <h2>Массивы</h2>
 <h3>Добавление, удаление элемента</h3>
@@ -320,6 +345,52 @@ l = a.length
 for (var i = 0; i < l; i++) {
   console.log(i, a[i])
 }
+</pre>
+<h4>Перебор nested (вложенного) массива</h4>
+<pre class="prettyprint lang-js eval_js">
+Array.prototype.next = function() {
+  return this[this.current++]
+}
+Array.prototype.prev = function() {
+  return this[this.current--]
+}
+Array.prototype.reset = function() {
+  this.current = 0
+}
+Array.prototype.current = 0
+Array.prototype.clone = function() {
+  return this.slice(0)
+}
+
+  var nested_catalog = [
+    {text:'1'},
+    {text:'2', children: [
+     {text:'2-1'},
+     {text:'2-2'},
+    ]},
+    {text:'3'},
+  ]
+  var level = 0
+  var cache = []
+  cache[level] = nested_catalog.clone()
+  cache[level].reset()
+  while (level&gt;=0) {
+    var node = cache[level].next()
+    if (node != null) {
+      console.log('node[&quot;text&quot;]: ', node[&quot;text&quot;])
+      if (
+        node['children']!=null &amp;&amp;
+        Object.prototype.toString.call(node['children']) === '[object Array]' &amp;&amp;
+        node['children'].length
+      ) {
+        level++
+        cache[level] = node['children'].clone()
+        cache[level].reset()
+      }
+    } else {
+      level--
+    }
+  }
 </pre>
 <h3>Найти максимально значение в массиве</h3>
 <pre class="prettyprint lang-js">maxKey = Math.max.apply(null, existKey);</pre>

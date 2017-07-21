@@ -16,3 +16,5 @@ p сontains_text 'asdf', 'b'
 v = '123333.21452345.23453254a'
 is_version_format = !((v =~ /^\d+\.\d+\.\d+$/).nil?)
 p is_version_format
+
+p 'admin.ru/asd/sadf-sa_df/?asd=wfwрусские 123123123'.split(' ')[0].gsub(/[^a-z.\-_0-9]/, '')

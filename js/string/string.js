@@ -1,7 +1,9 @@
+// Разбить в массив
 var str = "How are you doing today?";
 var res = str.split(" ");
 console.log('res: ', res)
 
+// Заменить
 console.log( '.A.'.replace(/A/g, '!'))
 
 console.log('substring')
