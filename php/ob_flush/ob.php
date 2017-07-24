@@ -6,6 +6,17 @@
 </head>
 <body>
 
+<pre>
+                | вернёт | очистит | отправит | отключит |
+ob_get_contents |   X    |         |          |          |
+ob_clean        |        |    X    |          |          |
+ob_flush        |        |         |    X     |          |
+ob_end_clean    |        |    X    |          |    X     |
+ob_end_flush    |        |         |    X     |    X     |
+ob_get_clean    |   X    |    X    |          |    X     |
+ob_get_flush    |   X    |         |    X     |    X     |
+</pre>
+
 <?php
 
 
