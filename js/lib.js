@@ -79,6 +79,49 @@ Array.prototype.to_flat = function(change_self=true, options=null) {
   return flat
 }
 
+Array.prototype.get_flat_descendants = function(parent_id, change_self=true, options=null) {
+  var o = Object.assign({
+    id: 'id',
+    root_id: '#',
+    childrens: 'children',
+    parent: 'parent'
+  }, options||{})
+  var level = 0
+  var to_flat = []
+  var cache = []
+  cache[level] = this.clone()
+  cache[level].reset()
+  while (level>=0) {
+    var node = cache[level].next()
+    if (node != null) {
+
+      if (node[o.id]===parent_id) {
+        to_flat = (node[o.childrens]||[]).clone()
+        break
+      }
+
+      if (
+        node[o.childrens]!=null &&
+        Object.prototype.toString.call(node[o.childrens]) === '[object Array]' &&
+        node[o.childrens].length
+      ) {
+        level++
+        cache[level] = node[o.childrens].clone()
+        cache[level].reset()
+      }
+    } else {
+      level--
+    }
+  }
+  var flat = to_flat.to_flat()
+  if (change_self) {
+    this.clean()
+    this.spliceArray(0, 0, flat)
+    return this
+  }
+  return flat
+}
+
 Array.prototype.to_nested = function(change_self=true, options=null) {
   if (!options) {
     options = {

@@ -58,7 +58,7 @@ window.tree.get_data = function(position) {
       flat: false
     }
   )
-  // data = data.to_flat(false)
+  data.to_flat()
   return data
 }
 

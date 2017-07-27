@@ -31,3 +31,7 @@ console.log('Удаление свойства')
 console.log('a = {a:1}: ', a = {a:1})
 console.log('delete a.a: ', delete a.a)
 console.log('a: ', a)
+
+{id:1,name:'asd'}.map(function(k,v){
+  console.log('k: ', k)
+})

@@ -47,6 +47,7 @@ window.config.tree = {
   },
   contextmenu_options: {
     Create: true,
+    DeleteDuplicates: true,
     Rename: true,
     Copy: true,
     Paste: true,
@@ -68,6 +69,38 @@ window.config.tree = {
         action: function (obj) {
           node_data = tree.create_node(node_data);
           tree.edit(node_data);
+        }
+      }
+    },
+    DeleteDuplicates: function(node_data, tree) {
+      return {
+        label: "Удалить дубликаты",
+        // icon: 'green folder icon',
+        action: function (obj) {
+          var flat = tree
+            .get_selected() // массив id выделенных нод
+            .map(function(node_id){ // получаем json каждой выделенной ноды, вместо id
+              var nodes = tree.get_json(node_id, {
+                no_state:true,
+                no_id:false,
+                no_children:false,
+                no_data:false,
+                no_li_attr:true,
+                no_a_attr:true,
+                flat:false
+              })
+              return nodes
+            })
+            .to_flat(false) // вложенную структуру преобразуем в список
+          console.log('flat: ', flat)
+          var cache = {}
+          for(var i=0, l=flat.length; i<l; i++) {
+            if (cache[flat[i]['text']]!=null) {
+              tree.delete_node(flat[i]['id'])
+            } else {
+              cache[flat[i]['text']] = flat[i]['id']
+            }
+          }
         }
       }
     }

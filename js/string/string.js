@@ -5,6 +5,8 @@ console.log('res: ', res)
 
 // Заменить
 console.log( '.A.'.replace(/A/g, '!'))
+// Сгенерировать regex из стринги
+console.log('GODzilla'.replace( new RegExp('god', 'i'), '' ) )
 
 console.log('substring')
 console.log('\'Цвет кармана\'.substring(0,4): ', 'Цвет кармана'.substring(0,4))

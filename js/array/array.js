@@ -34,5 +34,31 @@ console.log(b)
 console.log(c)
 console.log(d)
 
-// Объеденить
+// Объеденить массив в строку
 // array.join(separator)
+
+
+// Нужно описать .filter()
+
+
+// Преобразовать массив чего-то в hash
+var a = [
+  {id:'id1', val: [1,2,3]},
+  {id:'id2', val: [2,3,4]},
+  {id:'id3', val: [3,4,5]},
+]
+
+var b = a.reduce(function(prev, curr){
+  console.log('prev: ', prev)
+  console.log('curr: ', curr)
+  prev[curr.id] = curr.val[1]
+  return prev
+}, {})
+
+console.log('a: ', a)
+console.log('b: ', b)
+
+
+// Массив содержит в себе хотя бы один элемент другого массива
+console.log( [1,2,3].some(id=>[4,5,6,2].includes(id)) )
+console.log( [1,2,3].some(id=>[4,5,6,2].indexOf(id)>=0) )

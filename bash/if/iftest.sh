@@ -1,6 +1,6 @@
 #!/bin/bash
 STRING="100.1.1"
-ARRAY=(${STRING//./ })
+ARRAY=(${STRING//./})
 A=100
 B=2
 if [[ $A -gt $B ]] && [[ ${ARRAY[0]} -gt 2 ]]

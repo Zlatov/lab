@@ -48,3 +48,22 @@ p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
 }.map{ |node|
   [node, node]
 }]
+
+# Слияние двух hash
+puts 'Слияние двух hash'.red
+h1 = {a:'a',b:'b'}
+h2 = {a:'aa',c:'cc'}
+h3 = h1.merge(h2)
+p h1
+p h2
+p h3
+
+# Ключи в стрингу
+a = {a:'aa',c:'cc'}
+# {a:'aa',c:'cc'}.stringify_keys
+p Hash[a.map{|k,v|[k.to_s,v]}]
+p a
+
+p a.delete 'a'
+p a.delete :a
+p a
