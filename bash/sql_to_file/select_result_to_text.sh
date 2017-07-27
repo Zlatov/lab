@@ -18,7 +18,7 @@ else
     then
         > 2.html
     fi
-    mysql --host=$DBHOST --port=3306 --user="$DBUSER" --database="$DBNAME" -s < "./sql.sql" > 'text.txt'
+    mysql --host=$DBHOST --port=3306 --user="$DBUSER" --database="$DBNAME" -s < "./1.sql" > '1.html'
 fi
 
 if [ ! -f ./2.sql ]
