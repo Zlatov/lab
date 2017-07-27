@@ -1,2 +1,6 @@
-config.sh
-text.txt
+*
+!.gitignore
+!select_result_to_text.sh
+!config-example.sh
+!1.sql
+!2.sql
