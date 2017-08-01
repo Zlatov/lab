@@ -1,20 +1,19 @@
 # encoding: UTF-8
 require 'json'
+require_relative '../colorize/colorize'
 
-a = '["a"]'
+puts 'Json текст в переменную ruby'.green
+
+ja = '[{"id":1,"name":"Nick"},{"id":"1","name":"Mikle"}]'
+a = JSON.parse ja
+print 'a: '.light_blue; p a
+
+puts 'Переменную ruby в текст json'.green
+
 b = ['asd']
-c = {asd:'asd'}
-
 jb = b.to_json
-jc = c.to_json
+print 'jb: '.light_blue; puts jb
 
-p jb
-p jc
-
-b = JSON.parse(jb)
-c = JSON.parse(jc)
-
-p b
-p c
-
-p hash
+c = [{asd:'asd'},{"id"=>1}]
+jc = JSON.pretty_generate c
+print 'jc: '.light_blue; puts jc

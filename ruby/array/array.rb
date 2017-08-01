@@ -123,3 +123,29 @@ p hash_of_hash.any?{|node|node[1][:id]==4}
 puts '.select'.green
 p array_of_hash.select{|node|node[:id]==2}
 p hash_of_hash.select{|key,node|node[:id]==2}
+
+
+# Удалить из массива хешей по значению хеша
+puts 'Удалить из массива хешей по значению хеша'.red
+array_of_hash.delete_if{|v| v[:id]===3}
+p array_of_hash
+
+
+puts 'Перебор массива - создание нового'.red
+ids = array_of_hash.map{|v|v[:id]*2}
+p ids
+p array_of_hash
+
+
+puts 'Создание нового идентификатора'.red
+ids = (0..5).map {|v|v.to_s}
+p ids
+id = nil
+ids.each_with_index{|v,i|
+  if v!=i.to_s
+    id = i.to_s
+    break
+  end
+}
+id = ids.length.to_s if !id
+p id

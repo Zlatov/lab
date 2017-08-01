@@ -1,14 +1,14 @@
 $.ajax({
   type: 'GET',
   url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',
-  async: true, // boolean(true)
+  async: true,
   dataType: 'json',
   cache: false,
   beforeSend: function() {
   },
   error: function(jqXHR, textStatus, errorThrown) {
   },
-  success: function(data){
+  success: function(data, textStatus, jqXHR){
     console.log(data)
   }
 })
@@ -32,7 +32,19 @@ jQuery.ajax({
   // complete(jqXHR, textStatus):function, array
   // contents:map
   // contentType:string('application/x-www-form-urlencoded')
+
   // context:object
+  // В качестве контекста можно задать DOM-элемент, который должен 
+  // каким-либо образом сигнализировать о завершении запроса
+  // ```
+  //   success: function(data, textStatus, jqXHR) {
+  //     $(this).remove()
+  //   }
+  // ```
+  // однако тогда теряется изначальный контекст this в котором присутствуют изначальные настройки запроса, например
+  // this.url, this.custom_data ...
+  context: $input
+
   // converters:map({"* text":window.String, "text html":true, "text json":jQuery.parseJSON, "text xml":jQuery.parseXML})
   // crossDomain:boolean(false при запросах на тот же домен, true в случае запросах в чужую доменную зону)
   // data:object,string
@@ -53,7 +65,10 @@ jQuery.ajax({
   // password:string
 
   // processData:boolean(true)
-  // По умолчанию, все передаваемые на сервер данные, предварительно преобразуются в строку (url-формата: fName1=value1&fName2=value2&...) соответствующую "application/x-www-form-urlencoded". Если вам необходимо отправить данные, которые нельзя подвергать подобной обработке (например документ-DOM), то следует отключить опцию processData.
+  // По умолчанию, все передаваемые на сервер данные, предварительно преобразуются в строку 
+  // (url-формата: fName1=value1&fName2=value2&...) соответствующую 
+  // "application/x-www-form-urlencoded". Если вам необходимо отправить данные, которые нельзя 
+  // подвергать подобной обработке (например документ-DOM), то следует отключить опцию processData.
   processData: true,
 
   // scriptCharset:string

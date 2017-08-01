@@ -18,3 +18,6 @@ puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' 
 
 
 p "1,2,3,4".split(",") # ["1", "2", "3", "4"]
+
+p DateTime.now.strftime("%-y%-j%H_")
+p DateTime.now.strftime("%e_") + (3 + 1).to_s
