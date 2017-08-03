@@ -65,9 +65,18 @@ set @a2 = null, @b2 = 2000;
 set @a3 = null, @b3 = null;
 set @a4 = 2000, @b4 = 2000;
 
--- Не равно (добавлено &lt;&gt;1):
-select @a1&lt;=&gt;@b1&lt;&gt;1, @a2&lt;=&gt;@b2&lt;&gt;1, @a3&lt;=&gt;@b3&lt;&gt;1, @a4&lt;=&gt;@b4&lt;&gt;1;
-  -&gt; 1, 1, 0, 0
+select 'Равны? (не верное использование)' as `опреация`, @a1=@b1 as `@1`, @a2=@b2 as `@2`, @a3=@b3 as `@3`, @a4=@b4 as `@4`
+union all
+select 'Равны?' as `опреация`, @a1&lt;=&gt;@b1 as `@1`, @a2&lt;=&gt;@b2 as `@2`, @a3&lt;=&gt;@b3 as `@3`, @a4&lt;=&gt;@b4 as `@4`
+union all
+select 'Не равны? (не верное использование)' as `опреация`, !@a1&lt;=&gt;@b1 as `@1`, !@a2&lt;=&gt;@b2 as `@2`, !@a3&lt;=&gt;@b3 as `@3`, !@a4&lt;=&gt;@b4 as `@4`
+union all
+select 'Не равны?' as `опреация`, !(@a1&lt;=&gt;@b1) as `@1`, !(@a2&lt;=&gt;@b2) as `@2`, !(@a3&lt;=&gt;@b3) as `@3`, !(@a4&lt;=&gt;@b4) as `@4`
+union all
+select 'Не равны?' as `опреация`, @a1&lt;=&gt;@b1&lt;&gt;1 as `@1`, @a2&lt;=&gt;@b2&lt;&gt;1 as `@2`, @a3&lt;=&gt;@b3&lt;&gt;1 as `@3`, @a4&lt;=&gt;@b4&lt;&gt;1 as `@4`
+union all
+select 'Не равны?' as `опреация`, NOT @a1&lt;=&gt;@b1 as `@1`, NOT @a2&lt;=&gt;@b2 as `@2`, NOT @a3&lt;=&gt;@b3 as `@3`, NOT @a4&lt;=&gt;@b4 as `@4`
+;
 </pre>
 
 <h2>Функции</h2>

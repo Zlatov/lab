@@ -75,6 +75,7 @@
 <h2>Вложенные множества (Nested Set)</h2>
 <p>Обход дерева с выставлением левого и правго номера (left - right, nsleft - nsright, left_id - right_id или ancestor - descendant)</p>
 <h2>Таблица связей (Closure Table)</h2>
+<p>Обычно в <strong>таблице связей</strong> хранят связи между всеми элементами в виде aid, did (ancestor_id, descendant_id) и ссылку на себя aid, did (did = aid). Ссылку на себя хранят для упрощения построения запросов. Однако есть вариант хранения только связей.</p>
 <h2>Создать свою древовидную структуру AL + CT</h2>
 <h3>Создадим таблицы</h3>
 <pre class="prettyprint lang-sql copyToClipboard">

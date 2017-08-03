@@ -2,7 +2,8 @@
 $pathinfo = pathinfo($_SERVER['REDIRECT_URL']);
 $explode = explode('/',$pathinfo['dirname']);
 $last = end($explode);
-$header = $last?'All ' . $last:'All';
+// $header = $last?'All ' . $last:'All';
+$header = $last?$last:'';
 ?><!DOCTYPE html>
 <html lang="ru">
 
@@ -12,7 +13,7 @@ $header = $last?'All ' . $last:'All';
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?= $header ?></title>
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="/theme/favicon.ico" type="image/x-icon">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="/theme/bootstrap/css/bootstrap.css">
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

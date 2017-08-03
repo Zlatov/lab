@@ -2,6 +2,7 @@
 require 'fileutils'
 require_relative '../colorize/colorize'
 require 'json'
+$stdout.sync = true
 
 # ┏━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
 # ┃    ┃ чтение ┃ запись ┃ указатель ┃ содержимое ┃ создание файла ┃
@@ -85,47 +86,49 @@ end
 file.close
 
 
-puts '10 с ожидания закрытия файла другим процессом.'.green
-file = File.open path_to_file, 'r+'
-sleep_time = 0
-while ( file.flock(File::LOCK_EX|File::LOCK_NB)!=0 )
-  sleep(0.5)
-  sleep_time+=1
-  if sleep_time > 10
-    raise 'Слишком долго ждем!'
-  end
-end
-puts 'наконец мы получили исключительный доступ к файлу!'.light_blue
-file.close
+# puts '10 с ожидания закрытия файла другим процессом.'.green
+# file = File.open path_to_file, 'r+'
+# sleep_time = 0
+# while ( file.flock(File::LOCK_EX|File::LOCK_NB)!=0 )
+#   sleep(0.5)
+#   sleep_time+=1
+#   if sleep_time > 10
+#     raise 'Слишком долго ждем!'
+#   end
+# end
+# puts 'наконец мы получили исключительный доступ к файлу!'.light_blue
+# file.close
 
 
 puts 'Запись в файл.'.green
 file = File.open path_to_file, 'r+'
 sleep_time = 0
-while ( file.flock(File::LOCK_EX|File::LOCK_NB)!=0 )
-  sleep(0.5)
-  sleep_time+=1
+while file.flock(File::LOCK_EX|File::LOCK_NB) != 0
+  sleep(0.2)
+  sleep_time+= 0.2
   if sleep_time > 10
     raise 'Слишком долго ждем!'
   end
 end
-file.write JSON.pretty_generate [{asd:'asd'},{"id"=>1}]
+file.write JSON.pretty_generate [{asd:'asd'},{"id"=>312}]
 file.close
 
-p File.read path_to_file
-
-file = File.open path_to_file, 'r+'
-sleep_time = 0
-while ( file.flock(File::LOCK_EX|File::LOCK_NB)!=0 )
-  sleep(0.5)
-  sleep_time+=1
-  if sleep_time > 10
-    raise 'Слишком долго ждем!'
-  end
-end
-file.truncate 0
-file.write JSON.pretty_generate [{asd:'asd'},{"id"=>1}]
+file = File.open path_to_file
+p file.read
 file.close
 
-p File.read path_to_file
+# file = File.open path_to_file, 'r+'
+# sleep_time = 0
+# while ( file.flock(File::LOCK_EX|File::LOCK_NB)!=0 )
+#   sleep(0.5)
+#   sleep_time+=1
+#   if sleep_time > 10
+#     raise 'Слишком долго ждем!'
+#   end
+# end
+# file.truncate 0
+# file.write JSON.pretty_generate [{asd:'asd'},{"id"=>1}]
+# file.close
+
+# p File.read path_to_file
 
