@@ -1,3 +1,29 @@
+<?php
+
+if (isset($_POST['submitForm'])) {
+	if ( empty($_POST['user']) || empty($_POST['password']) ) {
+		$error = 'Заполниет форму.';
+	}
+	try {
+		$username = strip_tags(trim($_POST['user']));
+		$password = trim($_POST['password']);
+		$encoded_password = base64_encode(sha1($password, true));
+		$htpasswd_content = $username . ':{SHA}' . $encoded_password;
+		file_put_contents('./test/.htpasswd', $htpasswd_content);
+		// header('Location: password_for_a_htpasswd.php');
+	} catch(Exception $e) {
+		$error = '';
+		$error.= "<p>";
+		$error.= $e->errorInfo[2];
+		$error.= "</p>";
+		$error.= '<pre>';
+		$error.= $e->getTraceAsString();
+		$error.= '</pre>';
+	}
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 	<head>
@@ -24,54 +50,30 @@
 					<h2>Логин и пароль для доступа к папке ./test/</h2>
 					<form action="" method="POST" role="form">
 						<div class="form-group">
-							<input name="user" type="text" class="form-control" id="" placeholder="Логин" value="test">
+							<input name="user" type="text" class="form-control" placeholder="Логин">
 						</div>
 						<div class="form-group">
-							<input name="password" type="password" class="form-control" id="" placeholder="Пароль">
+							<input name="password" type="password" class="form-control" placeholder="Пароль">
 						</div>
-						<button type="submit" class="btn btn-primary">Кодировать</button>
+						<button type="submit" name="submitForm" class="btn btn-primary">Кодировать</button>
 					</form>
 
-					<?php if (isset($_POST['password'])): ?>
-
-						<?php
-
-						try {
-							$username = strip_tags(trim($_POST['user']));
-							$password = trim($_POST['password']);
-							$encoded_password = base64_encode(sha1($password, true));
-							$echo = $username . ':{SHA}' . $encoded_password;
-							$file_put_contents = file_put_contents('./test/.htpasswd', $echo);
-							if ($file_put_contents===false) {
-								throw new Exception("ошибка записи в файл .htpasswd, новый пароль нельзя протестировать.", 1);
-							}
-							echo "<hr><h2>Содержимое ./test/.htpasswd</h2>";
-							echo "<pre>$echo</pre>";
-							echo "<h2>Проверить</h2>";
-							echo "<p><a href=\"./test/test.html\" target=\"_blank\">./test/test.html</a></p>";
-						} catch(Exception $e) {
-							printf("<p>Ошибка: %s</p>", $e->getMessage());
-							echo "<hr><h2>В файл ./test/.htpasswd необходимо записать строку</h2>";
-							echo "<pre>$echo</pre>";
-						} 
-
-						?>
-						
+					<?php if (isset($error)): ?>
+						<hr>
+						<?= $error ?>
 					<?php endif ?>
 
+					<?php if (!isset($error)&&isset($htpasswd_content)): ?>
 					<hr>
-					
-					<h2>Пример файла ./test/.htaccess</h2>
-					
-					<pre>AuthType Basic
-AuthName 'Authorization...'
-AuthUserFile /absolute/pathname/to/.htpasswd
-#Require valid-user
-# or
-Require user test
-</pre>
+					<h2>Содержимое файл <code>test/.htaccess</code></h2>
+					<pre><?= file_get_contents('test/.htaccess'); ?></pre>
+					<h2>Содержимое файла <code>test/.htpasswd</code></h2>
+					<pre><?= $htpasswd_content ?></pre>
 					<hr>
-					
+					<h2>Проверить</h2>
+					<p><a href="./test/test.php" target="_blank">./test/test.php</a></p>
+					<?php endif; ?>
+
 				</div>
 			</div>
 		</div>
@@ -80,6 +82,6 @@ Require user test
 		<!-- Bootstrap JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
- 		<script src="Hello World"></script>
+		<script src="Hello World"></script>
 	</body>
 </html>

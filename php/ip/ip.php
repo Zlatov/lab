@@ -1,4 +1,20 @@
 <?php
+// $_SERVER['REMOTE_ADDR'], остальное - фуфло. 
+// Все что начинается с $_SERVER['HTML_... - это заголовки, их можно подделать!
+// Бред:
+// function getIP() {
+//     if (getenv("HTTP_CLIENT_IP"))
+//         $ip = getenv("HTTP_CLIENT_IP");
+//     else if(getenv("HTTP_X_FORWARDED_FOR"))
+//         $ip = getenv("HTTP_X_FORWARDED_FOR");
+//     else if(getenv("REMOTE_ADDR"))
+//         $ip = getenv("REMOTE_ADDR");
+//     else
+//         $ip = "UNKNOWN";
+//     return $ip;
+// }
+// $client_ip=getIP();
+// echo "Your IP :".$client_ip;
 
 $ip = '1.2.1.1';
 

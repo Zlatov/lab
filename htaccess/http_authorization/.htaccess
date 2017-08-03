@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName 'Authorization...'
+AuthUserFile /home/iadfeshchm/projects/my/lab/lab/htaccess/http_authorization/.htpasswd
+Require valid-user
