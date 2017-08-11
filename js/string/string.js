@@ -1,17 +1,34 @@
 // Разбить в массив
+console.log('> Разбить в массив')
 var str = "How are you doing today?";
 var res = str.split(" ");
 console.log('res: ', res)
 
 // Заменить
+console.log('----------------------------------------')
+console.log('> Заменить')
 console.log( '.A.'.replace(/A/g, '!'))
+
 // Сгенерировать regex из стринги
+console.log('----------------------------------------')
+console.log('> Сгенерировать regex из стринги')
 console.log('GODzilla'.replace( new RegExp('god', 'i'), '' ) )
 
+// Фильтр пользовательского ввода для создания регулярного выражения
+console.log('----------------------------------------')
+console.log('> Фильтр пользовательского ввода для создания регулярного выражения')
+a = 'ds\\^f[sd'
+b = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+console.log('a: ', a)
+console.log('b: ', b)
+
+console.log('----------------------------------------')
 console.log('substring')
 console.log('\'Цвет кармана\'.substring(0,4): ', 'Цвет кармана'.substring(0,4))
 
 
+console.log('----------------------------------------')
+console.log('> Преобразование в int')
 console.log( '0', parseInt('0')          )
 console.log( '+0', parseInt('+0')         )
 console.log( '-0', parseInt('-0')         )

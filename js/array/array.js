@@ -38,7 +38,23 @@ console.log(d)
 // array.join(separator)
 
 
-// Нужно описать .filter()
+// Отфильтровать элементы массива
+// возвращает новый массив
+console.log('> Отфильтровать элементы массива')
+var a = ['', 'asd']
+var b = a.filter((element, index, array)=>{return element!=''})
+console.log('a: ', a)
+console.log('b: ', b)
+
+// Преобразовать элементы массива
+// возвращает новый массив
+console.log('> Преобразовать элементы массива')
+var a = ['', 'asd']
+var b = a.map((e, i, a)=>{
+  return e+='_sufix'
+})
+console.log('a: ', a)
+console.log('b: ', b)
 
 
 // Преобразовать массив чего-то в hash

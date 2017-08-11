@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/theme/bower/semantic/dist/semantic.min.css">
+	</head>
+	<body>
+
+		<div class="ui form">
+			<div class="field">
+				<label>Country</label>
+				<select class="ui search dropdown">
+					<option value="">Select Country</option>
+					<option value="AF">Afghanistan</option>
+					<option value="AX">Åland Islands</option>
+					<option value="AL">Albania</option>
+					<option value="DZ">Algeria</option>
+					<option value="AS">American Samoa</option>
+					<option value="AD">Andorra</option>
+					<option value="AO">Angola</option>
+					<option value="AI">Anguilla</option>
+					<option value="AQ">Antarctica</option>
+				</select>
+			</div>
+		</div>
+
+		<select multiple="" class="ui fluid normal dropdown">
+			<option value="">Skills</option>
+			<option value="angular">Angular</option>
+			<option value="css">CSS</option>
+			<option value="design">Graphic Design</option>
+			<option value="ember">Ember</option>
+			<option value="html">HTML</option>
+		</select>
+
+		<div class="ui fluid multiple search normal selection compact dropdown">
+			<input type="hidden" name="country" value="af|al">
+			<i class="dropdown icon"></i>
+			<div class="default text">Select Country</div>
+			<div class="menu">
+				<!-- <div class="item active filtered" data-value="af"><i class="af flag"></i>Afghanistan</div> -->
+				<div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+				<div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+				<div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+				<div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
+				<div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
+				<div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
+				<div class="item" data-value="ao"><i class="ao flag"></i>Angola</div>
+				<div class="item" data-value="ai"><i class="ai flag"></i>Anguilla</div>
+				<div class="item" data-value="ag"><i class="ag flag"></i>Antigua</div>
+				<div class="item" data-value="ar"><i class="ar flag"></i>Argentina</div>
+				<div class="item" data-value="am"><i class="am flag"></i>Armenia</div>
+				<div class="item" data-value="aw"><i class="aw flag"></i>Aruba</div>
+				<div class="item" data-value="au"><i class="au flag"></i>Australia</div>
+				<div class="item" data-value="at"><i class="at flag"></i>Austria</div>
+				<div class="item" data-value="az"><i class="az flag"></i>Azerbaijan</div>
+			</div>
+		</div>
+
+
+		<div class="ui fluid multiple search special selection dropdown">
+			<input type="hidden" name="country">
+			<i class="dropdown icon"></i>
+			<div class="default text">Select Country</div>
+			<div class="menu">
+				<div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+				<div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+				<div class="item" data-value="al"><i class="al flag"></i>Albania</div>
+				<div class="item" data-value="dz"><i class="dz flag"></i>Algeria</div>
+				<div class="item" data-value="as"><i class="as flag"></i>American Samoa</div>
+				<div class="item" data-value="ad"><i class="ad flag"></i>Andorra</div>
+				<div class="item" data-value="ao"><i class="ao flag"></i>Angola</div>
+				<div class="item" data-value="ai"><i class="ai flag"></i>Anguilla</div>
+				<div class="item" data-value="ag"><i class="ag flag"></i>Antigua</div>
+				<div class="item" data-value="ar"><i class="ar flag"></i>Argentina</div>
+				<div class="item" data-value="am"><i class="am flag"></i>Armenia</div>
+				<div class="item" data-value="aw"><i class="aw flag"></i>Aruba</div>
+				<div class="item" data-value="au"><i class="au flag"></i>Australia</div>
+				<div class="item" data-value="at"><i class="at flag"></i>Austria</div>
+				<div class="item" data-value="az"><i class="az flag"></i>Azerbaijan</div>
+			</div>
+		</div>
+
+
+		<script type="text/javascript" src="/theme/bower/jquery/dist/jquery.js"></script>
+		<script type="text/javascript" src="/theme/bower/semantic/dist/semantic.min.js"></script>
+		<script type="text/javascript">
+			$('.ui.dropdown').dropdown({
+				delimiter: '|'
+			})
+		</script>
+	</body>
+</html>

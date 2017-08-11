@@ -1,0 +1,43 @@
+# ######################
+# ##                  ##
+# ##    Ошибки PHP    ##
+# ##                  ##
+# ######################
+
+# Запись ошибок в логи
+php_flag log_errors on
+
+# В какие логи писать, например,
+# в том же месте ге скрипт с ошибкой: "php_value error_log PHP-errors.log", что не очень удобно
+# или в одном файле на проект: "/path/to/public_html/PHP-errors.log" (с DOCUMENT_ROOT)
+# под виндой "D:/path/to/public_html/PHP-errors.log"
+php_value error_log /home/iadfeshchm/projects/my/lab/lab/phpbb3/sitemap/error.log
+php_value access_log /home/iadfeshchm/projects/my/lab/lab/phpbb3/sitemap/access.log
+
+# Задание максимальной длины log_errors в байтах. Значение по умолчанию 1024. Установка значения в 0 позволяет снять ограничение на длину log_errors.
+php_value log_errors_max_len 1024
+
+# Определяет типы выводимых ошибок по маске
+# "E_ERROR" - 1
+# "E_WARNING" - 2
+# "E_PARSE" - 4
+# "E_NOTICE" - 8
+# "E_CORE_ERROR" - 16
+# "E_CORE_WARNING" - 32
+# "E_COMPILE_ERROR" - 64
+# "E_COMPILE_WARNING" - 128
+# "E_USER_ERROR" - 256
+# "E_USER_WARNING" - 512
+# "E_USER_NOTICE" - 1024
+# "E_STRICT" - 2048
+# "E_RECOVERABLE_ERROR" - 4096
+# "E_DEPRECATED" - 8192
+# "E_USER_DEPRECATED" - 16384
+# "E_ALL" - 32767
+php_value error_reporting 32767
+
+# Включает / выключает вывод ошибок в браузер (php_flag display_errors), если сайт рабочий ошибки нужно писать в логи
+php_flag display_errors on
+
+# Отключает / включает HTML тэги в сообщениях об ошибках. Ссылки на страницы с описаниями ошибок. За такие ссылки ответственны docref_root и docref_ext.
+php_flag html_errors on
