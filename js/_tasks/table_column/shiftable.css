@@ -1,0 +1,48 @@
+/*
+.shiftable {}
+.shiftable .shiftable-c {} - Колонка
+.shiftable .shiftable-b {} - В начало
+.shiftable .shiftable-l {} - В лево
+.shiftable .shiftable-r {} - В право
+.shiftable .shiftable-e {} - В конец
+*/
+
+.shiftable {}
+
+.shiftable .shiftable-c {}
+
+.shiftable .shiftable-b {
+  margin-right: 5px;
+}
+.shiftable .shiftable-b:before {
+  content: '\21E4';
+}
+
+.shiftable .shiftable-l {
+  margin-right: 5px;
+}
+.shiftable .shiftable-l:before {
+  content: '\2190';
+}
+
+.shiftable .shiftable-r {
+  margin-left: 5px;
+}
+.shiftable .shiftable-r:before {
+  content: '\2192';
+}
+
+.shiftable .shiftable-e {
+  margin-left: 5px;
+}
+.shiftable .shiftable-e:before {
+  content: '\21E5';
+}
+
+.shiftable .shiftable-b, .shiftable .shiftable-l, .shiftable .shiftable-r, .shiftable .shiftable-e {
+  display: inline-block;
+  min-width: 0.5em;
+  min-height: 0.8em;
+  cursor: pointer;
+  font-weight: normal;
+}

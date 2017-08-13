@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="shiftable.css">
+		<style type="text/css">
+			table {
+				border-collapse: collapse;
+			}
+			td, th {
+				border: solid 1px black;
+			}
+		</style>
+	</head>
+	<body>
+		<table class="tables_with_shiftable_columnt">
+			<caption>caption</caption>
+			<thead>
+				<tr>
+					<th class="shiftable-c">
+						<span class="shiftable-b"></span>
+						<span class="shiftable-l"></span>
+						thead1
+						<span class="shiftable-r"></span>
+						<span class="shiftable-e"></span>
+					</th>
+					<th class="shiftable-c shiftable_column">
+						<span class="shiftable-b"></span>
+						<span class="shiftable-l"></span>
+						thead2
+						<span class="shiftable-r"></span>
+						<span class="shiftable-e"></span>
+					</th>
+					<th class="shiftable-c shiftable_column">
+						<span class="shiftable-b"></span>
+						<span class="shiftable-l"></span>
+						thead3
+						<span class="shiftable-r"></span>
+						<span class="shiftable-e"></span>
+					</th>
+					<th class="shiftable-c shiftable_column">
+						<span class="shiftable-b"></span>
+						<span class="shiftable-l"></span>
+						thead4
+						<span class="shiftable-r"></span>
+						<span class="shiftable-e"></span>
+					</th>
+					<th class="shiftable-c">
+						<span class="shiftable-b"></span>
+						<span class="shiftable-l"></span>
+						thead5
+						<span class="shiftable-r"></span>
+						<span class="shiftable-e"></span>
+					</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td>tfoot1</td>
+					<td>tfoot2</td>
+					<td>tfoot3</td>
+					<td>tfoot4</td>
+					<td>tfoot5</td>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>22</td>
+					<td>33</td>
+					<td>44</td>
+					<td>55</td>
+				</tr>
+				<tr>
+					<td>111</td>
+					<td>222</td>
+					<td>333</td>
+					<td>444</td>
+					<td>555</td>
+				</tr>
+				<tr>
+					<td>1111</td>
+					<td>2222</td>
+					<td>3333</td>
+					<td>4444</td>
+					<td>5555</td>
+				</tr>
+			</tbody>
+		</table>
+		<script type="text/javascript" src="../../../theme/bower/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="../../../theme/bower/jquery-ui/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="shiftable.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('.tables_with_shiftable_columnt').shiftable({shiftOnly:'shiftable_column'})
+			});
+		</script>
+	</body>
+</html>

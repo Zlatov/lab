@@ -272,6 +272,8 @@ cd `dirname &quot;$0&quot;`
 scp -r admintest:~/app/admin/app/data/\{item,tree\} ../../db/fs
 </pre>
 <h3>ssh</h3>
+<p><strong>Принудительно запросить пароль вместо аутентификации по ключу.</strong></p>
+<pre class="prettyprint lang-sh copyToClipboard">ssh -o PubkeyAuthentication=no login@host</pre>
 <pre>ssh MYHOST -t 'cd MYPATH; bash --login'</pre>
 <h4>Тунелироваине, проброс порта</h4>
 <pre>#!/bin/bash

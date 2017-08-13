@@ -1,8 +1,10 @@
 <h2>Ключи</h2>
 <p>Сгенерировать пару ключей:</p>
-<pre>ssh-keygen -t rsa</pre>
+<pre class="prettyprint lang-sh copyToClipboard">ssh-keygen -t rsa</pre>
 <p>Копируем публичную часть на сервер:</p>
-<pre>ssh-copy-id -i ~/.ssh/id_rsa.pub myserv</pre>
+<pre class="prettyprint lang-sh copyToClipboard">ssh-copy-id -i ~/.ssh/id_rsa.pub myserv</pre>
+<p><strong>Принудительно запросить пароль вместо аутентификации по ключу.</strong></p>
+<pre class="prettyprint lang-sh copyToClipboard">ssh -o PubkeyAuthentication=no login@host</pre>
 
 <h2>через Proxy</h2>
 <h3>GitHub и BitBucket через Proxy по 433 порту</h3>
