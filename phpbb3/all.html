@@ -78,6 +78,67 @@ vendor/
     <li><a href="codes/mcp_mod_crud_info.html"><code>includes/mcp/info/mcp_modcrud.php</code></a></li>
     <li><a href="codes/mcp_mod_crud_html.html"><code>styles/prosilver/template/mcp_modcrud_list.html</code></a></li>
 </ul>
+<h3>Добавление своего административного модуля</h3>
+<p><var class="copyToClipboard">includes/acp/acp_uatf.php</var>:</p>
+<pre class="copyToClipboard">
+&lt;?php
+class acp_uatf
+{
+    var $u_action;
+    function main($id, $mode)
+    {
+        global $db, $user, $auth, $template;
+        global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+        switch($mode)
+        {
+            case 'index':
+                $this-&gt;page_title = 'ACP_uatf';
+                $this-&gt;tpl_name = 'acp_uatf';
+                break;
+        }
+    }
+}
+?&gt;
+</pre>
+<p><var class="copyToClipboard">includes/acp/info/acp_uatf.php</var>:</p>
+<pre class="copyToClipboard">
+&lt;?php
+class acp_uatf_info
+{
+    function module()
+    {
+        return array(
+            'filename' =&gt; 'acp_uatf',
+            'title'    =&gt; 'Доступ пользователей к форумам', // Имя модуля (на самом деле группы модулей, см. выпадающий список «Добавить модуль»)
+            'version'  =&gt; '1.0.0',
+            'modes'    =&gt; [
+                'index' =&gt; [
+                    'title' =&gt; 'Доступ пользователей к форумам', // Заголовк одного инструмента модуля
+                    'auth' =&gt; 'acl_a_',
+                    'cat' =&gt; [''],
+                ],
+            ],
+        );
+    }
+
+    function install()
+    {
+    }
+
+    function uninstall()
+    {
+    }
+}
+?&gt;
+</pre>
+<p><var class="copyToClipboard">adm/style/acp_uatf.html</var>:</p>
+<pre>
+&lt;!-- INCLUDE overall_header.html --&gt;
+
+Hello, World!
+
+&lt;!-- INCLUDE overall_footer.html --&gt;
+</pre>
 <h3>Правило/rule в ролях</h3>
 <p>Вообще достаточно в базу добавить:</p>
 <pre class="prettyprint lang-sql">INSERT INTO `forum_acl_options` (`auth_option_id`, `auth_option`, `is_global`, `is_local`, `founder_only`) VALUES (NULL, 'u_changereputation', '1', '0', '0');</pre>
