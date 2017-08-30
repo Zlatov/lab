@@ -1,3 +1,5 @@
+p ' sdf sdf '.strip
+
 p "date".slice 0, 2
 
 require 'date'
@@ -17,6 +19,7 @@ puts '<img src="../../images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' s
 puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
 
 
+# В массив
 p "1,2,3,4".split(",") # ["1", "2", "3", "4"]
 
 p DateTime.now.strftime("%-y%-j%H_")

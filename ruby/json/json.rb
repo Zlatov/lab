@@ -17,3 +17,7 @@ print 'jb: '.light_blue; puts jb
 c = [{asd:'asd'},{"id"=>1}]
 jc = JSON.pretty_generate c
 print 'jc: '.light_blue; puts jc
+
+a = {mtime:123}
+b = a.to_json
+p b
