@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS `rbac_assignment`;
 DROP TABLE IF EXISTS `rbac_perm`;
 DROP TABLE IF EXISTS `rbac_role`;
 DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `rbac_objectrel`;
+DROP TABLE IF EXISTS `rbac_object`;
 
 CREATE TABLE `user` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -14,6 +16,32 @@ CREATE TABLE `user` (
 ENGINE=InnoDB
 AUTO_INCREMENT 1
 DEFAULT CHARSET=utf8
+COLLATE utf8_general_ci;
+
+CREATE TABLE `rbac_object` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `pid` INT UNSIGNED NULL DEFAULT NULL,
+  `level` INT UNSIGNED NOT NULL,
+  `name` VARCHAR(128) NOT NULL,
+  `order` INT UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_rbacobject_header` (`name` ASC),
+  CONSTRAINT `fk_rbacobject_pid` FOREIGN KEY (`pid`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+ENGINE InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+CREATE TABLE `rbac_objectrel` (
+  `aid` INT UNSIGNED NOT NULL,
+  `did` INT UNSIGNED NOT NULL,
+  UNIQUE KEY `uq_rbacobjectrel_adid` (`aid` ASC, `did` ASC),
+  CONSTRAINT `fk_rbacobjectrel_aid` FOREIGN KEY (`aid`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `fk_rbacobjectrel_did` FOREIGN KEY (`did`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+ENGINE InnoDB
+DEFAULT CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
 CREATE TABLE `rbac_role` (

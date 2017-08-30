@@ -35,6 +35,17 @@ function schema_select()
     $pdo->exec($sql);
 }
 
+function check_schema_select()
+{
+    global $pdo, $config;
+    $db = $pdo->query('SELECT database();')->fetchColumn();
+    if ($db===$config['dbName']) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function recreate_schema()
 {
     global $pdo, $config;
@@ -120,6 +131,99 @@ function add_perm() {
         $pdo->exec("ROLLBACK;");
         echoPDOException($e);
     }
+}
+
+function connect_role() {
+    global $pdo, $config;
+    try {
+        $pdo->exec("START TRANSACTION;");
+        $stt = $pdo->prepare('CALL connect_role(:did, :aid);');
+        $stt->bindValue(':did', $_POST['did'], PDO::PARAM_INT);
+        $stt->bindValue(':aid', $_POST['aid'], PDO::PARAM_INT);
+        $stt->execute();
+        $pdo->exec("COMMIT;");
+        echo $stt->rowCount();
+    } catch (PDOException $e) {
+        $pdo->exec("ROLLBACK;");
+        echoPDOException($e);
+    }
+}
+
+function get_users() {
+    global $pdo, $config;
+    $stt = $pdo->query('CALL get_users();');
+    $users = $stt->fetchAll();
+    return $users;
+}
+
+function get_roles() {
+    global $pdo, $config;
+    $roles = $pdo->query('CALL get_roles();')->fetchAll();
+    return $roles;
+}
+
+function get_edges() {
+    global $pdo, $config;
+    $edges = $pdo->query('CALL get_edges();')->fetchAll();
+    return $edges;
+}
+
+function get_perm() {
+    global $pdo, $config;
+    $perm = $pdo->query('CALL get_perm();')->fetchAll();
+    return $perm;
+}
+
+function get_users_tbale($users) {
+    $table = '<table class="ib"><caption>Пользователи</caption><thead><tr><th>id</th><th>name</th></tr></thead><tbody>';
+    foreach ($users as $user) {
+        $table.= '<tr><td>';
+        $table.= $user['id'];
+        $table.= '</td><td>';
+        $table.= $user['name'];
+        $table.= '</td></tr>';
+    }
+    $table.= '</tbody></table>';
+    return $table;
+}
+
+function get_edges_tbale($edges) {
+    $table = '<table class="ib"><caption>Ребра</caption><thead><tr><th>aid</th><th>did</th></tr></thead><tbody>';
+    foreach ($edges as $role) {
+        $table.= '<tr><td>';
+        $table.= $role['aid'];
+        $table.= '</td><td>';
+        $table.= $role['did'];
+        $table.= '</td></tr>';
+    }
+    $table.= '</tbody></table>';
+    return $table;
+}
+
+function get_roles_tbale($roles) {
+    $table = '<table class="ib"><caption>Роли</caption><thead><tr><th>id</th><th>name</th></tr></thead><tbody>';
+    foreach ($roles as $role) {
+        $table.= '<tr><td>';
+        $table.= $role['id'];
+        $table.= '</td><td>';
+        $table.= $role['name'];
+        $table.= '</td></tr>';
+    }
+    $table.= '</tbody></table>';
+    return $table;
+}
+
+function get_perm_tbale($perms) {
+    $table = '<table class="ib"><caption>Разрешения</caption><thead><tr><th>id</th><th>name</th></tr></thead><tbody>';
+    foreach ($perms as $perm) {
+        $table.= '<tr><td>';
+        $table.= $perm['id'];
+        $table.= '</td><td>';
+        $table.= $perm['name'];
+        $table.= '</td></tr>';
+    }
+    $table.= '</tbody></table>';
+    return $table;
 }
 
 function echoPDOException($e) {
