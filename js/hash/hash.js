@@ -10,7 +10,7 @@ console.log('a = {a:1}: ', a = {a:1})
 console.log('b = {b:2}: ', b = {b:2})
 console.log('c = {}: ', c = {})
 console.log('Object.assign({},a,b): ', Object.assign({},a,b))
-console.log('a: ', a)
+console.log('c={a:"перез",b:"аписал"}: ', c={a:"перез",b:"аписал"})
 console.log('Object.assign({},a,b,c): ', Object.assign({},a,b,c))
 
 console.log('Клонирование (то же что слияние с {})')
@@ -32,6 +32,15 @@ console.log('a = {a:1}: ', a = {a:1})
 console.log('delete a.a: ', delete a.a)
 console.log('a: ', a)
 
-{id:1,name:'asd'}.map(function(k,v){
-  console.log('k: ', k)
-})
+// Длинна хэш
+console.log('Длинна хэш')
+console.log('Object.keys({a:1,b:null,c:undefined}).length: ', Object.keys({a:1,b:null,c:undefined}).length)
+
+
+// var a = {
+//   'id': '1',
+//   'name': 'asd'
+// }
+// a.map(function(k,v){
+//   console.log('k: ', k)
+// })

@@ -1,5 +1,7 @@
+// Переборы
+// Перебор forEach - ничего не возвращает просто выполняет функцию .length раз (над каждым элементом)
 a = ['a','b','a','b']
-a.forEach((e,i,s)=>{
+var b = a.forEach((e,i,s)=>{
   if (e=='a') {
     s.splice(i,1)
     // Не остановится, уьерёт все
@@ -8,6 +10,7 @@ a.forEach((e,i,s)=>{
   }
 })
 console.log(a)
+console.log(b) // forEach
 
 
 a = ['a','b','a','b']
