@@ -247,10 +247,11 @@ if ($db) {
 }
 </pre>
 <h3>Кратко о функциях</h3>
-<ul>
-<li><code>$pdo->exec($sql);</code> - возвращает количество обработанных строк, она для DELETE, UPDATE, INSERT, CREATE TABLE, DROP DATABASE...;</li>
-<li><code>$pdo->query($sql);</code> - возвращает объект stmt (результирующий набор).</li>
-</ul>
+<ol>
+<li><code>$pdo->exec($sql);</code> - возвращает количество обработанных строк, она для INSERT, UPDATE, DELETE, CREATE TABLE, DROP DATABASE...;</li>
+<li><code>$stt = $pdo->query($sql);</code> - возвращает объект stmt (результирующий набор).</li>
+<li><code>$stt = $pdo->prepare($sql);</code> - подготавливает запрос (возможен множественный запуск запроса с разными аргументами).</li>
+</ol>
 <h3>Выполнение запросов</h3>
 <pre class="prettyprint lang-php">
 $stmt = $pdo-&gt;query('SELECT header FROM test');

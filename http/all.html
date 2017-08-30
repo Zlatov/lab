@@ -1,0 +1,93 @@
+<h2>Коды ответа</h2>
+<ul>
+	<li><strong>1xx: Informational</strong> (информационные):
+		<ul>
+			<li><strong>100 Continue</strong> («продолжай»);</li>
+			<li><strong>101 Switching Protocols</strong> («переключение протоколов»);</li>
+			<li><strong>102 Processing</strong> («идёт обработка»).</li>
+		</ul>
+	</li>
+	<li><strong>2xx: Success</strong> (успешно):
+		<ul>
+			<li><strong>200 OK</strong> («хорошо»);</li>
+			<li><strong>201 Created</strong> («создано»);</li>
+			<li><strong>202 Accepted</strong> («принято»);</li>
+			<li><strong>203 Non-Authoritative Information</strong> («информация не авторитетна»);</li>
+			<li><strong>204 No Content</strong> («нет содержимого»);</li>
+			<li><strong>205 Reset Content</strong> («сбросить содержимое»);</li>
+			<li><strong>206 Partial Content</strong> («частичное содержимое»);</li>
+			<li><strong>207 Multi-Status</strong> («многостатусный»);</li>
+			<li><strong>226 IM Used</strong> («использовано IM»).</li>
+		</ul>
+	</li>
+	<li><strong>3xx: Redirection</strong> (перенаправление):
+		<ul>
+			<li><strong>300 Multiple Choices</strong> («множество выборов»);</li>
+			<li><strong>301 Moved Permanently</strong> («перемещено навсегда»);</li>
+			<li><strong>302 Moved Temporarily</strong> («перемещено временно»);</li>
+			<li><strong>302 Found</strong> («найдено»);</li>
+			<li><strong>303 See Other</strong> («смотреть другое»);</li>
+			<li><strong>304 Not Modified</strong> («не изменялось»);</li>
+			<li><strong>305 Use Proxy</strong> («использовать прокси»);</li>
+			<li><strong>306</strong>&nbsp;— <i>зарезервировано</i> (код использовался только в ранних спецификациях);</li>
+			<li><strong>307 Temporary Redirect</strong> («временное перенаправление»).</li>
+		</ul>
+	</li>
+	<li><strong>4xx: Client Error</strong> (ошибка клиента):
+		<ul>
+			<li><strong>400 Bad Request</strong> («плохой, неверный запрос»);</li>
+			<li><strong>401 Unauthorized</strong> («не авторизован»);</li>
+			<li><strong>402 Payment Required</strong> («необходима оплата»);</li>
+			<li><strong>403 Forbidden</strong> («запрещено»);</li>
+			<li><strong>404 Not Found</strong> («не найдено»);</li>
+			<li><strong>405 Method Not Allowed</strong> («метод не поддерживается»);</li>
+			<li><strong>406 Not Acceptable</strong> («неприемлемо»);</li>
+			<li><strong>407 Proxy Authentication Required</strong> («необходима аутентификация прокси»);</li>
+			<li><strong>408 Request Timeout</strong> («истекло время ожидания»);</li>
+			<li><strong>409 Conflict</strong> («конфликт»);</li>
+			<li><strong>410 Gone</strong> («удалён»);</li>
+			<li><strong>411 Length Required</strong> («необходима длина»);</li>
+			<li><strong>412 Precondition Failed</strong> («условие ложно»);</li>
+			<li><strong>413 Payload Too Large</strong> («полезная нагрузка слишком велика»);</li>
+			<li><strong>414 URI Too Long</strong> («<strong>URI</strong> слишком длинный»);</li>
+			<li><strong>415 Unsupported Media Type</strong> («неподдерживаемый тип данных»);</li>
+			<li><strong>416 Range Not Satisfiable</strong> («диапазон не достижим»);</li>
+			<li><strong>417 Expectation Failed</strong> («ожидаение не удалось»);</li>
+			<li><strong>418 I’m a teapot</strong> («я&nbsp;— чайник»)</li>
+			<li><strong>422 Unprocessable Entity</strong> («необрабатываемый экземпляр»);</li>
+			<li><strong>423 Locked</strong> («заблокировано»);</li>
+			<li><strong>424 Failed Dependency</strong> («невыполненная зависимость»);</li>
+			<li><strong>425 Unordered Collection</strong> («неупорядоченный набор»);</li>
+			<li><strong>426 Upgrade Required</strong> («необходимо обновление»);</li>
+			<li><strong>428 Precondition Required</strong> («необходимо предусловие»);</li>
+			<li><strong>429 Too Many Requests</strong> («слишком много запросов»);</li>
+			<li><strong>431 Request Header Fields Too Large</strong> («поля заголовка запроса слишком большие»);</li>
+			<li>444 Закрывает соединение без передачи заголовка ответа. Нестандартный код;</li>
+			<li><strong>449 Retry With</strong> («повторить с»);</li>
+			<li><strong>451 Unavailable For Legal Reasons</strong> («недоступно по юридическим причинам»).</li>
+		</ul>
+	</li>
+	<li><strong>5xx: Server Error</strong> (ошибка сервера):
+		<ul>
+			<li><strong>500 Internal Server Error</strong> («внутренняя ошибка сервера»);</li>
+			<li><strong>501 Not Implemented</strong> («не реализовано»);</li>
+			<li><strong>502 Bad Gateway</strong> («плохой, ошибочный шлюз»);</li>
+			<li><strong>503 Service Unavailable</strong> («сервис недоступен»);</li>
+			<li><strong>504 Gateway Timeout</strong> («шлюз не отвечает»);</li>
+			<li><strong>505 HTTP Version Not Supported</strong> («версия HTTP не поддерживается»);</li>
+			<li><strong>506 Variant Also Negotiates</strong> («вариант тоже проводит согласование»);</li>
+			<li><strong>507 Insufficient Storage</strong> («переполнение хранилища»);</li>
+			<li><strong>508 Loop Detected</strong> («обнаружено бесконечное перенаправление»);</li>
+			<li><strong>509 Bandwidth Limit Exceeded</strong> («исчерпана пропускная ширина канала»);</li>
+			<li><strong>510 Not Extended</strong> («не расширено»);</li>
+			<li><strong>511 Network Authentication Required</strong> («требуется сетевая аутентификация»);</li>
+			<li><strong>520 Unknown Error</strong> («неизвестная ошибка»);</li>
+			<li><strong>521 Web Server Is Down</strong> («веб-сервер не работает»);</li>
+			<li><strong>522 Connection Timed Out</strong> («соединение не отвечает»);</li>
+			<li><strong>523 Origin Is Unreachable</strong> («источник недоступен»);</li>
+			<li><strong>524 A Timeout Occurred</strong> («время ожилания истекло»);</li>
+			<li><strong>525 SSL Handshake Failed</strong> («квитирование SSL не удалось»);</li>
+			<li><strong>526 Invalid SSL Certificate</strong> («недействительный сертификат SSL»).</li>
+		</ul>
+	</li>
+</ul>

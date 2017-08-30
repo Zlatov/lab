@@ -27,5 +27,9 @@
 <p><code class="prettyprint lang-sh copyToClipboard">slimrb -e 'index.html.slim' > index.html.erb</code></p>
 
 <h2>Консоль рельсы</h2>
+<p><strong>Запуск</strong></p>
 <pre class="prettyprint lang-sh copyToClipboard">rails c</pre>
+<p><strong>Вызов метода класса</strong></p>
 <pre class="prettyprint lang-rb">Agava::Model::Article.using(:cut_cut).connection.execute('show tables;').to_a</pre>
+<p><strong>Вызов метода контроллера</strong></p>
+<pre class="prettyprint lang-rb">ApplicationController.new.method_name</pre>
