@@ -416,6 +416,11 @@ mysql -uroot -p -e "show databases"</pre>
 mysql --host=$DBHOST --port=3306 --user="$DBUSER" --password="$DBPASS" -s --execute="SELECT concat(\`1\`, '.', \`2\`, '.', \`3\`) as version FROM newzlatov.sqlversion LIMIT 1;"</pre>
 <p>Прям выполнить sql файл</p>
 <pre>mysql --database="$database" --user="$user" --password="$password" < ./procedures.sql;</pre>
+<p><strong>Параметры</strong></p>
+<p><code>-t</code> — форматировать в таблицы</p>
+<p><code>-s</code> — без сетки таблицы</p>
+<p><code>-N</code> — без заголовка таблицы (без имён полей)</p>
+
 <h3>Резервное копирование и восстановление (дамп dump)</h3>
 <h4>Создание резервной копии</h4>
 <p>Необходимо обратить внимание на параметры mysqldump</p>
