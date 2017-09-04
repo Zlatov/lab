@@ -372,6 +372,23 @@ screen -r 2398.pts-0.webtest
 <h2>Программирование</h2>
 <h3>Пути/имена</h3>
 <pre class="prettyprint lang-sh">
+echo '-----------------------'
+echo '$BASH_ARGV:  ' $BASH_ARGV
+echo '$BASH_SOURCE:' $BASH_SOURCE
+echo '$0:          ' $0
+echo '`pwd`:       ' `pwd`
+echo '-----------------------'
+echo `dirname "$BASH_ARGV"`
+echo `dirname "$BASH_SOURCE"`
+echo `dirname "$0"`
+echo $(dirname $(pwd))
+echo '-----------------------'
+echo `basename "$BASH_ARGV"`
+echo `basename "$BASH_SOURCE"`
+echo `basename "$0"`
+echo $(basename $(pwd))
+echo '-----------------------'
+
 echo $0                     # ./sh/pull_db_test.sh
 echo $(dirname "$0")        # ./sh
 echo $(pwd)                 # /home/iadfeshchm/projects/admin/temp

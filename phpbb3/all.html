@@ -381,6 +381,72 @@ die();
         $rights = $auth-&gt;acl_get_list($user_id, ['f_read', 'm_'], false);
     }
 </pre>
+<h3>Форумные разрешения</h3>
+<table>
+<tbody>
+<tr><td>f_</td>
+<td>Разрешения форума</td></tr>
+<tr><td>f_announce</td>
+<td>Может публиковать объявления</td></tr>
+<tr><td>f_attach</td>
+<td>Можно прикреплять файлы</td></tr>
+<tr><td>f_bbcode</td>
+<td>Модераторы</td></tr>
+<tr><td>f_bump</td>
+<td>Могу ударить темы</td></tr>
+<tr><td>f_delete</td>
+<td>Может удалять собственные сообщения</td></tr>
+<tr><td>f_download</td>
+<td>Можно загружать файлы</td></tr>
+<tr><td>f_edit</td>
+<td>Можно редактировать собственные сообщения</td></tr>
+<tr><td>f_email</td>
+<td>Может отправлять сообщения по электронной почте</td></tr>
+<tr><td>f_flash</td>
+<td>Можно отправить Flash</td></tr>
+<tr><td>f_icons</td>
+<td>Можно использовать значки сообщений</td></tr>
+<tr><td>f_ignoreflood</td>
+<td>Может игнорировать ограничение на лимит</td></tr>
+<tr><td>f_img</td>
+<td>Можно отправлять изображения</td></tr>
+<tr><td>f_list</td>
+<td>Может видеть форум</td></tr>
+<tr><td>f_noapprove</td>
+<td>Может публиковать без одобрения</td></tr>
+<tr><td>f_poll</td>
+<td>Может создавать опросы</td></tr>
+<tr><td>f_post</td>
+<td>Можно начинать новые темы</td></tr>
+<tr><td>f_postcount</td>
+<td>Инкремент post counter. Обратите внимание, что этот параметр влияет только на новые сообщения.</td></tr>
+<tr><td>f_print</td>
+<td>Можно печатать темы</td></tr>
+<tr><td>f_read</td>
+<td>Может читать форум</td></tr>
+<tr><td>f_reply</td>
+<td>Ответить на тему</td></tr>
+<tr><td>f_report</td>
+<td>Может сообщать сообщения</td></tr>
+<tr><td>f_search</td>
+<td>Поиск в форуме</td></tr>
+<tr><td>f_sigs</td>
+<td>Может использовать подписи</td></tr>
+<tr><td>f_smilies</td>
+<td>Может отправлять смайлики</td></tr>
+<tr><td>f_sticky</td>
+<td>Может отправлять листки</td></tr>
+<tr><td>f_subscribe</td>
+<td>Может подписаться на форум</td></tr>
+<tr><td>f_user_lock</td>
+<td>Можно заблокировать собственные темы</td></tr>
+<tr><td>f_vote</td>
+<td>Может голосовать в опросах</td></tr>
+<tr><td>f_votechg</td>
+<td>Может изменить существующее голосование</td></tr>
+</tbody>
+</table>
+
 <h2>Ббкоды</h2>
 <p>Это отдельная головная боль phpbb, очень интересный алгоритм преобразования, особенно если еще прикручен какой-нибудь WYSIWYG редактор.</p>
 <p>В кратце заметки:</p>
@@ -401,3 +467,318 @@ die();
     <li><var class="copyToClipboard">styles/prosilver/theme/custom.js</var> - insert_text();</li>
     <li><var class="copyToClipboard">assets/javascript/editor.js</var> - тоже :-( insert_text().</li>
 </ul>
+
+<h2>Вложения</h2>
+
+
+<p><strong><var>posting.php</var></strong></p>
+<pre>
+// 
+$message_parser->get_submitted_attachment_data($post_data['poster_id']);
+</pre>
+
+<pre>
+// Preview
+if (!sizeof($error) &amp;&amp; $preview)
+...
+    // Attachment Preview
+    if (sizeof($message_parser-&gt;attachment_data))
+    {
+        $template-&gt;assign_var('S_HAS_ATTACHMENTS', true);
+
+        $update_count = array();
+        $attachment_data = $message_parser-&gt;attachment_data;
+
+        // Массив с информацией о вложениях в посте
+        // echo '$attachment_data: &lt;pre&gt;';
+        // print_r($attachment_data);
+        // echo '&lt;/pre&gt;';
+        // die();
+
+        parse_attachments($forum_id, $preview_message, $attachment_data, $update_count, true);
+
+        // Массив с html (вложения в посте)
+        // echo '$attachment_data: &lt;pre&gt;';
+        // print_r($attachment_data);
+        // echo '&lt;/pre&gt;';
+        // die();
+</pre>
+
+<pre>
+// передаем шаблону $attachment_data:
+// Attachment entry
+posting_gen_attachment_entry($attachment_data, $filename_data, $allowed);
+</pre>
+
+
+<p><strong><var>includes/functions_content.php</var></strong></p>
+<pre>
+function parse_attachments($forum_id, &amp;$message, &amp;$attachments, &amp;$update_count, $preview = false)
+...
+        $sql = 'SELECT *
+            FROM ' . ATTACHMENTS_TABLE . '
+            WHERE ' . $db-&gt;sql_in_set('attach_id', array_keys($attach_ids));
+        $result = $db-&gt;sql_query($sql);
+
+        while ($row = $db-&gt;sql_fetchrow($result))
+        {
+            // iadfeshchm
+            // Выбранная из базы данных инф о вложениях
+            // echo '$row: &lt;pre&gt;';
+            // print_r($row);
+            // echo '&lt;/pre&gt;';
+            if (!isset($attach_ids[$row['attach_id']]))
+            {
+                continue;
+            }
+
+            // If we preview attachments we will set some retrieved values here
+            if ($preview)
+            {
+                $row['attach_comment'] = $attachments[$attach_ids[$row['attach_id']]]['attach_comment'];
+                $row['preview'] = $attachments[$attach_ids[$row['attach_id']]]['preview'];
+
+...
+
+        if (!$denied)
+        {
+            $l_downloaded_viewed = $download_link = '';
+            $display_cat = $extensions[$attachment['extension']]['display_cat'];
+
+            if ($display_cat == ATTACHMENT_CATEGORY_IMAGE)
+            {
+
+                $block_array += array(
+                    'S_FILE_IS_IMAGE' => true,
+                );
+</pre>
+
+
+
+<pre><strong><var>includes/functions_posting.php</var></strong></pre>
+<pre>
+/**
+* Generate inline attachment entry
+*/
+function posting_gen_attachment_entry($attachment_data, &amp;$filename_data, $show_attach_box = true)
+
+...
+
+            $template-&gt;assign_block_vars('attach_row', array(
+                'FILENAME'          =&gt; utf8_basename($attach_row['real_filename']),
+                'A_FILENAME'        =&gt; addslashes(utf8_basename($attach_row['real_filename'])),
+                'FILE_COMMENT'      =&gt; $attach_row['attach_comment'],
+                'ATTACH_ID'         =&gt; $attach_row['attach_id'],
+                'S_IS_ORPHAN'       =&gt; $attach_row['is_orphan'],
+                'ASSOC_INDEX'       =&gt; $count,
+                'FILESIZE'          =&gt; get_formatted_filesize($attach_row['filesize']),
+
+                'PREVIEW_LINK'      =&gt; ($attach_row['preview']==='link')?' checked':'',
+                'PREVIEW_THUMBNAIL' =&gt; ($attach_row['preview']==='thumbnail')?' checked':'',
+
+                'U_VIEW_ATTACHMENT' =&gt; $download_link,
+                'S_HIDDEN'          =&gt; $hidden)
+            );
+
+
+</pre>
+
+<pre>
+
+/**
+* Submit Post
+* @todo Split up and create lightweight, simple API for this.
+*/
+function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $update_message = true, $update_search_index = true)
+
+...
+
+        foreach ($data['attachment_data'] as $pos =&gt; $attach_row)
+        {
+            if ($attach_row['is_orphan'] &amp;&amp; !isset($orphan_rows[$attach_row['attach_id']]))
+            {
+                continue;
+            }
+
+            if (!$attach_row['is_orphan'])
+            {
+                // update entry in db if attachment already stored in db and filespace
+                if ($attach_row['preview'] &amp;&amp; in_array($attach_row['preview'],['link','thumbnail'])) {
+                    $preview_attach = &quot;'&quot; . $db-&gt;sql_escape($attach_row['preview']) . &quot;'&quot;;
+                } else {
+                    $preview_attach = 'NULL';
+                }
+                $sql = 'UPDATE ' . ATTACHMENTS_TABLE . &quot;
+                    SET attach_comment = '&quot; . $db-&gt;sql_escape($attach_row['attach_comment']) . &quot;'
+                        , preview = &quot; . $preview_attach . &quot;
+                    WHERE attach_id = &quot; . (int) $attach_row['attach_id'] . '
+                        AND is_orphan = 0';
+                $db-&gt;sql_query($sql);
+            }
+            else
+            {
+                // insert attachment into db
+                if (!@file_exists($phpbb_root_path . $config['upload_path'] . '/' . utf8_basename($orphan_rows[$attach_row['attach_id']]['physical_filename'])))
+                {
+                    continue;
+                }
+
+                $space_taken += $orphan_rows[$attach_row['attach_id']]['filesize'];
+                $files_added++;
+
+                if ($attach_row['preview'] &amp;&amp; in_array($attach_row['preview'],['link','thumbnail'])) {
+                    $preview_attach = $db-&gt;sql_escape($attach_row['preview']);
+                } else {
+                    $preview_attach = null;
+                }
+
+                $attach_sql = array(
+                    'post_msg_id'       =&gt; $data['post_id'],
+                    'topic_id'          =&gt; $data['topic_id'],
+                    'is_orphan'         =&gt; 0,
+                    'poster_id'         =&gt; $poster_id,
+                    'attach_comment'    =&gt; $attach_row['attach_comment'],
+                    'preview'           =&gt; $preview_attach,
+                );
+
+</pre>
+
+
+<p><strong><var>includes/message_parser.php</var></strong></p>
+
+<pre>
+    function get_submitted_attachment_data($check_user_id = false)
+
+...
+
+        // iadfeshchm
+        $preview_attach = request_var('preview_attach', [''=>'']);
+
+...
+
+        // Regenerate already posted attachments
+        if (sizeof($not_orphan))
+        {
+            // Get the attachment data, based on the poster id...
+            // Ну а если постера не найдено, то хотя бы просто выбираем аттачи
+            $sql = '
+                SELECT attach_id, is_orphan, real_filename, attach_comment, filesize, preview
+                FROM ' . ATTACHMENTS_TABLE . ' a
+                LEFT JOIN forum_users u on u.user_id = a.poster_id
+                WHERE ' . $db->sql_in_set('attach_id', array_keys($not_orphan)) . '
+                    AND IF(u.user_id, a.poster_id = '.$check_user_id.', 1=1)'
+                ;
+            $result = $db->sql_query($sql);
+
+            while ($row = $db->sql_fetchrow($result))
+            {
+                $pos = $not_orphan[$row['attach_id']];
+                $this->attachment_data[$pos] = $row;
+                $this->attachment_data[$pos]['attach_comment'] = $attachment_data[$pos]['attach_comment'];
+                if (isset($preview_attach[$pos])) {
+                    $this->attachment_data[$pos]['preview'] = $preview_attach[$pos];
+                }
+
+                unset($not_orphan[$row['attach_id']]);
+            }
+            $db->sql_freeresult($result);
+        }
+
+        if (sizeof($not_orphan))
+        {
+            trigger_error('NO_ACCESS_ATTACHMENT', E_USER_ERROR);
+        }
+
+        // Regenerate newly uploaded attachments
+        if (sizeof($orphan))
+        {
+            $sql = 'SELECT attach_id, is_orphan, real_filename, attach_comment, filesize, preview
+                FROM ' . ATTACHMENTS_TABLE . '
+                WHERE ' . $db->sql_in_set('attach_id', array_keys($orphan)) . '
+                    AND poster_id = ' . $user->data['user_id'] . '
+                    AND is_orphan = 1';
+            $result = $db->sql_query($sql);
+
+            while ($row = $db->sql_fetchrow($result))
+            {
+                $pos = $orphan[$row['attach_id']];
+                $this->attachment_data[$pos] = $row;
+                $this->attachment_data[$pos]['attach_comment'] = $attachment_data[$pos]['attach_comment'];
+                if (isset($preview_attach[$pos])) {
+                    $this->attachment_data[$pos]['preview'] = $preview_attach[$pos];
+                }
+
+</pre>
+
+
+<p><strong><var>styles/prosilver/template/attachment.html</var></strong></p>
+
+<pre>
+        &lt;!-- IF _file.S_IMAGE --&gt;
+        &lt;dl class=&quot;file&quot;&gt;
+            &lt;dt class=&quot;attach-image&quot;&gt;
+                &lt;!-- IF _file.PREVIEW == 'thumbnail' --&gt;
+                    &lt;a href=&quot;{_file.U_INLINE_LINK}&quot; data-lightbox=&quot;{_file.POST_MSG_ID}&quot;&gt;
+                        &lt;img src=&quot;{_file.U_INLINE_LINK}&quot; class=&quot;postimage attach&quot; alt=&quot;{_file.DOWNLOAD_NAME}&quot;&gt;
+                    &lt;/a&gt;
+                &lt;!-- ELSEIF _file.PREVIEW == 'link' --&gt;
+                    &lt;a class=&quot;postlink&quot; href=&quot;{_file.U_DOWNLOAD_LINK}&quot;&gt;{_file.DOWNLOAD_NAME}&lt;/a&gt;
+                &lt;!-- ELSE --&gt;
+                    &lt;a href=&quot;{_file.U_INLINE_LINK}&quot; data-lightbox=&quot;{_file.POST_MSG_ID}&quot;&gt;
+                        &lt;img src=&quot;{_file.U_INLINE_LINK}&quot; class=&quot;postimage attach&quot; alt=&quot;{_file.DOWNLOAD_NAME}&quot;&gt;
+                    &lt;/a&gt;
+                &lt;!-- ENDIF --&gt;
+</pre>
+
+
+<p><strong><var>styles/prosilver/template/posting_attach_body.html</var></strong></p>
+
+<pre>
+
+                            &lt;td class=&quot;attach-comment&quot;&gt;
+                                &lt;textarea name=&quot;comment_list[{attach_row.ASSOC_INDEX}]&quot; rows=&quot;1&quot; cols=&quot;30&quot; class=&quot;inputbox&quot;&gt;{attach_row.FILE_COMMENT}&lt;/textarea&gt;
+                                {attach_row.S_HIDDEN}
+                            &lt;/td&gt;
+                            &lt;td class=&quot;attach-filesize&quot;&gt;
+                                &lt;span class=&quot;file-size&quot;&gt;{attach_row.FILESIZE}&lt;/span&gt;
+                            &lt;/td&gt;
+                            &lt;td class=&quot;attach-preview&quot;&gt;
+                                &lt;label&gt;
+                                    &lt;input type=&quot;radio&quot; name=&quot;preview_attach[{attach_row.ASSOC_INDEX}]&quot; value=&quot;link&quot;{attach_row.PREVIEW_LINK}&gt;ссылка
+                                &lt;/label&gt;
+                                &lt;label&gt;
+                                    &lt;input type=&quot;radio&quot; name=&quot;preview_attach[{attach_row.ASSOC_INDEX}]&quot; value=&quot;thumbnail&quot;{attach_row.PREVIEW_THUMBNAIL}&gt;миниатюра
+                                &lt;/label&gt;
+                            &lt;/td&gt;
+                            &lt;td class=&quot;attach-status&quot;&gt;
+                                &lt;span class=&quot;file-status file-uploaded&quot;&gt;&lt;/span&gt;
+                            &lt;/td&gt;
+                        &lt;/tr&gt;
+</pre>
+
+<p><strong><var>assets/javascript/plupload.js</var></strong></p>
+<pre>
+phpbb.plupload.insertRow = function(file) {
+
+...
+
+    row.find('.file-size').html(plupload.formatSize(file.size));
+
+    var attach_id = file.id;
+    row.find('.attach-filesize').after('&lt;td class=&quot;attach-preview&quot;&gt;&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;preview_attach[' + attach_id + ']&quot; value=&quot;link&quot;&gt;ссылка&lt;/label&gt; &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;preview_attach[' + attach_id + ']&quot; value=&quot;thumbnail&quot;&gt;миниатюра&lt;/label&gt;&lt;/td&gt;');
+
+</pre>
+
+<pre>
+phpbb.plupload.updateRow = function(index, downloadUrl) {
+    var attach = phpbb.plupload.data[index],
+        row = $('[data-attach-id=&quot;' + attach.attach_id + '&quot;]');
+
+...
+
+    row.find('textarea').attr('name', 'comment_list[' + index + ']');
+    row.find('input[type=&quot;radio&quot;]').attr('name', 'preview_attach[' + index + ']');
+    phpbb.plupload.updateHiddenData(row, attach, index);
+};
+</pre>
+
