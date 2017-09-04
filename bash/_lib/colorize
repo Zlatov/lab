@@ -1,0 +1,22 @@
+#!/bin/bash
+TEXT_BOLD='\033[1m'
+COLOR_RED='\033[31m'
+COLOR_GREEN='\033[32m'
+COLOR_BLUE='\033[36m'
+COLOR_YELLOW='\033[33m'
+STYLE_DEFAULT='\033[0m'
+
+COLORIZE_CLEAR='\033[0m'
+
+function echoc {
+	# while true;
+ #    do
+        case "$1" in
+            -n | --name ) echo NAME="$2"; shift 2;;
+            -d | --dir ) echo DIR="$2"; shift 2;;
+        esac
+    # done
+    # echo -en $COLOR_RED
+    # echo -e "Ошибка применения триггеров."
+    # echo -en $STYLE_DEFAULT
+}
