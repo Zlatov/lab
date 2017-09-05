@@ -50,7 +50,14 @@ END;;
 
 CREATE PROCEDURE `assign_role_parent`(IN param_did INT UNSIGNED, IN param_aid INT UNSIGNED)
 procedure_label:BEGIN
-	INSERT INTO `rbac_rolerel` (`aid`, `did`) VALUES (param_aid, param_did);
+	INSERT INTO `rbac_rolerel` (`aid`, `did`, `dif`) VALUES (param_aid, param_did, 1);
+	-- Вставляем связи
+	INSERT INTO `rbac_rolerel` (`aid`, `did`, `dif`)
+		-- Выбираем предков указанного родителя (did = idРодителя)
+		-- и вставляем записи типа: idПредка, нашId
+		SELECT `aid`, param_did, 2
+		FROM `rbac_rolerel`
+		WHERE `did` = param_aid;
 END;;
 
 CREATE PROCEDURE `get_roles`()
@@ -60,7 +67,7 @@ END;;
 
 CREATE PROCEDURE `get_roles_rel`()
 procedure_label:BEGIN
-	SELECT `aid`, `did` FROM `rbac_rolerel`;
+	SELECT `aid`, `did`, `dif` FROM `rbac_rolerel`;
 END;;
 
 CREATE PROCEDURE `add_perm`(

@@ -42,30 +42,41 @@ CALL add_perm('edit_products_vips', 6, 'Изменять Продукты ВИП
 CALL add_perm('read_affiliates', 7, 'Читать Филиалы'); -- 13
 CALL add_perm('edit_affiliates', 7, 'Изменять Филиалы'); -- 14
 
-CALL add_role('admin'); -- 1
-CALL add_role('seo'); -- 2
-CALL add_role('director'); -- 3
-CALL add_role('senior_manager'); -- 4
-CALL add_role('junior_manager'); -- 5
+-- CALL add_role('admin'); -- 1
+-- CALL add_role('seo'); -- 2
+-- CALL add_role('director'); -- 3
+-- CALL add_role('senior_manager'); -- 4
+-- CALL add_role('junior_manager'); -- 5
 
-CALL assign_role_parent(4,5);
-CALL assign_role_parent(3,4);
-CALL assign_role_parent(1,3);
-CALL assign_role_parent(1,2);
+-- CALL assign_role_parent(4,5);
+-- CALL assign_role_parent(3,4);
+-- CALL assign_role_parent(1,3);
+-- CALL assign_role_parent(1,2);
 
-CALL assign_permission_role(1,1);
-CALL assign_permission_role(2,1);
-CALL assign_permission_role(3,1);
-CALL assign_permission_role(4,1);
-CALL assign_permission_role(5,1);
-CALL assign_permission_role(6,1);
-CALL assign_permission_role(7,1);
-CALL assign_permission_role(8,1);
-CALL assign_permission_role(9,1);
-CALL assign_permission_role(10,1);
-CALL assign_permission_role(11,1);
-CALL assign_permission_role(12,1);
-CALL assign_permission_role(13,1);
-CALL assign_permission_role(14,1);
+-- CALL assign_permission_role(1,1);
+-- CALL assign_permission_role(2,1);
+-- CALL assign_permission_role(3,1);
+-- CALL assign_permission_role(4,1);
+-- CALL assign_permission_role(5,1);
+-- CALL assign_permission_role(6,1);
+-- CALL assign_permission_role(7,1);
+-- CALL assign_permission_role(8,1);
+-- CALL assign_permission_role(9,1);
+-- CALL assign_permission_role(10,1);
+-- CALL assign_permission_role(11,1);
+-- CALL assign_permission_role(12,1);
+-- CALL assign_permission_role(13,1);
+-- CALL assign_permission_role(14,1);
 
-CALL assign_role_user(1,1);
+-- CALL assign_role_user(1,1);
+
+
+CALL add_role('user'); -- 1
+CALL add_role('moder'); -- 2
+CALL add_role('admin'); -- 3
+CALL add_role('admin2'); -- 4
+
+CALL assign_role_parent(2,1);
+-- CALL assign_role_parent(3,2);
+-- CALL assign_role_parent(4,3);
+CALL get_roles_rel();

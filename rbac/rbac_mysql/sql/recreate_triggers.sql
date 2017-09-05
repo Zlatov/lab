@@ -1,8 +1,6 @@
 DROP TRIGGER IF EXISTS `tbi_user`;
 DROP TRIGGER IF EXISTS `tbi_rbac_role`;
 
-DROP TRIGGER IF EXISTS `tai_rbac_rolerel`; -- После вставки связи ролей добавляем связи
-
 DROP TRIGGER IF EXISTS `tbi_rbac_object`; -- Перед вставкой в структуру устанавливаем уровень
 DROP TRIGGER IF EXISTS `tai_rbac_object`; -- После вставки в структуру добавляем связи
 DROP TRIGGER IF EXISTS `tbd_rbac_object`; -- Перед удалением из структуры удаляем связи

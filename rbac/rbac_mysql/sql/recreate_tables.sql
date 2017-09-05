@@ -61,6 +61,7 @@ COMMENT 'Роли';
 CREATE TABLE `rbac_rolerel` (
   `aid` INT UNSIGNED NOT NULL,
   `did` INT UNSIGNED NOT NULL,
+  `dif` INT UNSIGNED NOT NULL,
   UNIQUE KEY `uq_rbacrolerel_adid` (`aid`,`did`),
   INDEX `ix_rbacrolerel_did` (`did`),
   INDEX `ix_rbacrolerel_aid` (`aid`),
