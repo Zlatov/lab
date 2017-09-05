@@ -1,14 +1,18 @@
-DROP PROCEDURE IF EXISTS `add_user`;
-DROP PROCEDURE IF EXISTS `add_role`;
-DROP PROCEDURE IF EXISTS `add_perm`;
-
-DROP PROCEDURE IF EXISTS `connect_role`;
-
+DROP PROCEDURE IF EXISTS `add_user`; -- Добавить пользователя
+DROP PROCEDURE IF EXISTS `add_role`; -- Добавить роль
+DROP PROCEDURE IF EXISTS `add_perm`; -- Добавить разрешение на объект
+DROP PROCEDURE IF EXISTS `add_object`; -- Добавить объект
+DROP PROCEDURE IF EXISTS `assign_role_parent`; -- Назначить роли предка (другую роль)
+DROP PROCEDURE IF EXISTS `assign_permission_role`; -- Дать разрешение роли
+DROP PROCEDURE IF EXISTS `assign_role_user`; -- Назначить роль пользователя
+DROP PROCEDURE IF EXISTS `get_role_immediate_perm_on_object`;
+DROP PROCEDURE IF EXISTS `get_role_perm`;
 DROP PROCEDURE IF EXISTS `get_roles`;
+DROP PROCEDURE IF EXISTS `get_roles_rel`;
 DROP PROCEDURE IF EXISTS `get_users`;
-DROP PROCEDURE IF EXISTS `get_edges`;
 DROP PROCEDURE IF EXISTS `get_perm`;
--- DELIMITER ;;
+-- DROP PROCEDURE IF EXISTS `get_user_permissions_object`;
+DELIMITER ;;
 
 CREATE PROCEDURE `add_user`(IN param_name VARCHAR(128))
 procedure_label:BEGIN
@@ -21,12 +25,17 @@ procedure_label:BEGIN
 		LEAVE procedure_label;
 	END IF;
 	INSERT INTO `user` (`name`) VALUES (param_name);
-END;
+END;;
+
+CREATE PROCEDURE `add_object`(IN param_pid INT UNSIGNED, IN param_name VARCHAR(128))
+procedure_label:BEGIN
+	INSERT INTO `rbac_object` (`pid`, `name`) VALUES (param_pid, param_name);
+END;;
 
 CREATE PROCEDURE `get_users`()
 procedure_label:BEGIN
 	SELECT `id`, `name` FROM `user`;
-END;
+END;;
 
 CREATE PROCEDURE `add_role`(IN param_name VARCHAR(128))
 procedure_label:BEGIN
@@ -37,24 +46,28 @@ procedure_label:BEGIN
 		LEAVE procedure_label;
 	END IF;
 	INSERT INTO `rbac_role` (`name`) VALUES (param_name);
-END;
+END;;
 
-CREATE PROCEDURE `connect_role`(IN param_did INT UNSIGNED, IN param_aid INT UNSIGNED)
+CREATE PROCEDURE `assign_role_parent`(IN param_did INT UNSIGNED, IN param_aid INT UNSIGNED)
 procedure_label:BEGIN
 	INSERT INTO `rbac_rolerel` (`aid`, `did`) VALUES (param_aid, param_did);
-END;
+END;;
 
 CREATE PROCEDURE `get_roles`()
 procedure_label:BEGIN
 	SELECT `id`, `name` FROM `rbac_role`;
-END;
+END;;
 
-CREATE PROCEDURE `get_edges`()
+CREATE PROCEDURE `get_roles_rel`()
 procedure_label:BEGIN
 	SELECT `aid`, `did` FROM `rbac_rolerel`;
-END;
+END;;
 
-CREATE PROCEDURE `add_perm`(IN param_name VARCHAR(128), IN param_description TEXT)
+CREATE PROCEDURE `add_perm`(
+	IN param_name VARCHAR(128),
+	IN param_object_id INT UNSIGNED,
+	IN param_description TEXT
+)
 procedure_label:BEGIN
 	DECLARE nameCharLength INT;
 	SELECT CHAR_LENGTH( param_name ) INTO nameCharLength;
@@ -62,10 +75,50 @@ procedure_label:BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Длинна имени разрешения превышает допустимое значение.';
 		LEAVE procedure_label;
 	END IF;
-	INSERT INTO `rbac_perm` (`name`, `description`) VALUES (param_name, param_description);
-END;
+	INSERT INTO `rbac_perm` (`name`, `description`, `object_id`) VALUES (param_name, param_description, param_object_id);
+END;;
 
 CREATE PROCEDURE `get_perm`()
 procedure_label:BEGIN
 	SELECT `id`, `name` FROM `rbac_perm`;
-END;
+END;;
+
+CREATE PROCEDURE `assign_permission_role`(IN param_permid INT UNSIGNED, IN param_roleid INT UNSIGNED)
+procedure_label:BEGIN
+	INSERT INTO `rbac_perm_role` VALUES (param_permid, param_roleid);
+END;;
+
+CREATE PROCEDURE `assign_role_user`(IN param_roleid INT UNSIGNED, IN param_userid INT UNSIGNED)
+procedure_label:BEGIN
+	INSERT INTO `rbac_assignment` VALUES (param_userid, param_roleid);
+END;;
+
+CREATE PROCEDURE `get_role_immediate_perm_on_object`(
+	IN param_roleid INT UNSIGNED,
+	IN param_objectid INT UNSIGNED
+)
+procedure_label:BEGIN
+	SELECT
+		p.id,
+		p.name,
+		p.description,
+		p.object_id
+	FROM rbac_perm p
+	INNER JOIN rbac_perm_role pr ON pr.perm_id = p.id
+	WHERE
+		p.object_id = param_objectid
+		AND pr.role_id = param_roleid;
+END;;
+
+CREATE PROCEDURE `get_role_perm`(
+	IN param_roleid INT UNSIGNED
+)
+procedure_label:BEGIN
+	SELECT
+		*
+	FROM rbac_rolerel rr
+	WHERE
+		rr.did = param_roleid;
+END;;
+
+DELIMITER ;

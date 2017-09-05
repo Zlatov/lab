@@ -16,7 +16,8 @@ CREATE TABLE `user` (
 ENGINE=InnoDB
 AUTO_INCREMENT 1
 DEFAULT CHARSET=utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT 'Таблица пользователей';
 
 CREATE TABLE `rbac_object` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -25,13 +26,13 @@ CREATE TABLE `rbac_object` (
   `name` VARCHAR(128) NOT NULL,
   `order` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_rbacobject_header` (`name` ASC),
   CONSTRAINT `fk_rbacobject_pid` FOREIGN KEY (`pid`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 ENGINE InnoDB
 AUTO_INCREMENT 1
 DEFAULT CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT 'Объекты разрешений';
 
 CREATE TABLE `rbac_objectrel` (
   `aid` INT UNSIGNED NOT NULL,
@@ -42,7 +43,8 @@ CREATE TABLE `rbac_objectrel` (
 )
 ENGINE InnoDB
 DEFAULT CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT 'Объекты древовидны';
 
 CREATE TABLE `rbac_role` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -53,7 +55,8 @@ CREATE TABLE `rbac_role` (
 ENGINE=InnoDB
 AUTO_INCREMENT 1
 DEFAULT CHARSET=utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT 'Роли';
 
 CREATE TABLE `rbac_rolerel` (
   `aid` INT UNSIGNED NOT NULL,
@@ -67,16 +70,24 @@ CREATE TABLE `rbac_rolerel` (
 ENGINE=InnoDB
 AUTO_INCREMENT 1
 DEFAULT CHARSET=utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT 'Роли графовидны';
 
 CREATE TABLE `rbac_perm` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,
   `description` TEXT NOT NULL,
-  `rule_name` VARCHAR(128) DEFAULT NULL,
+  `object_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  UNIQUE KEY `name_UNIQUE` (`name`),
+  INDEX `ix_rbacperm_objectid` (`object_id`),
+  CONSTRAINT `fk_rbacperm_objectid` FOREIGN KEY (`object_id`) REFERENCES `rbac_object` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARSET=utf8
+COLLATE utf8_general_ci
+COMMENT 'Разрешения';
 
 CREATE TABLE `rbac_perm_role` (
   `perm_id` int(10) UNSIGNED NOT NULL,
@@ -85,7 +96,10 @@ CREATE TABLE `rbac_perm_role` (
   KEY `fk_rbacpermrole_roleid_idx` (`role_id`),
   CONSTRAINT `fk_rbacpermrole_permid` FOREIGN KEY (`perm_id`) REFERENCES `rbac_perm` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_rbacpermrole_roleid` FOREIGN KEY (`role_id`) REFERENCES `rbac_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8
+COMMENT 'Связи разрешений к ролям';
 
 CREATE TABLE `rbac_assignment` (
   `user_id` int(10) UNSIGNED NOT NULL,
@@ -94,4 +108,7 @@ CREATE TABLE `rbac_assignment` (
   KEY `fk_rbac_assignment_roleid_idx` (`role_id`),
   CONSTRAINT `fk_rbacassignment_userid` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_rbac_assignment_roleid` FOREIGN KEY (`role_id`) REFERENCES `rbac_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8
+COMMENT 'Связи пользователей к ролям';

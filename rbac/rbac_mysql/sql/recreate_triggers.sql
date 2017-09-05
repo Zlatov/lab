@@ -1,11 +1,14 @@
 DROP TRIGGER IF EXISTS `tbi_user`;
 DROP TRIGGER IF EXISTS `tbi_rbac_role`;
 
+DROP TRIGGER IF EXISTS `tai_rbac_rolerel`; -- После вставки связи ролей добавляем связи
+
 DROP TRIGGER IF EXISTS `tbi_rbac_object`; -- Перед вставкой в структуру устанавливаем уровень
 DROP TRIGGER IF EXISTS `tai_rbac_object`; -- После вставки в структуру добавляем связи
 DROP TRIGGER IF EXISTS `tbd_rbac_object`; -- Перед удалением из структуры удаляем связи
 DROP TRIGGER IF EXISTS `tbu_rbac_object`; -- Перед обновлением структуры обновляем связи
 
+DELIMITER ;;
 
 CREATE TRIGGER `tbi_user` BEFORE INSERT ON `user` FOR EACH ROW
 trigger_label:BEGIN
@@ -16,7 +19,7 @@ trigger_label:BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Попытка создать пользователя с пустым именем.';
 		LEAVE trigger_label;
 	END IF;
-END;
+END;;
 
 CREATE TRIGGER `tbi_rbac_role` BEFORE INSERT ON `rbac_role` FOR EACH ROW
 trigger_label:BEGIN
@@ -27,7 +30,7 @@ trigger_label:BEGIN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Попытка создать роль с пустым именем.';
 		LEAVE trigger_label;
 	END IF;
-END;
+END;;
 
 CREATE TRIGGER `tbi_rbac_object` BEFORE INSERT ON `rbac_object` FOR EACH ROW
 trigger_label:BEGIN
@@ -42,7 +45,7 @@ trigger_label:BEGIN
 		-- Устанавливаем уровень в любом случае (1 если нет родителя)
 		SET NEW.`level` = level_of_parent;
 	END IF;
-END;
+END;;
 
 CREATE TRIGGER `tai_rbac_object` AFTER INSERT ON `rbac_object` FOR EACH ROW
 trigger_label:BEGIN
@@ -62,7 +65,7 @@ trigger_label:BEGIN
 		    UNION ALL
 		    SELECT NEW.`pid`, NEW.`id`;
 	END IF;
-END;
+END;;
 
 CREATE TRIGGER `tbd_rbac_object` BEFORE DElETE ON `rbac_object` FOR EACH ROW
 BEGIN
@@ -77,7 +80,7 @@ BEGIN
 	FROM `rbac_objectrel` `find_rel_to_removed`
 	WHERE `find_rel_to_removed`.`did` = OLD.`id`;
 
-END;
+END;;
 
 CREATE TRIGGER `tbu_rbac_object` BEFORE UPDATE ON `rbac_object` FOR EACH ROW
 trigger_label:BEGIN
@@ -149,4 +152,6 @@ trigger_label:BEGIN
 		END IF;
 
 	END IF;
-END;
+END;;
+
+DELIMITER ;
