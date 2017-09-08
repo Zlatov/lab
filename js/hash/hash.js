@@ -32,6 +32,9 @@ console.log('a = {a:1}: ', a = {a:1})
 console.log('delete a.a: ', delete a.a)
 console.log('a: ', a)
 
+console.log('Ключи хэш')
+console.log('Object.keys({a:1,b:null,c:undefined}): ', Object.keys({a:1,b:null,c:undefined}))
+
 // Длинна хэш
 console.log('Длинна хэш')
 console.log('Object.keys({a:1,b:null,c:undefined}).length: ', Object.keys({a:1,b:null,c:undefined}).length)

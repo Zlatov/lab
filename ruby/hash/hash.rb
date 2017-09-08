@@ -52,11 +52,13 @@ p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
 # Слияние двух hash
 puts 'Слияние двух hash'.red
 h1 = {a:'a',b:'b'}
-h2 = {a:'aa',c:'cc'}
+h2 = {a:nil,c:'cc'}
 h3 = h1.merge(h2)
 p h1
 p h2
 p h3
+h1.merge! h2
+p h1
 
 # Ключи в стрингу
 a = {a:'aa',c:'cc'}

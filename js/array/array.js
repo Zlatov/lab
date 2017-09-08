@@ -53,26 +53,31 @@ console.log('b: ', b)
 // возвращает новый массив
 console.log('> Преобразовать элементы массива')
 var a = ['', 'asd']
-var b = a.map((e, i, a)=>{
-  return e+='_sufix'
+var b = a.map((element, index, array)=>{
+  return element+='_sufix'
 })
 console.log('a: ', a)
 console.log('b: ', b)
 
 
 // Преобразовать массив чего-то в hash
+console.log('> Преобразовать массив чего-то в hash')
 var a = [
   {id:'id1', val: [1,2,3]},
   {id:'id2', val: [2,3,4]},
   {id:'id3', val: [3,4,5]},
 ]
 
-var b = a.reduce(function(prev, curr){
-  console.log('prev: ', prev)
+// initialValue (второй параметр ф-ии reduce) - то, с каким значением переменной previousValue начинаем перебор,
+// если не задан второй параметр, то перебор начинается со второго элемента, а previousValue = первому элементу
+var initialValue = {}
+var b = a.reduce(function(previousValue, curr, index, array){
+  console.log('previousValue: ', previousValue) // на первом элементе previousValue = {}
   console.log('curr: ', curr)
-  prev[curr.id] = curr.val[1]
-  return prev
-}, {})
+  // previousValue[curr.id] = curr.val[1] // второй элемент массива
+  previousValue[curr.id] = curr.val.slice(0) // весь массив
+  return previousValue
+}, initialValue)
 
 console.log('a: ', a)
 console.log('b: ', b)

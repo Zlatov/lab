@@ -33,3 +33,55 @@
 <pre class="prettyprint lang-rb">Agava::Model::Article.using(:cut_cut).connection.execute('show tables;').to_a</pre>
 <p><strong>Вызов метода контроллера</strong></p>
 <pre class="prettyprint lang-rb">ApplicationController.new.method_name</pre>
+
+<h2>ActiveRecord</h2>
+<pre class="prettyprint lang-rb">
+# Плохо):
+# rails db:schema:load RAILS_ENV=development
+# rails db:migrate
+# Хорошо):
+# rails db:drop db:create db:migrate
+
+class Seo &lt; ActiveRecord::Base
+
+  self.table_name = :seo
+
+  def connection
+    ActiveRecord::Base.connection
+  end
+
+  # def self.get_test
+  #   # result = ActiveRecord::Base.connection.execute('SELECT * FROM `seo`;') 
+  #   # return result
+  #   # result.each(:as =&gt; :hash) do |row| 
+  #   #   p row[&quot;id&quot;]
+  #   # end
+
+  #   # st = ActiveRecord::Base.connection.raw_connection.prepare(&quot;update table set f1=? where f2=? and f3=?&quot;)
+  #   # st.execute(f1, f2, f3)
+  #   # st.close
+
+  #   # self.connection.prepare(&quot;CALL get_seo(:id);&quot;)
+  #   # q = self.sanitize_sql_array([&quot;CALL get_seo(:id);&quot;, id: id])
+  # end
+
+  def self.get_hash id
+    begin
+      query = ActiveRecord::Base.sanitize_sql_array([&quot;CALL get_seo(:id);&quot;, id: id])
+      result = connection.execute(query)
+    ensure
+      connection.close
+    end
+    results = []
+    result.each(as: :hash) {|row| results &lt;&lt; row}
+    results.first || {}
+  end
+
+  def self.set_hash hash
+    hash = {title:nil,description:nil,keywords:nil,h1:nil}.merge! hash
+    query = ActiveRecord::Base.sanitize_sql_array([&quot;CALL set_seo(:id, :title, :description, :keywords, :h1);&quot;, hash])
+    connection.execute(query)
+  end
+
+end
+</pre>
