@@ -27,9 +27,13 @@ procedure_label:BEGIN
 	INSERT INTO `user` (`name`) VALUES (param_name);
 END;;
 
-CREATE PROCEDURE `add_object`(IN param_pid INT UNSIGNED, IN param_name VARCHAR(128))
+CREATE PROCEDURE `add_object`(
+	IN param_pid INT UNSIGNED,
+	IN param_name VARCHAR(128),
+	IN param_nick VARCHAR(128)
+)
 procedure_label:BEGIN
-	INSERT INTO `rbac_object` (`pid`, `name`) VALUES (param_pid, param_name);
+	INSERT INTO `rbac_object` (`pid`, `name`, `nick`) VALUES (param_pid, param_name, param_nick);
 END;;
 
 CREATE PROCEDURE `get_users`()

@@ -24,8 +24,10 @@ CREATE TABLE `rbac_object` (
   `pid` INT UNSIGNED NULL DEFAULT NULL,
   `level` INT UNSIGNED NOT NULL,
   `name` VARCHAR(128) NOT NULL,
+  `nick` VARCHAR(128) NOT NULL,
   `order` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
+  -- UNIQUE KEY `uq_rbacobject_nick` (`nick`),
   CONSTRAINT `fk_rbacobject_pid` FOREIGN KEY (`pid`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 ENGINE InnoDB
