@@ -95,15 +95,21 @@ procedure_label:BEGIN
 END;;
 
 CREATE PROCEDURE `add_perm`(
-	IN param_name VARCHAR(128),
+	IN param_type VARCHAR(128),
 	IN param_object_id INT UNSIGNED,
 	IN param_description TEXT
 )
 procedure_label:BEGIN
-	DECLARE nameCharLength INT;
-	SELECT CHAR_LENGTH( param_name ) INTO nameCharLength;
-	IF (nameCharLength > 128) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Длинна имени разрешения превышает допустимое значение.';
+	-- DECLARE nameCharLength INT;
+	-- SELECT CHAR_LENGTH( param_name ) INTO nameCharLength;
+	-- IF (nameCharLength > 128) THEN
+	-- 	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Длинна имени разрешения превышает допустимое значение.';
+	-- 	LEAVE procedure_label;
+	-- END IF;
+	DECLARE type_types ENUM('read','edit');
+	SELECT FIND_IN_SET(param_type, type_types) INTO type_in_set;
+	IF type_in_set = 0 THEN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Значение поля тип не верно!';
 		LEAVE procedure_label;
 	END IF;
 	INSERT INTO `rbac_perm` (`name`, `description`, `object_id`) VALUES (param_name, param_description, param_object_id);

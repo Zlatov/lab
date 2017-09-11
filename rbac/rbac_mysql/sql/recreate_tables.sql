@@ -24,10 +24,10 @@ CREATE TABLE `rbac_object` (
   `pid` INT UNSIGNED NULL DEFAULT NULL,
   `level` INT UNSIGNED NOT NULL,
   `name` VARCHAR(128) NOT NULL,
-  `nick` VARCHAR(128) NOT NULL,
+  `code` VARCHAR(128) NOT NULL COMMENT 'Используется для проверки права.',
   `order` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  -- UNIQUE KEY `uq_rbacobject_nick` (`nick`),
+  UNIQUE KEY `uq_rbacobject_code` (`code`),
   CONSTRAINT `fk_rbacobject_pid` FOREIGN KEY (`pid`) REFERENCES `rbac_object` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 )
 ENGINE InnoDB
@@ -76,14 +76,26 @@ DEFAULT CHARSET=utf8
 COLLATE utf8_general_ci
 COMMENT 'Роли графовидны';
 
+CREATE TABLE `rbac_permtype` (
+  `id` TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type` VARCHAR(65) NOT NULL COMMENT 'Используется для проверки права.',
+  `description` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uq_rbacpermtype_type` (`type`)
+)
+ENGINE=InnoDB
+AUTO_INCREMENT 1
+DEFAULT CHARSET=utf8
+COLLATE utf8_general_ci
+COMMENT 'Типы разрешений';
+
 CREATE TABLE `rbac_perm` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(128) NOT NULL,
-  `description` TEXT NOT NULL,
+  `permtype_id` TINYINT UNSIGNED NOT NULL,
   `object_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_UNIQUE` (`name`),
   INDEX `ix_rbacperm_objectid` (`object_id`),
+  CONSTRAINT `fk_rbacperm_permtypeid` FOREIGN KEY (`permtype_id`) REFERENCES `rbac_permtype` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_rbacperm_objectid` FOREIGN KEY (`object_id`) REFERENCES `rbac_object` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 )
 ENGINE=InnoDB

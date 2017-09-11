@@ -29,3 +29,9 @@ LEFT JOIN rbac_perm p ON p.id = pr.perm_id
 WHERE a.user_id = @user_id
 GROUP BY p.id
 
+
+-- ELECT SUBSTRING(COLUMN_TYPE,5)
+-- FROM information_schema.COLUMNS
+-- WHERE TABLE_SCHEMA='lab' 
+--     AND TABLE_NAME='tablename'
+--     AND COLUMN_NAME='columnname'
