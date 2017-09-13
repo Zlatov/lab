@@ -78,18 +78,21 @@ b = types.merge(types) {|k,v| v }
 
 sids = Hash[types.map { |k,v|
   if v[:article].nil?
-    nil
+    [nil, nil]
   else
-    [v[:article].to_s,k.to_s]
+    [v[:article].to_sym,k.to_s]
   end
-}]
+}].select {|k,v| k!=nil}
+
+p sids
+puts ''
 
 sids = Hash[ types.map { |k,v|
   -> k, v {
-    return nil if v[:article].nil?
+    return [nil,nil] if v[:article].nil?
     return [v[:article].to_sym, k.to_s]
   }.call k,v
-}]
+}].select {|k,v| k!=nil}
 
 p sids
 puts ''

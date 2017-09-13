@@ -149,3 +149,20 @@ ids.each_with_index{|v,i|
 }
 id = ids.length.to_s if !id
 p id
+
+
+proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
+  -> k, v {
+    return nil if v[:article].nil?
+    return [v[:article].to_sym, k.to_s]
+  }.call k,v
+}]
+p proj_iarticle_slug
+
+proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
+  -> k, v {
+    return nil if v[:article].nil?
+    return [v[:article].to_sym, k.to_s]
+  }.call k,v
+}]
+p proj_iarticle_slug

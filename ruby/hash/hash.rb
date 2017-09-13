@@ -69,3 +69,8 @@ p a
 p a.delete 'a'
 p a.delete :a
 p a
+
+a = 'ds'
+a = nil
+puts "asd: #{a.to_s.red}"
+
