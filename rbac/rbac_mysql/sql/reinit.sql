@@ -4,97 +4,93 @@ source /home/iadfeshchm/projects/my/lab/lab/rbac/rbac_mysql/sql/recreate_tables.
 source /home/iadfeshchm/projects/my/lab/lab/rbac/rbac_mysql/sql/recreate_procedures.sql;
 source /home/iadfeshchm/projects/my/lab/lab/rbac/rbac_mysql/sql/recreate_triggers.sql;
 
-CALL add_user('Златов');    --  администратор
-CALL add_user('Иванов');    --  директор проекта ЦСП
-CALL add_user('Петров');    --  старший менеджер проекта ЦСП
-CALL add_user('Сарнычева'); --  старший менеджер проекта ЦСП
-CALL add_user('Сидоров');   --  младший менеджер проекта ЦСП
-CALL add_user('Гринина');   --  младший менеджер проекта ЦСП
-CALL add_user('Огаркова');  --  младший менеджер проекта ЦСП
-CALL add_user('Пастух');    --  директор проекта ВИПС
-CALL add_user('Вергунова'); --  старший менеджер проекта ВИПС
-CALL add_user('Нилов');     --  старший менеджер проекта ВИПС
-CALL add_user('Моргунов');  --  младший менеджер проекта ВИПС
-CALL add_user('Носатенко'); --  младший менеджер проекта ВИПС
-CALL add_user('Ясавеева');  --  младший менеджер проекта ВИПС
+CALL add_user('Златов');    -- 1
+CALL add_user('Иванов');    -- 2
+CALL add_user('Петров');    -- 3
+CALL add_user('Сарнычева'); -- 4
+CALL add_user('Сидоров');   -- 5
+CALL add_user('Гринина');   -- 6
+CALL add_user('Огаркова');  -- 7
+CALL add_user('Пастух');    -- 8
+CALL add_user('Вергунова'); -- 9
+CALL add_user('Нилов');     -- 10
+CALL add_user('Моргунов');  -- 11
+CALL add_user('Носатенко'); -- 12
 
-CALL add_object(NULL, 'ЦСП',      'csp'              ); -- 1
-CALL add_object(1,    'Каталог',  'csp_catalog'      ); -- 2
-CALL add_object(2,    'Seo',      'csp_catalog_seo'  ); -- 3
-CALL add_object(1,    'Продукт',  'csp_product'      ); -- 4
-CALL add_object(4,    'Seo',      'csp_product_seo'  ); -- 5
-CALL add_object(NULL, 'ВИПС',     'vips'             ); -- 6
-CALL add_object(6,    'Каталог',  'vips_catalog'     ); -- 7
-CALL add_object(7,    'Seo',      'vips_catalog_seo' ); -- 8
-CALL add_object(6,    'Продукт',  'vips_product'     ); -- 9
-CALL add_object(9,    'Seo',      'vips_product_seo' ); -- 10
-CALL add_object(NULL, 'Филиалы',  'affiliates'       ); -- 11
-CALL add_object(11,   'Seo',      'affiliates_seo'   ); -- 12
+CALL add_obj(NULL, 'ЦСП',      'csp'              ); -- 1
+CALL add_obj(1,    'Каталог',  'csp_catalog'      ); -- 2
+CALL add_obj(2,    'Seo',      'csp_catalog_seo'  ); -- 3
+CALL add_obj(1,    'Продукт',  'csp_product'      ); -- 4
+CALL add_obj(4,    'Seo',      'csp_product_seo'  ); -- 5
+CALL add_obj(NULL, 'ВИПС',     'vips'             ); -- 6
+CALL add_obj(6,    'Каталог',  'vips_catalog'     ); -- 7
+CALL add_obj(7,    'Seo',      'vips_catalog_seo' ); -- 8
+CALL add_obj(6,    'Продукт',  'vips_product'     ); -- 9
+CALL add_obj(9,    'Seo',      'vips_product_seo' ); -- 10
+CALL add_obj(NULL, 'Филиалы',  'affiliates'       ); -- 11
+CALL add_obj(11,   'Seo',      'affiliates_seo'   ); -- 12
 
-CALL add_permtype('read', 1, 'Читать');   -- 1
-CALL add_permtype('edit', 1, 'Изменять'); -- 2
-
-CALL add_role('Администратор');                 -- 1
-CALL add_role('Seo специалист');                -- 2
-CALL add_role('Директор');                      -- 3
-CALL add_role('Руководитель проекта ЦСП');      -- 3
-CALL add_role('Руководитель проекта ВИПС');     -- 3
-CALL add_role('Старший менеджер проекта ЦСП');  -- 4
-CALL add_role('Старший менеджер проекта ВИПС'); -- 4
-CALL add_role('Менеджер проекта ЦСП');          -- 4
+CALL add_role('новый менеджер проекта ВИПС');   -- 1
+CALL add_role('новый менеджер проекта ЦСП');    -- 2
+CALL add_role('Младший менеджер проекта ЦСП');  -- 3
 CALL add_role('Менеджер проекта ВИПС');         -- 4
-CALL add_role('Младший менеджер проекта ЦСП');  -- 5
-CALL add_role('новый менеджер проекта ЦСП');    -- 4
-CALL add_role('новый менеджер проекта ВИПС');   -- 4
+CALL add_role('Менеджер проекта ЦСП');          -- 5
+CALL add_role('Старший менеджер проекта ВИПС'); -- 6
+CALL add_role('Старший менеджер проекта ЦСП');  -- 7
+CALL add_role('Руководитель проекта ВИПС');     -- 8
+CALL add_role('Руководитель проекта ЦСП');      -- 9
+CALL add_role('Директор');                      -- 10
+CALL add_role('Seo специалист');                -- 11
+CALL add_role('Администратор');                 -- 12
 
-CALL assign_perm(1, 1);
-CALL assign_perm(2, 1);
-CALL assign_perm(1, 2);
-CALL assign_perm(2, 2);
-CALL assign_perm(1, 3);
-CALL assign_perm(2, 3);
-CALL assign_perm(1, 4);
-CALL assign_perm(2, 4);
-CALL assign_perm(1, 5);
-CALL assign_perm(2, 5);
-CALL assign_perm(1, 6);
-CALL assign_perm(2, 6);
-CALL assign_perm(1, 7);
-CALL assign_perm(2, 7);
-
-CALL assign_role_parent(4,5);
-CALL assign_role_parent(3,4);
-CALL assign_role_parent(1,3);
-CALL assign_role_parent(1,2);
-
-CALL assign_permission_role(1,1);
-CALL assign_permission_role(2,2);
-CALL assign_permission_role(3,3);
-CALL assign_permission_role(4,4);
-CALL assign_permission_role(5,5);
--- CALL assign_permission_role(6,1);
--- CALL assign_permission_role(7,1);
--- CALL assign_permission_role(8,1);
--- CALL assign_permission_role(9,1);
--- CALL assign_permission_role(10,1);
--- CALL assign_permission_role(11,1);
--- CALL assign_permission_role(12,1);
--- CALL assign_permission_role(13,1);
--- CALL assign_permission_role(14,1);
-
-CALL assign_role_user(1,1);
+CALL add_perm('read', 'Читать');   -- 1
+CALL add_perm('edit', 'Изменять'); -- 2
 
 
--- CALL add_role('1'); -- 1
--- CALL add_role('2'); -- 2
--- CALL add_role('3'); -- 3
--- CALL add_role('4'); -- 4
--- CALL add_role('5'); -- 5
--- CALL add_role('6'); -- 6
+CALL set_role_parent(4,1);
+CALL set_role_parent(3,2);
+CALL set_role_parent(5,3);
+CALL set_role_parent(6,4);
+CALL set_role_parent(7,5);
+CALL set_role_parent(8,6);
+CALL set_role_parent(9,7);
+CALL set_role_parent(10,8);
+CALL set_role_parent(10,9);
+CALL set_role_parent(12,10);
+CALL set_role_parent(12,11);
 
--- CALL assign_role_parent(2,1);
--- CALL assign_role_parent(3,2);
--- CALL assign_role_parent(5,4);
--- CALL assign_role_parent(6,5);
--- CALL assign_role_parent(4,3);
--- CALL get_roles_rel();
+CALL set_rpo(1, 1, 1);
+CALL set_rpo(1, 2, 1);
+CALL set_rpo(1, 1, 6);
+CALL set_rpo(1, 2, 6);
+CALL set_rpo(1, 1, 11);
+CALL set_rpo(1, 2, 11);
+CALL set_rpo(2, 1, 1);
+CALL set_rpo(2, 2, 1);
+CALL set_rpo(2, 1, 6);
+CALL set_rpo(2, 2, 6);
+CALL set_rpo(2, 1, 11);
+CALL set_rpo(2, 2, 11);
+CALL set_rpo(11, 1, 3);
+CALL set_rpo(11, 1, 5);
+CALL set_rpo(11, 1, 8);
+CALL set_rpo(11, 1, 10);
+CALL set_rpo(11, 1, 12);
+CALL set_rpo(11, 2, 3);
+CALL set_rpo(11, 2, 5);
+CALL set_rpo(11, 2, 8);
+CALL set_rpo(11, 2, 10);
+CALL set_rpo(11, 2, 12);
+
+CALL set_user_role(1,12);
+CALL set_user_role(2,11);
+CALL set_user_role(3,10);
+CALL set_user_role(4,9);
+CALL set_user_role(5,8);
+CALL set_user_role(6,7);
+CALL set_user_role(7,6);
+CALL set_user_role(8,5);
+CALL set_user_role(9,4);
+CALL set_user_role(10,3);
+CALL set_user_role(11,2);
+CALL set_user_role(12,1);
