@@ -9,6 +9,7 @@ h = {
   :jes => '1432352',
   0 => ['asd'],
   asdf: ['asd'],
+  'asdf' => ['asd'],
 }
 p h
 

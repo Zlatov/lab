@@ -244,6 +244,45 @@ add.call
 </pre>
 
 <h2>Ruby ООП</h2>
+<h3>load, require, include, extend</h3>
+<ul>
+  <li><code>load</code> — включить файл в другой файл, файл загружается каждый раз в момент вызова (не нужно перезапускать сервер рельсы чтобы получить результат изменений в файле)</li>
+  <li><code>require</code> — включить файл в другой файл, файл загружается в память и используется (нужно пезапустить сервер рельсы для получения результата изменений в файле)</li>
+</ul>
+<ul>
+  <li><code>include</code> — методы модуля становятся доступными для выполнения в классе, для добавления функционала к объекту класса.</li>
+  <li><code>extend</code> — методы модуля становятся доступными для выполнения в классе, для расширения функционала класса.</li>
+</ul>
+<pre class="prettyprint lang-rb">
+module TestModule
+  def some_method
+    "Some method of #{self.class}"
+  end
+end
+
+class TestClass
+  include TestModule
+  # ...
+end
+
+puts TestClass.new.some_method
+=> 'Some method of TestClass'
+</pre>
+<pre class="prettyprint lang-rb">
+module TestModule
+  def some_method
+    "Some method of #{self.class}"
+  end
+end
+
+class TestClass
+  extend TestModule
+  # ...
+end
+
+puts TestClass.some_method
+=> 'Some method of Class'
+</pre>
 <h3>Свойства</h3>
 <pre class="prettyprint lang-rb">
 class ClassName

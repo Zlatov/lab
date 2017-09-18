@@ -97,3 +97,14 @@ sids = Hash[ types.map { |k,v|
 p sids
 puts ''
 # p types
+
+
+projects_sid = Array(types.map { |k,v| 
+  if v[:article].nil?
+    nil
+  else
+    k.to_s
+  end
+}).select {|v| !v.nil?}
+
+p projects_sid

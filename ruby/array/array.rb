@@ -103,10 +103,10 @@ while level >= 0
 end
 
 array_of_hash = [
-  {id:1},
-  {id:2},
-  {id:3},
-  {id:2},
+  {'id':1},
+  {'id':2},
+  {'id':3},
+  {'id':2},
 ]
 
 
@@ -116,53 +116,71 @@ hash_of_hash = {
   c: {id:3},
 }
 
-puts '.any?'.green
-p array_of_hash.any?{|node|node[:id]==4}
-p hash_of_hash.any?{|node|node[1][:id]==4}
+# puts '.any?'.green
+# p array_of_hash.any?{|node|node[:id]==4}
+# p hash_of_hash.any?{|node|node[1][:id]==4}
 
-puts '.select'.green
-p array_of_hash.select{|node|node[:id]==2}
-p hash_of_hash.select{|key,node|node[:id]==2}
+# puts '.select'.green
+# p array_of_hash.select{|node|node[:id]==2}
+# p hash_of_hash.select{|key,node|node[:id]==2}
 
 
 # Удалить из массива хешей по значению хеша
-puts 'Удалить из массива хешей по значению хеша'.red
-array_of_hash.delete_if{|v| v[:id]===3}
+puts "#{'Удалить из массива хешей по значению хеша'.green} #{'# преобразует ключи тварь'.red}"
+array_of_hash = [
+  {'id':1},
+  {'id':2},
+  {'id':3},
+  {'id':2},
+]
+p array_of_hash
+array_of_hash.delete_if{|v| v['id'.to_sym]==3}
 p array_of_hash
 
 
-puts 'Перебор массива - создание нового'.red
-ids = array_of_hash.map{|v|v[:id]*2}
-p ids
-p array_of_hash
+# puts 'Перебор массива - создание нового'.red
+# ids = array_of_hash.map{|v|v[:id]*2}
+# p ids
+# p array_of_hash
 
 
-puts 'Создание нового идентификатора'.red
-ids = (0..5).map {|v|v.to_s}
-p ids
-id = nil
-ids.each_with_index{|v,i|
-  if v!=i.to_s
-    id = i.to_s
-    break
+# puts 'Создание нового идентификатора'.red
+# ids = (0..5).map {|v|v.to_s}
+# p ids
+# id = nil
+# ids.each_with_index{|v,i|
+#   if v!=i.to_s
+#     id = i.to_s
+#     break
+#   end
+# }
+# id = ids.length.to_s if !id
+# p id
+
+
+proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
+  -> k, v {
+    return nil if v[:article].nil?
+    return [v[:article].to_sym, k.to_s]
+  }.call k,v
+}]
+p proj_iarticle_slug
+
+proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
+  -> k, v {
+    return nil if v[:article].nil?
+    return [v[:article].to_sym, k.to_s]
+  }.call k,v
+}]
+p proj_iarticle_slug
+
+a = [1,2,3]
+b = []
+a.delete_if.with_index do |_, index|
+  puts _.to_s.red
+  if index==1
+    b << 1
   end
-}
-id = ids.length.to_s if !id
-p id
-
-
-proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
-  -> k, v {
-    return nil if v[:article].nil?
-    return [v[:article].to_sym, k.to_s]
-  }.call k,v
-}]
-p proj_iarticle_slug
-
-proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
-  -> k, v {
-    return nil if v[:article].nil?
-    return [v[:article].to_sym, k.to_s]
-  }.call k,v
-}]
-p proj_iarticle_slug
+  b.include? index
+end
+p a
