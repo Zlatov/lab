@@ -17,18 +17,18 @@ CALL add_user('Нилов');     -- 10
 CALL add_user('Моргунов');  -- 11
 CALL add_user('Носатенко'); -- 12
 
-CALL add_obj(NULL, 'ЦСП',      'csp'              ); -- 1
-CALL add_obj(1,    'Каталог',  'csp_catalog'      ); -- 2
-CALL add_obj(2,    'Seo',      'csp_catalog_seo'  ); -- 3
-CALL add_obj(1,    'Продукт',  'csp_product'      ); -- 4
-CALL add_obj(4,    'Seo',      'csp_product_seo'  ); -- 5
-CALL add_obj(NULL, 'ВИПС',     'vips'             ); -- 6
-CALL add_obj(6,    'Каталог',  'vips_catalog'     ); -- 7
-CALL add_obj(7,    'Seo',      'vips_catalog_seo' ); -- 8
-CALL add_obj(6,    'Продукт',  'vips_product'     ); -- 9
-CALL add_obj(9,    'Seo',      'vips_product_seo' ); -- 10
-CALL add_obj(NULL, 'Филиалы',  'affiliates'       ); -- 11
-CALL add_obj(11,   'Seo',      'affiliates_seo'   ); -- 12
+CALL add_obj(NULL, 'ЦСП',                  'csp'              ); -- 1
+CALL add_obj(1,    'Каталог ЦСП',          'csp_catalog'      ); -- 2
+CALL add_obj(2,    'SEO каталога ЦСП',     'csp_catalog_seo'  ); -- 3
+CALL add_obj(1,    'Продукт каталога ЦСП', 'csp_product'      ); -- 4
+CALL add_obj(4,    'SEO продукта ЦСП',     'csp_product_seo'  ); -- 5
+CALL add_obj(NULL, 'ВИПС',                 'vips'             ); -- 6
+CALL add_obj(6,    'Каталог ВИПС',         'vips_catalog'     ); -- 7
+CALL add_obj(7,    'SEO каталога ВИПС',    'vips_catalog_seo' ); -- 8
+CALL add_obj(6,    'Продукт ВИПС',         'vips_product'     ); -- 9
+CALL add_obj(9,    'SEO продукта ВИПС',    'vips_product_seo' ); -- 10
+CALL add_obj(NULL, 'Филиалы',              'affiliates'       ); -- 11
+CALL add_obj(11,   'SEO филиалов',         'affiliates_seo'   ); -- 12
 
 CALL add_role('новый менеджер проекта ВИПС');   -- 1
 CALL add_role('новый менеджер проекта ЦСП');    -- 2
@@ -59,18 +59,37 @@ CALL set_role_parent(10,9);
 CALL set_role_parent(12,10);
 CALL set_role_parent(12,11);
 
-CALL set_rpo(1, 1, 1);
-CALL set_rpo(1, 2, 1);
-CALL set_rpo(1, 1, 6);
-CALL set_rpo(1, 2, 6);
-CALL set_rpo(1, 1, 11);
-CALL set_rpo(1, 2, 11);
-CALL set_rpo(2, 1, 1);
-CALL set_rpo(2, 2, 1);
-CALL set_rpo(2, 1, 6);
-CALL set_rpo(2, 2, 6);
-CALL set_rpo(2, 1, 11);
-CALL set_rpo(2, 2, 11);
+
+CALL set_rpo(1, 1, 7); -- новый менеджер проекта ВИПС
+CALL set_rpo(1, 1, 9);
+
+CALL set_rpo(2, 1, 2); -- новый менеджер проекта ЦСП
+CALL set_rpo(2, 1, 4);
+
+CALL set_rpo(3, 1, 2); -- Младший менеджер проекта ЦСП
+CALL set_rpo(3, 1, 4);
+
+CALL set_rpo(4, 1, 7); -- Менеджер проекта ВИПС
+CALL set_rpo(4, 2, 7);
+CALL set_rpo(4, 1, 9);
+CALL set_rpo(4, 2, 9);
+CALL set_rpo(4, 1, 8);
+CALL set_rpo(4, 1, 10);
+
+CALL set_rpo(5, 1, 2); -- Менеджер проекта ЦСП
+CALL set_rpo(5, 2, 2);
+CALL set_rpo(5, 1, 4);
+CALL set_rpo(5, 2, 4);
+CALL set_rpo(5, 1, 3);
+CALL set_rpo(5, 1, 5);
+
+CALL set_rpo(6, 2, 8); -- Старший менеджер проекта ВИПС
+CALL set_rpo(6, 2, 10);
+
+CALL set_rpo(7, 2, 3); -- Старший менеджер проекта ЦСП
+CALL set_rpo(7, 2, 5);
+
+
 CALL set_rpo(11, 1, 3);
 CALL set_rpo(11, 1, 5);
 CALL set_rpo(11, 1, 8);

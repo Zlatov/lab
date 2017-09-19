@@ -1,9 +1,44 @@
-SELECT * FROM USER ORDER BY id ASC;
+-- SELECT * FROM `user` ORDER BY id ASC;
+-- SELECT * FROM `rbac_obj` ORDER BY `level` ASC;
+-- SELECT * FROM `rbac_role` ORDER BY `id` ASC;
+-- SELECT * FROM `rbac_perm` ORDER BY `id` ASC;
+-- SELECT * FROM `rbac_role_perm_obj`;
+-- SELECT * FROM `rbac_user_role`;
 
--- CALL get_role_immediate_perm_on_object(1,1);
--- CALL get_roles();
--- CALL get_roles_rel();
--- CALL get_role_perm(1);
+
+SET @user_id = 1;
+
+-- SELECT * FROM `user` WHERE `id` = @user_id;
+
+-- SELECT
+-- 	u.id as u_id,
+-- 	u.name as u_name,
+-- 	ur.user_id as ur_user_id,
+-- 	ur.role_id as ur_role_id,
+-- 	r.id as r_id,
+-- 	r.name as r_name
+-- FROM `user` u
+-- left join `rbac_user_role` ur on ur.user_id = u.id
+-- left join `rbac_role` r on r.id = ur.role_id
+-- WHERE u.id = @user_id;
+
+
+SET @role_id = 12;
+
+SELECT
+	-- rr.*,
+	-- rpm.*,
+	-- o.*,
+	-- p.*
+	concat(p.sid, '_', o.sid),
+	concat(p.description, ' ', o.name)
+FROM rbac_role r
+LEFT JOIN rbac_rolerel rr ON rr.did = r.id
+INNER JOIN rbac_role_perm_obj rpm ON rpm.role_id = rr.aid OR rpm.role_id = r.id
+LEFT JOIN rbac_obj o ON o.id = rpm.obj_id
+LEFT JOIN rbac_perm p ON p.id = rpm.perm_id
+WHERE r.id = @role_id;
+
 
 -- SET @role_id = 1;
 -- -- SET @role_id = '1,5';
