@@ -41,3 +41,5 @@ console.log( '101.1', parseInt('101.1')      )
 console.log( '0.1', parseInt('0.1')        )
 console.log( '-0.1', parseInt('-0.1')       )
 console.log( '-0000.100', parseInt('-0000.100')  )
+
+console.log( 'Number(\'-0000.100\')', Number('-0000.100')  )

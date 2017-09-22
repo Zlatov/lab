@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <h3>Материал из JQuery</h3>
+  <div></div>
+  <div><a>&lt;&lt; Селекторы</a></div>
+  <div>.className<span>v:1.0</span></div>
+  <p>Соответствует всем элементам страницы с классом <i>className</i>. Селектор по классу является одним из наиболее востребуемых средств jQuery.
+  </p>
+  <p>
+    Примеры использования:
+  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td><span>$('.someBlock')</span>
+        </td>
+        <td>вернет все элементы с классом someBlock.
+        </td>
+      </tr>
+      <tr>
+        <td><span>$('div.someBlock')</span>
+        </td>
+        <td>вернет все div-элементы с классом someBlock.
+        </td>
+      </tr>
+      <tr>
+        <td><span>$('div.someBlock:odd')</span>
+        </td>
+        <td>вернет все нечетные div-элементы с классом someBlock.
+        </td>
+      </tr>
+      <tr>
+        <td><span>$('#content2 div.someBlock')</span>
+        </td>
+        <td>вернет div-элементы с классом someBlock, которые находятся внутри элемента с идентификатором content2.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Для поиска элементов по классу, библиотека jQuery использует нативную javascript-функцию
+    <tt>getElementsByClassName()</tt> (если ее поддерживает браузер).
+  </p>
+  <p>
+    <br>
+  </p>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <div>
+            <h2>Содержание</h2> <span>[<a>убрать</a>]</span></div>
+          <ul>
+            <li><a><span>1</span> <span>Примеры</span></a></li>
+            <li><a><span>2</span> <span>В действии</span></a></li>
+            <li><a><span>3</span> <span>См. также</span></a></li>
+            <li><a><span>4</span> <span>Ссылки</span></a></li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a></a>
+  <h2> <span>Примеры</span></h2>
+  <p>Один элемент страницы может обладать несколькими классами одновременно. Найти такой элемент можно по любому из классов:
+  </p>
+  <pre>~lt~div class="leftBox"~gt~1~lt~/div~gt~
+~lt~div class="leftBox commentBox"~gt~2~lt~/div~gt~
+~lt~div class="rightBox commentBox"~gt~3~lt~/div~gt~
+
+~lt~script~gt~
+  var leftBoxElements = $('.leftBox'); // найдет первый и второй элементы
+  var commentBoxElements = $('.commentBox'); // найдет второй и третий элементы
+~lt~/script~gt~
+</pre>
+  <textarea></textarea>
+  <textarea></textarea>
+  <div>
+    <div>
+      <div>
+        <div>
+          <textarea></textarea>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div></div>
+              </div>
+              <div>
+                <div>
+                  <div></div><pre>&nbsp;</pre>
+                  <div></div>
+                  <div><pre><span>&lt;div</span> <span>class</span>=<span>"leftBox"</span><span>&gt;</span>1<span>&lt;/div&gt;</span></pre><pre><span>&lt;div</span> <span>class</span>=<span>"leftBox commentBox"</span><span>&gt;</span>2<span>&lt;/div&gt;</span></pre><pre><span>&lt;div</span> <span>class</span>=<span>"rightBox commentBox"</span><span>&gt;</span>3<span>&lt;/div&gt;</span></pre><pre> </pre><pre><span>&lt;script&gt;</span></pre><pre>  <span>var</span> <span>leftBoxElements</span> = <span>$</span>(<span>'.leftBox'</span>); <span>// найдет первый и второй элементы</span></pre><pre>  <span>var</span> <span>commentBoxElements</span> = <span>$</span>(<span>'.commentBox'</span>); <span>// найдет второй и третий элементы</span></pre><pre><span>&lt;/script&gt;</span></pre></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p>Чтобы найти элемент, который обладает двумя (или более) классами одновременно, нужно перечислить их без пробела:
+  </p>
+  <pre>~lt~div class="leftBox"~gt~1~lt~/div~gt~
+~lt~div class="leftBox commentBox"~gt~2~lt~/div~gt~
+~lt~div class="rightBox commentBox"~gt~3~lt~/div~gt~
+
+~lt~script~gt~
+  var leftBoxElements = $('.leftBox.commentBox'); // найдет только второй элемент
+~lt~/script~gt~
+</pre>
+  <textarea></textarea>
+  <textarea></textarea>
+  <div>
+    <div>
+      <div>
+        <div>
+          <textarea></textarea>
+        </div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <div></div>
+              </div>
+              <div>
+                <div>
+                  <div></div><pre>&nbsp;</pre>
+                  <div></div>
+                  <div><pre><span>&lt;div</span> <span>class</span>=<span>"leftBox"</span><span>&gt;</span>1<span>&lt;/div&gt;</span></pre><pre><span>&lt;div</span> <span>class</span>=<span>"leftBox commentBox"</span><span>&gt;</span>2<span>&lt;/div&gt;</span></pre><pre><span>&lt;div</span> <span>class</span>=<span>"rightBox commentBox"</span><span>&gt;</span>3<span>&lt;/div&gt;</span></pre><pre> </pre><pre><span>&lt;script&gt;</span></pre><pre>  <span>var</span> <span>leftBoxElements</span> = <span>$</span>(<span>'.leftBox.commentBox'</span>); <span>// найдет только второй элемент</span></pre><pre><span>&lt;/script&gt;</span></pre></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a></a>
+  <h2> <span>В действии</span></h2>
+  <p>Выделим div-элементы с классом someBlock бледно-зеленым цветом фона, а все четные (т.е. с четным индексом) из них, обведем красной рамкой:
+  </p>
+  <pre>~lt~!DOCTYPE html~gt~
+~lt~html~gt~
+~lt~head~gt~
+  ~lt~script src="/p2p/jquery-1.7.2.min.js"~gt~~lt~/script~gt~
+  ~lt~style~gt~
+    div, span {
+      display: block;
+      width: 50px;
+      height: 50px;
+      float: left;
+      padding: 15px;
+      margin: 5px;
+      background-color: #eee;
+      font-size: 20pt;
+    }
+  ~lt~/style~gt~
+~lt~/head~gt~
+~lt~body~gt~
+  ~lt~div class="someBlock"~gt~ А ~lt~/div~gt~
+  ~lt~div class="otherBlock"~gt~ Б ~lt~/div~gt~
+  ~lt~div~gt~ В ~lt~/div~gt~
+  ~lt~span class="someBlock"~gt~ Г ~lt~/span~gt~
+  ~lt~div class="someBlock"~gt~ Д ~lt~/div~gt~
+  ~lt~div class="someBlock"~gt~ Е ~lt~/div~gt~
+~lt~script~gt~
+  $( 'div.someBlock' )
+    .css( 'background-color', '#e0f0e0' )
+  .filter( ':even' )
+    .css( 'border', '3px solid red' );
+~lt~/script~gt~
+~lt~/body~gt~
+~lt~/html~gt~
+</pre>
+  <textarea></textarea>
+  <textarea></textarea>
+  <div>
+    <div><a>скрыть исходный код</a> &nbsp; <a>запустить</a> <a></a><a>document</a><a>js</a><a>css</a><a>html</a></div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <textarea></textarea>
+          </div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div>
+                    <div><pre><span>x</span></pre></div><pre>&nbsp;</pre>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <textarea></textarea>
+          </div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div>
+                    <div><pre><span>x</span></pre></div><pre>&nbsp;</pre>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <textarea></textarea>
+          </div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div>
+                    <div></div><pre>&nbsp;</pre>
+                    <div></div>
+                    <div><pre><span>$</span>( <span>'div.someBlock'</span> )</pre><pre>  .<span>css</span>( <span>'background-color'</span>, <span>'#e0f0e0'</span> )</pre><pre>.<span>filter</span>( <span>':even'</span> )</pre><pre>  .<span>css</span>( <span>'border'</span>, <span>'3px solid red'</span> );</pre></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <textarea></textarea>
+          </div>
+          <div>
+            <div>
+              <div>
+                <div>
+                  <div></div>
+                </div>
+                <div>
+                  <div>
+                    <div><pre><span>x</span></pre></div><pre>&nbsp;</pre>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><span>Результат:</span>
+    <div>
+      <div>
+        <iframe></iframe>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <a></a>
+  <h2> <span>См. также</span></h2>
+  <ul>
+    <li><a>Селектор по идентификатору</a>
+    </li>
+    <li><a>Селектор по имени тега</a>
+    </li>
+  </ul>
+  <a></a>
+  <h2> <span>Ссылки</span></h2>
+  <ul>
+    <li><a>Список всех селекторов</a>
+    </li>
+    <li><a>$( ) — функция jQuery</a>
+    </li>
+  </ul>
+  <div><span>Поисковые ключи:</span>
+    <ul>
+      <li> .class</li>
+      <li> селектор .class</li>
+      <li> className</li>
+      <li> класс элементов равен value</li>
+      <li> элементы по классу</li>
+      <li> элемент по классу</li>
+      <li> элементы с классом className</li>
+      <li> найти все элементы с классом className</li>
+      <li> поиск элементов по классу</li>
+      <li> селектор элементов по классу </li>
+    </ul>
+  </div>
+</body>
+
+</html>

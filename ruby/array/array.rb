@@ -184,3 +184,6 @@ a.delete_if.with_index do |_, index|
   b.include? index
 end
 p a
+
+p *[:asd].to_s
+
