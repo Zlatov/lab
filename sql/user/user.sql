@@ -7,3 +7,5 @@ SHOW GRANTS FOR 'lab'@'localhost';
 
 -- REVOKE ALL ON lab.lab FROM 'lab'@'localhost';
 -- SHOW GRANTS FOR 'lab'@'localhost';
+
+mysqladmin -u root password NEWPASSWORD
