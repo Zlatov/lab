@@ -54,8 +54,8 @@ CALL set_role_parent(6,4);
 CALL set_role_parent(7,5);
 CALL set_role_parent(8,6);
 CALL set_role_parent(9,7);
-CALL set_role_parent(10,8);
-CALL set_role_parent(10,9);
+-- CALL set_role_parent(10,8);
+-- CALL set_role_parent(10,9);
 CALL set_role_parent(12,10);
 CALL set_role_parent(12,11);
 
@@ -89,8 +89,14 @@ CALL set_rpo(6, 2, 10);
 CALL set_rpo(7, 2, 3); -- Старший менеджер проекта ЦСП
 CALL set_rpo(7, 2, 5);
 
+CALL set_rpo(10, 1, 1); -- Директор
+CALL set_rpo(10, 1, 6);
+CALL set_rpo(10, 1, 11);
+CALL set_rpo(10, 2, 1);
+CALL set_rpo(10, 2, 6);
+CALL set_rpo(10, 2, 11);
 
-CALL set_rpo(11, 1, 3);
+CALL set_rpo(11, 1, 3); -- Seo специалист
 CALL set_rpo(11, 1, 5);
 CALL set_rpo(11, 1, 8);
 CALL set_rpo(11, 1, 10);
@@ -101,15 +107,17 @@ CALL set_rpo(11, 2, 8);
 CALL set_rpo(11, 2, 10);
 CALL set_rpo(11, 2, 12);
 
-CALL set_user_role(1,12);
-CALL set_user_role(2,11);
-CALL set_user_role(3,10);
-CALL set_user_role(4,9);
-CALL set_user_role(5,8);
-CALL set_user_role(6,7);
-CALL set_user_role(7,6);
-CALL set_user_role(8,5);
-CALL set_user_role(9,4);
-CALL set_user_role(10,3);
-CALL set_user_role(11,2);
-CALL set_user_role(12,1);
+
+
+-- CALL set_user_role(1,12);
+-- CALL set_user_role(2,11);
+-- CALL set_user_role(3,10);
+-- CALL set_user_role(4,9);
+-- CALL set_user_role(5,8);
+-- CALL set_user_role(6,7);
+-- CALL set_user_role(7,6);
+-- CALL set_user_role(8,5);
+-- CALL set_user_role(9,4);
+-- CALL set_user_role(10,3);
+-- CALL set_user_role(11,2);
+-- CALL set_user_role(12,1);
