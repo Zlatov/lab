@@ -24,27 +24,7 @@ SET @user_id = 1;
 
 
 SET @role_id = 10;
-
-SELECT
-	r.*,
-	-- rr.*,
-	rpm.*,
-	-- o.*,
-	orel.*,
-	rpmd.*
-	-- p.*
-	-- concat(p.sid, '_', o.sid),
-	-- concat(p.description, ' ', o.name)
-FROM rbac_role r
-LEFT JOIN rbac_rolerel rrel ON rrel.did = r.id
-INNER JOIN rbac_role_perm_obj rpm ON rpm.role_id = rrel.aid OR rpm.role_id = r.id
--- LEFT JOIN rbac_obj o ON o.id = rpm.obj_id
-LEFT JOIN rbac_objrel orel ON orel.aid = rpm.obj_id
-LEFT JOIN rbac_role_perm_obj rpmd ON rpmd.role_id = rpm.role_id AND ( rpmd.obj_id = rpm.obj_id OR rpmd.obj_id = orel.did )
--- LEFT JOIN rbac_perm p ON p.id = rpm.perm_id
-WHERE r.id = @role_id
--- GROUP BY rpm.perm_id, rpm.obj_id;
-
+CALL get_role_rights(@role_id);
 
 -- SET @role_id = 1;
 -- -- SET @role_id = '1,5';

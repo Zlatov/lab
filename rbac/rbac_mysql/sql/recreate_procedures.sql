@@ -7,6 +7,9 @@ DROP PROCEDURE IF EXISTS `set_role_parent`;                          -- Назн
 DROP PROCEDURE IF EXISTS `set_rpo`;                                  -- Дать разрешение роли
 DROP PROCEDURE IF EXISTS `set_user_role`;                            -- Назначить роль пользователя
 
+DROP PROCEDURE IF EXISTS `get_rights`;                               -- Получить права пользователя
+DROP PROCEDURE IF EXISTS `get_role_rights`;                          -- Получить права роли
+
 DELIMITER ;;
 
 
@@ -71,6 +74,24 @@ END;;
 CREATE PROCEDURE `set_user_role`(IN param_userid INT UNSIGNED, IN param_roleid INT UNSIGNED)
 procedure_label:BEGIN
 	INSERT INTO `rbac_user_role` VALUES (param_userid, param_roleid);
+END;;
+
+CREATE PROCEDURE `get_role_rights`(IN param_roleid INT UNSIGNED)
+procedure_label:BEGIN
+	SELECT
+		p.id as perm_id, p.sid as perm_sid, p.description as perm_name,
+		oi.id as oi_id, oi.sid as oi_sid, oi.name as oi_name,
+		concat(p.sid, '_', oi.sid) as right_sid,
+		concat(p.description, ' ', oi.name) as right_name
+	FROM rbac_role r
+	LEFT JOIN rbac_rolerel rrel ON rrel.did = r.id
+	INNER JOIN rbac_role_perm_obj rpo ON rpo.role_id = rrel.aid OR rpo.role_id = r.id
+	LEFT JOIN rbac_obj o ON o.id = rpo.obj_id
+	LEFT JOIN rbac_objrel orel ON orel.aid = o.id
+	LEFT JOIN rbac_obj oi ON oi.id = orel.did OR oi.id = o.id
+	LEFT JOIN rbac_perm p ON p.id = rpo.perm_id
+	WHERE r.id = param_roleid
+	GROUP BY rpo.perm_id, oi.id;
 END;;
 
 
