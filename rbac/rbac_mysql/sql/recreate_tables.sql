@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `rbac_user_role`;     -- Назначенные польз�
 DROP TABLE IF EXISTS `rbac_role_perm_obj`; -- Назначенные роли разрешения на объект
 DROP TABLE IF EXISTS `rbac_rolerel`;       -- Связи ролей графовидны
 DROP TABLE IF EXISTS `rbac_objrel`;        -- Связи объектов древовидны
+-- DROP TABLE IF EXISTS `rbac_obj_perm`;        -- Связи разрешений и объектов (определения разрешений применимых к объекту)
 
 DROP TABLE IF EXISTS `rbac_perm`;          -- Разрешения
 DROP TABLE IF EXISTS `rbac_role`;          -- Роли
