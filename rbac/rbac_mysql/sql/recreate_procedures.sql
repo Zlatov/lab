@@ -76,6 +76,24 @@ procedure_label:BEGIN
 	INSERT INTO `rbac_user_role` VALUES (param_userid, param_roleid);
 END;;
 
+CREATE PROCEDURE `get_rights`(IN param_userid INT UNSIGNED)
+procedure_label:BEGIN
+	SELECT
+		p.id as perm_id, p.sid as perm_sid, p.description as perm_name,
+		oi.id as oi_id, oi.sid as oi_sid, oi.name as oi_name,
+		concat(p.sid, '_', oi.sid) as right_sid,
+		concat(p.description, ' ', oi.name) as right_name
+	FROM rbac_user_role ur
+	LEFT JOIN rbac_rolerel rrel ON rrel.did = ur.role_id
+	INNER JOIN rbac_role_perm_obj rpo ON rpo.role_id = rrel.aid OR rpo.role_id = ur.role_id
+	LEFT JOIN rbac_obj o ON o.id = rpo.obj_id
+	LEFT JOIN rbac_objrel orel ON orel.aid = o.id
+	LEFT JOIN rbac_obj oi ON oi.id = orel.did OR oi.id = o.id
+	LEFT JOIN rbac_perm p ON p.id = rpo.perm_id
+	WHERE ur.user_id = param_userid
+	GROUP BY rpo.perm_id, oi.id;
+END;;
+
 CREATE PROCEDURE `get_role_rights`(IN param_roleid INT UNSIGNED)
 procedure_label:BEGIN
 	SELECT

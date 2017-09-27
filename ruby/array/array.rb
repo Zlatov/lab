@@ -187,3 +187,7 @@ p a
 
 p *[:asd].to_s
 
+p ['asd','zxc'].join('|')
+
+p [].length
+p !!0
