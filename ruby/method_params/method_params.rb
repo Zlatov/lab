@@ -13,6 +13,7 @@ def meth2 *param
 end
 
 def meth3 id: 'default_id', pid: 'default_pid'
+  print 'id: '.red; puts id
   p id
   p pid
   # p method(__method__).parameters

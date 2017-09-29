@@ -1,6 +1,17 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
 
+  class Array
+    def lib_to_info i
+      Hash[ self.map{ |value|
+        -> value {
+          [value[i], value]
+        }.call(value) if !value[i].nil?
+      }]
+    end
+    alias :to_info :lib_to_info
+  end
+
 arr = []
 arr = Array.new
 arr = Array.new(5)
@@ -116,13 +127,13 @@ hash_of_hash = {
   c: {id:3},
 }
 
-# puts '.any?'.green
-# p array_of_hash.any?{|node|node[:id]==4}
-# p hash_of_hash.any?{|node|node[1][:id]==4}
+puts 'Массив хэшей - проверить есть ли хешь со значением поля равным заданному (.any?)'.green
+p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='b'}
+p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='d'}
 
-# puts '.select'.green
-# p array_of_hash.select{|node|node[:id]==2}
-# p hash_of_hash.select{|key,node|node[:id]==2}
+puts 'Массив хэшей|Хэш хэшей - выбрать только те элементы значения которых равны заданному (.select)'.green
+p   [{text:'a'},{text:'b'},{text:'b'}].select{|node|node[:text]=='b'}
+p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).select{|k,node|node[:id]=='b'}
 
 
 # Удалить из массива хешей по значению хеша
@@ -191,3 +202,6 @@ p ['asd','zxc'].join('|')
 
 p [].length
 p !!0
+
+p [{id: 1}, {id: 2}].to_info :id
+
