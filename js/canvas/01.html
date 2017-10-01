@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<style type="text/css">
+	canvas {
+		border: 1px solid black;
+	}
+	</style>
+</head>
+
+<body onload="window.draw()">
+	<a href="https://developer.mozilla.org/ru/docs/Web/API/Canvas_API/Tutorial/Basic_usage">https://developer.mozilla.org/ru/docs/Web/API/Canvas_API/Tutorial/Basic_usage</a>
+	<canvas id="tutorial" width="150" height="150"></canvas>
+	<canvas id="tutorial2" width="150" height="150"></canvas>
+	<script type="text/javascript">
+	var draw = function() {
+		var canvas = document.getElementById('tutorial')
+		var canvas2 = document.getElementById('tutorial2')
+		if (canvas.getContext) {
+
+			console.log('> getContext')
+
+			var ctx = canvas.getContext('2d')
+			var ctx2 = canvas2.getContext('2d')
+
+			ctx.fillStyle = "rgb(200,0,0)";
+			ctx.fillRect(10, 10, 55, 50);
+
+			ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+			ctx.fillRect(30, 30, 55, 50);
+
+			ctx.fillRect(25, 25, 100, 100);
+			ctx.clearRect(45, 45, 60, 60);
+			ctx.strokeRect(50, 50, 50, 50);
+
+
+			ctx2.beginPath();
+			ctx2.moveTo(75, 50);
+			ctx2.lineTo(100, 75);
+			ctx2.lineTo(100, 25);
+			ctx2.fill();
+
+			ctx2.beginPath();
+			ctx2.arc(75, 75, 50, 0, Math.PI * 2, true); // Внешняя окружность
+			ctx2.moveTo(110, 75);
+			ctx2.arc(75, 75, 35, 0, Math.PI, false); // рот (по часовой стрелке)
+			ctx2.moveTo(65, 65);
+			ctx2.arc(60, 65, 5, 0, Math.PI * 2, true); // Левый глаз
+			ctx2.moveTo(95, 65);
+			ctx2.arc(90, 65, 5, 0, Math.PI * 2, true); // Правый глаз
+			ctx2.stroke();
+
+		} else {
+			console.log('no canvas!')
+		}
+	}
+	</script>
+</body>
+
+</html>
