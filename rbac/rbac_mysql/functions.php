@@ -9,15 +9,15 @@ $opt = [
     PDO::ATTR_STRINGIFY_FETCHES => false, // Преобразовывать числовые значения в строки во время выборки.
 ];
 
-$link = sprintf('mysql:host=%1$s;charset=%2$s', $config['host'], $config['charset']);
-$pdo = new PDO($link, $config['user'], $config['password'], $opt);
+$link = sprintf('mysql:host=%1$s;charset=%2$s', $config['db']['host'], $config['db']['charset']);
+$pdo = new PDO($link, $config['db']['user'], $config['db']['password'], $opt);
 
 function check_schema_exist()
 {
     global $pdo, $config;
     $sql = sprintf(
         "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '%s';",
-        $config['dbName']
+        $config['db']['dbName']
     );
     $stmt = $pdo->query($sql);
     $db = $stmt->fetchColumn();
@@ -31,7 +31,7 @@ function check_schema_exist()
 function schema_select()
 {
     global $pdo, $config;
-    $sql = sprintf("USE %s;", $config['dbName']);
+    $sql = sprintf("USE %s;", $config['db']['dbName']);
     $pdo->exec($sql);
 }
 
@@ -39,7 +39,7 @@ function check_schema_select()
 {
     global $pdo, $config;
     $db = $pdo->query('SELECT database();')->fetchColumn();
-    if ($db===$config['dbName']) {
+    if ($db===$config['db']['dbName']) {
         return true;
     } else {
         return false;
@@ -48,28 +48,30 @@ function check_schema_select()
 
 function recreate_schema()
 {
-    global $pdo, $config;
+    global $pdo, $config, $response;
     try {
         $sql = sprintf(
             file_get_contents(__DIR__ . '/sql/recreate_schema.sql'),
-            $config['dbName']
+            $config['db']['dbName']
         );
         $pdo->exec($sql);
-        echo "<p>База данных пересоздана.</p>";
+        $response = "<p>База данных пересоздана.</p>";
     } catch (PDOException $e) {
         echoPDOException($e);
     }
 }
 
-function recreate_tables()
+function recreate_tables_triggers_procedures()
 {
-    global $pdo, $config;
+    global $pdo, $config, $response;
     try {
         $sql = file_get_contents(__DIR__ . '/sql/recreate_tables.sql');
         $pdo->exec($sql);
-        $sql = file_get_contents(__DIR__ . '/sql/recreate_triggers.sql');
+        $sql = str_replace([';;', 'DELIMITER ;;', 'DELIMITER ;'], [';'], file_get_contents(__DIR__ . '/sql/recreate_triggers.sql'));
         $pdo->exec($sql);
-        echo "<p>Таблицы и триггеры созданы.</p>";
+        $sql = str_replace([';;', 'DELIMITER ;;', 'DELIMITER ;'], [';'], file_get_contents(__DIR__ . '/sql/recreate_procedures.sql'));
+        $pdo->exec($sql);
+        $response = "<p>Таблицы, триггеры и процедуры созданы.</p>";
     } catch (PDOException $e) {
         echoPDOException($e);
     }
@@ -77,42 +79,30 @@ function recreate_tables()
 
 function recreate_procedures()
 {
-    global $pdo, $config;
+    global $pdo, $config, $response;
+    if (!check_schema_exist()) {
+        $response = '<p>База данных не существует.</p>';
+        return null;
+    } else {
+        schema_select();
+    }
     try {
-        $sql = file_get_contents(__DIR__ . '/sql/recreate_procedures.sql');
+        $sql = str_replace([';;', 'DELIMITER ;;', 'DELIMITER ;'], [';'], file_get_contents(__DIR__ . '/sql/recreate_procedures.sql'));
         $pdo->exec($sql);
-        echo "<p>Процедуры созданы.</p>";
+        $response = "<p>Процедуры созданы.</p>";
     } catch (PDOException $e) {
         echoPDOException($e);
     }
 }
 
-function add_user() {
-    global $pdo, $config;
+function insert_test_data_with_api()
+{
+    global $pdo, $config, $response;
     try {
-        $pdo->exec("START TRANSACTION;");
-        $stt = $pdo->prepare('CALL add_user(:name);');
-        $stt->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
-        $stt->execute();
-        $pdo->exec("COMMIT;");
-        echo $stt->rowCount();
+        $sql = file_get_contents(__DIR__ . '/sql/insert_test_data_with_api.sql');
+        $pdo->exec($sql);
+        $response = "<p>Данные вставлены.</p>";
     } catch (PDOException $e) {
-        $pdo->exec("ROLLBACK;");
-        echoPDOException($e);
-    }
-}
-
-function add_role() {
-    global $pdo, $config;
-    try {
-        $pdo->exec("START TRANSACTION;");
-        $stt = $pdo->prepare('CALL add_role(:name);');
-        $stt->bindValue(':name', $_POST['name'], PDO::PARAM_STR);
-        $stt->execute();
-        $pdo->exec("COMMIT;");
-        echo $stt->rowCount();
-    } catch (PDOException $e) {
-        $pdo->exec("ROLLBACK;");
         echoPDOException($e);
     }
 }
@@ -133,84 +123,10 @@ function add_perm() {
     }
 }
 
-function connect_role() {
-    global $pdo, $config;
-    try {
-        $pdo->exec("START TRANSACTION;");
-        $stt = $pdo->prepare('CALL connect_role(:did, :aid);');
-        $stt->bindValue(':did', $_POST['did'], PDO::PARAM_INT);
-        $stt->bindValue(':aid', $_POST['aid'], PDO::PARAM_INT);
-        $stt->execute();
-        $pdo->exec("COMMIT;");
-        echo $stt->rowCount();
-    } catch (PDOException $e) {
-        $pdo->exec("ROLLBACK;");
-        echoPDOException($e);
-    }
-}
-
-function get_users() {
-    global $pdo, $config;
-    $stt = $pdo->query('CALL get_users();');
-    $users = $stt->fetchAll();
-    return $users;
-}
-
-function get_roles() {
-    global $pdo, $config;
-    $roles = $pdo->query('CALL get_roles();')->fetchAll();
-    return $roles;
-}
-
-function get_edges() {
-    global $pdo, $config;
-    $edges = $pdo->query('CALL get_edges();')->fetchAll();
-    return $edges;
-}
-
 function get_perm() {
     global $pdo, $config;
     $perm = $pdo->query('CALL get_perm();')->fetchAll();
     return $perm;
-}
-
-function get_users_tbale($users) {
-    $table = '<table class="ib"><caption>Пользователи</caption><thead><tr><th>id</th><th>name</th></tr></thead><tbody>';
-    foreach ($users as $user) {
-        $table.= '<tr><td>';
-        $table.= $user['id'];
-        $table.= '</td><td>';
-        $table.= $user['name'];
-        $table.= '</td></tr>';
-    }
-    $table.= '</tbody></table>';
-    return $table;
-}
-
-function get_edges_tbale($edges) {
-    $table = '<table class="ib"><caption>Ребра</caption><thead><tr><th>aid</th><th>did</th></tr></thead><tbody>';
-    foreach ($edges as $role) {
-        $table.= '<tr><td>';
-        $table.= $role['aid'];
-        $table.= '</td><td>';
-        $table.= $role['did'];
-        $table.= '</td></tr>';
-    }
-    $table.= '</tbody></table>';
-    return $table;
-}
-
-function get_roles_tbale($roles) {
-    $table = '<table class="ib"><caption>Роли</caption><thead><tr><th>id</th><th>name</th></tr></thead><tbody>';
-    foreach ($roles as $role) {
-        $table.= '<tr><td>';
-        $table.= $role['id'];
-        $table.= '</td><td>';
-        $table.= $role['name'];
-        $table.= '</td></tr>';
-    }
-    $table.= '</tbody></table>';
-    return $table;
 }
 
 function get_perm_tbale($perms) {
@@ -227,10 +143,9 @@ function get_perm_tbale($perms) {
 }
 
 function echoPDOException($e) {
-    echo "<p>";
-    echo $e->errorInfo[2];
-    echo "</p>";
-    echo '<pre>';
-    echo $e->getTraceAsString();
-    echo '</pre>';
+    global $response;
+    $response = <<<HTML
+        <p>{$e->errorInfo[2]}</p>
+        <pre>{$e->getTraceAsString()}</pre>
+HTML;
 }

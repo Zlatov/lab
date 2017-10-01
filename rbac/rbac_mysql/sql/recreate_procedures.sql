@@ -1,6 +1,12 @@
 DROP PROCEDURE IF EXISTS `add_user`;                                 -- Добавить пользователя
+DROP PROCEDURE IF EXISTS `get_users`;                                -- Получить пользователей (пагинационно)
+
 DROP PROCEDURE IF EXISTS `add_obj`;                                  -- Добавить объект
+
 DROP PROCEDURE IF EXISTS `add_role`;                                 -- Добавить роль
+DROP PROCEDURE IF EXISTS `get_roles`;                                -- Получить все роли
+DROP PROCEDURE IF EXISTS `get_edges`;                                -- Получить все связи ролей
+
 DROP PROCEDURE IF EXISTS `add_perm`;                                 -- Добавить разрешение на объект
 
 DROP PROCEDURE IF EXISTS `set_role_parent`;                          -- Назначить роли предка (другую роль) от которой будут наследоваться права
@@ -18,6 +24,16 @@ procedure_label:BEGIN
 	INSERT INTO `user` (`name`) VALUES (param_name);
 END;;
 
+CREATE PROCEDURE `get_users`(IN param_from INT UNSIGNED, IN param_limit INT UNSIGNED)
+procedure_label:BEGIN
+	SELECT SQL_CALC_FOUND_ROWS
+		`user`.`id`,
+		`user`.`name`
+	FROM `user`
+	ORDER BY id ASC
+	LIMIT param_from, param_limit;
+END;;
+
 CREATE PROCEDURE `add_obj`(IN param_pid INT UNSIGNED, IN param_name VARCHAR(255), IN param_sid VARCHAR(255))
 procedure_label:BEGIN
 	INSERT INTO `rbac_obj` (`pid`, `name`, `sid`) VALUES (param_pid, param_name, param_sid);
@@ -26,6 +42,19 @@ END;;
 CREATE PROCEDURE `add_role`(IN param_name VARCHAR(255))
 procedure_label:BEGIN
 	INSERT INTO `rbac_role` (`name`) VALUES (param_name);
+END;;
+
+CREATE PROCEDURE `get_roles`()
+procedure_label:BEGIN
+	SELECT *
+	FROM rbac_role;
+END;;
+
+CREATE PROCEDURE `get_edges`()
+procedure_label:BEGIN
+	SELECT *
+	FROM `rbac_rolerel`
+	WHERE `dif` = 1;
 END;;
 
 CREATE PROCEDURE `add_perm`(IN param_sid VARCHAR(255), IN param_description VARCHAR(255))

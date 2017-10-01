@@ -1,3 +1,8 @@
+	SELECT *
+	FROM rbac_rolerel
+	WHERE dif = 1
+
+
 -- SELECT * FROM `user` ORDER BY id ASC;
 -- SELECT * FROM `rbac_obj` ORDER BY `level` ASC;
 -- SELECT * FROM `rbac_role` ORDER BY `id` ASC;

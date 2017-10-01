@@ -1,7 +1,9 @@
-<?php 
+<?php
 
 include_once 'config.php';
 include_once 'functions.php';
+include_once 'model/user.php';
+include_once 'model/role.php';
 
 $error = false;
 $response = '';
@@ -11,7 +13,7 @@ if (isset($_POST['submitForm'])&&!$error) {
 		case 'recreate_schema':
 		case 'recreate_tables':
 		case 'recreate_procedures':
-		$response = get_response($_POST['submitForm']);
+		$_POST['submitForm']();
 		break;
 	}
 }
@@ -29,7 +31,7 @@ if (!check_schema_select()) {
 }
 
 if (isset($_POST['submitForm'])&&!$error) {
-	$response = get_response($_POST['submitForm']);
+	$_POST['submitForm']();
 }
 
-include_once 'template.php';
+include_once 'view/layout.php';
