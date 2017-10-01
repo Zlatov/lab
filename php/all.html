@@ -70,7 +70,21 @@ echo &quot;&lt;pre&gt;&quot;;
 var_dump($s);
 echo &quot;&lt;/pre&gt;&quot;;
 </pre>
-
+<h2>Переменные</h2>
+<h3>Типы</h3>
+<p><code>gettype()</code> — Возвращает тип переменной</p>
+<p>Возможные значения:</p>
+<ul>
+    <li><code>"boolean"</code></li>
+    <li><code>"integer"</code></li>
+    <li><code>"double"</code> (по историческим причинам в случае типа float возвращается "double", а не просто "float")</li>
+    <li><code>"string"</code></li>
+    <li><code>"array"</code></li>
+    <li><code>"object"</code></li>
+    <li><code>"resource"</code></li>
+    <li><code>"NULL"</code></li>
+    <li><code>"unknown type"</code></li>
+</ul>
 <h2>Константы</h2>
 <pre class="prettyprint lang-php">if (!defined('COOKIE_ENABLED')) {
     define('COOKIE_ENABLED', false);
