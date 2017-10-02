@@ -1,43 +1,47 @@
-<div id="roles" style="height: 400px;"></div>
+<div id="roles" style="height: 600px; border: solid 1px black;"></div>
 <script type="text/javascript">
 	var nodes = new vis.DataSet([
 		<?php foreach ($roles as $role): ?>
-		{id: <?= $role['id'] ?>, label: "<?= $role['name'] ?>"},
+		{id: <?= $role['id'] ?>, label: ("<?= $role['name'] ?>".split_with_line_breaks(20))},
 		<?php endforeach ?>
 	]);
-
-	// create an array with edges
 	var edges = new vis.DataSet([
 		<?php foreach ($edges as $edge): ?>
 		{from: <?= $edge['aid'] ?>, to: <?= $edge['did'] ?>, arrows:'to'},
 		<?php endforeach ?>
 	]);
-
-	// create a network
 	var container = document.getElementById('roles');
-
-	// provide the data in the vis format
 	var data = {
 		nodes: nodes,
 		edges: edges
 	};
 	var options = {
-
-		edges: {
-			smooth: {
-				type: 'cubicBezier',
-				forceDirection: 'vertical',
-				roundness: 0.4
-			}
-		},
-		layout: {
-			hierarchical: {
-				direction: 'UD'
-			}
-		},
-		physics:false				
-	};
-
-	// initialize your network!
-	var network = new vis.Network(container, data, options);
+	  nodes: {
+	    font: {
+	      size: 16
+	    },
+	    scaling: {
+	      max: 160
+	    },
+	    shape: "box",
+	    size: 50
+	  },
+	  edges: {
+	    smooth: false
+	  },
+	  layout: {
+	    hierarchical: {
+	      enabled: true,
+	      levelSeparation: 100,
+	      nodeSpacing: 250,
+	      blockShifting: false,
+	      edgeMinimization: false,
+	      parentCentralization: false
+	    }
+	  },
+	  physics: {
+	    enabled: false
+	  }
+	}
+	var roles = new vis.Network(container, data, options);
 </script>

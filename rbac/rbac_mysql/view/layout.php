@@ -5,6 +5,29 @@
 	<title>RBAC_MYSQL</title>
 	<link rel="stylesheet" type="text/css" href="../../theme/bower/vis/dist/vis.css"/>
 	<link rel="stylesheet" type="text/css" href="css.css"/>
+	<script type="text/javascript">
+		String.prototype.split_with_line_breaks = function(max_string_length) {
+		  if (!max_string_length) {
+		    return this.valueOf()
+		  }
+		  var words = this.valueOf().split(' ')
+		  if (words.length==1) {
+		    return words[0]
+		  }
+		  var new_text = words[0]
+		  var line_length = words[0].length
+		  for(var i=1, l=words.length; i<l; i++) {
+		    if ((line_length + 1 + words[i].length) > max_string_length) {
+		      new_text+= '\n' + words[i]
+		      line_length = words[i].length
+		    } else {
+		      new_text+= ' ' + words[i]
+		      line_length+= 1 + words[i].length
+		    }
+		  }
+		  return new_text
+		}
+	</script>
 	<script type="text/javascript" src="../../theme/bower/vis/dist/vis.min.js"></script>
 </head>
 <body>
