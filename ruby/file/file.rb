@@ -49,6 +49,10 @@ print 'dirname: '.light_blue; puts dirname
 puts 'Рекурсивное создание пути.'.green
 FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)
 
+puts 'Расширение файла'.green
+puts File.extname('qaer4ef24r34.rffre31.ваще не понятно что?')
+puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?')
+
 puts 'Открыте файла на запись.'.green
 
 file = File.open path_to_file, 'r+'
@@ -132,3 +136,5 @@ file.close
 
 # p File.read path_to_file
 
+p File.basename 'http://sadf.ru/asdf.jpg?asd'
+p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )

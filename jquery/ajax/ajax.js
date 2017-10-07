@@ -1,6 +1,24 @@
 $.ajax({
   type: 'GET',
   url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',
+  cache: false,
+  beforeSend: function() {
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+  },
+  success: function(data, textStatus, jqXHR){
+  }
+})
+
+$.ajax({
+  type: 'POST',
+  url: '/',
+  data: {
+    some_field: some_var
+  },
+  data_custom: {
+    some_field: some_var
+  },
   async: true,
   dataType: 'json',
   cache: false,
@@ -9,7 +27,8 @@ $.ajax({
   error: function(jqXHR, textStatus, errorThrown) {
   },
   success: function(data, textStatus, jqXHR){
-    console.log(data)
+    console.log('data: ', data)
+    console.log('this.data_custom: ', this.data_custom)
   }
 })
 

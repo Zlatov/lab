@@ -21,6 +21,34 @@
 <h3>Задачи (task)</h3>
 <p><code>rails g task convertings test_tab_and_ajson</code></p>
 <p><code>rails convertings:test_tab_and_ajson</code></p>
+<pre class="prettyprint lang-rb">
+  task :content, [:proj_slug] => [:environment] do |t, params|
+    puts 'START import content!'.green
+
+    # Свои логи
+    @log = {}
+    logerrorpath = 'lib/tasks/import/log/error.log'
+    logsuccesspath = 'lib/tasks/import/log/success.log'
+    @log[:error] = Logger.new(logerrorpath)
+    @log[:success] = Logger.new(logsuccesspath)
+    File.open(logerrorpath, 'w') {|file| file.truncate(0)}
+    File.open(logsuccesspath, 'w') {|file| file.truncate(0)}
+    def logerror txt
+      @log[:error].error txt
+    end
+    def logsuccess txt
+      @log[:success].info txt
+    end
+
+    # Параметры задачи
+    if params[:proj_slug]
+      projs_slug = [params[:proj_slug]]
+    else
+      projs_slug = Conf.domain.admin.proj.itypes.to_h.select{|slug,proj| proj = proj.to_h; !proj[:article].nil? }.keys
+    end
+    # next # Выход из задачи
+    ...
+</pre>
 
 <h2>Slimrb</h2>
 <h3>slim to rb</h3>
