@@ -50,6 +50,8 @@ p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
   [node, node]
 }]
 
+puts ({a:1,b:2}).select{ |k,v| k != :a}
+
 # Слияние двух hash
 puts 'Слияние двух hash'.red
 h1 = {a:'a',b:'b'}
