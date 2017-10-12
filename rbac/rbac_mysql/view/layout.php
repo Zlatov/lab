@@ -5,6 +5,7 @@
 	<title>RBAC_MYSQL</title>
 	<link rel="stylesheet" type="text/css" href="../../theme/bower/vis/dist/vis.css"/>
 	<link rel="stylesheet" type="text/css" href="css.css"/>
+	<script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript">
 		String.prototype.split_with_line_breaks = function(max_string_length) {
 		  if (!max_string_length) {
