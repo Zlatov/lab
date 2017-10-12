@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="/theme/bower/jstree/dist/themes/default/style.min.css">
+</head>
+
+<body>
+	<button class="load" type="button" data-tree_slug="data">data</button>
+	<button class="load" type="button" data-tree_slug="data2">data2</button>
+	<button class="load" type="button" data-tree_slug="data3">data3</button>
+	<div id="panel">
+		<div id="struct"></div>
+	</div>
+	<script type="text/javascript" src="/theme/bower/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="/theme/bower/jstree/dist/jstree.js"></script>
+	<script type="text/javascript" src="/js/lib.js"></script>
+	<script type="text/javascript">
+	function activate_load() {
+		$('button.load').on('click', function(event) {
+			var tree_slug = $(this).data('tree_slug')
+			window.load(tree_slug)
+		})
+	}
+
+	function load(tree_slug) {
+		$.ajax({
+			type: 'post',
+			url: 'data/' + tree_slug + '.json',
+			success: function(data, textStatus, jqXHR) {
+				window.data = data
+				window.display()
+			},
+			error: function() {
+				console.log('error')
+			}
+		})
+	}
+
+	function display() {
+		console.log('> display')
+		var panel = $('#panel')
+		panel.empty()
+		panel.append('<div id="struct"></div>')
+		var struct = $('#struct')
+		console.log('struct.jstree(true): ', struct.jstree(true))
+		// window.my_jstree.jstree(true).settings.core.data = window.data
+
+		// window.my_jstree.settings.json_data.data = window.data
+		// $.jstree._reference('#struct')._set_settings(window.my_jstree.settings)
+		// $.jstree._reference('#struct').refresh(-1);
+
+		// window.my_jstree.element = struct
+		// window.my_jstree.init(struct, window.my_jstree.settings)
+		window.my_jstree.jstree(true).refresh()
+	}
+
+	$(document).ready(function() {
+		window.activate_load()
+		window.my_jstree = $('#struct').jstree({
+			core: {
+				data:[
+					{id:'1', text:'a'}
+				]
+			}
+		})
+	})
+	</script>
+</body>
+
+</html>

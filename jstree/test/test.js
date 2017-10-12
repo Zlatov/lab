@@ -1,11 +1,51 @@
 window.tree = {}
+window.tree.data = {}
+window.tree.data.left = []
+window.tree.data.right = []
 
-window.tree.display = function(data, position) {
-  var struct = $('#struct_' + position)
+window.tree.load = function(slug=null) {
+  if (slug==null) {
+    slug = 'data'
+  }
+  $.ajax({
+    type: 'post',
+    url: 'data/' + slug + '.json',
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    success: function(data, textStatus, jqXHR){
+      window.tree.data['left'] = data
+      window.tree.display('left')
+    },
+    fail: function(){
+      console.log('error')
+    }
+  })
+}
+
+window.tree.display = function(position) {
+  var panel = $('#panel_' + position)
+  panel.empty()
+  panel.append('<div id="struct_'+ position +'"></div>')
+  console.log('window.tree.data[position]: ', window.tree.data[position])
+  var struct = $("#struct_" + position)
+
+  var tmp = struct.jstree(true)
+  if(tmp) {
+    tmp.destroy()
+  }
+
   struct.jstree({
     core: {
-      data: data,
+      data: window.tree.data[position],
+      // data: function(obj, callback) {
+      //   return window.tree.data[this.settings.data_custom.position]||[]
+      // },
       check_callback: true
+    },
+    data_custom: {
+      position: position
     },
     types: window.config.tree.node_types,
     contextmenu: {
@@ -21,28 +61,9 @@ window.tree.display = function(data, position) {
       'dnd'
     ]
   })
-}
-
-window.tree.load = function() {
-  $.ajax({
-    type: 'POST',
-    url: 'data/data.json',
-    data: null,
-    cache: false,
-    async: true,
-    contentType: false,
-    processData: false,
-    dataType: 'json',
-    beforeSend: function(jqXHR, settings){
-    },
-    success: function(data, textStatus, jqXHR){
-      tree.display(data, 'left')
-      tree.display(data, 'right')
-    },
-    fail: function(){
-      console.log('error')
-    }
-  })
+  // struct.jstree(true).settings.core.data = window.tree.data[position]
+  struct.jstree(true).refresh()
+  // struct.jstree(true).redraw(true)
 }
 
 window.tree.get_data = function(position) {
@@ -100,7 +121,7 @@ window.panel.save = function(position) {
   })
 }
 
-window.tree.activate_save = function() {
+window.activate_save = function() {
   $('#save_left').on('click', function(){
     window.panel.save('left');
   })
@@ -109,8 +130,50 @@ window.tree.activate_save = function() {
   })
 }
 
+window.activate_load = function() {
+  $('.load_tree').on('click', function(event) {
+    var tree_id = $(this).data('tree_id')
+    window.tree.load(tree_id)
+  })
+}
+
+function activate_jstree() {
+  var positions = ['left', 'right']
+  for(var i=0, l=positions.length; i<l; i++) {
+    var position = positions[i];
+    var struct = $('#struct_' + position)
+    struct.jstree({
+      core: {
+        data: function(obj, callback) {
+          var position = this.settings.data_custom.position
+          console.log('window.tree.data[' + position + ']: ', window.tree.data[position])
+          return window.tree.data[position]||[]
+        },
+        check_callback: true
+      },
+      data_custom: {
+        position: position
+      },
+      types: window.config.tree.node_types,
+      contextmenu: {
+        items: function(node_data) {
+          var tree = struct.jstree(true)
+          return window.tree.contextmenu(node_data, tree)
+        }
+      },
+      plugins: [
+        'search',
+        'types',
+        'contextmenu',
+        'dnd'
+      ]
+    })
+  }
+}
 
 $(document).ready(function(){
-  window.tree.load()
-  window.tree.activate_save()
+  // window.activate_jstree()
+  window.activate_load()
+  window.activate_save()
+  window.tree.load('data')
 })

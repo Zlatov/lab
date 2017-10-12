@@ -228,3 +228,29 @@ String.prototype.split_with_line_breaks = function(max_string_length) {
   }
   return new_text
 }
+
+String.prototype.red = function() {
+  return '<span style="color:red;">' + this.valueOf() + '</span>'
+}
+String.prototype.green = function() {
+  return '<span style="color:green;">' + this.valueOf() + '</span>'
+}
+String.prototype.blue = function() {
+  return '<span style="color:blue;">' + this.valueOf() + '</span>'
+}
+
+;(function () {
+  "use strict"
+  window.document.log = function() {
+    var messages = [...arguments]
+    for(var i=0, l=messages.length; i<l; i++) {
+      var message = messages[i]
+      if (typeof message == 'object') {
+        window.document.body.innerHTML += (JSON && JSON.stringify ? JSON.stringify(message) : message);
+      } else {
+        window.document.body.innerHTML += message
+      }
+    }
+    window.document.body.innerHTML += '<br />'
+  }
+})();
