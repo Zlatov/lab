@@ -4,6 +4,19 @@ require_relative '../colorize/colorize'
 require 'json'
 $stdout.sync = true
 
+# 
+# somefile = File.open 'path_to_file'[, 'w+']
+# somefile.flock = ...
+# somefile.pos = ...
+# somefile.truncate 0
+# somefile.close
+# 
+# или
+# 
+# File.open 'path_to_file'[, 'w+'] do |file|
+#   file. ...
+# end
+# 
 # ┏━━━━┳━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
 # ┃    ┃ чтение ┃ запись ┃ указатель ┃ содержимое ┃ создание файла ┃
 # ┣━━━━╋━━━━━━━━╋━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━━━━━━━┫
