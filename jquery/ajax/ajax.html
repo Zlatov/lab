@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<title>HTML5 - Привет, Мир!</title>
-		<style type="text/css">
-			article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-		</style>
-	</head>
-	<body>
-		<p>Привет, Мир!</p>
-		<script src="../../theme/bower/jquery/dist/jquery.min.js"></script>
-		<script src="ajax.js"></script>
-	</body>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <form>
+      <input type="file" name="main"><br>
+      <input type="file" name="images"><br>
+      <button type="button" id="send1">Отправить</button>
+    </form>
+    <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#send1').on('click', function(event) {
+          var form = $('form')[0]
+          var form_data = new FormData(form)
+          $.ajax({
+            type: 'post',
+            url: 'ajax.php',
+            data: form_data,
+            contentType: 'multipart/form-data',
+            processData: false,
+            dataType: 'json',
+            cache: false,
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log('jqXHR, textStatus, errorThrown: ', jqXHR, textStatus, errorThrown)
+            },
+            success: function(data, textStatus, jqXHR) {
+              console.log('data, textStatus, jqXHR: ', data, textStatus, jqXHR)
+            }
+          })
+        })
+      })
+    </script>
+  </body>
 </html>

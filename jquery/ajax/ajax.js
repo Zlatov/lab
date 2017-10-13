@@ -6,37 +6,36 @@ $.ajax({
   },
   error: function(jqXHR, textStatus, errorThrown) {
   },
-  success: function(data, textStatus, jqXHR){
+  success: function(data, textStatus, jqXHR) {
   }
 })
 
+var form = $('form')[0]
+var form_data = new FormData(form)
 $.ajax({
   type: 'post',
-  url: '/',
-  data: {
-    some_field: some_var
-  },
-  data_custom: {
-    some_field: some_var
-  },
-  async: true,
+  url: 'ajax.php',
+  data: form_data,
+  data_custom: {form: form}
+  contentType: 'multipart/form-data',
+  processData: false,
   dataType: 'json',
   cache: false,
-  beforeSend: function() {
-  },
   error: function(jqXHR, textStatus, errorThrown) {
+    console.log('jqXHR, textStatus, errorThrown: ', jqXHR, textStatus, errorThrown)
   },
-  success: function(data, textStatus, jqXHR){
-    console.log('data: ', data)
-    console.log('this.data_custom: ', this.data_custom)
+  success: function(data, textStatus, jqXHR) {
+    console.log('data, textStatus, jqXHR: ', data, textStatus, jqXHR)
+    console.log('this.data_custom.form: ', this.data_custom.form)
   }
 })
-
 
 // Параметры ajax
 jQuery.ajax({
 
   // accepts:map(зависит от DataType)
+
+  // async: [Boolean]
   async: true,
   async: false,
 
@@ -44,13 +43,17 @@ jQuery.ajax({
   beforeSend: function(jqXHR, settings) {
   }
 
-  // cache:boolean(true. Для 'script' и 'jsonp' — false)
-  cache:true,
-  cache:false,
+  // cache: boolean(true. Для 'script' и 'jsonp' — false)
+  cache: true,
+  cache: false,
 
   // complete(jqXHR, textStatus):function, array
   // contents:map
-  // contentType:string('application/x-www-form-urlencoded')
+
+  // contentType: [String] ('multipart/form-data'|'application/x-www-form-urlencoded')
+  // При отправлении запроса на сервер, данные передаются в формате, указанном в contentType
+  contentType: 'application/x-www-form-urlencoded',
+  contentType: 'multipart/form-data',
 
   // context:object
   // В качестве контекста можно задать DOM-элемент, который должен 
