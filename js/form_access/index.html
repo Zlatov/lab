@@ -1,14 +1,55 @@
-<body>
-  <form name="my">
-    <input name="one" value="1">
-    <input name="two" value="2">
-  </form>
+<!DOCTYPE html>
+<html lang="ru">
 
-  <script>
-    var form = document.forms.my; // можно document.forms[0]
+  <head>
+    <meta charset="utf-8">
+  </head>
 
-    var elem = form.elements.one; // можно form.elements[0]
+  <body>
+    <form name="my">
+      <input type="text" name="field1" value="1">
+      <input type="text" name="field2" value="2">
+      <input type="text" name="field3[]" value="3-1">
+      <input type="text" name="field3[]" value="3-2">
+      <select name="field4" multiple="">
+      	<option value="1">1</option>
+      	<option value="2" selected="">2</option>
+      	<option value="3" selected="">3</option>
+      </select>
+    </form>
+    <script type="text/javascript" src="../_lib/lib.js"></script>
+    <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+    var form = document.forms.my; // document.forms[0]
+    document.log('form: ', form)
+    console.log('form: ', form)
 
-    alert( elem.value ); // 1
-  </script>
-</body>
+    var field1 = form.elements.field1; // form.elements[0]
+    document.log('field1: ', field1)
+    console.log('field1: ', field1)
+
+    var value_field1 = field1.value
+    document.log('value_field1: ', value_field1)
+    console.log('value_field1: ', value_field1)
+
+    var formData = new FormData(document.querySelector('form'))
+    document.log('formData: ', formData)
+    console.log('formData: ', formData)
+    formData.forEach(function(e, i, a) {
+    	document.log('i: ', i)
+    	console.log('i: ', i)
+    	document.log('e: ', e)
+    	console.log('e: ', e)
+    })
+
+    document.log('> jquery'.green())
+    console.log('> jquery')
+    document.log('> $(selector).serializeArray()'.blue())
+    console.log('> $(selector).serializeArray()')
+    var data = $('form').serializeArray()
+    document.log('data: ', data)
+    console.log('data: ', data)
+    </script>
+  </body>
+
+</html>

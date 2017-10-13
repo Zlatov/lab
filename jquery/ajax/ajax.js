@@ -1,5 +1,5 @@
 $.ajax({
-  type: 'GET',
+  type: 'get',
   url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',
   cache: false,
   beforeSend: function() {
@@ -11,7 +11,7 @@ $.ajax({
 })
 
 $.ajax({
-  type: 'POST',
+  type: 'post',
   url: '/',
   data: {
     some_field: some_var
