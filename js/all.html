@@ -66,11 +66,12 @@ while (level&gt;=0) {
 <h2>Переменные</h2>
 <h3>Типы переменных</h3>
 <pre class="prettyprint lang-js">
-Object.prototype.toString.call([]) === '[object Array]'
-Object.prototype.toString.call({}) === '[object Object]'
-Object.prototype.toString.call('') === '[object String]'
-Object.prototype.toString.call(10) === '[object Number]'
-Object.prototype.toString.call(/s/)=== '[object RegExp]'
+Object.prototype.toString.call([])           === '[object Array]'
+Object.prototype.toString.call({})           === '[object Object]'
+Object.prototype.toString.call('')           === '[object String]'
+Object.prototype.toString.call(10)           === '[object Number]'
+Object.prototype.toString.call(/s/)          === '[object RegExp]'
+Object.prototype.toString.call(function(){}) === '[object Function]'
 
 // Numbers
 typeof 37 === 'number';
