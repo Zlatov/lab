@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script src="../_lib/lib.js"></script>
+  <script type="text/javascript">
+  "use strict"
+  window.Market = {}
+  // Фабрика фильтров
+  // инстансы фабрики не создаем
+  window.Market.FilterFactory = function() {
+  }
+  // Статический метод для регистрации конструкторов фабрики
+  // конструкторы хранятся в классе
+  window.Market.FilterFactory.register = function(constructor_function) {
+    if (!(constructor_function instanceof Function)) {
+      throw new window.Error('constructor_function is not function.')
+    }
+    console.log('constructor_function.name: ', constructor_function.name)
+    console.log('constructor_function: ', constructor_function)
+    this[constructor_function.name] = constructor_function
+  }
+  // Метод находящий файбричный метод по типу
+  window.Market.FilterFactory.new = function(type, name, pickers) {
+    var constructor_class_name = 'Filter' + type.charAt(0).toUpperCase() + type.slice(1)
+    var constructor_function = this[constructor_class_name]
+    if (!(constructor_function instanceof Function)) {
+      throw new window.Error('Конструктор "' + constructor_class_name + '" не найден.')
+    }
+    return new constructor_function(name, pickers)
+  }
+  // Базовый класс для фильтров
+  window.Market.Filter = function(name, pickers) {
+    this.name = name
+    this.pickers = pickers
+    this.get_name = function() {
+      return this.name
+    }
+  }
+  // Фильтр типа Флажок
+  window.Market.FilterCheckbox = function FilterCheckbox(name, pickers) {
+    window.Market.Filter.apply(this, arguments);
+    this.type = 'checkbox'
+  }
+  // Флажок - потомок базового класса
+  window.Market.FilterCheckbox.prototype = Object.create(window.Market.Filter.prototype)
+  window.Market.FilterCheckbox.prototype.constructor = window.Market.FilterCheckbox
+  // Регистрируем флажок в фабрике
+  window.Market.FilterFactory.register(window.Market.FilterCheckbox)
+  // Фильтр типа Интервал
+  window.Market.FilterInterval = function FilterInterval(name, pickers) {
+    window.Market.Filter.apply(this, arguments);
+    this.type = 'interval'
+  }
+  // Флажок - потомок базового класса
+  window.Market.FilterInterval.prototype = Object.create(window.Market.Filter.prototype)
+  window.Market.FilterInterval.prototype.constructor = window.Market.FilterInterval
+  // Регистрируем флажок в фабрике
+  window.Market.FilterFactory.register(window.Market.FilterInterval)
+
+  var filter1 = new window.Market.FilterCheckbox('filter1', [1,2,3])
+  document.log('filter1.name: ', filter1.name)
+  document.log('filter1.get_name: ', filter1.get_name)
+  document.log('filter1.get_name(): ', filter1.get_name())
+  document.log('filter1.type: ', filter1.type)
+  var filter2 = window.Market.FilterFactory.new('checkbox', 'filter2', [1,2])
+  document.log('filter2.name: ', filter2.name)
+  document.log('filter2.get_name: ', filter2.get_name)
+  document.log('filter2.get_name(): ', filter2.get_name())
+  document.log('filter2.type: ', filter2.type)
+  var filter3 = window.Market.FilterFactory.new('interval', 'filter3', [1])
+  document.log('filter3.name: ', filter3.name)
+  document.log('filter3.get_name: ', filter3.get_name)
+  document.log('filter3.get_name(): ', filter3.get_name())
+  document.log('filter3.type: ', filter3.type)
+  </script>
+</body>
+
+</html>

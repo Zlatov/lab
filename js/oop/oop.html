@@ -9,13 +9,13 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			"use strict"
 			function Cl() {
-				// console.log(this) // this - инстанса
-				this.foo = 'foo'
+				console.log('this in Cl(): ', this) // this - инстанса
+				this.foo = 'property instanse one'
 				this.bar = function() {
-					// console.log(this) // this - инстанса
-					// return this.foo
-					return 'bar'
+					console.log('this in this.bar(): ', this) // this - инстанса
+					return 'property instance two'
 				}
 				// Неверно, така как вызывается только при инициализации:
 				// Cl.foo = 'baz'
@@ -24,20 +24,22 @@
 				// }
 			}
 			// Верно:
-			Cl.foo = 'baz'
+			Cl.foo = 'property class one'
 			Cl.bar = function() {
-				return 'quux'
+				console.log('this in Cl.bar(): ', this)
+				return 'property class two'
 			}
 
-			// console.log( Cl.foo )
-			// console.log( Cl.bar() )
-			instance = new Cl()
-			instance2 = new Cl()
+			var instance = new Cl()
 			instance.foo = 2
-			console.log( instance.foo )
-			// console.log( instance.bar() )
-			console.log( instance2.foo )
-			// console.log( instance2.bar() )
+			var instance2 = new Cl()
+			console.log('> log result ========================')
+			console.log('Cl.foo: ', Cl.foo)
+			console.log('Cl.bar(): ', Cl.bar())
+			console.log('instance.foo: ', instance.foo)
+			console.log('instance.bar(): ', instance.bar())
+			console.log('instance2.foo: ', instance2.foo)
+			console.log('instance2.bar(): ', instance2.bar())
 		</script>
 	</body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script src="../_lib/lib.js"></script>
+  <script type="text/javascript">
+  "use strict"
+  window.Market = {}
+  window.Market.Filter = function(name, pickers) {
+    this.name = name
+    this.pickers = pickers
+    this.get_name = function() {
+      return this.name
+    }
+  }
+  window.Market.FilterCheckbox = function(name, pickers) {
+    window.Market.Filter.apply(this, arguments);
+    this.type = 'checkbox'
+  }
+  window.Market.FilterCheckbox.prototype = Object.create(window.Market.Filter.prototype)
+  window.Market.FilterCheckbox.prototype.constructor = window.Market.FilterCheckbox
+
+  var filter1 = new window.Market.FilterCheckbox('filter1', [1,2,3])
+  document.log('filter1.name: ', filter1.name)
+  document.log('filter1.get_name: ', filter1.get_name)
+  document.log('filter1.get_name(): ', filter1.get_name())
+  document.log('filter1.type: ', filter1.type)
+  </script>
+</body>
+
+</html>
