@@ -26,7 +26,7 @@ console.log('GODzilla'.replace( new RegExp('god', 'i'), '' ) )
 // Фильтр пользовательского ввода для создания регулярного выражения
 console.log('----------------------------------------')
 console.log('> Фильтр пользовательского ввода для создания регулярного выражения')
-a = 'ds\\^f[sd'
+a = 'ds\\^f[sd Ширина (м)'
 b = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 console.log('a: ', a)
 console.log('b: ', b)

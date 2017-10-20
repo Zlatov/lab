@@ -1,9 +1,75 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<script src="regex.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script src="../_lib/lib.js"></script>
+  <script type="text/javascript">
+  'use strict'
+  // 
+  // Синтаксис
+  // 
+  // /pattern/flags
+  // или
+  // new RegExp(pattern[, flags])
+  // 
+  // 
+  // Параметры
+  // 
+  // pattern — текст регулярного выражения.
+  // flags — если определён, может принимать любую комбинацию нижеследующих значений:
+  //   g — глобальное сопоставление
+  //   i — игнорирование регистра при сопоставлении
+  //   m — сопоставление по нескольким строкам; 
+  //       символы начала и конца (^ и $) начинают работать по нескольким строкам.
+  // 
+
+  console.log('"asdf".match(/s/gim): ', "asdf".match(/s/gim))
+  console.log('/s/gim.test("asd"): ', /s/gim.test("asd"))
+  console.log('/f/gim.test("asd"): ', /f/gim.test("asd"))
+  var versions = [
+    '.',
+    'a',
+    '0',
+    '1',
+    '103',
+    '..',
+    'a.',
+    '0.',
+    '1.',
+    '103.',
+    '.a',
+    '.0',
+    '.1',
+    '.103',
+    'a.a',
+    '0.0',
+    '1.1',
+    'a.a.a',
+
+    '0.0.0',
+    '1.1.1',
+    '103.103.103',
+  ]
+  for (var i = 0, l = versions.length; i < l; i++) {
+    console.log(versions[i], /^[0-9]+\.[0-9]+\.[0-9]+$/gi.test(versions[i]))
+  }
+
+  var filters_name = ['Длинна (м)', 'Бренды']
+  // a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  // .join(separator)
+  var rgx = new RegExp('(?:^Длинна \(м\))|(?:^Бренды)')
+
+  var dinamic_regexp = new RegExp(filters_name.map(function(e,i,a) { return '(?:' + (e.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) + ')' }).join('|'))
+
+  document.log('dinamic_regexp.test("Бренды Филипс"): ', dinamic_regexp.test("Бренды Филипс"))
+  document.log('dinamic_regexp.test("Длинна (м) 10"): ', dinamic_regexp.test('Длинна (м) 10'))
+  document.log('dinamic_regexp.test("Бренд Филипс"): ', dinamic_regexp.test("Бренд Филипс"))
+  document.log('dinamic_regexp.test("Длинн (м) 10"): ', dinamic_regexp.test('Длинн (м) 10'))
+  </script>
+</body>
+
 </html>

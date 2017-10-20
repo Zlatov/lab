@@ -73,6 +73,21 @@ Object.prototype.toString.call(10)           === '[object Number]'
 Object.prototype.toString.call(/s/)          === '[object RegExp]'
 Object.prototype.toString.call(function(){}) === '[object Function]'
 
+
+var a = []
+a instanceof Array // -&gt; true
+a instanceof Object // -&gt; true
+
+function Aclass() {}
+function Bclass() {}
+Bclass.prototype = Object.create(Aclass.prototype)
+Bclass.prototype.constructor = Bclass
+var a = new Bclass()
+a instanceof Bclass // -&gt; true
+a instanceof Aclass // -&gt; true
+a instanceof Object // -&gt; true
+
+
 // Numbers
 typeof 37 === 'number';
 typeof 3.14 === 'number';

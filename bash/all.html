@@ -357,18 +357,24 @@ $ scp ?
 <p><code class="copyToClipboard">htop</code></p>
 <h3>pwd</h3>
 <p>Вывести полный путь до текущей директории.</p>
-<p><strong>Примеры</strong></p>
+<p><strong>Пример:</strong></p>
 <pre>user@server ~/some/path/from/user/folder $ pwd
 /home/user/some/path/from/user/folder</pre>
 <h2>Работа с окнами</h2>
-<pre class="prettyprint lang-sh">
-screen
-screen -r
-screen -r 2398.pts-0.webtest
-</pre>
-<p>Чтобы создать screen с именем foo, используй:</p>
-<pre class="prettyprint lang-sh copyToClipboard">screen -S foo</pre>
-<p><kbd>Ctrl + A, D</kbd> - выйти из сессии</p>
+<p><strong>Команды:</strong></p>
+<ul>
+    <li><code>screen -ls</code> — список скринов;</li>
+    <li><code>screen -r</code> — список скринов или если он один сразу зайти в него;</li>
+    <li><code>screen -r 2398</code> — зайти в скрин с заданным идентификатором;</li>
+    <li><code>screen -S foo</code> — создать скрин с алиасом;</li>
+    <li><code>screen -r foo</code> — зайти в скрин с заданным алиасом.</li>
+</ul>
+<p><strong>Сочетания клавишь:</strong></p>
+<ul>
+    <li><kbd>Ctrl</kbd> + <kbd>A</kbd> , <kbd>D</kbd> — выйти из скрина</li>
+    <li><kbd>Ctrl</kbd> + <kbd>A</kbd> ; <kbd>Esc</kbd> — перейти в режим прокрутки/выделения</li>
+    <li><kbd>Enter</kbd> ; <kbd>Enter</kbd> — выйти из режима прокрутки/выделения</li>
+</ul>
 <h2>Программирование</h2>
 <h3>Пути/имена</h3>
 <pre class="prettyprint lang-sh">
