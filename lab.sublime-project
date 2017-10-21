@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"settings":
+	{
+		"sublime-view-in-browser":
+		{
+			"basePath": "/home/iadfeshchm/projects/my/lab/lab/",
+			"baseUrl": "http://lab.local/"
+		}
+	}
+}
