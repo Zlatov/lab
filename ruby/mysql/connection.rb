@@ -1,20 +1,19 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
 require 'rubygems'
+require 'awesome_print'
 require 'mysql2'
 
-client = Mysql2::Client.new(
+$pdo = Mysql2::Client.new(
   :host => "localhost",
   :username => "lab",
   :password => 'lab',
   :database => 'lab'
 )
 
-sql = 'CREATE TABLE IF NOT EXISTS `test` (`numbers` INT);'
-client.query sql
+sql = 'DROP TABLE IF EXISTS `test`;'
+$pdo.query sql
+sql = 'CREATE TABLE `test` (`numbers` INT, `texts` VARCHAR(255));'
+$pdo.query sql
 
-results = client.query('SELECT * FROM `test` LIMIT 10;')
-results.each do |row|
-  row_hash = row.to_h
-  print 'row_hash: '.red; puts row_hash
-end
+# $pdo.close
