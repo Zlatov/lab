@@ -7,9 +7,13 @@
 -- Выбрать базу данных
 -- USE lab;
 
+-- Определить выбранную БД
+-- SELECT DATABASE();
+
 -- Удалить базу данных
 -- DROP DATABASE IF EXISTS `lab`;
 
 SHOW databases;
-USE lab;
+USE `lab`;
+SELECT DATABASE();
 SHOW tables;
