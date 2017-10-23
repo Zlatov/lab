@@ -2,7 +2,12 @@
 	"folders":
 	[
 		{
-			"path": "."
+			"path": ".",
+			"index_exclude_patterns": ["*.log", "*.sql", "theme/bower/*"],
+			"folder_exclude_patterns": ["bogacho", "argo-ds"],
+			"file_exclude_patterns": ["argo-ds/*.html"],
+			"folder_exclude_patterns-example": "\"folder_exclude_patterns\": [\"bogacho\"],",
+			"file_exclude_patterns-example": "\"file_exclude_patterns\": [\"argo-ds/*.html\"]"
 		}
 	],
 	"settings":
