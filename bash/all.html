@@ -376,6 +376,16 @@ $ scp ?
     <li><kbd>Enter</kbd> ; <kbd>Enter</kbd> — выйти из режима прокрутки/выделения</li>
 </ul>
 <h2>Программирование</h2>
+<ul>
+<li>Нужно использовать полные названия опций <code>logger --priority</code> вместо <code>logger -p</code></li>
+<li><code>set -o errexit</code>, <code>set -e</code> - выходит из скрипта при ошибке</li>
+<li><code>|| true</code> - разрешает команде выполняться с ошибкой</li>
+<li><code>set -o nounset</code>, <code>set -u</code> - выходить при обращении к неопределённой переменной</li>
+<li><code>echo ${NAME:-bubujka}</code> - значение по умолчанию, если переменная не определена</li>
+<li><code>set -o xtrace</code>, <code>set -x</code> - печатать каждую команду что исполняется</li>
+<li><code>set -o pipefail</code> - обрывать выполнение если хоть одна команда в пайпе вернула ненулевой статус. <code>mysqldump | gzip</code></li>
+<li>Переменные нужно брать в фигурные скобки <code>ls /srv/${ENV}_app</code></li>
+</ul>
 <h3>Пути/имена</h3>
 <pre class="prettyprint lang-sh">
 echo '-----------------------'
