@@ -52,6 +52,22 @@ p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
 
 puts ({a:1,b:2}).select{ |k,v| k != :a}
 
+# Преобразование всех полей в хэше
+puts 'Преобразование всех полей в хэше'.green
+# Старый хэш, старые строки (преобразованные):
+a = {a:'a0',b:'b0'}
+a.each{ |_,v| v.gsub! '0', '1' }
+print 'a: '.red; puts a
+# Старый хэш, новые строки:
+a = {a:'a0',b:'b0'}
+a.each{ |k,v| a[k] = "#{v[0]}2" }
+print 'a: '.red; puts a
+# Новый хеш:
+a = {a:'a0',b:'b0'}
+b = Hash[a.map{|k,v| [k,v+'3'] } ]
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+
 # Слияние двух hash
 puts 'Слияние двух hash'.red
 h1 = {a:'a',b:'b'}

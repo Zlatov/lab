@@ -2,6 +2,7 @@
 require_relative '../colorize/colorize'
 require "open-uri"
 require 'rubygems'
+require 'awesome_print'
 require 'mini_magick'
 
   class Array
@@ -31,17 +32,30 @@ p arr
 arr = %w[asd asd asd]
 p arr
 
-arr.each do |item|
-  p item
+
+puts '--------------------------------'
+puts 'Перебор'.green
+puts 'each, v не является ссылкой'.blue
+a = [1,'asd',nil]
+print 'a: '.red; ap a
+a.each do |v|
+  print 'v: '.red; puts v
+  v = 3
+end
+print 'a: '.red; ap a
+
+puts 'each_with_index'.blue
+a = [1,'asd',nil]
+a.each_with_index do |value, key|
+  print key.to_s.red, ' ', value.to_s, "\n"
 end
 
-arr.each_with_index do |value, key|
-  puts key.to_s, value
-end
+puts '--------------------------------'
+puts 'Последний элемент массива'.green
+a = [1,'asd',nil]
+puts arr.last.to_s.red
 
-p arr.last
-
-puts 'Перебо, остаток от деления'.red
+puts 'Перебо, остаток от деления'.green
 a = 1..5
 a.each_with_index do |value, key|
   puts "#{'ключ:'.light_blue} #{key.to_s}, #{'остаток от деления на 2:'.light_blue} #{(key%2).to_s}"
@@ -201,10 +215,18 @@ p a
 
 p *[:asd].to_s
 
-p ['asd','zxc'].join('|')
 
-p [].length
-p !!0
 
+puts '--------------------------------'
+puts 'Массив хэшей в хэш-инфо'.green
 p [{id: 1}, {id: 2}].to_info :id
 
+puts '--------------------------------'
+puts 'Массив строку'.green
+ap ['asd','zxc'].join('|')
+
+puts '--------------------------------'
+puts 'Массив в sql строку'.green
+a = [1, '2', nil, 0]
+ap a
+ap a.map!{|v| if v.is_a? String then "'#{v}'" elsif v.nil? then 'NULL' else v.to_s end}.join(', ')
