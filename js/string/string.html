@@ -1,9 +1,94 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<script src="string.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script src="../_lib/lib.js"></script>
+  <script type="text/javascript">
+  // Разбить в массив
+  document.log('> Разбить в массив'.green())
+  var str = "How are you doing today?";
+  var res = str.split(" ");
+  document.log('res: ', res)
+
+  // Заменить
+  document.log('----------------------------------------')
+  document.log('> Заменить'.green())
+  document.log('.A.'.replace(/A/g, '!'))
+
+  document.log('----------------------------------------')
+  document.log('> str_replce'.green())
+  function str_replce(search, replace, subject) {
+    if (typeof(search) === 'string' && typeof(replace) === 'string') {
+      search = [search]
+      replace = [replace]
+    }
+    if (
+      Object.prototype.toString.call(search) === '[object Array]' &&
+      Object.prototype.toString.call(replace) === '[object Array]' &&
+      search.length == replace.length
+    ) {
+      var regex
+      for (var i = 0; i < search.length; i++) {
+        regex = new RegExp(search[i], 'g')
+        subject = subject.replace(regex, replace[i])
+      }
+    }
+    return subject
+  }
+
+  a = 'asd asd'
+  b = str_replce('a', '1', a)
+  b = str_replce(['s', 'd'], ['2', '3'], b)
+  document.log('a: ', a)
+  document.log('b: ', b)
+
+  // slice - возвращает новую строку извлекая часть строки.
+  document.log('----------------------------------------')
+  document.log('> slice'.green())
+  var a = '0123456789'
+  var b = a.slice(2)
+  document.log('a: ', a) // 0123456789
+  document.log('b: ', b) // 23456789
+
+  // Сгенерировать regex из стринги
+  document.log('----------------------------------------')
+  document.log('> Сгенерировать regex из стринги'.green())
+  document.log('GODzilla'.replace(new RegExp('god', 'i'), ''))
+
+  // Фильтр пользовательского ввода для создания регулярного выражения
+  document.log('----------------------------------------')
+  document.log('> Фильтр пользовательского ввода для создания регулярного выражения'.green())
+  a = 'ds\\^f[sd Ширина (м)'
+  b = a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  document.log('a: ', a)
+  document.log('b: ', b)
+
+  document.log('----------------------------------------')
+  document.log('substring')
+  document.log('\'Цвет кармана\'.substring(0,4): ', 'Цвет кармана'.substring(0, 4))
+
+
+  document.log('----------------------------------------')
+  document.log('> Преобразование в int'.green())
+  document.log('0', parseInt('0'))
+  document.log('+0', parseInt('+0'))
+  document.log('-0', parseInt('-0'))
+  document.log('+000', parseInt('+000'))
+  document.log('-1', parseInt('-1'))
+  document.log('00001', parseInt('00001'))
+  document.log('-00001', parseInt('-00001'))
+  document.log('+00001', parseInt('+00001'))
+  document.log('101.1', parseInt('101.1'))
+  document.log('0.1', parseInt('0.1'))
+  document.log('-0.1', parseInt('-0.1'))
+  document.log('-0000.100', parseInt('-0000.100'))
+
+  document.log('Number(\'-0000.100\')', Number('-0000.100'))
+  </script>
+</body>
+
 </html>
