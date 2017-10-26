@@ -14,6 +14,17 @@
 // Array.prototype.to_nested
 // String.prototype.split_with_line_breaks
 
+// ;(function() {
+//   window.lib = {}
+//   window.lib.image = {}
+//   "use strict"
+//   var script = document.createElement('script')
+//   script.src = '/js/_lib/image.js'
+//   document.body.appendChild(script)
+// })();
+
+window.lib = {}
+
 Array.prototype.current = 0
 Array.prototype.next = function() {
   return this[this.current++]

@@ -149,5 +149,6 @@ file.close
 
 # p File.read path_to_file
 
+p File.basename 'asd.zxc'
 p File.basename 'http://sadf.ru/asdf.jpg?asd'
 p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )

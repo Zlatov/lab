@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<script type="text/javascript" src="lib.js"></script>
-		<script type="text/javascript" src="test.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <script type="text/javascript" src="lib.js"></script>
+  <script type="text/javascript" src="image.js"></script>
+  <script type="text/javascript">
+  function test_split_with_line_breaks() {
+    var a = '                1 22 333 4444 55555 666666 7777777 88888888                '
+    var b = a.trim().split_with_line_breaks(8)
+    document.log('a: ', a)
+    document.log('b: ', b)
+  }
+
+  function test_image() {
+    document.log('> determine_mime_type_by_path'.blue())
+    var a = 'asd.png'
+    var b = window.lib.image.determine_mime_type_by_path(a)
+    document.log('a: ', a)
+    document.log('b: ', b)
+    var a = './asd/asd/asd.jpeg'
+    var b = window.lib.image.determine_mime_type_by_path(a)
+    document.log('a: ', a)
+    document.log('b: ', b)
+  }
+
+  document.log('> Test text functions:'.green())
+  test_split_with_line_breaks()
+  document.log('> Test image functions:'.green())
+  test_image()
+  </script>
+</body>
+
 </html>

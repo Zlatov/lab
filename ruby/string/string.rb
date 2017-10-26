@@ -46,3 +46,8 @@ p "1,2,3,4".split(",") # ["1", "2", "3", "4"]
 puts 'Дату в форматированный текст'.green
 p DateTime.now.strftime("%-y%-j%H_")
 p DateTime.now.strftime("%e_") + (3 + 1).to_s
+
+a = 'data:image/png;base64,iVBOR....'
+b = a.index(',') + 1
+c = a[b..-1]
+puts c
