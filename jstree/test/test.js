@@ -26,15 +26,15 @@ window.tree.load = function(slug=null) {
 
 window.tree.display = function(position) {
   var panel = $('#panel_' + position)
+  var struct = panel.children('#struct_' + position)
+  var jstree_instance = struct.jstree(true)
+  if (jstree_instance) {
+    jstree_instance.destroy()
+  }
   panel.empty()
   panel.append('<div id="struct_'+ position +'"></div>')
-  console.log('window.tree.data[position]: ', window.tree.data[position])
+  // console.log('window.tree.data[position]: ', window.tree.data[position])
   var struct = $("#struct_" + position)
-
-  var tmp = struct.jstree(true)
-  if(tmp) {
-    tmp.destroy()
-  }
 
   struct.jstree({
     core: {
@@ -175,5 +175,5 @@ $(document).ready(function(){
   // window.activate_jstree()
   window.activate_load()
   window.activate_save()
-  window.tree.load('data')
+  // window.tree.load('data')
 })
