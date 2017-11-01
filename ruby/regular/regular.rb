@@ -8,6 +8,10 @@ regex = /.+?articles\d+\.html.*/i
 b = ((a =~ regex) != nil)
 p b
 
+a = 'view_a'
+b = !(/^origin_.+|^thumbnail_.+|^view_.+|^big_.+/ =~ a).nil?
+print 'b: '.red; puts b
+
 a = 'http://zenonline.ru/vlad/articles/articles1827.html'
 regex = /^http.*/i
 b = ((a =~ regex) != nil)

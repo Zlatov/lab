@@ -98,7 +98,12 @@ jQuery.ajax({
   // scriptCharset:string
   // statusCode:map({})
   // success(data, textStatus, jqXHR):function,array
-  // timeout:integer
+
+  // timeout: [Number] (10000)
+  // Время ожидания ответа от сервера.
+  // Задается в в миллисекундах. Если это время будет превышено, запрос будет завершен с ошибкой и произойдет событие error, которое будет иметь статус "timeout".
+  timeout: 30000
+
   // traditional:boolean(false)
   // type:string("GET")
   // url:string(адрес текущей страницы)

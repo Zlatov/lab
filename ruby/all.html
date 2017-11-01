@@ -502,6 +502,33 @@ a = Cl.new
 p a.attr_i
 </pre>
 
+<h3>Расширение классов модулями</h3>
+<pre class="prettyprint lang-rb">
+# Контроллер админки обладающий самым широким набором функционала
+# Наследуется от базового контроллера (который в свою очередь от рельсового ActionController::Base)
+class Domain::Admin::Controller::WideController < Domain::Admin::Base::Controller
+  # Расширяем модулями с помощью include (расширяем инстанс)
+  include Domain::Admin::Controller::WideController::Task
+  include Domain::Admin::Controller::WideController::Ok
+  private :ok
+end
+
+# модуль
+module Domain::Admin::Controller::WideController::Ok
+
+  # этим методом будет обладать инстанс
+  def ok *message
+    # ...
+  end
+
+  # этот метод не не попадёт в инстанс, это будет только метод модуля, потому что `self.`
+  def self.some_method
+    # ...
+  end
+
+end
+</pre>
+
 <h2>Наработки</h2>
 <h3>Кодировка</h3>
 <pre class="prettyprint lang-rb"># encoding: UTF-8
