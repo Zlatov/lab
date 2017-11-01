@@ -513,7 +513,7 @@ class Domain::Admin::Controller::WideController < Domain::Admin::Base::Controlle
   private :ok
 end
 
-# модуль
+# простой модуль с методами
 module Domain::Admin::Controller::WideController::Ok
 
   # этим методом будет обладать инстанс
@@ -524,6 +524,34 @@ module Domain::Admin::Controller::WideController::Ok
   # этот метод не не попадёт в инстанс, это будет только метод модуля, потому что `self.`
   def self.some_method
     # ...
+  end
+
+end
+
+# модуль с задание переменных класса в расширяемом классе
+module Domain::Admin::Controller::WideController::Task
+
+  # конкретно это просто работает везде
+  require 'rake'
+
+  # позволяет на лету изменять расширяемый класс (рельсовая тема!)
+  extend ActiveSupport::Concern
+
+  # собственно полётное расширение (рельсовая тема!)
+  included do |base|
+    base.class_eval do 
+      @@status_busy = {}
+    end
+    # рельсовая тема!
+    ::Admin::Application.load_tasks
+  end
+
+  def status_busy= value
+    @@status_busy[@task_id.to_sym] = value
+  end
+
+  def status_busy
+    !!@@status_busy[@task_id.to_sym]
   end
 
 end
