@@ -1,6 +1,11 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
 
+puts !!nil === !nil.nil?
+puts !!0 === !0.nil?
+puts !!1 === !1.nil?
+puts !!( '.gif' =~ /^(?:\.gif|\.jpg|\.jpeg)$/i )
+
 a = [
   nil,
   false,

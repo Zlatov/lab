@@ -1,9 +1,17 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
+require 'unicode_utils' # UnicodeUtils.downcase 'String'
 
 # Удалить пробелы вокругтекста
 puts 'Удалить пробелы вокругтекста'.green
 p ' sdf sdf '.strip
+
+# Управление регистром символов в строке (кирилица будет в v 2.4.1)
+puts "привет Макс! asd Asd".downcase!
+puts UnicodeUtils.downcase('привет Макс! asd Asd')
+# puts "привет Макс! asd Asd".mb_chars.upcase!
+# puts "привет Макс! asd Asd".mb_chars.capitalize!
+# puts "привет Макс!".titleize #rails
 
 # Вырезать по позиции
 puts 'Вырезать по позиции'.green
