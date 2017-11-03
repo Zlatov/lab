@@ -50,6 +50,13 @@ a.each_with_index do |value, key|
   print key.to_s.red, ' ', value.to_s, "\n"
 end
 
+puts 'for in'.blue
+a = [1,2,3]
+for val in a
+  next if val == 2
+  puts val
+end
+
 puts '--------------------------------'
 puts 'Последний элемент массива'.green
 a = [1,'asd',nil]

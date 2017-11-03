@@ -9,8 +9,33 @@
   <script src="../_lib/lib.js"></script>
   <script type="text/javascript">
   "use strict"
-  var timeInMs = Date.now();
+  var timeInMs = Date.now()
   document.log('timeInMs: ', timeInMs)
+
+  var date = new Date(timeInMs)
+  var year = date.getFullYear()
+  var month = ('0'+date.getMonth()).substr(-2)
+  var day = ('0'+date.getDate()).substr(-2)
+  var hour = ('0'+date.getHours()).substr(-2)
+  var minute = ('0'+date.getMinutes()).substr(-2)
+  var second = ('0'+date.getSeconds()).substr(-2)
+  var formatted_date_time = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second
+  document.log('formatted_date_time: ', formatted_date_time)
+
+  function unixtime_to_date_time(unixtime) {
+    var date = new Date(unixtime*1000)
+    var year = date.getFullYear()
+    var month = ('0'+date.getMonth()).substr(-2)
+    var day = ('0'+date.getDate()).substr(-2)
+    var hour = ('0'+date.getHours()).substr(-2)
+    var minute = ('0'+date.getMinutes()).substr(-2)
+    var second = ('0'+date.getSeconds()).substr(-2)
+    var formatted_date_time = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second
+    return formatted_date_time
+  }
+
+  var date_time = unixtime_to_date_time(1474298509)
+  document.log('date_time: ', date_time)
   </script>
 </body>
 

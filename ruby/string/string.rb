@@ -15,15 +15,27 @@ puts UnicodeUtils.downcase('привет Макс! asd Asd')
 
 # Вырезать по позиции
 puts 'Вырезать по позиции'.green
+puts 'slice'.blue
 p "date".slice 0, 2
 mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
 p mysql_error_message.length
 p mysql_error_message.slice(15, mysql_error_message.length-15)
 
+
+a = 'prefix_needle'
+b = a.slice c.length+1, a.length
+print 'b: '.red; puts b
+
+
 # Скопировать часть строки регуляркой
 puts 'Скопировать часть строки регуляркой'.green
 a = 'thumbnail_asd'
 b = a[/^(?:origin_|thumbnail_|view_|big_)(.+)/,1]
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+
+a = 'prefix_needle'
+b = a[/prefix_(.*)/, 1]
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 

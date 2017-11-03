@@ -10,6 +10,8 @@ require_relative '../colorize/colorize'
 puts 'UNIX timestamp'.green
 p Time.now.to_i.to_s
 
+print 'Time.now: '.red; puts Time.now
+
 a = Time.new(1998, 2, 8, 9, 12, 23, "+03:00")
 print 'a: '.light_blue; puts a
 b = Time.new(1998, 2, 9, 8, 13, 41, "+03:00")
