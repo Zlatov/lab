@@ -38,31 +38,31 @@ window.tree.display = function(position) {
 
   struct.jstree({
     core: {
-      data: window.tree.data[position],
+      data: window.tree.data[position]//,
       // data: function(obj, callback) {
       //   return window.tree.data[this.settings.data_custom.position]||[]
       // },
-      check_callback: true
-    },
-    data_custom: {
-      position: position
-    },
-    types: window.config.tree.node_types,
-    contextmenu: {
-      items: function(node_data) {
-        var tree = struct.jstree(true)
-        return window.tree.contextmenu(node_data, tree)
-      }
-    },
-    plugins: [
-      'search',
-      'types',
-      'contextmenu',
-      'dnd'
-    ]
+      // check_callback: true
+    }//,
+    // data_custom: {
+    //   position: position
+    // },
+    // types: window.config.tree.node_types,
+    // contextmenu: {
+    //   items: function(node_data) {
+    //     var tree = struct.jstree(true)
+    //     return window.tree.contextmenu(node_data, tree)
+    //   }
+    // },
+    // plugins: [
+    //   'search',
+    //   'types',
+    //   'contextmenu',
+    //   'dnd'
+    // ]
   })
   // struct.jstree(true).settings.core.data = window.tree.data[position]
-  struct.jstree(true).refresh()
+  // struct.jstree(true).refresh()
   // struct.jstree(true).redraw(true)
 }
 

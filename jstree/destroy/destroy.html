@@ -24,7 +24,7 @@
         var tree = struct.jstree(true)
         if (tree) {
           tree.destroy()
-          tree = null
+          // tree = null
         }
         panel.empty()
         panel.append('<div id="struct"></div>')
@@ -36,12 +36,10 @@
       }
 
       window.load_tree = function() {
-        
         var struct = panel.children('#struct')
         struct.jstree({
           core: {
-            data: [
-            ]
+            data: window.tree_data
           }
         })
       }
@@ -55,6 +53,22 @@
         window.prepare_panel()
         window.load_else()
       })
+
+      window.tree_data = []
+      for(var i=0; i<100; i++) {
+        let s = i.toString()
+        window.tree_data.push({id: s, text: 'Text node with number ' + s, parent: '#'})
+      }
+      for(var i=100; i<10100; i++) {
+        let s = i.toString()
+        let p = (i%100).toString()
+        window.tree_data.push({id: s, text: 'Text node with number ' + s, parent: p})
+      }
+      // for(var i=10100; i<110100; i++) {
+      //   let s = i.toString()
+      //   let p = ((i-10100)%10000).toString()
+      //   window.tree_data.push({id: s, text: 'Text node with number ' + s, parent: p})
+      // }
 
     });
     </script>
