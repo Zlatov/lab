@@ -3,7 +3,11 @@
 	[
 		{
 			"path": ".",
-			"index_exclude_patterns": ["*.log", "*.sql", "theme/bower/*"],
+			"index_exclude_patterns": [
+				"*.log",
+				"*.sql",
+				"theme/bower/*.*"
+			],
 			"folder_exclude_patterns": ["bogacho", "argo-ds"]
 		}
 	],
