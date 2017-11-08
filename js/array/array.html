@@ -75,7 +75,7 @@
 
   // Преобразовать элементы массива
   // возвращает новый массив
-  document.log('> Преобразовать элементы массива')
+  document.log('> Преобразовать элементы массива'.green())
   var a = ['', 'asd']
   var b = a.map((element, index, array) => {
     return element += '_sufix'
@@ -83,9 +83,30 @@
   document.log('a: ', a)
   document.log('b: ', b)
 
+  document.log('> Удалить элементы массива по значению в переборе'.green())
+  document.log('> индексы ведь меняются после удаления, map накосячит:'.blue())
+  var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
+  a.map((element, index, array) => {
+    if (element.id == 4 || element.id == 5) {
+      document.log('index: ', index)
+      array.splice(index, 1)
+    }
+  })
+  document.log('a: ', a)
+  document.log('> for вместе с i-- :'.blue())
+  var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
+  for(var i=0; i<a.length; i++) {
+    if (a[i].id == 4 || a[i].id == 5) {
+      document.log('i: ', i)
+      a.splice(i, 1)
+      i--
+    }
+  }
+  document.log('a: ', a)
+
 
   // Преобразовать массив чего-то в hash
-  document.log('> Преобразовать массив чего-то в hash')
+  document.log('> Преобразовать массив чего-то в hash'.green())
   var a = [
     { id: 'id1', val: [1, 2, 3] },
     { id: 'id2', val: [2, 3, 4] },
@@ -107,7 +128,7 @@
   document.log('b: ', b)
 
   // Часть массива
-  document.log('> Часть массива')
+  document.log('> Часть массива'.green())
 
   // slice (кусочек)
   a = [1, 2, 3, 4]
@@ -117,7 +138,7 @@
   document.log('b: ', b)
 
   // Массив содержит в себе хотя бы один элемент другого массива
-  document.log('> Массив содержит в себе хотя бы один элемент другого массива')
+  document.log('> Массив содержит в себе хотя бы один элемент другого массива'.green())
   document.log([1, 2, 3].some(id => [4, 5, 6, 2].includes(id)))
   document.log([1, 2, 3].some(id => [4, 5, 6, 2].indexOf(id) >= 0))
   </script>
