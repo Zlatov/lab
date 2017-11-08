@@ -1,11 +1,45 @@
+<!--
+
+https://learn.javascript.ru/introduction-browser-events
+https://learn.javascript.ru/dispatch-events
+https://developer.mozilla.org/ru/docs/Web/API/Event
+
+-->
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat culpa eveniet cumque, quam officia dolores. Assumenda fugit dolores dolore, adipisci, sequi ab. Natus earum laboriosam nulla non voluptatum in, ipsam aspernatur ex recusandae quae quos fugiat pariatur maxime dolor odio debitis, iste aut officia, totam quia consequatur eum. Et alias sint laborum, excepturi. Qui eius, odio repellat possimus cum officia eligendi ducimus hic fuga officiis accusamus, est recusandae minus dolore! Possimus pariatur repudiandae, error voluptates saepe reprehenderit quas temporibus numquam a earum autem sed, nihil inventore quasi, odit corporis voluptas quo? Necessitatibus, consectetur, omnis. Quidem accusamus tempore veniam consectetur illum.</div>
-		<script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
-		<script type="text/javascript" src="./event.js"></script>
-	</body>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div id="content-holder"></div>
+  <div id="square" style="width: 100px; height: 100px; background-color: red;"></div>
+
+  <script type="text/javascript">
+    var click_on_red = new Event('click_on_red')
+    var click_on_red_handler = function(event) {
+      console.log('Red Click!!!')
+    }
+
+    var square = document.getElementById('square')
+
+    var click_handler = function(event) {
+      if (event.target.style.backgroundColor == 'red') {
+        event.target.style.backgroundColor = 'green'
+        event.target.dispatchEvent(window.click_on_red)
+      } else {
+        event.target.style.backgroundColor = 'red'
+      }
+    }
+    square.addEventListener('click', click_handler)
+
+    if (window.square.style.backgroundColor == 'red') {
+      square.addEventListener('click_on_red', window.click_on_red_handler)
+    } else {
+      square.removeEventListener('click_on_red', window.click_on_red_handler)
+    }
+  </script>
+</body>
+
 </html>

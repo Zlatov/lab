@@ -17,7 +17,7 @@ $.ajax({
   type: 'post',
   url: 'ajax.php',
   data: form_data,
-  data_custom: {form: form}
+  data_custom: {form: form},
   // contentType: 'multipart/form-data',
   contentType: false,
   processData: false,

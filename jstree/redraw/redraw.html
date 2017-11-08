@@ -8,42 +8,68 @@
 
 <body>
   <div id="tree"></div>
-  <button type="button" id="change">Change tree</button>
+  <button type="button" id="change">Изменить ноды и перерисовать.</button>
+  <button type="button" id="change_data">Добавить детей и перерисовать.</button>
   <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../../theme/bower/jstree/dist/jstree.min.js"></script>
   <script type="text/javascript">
     var struct = $('#tree')
     struct.jstree({
-      core: {
-        data: [
+      data_custom: {
+        json: [
           {id: '1', text: '1', parent: '#'},
           {id: '2', text: '2', parent: '1'},
           {id: '3', text: '3', parent: '#', state: {opened: true}},
           {id: '4', text: '4', parent: '3', state: {opened: true}},
           {id: '5', text: '5', parent: '3'},
           {id: '6', text: '6', parent: '4'},
-          {id: '7', text: '7', parent: '#'},
+          {id: '7', text: '7', parent: '#', state: {opened: true}},
           {id: '8', text: '8', parent: '7'},
-          {id: '9', text: '9', parent: '7'},
+          {id: '9', text: '9', parent: '7'}
         ]
+      },
+      core: {
+        data: function (node, callback) {
+          // console.log('this: ', this)
+          // console.log('node: ', node)
+          // console.log('callback: ', callback)
+          var data = this.settings.data_custom.json
+          if (node.id === "#") {
+            callback.call(this, data)
+          } else {
+            callback.call(this, data.filter(e=>{return e.parent === node.id}))
+          }
+        }
       }
     })
+
     $('body').on('click', '#change', function(event) {
       var struct = $('#tree')
       var tree = struct.jstree(true)
       var node4 = tree.get_node('4')
       var node6 = tree.get_node('6')
+      var node7 = tree.get_node('7')
+      var node8 = tree.get_node('8')
       node4.text = 'four'
       node4.state.opened = true
       node6.text = 'six'
-
-      // One of:
+      node7.text = 'seven'
+      node8.text = 'eight'
 
       // tree.redraw() // not work (redraws all nodes that need to be redrawn. Who need???)
       // tree.redraw(true) // all nodes (we do not want all)
-      tree.redraw_node('4', false) // without childrens, work!
+      tree.redraw_node('4') // without childrens, work!
+      tree.redraw_node('7', true) // with childrens, work!
 
     })
+
+    $('body').on('click', '#change_data', function(event) {
+      var struct = $('#tree')
+      var tree = struct.jstree(true)
+      tree.settings.data_custom.json.push({id: '10', text: '10', parent: '4'})
+      tree.refresh_node('4')
+    })
+
   </script>
 </body>
 
