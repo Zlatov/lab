@@ -237,3 +237,11 @@ puts 'Массив в sql строку'.green
 a = [1, '2', nil, 0]
 ap a
 ap a.map!{|v| if v.is_a? String then "'#{v}'" elsif v.nil? then 'NULL' else v.to_s end}.join(', ')
+
+puts '--------------------------------'
+puts 'Удаление по значению'.green
+a = [0,1,2,3,4,5]
+a.delete_if do |v|
+  v == 4 || v == 5
+end
+puts a

@@ -1,9 +1,170 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-	<meta charset="utf-8">
+  <meta charset="utf-8">
 </head>
+
 <body>
-	<script type="text/javascript" src="hash.js"></script>
+  <h1>js hash</h1>
+  <script src="../_lib/lib.js"></script>
+  <script type="text/javascript">
+    document.log('Простой доступ к данным'.green())
+    document.log('a = {a:1}: ', a = {a: 1 })
+    document.log('a.a: ', a.a)
+    document.log('a["a"]: ', a["a"])
+    document.log('a.z: ', a.z)
+    document.log('a["z"]: ', a["z"])
+    document.log('Доступ к вложенным данным'.green())
+    a = [
+      ,
+      undefined,
+      null,
+      false,
+      true,
+      0,
+      1,
+      '',
+      'no node',
+      [],
+      ['no node'],
+      {},
+      {data: undefined },
+      {data: null },
+      {data: false },
+      {data: true },
+      {data: 0 },
+      {data: 1 },
+      {data: '' },
+      {data: 'data' },
+      {data: [] },
+      {data: [''] },
+      {data: {} },
+      {data: {sid: undefined } },
+      {data: {sid: null } },
+      {data: {sid: false } },
+      {data: {sid: true } },
+      {data: {sid: 0 } },
+      {data: {sid: 1 } },
+      {data: {sid: '' } },
+      {data: {sid: '  ' } },
+      {data: {sid: 'sid' } },
+      {data: {sid: [] } },
+      {data: {sid: ['sid'] } },
+      {data: {sid: {} } }
+    ]
+    var b = {
+      0: {},
+      1: {},
+      2: {},
+      3: {}
+    }
+
+
+    for (var i = 0, l = a.length; i < l; i++) {
+      var node = a[i]
+
+      var sid = node && node.data && node.data.sid!=null ? node.data.sid : null
+      if (sid!=null) {
+        b[0][i] = {
+          node: node,
+          sid: sid
+        }
+      }
+
+      var sid = node && node.data && node.data.sid!=null && typeof(node.data.sid)==='string' ? node.data.sid : null
+      if (sid!=null) {
+        b[1][i] = {
+          node: node,
+          sid: sid
+        }
+      }
+      var sid = node && node.data && node.data.sid!=null && typeof(node.data.sid)==='string' && node.data.sid.length!=0 ? node.data.sid : null
+      if (sid!=null) {
+        b[2][i] = {
+          node: node,
+          sid: sid
+        }
+      }
+      var sid = node && node.data && node.data.sid!=null && typeof(node.data.sid)==='string' && node.data.sid.trim().length!=0 ? node.data.sid : null
+      if (sid!=null) {
+        b[3][i] = {
+          node: node,
+          sid: sid
+        }
+      }
+      // document.log('node: ', node, ' id: ', sid)
+    }
+    // Любое определённое значение node.data.sid:
+    document.log('> Любое определённое значение node.data.sid:'.blue())
+    for (var key in b[0]) {
+      document.log('sid(node): ', b[0][key].node, ' => '.red(), b[0][key].sid)
+    }
+    // Значение cо строкой node.data.sid:
+    document.log('> Значение cо строкой node.data.sid:'.blue())
+    for (var key in b[1]) {
+      document.log('sid(node): ', b[1][key].node, ' => '.red(), b[1][key].sid)
+    }
+    // Значение c непустой строкой node.data.sid:
+    document.log('> Значение c непустой строкой node.data.sid:'.blue())
+    for (var key in b[2]) {
+      document.log('sid(node): ', b[2][key].node, ' => '.red(), b[2][key].sid)
+    }
+    // Значение c непустой строкой после trim() node.data.sid:
+    document.log('> Значение c непустой строкой после trim() node.data.sid:'.blue())
+    for (var key in b[3]) {
+      document.log('sid(node): ', b[3][key].node, ' => '.red(), b[3][key].sid)
+    }
+
+    document.log('')
+    document.log('Слияние'.green())
+    document.log('a = {a:1}: ', a = {a: 1 })
+    document.log('b = {b:2}: ', b = {b: 2 })
+    document.log('c = {}: ', c = {})
+    document.log('Object.assign({},a,b): ', Object.assign({}, a, b))
+    document.log('c={a:"перез",b:"аписал"}: ', c = {a: "перез", b: "аписал" })
+    document.log('Object.assign({},a,b,c): ', Object.assign({}, a, b, c))
+
+    document.log('')
+    document.log('Клонирование (то же что слияние с {})'.green())
+    document.log('a = {a:1}: ', a = {a: 1 })
+    document.log('b = Object.assign({},a): ', b = Object.assign({}, a))
+    document.log('a.a=2: ', a.a = 2)
+    document.log('a.a: ', a.a)
+    document.log('b.a: ', b.a)
+
+    document.log('')
+    document.log('Перебор'.green())
+    document.log('for (var key in b) {...')
+    for (var key in b) {
+      document.log('key: ', key)
+      document.log('b[key]: ', b[key])
+    }
+
+    document.log('')
+    document.log('Удаление свойства'.green())
+    document.log('a = {a:1}: ', a = {a: 1 })
+    document.log('delete a.a: ', delete a.a)
+    document.log('a: ', a)
+
+    document.log('')
+    document.log('Ключи хэш'.green())
+    document.log('Object.keys({a:1,b:null,c:undefined}): ', Object.keys({a: 1, b: null, c: undefined }))
+
+    // Длинна хэш
+    document.log('')
+    document.log('Длинна хэш'.green())
+    document.log('Object.keys({a:1,b:null,c:undefined}).length: ', Object.keys({a: 1, b: null, c: undefined }).length)
+
+
+    // var a = {
+    //   'id': '1',
+    //   'name': 'asd'
+    // }
+    // a.map(function(k,v){
+    //   console.log('k: ', k)
+    // })
+  </script>
 </body>
+
 </html>

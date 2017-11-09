@@ -76,10 +76,12 @@
   // Преобразовать элементы массива
   // возвращает новый массив
   document.log('> Преобразовать элементы массива'.green())
-  var a = ['', 'asd']
-  var b = a.map((element, index, array) => {
-    return element += '_sufix'
-  })
+  var a = ['', 'asd', , 3, undefined]
+  var b = a.map(function(element, index, array) {
+    if (element=='asd') {
+      return element += '_sufix'
+    }
+  }).filter(e=>!!e) // Отфильтровать null значения
   document.log('a: ', a)
   document.log('b: ', b)
 
