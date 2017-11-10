@@ -3,6 +3,11 @@ require_relative '../colorize/colorize'
 
 p "#{RUBY_VERSION}-p#{RUBY_PATCHLEVEL}"
 
+a = 0
+# `a = 1 if !a.is_a? String && a == 0` - ошибка, параметр должен быть в скобках.
+a = 1 if !a.is_a? String # - а так кможно.
+puts a
+
 def meth1 param
   p param
   # p *param

@@ -2,7 +2,26 @@
 require_relative '../colorize/colorize'
 require 'unicode_utils' # UnicodeUtils.downcase 'String'
 
-# Удалить пробелы вокругтекста
+# Многострочность multiline
+puts 'Многострочность multiline'.green
+  puts '...', <<-TEXT
+    вторая строка
+    терьтя строка
+  TEXT
+  puts '...', %Q(
+    вторая строка
+    терьтя строка
+  )
+  puts '...', %(
+    вторая строка
+    терьтя строка
+  )
+  puts '...', %q(
+    вторая строка
+    терьтя строка
+  )
+
+# Удалить пробелы вокругтекста (`trim` в других языках)
 puts 'Удалить пробелы вокругтекста'.green
 p ' sdf sdf '.strip
 
@@ -20,11 +39,11 @@ p "date".slice 0, 2
 mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
 p mysql_error_message.length
 p mysql_error_message.slice(15, mysql_error_message.length-15)
-
-
+puts 'Простой пример с префиксом'.blue
 a = 'prefix_needle'
-b = a.slice c.length+1, a.length
-print 'b: '.red; puts b
+c = 'prefix_'
+b = a.slice c.length, a.length
+print 'needle: '.red; puts b
 
 
 # Скопировать часть строки регуляркой
