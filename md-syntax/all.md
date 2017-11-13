@@ -1,8 +1,8 @@
 # Документация синтаксиса markdown
 
-## <a name="toc"></a>Оглавление<a name="id2"></a><a name="id1"></a>
+## <a id="toc"></a>Оглавление<a name="anchors-in-markdown"></a><a name="id1"></a>
 
-1. [Заголовки](#Заголовки)
+1. [Заголовки](#z)
     1. Заголовок `h1`
     1. Заголовок `h2`
     1. Заголовки 3 – 6-го уровня
@@ -14,7 +14,7 @@
 1. [Ссылки](#Ссылки)
 1. Коды
 
-## <a name="Заголовки"></a>[Заголовки](#toc)
+## <a id="z"></a>Заголовки [↑](#toc)
 
 ### Заголовок `h1`
 
@@ -105,6 +105,8 @@ asd
 
 ## Ссылки
 
+[create an anchor](#anchors-in-markdown)
+
 [Абсолютная ссылка](https://www.google.com)
 
 [Абсолютная ссылка с тайтлом](https://www.google.com "Домашняя страница Гугла")
@@ -138,7 +140,7 @@ Some text to show that the reference links can follow later.
 `cd ..`
 
 ```javascript
-var s = &quot;JavaScript syntax highlighting&quot;;
+var s = "JavaScript syntax highlighting";
 alert(s);
 ```
 
