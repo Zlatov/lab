@@ -6,14 +6,12 @@
 </head>
 
 <body>
-  <p ondblclick="eval(this.innerHTML)">alert('hi')</p>
   <script src="../_lib/lib.js"></script>
   <script type="text/javascript">
   "use strict"
 
-  // Переборы
+  document.log()
   document.log('> Переборы'.green())
-  // Перебор forEach - ничего не возвращает просто выполняет функцию .length раз (над каждым элементом)
   document.log('> forEach(function(elem, index, array) {}[, thisArg])'.blue())
   document.log('ничего не возвращает,<br> выполняет callback над каждым явно заданным элементом (пропустит элемент #1 если [0,,2] или если a[0]=0 a[2]=2),<br> не останавливается на break,<br> elem - не является ссылкой на элемнт массива.')
   var a = ['a', 'b', 'a', 'b', , null, undefined, { a: 'a' }]
@@ -50,8 +48,8 @@
   }
 
 
-  document.log('========================='.green())
-  document.log('> concat'.blue())
+  document.log()
+  document.log('> concat'.green())
   var a = ['1', '2']
   var b = ['3', 4]
   var c = a.concat(b)
@@ -61,21 +59,28 @@
   document.log(c)
   document.log(d)
 
-  // Объеденить массив в строку
-  // array.join(separator)
+  document.log()
+  document.log('> Объеденить массив в строку'.green())
+  document.log('join'.blue())
+  a = [1,2,3,4]
+  b = a.join()
+  c = a.join('-')
+  document.log(a)
+  document.log(b)
+  document.log(c)
 
 
-  // Отфильтровать элементы массива
-  // возвращает новый массив
-  document.log('> Отфильтровать элементы массива'.blue())
+  document.log()
+  document.log('> Отфильтровать элементы массива'.green())
+  document.log('возвращает новый массив'.blue())
   var a = ['', 'asd']
   var b = a.filter((element, index, array) => { return element != '' })
   document.log('a: ', a)
   document.log('b: ', b)
 
-  // Преобразовать элементы массива
-  // возвращает новый массив
+  document.log()
   document.log('> Преобразовать элементы массива'.green())
+  document.log('возвращает новый массив'.blue())
   var a = ['', 'asd', , 3, undefined]
   var b = a.map(function(element, index, array) {
     if (element=='asd') {
@@ -85,6 +90,7 @@
   document.log('a: ', a)
   document.log('b: ', b)
 
+  document.log()
   document.log('> Удалить элементы массива по значению в переборе'.green())
   document.log('> индексы ведь меняются после удаления, map накосячит:'.blue())
   var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
@@ -106,8 +112,7 @@
   }
   document.log('a: ', a)
 
-
-  // Преобразовать массив чего-то в hash
+  document.log()
   document.log('> Преобразовать массив чего-то в hash'.green())
   var a = [
     { id: 'id1', val: [1, 2, 3] },
@@ -125,21 +130,26 @@
     previousValue[curr.id] = curr.val.slice(0) // весь массив
     return previousValue
   }, initialValue)
-
   document.log('a: ', a)
   document.log('b: ', b)
 
-  // Часть массива
+  document.log()
   document.log('> Часть массива'.green())
 
-  // slice (кусочек)
+  document.log('> slice([begin[, end]]) (кусочек) возврящает новый массив.'.blue())
   a = [1, 2, 3, 4]
   b = a.slice(1)
   a[1] = 100
   document.log('a: ', a)
   document.log('b: ', b)
 
-  // Массив содержит в себе хотя бы один элемент другого массива
+  document.log('> без последнего элемента.'.blue())
+  a = [1, 2, 3, 4]
+  b = a.slice(0, -1)
+  document.log('a: ', a)
+  document.log('b: ', b)
+
+  document.log()
   document.log('> Массив содержит в себе хотя бы один элемент другого массива'.green())
   document.log([1, 2, 3].some(id => [4, 5, 6, 2].includes(id)))
   document.log([1, 2, 3].some(id => [4, 5, 6, 2].indexOf(id) >= 0))
