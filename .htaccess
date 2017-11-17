@@ -20,6 +20,9 @@ IndexOptions Charset=UTF-8
 
 	RewriteCond %{REQUEST_URI} ^/[^/]+/all\.html$
 	RewriteRule ^.*$ /theme/index.php [L]
+
+	RewriteCond %{REQUEST_URI} ^/[^/]+/_doc/.+\.html$
+	RewriteRule ^.*$ /theme/doc.php [L]
 </IfModule>
 
 # <Files ~ "^.*\.([Hh][Tt][Aa])">

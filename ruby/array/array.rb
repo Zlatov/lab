@@ -34,6 +34,15 @@ p arr
 
 
 puts '--------------------------------'
+puts 'Пересечение'.green
+a = [1,1,3,4]
+b = [1,2,4,5]
+c = a & b
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+
+puts '--------------------------------'
 puts 'Перебор'.green
 puts 'each, v не является ссылкой'.blue
 a = [1,'asd',nil]

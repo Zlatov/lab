@@ -19,7 +19,7 @@
 //   window.lib.image = {}
 //   "use strict"
 //   var script = document.createElement('script')
-//   script.src = '/js/_lib/image.js'
+//   script.src = '/js/_libs/image.js'
 //   document.body.appendChild(script)
 // })();
 
