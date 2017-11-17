@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    .b_checkbox {
+      cursor: pointer;
+    }
+    .b_checkbox > input {
+      visibility: hidden;
+      position: absolute;
+    }
+    .b_checkbox > input + span {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background-color: red;
+    }
+    .b_checkbox > input:checked + span {
+      background-color: green;
+    }
+  </style>
+</head>
+<body>
+  <p>Стандартное отображение checkbox без CSS:</p>
+  <p>
+    <input type="checkbox" name="param1" value="1">
+  </p>
+  <p>
+    <input type="checkbox" name="param2" id="param2" value="1">
+    <label for="param2">param2</label>
+  </p>
+  <p>
+    <label for="param3">param3</label>
+    <input type="checkbox" name="param3" value="1" id="param3">
+  </p>
+  <p>
+    <label>
+      param4
+      <input type="checkbox" name="param4" value="1">
+    </label>
+  </p>
+  <p>
+    <label>
+      <input type="checkbox" name="param5" value="1">
+      param5
+    </label>
+  </p>
+  <hr>
+  <p>Отображение checkbox с CSS:</p>
+  <p>
+    <label class="b_checkbox">
+      <input type="checkbox" name="b_param1" value="1">
+      <span></span>
+    </label>
+  </p>
+  <p>
+    <label class="b_checkbox">
+      <input type="checkbox" name="b_param2" id="b_param2" value="1">
+      <span></span>
+    </label>
+    <label for="b_param2">b_param2</label>
+  </p>
+</body>
+</html>
