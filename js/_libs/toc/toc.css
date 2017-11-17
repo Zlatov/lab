@@ -51,7 +51,7 @@
 
 #toc ul ul {
     padding-left: 20px;
-    display: none;
+    /*display: none;*/
 }
 
 #toc li.active>ul {

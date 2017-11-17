@@ -2,6 +2,12 @@
   $pathinfo = pathinfo($_SERVER['REDIRECT_URL']);
   $explode = explode('/',$pathinfo['dirname']);
   $last = end($explode);
+  // echo 'end($explode): <pre>';
+  // print_r(end($explode));
+  // array_shift($explode)
+  // print_r(end($explode));
+  // echo '</pre>';
+  // die();
   $header = $last?$last:'';
 ?>
 
