@@ -1,5 +1,11 @@
 $(document).ready(function() {
-    $("#toc").append('<ul></ul>');
+    $("#toc").append('<p id="toc_">Оглавление</p><ul></ul>')
+
+    // for (var h = 2; h <= 6; i++) {
+    //     var header_selectror = 'h' + h
+    //     $(header_selectror).each
+    // }
+
     $("h2").each(function(i) {
         var current = $(this);
         current.attr("id", "h2" + i);
@@ -21,7 +27,6 @@ $(document).ready(function() {
         current.attr("id", "h4" + i);
         var prevh3 = current.prevAll("h3").first();
         var j = prevh3.attr("id").substring(2);
-        alert
         $("#linkh3" + j).next("ul").append("<li><a id='linkh4" + i + "' href='#h4" +
             i + "' title='" + (current.attr("title")||'') + "'>" +
             current.html() + '</a><ul></ul></li>');

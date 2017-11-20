@@ -3,6 +3,18 @@
 <head>
   <meta charset="utf-8">
   <style type="text/css">
+    .b2_checkbox {
+      cursor: pointer;
+      visibility: hidden;
+      position: absolute;
+    }
+    .b2_checkbox::after {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      background-color: red;
+    }
+
     .b_checkbox {
       cursor: pointer;
     }
@@ -60,6 +72,16 @@
       <span></span>
     </label>
     <label for="b_param2">b_param2</label>
+  </p>
+  <p>
+    <label for="b_param3">b_param3</label>
+    <label class="b_checkbox">
+      <input type="checkbox" name="b_param3" id="b_param3" value="1">
+      <span></span>
+    </label>
+  </p>
+  <p>
+    <input type="checkbox" name="b2p1" value="1" class="b2_checkbox">
   </p>
 </body>
 </html>
