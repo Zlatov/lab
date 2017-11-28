@@ -55,6 +55,9 @@ meth1 asd: 'zxc', zxc: ['asd','zxc']
 puts 'meth2 передаём Hash'.green
 meth2 asd: 'zxc', zxc: ['asd','zxc']
 
+puts 'meth2 передаём Параметры'.green
+meth2 :video, :suka
+
 puts 'options_merge передаём Hash'.green
 options_merge
 options_merge c:'cc'

@@ -79,6 +79,14 @@
   document.log('b: ', b)
 
   document.log()
+  document.log('> привести к уникальным значениям примерно как в _.uniq()'.green())
+  document.log('возвращает новый массив'.blue())
+  var a = ['2', 1, 'asd', 2, 1, 'asd', '1', 2, '', , 0]
+  var b = a.filter((element, index, array) => { return array.indexOf(element) === index })
+  document.log('a: ', a)
+  document.log('b: ', b)
+
+  document.log()
   document.log('> Преобразовать элементы массива'.green())
   document.log('возвращает новый массив'.blue())
   var a = ['', 'asd', , 3, undefined]
@@ -214,6 +222,34 @@
       level--
     }
   }
+
+  document.log()
+  document.log('> Сортировка'.green())
+  document.log('> Строки, запятые'.green())
+  var a = ['0,41', '100', '1,24', '1,22', '0,92', '1,23', '0,375', '1', '1,52', '0,61', '1,27']
+  document.log('a: ', a)
+  var b = a.sort()
+  document.log('a: ', a)
+  document.log('b: ', b)
+  document.log('> Строки, точки'.green())
+  var a = ['0.41', '100', '1.24', '1.22', '0.92', '1.23', '0.375', '1', '1.52', '0.61', '1.27']
+  document.log('a: ', a)
+  var b = a.sort()
+  document.log('a: ', a)
+  document.log('b: ', b)
+  document.log('> float'.green())
+  var a = [1.8, 10, 100, 14.7, 17, 18.92, 299, 5, 516, 7]
+  document.log('a: ', a)
+  var b = a.sort()
+  document.log('a: ', a)
+  document.log('b: ', b)
+  document.log('> float'.green())
+  var a = [1.8, 10, 100, 14.7, 17, 18.92, 299, 5, 516, 7]
+  document.log('a: ', a)
+  var b = a.sort((a,b)=>{return a-b})
+  document.log('a: ', a)
+  document.log('b: ', b)
+
 
   </script>
 </body>

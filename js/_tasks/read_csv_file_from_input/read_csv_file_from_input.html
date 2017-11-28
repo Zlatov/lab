@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <form id="form_csv">
+    <input type="file" name="csv" accept=".csv">
+    <button type="button" id="button_read">read</button>
+  </form>
+  <script>
+
+    "use strict"
+
+
+    var reader_load_handler = function(event) {
+      var csv = event.target.result
+      processData(csv)
+    }
+
+    var button_click_handler = function(event) {
+      var reader = new FileReader()
+      var form = window.document.getElementById('form_csv')
+      var input = form.elements.csv
+      var csv_file = input.files[0]
+      if (!csv_file) {
+        return null
+      }
+      reader.readAsText(csv_file)
+      reader.onload = reader_load_handler
+    }
+
+    var processData = function(csv) {
+      var lines = csv.split(/\r\n|\n/)
+      var matrix = []
+      for (var i=0, l=lines.length; i<l; i++) {
+        var line = lines[i]
+        var row = line.split('|')
+        if (row.length == 1) {
+          continue
+        }
+        matrix.push(row)
+      }
+      console.log('matrix: ', matrix)
+    }
+
+    var button = window.document.getElementById('button_read')
+
+    button.addEventListener('click', button_click_handler)
+
+  </script>
+</body>
+</html>

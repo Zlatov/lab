@@ -73,3 +73,66 @@ b = a.scan(regex).flatten
 b = b.select{|v| !v.nil? && !v.empty? }
 p b
 p b.length
+
+a = '
+
+<div style="COLOR: #383838; FONT: 13px Tahoma, Verdana, sans-serif; MARGIN: 0px auto; WIDTH: 590px">
+<h1 style="FONT-SIZE: 18px; TEXT-TRANSFORM: none; COLOR: #ff6500; TEXT-ALIGN: center; MARGIN: 15px 0px 20px">Знакомьтесь: ЗЕНОН АКАДЕМИЯ! </h1>
+<div style="PADDING-BOTTOM: 25px; TEXT-ALIGN: center"><a style="TEXT-DECORATION: none" href="/mosc/articles/articles2511.html?utm_source=sendingEmail&amp;utm_content=2511" target="_blank">
+<img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="/images/articles/10716.jpg" width="590" height="275"> </a>
+<img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="/images/articles/10716.jpg" width="590" height="275"> </a>
+<img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="/images/articles/10716.jpg" width="590" height="275"> </a>
+</div>
+<div style="PADDING-BOTTOM: 15px; TEXT-ALIGN: center"><b>Уважаемые партнеры и те, кто только планирует сотрудничество с компанией "ЗЕНОН - Рекламные Поставки"!</b> </div>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Всем известно, что наша компания давно и активно занимается семинарской деятельностью на территории России. </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">На сегодняшний день ЗЕНОН объединяет более 40 филиалов и представительств в разных регионах нашей страны. И в каждом на регулярной основе проводятся масштабные события - <b>семинары, мастер-классы, дни открытых дверей и т.д.</b>, с участием ведущих руководителей направлений товарных групп, а также приглашенных представителей наших основных западных поставщиков. Помимо крупных мероприятий, мы проводим и так называемые <b>мини-семинары</b>, которые фактически являются индивидуальными встречами, направленными на обучение и обсуждение персональных вопросов и нужд наших клиентов. </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Мы готовы делиться с Вами своими знаниями и огромным, годами наработанным, опытом. А в ответ с удовольствием получаем вашу неизменную заинтересованность и активность во время наших встреч. </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Настало время объединить все обучающие направления нашей деятельности и в наступающем 2018 году представить вам новый бренд: </p>
+<div style="TEXT-ALIGN: center"><img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="/images/articles/10717.png" width="220" height="158"> </div>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 15px 0px"><b>ЗЕНОН АКАДЕМИЯ</b> - это вся семинарская и консультационная деятельность компании ЗЕНОН, включающая <b>Теорию, Практику и Индивидуальный подход</b> в работе с действующими и потенциальными партнерами. </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Разумеется, деление на Теорию, Практику и Индивидуальный подход весьма условно! Ведь каждая наша встреча - это синтез общего освещения товарного ассортимента, новинок, последних тенденций на рынке производства наружной рекламы, а также интересной "живой" работы с материалами и оборудованием с раскрытием технологических секретов и нюансов. И, конечно, ценнейшая составляющая - это ваше непосредственное участие и прямой контакт с нашими специалистами. </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Символом АКАДЕМИИ стало дерево, которое, как и наша компания, находится в процессе постоянного роста, изменения и развития, сохраняя стабильность и устойчивость ко всем внешним воздействиям. <b>Приглашаем развиваться вместе с нами!</b> </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px 0px 15px">Напоминаем, что <b>занятия в нашей ЗЕНОН АКАДЕМИИ все еще абсолютно бесплатны!</b> </p>
+<p style="COLOR: #383838; FONT: 13px/16px Tahoma, verdana, sans-serif; MARGIN: 0px">Ждите анонсов наших мероприятий на 2018 год в новом едином формате ЗЕНОН АКАДЕМИИ! </p>
+<div style="PADDING-BOTTOM: 10px; PADDING-TOP: 30px; FONT: 13px/16px Tahoma, Verdana, sans-serif; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">
+<div style="BORDER-TOP: #383838 1px solid; COLOR: #383838; PADDING-BOTTOM: 10px; PADDING-TOP: 20px; FONT: bold 13px/15px Tahoma, Verdana, sans-serif; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">Все проекты ЗЕНОНа:</div><noindex>
+<table style="BORDER-COLLAPSE: collapse; TEXT-ALIGN: left; BORDER-SPACING: 0" width="590" border="0">
+<tbody>
+<tr>
+<td style="VERTICAL-ALIGN: top; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 13px/16px Tahoma, Verdana, sans-serif; PADDING-LEFT: 0px; PADDING-RIGHT: 0px" width="50%">
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://zeon-land.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Рекламное оборудование Roland DG</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.dgi-net.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Рекламное оборудование DGI</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zeon-net.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Рекламное оборудование Zeon</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://dilli.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Широкоформатные принтеры Dilli</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.vivid-print.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Сувенирные принтеры VIVID</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.vinyls.su/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Самоклеящиеся плёнки для рекламы</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.inks.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Чернила для широкоформатной печати</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.neo-neon.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Декоративная светотехника</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zenosvet.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Рекламная светотехника</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.led-lamp.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Светодиодные системы</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.neon-neon.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Неоновые технологии и материалы</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.screenprint.su/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Шелкотрафаретные технологии</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.textiller.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Одежда для маркировки</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.termotransfer.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Термотрансферные технологии</a></div></td>
+<td style="VERTICAL-ALIGN: top; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; FONT: 13px/16px Tahoma, Verdana, sans-serif; PADDING-LEFT: 0px; PADDING-RIGHT: 0px">
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.sheets.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Листовые материалы</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zenobond.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Алюминиевые композитные сэндвич-панели</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zenobaner.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Рулонные материалы для струйной печати</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zenoprofil.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Алюминиевые и пластиковые профили</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.standshop.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Мобильные выставочные системы JUST</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.markbric.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Мобильные выставочные системы MARKBRIC</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.pos-torg.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Материалы для оформления места продаж</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.glues.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Клеевые и монтажные технологии</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.coating.su/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Аэрозольные лаки и краски</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.cut-cut.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Профессиональный инструмент для раскроя</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.dist.su/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Держатели и подвесные системы</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.zenotools.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Оборудование и металлофурнитура</a></div>
+<div style="PADDING-BOTTOM: 5px"><a style="COLOR: #008080; TEXT-DECORATION: none" href="http://www.signtool.ru/?utm_source=sendingEmail&amp;utm_content=2511" rel="nofollow" target="_blank">Инструменты FESTOOL</a></div></td></tr></tbody></table></noindex></div></div>
+
+'
+regex = '<img style="BORDER-TOP: 0px; BORDER-RIGHT: 0px; BORDER-BOTTOM: 0px; BORDER-LEFT: 0px" alt="" src="/images/articles/10716.jpg" width="590" height="275">'
+regex = /<img .*?(?:src="(.*?)")|(?:src='(.*?)')/i
+b = a.scan(regex)
+
+print 'b: '.red; puts b
+print 'b: '.red; puts b.flatten.inspect

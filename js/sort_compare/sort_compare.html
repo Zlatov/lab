@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+  <script src="../_libs/lib.js"></script>
+	<script>
+   "use strict"
+
+    var a = '0,3753'
+    var b = '1,23'
+    var c = '10'
+
+    var arr = ['0,41', '1,24', '1,22', '0,92', '1,23', '0,375', '1', '1,52', '0,61', '1,27']
+
+    var ab = a.localeCompare(b, 'ru', {numeric: true, sensitivity: 'base'})
+    var bc = b.localeCompare(c, 'ru', {numeric: true, sensitivity: 'base'})
+    document.log('ab: ', ab)
+    document.log('bc: ', bc)
+
+    var collator = new Intl.Collator('ru', {numeric: true, sensitivity: 'base'})
+    document.log('arr: ', arr)
+    arr.sort(collator.compare)
+    document.log('arr: ', arr)
+ 
+  </script>
+</body>
+
+</html>

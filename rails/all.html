@@ -64,6 +64,11 @@
 <p><strong>Вызов метода контроллера</strong></p>
 <pre class="prettyprint lang-rb">ApplicationController.new.method_name</pre>
 
+<h2>routes (path...)</h2>
+<p><tt>$</tt> <code class="copyToClipboard">rails routes</code> - список всех путей</p>
+<p><tt>&gt;</tt> <code class="copyToClipboard">app.products_path</code> - проверка пути, вернёт url</p>
+<p><tt>&gt;</tt> <code class="copyToClipboard">app.product_path 123</code> - -//-</p>
+
 <h2>ActiveRecord</h2>
 <pre class="prettyprint lang-rb">
 # Плохо):
@@ -115,3 +120,6 @@ class Seo &lt; ActiveRecord::Base
 
 end
 </pre>
+
+<h2>Полезные гемы</h2>
+<h3>Kaminari - пагинациая модели</h3>

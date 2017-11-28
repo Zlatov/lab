@@ -266,6 +266,12 @@ less -I -p void *.c					# Case insensitive search for "void" in all .c files</pr
 <p><strong>Примеры</strong></p>
 <p><code>scp username@hostname:~/filename.tar.gz ./web.tar.gz</code> — копирования файла filename.tar.gz с удалённого хоста к себе спереименованием.</p>
 <p><code>scp filename.tar.gz username@hostname:~/folder/name</code> — копирования локального файла filename.tar.gz на удалённый хост.</p>
+<p><strong>Копировать всё содержимое папки <code>public/img</code> на сервер в <code>~/app/project1</code>/<code>public/img</code></strong></p>
+<pre class="prettyprint lang-sh">#!/bin/bash
+cd `dirname &quot;$0&quot;`
+scp -r ../public/img project1:~/app/project1/public
+</pre>
+<p><strong>Сразу несколько папок</strong></p>
 <pre class="prettyprint lang-sh">
 #!/bin/bash
 cd `dirname &quot;$0&quot;`
