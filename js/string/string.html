@@ -11,7 +11,11 @@
   // Разбить в массив
   document.log('> Разбить в массив'.green())
   var str = "How are you doing today?";
-  var res = str.split(" ");
+  var res = str.split(" ")
+  document.log('res: ', res)
+  document.log('> Разбить в массив'.green())
+  var str = 'Гарри Трамп ,Фрэд Барни, Хелен Ригби , Билл Абель ,Крис Ханд ';
+  var res = str.split(/\s*,\s*/)
   document.log('res: ', res)
 
   // Метод trim() удаляет пробельные символы с начала и конца строки.
@@ -111,6 +115,12 @@
   document.log('-0000.100: ', parseFloat('-0000.100'))
 
   document.log('Number(\'-0000.100\'): ', Number('-0000.100'))
+
+  var a = '234'
+  var b = '0'.repeat(5-a.length) + a
+  document.log('a: ', a)
+  document.log('b: ', b)
+
   </script>
 </body>
 
