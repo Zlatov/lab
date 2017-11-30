@@ -1,0 +1,3 @@
+[submodule "js/_tasks/dotdotdot"]
+	path = js/_tasks/dotdotdot
+	url = git@github.com:tbasse/jquery-truncate.git
