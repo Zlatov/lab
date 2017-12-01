@@ -152,3 +152,6 @@ file.close
 p File.basename 'asd.zxc'
 p File.basename 'http://sadf.ru/asdf.jpg?asd'
 p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )
+
+a = File.read('/asdasdasd') rescue 123
+print 'a: '.red; puts a

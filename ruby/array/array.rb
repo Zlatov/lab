@@ -92,56 +92,46 @@ end
 
 p node
 
-puts 'nested - перебор всех'.green
+puts
+puts 'Перебор nested'.green
 a = [
-  {
-    id: '1'
-  },
-  {
-    id: '2',
-    'children' => [
+  {id: '1'},
+  {id: '2', 'children' => [] },
+  {id: '3', 'children' =>
+    [
+      {id: '3-1'},
+      {id: '3-2', 'children' => [] }
     ]
   },
-  {
-    id: '3',
-    'children' => [
-      {
-        id: '3-1'
-      },
-      {
-        id: '3-2',
-        'children' => [
-        ]
-      }
-    ]
-  },
-  {
-    id: '4',
-    'children' => [
-    ]
-  }
+  {id: '4', 'children' => [] }
 ]
 
-cache = []
-i = []
 level = 0
+cache = []
 cache[level] = a
+parents = []
+parents[level] = nil
+# Если нет .next()
+i = []
 i[level] = 0
 
 while level >= 0
   node = cache[level][i[level]]
   i[level]+= 1
-
   if node != nil
 
-    p node
+    print 'level: '.red; puts level
+    print 'node: '.red; puts node
+    print 'parents: '.red; puts parents
 
-    if node['children'] != nil && node['children'].length != 0
+    if !node['children'].nil? && node['children'].length > 0
       level+= 1
+      parents[level] = node.clone
       cache[level] = node['children']
       i[level] = 0
     end
   else
+    parents[level] = nil
     level-= 1
   end
 end
@@ -160,6 +150,7 @@ hash_of_hash = {
   c: {id:3},
 }
 
+puts
 puts 'Массив хэшей - проверить есть ли хешь со значением поля равным заданному (.any?)'.green
 p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='b'}
 p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='d'}
@@ -254,3 +245,61 @@ a.delete_if do |v|
   v == 4 || v == 5
 end
 puts a
+
+puts
+puts 'Вывод nested'.green
+a = [
+  {id: '1'},
+  {id: '2', 'children' => [] },
+  {id: '3', 'children' =>
+    [
+      {id: '3-1'},
+      {id: '3-2', 'children' => [] }
+    ]
+  },
+  {id: '4', 'children' => [] },
+  {id: '5', 'children' =>
+    [
+      {id: '5-1', 'children' =>
+        [
+          {id: '5-1-1'},
+          {id: '5-1-2'}
+        ]
+      }
+    ]
+  }
+]
+
+level = 0
+cache = []
+cache[level] = a
+parents = []
+parents[level] = nil
+# Если нет .next()
+i = []
+i[level] = 0
+
+print "<ul>\n"
+
+while level >= 0
+  node = cache[level][i[level]]
+  i[level]+= 1
+  if node != nil
+
+    print "#{'    '*level+'    '}<li><a>#{node[:id]}</a>"
+
+    if !node['children'].nil? && node['children'].length > 0
+      level+= 1
+      print "\n#{'    '*level}<ul>\n"
+      parents[level] = node.clone
+      cache[level] = node['children']
+      i[level] = 0
+    else
+      print "</li>\n"
+    end
+  else
+    parents[level] = nil
+    print "#{'    '*(level<0 ? 0 : level)}</ul>\n"
+    level-= 1
+  end
+end

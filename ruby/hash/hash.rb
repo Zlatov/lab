@@ -20,6 +20,8 @@ p h
 p h[:Mike]
 
 # Имеется ли элемент с ключем
+puts
+puts 'Имеется ли элемент с ключем'.green
 if h.key? :mike
   p h[:mike]
 end
@@ -37,13 +39,18 @@ end
 # Количество элементов
 p h.count
 
-# Удалить элемент с ключем :a
-h.delete("a")
-
-p nil&&nil
+# Удаление по ключу
+puts
+puts 'Удаление по ключу'.green
+a = {a: 1, 'a' => 2}
+a.delete 'a'
+print 'a: '.red; puts a
+a.delete :a
+print 'a: '.red; puts a
 
 # Преобразование в hash с фильтрацией
-puts 'Преобразование в hash с фильтрацией'.red
+puts
+puts 'Преобразование в hash с фильтрацией'.green
 p Hash[ [1,2,3,4,5,6,7,8].select{ |node|
   node != 2
 }.map{ |node|
@@ -69,7 +76,8 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 
 # Слияние двух hash
-puts 'Слияние двух hash'.red
+puts
+puts 'Слияние двух hash'.green
 h1 = {a:'a',b:'b'}
 h2 = {a:nil,c:'cc'}
 h3 = h1.merge(h2)
@@ -80,16 +88,29 @@ h1.merge! h2
 p h1
 
 # Ключи в стрингу
+puts
+puts 'Ключи в стрингу'.green
+puts 'В Rails .stringify_keys()'.blue
 a = {a:'aa',c:'cc'}
-# {a:'aa',c:'cc'}.stringify_keys
-p Hash[a.map{|k,v|[k.to_s,v]}]
-p a
+b = Hash[a.map{|k,v|[k.to_s,v]}]
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 
-p a.delete 'a'
-p a.delete :a
-p a
+# Ключи в символ (один уровень)
+puts
+puts 'Ключи в символ (один уровень)'.green
+puts 'Новый hash'.blue
+a = {'a' => 'a','b b' => {'c' => 'c'}}
+b = Hash[a.map{|k,v|[k.to_sym,v]}]
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+puts 'Себя'.blue
+a = {'a' => 'a','b' => {'c' => 'c'}}
+a.keys.each do |key|
+  a[(key.to_sym rescue key) || key] = a.delete(key)
+end
+print 'a: '.red; puts a
 
 a = 'ds'
 a = nil
 puts "asd: #{a.to_s.red}"
-
