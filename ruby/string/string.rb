@@ -1,6 +1,8 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
 require 'unicode_utils' # UnicodeUtils.downcase 'String'
+require 'rubygems'
+require 'awesome_print'
 
 # Многострочность multiline
 puts 'Многострочность multiline'.green
@@ -78,8 +80,16 @@ p i = text.rindex('/')
 p text.slice(0, i+1)
 
 # В массив
+puts
 puts 'В массив'.green
-p "1,2,3,4".split(",") # ["1", "2", "3", "4"]
+a = "1,2,3,4"
+b = a.split(",")
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+a = " asd, \n zxc, \n qwe "
+b = a.strip.split("\s\n\s").first.delete ','
+print 'a: '.red; puts a
+print 'b: '.red; ap b
 
 # Дату в форматированный текст
 puts 'Дату в форматированный текст'.green

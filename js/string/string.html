@@ -25,11 +25,18 @@
   var b = a.split(/\s*,\s+|\s*,(?=[^\d])/)
   document.log('a: ', a)
   document.log('b: ', b)
+  document.log('> по переносам, не учитывая пробелы до и после переноса'.blue())
+  var a = " asd \n zxc\nqwe ";
+  var b = a.split(/\s*\n\s*/)
+  document.log('a: ', a)
+  console.log('a: ', a)
+  document.log('b: ', b)
 
   // Метод trim() удаляет пробельные символы с начала и конца строки.
   document.log('> Метод trim() удаляет пробельные символы с начала и конца строки.'.green())
-  var orig = '   foo  ';
-  document.log(orig.trim()); // 'foo'
+  var a = "   foo \n asd  "
+  document.log(a.trim())
+  console.log(a.trim())
 
   // Заменить
   document.log('----------------------------------------')
