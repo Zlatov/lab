@@ -3,85 +3,167 @@
 <head>
   <meta charset="utf-8">
   <style type="text/css">
-    .b2_checkbox {
-      cursor: pointer;
+    .sub_ui.checkbox {
+    }
+    .sub_ui.checkbox > input {
       visibility: hidden;
       position: absolute;
     }
-    .b2_checkbox::after {
+    .sub_ui.checkbox > input + span {
       display: inline-block;
       width: 1em;
       height: 1em;
-      background-color: red;
+    }
+    .sub_ui.checkbox > input:checked + span {
     }
 
-    .b_checkbox {
-      cursor: pointer;
-    }
-    .b_checkbox > input {
-      visibility: hidden;
-      position: absolute;
-    }
-    .b_checkbox > input + span {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
+    /* test */
+    .sub_ui.checkbox.test > input + span {
       background-color: red;
     }
-    .b_checkbox > input:checked + span {
+    .sub_ui.checkbox.test > input:checked + span {
       background-color: green;
+    }
+
+    /* css1 */
+    .sub_ui.checkbox.css1 {
+      cursor: pointer;
+    }
+    .sub_ui.checkbox.css1 > input + span {
+      width: 0.8em;
+      height: 0.8em;
+      border: solid 1px rgba(0,0,0,0.5);
+      border-radius: 2px;
+      position: relative;
+    }
+    .sub_ui.checkbox.css1 > input:checked + span::after {
+      content: '\2713';
+      display: block;
+      width: 1em;
+      height: 1em;
+      position: absolute;
+      font-size: 1.5em;
+      line-height: 0.5em;
+      text-indent: -0.1em;
     }
   </style>
 </head>
 <body>
-  <p>Стандартное отображение checkbox без CSS:</p>
+
+
+  <h2>Стандартное отображение checkbox без CSS:</h2>
+  <p><strong>Просто чекбокс</strong></p>
   <p>
-    <input type="checkbox" name="param1" value="1">
+    <input type="checkbox" name="param[]" value="1">
   </p>
+  <p><strong>Чекбокс перед лэйбл</strong></p>
   <p>
-    <input type="checkbox" name="param2" id="param2" value="1">
-    <label for="param2">param2</label>
+    <input type="checkbox" name="param[]" id="field2" value="1">
+    <label for="field2">field</label>
   </p>
+  <p><strong>Чекбокс после лэйбл</strong></p>
   <p>
-    <label for="param3">param3</label>
-    <input type="checkbox" name="param3" value="1" id="param3">
+    <label for="field3">field</label>
+    <input type="checkbox" name="param[]" value="1" id="field3">
   </p>
+  <p><strong>Чекбокс внутри лэйбл перед текстом</strong></p>
   <p>
     <label>
-      param4
-      <input type="checkbox" name="param4" value="1">
+      <input type="checkbox" name="param[]" value="1">
+      field
     </label>
   </p>
+  <p><strong>Чекбокс внутри лэйбл после текста</strong></p>
   <p>
     <label>
-      <input type="checkbox" name="param5" value="1">
-      param5
+      field
+      <input type="checkbox" name="param[]" value="1">
     </label>
   </p>
-  <hr>
-  <p>Отображение checkbox с CSS:</p>
+
+
+  <h2>Отображение checkbox с заменой пользовательского интерфейса, .test:</h2>
+  <p><strong>Просто чекбокс</strong></p>
   <p>
-    <label class="b_checkbox">
-      <input type="checkbox" name="b_param1" value="1">
+    <label class="sub_ui checkbox test">
+      <input type="checkbox" name="param[]" value="1">
       <span></span>
     </label>
   </p>
+  <p><strong>Чекбокс „перед“ лэйбл</strong></p>
   <p>
-    <label class="b_checkbox">
-      <input type="checkbox" name="b_param2" id="b_param2" value="1">
+    <label class="sub_ui checkbox test">
+      <input type="checkbox" name="param[]" id="field4" value="1">
       <span></span>
     </label>
-    <label for="b_param2">b_param2</label>
+    <label for="field4">field</label>
   </p>
+  <p><strong>Чекбокс „после“ лэйбл</strong></p>
   <p>
-    <label for="b_param3">b_param3</label>
-    <label class="b_checkbox">
-      <input type="checkbox" name="b_param3" id="b_param3" value="1">
+    <label for="field5">field</label>
+    <label class="sub_ui checkbox test">
+      <input type="checkbox" name="param[]" id="field5" value="1">
       <span></span>
     </label>
   </p>
+  <p><strong>Чекбокс „внутри лэйбл“ перед текстом</strong></p>
   <p>
-    <input type="checkbox" name="b2p1" value="1" class="b2_checkbox">
+    <label class="sub_ui checkbox test">
+      <input type="checkbox" name="param[]" value="1">
+      <span></span>
+      field
+    </label>
   </p>
+  <p><strong>Чекбокс „внутри лэйбл“ после текста</strong></p>
+  <p>
+    <label class="sub_ui checkbox test">
+      field
+      <input type="checkbox" name="param[]" value="1">
+      <span></span>
+    </label>
+  </p>
+
+
+  <h2>.sub_ui.checkbox.css1:</h2>
+  <p><strong>Просто чекбокс</strong></p>
+  <p>
+    <label class="sub_ui checkbox css1">
+      <input type="checkbox" name="param[]" value="1">
+      <span></span>
+    </label>
+  </p>
+  <p><strong>Чекбокс „перед“ лэйбл</strong></p>
+  <p>
+    <label class="sub_ui checkbox css1">
+      <input type="checkbox" name="param[]" id="field6" value="1">
+      <span></span>
+    </label>
+    <label for="field6">field</label>
+  </p>
+  <p><strong>Чекбокс „после“ лэйбл</strong></p>
+  <p>
+    <label for="field7">field</label>
+    <label class="sub_ui checkbox css1">
+      <input type="checkbox" name="param[]" id="field7" value="1" checked="checked">
+      <span></span>
+    </label>
+  </p>
+  <p><strong>Чекбокс „внутри лэйбл“ перед текстом</strong></p>
+  <p>
+    <label class="sub_ui checkbox css1">
+      <input type="checkbox" name="param[]" value="1">
+      <span></span>
+      field
+    </label>
+  </p>
+  <p><strong>Чекбокс „внутри лэйбл“ после текста</strong></p>
+  <p>
+    <label class="sub_ui checkbox css1">
+      field
+      <input type="checkbox" name="param[]" value="1" checked="checked">
+      <span></span>
+    </label>
+  </p>
+
 </body>
 </html>

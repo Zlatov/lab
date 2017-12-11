@@ -35,6 +35,8 @@
   <script src="/theme/bower/jquery/dist/jquery.min.js"></script>
   <!-- Подсветка синтаксиса кода -->
   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+  <!-- DOC -->
+  <script src="/js/_libs/doc/doc.js" type="text/javascript"></script>
   <!-- TOC -->
   <script src="/js/_libs/toc/toc.js" type="text/javascript"></script>
   <!-- copyToClipboard -->

@@ -223,6 +223,39 @@
     }
   }
 
+  document.log('Перебор nested массива без next/reset'.blue())
+  document.log('a: ', a)
+  var level = 0
+  var cache = []; cache[level] = a.slice(0)
+  var parent = []; parent[level] = null
+  var index = []; index[level] = 0
+  while (level>=0) {
+    var node = cache[level][index[level]]
+    if (node != null) {
+
+      document.log('node.id: ', node.id)
+      document.log('parent: ', parent)
+
+      if (
+        node['children'] != null &&
+        Object.prototype.toString.call(node['children']) === '[object Array]' &&
+        node['children'].length
+      ) {
+        level++
+        index[level] = 0
+        parent[level] = Object.assign({}, node)
+        delete parent[level]['children']
+        cache[level] = node['children'].slice(0)
+      } else {
+        index[level]++
+      }
+    } else {
+      parent[level] = null
+      level--
+      index[level]++
+    }
+  }
+
   document.log()
   document.log('> Сортировка'.green())
   document.log('> Строки, запятые'.green())

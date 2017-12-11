@@ -114,3 +114,13 @@ print 'a: '.red; puts a
 a = 'ds'
 a = nil
 puts "asd: #{a.to_s.red}"
+
+
+# def nested_hash hash
+#   hash.each{|k,v| nested_hash k}
+# end
+
+# a = {a: {b: nil}, c: nil}
+# b = a.each{|k,v| k}
+# print 'a: '.red; puts a
+# print 'b: '.red; puts b

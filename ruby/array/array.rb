@@ -303,3 +303,8 @@ while level >= 0
     level-= 1
   end
 end
+
+a =  [1,2]
+b =  [1,2]
+c = a + b
+print 'c: '.red; puts c

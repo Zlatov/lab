@@ -44,3 +44,19 @@ for price in [99, 99.00, 99.99, 99.888, 99.999, 9999999, 9999999.00, 9999999.99,
   end
   print 'formated_price: '.red; puts formated_price
 end
+
+amt = 3
+sale = 0.0
+percentage = (amt/sale)*100
+case true
+when percentage == 0
+  quant = 0
+when percentage <= 25
+  quant = 1
+when percentage <= 75
+  quant = 2
+else
+  quant = 3
+end
+
+print 'quant: '.red; puts quant

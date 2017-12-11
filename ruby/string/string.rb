@@ -49,7 +49,7 @@ print 'needle: '.red; puts b
 
 
 # Скопировать часть строки регуляркой
-puts 'Скопировать часть строки регуляркой'.green
+puts 'Скопировать часть строки регуляркой [//,1]'.green
 a = 'thumbnail_asd'
 b = a[/^(?:origin_|thumbnail_|view_|big_)(.+)/,1]
 print 'a: '.red; puts a
@@ -69,7 +69,10 @@ p d1<d2
 
 # Замена в строке
 puts 'Замена в строке'.green
-p '<strong>asdf<strong>'.gsub! '<', '&lt;'
+a = '<strong>asdf<strong>'
+b = a.gsub! '<', '&lt;'
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 puts '<img src="../../images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
 puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
 
@@ -135,3 +138,10 @@ a = [
 a.each do |v|
   print 'v.to_i: '.red; puts v.to_i
 end
+
+a = "Ширина"
+b = a[/\((.*?)\)/,1]
+c = a[/^[^\(]*/].strip
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
