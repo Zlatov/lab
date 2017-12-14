@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=cyrillic-ext" rel="stylesheet">
+  <style type="text/css">
+    .font1 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      color: #434343;
+    }
+    .example {
+      float: left;
+      margin: 10px 100px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* .navigation_filter */
+    .navigation_filter {
+      width: 370px;
+      overflow: hidden;
+    }
+    .navigation_filter > a {
+      float: left;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-left: 8px;
+      border: 1px solid #DDDDDD;
+      position: relative;
+      border-radius: 3px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .navigation_filter.color > a {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 30px;
+    }
+    .navigation_filter.color > a.possible::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 44px;
+      height: 42px;
+      left: -8px;
+      top: -7px;
+      background-color: #ffffff;
+      border: solid 1px #DDDDDD;
+      border-radius: 4px;
+      z-index: -2;
+      background-color: #EEEEEE;
+    }
+    .navigation_filter.color > a.possible + a.possible::before {
+      width: 52px;
+      left: -14px;
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .navigation_filter.color > a.possible:nth-child(7n) + a.possible::before {
+      width: 44px;
+      left: -8px;
+      border: solid 1px #DDDDDD;
+      border-radius: 3px;
+    }
+    .navigation_filter.color > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      left: 12px;
+      top: -9px;
+      background-color: #AAAAAA;
+      border-radius: 4px;
+      z-index: -1;
+      border: 0 none;
+    }
+    .navigation_filter.value > a {
+      display: block;
+      height: 20px;
+      padding: 6px 12px;
+      background-color: #FFFFFF;
+    }
+    .navigation_filter.value > a.possible::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: calc(100% + 16px);
+      height: 43px;
+      left: -8px;
+      top: -7px;
+      background-color: #ffffff;
+      border: solid 1px #DDDDDD;
+      border-radius: 4px;
+      z-index: -2;
+      background-color: #EEEEEE;
+    }
+    .navigation_filter.value > a.possible + a.possible::before {
+      width: calc(100% + 20px);
+      left: -12px;
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .navigation_filter.value > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      left: calc(50% - 2px);
+      top: -9px;
+      background-color: #BBBBBB;
+      border-radius: 4px;
+      z-index: -1;
+      border: 0 none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* .navigation_filter_counted */
+    .navigation_filter_counted {
+      width: 370px;
+      overflow: hidden;
+    }
+    .navigation_filter_counted > a {
+      float: left;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-left: 8px;
+      border: 1px solid #DDDDDD;
+      position: relative;
+      border-radius: 3px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .navigation_filter_counted.color > a {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 30px;
+    }
+    .navigation_filter_counted.color > a.possible::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 44px;
+      height: 42px;
+      left: -8px;
+      top: -7px;
+      background-color: #ffffff;
+      border: solid 1px rgba(0,159,60,0.4);
+      border-radius: 4px;
+      z-index: -2;
+    }
+    .navigation_filter_counted.color > a.possible + a.possible::before {
+      width: 52px;
+      left: -14px;
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .navigation_filter_counted.color > a.possible:nth-child(7n) + a.possible::before {
+      width: 44px;
+      left: -8px;
+      border: solid 1px rgba(0,159,60,0.4);
+      border-radius: 4px;
+    }
+    .navigation_filter_counted.color > a.selected {
+      border-color: #518ab7;
+    }
+    .navigation_filter_counted.color > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0px;
+      height: 2px;
+      left: 12px;
+      top: -9px;
+      border-style: solid;
+      border-color: #518ab7;
+      border-width: 6px 4px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      z-index: -1;
+    }
+    .navigation_filter_counted.color > a > span {
+      display: none;
+    }
+    .navigation_filter_counted.color > a.possible > span.present {
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      left: 12px;
+      top: 27px;
+      background-color: #009f3c;
+      border-radius: 4px;
+      z-index: 1;
+      border: 0 none;
+    }
+    .navigation_filter_counted.value > a {
+      display: block;
+      height: 20px;
+      padding: 6px 12px;
+      background-color: #FFFFFF;
+    }
+    .navigation_filter_counted.value > a.possible::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: calc(100% + 17px);
+      height: 43px;
+      left: -8px;
+      top: -7px;
+      background-color: #F9F9F9;
+      border: solid 1px rgba(0,159,60,0.4);
+      /*border-radius: 4px;*/
+      z-index: -2;
+    }
+    /*.navigation_filter_counted.value > a.possible + a.possible::before {
+      width: calc(100% + 20px);
+      left: -12px;
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }*/
+    .navigation_filter_counted.value > a.selected {
+      border-color: #518ab7;
+      font-weight: bold;
+    }
+    .navigation_filter_counted.value > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      left: calc(50% - 3px);
+      top: -9px;
+      z-index: -1;
+      border-style: solid;
+      border-color: #518ab7;
+      border-width: 6px 4px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+    }
+    .navigation_filter_counted.value > a > span {
+      display: none;
+    }
+    .navigation_filter_counted.value > a.possible > span.present {
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      left: calc(50% - 3px);
+      top: 29px;
+      background-color: #009f3c;
+      border-radius: 4px;
+      z-index: 1;
+      border: 0 none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* .navigation_filter_3 */
+    .navigation_filter_3 {
+      width: 370px;
+      overflow: hidden;
+    }
+    .navigation_filter_3 > a {
+      float: left;
+      margin-right: 8px;
+      margin-bottom: 8px;
+      margin-top: 8px;
+      margin-left: 8px;
+      border: 1px solid #DDDDDD;
+      position: relative;
+      border-radius: 3px;
+      color: inherit;
+      text-decoration: none;
+    }
+    .navigation_filter_3.color > a {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 30px;
+    }
+    .navigation_filter_3.color > a.not_exist::before {
+
+      content: '';
+      position: absolute;
+      width: 171%;
+      height: 1px;
+      left: -11px;
+      top: 45%;
+      margin-top: 0;
+      background-color: #AAAAAA;
+      border: solid 1px rgba(255,255,255,0.2);
+      transform: rotate(45deg);
+      background-clip: content-box;
+
+      /*filter: invert(1) saturate(0) brightness(200%);*/
+      /*filter: invert(1) saturate(0) brightness(200%);*/
+      /*filter: invert(60%) saturate(0) brightness(200%);*/
+      /*filter: invert(60%) saturate(0) brightness(200%);*/
+    }
+    .navigation_filter_3.color > a.selected {
+      border-color: #518ab7;
+    }
+    .navigation_filter_3.color > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0px;
+      height: 2px;
+      left: 12px;
+      top: -9px;
+      border-style: solid;
+      border-color: #518ab7;
+      border-width: 6px 4px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      z-index: -1;
+    }
+    .navigation_filter_3.color > a > span {
+      display: none;
+    }
+    .navigation_filter_3.color > a.possible > span.present {
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      left: 12px;
+      top: 27px;
+      background-color: #009f3c;
+      border-radius: 4px;
+      z-index: 1;
+      border: 0 none;
+    }
+    .navigation_filter_3.value > a {
+      display: block;
+      height: 20px;
+      padding: 6px 12px;
+      background-color: #FFFFFF;
+    }
+    .navigation_filter_3.value > a.possible::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: calc(100% + 17px);
+      height: 43px;
+      left: -8px;
+      top: -7px;
+      background-color: #F9F9F9;
+      border: solid 1px rgba(0,159,60,0.4);
+      /*border-radius: 4px;*/
+      z-index: -2;
+    }
+    /*.navigation_filter_3.value > a.possible + a.possible::before {
+      width: calc(100% + 20px);
+      left: -12px;
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }*/
+    .navigation_filter_3.value > a.selected {
+      border-color: #518ab7;
+      font-weight: bold;
+    }
+    .navigation_filter_3.value > a.selected::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0px;
+      height: 0px;
+      left: calc(50% - 3px);
+      top: -9px;
+      z-index: -1;
+      border-style: solid;
+      border-color: #518ab7;
+      border-width: 6px 4px;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+    }
+    .navigation_filter_3.value > a > span {
+      display: none;
+    }
+    .navigation_filter_3.value > a.possible > span.present {
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      left: calc(50% - 3px);
+      top: 29px;
+      background-color: #009f3c;
+      border-radius: 4px;
+      z-index: 1;
+      border: 0 none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="font1 example">
+    <div class="navigation_filter color">
+      <a href="#" style="background-color: #FFFFFF;"></a>
+      <a href="#" style="background-color: #FF0000;"></a>
+      <a href="#" style="background-color: #FFFF00;"></a>
+      <a href="#" style="background-color: #00FF00;"></a>
+      <a href="#" style="background-color: #00FFFF;"></a>
+      <a href="#" style="background-color: #0000FF;"></a>
+      <a href="#" style="background-color: #CCCCCC;"></a>
+      <a href="#" style="background-color: #888888;"></a>
+      <a href="#" style="background-color: #444444;"></a>
+      <a href="#" style="background-color: #000000;"></a>
+
+      <a href="#" style="background-color: #FFFFFF;" class="possible"></a>
+      <a href="#" style="background-color: #FF0000;" class="possible"></a>
+      <a href="#" style="background-color: #FFFF00;" class="possible"></a>
+      <a href="#" style="background-color: #00FF00;" class="possible"></a>
+      <a href="#" style="background-color: #00FFFF;" class="possible selected"></a>
+      <a href="#" style="background-color: #0000FF;" class="possible"></a>
+      <a href="#" style="background-color: #CCCCCC;" class="possible"></a>
+      <a href="#" style="background-color: #888888;" class="possible"></a>
+      <a href="#" style="background-color: #444444;" class="possible"></a>
+      <a href="#" style="background-color: #000000;" class="possible"></a>
+
+      <a href="#" style="background-color: #FFFFFF;"></a>
+      <a href="#" style="background-color: #FF0000;"></a>
+      <a href="#" style="background-color: #FFFF00;"></a>
+      <a href="#" style="background-color: #00FF00;"></a>
+      <a href="#" style="background-color: #00FFFF;"></a>
+      <a href="#" style="background-color: #0000FF;"></a>
+      <a href="#" style="background-color: #CCCCCC;"></a>
+      <a href="#" style="background-color: #888888;"></a>
+      <a href="#" style="background-color: #444444;"></a>
+      <a href="#" style="background-color: #000000;"></a>
+    </div>
+    <div class="navigation_filter value">
+      <a href="#">1</a>
+      <a href="#">2</a>
+      <a href="#">100</a>
+      <a href="#">5000</a>
+      <a href="#">длинный текст</a>
+      <a href="#">Lorem ipsum dolor sit amet</a>
+      <a href="#" class="possible">1</a>
+      <a href="#" class="possible">2</a>
+      <a href="#" class="possible">100</a>
+      <a href="#" class="possible">5000</a>
+      <a href="#" class="possible">длинный текст</a>
+      <a href="#" class="possible selected">Lorem ipsum dolor sit amet</a>
+      <a href="#" class="possible">1</a>
+      <a href="#" class="possible">2</a>
+      <a href="#" class="possible">100</a>
+      <a href="#" class="possible">5000</a>
+      <a href="#" class="possible">длинный текст</a>
+      <a href="#" class="possible">Lorem ipsum dolor sit amet</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="font1 example">
+    <div class="navigation_filter_counted color">
+      <a href="#" style="background-color: #FFFFFF;"><span></span></a>
+      <a href="#" style="background-color: #FF0000;"><span></span></a>
+      <a href="#" style="background-color: #FFFF00;"><span></span></a>
+      <a href="#" style="background-color: #00FF00;"><span></span></a>
+      <a href="#" style="background-color: #00FFFF;"><span></span></a>
+      <a href="#" style="background-color: #0000FF;"><span></span></a>
+      <a href="#" style="background-color: #CCCCCC;"><span></span></a>
+      <a href="#" style="background-color: #888888;"><span></span></a>
+      <a href="#" style="background-color: #444444;"><span></span></a>
+      <a href="#" style="background-color: #000000;"><span></span></a>
+
+      <a href="#" style="background-color: #FFFFFF;" class="possible"><span class="present"></span></a>
+      <a href="#" style="background-color: #FF0000;" class="possible"><span class="present"></span></a>
+      <a href="#" style="background-color: #FFFF00;" class="possible"><span class="present"></span></a>
+      <a href="#" style="background-color: #00FF00;" class="possible"><span class="present"></span></a>
+      <a href="#" style="background-color: #00FFFF;" class="possible selected"><span class="present"></span></a>
+      <a href="#" style="background-color: #0000FF;" class="possible"><span class="present"></span></a>
+      <a href="#" style="background-color: #CCCCCC;" class="possible"><span></span></a>
+      <a href="#" style="background-color: #888888;" class="possible"><span></span></a>
+      <a href="#" style="background-color: #444444;" class="possible"><span></span></a>
+      <a href="#" style="background-color: #000000;" class="possible"><span></span></a>
+
+      <a href="#" style="background-color: #FFFFFF;"><span class="present"></span></a>
+      <a href="#" style="background-color: #FF0000;"><span class="present"></span></a>
+      <a href="#" style="background-color: #FFFF00;"><span class="present"></span></a>
+      <a href="#" style="background-color: #00FF00;"><span class="present"></span></a>
+      <a href="#" style="background-color: #00FFFF;"><span class="present"></span></a>
+      <a href="#" style="background-color: #0000FF;"><span class="present"></span></a>
+      <a href="#" style="background-color: #CCCCCC;"><span class="present"></span></a>
+      <a href="#" style="background-color: #888888;"><span class="present"></span></a>
+      <a href="#" style="background-color: #444444;"><span class="present"></span></a>
+      <a href="#" style="background-color: #000000;"><span class="present"></span></a>
+    </div>
+    <div class="navigation_filter_counted value">
+      <a href="#"><span></span>1</a>
+      <a href="#"><span></span>2</a>
+      <a href="#"><span></span>100</a>
+      <a href="#"><span></span>5000</a>
+      <a href="#"><span></span>длинный текст</a>
+      <a href="#"><span></span>Lorem ipsum dolor sit amet</a>
+      <a href="#" class="possible"><span class="present"></span>1</a>
+      <a href="#" class="possible"><span class="present"></span>2</a>
+      <a href="#" class="possible"><span class="present"></span>100</a>
+      <a href="#" class="possible"><span class="present"></span>5000</a>
+      <a href="#" class="possible"><span class="present"></span>длинный текст</a>
+      <a href="#" class="possible"><span class="present"></span>Lorem ipsum dolor sit amet</a>
+      <a href="#" class="possible selected"><span class="present"></span>1</a>
+      <a href="#" class="possible"><span></span>2</a>
+      <a href="#" class="possible"><span></span>100</a>
+      <a href="#" class="possible"><span></span>5000</a>
+      <a href="#" class="possible"><span></span>длинный текст</a>
+      <a href="#" class="possible"><span></span>Lorem ipsum dolor sit amet</a>
+      <a href="#"><span class="present"></span>1</a>
+      <a href="#"><span class="present"></span>2</a>
+      <a href="#"><span class="present"></span>100</a>
+      <a href="#"><span class="present"></span>5000</a>
+      <a href="#"><span class="present"></span>длинный текст</a>
+      <a href="#"><span class="present"></span>Lorem ipsum dolor sit amet</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <div class="font1 example">
+    <div class="navigation_filter_3 color">
+      <a href="#" style="background-color: #FFFFFF;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #FF0000;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #FFFF00;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #00FF00;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #00FFFF;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #0000FF;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #CCCCCC;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #AAAAAA;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #dadada;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #888888;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #444444;" class="not_exist"><span></span></a>
+      <a href="#" style="background-color: #000000;" class="not_exist"><span></span></a>
+
+      <a href="#" style="background-color: #FFFFFF;"><span></span></a>
+      <a href="#" style="background-color: #FF0000;"><span></span></a>
+      <a href="#" style="background-color: #FFFF00;"><span></span></a>
+      <a href="#" style="background-color: #00FF00;"><span></span></a>
+      <a href="#" style="background-color: #00FFFF;" class="selected"><span class="not_available"></span></a>
+      <a href="#" style="background-color: #0000FF;"><span class="not_available"></span></a>
+      <a href="#" style="background-color: #CCCCCC;"><span class="not_available"></span></a>
+      <a href="#" style="background-color: #888888;"><span class="not_available"></span></a>
+      <a href="#" style="background-color: #444444;"><span class="not_available"></span></a>
+      <a href="#" style="background-color: #000000;"><span class="not_available"></span></a>
+
+      <a href="#" style="background-color: #FFFFFF;"><span></span></a>
+      <a href="#" style="background-color: #FF0000;"><span></span></a>
+      <a href="#" style="background-color: #FFFF00;"><span></span></a>
+      <a href="#" style="background-color: #00FF00;"><span></span></a>
+      <a href="#" style="background-color: #00FFFF;"><span></span></a>
+      <a href="#" style="background-color: #0000FF;"><span></span></a>
+      <a href="#" style="background-color: #CCCCCC;"><span></span></a>
+      <a href="#" style="background-color: #888888;"><span></span></a>
+      <a href="#" style="background-color: #444444;"><span></span></a>
+      <a href="#" style="background-color: #000000;"><span></span></a>
+    </div>
+    <div class="navigation_filter_3 value">
+      <a href="#" class="not_exist"><span></span>1</a>
+      <a href="#" class="not_exist"><span></span>2</a>
+      <a href="#" class="not_exist"><span></span>100</a>
+      <a href="#" class="not_exist"><span></span>5000</a>
+      <a href="#" class="not_exist"><span></span>длинный текст</a>
+      <a href="#" class="not_exist"><span></span>Lorem ipsum dolor sit amet</a>
+      <a href="#"><span></span>1</a>
+      <a href="#"><span></span>2</a>
+      <a href="#"><span></span>100</a>
+      <a href="#"><span></span>5000</a>
+      <a href="#"><span></span>длинный текст</a>
+      <a href="#"><span></span>Lorem ipsum dolor sit amet</a>
+      <a href="#" class="selected"><span class="not_available"></span>1</a>
+      <a href="#"><span class="not_available"></span>2</a>
+      <a href="#"><span class="not_available"></span>100</a>
+      <a href="#"><span class="not_available"></span>5000</a>
+      <a href="#"><span class="not_available"></span>длинный текст</a>
+      <a href="#"><span class="not_available"></span>Lorem ipsum dolor sit amet</a>
+      <a href="#"><span class="not_available"></span>1</a>
+      <a href="#"><span></span>2</a>
+      <a href="#"><span></span>100</a>
+      <a href="#"><span></span>5000</a>
+      <a href="#"><span></span>длинный текст</a>
+      <a href="#"><span></span>Lorem ipsum dolor sit amet</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+</body>
+</html>
