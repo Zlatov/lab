@@ -1,0 +1,18 @@
+<!-- https://eax.me/postgresql-install/ Начало работы с PostgreSQL -->
+<!-- https://postgrespro.ru/ -->
+<h2>Утсановка</h2>
+<p><code class="copyToClipboard">sudo apt-get install postgresql</code></p>
+<h2>Кофигурирование</h2>
+<p><code>/etc/postgresql/9.3/main/postgresql.conf</code> — конфигурационный файл.</p>
+<h2>Консоль</h2>
+<p><code>sudo -u postgres psql</code></p>
+<p><code>\q</code> + <kbd>Enter</kbd> — выйти из psql</p>
+<h3>Старт/Рестарт/Стоп</h3>
+<p><code>sudo service postgresql restart</code></p>
+<h3>Дамп</h3>
+<p><code>pg_dump -c -h 192.168.0.1 -U test_user test_database > ./dump.sql</code></p>
+<p><code>cat dump.sql | psql -h 192.168.0.1 test_database test_user</code></p>
+<h3>psql</h3>
+<p><code>psql -h your-server-name -U your-username -d your-database-name -p we-could-have-a-port-as-well -c "select count(*) from your_table;"</code></p>
+<p><code>psql -h localhost test_database test_user</code></p>
+<p><code>psql -h localhost</code> — войти под тем же пользователем из под которого запущена консоль (имеется в виду имя пользователя).</p>

@@ -1,0 +1,16 @@
+-- DROP TABLE [IF EXISTS] table_name [CASCADE | RESTRICT];
+DROP TABLE IF EXISTS users CASCADE;
+-- DROP SEQUENCE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
+DROP SEQUENCE IF EXISTS user_ids CASCADE;
+
+CREATE SEQUENCE user_ids;
+
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY DEFAULT NEXTVAL('user_ids'),
+  login CHAR(64),
+  password CHAR(64)
+);
+
+\d
+\d users
+
