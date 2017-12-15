@@ -7,6 +7,8 @@ puts Integer.class
 
 a = 1
 puts a.is_a?(Integer)
+a = 1.1
+puts a.is_a?(Integer)
 
 a = "%g"
 puts a % 0

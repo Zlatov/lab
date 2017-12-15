@@ -173,11 +173,11 @@ array_of_hash.delete_if{|v| v['id'.to_sym]==3}
 p array_of_hash
 
 
-# puts 'Перебор массива - создание нового'.red
-# ids = array_of_hash.map{|v|v[:id]*2}
-# p ids
-# p array_of_hash
-
+puts 'Перебор массива map! - '.green
+a = [1,2,3,4]
+b = a.map!{|e| e+= 1}
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 
 # puts 'Создание нового идентификатора'.red
 # ids = (0..5).map {|v|v.to_s}

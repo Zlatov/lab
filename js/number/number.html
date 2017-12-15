@@ -20,6 +20,25 @@
     document.log('a: ', a)
     document.log('b: ', b)
 
+    document.log()
+    document.log('> toFixed()'.green())
+    var a = 1
+    var b = a.toFixed(2)
+    document.log('a: ', a)
+    document.log('b: ', b)
+
+    document.log()
+    document.log('> numberWithSpaces()'.green())
+    function numberWithSpaces(x) {
+      var parts = x.toString().split(".");
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+      return parts.join(".");
+    }
+    var a = 10000000000.1
+    var b = numberWithSpaces(a.toFixed(2))
+    document.log('a: ', a)
+    document.log('b: ', b)
+
   </script>
 </body>
 </html>
