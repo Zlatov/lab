@@ -137,6 +137,7 @@ a = [
 ]
 a.each do |v|
   print 'v.to_i: '.red; puts v.to_i
+  print 'v.to_f: '.red; puts v.to_f
 end
 
 a = "Ширина"

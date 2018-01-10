@@ -16,6 +16,19 @@ $('#example1').jstree({
 })
 </pre>
 <div id="example1"></div>
+
+
+<h2>Инстансы</h2>
+<h3>В событиях jstree</h3>
+<p>В части кода <code>.on('after_open.jstree', function(event, data){ ... })</code>:</p>
+<pre>
+  var tree = data.instance
+  var struct = tree.element
+  // дата-атрибуты структуры:
+  var tree_type = struct.data('tree_type')
+</pre>
+
+
 <h2>Плагины</h2>
 <h3>Подключение плагинов</h3>
 <pre class="prettyprint lang-js eval_js">

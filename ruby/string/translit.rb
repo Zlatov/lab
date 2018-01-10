@@ -17,3 +17,8 @@ c = for_file_name Russian.translit(b)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+
+a = 'Русский ёж  - 度_腾 = №11# English'
+b = Russian.translit(a).gsub!(/\s+/, '-').gsub!(/[^a-z0-9_-]+/i, '_')
+print 'a: '.red; puts a
+print 'b: '.red; puts b

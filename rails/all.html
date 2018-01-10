@@ -121,5 +121,26 @@ class Seo &lt; ActiveRecord::Base
 end
 </pre>
 
+<h2>Миграции</h2>
+<h3>Экспорт/импорт схемы</h3>
+<p>Настройка экспорта схемы в файле <code class="copyToClipboard">config/environments/development.rb</code>:</p>
+<pre class="prettyprint lang-ruby">
+  # Если выбрано :ruby, тогда схема хранится в db/schema.rb, иначе в db/structure.sql
+  config.active_record.schema_format = :sql
+</pre>
+<p><code class="copyToClipboard">rails db:structure:dump</code> - экспорт схемы.</p>
+<p><code class="copyToClipboard">rails db:structure:load</code> - импорт схемы.</p>
+
 <h2>Полезные гемы</h2>
 <h3>Kaminari - пагинациая модели</h3>
+<h3>annotate - автоматическая нототация моделей и остального</h3>
+<p>Автоматически добавляет и обновляет комментарии в начале каждой из моделей, составляющих схему</p>
+<h3>pry</h3>
+<p>Pry - мощная альтернатива стандартной оболочке IRB для Ruby. Он написан с нуля, чтобы предоставить ряд дополнительных функций</p>
+<pre>
+  gem 'pry'
+  # gem 'pry-rails'
+  gem 'pry-nav'
+</pre>
+
+
