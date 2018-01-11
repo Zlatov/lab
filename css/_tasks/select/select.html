@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+
+  <style type="text/css">
+    select.b {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 0px;
+      padding: 5px 35px 5px 10px;
+      /*font-size: 16px;*/
+      /*line-height: 20px;*/
+      background: url("\
+        data:image/svg+xml;\
+        utf8,\
+        <svg\
+          baseProfile='full'\
+          width='7'\
+          height='7'\
+          viewBox='0 0 7 7'\
+          xmlns='http://www.w3.org/2000/svg'\
+          xmlns:xlink='http://www.w3.org/1999/xlink'\
+          xmlns:ev='http://www.w3.org/2001/xml-events'\
+          version='1.1'>\
+          <rect x='2' y='2' width='3' height='3' style='fill:rgb(0,0,255);stroke-width:2;stroke:rgb(0,0,0)' />\
+        </svg>\
+      ") no-repeat right center,
+      linear-gradient(180deg, #ebf1f6 0%, #abd3ee 50%, #89c3eb 51%, #d5ebfb 100%)
+      transparent;
+
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    /* CAUTION: IE hackery ahead */
+    select.b::-ms-expand { 
+        display: none; /* remove default arrow on ie10 and ie11 */
+    }
+
+    /* target Internet Explorer 9 to undo the custom arrow */
+    @media screen and (min-width:0\0) {
+        select.b {
+            background:none\9;
+            padding: 5px\9;
+        } 
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <select name="field">
+    <option value="1">one</option>
+    <option value="2" selected="selected">two</option>
+    <option value="3" disabled="disabled">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+    <option value="long">A very long option name to test wrapping and visual collisions</option>
+  </select>
+
+  <select name="field" multiple="multiple" size="4">
+    <option value="1">one</option>
+    <option value="2" selected="selected">two</option>
+    <option value="3" disabled="disabled">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+    <option value="long">A very long option name to test wrapping and visual collisions</option>
+  </select>
+
+  <select name="field" class="b">
+    <option value="1">one</option>
+    <option value="2" selected="selected">two</option>
+    <option value="3" disabled="disabled">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+    <option value="long">A very long option name to test wrapping and visual collisions</option>
+  </select>
+
+  <select name="field" multiple="multiple" size="4" class="b">
+    <option value="1">one</option>
+    <option value="2" selected="selected">two</option>
+    <option value="3" disabled="disabled">three</option>
+    <option value="4">four</option>
+    <option value="5">five</option>
+    <option value="long">A very long option name to test wrapping and visual collisions</option>
+  </select>
+
+</body>
+</html>
