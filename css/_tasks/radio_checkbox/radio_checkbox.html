@@ -5,7 +5,7 @@
   <style type="text/css">
     .sub_ui.checkbox {
     }
-    .sub_ui.checkbox > input {
+    .sub_ui.checkbox > input, .sub_ui.radio > input {
       visibility: hidden;
       position: absolute;
     }
@@ -13,6 +13,8 @@
       display: inline-block;
       width: 1em;
       height: 1em;
+    }
+    .sub_ui.radio > input + span {
     }
     .sub_ui.checkbox > input:checked + span {
     }
@@ -46,10 +48,47 @@
       line-height: 0.5em;
       text-indent: -0.1em;
     }
+
+    .sub_ui.radio.css1 {
+      cursor: pointer;
+    }
+    .sub_ui.radio.css1 > input + span {
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      border: solid 1px rgba(0,0,0,0.5);
+      border-radius: 0.4em;
+      position: relative;
+    }
+    .sub_ui.radio.css1 > input:checked + span::after {
+      content: '\2022';
+      display: block;
+      width: 1em;
+      height: 1em;
+      position: absolute;
+      font-size: 2.2em;
+      line-height: .43em;
+      text-indent: 0.01em;
+    }
+
+    .sub_ui.radio.button {
+      cursor: pointer;
+    }
+    .sub_ui.radio.button > input + span {
+      border: solid 1px rgba(0,0,0,0.5);
+      border-radius: 0.4em;
+      position: relative;
+      padding: 4px;
+    }
+    .sub_ui.radio.button > input:checked + span {
+      border-color: red;
+    }
+
   </style>
 </head>
 <body>
 
+  <h1>Стилизация флажка и переключателя</h1>
 
   <h2>Стандартное отображение checkbox без CSS:</h2>
   <p><strong>Просто чекбокс</strong></p>
@@ -162,6 +201,30 @@
       field
       <input type="checkbox" name="param[]" value="1" checked="checked">
       <span></span>
+    </label>
+  </p>
+
+  <h2>.sub_ui.radio</h2>
+  <p>
+    <label class="sub_ui radio css1">
+      <input type="radio" name="param[1]" value="1">
+      <span></span>
+      param 1
+    </label>
+    <label class="sub_ui radio css1">
+      param 2
+      <input type="radio" name="param[2]" value="2" checked="checked">
+      <span></span>
+    </label>
+  </p>
+  <p>
+    <label class="sub_ui radio button">
+      <input type="radio" name="param[2]" value="1">
+      <span>param 1</span>
+    </label>
+    <label class="sub_ui radio button">
+      <input type="radio" name="param[2]" value="2" checked="checked">
+      <span>param 2</span>
     </label>
   </p>
 
