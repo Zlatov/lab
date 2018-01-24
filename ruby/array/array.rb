@@ -62,7 +62,7 @@ end
 puts 'for in'.blue
 a = [1,2,3]
 for val in a
-  next if val == 2
+  next if val == 2 # как continue во многих других языках
   puts val
 end
 
