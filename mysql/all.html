@@ -437,6 +437,12 @@ mysql --host=$DBHOST --port=3306 --user="$DBUSER" --password="$DBPASS" -s --exec
 <p>вопрос - какой величины, если таблица очень большая то размер запроса может превысить параметр:</p>
 <pre>SHOW VARIABLES LIKE 'max_allowed_packet';</pre>
 
+<p>Ещё важный параметр <code>--routines</code> при котором в дамп пишутся <strong>stored procedures/functions</strong>.</p>
+<ul>
+  <li><code>--routines</code> – FALSE by default</li>
+  <li><code>--triggers</code> – TRUE by default</li>
+</ul>
+
 <p>config.sh</p>
 <pre class="prettyprint lang-sh">
 #!/bin/bash

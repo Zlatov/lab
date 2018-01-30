@@ -308,3 +308,8 @@ a =  [1,2]
 b =  [1,2]
 c = a + b
 print 'c: '.red; puts c
+
+a = {}
+a[:a] ||= []
+a[:a].push({a:1})
+print 'a[:a]: '.red; p a[:a]

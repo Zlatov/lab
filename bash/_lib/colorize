@@ -8,15 +8,15 @@ STYLE_DEFAULT='\033[0m'
 
 COLORIZE_CLEAR='\033[0m'
 
-function echoc {
+# function echoc {
 	# while true;
  #    do
-        case "$1" in
-            -n | --name ) echo NAME="$2"; shift 2;;
-            -d | --dir ) echo DIR="$2"; shift 2;;
-        esac
+        # case "$1" in
+        #     -n | --name ) echo NAME="$2"; shift 2;;
+        #     -d | --dir ) echo DIR="$2"; shift 2;;
+        # esac
     # done
     # echo -en $COLOR_RED
     # echo -e "Ошибка применения триггеров."
     # echo -en $STYLE_DEFAULT
-}
+# }
