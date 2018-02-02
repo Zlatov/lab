@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Decode</title>
+</head>
+
+<body>
+	<textarea id="decode_textarea" cols="30" rows="10"></textarea>
+	<button id="decode_button">Decode</button>
+	<script src="/theme/bower/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var decode_button = $('#decode_button')
+			decode_button.on('click', function(event) {
+				var decode_textarea = $('#decode_textarea')
+				var text = decode_textarea.val()
+				console.log('text: ', text)
+				var decoded = decodeURI(text)
+				console.log('decoded: ', decoded)
+				decode_textarea.val(decoded)
+			})
+		});
+	</script>
+</body>
+
+</html>
