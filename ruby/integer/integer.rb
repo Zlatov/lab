@@ -10,7 +10,7 @@ puts a.is_a?(Integer)
 a = 1.1
 puts a.is_a?(Integer)
 
-a = "%g"
+a = '%g'
 puts a % 0
 puts a % 0.001
 puts a % 0.01

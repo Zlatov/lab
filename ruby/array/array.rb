@@ -313,3 +313,11 @@ a = {}
 a[:a] ||= []
 a[:a].push({a:1})
 print 'a[:a]: '.red; p a[:a]
+
+# Массив в строки по 10 элементов
+puts 'each по несколько элементов'.green
+a = (1..45).to_a
+ap a
+a.each_slice(10) do |slice|
+  puts slice.join(', ')
+end
