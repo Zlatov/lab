@@ -1,4 +1,4 @@
--- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/insert.sql;
+-- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/insert_test_data.sql;
 -- ?????????:
 -- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/select.sql;
 -- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/api_get.sql;

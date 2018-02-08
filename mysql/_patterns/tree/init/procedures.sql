@@ -5,6 +5,7 @@ DROP PROCEDURE IF EXISTS `categories_reorder_cildrens`;
 DROP PROCEDURE IF EXISTS `categories_select_all`;
 DROP PROCEDURE IF EXISTS `categories_select_childrens`;
 DROP PROCEDURE IF EXISTS `categories_count_childrens`;
+DROP PROCEDURE IF EXISTS `categories_delete_element`;
 
 DELIMITER ;;
 
