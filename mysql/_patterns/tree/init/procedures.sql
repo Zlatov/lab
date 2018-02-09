@@ -21,6 +21,11 @@
 -- categories_tree_level(param_level, param_delta_level)
 -- 
 
+DROP PROCEDURE IF EXISTS `categories_tree_descendants`;
+DROP PROCEDURE IF EXISTS `categories_tree_ancestors`;
+DROP PROCEDURE IF EXISTS `categories_tree_childrens`;
+DROP PROCEDURE IF EXISTS `categories_tree_parent`;
+
 DROP PROCEDURE IF EXISTS `categories_update_level_moved_descendants`;
 DROP PROCEDURE IF EXISTS `categories_order_after`;
 DROP PROCEDURE IF EXISTS `categories_order_first`;
@@ -31,6 +36,82 @@ DROP PROCEDURE IF EXISTS `categories_count_childrens`;
 DROP PROCEDURE IF EXISTS `categories_delete_element`;
 
 DELIMITER ;;
+
+CREATE PROCEDURE `categories_tree_descendants`(IN param_id INT(11), IN param_level_begin INT(11), IN param_delta_level INT(11))
+procedure_label:BEGIN
+	DECLARE level_end INT DEFAULT 1;
+
+	CASE
+		WHEN param_level_begin IS NULL THEN
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.did = c.id
+			WHERE cr.aid = param_id;
+		WHEN param_level_begin IS NOT NULL AND param_delta_level IS NULL THEN
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.did = c.id
+			WHERE
+				cr.aid = param_id
+				AND c.level >= param_level_begin;
+		ELSE
+			SELECT param_level_begin + param_delta_level - 1 INTO level_end;
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.did = c.id
+			WHERE
+				cr.aid = param_id AND
+				c.level >= param_level_begin AND
+				c.level <= level_end;
+	END CASE;
+
+END;;
+
+CREATE PROCEDURE `categories_tree_ancestors`(IN param_id INT(11), IN param_level_begin INT(11), IN param_delta_level INT(11))
+procedure_label:BEGIN
+	DECLARE level_end INT DEFAULT 1;
+
+	CASE
+		WHEN param_level_begin IS NULL THEN
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.aid = c.id
+			WHERE cr.did = param_id;
+		WHEN param_level_begin IS NOT NULL AND param_delta_level IS NULL THEN
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.aid = c.id
+			WHERE
+				cr.did = param_id
+				AND c.level >= param_level_begin;
+		ELSE
+			SELECT param_level_begin + param_delta_level - 1 INTO level_end;
+			SELECT c.*
+			FROM `categories` c
+			INNER JOIN `categories_rels` cr ON cr.aid = c.id
+			WHERE
+				cr.did = param_id AND
+				c.level >= param_level_begin AND
+				c.level <= level_end;
+	END CASE;
+
+END;;
+
+CREATE PROCEDURE `categories_tree_childrens`(IN param_id INT(11))
+procedure_label:BEGIN
+	SELECT c.*
+	FROM `categories` c
+	WHERE c.pid = param_id;
+
+END;;
+
+CREATE PROCEDURE `categories_tree_parent`(IN param_id INT(11))
+procedure_label:BEGIN
+	SELECT parent.*
+	FROM `categories` parent
+	INNER JOIN `categories` children ON children.pid = parent.id
+	WHERE children.id = param_id;
+END;;
 
 CREATE PROCEDURE `categories_update_level_moved_descendants`(IN param_id INT(11))
 procedure_label:BEGIN
