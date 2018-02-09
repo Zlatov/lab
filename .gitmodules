@@ -1,3 +1,6 @@
 [submodule "js/_tasks/dotdotdot"]
 	path = js/_tasks/dotdotdot
 	url = git@github.com:tbasse/jquery-truncate.git
+[submodule "php/_libs/tree"]
+	path = php/_libs/tree
+	url = https://github.com/Zlatov/tree.git
