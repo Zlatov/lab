@@ -1,7 +1,30 @@
+-- 
+-- Необходимый функционал API:
+--  — Выбрать потомков
+--  — Выбрать потомков элемента с уровнем, уровнями по началу и смещению
+--  — Выбрать предков
+--  — Выбрать предков элемента с уровнем, уровнями по началу и смещению
+--  — Выбрать детей
+--  — Выбрать родителя
+--  — Выбрать листья
+--  — Выбрать листья с уровнем, уровнями по началу и смещению
+--  — Выбрать уровень, уровни, по началу и смещению
+-- 
+--  — Установить элемент в начало списка родителя
+--  — Установить элемент после элемента
+-- 
+-- categories_tree_descendants(param_id, param_level, param_delta_level)
+-- categories_tree_ancestors(param_id, param_level, param_delta_level)
+-- categories_tree_childrens(param_id)
+-- categories_tree_parent(param_id)
+-- categories_tree_leaf(param_id, param_level, param_delta_level)
+-- categories_tree_level(param_level, param_delta_level)
+-- 
+
 DROP PROCEDURE IF EXISTS `categories_update_level_moved_descendants`;
 DROP PROCEDURE IF EXISTS `categories_order_after`;
 DROP PROCEDURE IF EXISTS `categories_order_first`;
-DROP PROCEDURE IF EXISTS `categories_reorder_cildrens`;
+DROP PROCEDURE IF EXISTS `categories_reorder_childrens`;
 DROP PROCEDURE IF EXISTS `categories_select_all`;
 DROP PROCEDURE IF EXISTS `categories_select_childrens`;
 DROP PROCEDURE IF EXISTS `categories_count_childrens`;
@@ -61,7 +84,7 @@ procedure_label:BEGIN
 		`after_item`.`id` = param_after_id;
 
 	SELECT `categories`.`pid` INTO param_pid FROM `categories` WHERE `categories`.`id` = param_after_id;
-	CALL categories_reorder_cildrens(param_pid);
+	CALL categories_reorder_childrens(param_pid);
 
 END;;
 
@@ -78,10 +101,10 @@ procedure_label:BEGIN
 		`next_items`.`pid` = param_pid
 		AND `next_items`.`id` <> param_id;
 
-	CALL categories_reorder_cildrens(param_pid);
+	CALL categories_reorder_childrens(param_pid);
 END;;
 
-CREATE PROCEDURE `categories_reorder_cildrens`(IN param_pid INT(11))
+CREATE PROCEDURE `categories_reorder_childrens`(IN param_pid INT(11))
 procedure_label:BEGIN
 	UPDATE `categories` `childrens`
 	INNER JOIN (
