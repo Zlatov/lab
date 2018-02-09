@@ -1,14 +1,20 @@
-// $(document).ready(function() {
-//   $('body').css('background-color', 'red')
-// })
+$(document).ready(function() {
 
-var next = $('.pre_slider-next')
-next.on('click', function(event) {
-  var button = $(this)
-  var cat_products = button.parent().next('.cat_products')
-  console.log('cat_products: ', cat_products)
-  var first = cat_products.children('.product').first()
-  var left = first.css('left')
-  console.log('left: ', left)
-  first.css('left', '100px')
+  var next = $('.pre_slider-next')
+  next.on('click', function(event) {
+    var button = $(this)
+    var cat_products = button.parent().next('.cat_products')
+    console.log('cat_products: ', cat_products)
+    var line = cat_products.children('.line')
+    var left = parseInt(line.css('left'))
+    console.log('left: ', left)
+    line.css('left', (left - 214) + 'px')
+  })
+
+  var button_show_all_products = $('.js_show_all_products')
+  button_show_all_products.on('click', function(event) {
+    var products = $('.products')
+    products.toggleClass('limited')
+  })
+
 })

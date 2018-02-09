@@ -2,7 +2,7 @@
   width: 877px;
 }
 
-.h1 {
+.products .h1 {
   padding: 0 0 17px;
   color: #333;
   font: 20px/22px 'Roboto', sans-serif;
@@ -15,13 +15,19 @@
   overflow: hidden;
 }
 
+.products.limited>.cat_products>.line {
+  position: relative;
+  left: 0px;
+  transition: left 1.3s ease-in-out;
+}
+
 .product {
   width: 184px;
-  min-height: 544px;
+  min-height: 44px;
   padding: 0 9px 10px;
   margin: 0 14px 20px 0;
   border: 1px solid #efefef;
-  background: #fff;
+  background: red;
   text-align: center;
   position: relative;
   display: inline-block;
@@ -29,13 +35,12 @@
 }
 
 .products.limited .h1+.cat_products>.product:nth-child(n+9) {
-
   /*position: absolute;*/
-
   /*visibility: hidden;*/
 }
 
-.pre_slider-prev, .pre_slider-next {
+.pre_slider-prev,
+.pre_slider-next {
   display: block;
   float: right;
 }
