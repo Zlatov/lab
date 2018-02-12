@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+  window.liner = new window.Market.Liner($('.products .cat_products .line'))
+  console.log('window.liner: ', window.liner)
+  window.liner.activate_scroll()
+
+  /*
   var next = $('.pre_slider-next')
   next.on('click', function(event) {
     var button = $(this)
@@ -10,6 +15,7 @@ $(document).ready(function() {
     console.log('left: ', left)
     line.css('left', (left - 214) + 'px')
   })
+  */
 
   var button_show_all_products = $('.js_show_all_products')
   button_show_all_products.on('click', function(event) {
