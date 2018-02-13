@@ -24,8 +24,10 @@
     document.log('> toFixed()'.green())
     var a = 1
     var b = a.toFixed(2)
+    var c = a.toFixed(0)
     document.log('a: ', a)
     document.log('b: ', b)
+    document.log('c: ', c)
 
     document.log()
     document.log('> numberWithSpaces()'.green())
@@ -36,8 +38,10 @@
     }
     var a = 10000000000.1
     var b = numberWithSpaces(a.toFixed(2))
+    var c = numberWithSpaces(a.toFixed(0))
     document.log('a: ', a)
     document.log('b: ', b)
+    document.log('c: ', c)
 
   </script>
 </body>
