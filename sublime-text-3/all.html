@@ -123,12 +123,25 @@
 <p> – тоже что и Git​Gutter;</p>
 <h3><strong>Goto-CSS-Declaration</strong></h3>
 <p> — переход к классу в css файл;</p>
+
 <h3><strong>HTML-CSS-JS Prettify</strong></h3>
 <p> — оформление отступами, стоит вместе со следующим плагином, друг другу не мешают;</p>
 <pre class="prettyprint lang-js">    &quot;indent_char&quot;: &quot;\t&quot;, // Indentation character
 ...
 &quot;indent_size&quot;: 1, // Indentation size
 </pre>
+<p>часто ругается что nodejs либо не установлен, либо старая версия:</p>
+<p>1. лезем в настройки пакета, что стоит в</p>
+<pre>
+    "node_path":
+    {
+        "windows": "C:/Program Files/nodejs/node.exe",
+        "linux": "/usr/local/bin/node",
+        "osx": "/usr/local/bin/node"
+    },
+</pre>
+<p>из консоли набрать which node и сверить с тем что в настройках.</p>
+
 <h3><strong>CodeFormatter</strong></h3>
 <p> — понятно для чего, немного по вкусу настроить и все;</p>
 <p>Использует php 5.6! Настроить в конфиге!</p>
