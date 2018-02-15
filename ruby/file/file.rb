@@ -65,6 +65,7 @@ FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)
 puts 'Расширение файла'.green
 puts File.extname('qaer4ef24r34.rffre31.ваще не понятно что?')
 puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?')
+puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?', '.*') # имя без расширения
 
 puts 'Открыте файла на запись.'.green
 
@@ -155,3 +156,8 @@ p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )
 
 a = File.read('/asdasdasd') rescue 123
 print 'a: '.red; puts a
+
+p Dir.pwd
+p File.basename(Dir.pwd)
+p Dir.chdir '..'
+p Dir['*']

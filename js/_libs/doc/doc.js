@@ -26,6 +26,8 @@ $(document).ready(function() {
     })
   }
 
+  console.log('doc_headers: ', doc_headers)
+
   var doc_process_nodedata = function(node, parents, level) {
     var header_selector = 'h' + (level+2) + '[data-doc_id="' + node.id + '"]'
     var $header = $(header_selector)
@@ -79,12 +81,16 @@ $(document).ready(function() {
   }
 
 
-  // for (var h = 2; h <= 6; h++) {
-  //   var header_selectror = 'h' + h
-  //   $(header_selectror).each(function(index, dom) {
-  //     var header_content = header.text()
-  //     header.empty().append('<a href="' + header_content + '.html">' + header_content + '</a>')
-  //   })
-  // }
+
+  var doc_links = $('a.doc').each(function(i,d) {
+    var link = $(d)
+    console.log('link: ', link)
+    var parent_header = link.parent().parent().prevUntil('h6, h5, h4, h3, h2')
+    console.log('parent_header: ', parent_header)
+    console.log('parent_header.text(): ', parent_header.text())
+    for (var h = 2; h <= 6; h++) {
+      var header_selectror = 'h' + h
+    }
+  })
 
 });

@@ -1,0 +1,22 @@
+* {
+  margin:0;
+  padding:0;
+  /*-webkit-box-sizing:border-box;*/
+  /*-moz-box-sizing:border-box;*/
+  /*box-sizing: border-box; */
+}
+
+.wrapper {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.item {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  border: solid 2px black;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  float: left;
+}
