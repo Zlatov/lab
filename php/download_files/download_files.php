@@ -1,6 +1,9 @@
 <?php
-set_time_limit(60*10);
-
+$time_limit = 60*20;
+set_time_limit($time_limit);
+echo $time_limit;
+flush();
+ob_flush();
 
 // $array1 = range(101,109);
 // $array2 = range(201,210);
@@ -33,15 +36,15 @@ set_time_limit(60*10);
 // 	'06.01',
 // 	'06.02',
 // ];
-$array = range(1,16);
-
-flush();
-ob_flush();
+$array = range(9,25);
 
 foreach ($array as $value) {
-	$url = "http://audioknigi-online.site/audio/1/LITRPG/Subbota/Every/3/{$value}.mp3";
+	$url = "http://audioknigi-online.site/audio/1/STALKER/Groshev/1Stalker/$value.mp3";
+	echo 'start ' . $url;
+    flush();
+    ob_flush();
 	file_put_contents("{$value}.mp3", fopen("$url", 'r'));
-	echo $url . ' done.<br>' . PHP_EOL;
+	echo ' done.<br>' . PHP_EOL;
     flush();
     ob_flush();
 }
