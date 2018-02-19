@@ -1,7 +1,7 @@
 <?php
 namespace Lab;
 
-class PDOL {
+class LabPDO {
 
   function __construct() {
     $user = 'lab';

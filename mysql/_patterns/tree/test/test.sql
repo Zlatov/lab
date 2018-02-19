@@ -1,4 +1,7 @@
--- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/insert_test_data.sql;
+-- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/tables.sql;
+-- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/triggers.sql;
+-- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/procedures.sql;
+-- source /home/iadfeshchm/projects/my/lab/lab/mysql/_patterns/tree/test/data/1.sql;
 
 -- 1. call categories_tree_descendants(param_id, param_level, param_delta_level);
 -- 2. call categories_tree_ancestors(param_id, param_level, param_delta_level);
