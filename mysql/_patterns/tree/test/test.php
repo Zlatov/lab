@@ -1,7 +1,7 @@
 <?php
 
-require_once '../../../php/_libs/tree/src/Tree.php';
-require_once '../../../php/_libs/lab/LabPDO.php';
+require_once '../../../../php/_libs/tree/src/Tree.php';
+require_once '../../../../php/_libs/lab/LabPDO.php';
 
 use zlatov\tree\Tree;
 use Lab\LabPDO;
@@ -23,8 +23,9 @@ $pdo = LabPDO::connect();
 //   echo $row->name . PHP_EOL;
 // }
 
-$sql = file_get_contents('./init/tables.sql');
-$sql.= file_get_contents('./init/triggers.sql');
-$sql.= file_get_contents('./init/procedures.sql');
+$sql = file_get_contents('../tables.sql');
+$sql.= file_get_contents('../triggers.sql');
+$sql.= file_get_contents('../procedures.sql');
 $pdo->exec($sql);
-$sql = file_get_contents('./');
+$sql = file_get_contents('./data/1.sql');
+$pdo->exec($sql);
