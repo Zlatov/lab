@@ -17,12 +17,8 @@ trait TraitClass
 
 	public static function bar()
 	{
-		echo "<pre>";
 		print_r(self::$defOptions);
-		echo "</pre>";
-		echo "<pre>";
 		print_r(self::$options);
-		echo "</pre>";
 	}
 }
 
