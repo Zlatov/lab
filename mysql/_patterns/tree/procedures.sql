@@ -21,6 +21,7 @@
 -- categories_tree_level(param_level, param_delta_level)
 -- 
 
+DROP PROCEDURE IF EXISTS `categories_tree_all`;
 DROP PROCEDURE IF EXISTS `categories_tree_descendants`;
 DROP PROCEDURE IF EXISTS `categories_tree_ancestors`;
 DROP PROCEDURE IF EXISTS `categories_tree_childrens`;
@@ -36,6 +37,12 @@ DROP PROCEDURE IF EXISTS `categories_count_childrens`;
 DROP PROCEDURE IF EXISTS `categories_delete_element`;
 
 DELIMITER ;;
+
+CREATE PROCEDURE `categories_tree_all`()
+procedure_label:BEGIN
+	SELECT *
+	FROM `categories`;
+END;;
 
 CREATE PROCEDURE `categories_tree_descendants`(IN param_id INT(11), IN param_level_begin INT(11), IN param_delta_level INT(11))
 procedure_label:BEGIN
@@ -102,7 +109,6 @@ procedure_label:BEGIN
 	SELECT c.*
 	FROM `categories` c
 	WHERE c.pid = param_id;
-
 END;;
 
 CREATE PROCEDURE `categories_tree_parent`(IN param_id INT(11))
@@ -141,7 +147,6 @@ procedure_label:BEGIN
 			WHERE `relations`.`aid` = param_id;
 		END IF;
 	END IF;
-
 END;;
 
 CREATE PROCEDURE `categories_order_after`(IN param_id INT(11), IN param_after_id INT(11))
@@ -166,7 +171,6 @@ procedure_label:BEGIN
 
 	SELECT `categories`.`pid` INTO param_pid FROM `categories` WHERE `categories`.`id` = param_after_id;
 	CALL categories_reorder_childrens(param_pid);
-
 END;;
 
 CREATE PROCEDURE `categories_order_first`(IN param_id INT(11), IN param_pid INT(11))

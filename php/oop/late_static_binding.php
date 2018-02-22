@@ -11,19 +11,18 @@
  */
 class MyBaseClass
 {
-	private static $options = [
-		'bar' => 'bar',
-	];
+  private static $options = [
+    'bar' => 'bar',
+  ];
 
-	public static function bar()
-	{
-		echo "<pre>";
-		print_r(static::$options);
-		echo "</pre>";
-		echo "<pre>";
-		print_r(self::$options);
-		echo "</pre>";
-	}
+  public static function bar()
+  {
+    // Позднее статическое связывание это процесс обращения к свойствам потомков
+    // в методе оисанном в родительском классе:
+    echo var_export(static::$options, false) . PHP_EOL;
+    // Обычныое обращение чрез self приведет к обращению к свойству своего класса:
+    echo var_export(self::$options, false) . PHP_EOL;
+  }
 }
 
 /**
@@ -31,9 +30,9 @@ class MyBaseClass
  */
 class MyClass extends MyBaseClass
 {
-	protected static $options = [
-		'bar' => '2',
-	];
+  protected static $options = [
+    'bar' => '2',
+  ];
 }
 
 // Вызываем от потомка метод базового класса,

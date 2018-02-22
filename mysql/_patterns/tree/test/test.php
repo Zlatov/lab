@@ -12,9 +12,9 @@ $pdo = LabPDO::connect();
 
 class Categories {
   use TraitTree;
-  private static $options = [
+  private static $tree_options = [
     'table_name' => 'categories',
-    'pdo' => ,
+    'pdo' => 'pdo',
   ];
 }
 
@@ -23,12 +23,6 @@ class Categories {
 // $categories = new Tree($pdo, 'categories');
 // $categories->all()->to_nested()->to_s();
 // $categories->descendants(3)->to_nested()->to_s();
-// !!! !!! !!!
-
-// !!! !!! !!!
-// $pdo = LabPDO::connect();
-// $categories = Categories::all()::to_nested()::to_s();
-// $categories = Categories::find(3)::descendants(2)::to_nested()::to_s();
 // !!! !!! !!!
 
 // $stmt = $pdo->query('select * from categories;');
@@ -47,4 +41,18 @@ $sql = file_get_contents('./data/1.sql');
 $pdo->exec($sql);
 
 $categories = Categories::tree_all();
-print_r($categories);
+$nested = Categories::to_nested($categories);
+$html = Categories::to_html($nested);
+print_r($html);
+
+// $categories = Categories::descendants(1);        // |+++++++…
+// $categories = Categories::descendants(1, 3);     // |--+++++…
+// $categories = Categories::descendants(1, -3);    // |+++----…
+// $categories = Categories::descendants(1, 3, 2);  // |--++---…
+// $categories = Categories::descendants(1, 3, -2); // |-++----…
+
+// $categories = Categories::ancestors();
+// $categories = Categories::childrens();
+// $categories = Categories::parent();
+
+// print_r($categories);
