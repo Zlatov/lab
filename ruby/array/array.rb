@@ -343,3 +343,19 @@ ap a
 a.each_slice(10) do |slice|
   puts slice.join(', ')
 end
+
+
+# Изъять, выбрать из массива
+puts
+puts 'Изъять, выбрать из массива'.green
+puts 'С конца'.blue
+a = [1,2,3]
+b = a.pop
+print 'a: '.red; p a
+print 'b: '.red; p b
+puts 'С начала'.blue
+a = [1,2,3]
+b = a.shift
+print 'a: '.red; p a
+print 'b: '.red; p b
+

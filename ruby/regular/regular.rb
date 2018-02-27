@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
+require 'awesome_print'
 
 # Найдена ли подстрока | соответствует ли регулярке
 puts 'Найдена ли подстрока | соответствует ли регулярке'.green
@@ -41,6 +42,7 @@ if (a =~ /^http:\/\/www\.sign-forum\.ru.*?/i) != nil
 end
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+
 
 # def сontains_text string, text
 #   ((string =~ /#{text}/) != nil)
@@ -136,3 +138,12 @@ b = a.scan(regex)
 
 print 'b: '.red; puts b
 print 'b: '.red; puts b.flatten.inspect
+
+
+# Замена по регулярке
+puts 'Замена по регулярке'.green
+ap "foo".gsub(/(o+)/, '\1\1\1')
+a = '$asd'
+b = a.gsub(/^\$/, '_')
+print 'a: '.red; puts a
+print 'b: '.red; puts b

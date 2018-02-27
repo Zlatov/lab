@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
+require 'awesome_print'
 
 arr = 'asd'
 h = {
@@ -124,3 +125,43 @@ puts "asd: #{a.to_s.red}"
 # b = a.each{|k,v| k}
 # print 'a: '.red; puts a
 # print 'b: '.red; puts b
+
+
+# перебор Хэш
+puts 'перебор Хэш'.green
+a = {"id"=>"id", "tree_id"=>"tree_id", "text"=>"name", "data"=>{"article"=>"articul", "description"=>"description", "published_at"=>"published_at", "thumbnail_url"=>"thumbnail_url", "view_count"=>"view_count", "comment_count"=>"comment_count", "video_count"=>"video_count", "subscriber_count"=>"subscriber_count", "subscriber_count_visible"=>"subscriber_count_visible", "channel_id"=>"channel_id", "channel_title"=>"channel_title", "privacy_status"=>"privacy_status", "playlist_id"=>"playlist_id", "video_id"=>"video_id", "position"=>"position"}, "type"=>"item_type", "parent"=>"parent_id", "$project"=>"project_id"}
+b = {}
+
+
+# {
+#                           "id" => "@_json_cortege['id']",
+#                      "tree_id" => "@_json_cortege['tree_id']",
+#                         "name" => "@_json_cortege['text']",
+#                  "description" => "@_json_cortege['data']['description']",
+#                   "project_id" => "_project"
+
+
+
+def reqursive b, a, parents=[]
+  a.each do |k,v|
+    if v.is_a? String
+      if parents.empty?
+        echo_parents = ''
+      else
+        echo_parents = "['#{parents.join('\'][\'')}']"
+      end
+      if (k =~ /^\$/) != nil
+        b[v] = k.gsub /^\$/, '_'
+      else
+        b[v] = "@_json_cortege#{echo_parents}['#{k}']"
+      end
+    else
+      parents.push k
+      reqursive b, v, parents
+      parents.pop
+    end
+  end
+end
+
+reqursive b, a
+ap b
