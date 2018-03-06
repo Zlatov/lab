@@ -37,7 +37,8 @@ puts UnicodeUtils.downcase('привет Макс! asd Asd')
 # Вырезать по позиции
 puts 'Вырезать по позиции'.green
 puts 'slice'.blue
-p "date".slice 0, 2
+# "строка".slice индекс, дельта
+p "0123456789".slice 2, 3 # "234"
 mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
 p mysql_error_message.length
 p mysql_error_message.slice(15, mysql_error_message.length-15)
@@ -75,6 +76,11 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 puts '<img src="../../images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
 puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
+
+a = '1231231'
+b = a.gsub /\B(?=(\d{3})+(?!\d))/, ' '
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 
 # Последняя позиция подстроки, подстрока по позиции и длинне
 puts 'Последняя позиция подстроки, подстрока по позиции и длинне'.green

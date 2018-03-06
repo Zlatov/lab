@@ -340,9 +340,20 @@ mysql > SHOW CREATE TABLE tree_nodes;
 	...
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251 COLLATE=cp1251_bin |
 </pre>
+
+
 <h2>Дата, время</h2>
 <h3>Способы хранения</h3>
 <h3>Преобразования</h3>
+
+
+<h2>Процедуры</h2>
+<ul>
+  <li><code class="copyToClipboard">show procedure status;</code></li>
+  <li><code class="copyToClipboard">show procedure status where name = 'set_seo';</code></li>
+</ul>
+
+
 <h2>Транзакции</h2>
 <p>Совсем всегда использовать транзакции - отключить режим autocommit:</p>
 <p><code>SET AUTOCOMMIT=0</code></p>

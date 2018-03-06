@@ -1,5 +1,10 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
+require 'awesome_print'
+
+# ap false.is_a?(Boolean)
+some_var = rand(1) == 1 ? true : false
+(some_var.is_a?(TrueClass) || some_var.is_a?(FalseClass))
 
 puts !!nil === !nil.nil?
 puts !!0 === !0.nil?

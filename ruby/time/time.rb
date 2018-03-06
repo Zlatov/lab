@@ -62,3 +62,12 @@ else
   puts text
 end
 # p (b.to_date - a.to_date).to_i
+
+a = Time.now
+b = a.year
+c = a.month
+d = a.strftime("%Y%m%d")
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+print 'd: '.red; puts d
