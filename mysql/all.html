@@ -434,27 +434,43 @@ mysql --host=$DBHOST --port=3306 --user="$DBUSER" --password="$DBPASS" -s --exec
 
 <h3>Резервное копирование и восстановление (дамп dump)</h3>
 <h4>Создание резервной копии</h4>
-<p>Необходимо обратить внимание на параметры mysqldump</p>
 
-<pre>--opt
-или
---skip-opt</pre>
+<p><strong>Параметры:</strong></p>
+<ul>
+  <li>
+    <p><code>--opt</code></p>
+    <p>Параметр предназначен для оптимизации скорости резервирования данных и является сокращением, включающим следующие опции: --quick --add-drop-table --add-locks --create-options --disable-keys --extended-insert --lock-tables --set-charset. Начиная с MySQL 4.1, параметр --opt используется по умолчанию, т.е. все вышеперечисленные параметры включаются по умолчанию, даже если они не указываются. Для того чтобы исключить такое поведение, необходимо воспользоваться параметров --skip-opt</p>
+  </li>
+  <li>
+    <p><code>--extended-insert</code></p>
+    <p>создаст мультистроковые вставки в INSERT</p>
+    <p>вопрос - какой величины, если таблица очень большая то размер запроса может превысить параметр:</p>
+    <p><code>SHOW VARIABLES LIKE 'max_allowed_packet';</code></p>
+  </li>
+  <li>
+    <p><code>--routines</code> (FALSE by default)</p>
+    <p>при котором в дамп пишутся <strong>stored procedures/functions</strong>.</p>
+  </li>
+  <li>
+    <p><code>--triggers</code> (TRUE by default)</p>
+  </li>
+  <li>
+    <p><code>--no-data, -d</code></p>
+    <p>Подавляет создание операторов INSERT в дампе, что может быть полезно при создании дампа структуры базы данных без самих данных.</p>
+  </li>
+  <li>
+    <p><code>--ignore-table=db_name.tbl_name</code></p>
+    <p>Позволяет игнорировать таблицу tbl_name базы данных db_name при создании дампа. Если из дампа необходимо исключить несколько таблиц, необходимо использовать несколько параметров "--ignore-table", указывая по одной таблице в каждом из параметров.</p>
+  </li>
+  <li>
+    <p><code>--replace</code></p>
+    <p>Добавляет ключевое слово REPLACE в оператор INSERT. Данный параметр впервые появился в MySQL 5.1.3.</p>
+  </li>
+</ul>
 
 <p>Проверить !!! mysqldump --skip-extended-insert --net_buffer_length=50000 myschema > gigantic_file.sql</p>
 
-<p><code>--extended-insert</code></p>
-<p>- создаст мультистроковые вставки в INSERT</p>
-
-<p>вопрос - какой величины, если таблица очень большая то размер запроса может превысить параметр:</p>
-<pre>SHOW VARIABLES LIKE 'max_allowed_packet';</pre>
-
-<p>Ещё важный параметр <code>--routines</code> при котором в дамп пишутся <strong>stored procedures/functions</strong>.</p>
-<ul>
-  <li><code>--routines</code> – FALSE by default</li>
-  <li><code>--triggers</code> – TRUE by default</li>
-</ul>
-
-<p>config.sh</p>
+<p><em><code>config.sh</code></em></p>
 <pre class="prettyprint lang-sh">
 #!/bin/bash
 DBHOST=localhost
@@ -462,7 +478,7 @@ DBUSER=qsllogin
 DBPASS=qslpassword
 DBNAME=sqldbname
 </pre>
-<p>backup.sh</p>
+<p><em><code>backup.sh</code></em></p>
 <pre class="prettyprint lang-sh">
 #!/bin/bash
 . ../config.sh
