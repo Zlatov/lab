@@ -1,3 +1,4 @@
 vendor/
 theme/bower
+theme/yarn
 !*.sublime-project
