@@ -141,6 +141,17 @@ end
 <p><code class="copyToClipboard">rails db:structure:load</code> - импорт схемы.</p>
 
 <h2>Полезные гемы</h2>
+<h3>webpack - подключние js пакетов через es6</h3>
+<p><code>yarn add lazyload</code></p>
+<p><code>import lazyload from 'lazyload';</code> (<i>app/javascript/packs/application.js</i>)</p>
+<p><code>bin/webpack-dev-server</code> — запустить прослушку изменений в яваскрипте</p>
+<p><i>app/views/layouts/market/desktop/home_screen.html.erb</i>:</p>
+<pre class="copyToClipboard">
+&lt;%= stylesheet_pack_tag 'application' %&gt;
+&lt;%= javascript_pack_tag 'application' %&gt;
+</pre>
+
+
 <h3>Kaminari - пагинациая модели</h3>
 <h3>annotate - автоматическая нототация моделей и остального</h3>
 <p>Автоматически добавляет и обновляет комментарии в начале каждой из моделей, составляющих схему</p>
