@@ -16,6 +16,8 @@ require 'mini_magick'
     alias :to_info :lib_to_info
   end
 
+puts '--------------------------------'
+puts 'Задание массива'.green
 arr = []
 arr = Array.new
 arr = Array.new(5)
@@ -29,8 +31,12 @@ puts 'Масси включает в себя `:b`?'.red
 p (arr.include?(:b)? 'y' : 'n')
 arr = ['asd', 'asd', 'asd']
 p arr
-arr = %w[asd asd asd]
-p arr
+arr = %w{
+asd
+asd
+asd
+}
+ap arr
 
 
 puts '--------------------------------'
