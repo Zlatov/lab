@@ -10,6 +10,7 @@ if [[ $YN -eq 1 ]]
     BOO=false
 fi
 
+# Вообще странно что это работает:
 if !($BOO)
   then
     echo '(1)'
