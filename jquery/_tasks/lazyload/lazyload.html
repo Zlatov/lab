@@ -6,21 +6,20 @@
 </head>
 
 <body>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <div><img class="lazyload" src="../../../theme/images/800-600-nature.jpg"></div>
-  <script type="text/javascript" src="../../../theme/bower/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="../../../theme/bower/jquery_lazyload/jquery.lazyload.js"></script>
+  <p>Необходимо у img указывать height и width иначе, при прокрутке вверх изображение загружается только по достижению его верха (там где оно начинается при отсутствии height)</p>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/800-600-nature.jpg"></div>
+  <div style="height: 800px;"><img class="lazyload" data-src="../../../theme/images/600-800-nature.jpg"></div>
+  <script type="text/javascript" src="../../../theme/yarn/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../theme/yarn/lazyload/lazyload.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-      lazyload();
-    });
+    lazyload();
   </script>
 </body>
 
