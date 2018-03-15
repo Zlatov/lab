@@ -33,3 +33,35 @@ A="foofoobar"
 B=${A#foo}
 echo 'A = ' $A # -> foofoobar
 echo 'B = ' $B # -> foobar
+
+# Мультистроковая строка multyline string
+echoc 'Мультистроковая строка multyline string' green
+# Однострочное считывание
+echo $'line1\nline2'
+echo "обломс\nобломс\n"
+echo -e 'line1\nline2'
+# Многострочное считывание
+a="
+  не
+  очень
+  такой
+  метод
+"
+echo "$a"
+
+echo "$(cat <<-GG
+Нужно помнить:
+  — при выводе мультистроковых строк необходимо обернуть их в двойные кавычки:
+  echo "$MULTILINE_VALUE"
+  — чтобы вывести строку в которой переносы заданы символами '\' и 'n' (бугага), нужно использовать параметр -e:
+  echo -e 'line1\nline2\n'
+GG
+)"
+
+a=$(cat << GG
+  3
+  4
+GG
+)
+echo '$a:'
+echo "$a"
