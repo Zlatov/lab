@@ -9,3 +9,19 @@ print("Привет мир")
 print('Привет мир');
 print 'asd'
 print 1
+
+print colored('[:] - подстрока', 'green')
+a='1234567890'
+
+b=a[2:]; print b
+b=a[-2:]; print b
+
+print
+b=a[:3]; print b
+b=a[:-3]; print b
+
+print
+b=a[2:4]; print b # индексы начало и конца с начала
+b=a[2:-4]; print b # индекс конца с конца
+b=a[-6:6]; print b # индекс начала с конца
+b=a[-6:-2]; print b # индексы с конца
