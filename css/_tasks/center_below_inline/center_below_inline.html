@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <style type="text/css">
+    #menu > li {
+      display: inline-block;
+      position: relative;
+      border: solid 1px red;
+    }
+    #menu > li:hover .submenu {
+      display: block;
+    }
+    .submenu > li {
+      white-space: nowrap;
+    }
+    .submenu {
+      display: none;
+      position: absolute;
+      border: solid 1px green;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body>
+  <ul id="menu">
+    <li>Lorem ipsum dolor sit amet.
+      <ul class="submenu">
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+      </ul>
+    </li>
+    <li>Lorem ipsum dolor sit amet.
+      <ul class="submenu">
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+      </ul>
+    </li>
+    <li>Lorem ipsum dolor sit amet.
+      <ul class="submenu">
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+      </ul>
+    </li>
+    <li>Lorem ipsum dolor sit amet.
+      <ul class="submenu">
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipisicing.</li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>

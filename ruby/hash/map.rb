@@ -1,4 +1,5 @@
 # encoding: UTF-8
+require 'awesome_print'
 
 types = {
   vips: {
@@ -71,6 +72,7 @@ types = {
 a = types.map {|k,v|
   'a'
 }
+print 'a: '.red; puts a
 
 a = Hash[ types.map {|k,v| v[:sid] = k.to_s; [v[:abbr],v]} ]
 b = types.merge(types) {|k,v| v }

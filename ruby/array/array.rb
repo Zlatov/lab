@@ -1,8 +1,8 @@
 # encoding: UTF-8
-require_relative '../colorize/colorize'
-require "open-uri"
 require 'rubygems'
 require 'awesome_print'
+require_relative '../colorize/colorize'
+require "open-uri"
 require 'mini_magick'
 
   class Array

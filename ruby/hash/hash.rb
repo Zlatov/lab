@@ -30,12 +30,15 @@ p h[0]
 p h[3]
 
 # Перебор
-p 'Перебор'
-h.each do |key,value|
-  print key.to_s + ' - '
-  print value.to_s
-  print "\n"
+puts
+puts 'Перебор'.green
+a = {a: 1, b: 2}
+b = {}
+a.each do |k,v|
+  b[k] = v + 1
 end
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 
 # Количество элементов
 p h.count
