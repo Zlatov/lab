@@ -61,4 +61,3 @@ print '"aaa".equal? "aaa" ',                    "aaa".equal?("aaa"),            
 print ':aaa.eql? :aaa ',                        :aaa.eql?(:aaa),                      "\n"
 print ':aaa.equal? :aaa ',                      :aaa.equal?(:aaa),                    "\n"
 # puts :aaa.class
-

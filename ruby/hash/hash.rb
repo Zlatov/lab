@@ -89,7 +89,7 @@ p h1
 p h2
 p h3
 h1.merge! h2
-p h1
+print 'h1: '.red; puts h1
 
 # Ключи в стрингу
 puts
@@ -168,3 +168,31 @@ end
 
 reqursive b, a
 ap b
+
+a = {}
+[
+  {a:[1,2,3,4],b:[1,2,3,4]},
+  {a:[5,6,7,8],c:[5,6,7,8]},
+].each do |t|
+  # правило merge!{|...|...} срабатывает только если есть ключ и в первом и во втором хеш
+  # иначе сливает всё что есть (и цену и наличие):
+  a.merge!(t) do |k, v1, v2|
+    print 'k: '.red; puts k    
+    print 'v1: '.red; puts v1    
+    print 'v2: '.red; puts v2    
+    [v1[2]] + [v2[2]]
+  end
+end
+print 'a: '.red; puts a
+# поэтому:
+a = {}
+[
+  {a:[1,2,3,4],b:[1,2,3,4]},
+  {a:[5,6,7,8],c:[5,6,7,8]},
+].each do |t|
+  t.each do |k, v|
+    a[k] ||= []
+    a[k] += [v[2]]
+  end
+end
+print 'a: '.red; puts a

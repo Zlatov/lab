@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <script type="text/javascript">
+
+    "use strict"
+    var a = {
+      a: function() {
+        console.log('this in a: ', this)
+        // .bind(thisArg[, arg1[, arg2[, ...]]])
+        // Метод bind() создаёт новую функцию, которая при вызове устанавливает в качестве контекста thisArg.
+        // thisArg игнорируется, если привязанная функция конструируется с помощью оператора new.
+        // arg1, arg2, ... - аргументы передаваемые перед аргументами исходной функции.
+        var new_function = this.test.bind(window)
+        new_function()
+      },
+      test: function() {
+        console.log('this in test: ', this)
+      }
+    }
+
+    window.a.a()
+
+  </script>
+</body>
+</html>
