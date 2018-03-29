@@ -97,6 +97,28 @@ sed -r 's/\/\/.*$//g' ./example2.cpp
 # Заменим функцию foo с параметрами на функцию bar, а функцию foo без параметров не изменять:
 sed -r 's/foo(\([^\)]+\))/bar\1/' ./example2.cpp
 </pre>
+
+<p>Флаг команды замены p позволяет выводить строки, в которых найдены совпадения, при этом ключ -n, указанный при вызове sed, подавляет обычный вывод</p>
+
+<p>Для выполнения нескольких действий с данными, используйте ключ -e при вызове sed. Например, вот как организовать замену двух фрагментов текста:<br>
+$ sed -e 's/This/That/; s/test/another test/' ./myfile</p>
+
+<pre class="prettyprint lang-sh">
+sed -n '/^a/Ip' temp > temp2
+#    ^      ^^
+#    │      ││
+#    │      │└ выводим на печать найденное
+#    │      └ регистронезависимо
+#    └ подавляем печать всех строк исходного файла
+
+sed -ir 's/^a/c/i' temp2
+#    ^^  ^      ^
+#    ││  │      └ регистронезависимо
+#    ││  └ заменяем
+#    │└ используем расширенные регулярные выражения
+#    └ изменяем исходный файл
+</pre>
+
 <h3>chown</h3>
 <pre class="copyToClipboard">sudo chown -R $USER $HOME/.composer</pre>
 <h3>chmod</h3>
@@ -669,11 +691,19 @@ $2    # /home/kristoffer/test.txt
 <pre>
 /usr/local/bin/abbyyocr9 -rl Swedish -if &quot;$1&quot; -of &quot;$2&quot; 2&gt;&amp;1
 </pre>
+
+
 <h3>Манипуляции с файлами</h3>
-<h4>split - разделить файл на части</h4>
-<p>split [-l число_строк] [-a длина_суффикса] [файл [префикс]]
-    <br> split -b число_байт[K|k|M|m|G|g] [-a длина_суффикса] [файл [префикс]]
-    <br> split -p шаблон [-a длина_суффикса] [файл [префикс]]</p>
+<h4>split - разделить (разбить, склеить) файл на части</h4>
+<p>
+    <code>split [-l число_строк] [-a длина_суффикса] [файл [префикс]]</code><br>
+    <code>split -b число_байт[K|k|M|m|G|g] [-a длина_суффикса] [файл [префикс]]</code><br>
+    <code>split -p шаблон [-a длина_суффикса] [файл [префикс]]</code>
+</p>
+<p><code class="copyToClipboard">split -b 1m -a2 lite.sql lite_</code></p>
+<p><code class="copyToClipboard">cat lite_?? > lite2.sql</code></p>
+<p><code class="copyToClipboard">split -l 1 -a3 lite.sql lite_</code></p>
+<p><code class="copyToClipboard">cat lite_??? > lite2.sql</code></p>
 <h4>iconv</h4>
 <p>Перекодировать файл в другую кодировку и сохранить:</p>
 <pre>cat temp.html|iconv -f utf8 -tcp1251 > tempcp1251.html
@@ -683,6 +713,8 @@ $2    # /home/kristoffer/test.txt
 <p>Опция Описание</p>
 <p>-b, --brief Не печатать имя файла (краткий режим)</p>
 <p>-i, --mime Определить тип файла и кодировку</p>
+
+
 <h3>Манипуляции с текстом</h3>
 <h4>Замена в файле replace (от MySQL)</h4>
 <p>Во-первых, в состав MySQL входит замечательная утилита replace, которая замечательна тем, что умеет производить замену прямо в файле:</p>
