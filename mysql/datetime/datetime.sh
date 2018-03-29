@@ -1,16 +1,15 @@
 #!/bin/bash
-. ../../bash/_lib/colorize
+. ../../bash/_lib/echoc
 . ../common.sh
 
-echo -en $COLOR_BLUE
-echo -e 'Работа с датой и временем в mysql'
-echo -en $COLORIZE_CLEAR
+echoc 'Работа с датой и временем в mysql' red
 
 mysql -t < ./table.sql
 mysql -t <<SQL
 USE lab;
 SELECT * FROM test;
 SQL
+mysql -te "USE lab;SELECT * FROM test;"
 
 # echo $?
 # exit 0
