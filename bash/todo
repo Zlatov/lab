@@ -1,1 +1,9 @@
 read http://najomi.org/_nix/bash
+http://www.f-notes.info/linux:linux_command
+https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+
+
+
+EDITOR_PATH=`which subl`
+export EDITOR="$EDITOR_PATH -w"
+
