@@ -9,7 +9,7 @@
       <input type="file" name="images"><br>
       <button type="button" id="send1">Отправить</button>
     </form>
-    <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../theme/yarn/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('#send1').on('click', function(event) {
@@ -17,7 +17,7 @@
           var form_data = new FormData(form)
           $.ajax({
             type: 'post',
-            url: 'ajax.php',
+            url: 'ajax.json',
             data: form_data,
             contentType: 'multipart/form-data',
             processData: false,

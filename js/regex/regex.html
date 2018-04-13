@@ -28,6 +28,11 @@
   // 
 
   document.log('"asdf".match(/s/gim): ', "asdf".match(/s/gim))
+  document.log('"asdf".match(/g/gim): ', "asdf".match(/g/gim))
+  document.log('"asdssf".match(/s/gim): ', "asdssf".match(/s/gim))
+  document.log('main domain: ', "admin.zenon-line.local".match(/[a-zA-Z_-]+\.[a-zA-Z_-]+$/gim))
+  document.log('main domain: ', window.location.hostname.match(/[a-zA-Z_-]+\.[a-zA-Z_-]+$/gim))
+
   document.log('/s/gim.test("asd"): ', /s/gim.test("asd"))
   document.log('/f/gim.test("asd"): ', /f/gim.test("asd"))
   document.log('RegExp(/^Цвет/, "i").test("цвет "): ', RegExp(/^Цвет/, "i").test("цвет "))

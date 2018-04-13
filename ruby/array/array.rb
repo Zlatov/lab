@@ -365,3 +365,9 @@ b = a.shift
 print 'a: '.red; p a
 print 'b: '.red; p b
 
+puts
+puts 'Очистить от нулевых значений'.green
+a = [nil, 1, 2, nil, 3]
+b = a.compact!
+print 'a: '.red; p a
+print 'b: '.red; p b

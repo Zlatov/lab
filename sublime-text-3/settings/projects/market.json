@@ -1,0 +1,23 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "index_exclude_patterns": [
+        "*.log",
+        "*.sql",
+        "*.sqlite3",
+        "tmp",
+        "framework"
+      ],
+      "folder_exclude_patterns": [
+        "temp",
+        "app/models/admin", // Найти симлинки: ls -lR ./ | grep ^l
+        "public/admin"
+      ],
+      "file_exclude_patterns": [
+        "config/settings.yml"
+      ],
+      "follow_symlinks": false
+    }
+  ]
+}
