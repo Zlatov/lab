@@ -2,6 +2,8 @@
   "require": {
     "twbs/bootstrap": "3.3.7",
     "FortAwesome/Font-Awesome": "*",
-    "phpunit/phpunit": "^4"
+    "phpunit/phpunit": "^4",
+    "zlatov/resize-img": "1.*",
+    "zlatov/tree": "^1.2"
   }
 }

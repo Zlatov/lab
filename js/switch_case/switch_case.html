@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script type="text/javascript" src="../../theme/yarn/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../_libs/lib.js"></script>
+  <script type="text/javascript">
+    "use strict"
+
+    var a = 2
+    switch(a) {
+      case 1:
+        document.log('a1: ', a)
+      case 2:
+        document.log('a2: ', a) // начнёт выполнять
+      case 3:
+        document.log('a3: ', a) // продолжит выполнение
+        break                   // прервёт выполнение тут
+      default:
+        document.log('ad: ', a)
+    }
+
+    switch(true) {
+      case false:
+        document.log('1')
+      case 1:
+        document.log('2') // 1 не true
+      case 1 > 0:
+        document.log('3') // начнёт выполнять
+        break             // прервёт выполнение тут
+      default:
+        document.log('d')
+    }
+  </script>
+</body>
+</html>
