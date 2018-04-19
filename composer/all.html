@@ -82,6 +82,27 @@ composer global require "fxp/composer-asset-plugin:~1.1.1"</pre>
         }
     }
 }</pre>
+<p>Правильно настроить autoload и назвать классы:</p>
+<pre class="prettyprint lang-js">
+{
+    "name": "zlatov/tree",
+    // ...
+    "autoload": {
+        "psr-4": {
+            "Zlatov\\Tree\\": "src/"
+            // Значит класс Zlatov\Tree\Converter должен
+            // располагаться: /vendor/zlatov/tree/src/Tree/Converter.php
+            //                 └────┘ └─────────┘ └─┘ └──┘ └───────┘
+            //                 ...,
+            //                         имя репы,
+            //                                     вместо неймспейса Zlatov,
+            //                                         продолжение неймспейса
+            //                                              различные классы
+        }
+    }
+}
+</pre>
+<p><small>(<a href="https://getcomposer.org/doc/04-schema.md#psr-4" target="_blank">https://getcomposer.org/doc/04-schema.md#psr-4</a>)</small></p>
 <p>и создаем папочку <var>src</var> и файлы с классами или ...</p>
 <p>Комитимм в репозиторий, например, на GitHub.</p>
 <p>В настройках репозитория (на GitHub) в разделе <q>Integrations &amp; services</q> добавляем сервис <q>Packagist</q>.</p>
