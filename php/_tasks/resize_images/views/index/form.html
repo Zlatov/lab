@@ -1,0 +1,99 @@
+<form action="" method="POST" role="form" class="form-horizontal">
+  <fieldset>
+    <legend>What to do?</legend>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div data-toggle="buttons" class="btn-group">
+          <label class="btn btn-primary">
+            <input type="radio" name="do" id="input" class="sr-only" required value="resize"> Just change the image size
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="do" id="input" class="sr-only" required value="thumbnails"> Only creates thumbnails
+          </label>
+          <label class="btn btn-primary active">
+            <input type="radio" name="do" id="input" class="sr-only" required value="resizeandthumbnails" checked="checked"> Resize images and create thumbnails
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Options for resizing images</legend>
+    <div class="form-group">
+      <label for="imgwidthid" class="col-sm-2 control-label">Width</label>
+      <div class="col-sm-10">
+        <input type="number" name="imgwidth" class="form-control" id="imgwidthid" value="800" placeholder="Width">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imgheightid" class="col-sm-2 control-label">Height</label>
+      <div class="col-sm-10">
+        <input type="number" name="imgheight" class="form-control" id="imgheightid" value="600" placeholder="Height">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="imgtype" id="input" value="contain" checked="checked" required>
+            <q>Contain</q> — holds the image in the frame.
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="imgtype" id="input" value="cover" required>
+            <q>Cover</q> — image fills the frame
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Options for creating thumbnails</legend>
+    <div class="form-group">
+      <label for="thumbnailwidthid" class="col-sm-2 control-label">Width</label>
+      <div class="col-sm-10">
+        <input type="number" name="thumbnailwidth" class="form-control" id="thumbnailwidthid" value="250" placeholder="Thumbnail width" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="thumbnailheightid" class="col-sm-2 control-label">Height</label>
+      <div class="col-sm-10">
+        <input type="number" name="thumbnailheight" class="form-control" id="thumbnailheightid" value="250" placeholder="Thumbnail height" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="radio">
+          <label>
+            <input type="radio" name="thumbnailtype" id="input" value="contain" required>
+            <q>Contain</q> — holds the image in the frame.
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="thumbnailtype" id="input" value="cover" checked="checked" required>
+            <q>Cover</q> — image fills the frame
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Extra options</legend>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label>
+            <input name="subfolder" type="checkbox" value="true" checked="checked"> Save result as a subfolder
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Du it!</button>
+    </div>
+  </div>
+</form>
