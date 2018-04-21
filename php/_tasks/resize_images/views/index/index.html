@@ -5,5 +5,21 @@
 {% endblock %}
 
 {% block content %}
-  1
+  {% for image in images %}
+    <div class="row">
+      <div class="col-md-8">
+        <img src="{{ image.src }}" class="img-responsive img-thumbnail">
+      </div>
+      <div class="col-md-4">
+        <ul>
+          <li>file_path: {{ image.file_path }}</li>
+          <li>dir_path: {{ image.dir_path }}</li>
+          <li>file_name: {{ image.file_name }}</li>
+          <li>width: {{ image.width }}</li>
+          <li>height: {{ image.height }}</li>
+          <li>src: {{ image.src }}</li>
+        </ul>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}

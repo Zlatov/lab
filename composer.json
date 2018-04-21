@@ -2,7 +2,7 @@
   "require": {
     "twbs/bootstrap": "3.3.7",
     "FortAwesome/Font-Awesome": "*",
-    "zlatov/resize-img": "1.*",
+    "zlatov/resize-img": "^2",
     "zlatov/tree": "^1.2",
     "twig/twig": "^1.35"
   }

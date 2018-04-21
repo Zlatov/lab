@@ -1,16 +1,19 @@
 <?php
 $a = <<< STRING
-asd
-asddas
+1
+  2
 STRING;
-echo $a;
+var_dump($a); echo PHP_EOL;
 
 $a = <<< STRING
-	asddasasd;
-	DELIMITER ;;
-	asdsa;
-	asdsa;;
-	DELIMITER ;
+1
+asd
 STRING;
+$b = str_replace('asd', '2', $a);
+var_dump($a); echo PHP_EOL;
+var_dump($b); echo PHP_EOL;
 
-echo str_replace(';;',';',$a);
+$a = 'asd';
+$b = mb_strlen($a);
+var_dump($a); echo PHP_EOL;
+var_dump($b); echo PHP_EOL;

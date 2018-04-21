@@ -2,7 +2,7 @@
 
 require_once "../../../vendor/autoload.php";
 
-use zlatov\ResizeImg;
+use Zlatov\ResizeImg;
 
 // $a = 'Zlatov\ResizeImg\ResizeImg_Errors'; print(class_exists($a) ? "+: $a" : "-: $a");
 
@@ -10,59 +10,52 @@ Twig_Autoloader::register();
 
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/views');
 $twig = new Twig_Environment($loader, array(
-  'cache' => __DIR__ . '/views/cache',
+  'cache' => __DIR__ . '/cache/views/',
   'auto_reload' => true
 ));
 
+$images = [];
+
 if (isset($_POST)&&!empty($_POST)) {
-  $path = __DIR__;
-  $dir = opendir($path);
-  chdir($path);
+  $images_path = __DIR__ . DIRECTORY_SEPARATOR . 'images';
+  $destination_path = __DIR__ . DIRECTORY_SEPARATOR . 'destination';
+  $images_dir = opendir($images_path);
 
-  $paramImg = [
-    'width' => (int)$_POST['imgwidth'],
-    'height' => (int)$_POST['imgheight'],
-    'kind' => $_POST['imgtype'],
-    'subFolder' => (isset($_POST['subfolder'])&&($_POST['subfolder']==='true'))?true:false,
-    'nameSufix' => false,
-  ];
-  $paramThumbnail = [
-    'width' => (int)$_POST['thumbnailwidth'],
-    'height' => (int)$_POST['thumbnailheight'],
-    'kind' => $_POST['thumbnailtype'],
-    'subFolder' => (isset($_POST['subfolder'])&&($_POST['subfolder']==='true'))?true:false,
-    'nameSufix' => true,
-  ];
+  $is_resize = isset($_POST['do']) && ($_POST['do'] == 'resizeandthumbnails' || $_POST['do'] == 'resize');
+  $is_thumb = isset($_POST['do']) && ($_POST['do'] == 'resizeandthumbnails' || $_POST['do'] == 'thumbnails');
 
-  while ($f = readdir($dir))
-  {
-    if (is_file($f) && ($f !== ".") && ($f !== "..") && in_array(mb_strtolower(pathinfo($f)['extension']), ['png','jpg','jpeg']))
-    {
-      $pathToFile = $path . DIRECTORY_SEPARATOR . $f;
-      try {
-        $img = new ResizeImg($pathToFile);
-        switch ($_POST['do']) {
-          case 'resizeandthumbnails':
-            $img->resize($paramImg);
-            echo '<p>' . $img->imgTag . '</p>';
-            $img->resize($paramThumbnail);
-            echo '<p>' . $img->imgTag . '</p>';
-            break;
-          case 'thumbnails':
-            $img->resize($paramThumbnail);
-            echo '<p>' . $img->imgTag . '</p>';
-            break;
-          case 'resize':
-            $img->resize($paramImg);
-            echo '<p>' . $img->imgTag . '</p>';
-            break;
-        }
-        $img = null;
-      } catch (Exception $e) {
-        echo "<p>Ошибка: " . $e->getMessage() . "</p>";
-      }
+  while ($file_name = readdir($images_dir)) {
+    if (
+      !is_file($images_path . DIRECTORY_SEPARATOR . $file_name) ||
+      ($file_name == ".") ||
+      ($file_name == "..") ||
+      !in_array(mb_strtolower(pathinfo($file_name)['extension']), ['png','jpg','jpeg'])
+    ) {
+      continue;
+    }
+
+    $img = new ResizeImg($images_path . DIRECTORY_SEPARATOR . $file_name);
+    if ($is_resize) {
+      array_push($images, $img->resize([
+        'width' => (int)$_POST['imgwidth'],
+        'height' => (int)$_POST['imgheight'],
+        'scaleType' => $_POST['imgtype'],
+        'destination' => $destination_path,
+      ]));
+    }
+    if ($is_thumb) {
+      array_push($images, $img->resize([
+        'width' => (int)$_POST['thumbnailwidth'],
+        'height' => (int)$_POST['thumbnailheight'],
+        'scaleType' => $_POST['thumbnailtype'],
+        'nameSuffix' => '_thumbnail',
+        'destination' => $destination_path,
+      ]));
     }
   }
+  closedir($images_dir);
 }
 
-echo $twig->render('index/index.html', []);
+echo $twig->render('index/index.html', [
+  'images' => $images
+]);

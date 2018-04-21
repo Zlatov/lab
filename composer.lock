@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d238b18a0c40e9070a429feca34795ad",
-    "content-hash": "6b4c1d7a7fbfdcb84fc7dcea9bdb9fb0",
+    "hash": "64b4773b7c0d24661c2cfbebc472d8b7",
+    "content-hash": "be4ea8dd0f87c5f230fffce194de9b1a",
     "packages": [
         {
             "name": "fortawesome/font-awesome",
@@ -173,16 +173,16 @@
         },
         {
             "name": "zlatov/resize-img",
-            "version": "1.0.3",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Zlatov/resize-img.git",
-                "reference": "0670c6407fe8bb6d2f21f2d3121454b0ce73a9db"
+                "reference": "195b546fb34e1b097a2f8c74c1b1b4a43269d11e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Zlatov/resize-img/zipball/0670c6407fe8bb6d2f21f2d3121454b0ce73a9db",
-                "reference": "0670c6407fe8bb6d2f21f2d3121454b0ce73a9db",
+                "url": "https://api.github.com/repos/Zlatov/resize-img/zipball/195b546fb34e1b097a2f8c74c1b1b4a43269d11e",
+                "reference": "195b546fb34e1b097a2f8c74c1b1b4a43269d11e",
                 "shasum": ""
             },
             "type": "library",
@@ -201,7 +201,7 @@
                     "email": "zlatov@ya.ru"
                 }
             ],
-            "time": "2018-04-20 06:30:03"
+            "time": "2018-04-21 13:21:57"
         },
         {
             "name": "zlatov/tree",
