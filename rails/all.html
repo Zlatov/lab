@@ -70,6 +70,29 @@
 <p><tt>&gt;</tt> <code class="copyToClipboard">app.product_path 123</code> - -//-</p>
 
 <h2>ActiveRecord</h2>
+<p>
+  Agava::Model::Article.table_name<br>
+  Agava::Model::Article.column_names<br>
+  Agava::Model::Article.columns_hash
+</p>
+<h3>columns types</h3>
+<ul>
+  <li>:binary</li>
+  <li>:boolean</li>
+  <li>:date</li>
+  <li>:datetime</li>
+  <li>:decimal</li>
+  <li>:float</li>
+  <li>:integer</li>
+  <li>:bigint</li>
+  <li>:primary_key</li>
+  <li>:references</li>
+  <li>:string</li>
+  <li>:text</li>
+  <li>:time</li>
+  <li>:timestamp</li>
+</ul>
+
 <pre class="prettyprint lang-rb">
 # Плохо):
 # rails db:schema:load RAILS_ENV=development

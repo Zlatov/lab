@@ -32,3 +32,11 @@ CreateStrictColorConstant.new.process!
   <li><i class="copyToClipboard">config/initializers/_app_nicks.rb</i></li>
   <li><i class="copyToClipboard">framework/_/nicks/=domain/=market.rb</i></li>
 </ul>
+
+<h2>Обновление</h2>
+Копирование бд-ых в таскер
+Миграция бд-продакшн: TASKER=1 RAILS_ENV=production rails db:migrate
+Импорт: TASKER=1 RAILS_ENV=production rails import:all
+Трейдерные данные: TASKER=1 RAILS_ENV=production rails pricelist:all
+Дополнительные данные и константы: TASKER=1 RAILS_ENV=production rails create:all
+Константа CAT: RELOAD_CAT=1 rails c -e production

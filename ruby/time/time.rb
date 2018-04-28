@@ -66,7 +66,8 @@ end
 a = Time.now
 b = a.year
 c = a.month
-d = a.strftime("%Y%m%d")
+d = a.strftime("%Y-%m-%dT%H:%M:%S")
+# e = a.to_s :db  #(rails only)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
