@@ -70,11 +70,32 @@
 <p><tt>&gt;</tt> <code class="copyToClipboard">app.product_path 123</code> - -//-</p>
 
 <h2>ActiveRecord</h2>
-<p>
-  Agava::Model::Article.table_name<br>
-  Agava::Model::Article.column_names<br>
-  Agava::Model::Article.columns_hash
-</p>
+<h3>db info</h3>
+<pre class="prettyprint lang-rb">
+User.table_name
+User.column_names
+User.columns_hash
+</pre>
+<h3>.order</h3>
+<pre class="prettyprint lang-rb">
+User.order(:name)
+# => SELECT "users".* FROM "users" ORDER BY "users"."name" ASC
+
+User.order(email: :desc)
+# => SELECT "users".* FROM "users" ORDER BY "users"."email" DESC
+
+User.order(:name, email: :desc)
+# => SELECT "users".* FROM "users" ORDER BY "users"."name" ASC, "users"."email" DESC
+
+User.order('name')
+# => SELECT "users".* FROM "users" ORDER BY name
+
+User.order('name DESC')
+# => SELECT "users".* FROM "users" ORDER BY name DESC
+
+User.order('name DESC, email')
+# => SELECT "users".* FROM "users" ORDER BY name DESC, email
+</pre>
 <h3>columns types</h3>
 <ul>
   <li>:binary</li>

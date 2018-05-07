@@ -2,7 +2,7 @@
 require 'fileutils'
 
 # Удаление директорий
-Dir.rmdir 'a'
+Dir.rmdir 'a' if File.directory?('a')
 
 # Создание директорий
 Dir.mkdir 'a' if !Dir.exist? 'a'
@@ -43,4 +43,16 @@ a = Pathname.new 'asd/asd/asd/asd'
 a = a + '../zxc'
 p a.to_s
 
+# Глоб может выдавать список полуных путей к файлам, используй entries
+p Dir.glob('*').select{|e| File.file? e}
+p Dir['*'].select{|e| File.directory? e}
+p Dir[first].select{|e| File.directory? e}
+p Dir[__FILE__].select{|e| File.directory? e}
 
+p __FILE__
+p File.dirname(__FILE__)
+p Dir[File.dirname(__FILE__) + '/*'].select{|e| File.directory? e}
+p Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}.select{|e| File.directory? e}
+
+# Очистить директорию
+# FileUtils.rm_r Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}

@@ -27,6 +27,10 @@ arr << :b
 arr << :c
 arr << :d
 p arr.sample
+# [1, 2, 3]
+# %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
+# %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
+
 puts 'Масси включает в себя `:b`?'.red
 p (arr.include?(:b)? 'y' : 'n')
 arr = ['asd', 'asd', 'asd']

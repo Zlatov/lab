@@ -35,6 +35,13 @@
     var formData = new FormData(document.querySelector('form'))
     document.log('formData: ', formData)
     console.log('formData: ', formData)
+    formData.forEach(function(e, i, a) {
+      document.log('i: ', i)
+      console.log('i: ', i)
+      document.log('e: ', e)
+      console.log('e: ', e)
+    })
+    document.log('append custom'.blue())
     formData.append('custom_field_name', 'custom value')
     formData.append('custom_field_name', 'custom value2')
     formData.set('custom_field_name2', 'custom value')
