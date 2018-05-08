@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script type="text/javascript" src="../../js/_libs/lib.js"></script>
+  <script type="text/javascript">
+
+    window.a = {
+      c: function() {
+        document.log('this: ', this)
+        console.log('this: ', this)
+      }
+    }
+
+    window.a.b = function() {
+      document.log('this: ', this)
+      console.log('this: ', this)
+    }
+
+    window.a.b()
+    window.a.c()
+  </script>
+</body>
+</html>
