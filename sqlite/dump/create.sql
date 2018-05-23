@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS `a`;
+DROP TABLE IF EXISTS `b`;
+
+CREATE TABLE `a` (
+  `a_id` INT UNSIGNED NOT NULL,
+  `a_name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`a_id`)
+);
+
+CREATE TABLE `b` (
+  `b_id` INT UNSIGNED NOT NULL,
+  `b_name` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`b_id`)
+);
+
+INSERT INTO `a` VALUES (1,'1'), (2,'2');
+INSERT INTO `b` VALUES (1,'1'), (3,'3');

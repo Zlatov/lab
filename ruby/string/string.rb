@@ -101,6 +101,18 @@ b = a.strip.split("\s\n\s").first.delete ','
 print 'a: '.red; puts a
 print 'b: '.red; ap b
 
+puts 'Многострочный текст в массив'.green
+a = <<-TEXT
+     a@a.a ,   b@b.b
+b@b.b
+c@c.c
+d@d.d,
+ a@a.a, a@a.a,    
+    TEXT
+b = a.strip.split("\n").map{|e|e.split(',')}.flatten.map(&:strip).uniq
+print 'a: '.red; puts a
+print 'b: '.red; p b
+
 # Дату в форматированный текст
 puts 'Дату в форматированный текст'.green
 p DateTime.now.strftime("%-y%-j%H_")

@@ -65,9 +65,10 @@
 <pre class="prettyprint lang-rb">ApplicationController.new.method_name</pre>
 
 <h2>routes (path...)</h2>
-<p><tt>$</tt> <code class="copyToClipboard">rails routes</code> - список всех путей</p>
-<p><tt>&gt;</tt> <code class="copyToClipboard">app.products_path</code> - проверка пути, вернёт url</p>
+<p><tt>$</tt> <code class="copyToClipboard">rails routes</code> - список всех путей;</p>
+<p><tt>&gt;</tt> <code class="copyToClipboard">app.products_path</code> - проверка пути, вернёт url;</p>
 <p><tt>&gt;</tt> <code class="copyToClipboard">app.product_path 123</code> - -//-</p>
+<p><code class="copyToClipboard">&lt;%= rails_admin_path %&gt;</code> - доступ к пути во views.</p>
 
 <h2>ActiveRecord</h2>
 <h3>db info</h3>
@@ -212,10 +213,11 @@ end
 <p>Автоматически добавляет и обновляет комментарии в начале каждой из моделей, составляющих схему</p>
 <h3>pry</h3>
 <p>Pry - мощная альтернатива стандартной оболочке IRB для Ruby. Он написан с нуля, чтобы предоставить ряд дополнительных функций</p>
-<pre>
+<del><pre>
   gem 'pry'
   # gem 'pry-rails'
   gem 'pry-nav'
-</pre>
-
-
+</pre></del>
+<p><em>Gemfile</em>:</p>
+<p><code class="copyToClipboard">gem 'pry-rails', :group => :development</code></p>
+<p>$ <code class="copyToClipboard">bundle update pry pry-rails</code></p>

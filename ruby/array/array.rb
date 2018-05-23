@@ -190,87 +190,70 @@ p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='d'}
 puts 'Массив хэшей|Хэш хэшей - выбрать только те элементы значения которых равны заданному (.select)'.green
 p   [{text:'a'},{text:'b'},{text:'b'}].select{|node|node[:text]=='b'}
 p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).select{|k,node|node[:id]=='b'}
+puts 'Массив хэшей|Хэш хэшей - удалить только те элементы значения которых равны заданному (.reject)'.green
+p   [{text:'a'},{text:'b'},{text:'b'}].reject{|node|node[:text]=='b'}
+p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).reject{|k,node|node[:id]=='b'}
 
 
 # Удалить из массива хешей по значению хеша
-puts "#{'Удалить из массива хешей по значению хеша'.green} #{'# преобразует ключи тварь'.red}"
-array_of_hash = [
-  {'id':1},
-  {'id':2},
-  {'id':3},
-  {'id':2},
-]
-p array_of_hash
-array_of_hash.delete_if{|v| v['id'.to_sym]==3}
-p array_of_hash
+puts 'Удалить из массива хешей по значению хеша (.delete_if)'.green
+a = [{id:1}, {id:2}, {id:3}, {id:2}]
+b = a.delete_if{|v| v['id'.to_sym]==3}
+print 'a: '.red; p a
+print 'b: '.red; p b
 
 
-puts 'Перебор массива map! - '.green
+puts 'Изменение массива в переборе (.map!)'.green
 a = [1,2,3,4]
 b = a.map!{|e| e+= 1}
-print 'a: '.red; puts a
-print 'b: '.red; puts b
+print 'a: '.red; p a
+print 'b: '.red; p b
 
-# puts 'Создание нового идентификатора'.red
-# ids = (0..5).map {|v|v.to_s}
-# p ids
-# id = nil
-# ids.each_with_index{|v,i|
-#   if v!=i.to_s
-#     id = i.to_s
-#     break
-#   end
-# }
-# id = ids.length.to_s if !id
-# p id
-
-
-proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
+puts 'Изменение хеш в переборе (.map)'.green
+a = {vips: {article:'000023'}}
+b = Hash[ a.map { |k,v|
   -> k, v {
     return nil if v[:article].nil?
     return [v[:article].to_sym, k.to_s]
   }.call k,v
 }]
-p proj_iarticle_slug
+print 'a: '.red; p a
+print 'b: '.red; p b
 
-proj_iarticle_slug = Hash[ {vips: {article:'000023'}}.map { |k,v|
-  -> k, v {
-    return nil if v[:article].nil?
-    return [v[:article].to_sym, k.to_s]
-  }.call k,v
+a = {vips: {article:'000023'}}
+logic = ->(k,v) do
+end
+b = Hash[ a.map { |k,v|
+  [v[:article], k]
 }]
-p proj_iarticle_slug
+print 'a: '.red; p a
+print 'b: '.red; p b
 
+puts 'Удалить по условию с учётом индекса'.green
 a = [1,2,3]
 b = []
 a.delete_if.with_index do |_, index|
-  puts _.to_s.red
   if index==1
+    puts _.to_s.red
     b << 1
   end
   b.include? index
 end
-p a
-
-p *[:asd].to_s
-
+print 'a: '.red; p a
+print 'b: '.red; p b
 
 
-puts '--------------------------------'
 puts 'Массив хэшей в хэш-инфо'.green
 p [{id: 1}, {id: 2}].to_info :id
 
-puts '--------------------------------'
 puts 'Массив строку'.green
 ap ['asd','zxc'].join('|')
 
-puts '--------------------------------'
 puts 'Массив в sql строку'.green
 a = [1, '2', nil, 0]
 ap a
 ap a.map!{|v| if v.is_a? String then "'#{v}'" elsif v.nil? then 'NULL' else v.to_s end}.join(', ')
 
-puts '--------------------------------'
 puts 'Удаление по значению'.green
 a = [0,1,2,3,4,5]
 a.delete_if do |v|
@@ -336,55 +319,72 @@ while level >= 0
   end
 end
 
+puts 'Склеить массивы'.green
 a =  [1,2]
 b =  [1,2]
 c = a + b
-print 'c: '.red; puts c
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
 
+puts 'Назначить если нет (||=), вставить в массив (.push)'.green
 a = {}
 a[:a] ||= []
 a[:a].push({a:1})
 print 'a[:a]: '.red; p a[:a]
 
-# Массив в строки по 10 элементов
-puts 'each по несколько элементов'.green
-a = (1..45).to_a
-ap a
-a.each_slice(10) do |slice|
-  puts slice.join(', ')
+puts 'each по несколько элементов (.each_slice)'.green
+a = (1..5)
+b = a.each_slice(2) do |x|
+  print 'x: '.red; p x
 end
+print 'a: '.red; p a
+print 'b: '.red; p b
 
-
-# Изъять, выбрать из массива
-puts
 puts 'Изъять, выбрать из массива'.green
-puts 'С конца'.blue
+puts 'С конца (.pop)'.blue
 a = [1,2,3]
 b = a.pop
 print 'a: '.red; p a
 print 'b: '.red; p b
-puts 'С начала'.blue
+puts 'С начала (.shift)'.blue
 a = [1,2,3]
-b = a.shift
+b = a.shift 2
 print 'a: '.red; p a
 print 'b: '.red; p b
 
-puts
-puts 'Очистить от нулевых значений'.green
+puts 'Очистить от нулевых значений (.compact)'.green
 a = [nil, 1, 2, nil, 3]
 b = a.compact!
 print 'a: '.red; p a
 print 'b: '.red; p b
 
-# Sum some numbers
-puts (5..10).reduce(:+)                             #=> 45
-# Same using a block and inject
-puts (5..10).inject { |sum, n| sum + n }            #=> 45
-# Multiply some numbers
-puts (5..10).reduce(1, :*)                          #=> 151200
-# Same using a block
-puts (5..10).inject(1) { |product, n| product * n } #=> 151200
-# find the longest word
-longest = %w{ cat sheep bear }.inject do |memo, word|
-  memo.length > word.length ? memo : word
-end
+puts 'Сложить элементы массива (.reduce, .inject)'.green
+a = (1..3)
+b = a.reduce(:+)
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = (1..3)
+b = a.inject{ |sum, x| sum + x }
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = (1..3)
+b = a.inject(1){ |sum, x| sum + x }
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+puts 'Перемножить элементы массива (.reduce, .inject)'.green
+a = (1..3)
+b = a.reduce(:*)
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = (1..3)
+b = a.inject{|mul, x| mul * x}
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+puts 'Наилучший О.о элемент массива (.inject)'.green
+a = %w(cat sheep bear)
+b = a.inject{|memo, x| memo.length < x.length ? memo : x}
+print 'a: '.red; p a
+print 'b: '.red; p b

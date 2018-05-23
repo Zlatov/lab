@@ -6,6 +6,8 @@ echo 'asd.PNG' | sed s/'.PNG'/'.png'/
 
 echo '.PNG.PNG' | sed 's/\.PNG$/.png/'
 
+echo '.png.PNG' | sed 's/.PNG/.png/'
+
 touch temp
 echo -e "a\na \`b\nA \`b\nb" > temp
 

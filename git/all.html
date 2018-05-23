@@ -154,6 +154,7 @@ git config --global alias.hist 'log --graph --pretty=format:"%Cred%h%Creset -%C(
 <p>— отменит операцию слияния, но оставит изменения в конфликтующих файлах и/или в index области. При этом состоянии Git будет ожидать от вас фиксации или полной отмены изменений.</p>
 <pre>$ git reset --hard</pre>
 <p>— отменит операцию слияния, очистит index область и вернёт все файлы work tree до состояния последней фиксации по текущей ветви.</p>
+
 <h3>git tag</h3>
 <p>— отметить текущее состояние, как некоторое конечное состояние для новой версии вашего проекта. Используется для создания списка стабильных версий проекта. Имя метки tag может использоваться в командах checkout и других командах, на ровне с именами фиксаций, именами ссылок (HEAD, FETCH_HEAD) и именами веток (master и т.п.).</p>
 <pre>$ git tag</pre>
@@ -164,6 +165,8 @@ git config --global alias.hist 'log --graph --pretty=format:"%Cred%h%Creset -%C(
 <p>— удалить метку tag с именем tagname</p>
 <p><code class="copyToClipboard">git push origin tag_name</code> — To push a single tag</p>
 <p><code class="copyToClipboard">git push --tags</code> — push all tags (not recommended)</p>
+<p><code class="copyToClipboard">git fetch --tags</code> — fetch tags.</p>
+
 <h2>Настройки</h2>
 <h3>Origin репозиторий без ssl сертификата (<code>unable to access '...': server certificate verification failed.</code>)</h3>
 <p><code>git init</code> (т.к. это настройка репы:)</p>

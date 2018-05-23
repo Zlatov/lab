@@ -72,3 +72,9 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 print 'd: '.red; puts d
+
+# puts 'Парсинг строки во время'.green
+# a = '2017-02-08 08:00'
+# b = a.to_time
+# print 'a: '.red; puts a
+# print 'b: '.red; puts b

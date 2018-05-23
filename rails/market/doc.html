@@ -34,9 +34,46 @@ CreateStrictColorConstant.new.process!
 </ul>
 
 <h2>Обновление</h2>
+
+ssh market
+cd app/tasker
+git pull origin master
+bundle
+
 Копирование бд-ых в таскер
-Миграция бд-продакшн: TASKER=1 RAILS_ENV=production rails db:migrate
-Импорт: TASKER=1 RAILS_ENV=production rails import:all
-Трейдерные данные: TASKER=1 RAILS_ENV=production rails pricelist:all
-Дополнительные данные и константы: TASKER=1 RAILS_ENV=production rails create:all
-Константа CAT: RELOAD_CAT=1 rails c -e production
+cp ../market/db/production.sqlite3 ./db/production.sqlite3
+cp ../market/db/development.sqlite3 ./db/development.sqlite3
+
+Миграция бд-продакшн:
+TASKER=1 RAILS_ENV=production rails db:migrate
+
+Импорт:
+TASKER=1 RAILS_ENV=production rails import:all
+
+Трейдерные данные:
+TASKER=1 RAILS_ENV=production rails pricelist:all
+
+Дополнительные данные и константы:
+TASKER=1 RAILS_ENV=production rails create:all
+
+Константа CAT:
+RELOAD_CAT=1 rails c -e production
+
+cp ../market/db/production.sqlite3 ../market/db/production-.sqlite3
+cp ../market/db/development.sqlite3 ../market/db/development-.sqlite3
+
+cp ./db/production.sqlite3 ../market/db/production.sqlite3
+cp ./db/development.sqlite3 ../market/db/development.sqlite3
+
+cp ./config/cache/*.{json,dump} ../market/config/cache/
+cp ../market/config/cache/CAT_production.dump ../market/config/cache/CAT_development.dump
+
+cd ../market/
+
+git pull origin master
+
+./bash/production/prepare.sh
+
+screen -r ma
+пока что вручную
+

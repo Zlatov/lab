@@ -290,6 +290,16 @@
   document.log('a: ', a)
   document.log('b: ', b)
 
+  document.log('> filter short syntax'.green())
+  var a = [1,2,3]
+  var b = a.filter(e=>e != 2)
+  document.log('a: ', a)
+  document.log('b: ', b)
+  var a = [1,2,3]
+  var b = a.filter(function(e){return e != 2})
+  document.log('a: ', a)
+  document.log('b: ', b)
+
 
   </script>
 </body>

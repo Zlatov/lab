@@ -1,11 +1,15 @@
 # encoding: UTF-8
 require 'fileutils'
+require 'awesome_print'
 
 # Удаление директорий
 Dir.rmdir 'a' if File.directory?('a')
 
 # Создание директорий
 Dir.mkdir 'a' if !Dir.exist? 'a'
+Dir.mkdir '00001234' if !Dir.exist? '00001234'
+Dir.mkdir '00001235' if !Dir.exist? '00001235'
+Dir.mkdir '00001236' if !Dir.exist? '00001236'
 FileUtils.mkdir_p 'b/c'
 Dir.rmdir 'b' if Dir['b/*'].empty?
 FileUtils.rm_rf("b/.", secure: true) # отчистить папку от всего
@@ -14,6 +18,7 @@ FileUtils.mkdir_p 'c'
 Dir.rmdir 'c' if Dir['c/*'].empty?
 
 
+puts '-----------'.red
 # path_files = "#{AppPath.files}/#{action_name}/#{params['id']}"
 path_files = "./"
 files_name = []
@@ -21,12 +26,15 @@ if Dir.exist? path_files
   Dir.entries(path_files).each do |file_name|
     files_name << file_name if file_name != '.' && file_name != '..'
     p file_name
+    puts 'DIR!!!'.green if File.directory? file_name
   end
 end
+puts '-----------'.red
 p 'files_name:'
 files_name.each do |file_name|
   p file_name
 end
+puts '-----------'.red
 
 
 require 'pathname'
