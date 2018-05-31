@@ -166,3 +166,9 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 puts "string".send "red"
+
+a = '   0.2452354 , 334.23524 52  '
+b, c = *a.split(',').map(&:strip).map(&:to_f)
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c

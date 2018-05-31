@@ -1,0 +1,1 @@
+DBHOST=localhost && DBNAME=dbname && DBUSER=dbuser && DBPASS=dbpass && DBDATE=`date +%Y-%m-%d-%H-%M-%S` && mysqldump --opt -u$DBUSER -h$DBHOST -p$DBPASS $DBNAME --routines > ./$DBNAME-$DBDATE.sql

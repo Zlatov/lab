@@ -190,6 +190,7 @@ p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='d'}
 puts 'Массив хэшей|Хэш хэшей - выбрать только те элементы значения которых равны заданному (.select)'.green
 p   [{text:'a'},{text:'b'},{text:'b'}].select{|node|node[:text]=='b'}
 p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).select{|k,node|node[:id]=='b'}
+
 puts 'Массив хэшей|Хэш хэшей - удалить только те элементы значения которых равны заданному (.reject)'.green
 p   [{text:'a'},{text:'b'},{text:'b'}].reject{|node|node[:text]=='b'}
 p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).reject{|k,node|node[:id]=='b'}
@@ -254,12 +255,14 @@ a = [1, '2', nil, 0]
 ap a
 ap a.map!{|v| if v.is_a? String then "'#{v}'" elsif v.nil? then 'NULL' else v.to_s end}.join(', ')
 
-puts 'Удаление по значению'.green
+puts 'Удаление по условию (.delete_if)'.green
+puts 'Модифицирует иходный массив.'.blue
 a = [0,1,2,3,4,5]
-a.delete_if do |v|
+b = a.delete_if do |v|
   v == 4 || v == 5
 end
-puts a
+print 'a: '.red; p a
+print 'b: '.red; p b
 
 puts
 puts 'Вывод nested'.green
@@ -386,5 +389,26 @@ print 'b: '.red; p b
 puts 'Наилучший О.о элемент массива (.inject)'.green
 a = %w(cat sheep bear)
 b = a.inject{|memo, x| memo.length < x.length ? memo : x}
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+a, b = *[1,2,3]
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+puts 'Дубликаты (.)'.green
+a = [1,2,3,2,4,4,5]
+b = a.detect{|v| a.count(v) > 1}
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+a = [1,2,3,2,4,4,5]
+b = a.group_by{|v| v}
+c = b.select{|k,v| v.length > 1}
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+a = [{a:'1'},{a:'2'},{a:'3'},{a:'2'},{a:'4'},{a:'4'},{a:'5'}]
+b = a.group_by{|v| v[:a]}.select{|k,v| v.length >1}
 print 'a: '.red; p a
 print 'b: '.red; p b

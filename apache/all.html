@@ -89,6 +89,51 @@ sudo find . -type f ! -perm 644 -exec chmod 644 {} \;</pre>
 <p>Нужно монтировать с опцией umask=0</p>
 <p>NTFS не поддерживает разграничение прав пользователей в формате UNIX (всегда будет 700).</p>
 
+<h3>Настройка базовой аутентификации</h3>
+<h4>В виртуальном хосте</h4>
+<pre>
+&lt;VirtualHost *:80&gt;
+	ServerName admin.zenonline.local
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http://localhost:3000/
+	&lt;Directory &quot;/home/iadfeshchm/projects/zenon/newforum/newforum&quot;&gt;
+        AuthType Basic
+        AuthName &quot;Restricted Content&quot;
+        AuthUserFile /etc/apache2/sites-available/.htpasswd
+        Require valid-user
+	&lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</pre>
+<h4>При проксировании</h4>
+<!--
+<VirtualHost *:80>
+	ServerName admin.zenonline.local
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http://localhost:3000/
+	<Location />
+        AuthType Basic
+        AuthName "Restricted Content"
+        AuthUserFile /etc/apache2/sites-available/.htpasswd
+        Require valid-user
+	</Location>
+</VirtualHost>
+-->
+<pre>
+&lt;VirtualHost *:80&gt;
+	ServerName admin.zenonline.local
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:3000/
+	ProxyPassReverse / http://localhost:3000/
+	&lt;Location /&gt;
+        AuthType Basic
+        AuthName &quot;Restricted Content&quot;
+        AuthUserFile /etc/apache2/sites-available/.htpasswd
+        Require valid-user
+	&lt;/Location&gt;
+&lt;/VirtualHost&gt;
+</pre>
 
 <h3>Подключаем модуль Mod rewrite</h3>
 <p>Перейдите в каталог /etc/apache2/mods-available и убедитесь, что там есть файл rewrite.load отвечающий за загрузку модуля Mod rewrite. Для этого выполните в консоли следующие команды:</p>
