@@ -11,6 +11,23 @@ CreateTraderConstant.new.process!
 MetricConstantCreate.new.process!
 CreateStrictColorConstant.new.process!
 
+select
+  am.product,
+  -- am.angar,
+  an.name as Филиал,
+  -- am.storehouse_articul,
+  sh.name as Склад,
+  case
+    when sdsh.subdivision_sid is null then '-'
+    else 'Да'
+  end as 'Техниковский склад?',
+  am.amount
+from temp_amounts am
+left join market_angars an on an.id = am.angar
+left join market_storehouses sh on sh.articul = am.storehouse_articul
+left join market_subdivisions_storehouses sdsh on sdsh.storehouse_uid = sh.uid
+where
+  am.product = 45415
 
 
 <h2>Наличие</h2>

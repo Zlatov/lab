@@ -1,8 +1,9 @@
 $(document).ready(function() {
 
-  var doc_headers = []
+  var doc_headers_nested = []
   var doc_headers_cache = {}
 
+  // Собираем дерево заголовков, doc_headers_cache просто для быстрого доступа
   for (var h = 2; h <= 6; h++) {
     var header_selectror = 'h' + h
     $(header_selectror).each(function(index, dom) {
@@ -16,17 +17,19 @@ $(document).ready(function() {
       }
       doc_headers_cache[header_id] = header
       if (h==2) {
-        doc_headers.push(header)
+        doc_headers_nested.push(header)
       } else {
         var prev_header_selector = 'h' + (h - 1)
         var prev_header = $header.prevAll(prev_header_selector).first()
-        var prev_header_id = prev_header.data('doc_id')
-        doc_headers_cache[prev_header_id]['childrens'].push(header)
+        if (prev_header.length) {
+          var prev_header_id = prev_header.data('doc_id')
+          doc_headers_cache[prev_header_id]['childrens'].push(header)
+        }
       }
     })
   }
 
-  console.log('doc_headers: ', doc_headers)
+  console.log('doc_headers_nested: ', doc_headers_nested)
 
   var doc_process_nodedata = function(node, parents, level) {
     var header_selector = 'h' + (level+2) + '[data-doc_id="' + node.id + '"]'
@@ -46,7 +49,7 @@ $(document).ready(function() {
 
   var level = 0
   var cache = []
-  cache[level] = doc_headers.slice(0)
+  cache[level] = doc_headers_nested.slice(0)
   var parent = []
   parent[level] = null
   var index = []

@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <style type="text/css">
+    .cle:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .t {
+      display: inline-block;
+      width: 33%;
+      background-color: red;
+      vertical-align: bottom;
+      font-size: 12px;
+      /*min-height: 100px;*/
+    }
+  </style>
+
 </head>
 <body>
 	<div style="float: left; width: 70%;">1</div>
 	<div style="">2</div>
 	<div style="clear: both;">3</div>
   <hr>
+  <div style="overflow: hidden; ">
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="float: left; width: 33%; background-color: black;">2</div>
+  <div style="clear: both;"></div>
+
+  <div class="cle">
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">1</div>
+  </div>
+  <div style="float: left; width: 33%; background-color: black;">2</div>
+
+  <div style="clear: both;"></div>
+  <div style="font-size: 0">
+    asdf sd <div class="t">2<br>22</div>
+    <div class="t">2</div>
+    <div class="t" style="vertical-align: top;">2</div>
+    <div class="t">2</div>
+  </div>
 </body>
 </html>

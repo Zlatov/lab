@@ -2,3 +2,5 @@ vendor/
 theme/bower
 theme/yarn
 !*.sublime-project
+*.sqlite3
+**/temp

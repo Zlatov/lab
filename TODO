@@ -7,3 +7,7 @@ https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-c
 EDITOR_PATH=`which subl`
 export EDITOR="$EDITOR_PATH -w"
 
+
+
+toc.js, doc.js
+php interfaces, namespaces

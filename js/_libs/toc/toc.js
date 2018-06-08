@@ -5,24 +5,34 @@ $(document).ready(function() {
     var header_selectror = 'h' + h
     $(header_selectror).each(function(index, dom) {
       var header = $(this)
-      header.attr('id', header_selectror + index)
       if (h>2) {
+        var prev_header_id = null
         var prev_header_selector = 'h' + (h - 1)
         var prev_header = header.prevAll(prev_header_selector).first()
-        var link_index = prev_header.attr('id').substring(2)
-        var ul = $('#toc_link_' + prev_header_selector + link_index).next("ul")
+        if (prev_header.length) {
+          prev_header_id = prev_header.attr('id')
+        }
+        if (prev_header_id != null) {
+          header.attr('id', header_selectror + index)
+          var link_index = prev_header_id.substring(2)
+          console.log('link_index: ', link_index)
+          var ul = $('#toc_link_' + prev_header_selector + link_index).next("ul")
+        }
       } else {
+        header.attr('id', header_selectror + index)
         var ul = $('#toc').children('ul')
       }
-      ul.append(
-        '<li>' +
-          '<a id="toc_link_' + header_selectror + index + '" href="#' + header_selectror + index + '" title="' + (header.attr('title')||'') + '">' +
-            header.text() +
-          '</a>' +
-          '<ul></ul>' +
-        '</li>'
-      )
-      header.append(' <a href="#toc_link_' + header_selectror + index + '">↑</a>')
+      if (h>2 && prev_header_id !=null || h==2) {
+        ul.append(
+          '<li>' +
+            '<a id="toc_link_' + header_selectror + index + '" href="#' + header_selectror + index + '" title="' + (header.attr('title')||'') + '">' +
+              header.text() +
+            '</a>' +
+            '<ul></ul>' +
+          '</li>'
+        )
+        header.append(' <a href="#toc_link_' + header_selectror + index + '">↑</a>')
+      }
     })
   }
 
