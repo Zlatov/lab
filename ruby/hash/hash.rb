@@ -79,17 +79,21 @@ b = Hash[a.map{|k,v| [k,v+'3'] } ]
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
-# Слияние двух hash
-puts
-puts 'Слияние двух hash'.green
-h1 = {a:'a',b:'b'}
-h2 = {a:nil,c:'cc'}
-h3 = h1.merge(h2)
-p h1
-p h2
-p h3
-h1.merge! h2
-print 'h1: '.red; puts h1
+puts 'Слияние двух hash (.merge)'.green
+a = {a:'a', c:'1'}
+b = {b:'b', c:'2'}
+c = a.merge(b)
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+
+puts 'Слияние двух hash (.merge!)'.green
+a = {a:'a', c:'1'}
+b = {b:'b', c:'2'}
+c = a.merge!(b)
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
 
 # Ключи в стрингу
 puts

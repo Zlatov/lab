@@ -4,7 +4,9 @@
 touch temp
 > temp
 
-# Десерипторы (номер) ввода/вывода: STDIN:0 STDOUT:1 STDERR:0
+temp_path='./temp'
+
+# Десерипторы (номер) ввода/вывода: STDIN:0 STDOUT:1 STDERR:2
 
 echoc 'Вывод всего в стандартый вывод' 'green'
 ls stdin_out_err.sh nofile
@@ -26,4 +28,4 @@ ls stdin_out_err.sh nofile >/dev/null 2>&1
 
 echoc 'Нормы в файл' green
 ls stdin_out_err.sh nofile 1>./temp
-echo 'asd' 1>>./temp
+echo 'asd' 1>>$temp_path
