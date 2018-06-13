@@ -1,6 +1,17 @@
 <p>чтоб при рестарте не тупил использовать хинт</p>
 <pre>set global innodb_max_dirty_pages_pct = 0;</pre>
 
+<h2>Установка/удаление/переустановка</h2>
+<p>Желательно снести каталоги - <code class="copyToClipboard">sudo rm -rf /etc/mysql</code> и <code class="copyToClipboard">sudo rm -rf /var/lib/mysql</code></p>
+<p><strong>Удаление:</strong></p>
+<pre class="copyToClipboard">sudo apt-get remove --purge mysql-server mysql-client mysql-common
+sudo apt-get autoremove
+sudo apt-get autoclean
+
+</pre>
+<p><strong>Установка:</strong></p>
+<p><code class="copyToClipboard">sudo apt-get install mysql-server</code></p>
+
 
 <h2>Типы данных</h2>
 <h3>INT</h3>

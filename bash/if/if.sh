@@ -1,5 +1,6 @@
 #!/bin/bash
 . ../_lib/yn
+. ../_lib/echoc
 
 # Yn "Да? [YES/no]"
 
@@ -63,4 +64,13 @@ then
   echo 'один'
 else
   echo 'нет'
+fi
+
+a='if.sh'
+# if [ -f ./if.sh ]
+if [ -f $a ]
+then
+  echoc 'файл if.sh есть' green
+else
+  echoc 'файла if.sh нет' red
 fi
