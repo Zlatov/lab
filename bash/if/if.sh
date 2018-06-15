@@ -74,3 +74,11 @@ then
 else
   echoc 'файла if.sh нет' red
 fi
+
+a=true
+if [[ ! "$a" = true ]]
+then
+  echo '$a1: ' $a
+else
+  echo '$a2: ' $a
+fi

@@ -1,2 +1,11 @@
-INSERT INTO `test` VALUES (1);
-INSERT INTO `test` VALUES (1,'1'), (2,'2');
+DROP TABLE IF EXISTS `a`;
+
+CREATE TABLE `a` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+  `string` VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `a` (`string`) VALUES ('1'), ('2');
+INSERT INTO `a` VALUES (3, '1'), (4, '2');
+INSERT INTO `a` VALUES (5, '1'), (6, '2');

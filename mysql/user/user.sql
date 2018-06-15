@@ -11,6 +11,7 @@
 -- GRANT permission ON database.table TO 'userLogin'@'localhost';
 -- GRANT CREATE ON *.* TO 'userLogin'@'localhost';
 -- GRANT DROP ON testdatabase.* TO 'userLogin'@'localhost';
+-- GRANT ALL ON *.* TO 'lab'@'localhost';
 
 -- Краткий список часто используемых прав (permissions list):
 -- ALL – Allow complete access to a specific database. If a database is not specified, then allow complete access to the entirety of MySQL.
