@@ -1,0 +1,160 @@
+# Шпаргалка
+
+# RewriteCond
+# — условие, при котором срабатывают правила перенаправления.
+# условий может быть несколько (по одному в каждой строке),
+# между условиями нужно ставить [OR] (в конце верхнего условия):
+# RewriteCond … [NC, OR]
+# RewriteCond … [NC]
+# Флаги RewriteCond (RewriteCond … [flags]):
+# `nocase|NC` - регистронезависимо
+# `ornext|OR` - либо следующее условие
+# '-d' является ли каталогом
+# '-f' является ли обычным файлом
+# '-s' является ли обычным файлом с ненулевым размером
+# '-l' является ли символической ссылкой
+# '-F' проверка существования файла через подзапрос
+# '-U' проверка существования URL через подзапрос
+
+# RewriteRule
+# — основная директива преобразований.
+# R[=code] - вызывает редирект.
+# L - чтобы не преобразовывать текущий URL другими правилами преобразований.
+# QSA - добавлять строку запроса.
+
+# RewriteBase
+# Если не указать RewriteBase и в правой части RewriteRule указать относительный путь, например:
+# `RewriteRule .* local_redirect_works\.html [R=301,L]`
+# то можно перенаправить по пути /home/username/path/to/project/local_redirect_works.html
+# что крайне не желательно.
+# RewriteBase — устанавливает базовую часть URL в текущем каталоге (там где лежит .htaccess)
+# которая будет отниматься до и добавляться после преобразования RewriteRule (приблизительное объяснение!)
+# таким образом в RewriteRule пути зачатую начинаются без ведущего /
+
+# Часто используемые в RewriteCond и в RewriteRule __переменные среды__ и
+# их значения при запросе http://lab.local/apache/mod_rewrite/redirect/sever_variables.html?a=1&b=b#sadf
+# %{HTTP_HOST} => lab.local
+# %{QUERY_STRING} => a=1
+# %{THE_REQUEST} => GET /apache/mod_rewrite/redirect/sever_variables.html?a=1
+# %{REQUEST_URI} => /apache/mod_rewrite/redirect/sever_variables.html
+# %{REQUEST_FILENAME} => /home/iadfeshchm/projects/my/lab/lab/apache/mod_rewrite/redirect/sever_variables.html
+
+# отсальные =) __переменные среды__
+# %{HTTP_USER_AGENT} => Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36
+# %{HTTP_ACCEPT} => text/html,application/xhtml xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+# %{REMOTE_ADDR} => 127.0.0.1
+# %{REMOTE_HOST} => 127.0.0.1
+# %{REQUEST_METHOD} => GET
+# %{SCRIPT_FILENAME} => /home/iadfeshchm/projects/my/lab/lab/apache/mod_rewrite/redirect/sever_variables.html
+# %{DOCUMENT_ROOT} => /home/iadfeshchm/projects/my/lab/lab
+# %{SERVER_ADMIN} => [no address given]
+# %{SERVER_NAME} => lab.local
+# %{SERVER_ADDR} => 127.0.0.1
+# %{SERVER_PORT} => 80
+# %{SERVER_PROTOCOL} => HTTP/1.1
+# %{SERVER_SOFTWARE} => Apache/2.4.7 (Ubuntu)
+# %{TIME_YEAR} => 2018
+# %{TIME_MON} => 06
+# %{TIME_DAY} => 19
+# %{TIME_HOUR} => 12
+# %{TIME_MIN} => 38
+# %{TIME_SEC} => 03
+# %{TIME_WDAY} => 2
+# %{TIME} => 20180619123803
+# %{API_VERSION} => 20120211:27
+# %{IS_SUBREQ} => false
+
+
+# Если mod_rewrite есть на сервере
+<IfModule mod_rewrite.c>
+
+	# Включаем модуль mod_rewrite выполняющий URL преобразования на лету.
+	RewriteEngine on
+
+	# Устанавливает базовый URL для преобразований в каталоге.
+	RewriteBase /
+
+	# Блокируем доступ к файлам .htaccess
+	RewriteRule ^.htaccess$ - [F]
+
+	# 301 редиректы (перемещена постоянно) со страницы на страницу. Примеры:
+	RewriteCond %{REQUEST_URI} ^/i6\.html$
+	RewriteRule ^.*$ http://www.zlatov.net/publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+
+	# -http://www.zlatov.net
+	RewriteCond %{REQUEST_URI} ^/i8\.html$
+	RewriteRule ^.*$ /publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+	# Работает -/
+	#RewriteCond %{REQUEST_URI} ^/i9\.html$
+	#RewriteRule ^.*$ publication/import-chertejey-v-3ds-max-iz-autocad.html [R=301,L]
+
+	# Перенаправление адреса содеражащего текст "text" на страницу /404/
+	#RewriteCond %{QUERY_STRING} ^text.+$
+	#RewriteRule ^.*$ 404/
+
+	# Перенаправление с адреса без www на адрес с www.
+	# Перенаправление с явным указанием переменной:
+	RewriteCond %{HTTP_HOST} !^www\. [NC]
+	RewriteCond %{HTTP_HOST} !^$
+	RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+	# Перенаправление вручную:
+	#RewriteCond %{HTTP_HOST} ^domain.ru [NC]
+	#RewriteCond %{HTTP_HOST} !^$
+	#RewriteRule ^(.*)$ http://www.domain.ru/$1 [R=301,L]
+
+	# Перенаправление с адреса с www на адрес без www:
+	#RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+	#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+	# Убираем множественные слэши в середине запроса:
+	RewriteCond %{REQUEST_URI} ^(.*)/{2,}(.*)$
+	RewriteRule .* %1/%2 [R=301,L]
+
+	# Убираем множественные слэши в начале и/или в конце запроса:
+	RewriteCond %{THE_REQUEST} ^[A-Z]+\s//+(.*)\sHTTP/[0-9.]+$ [OR]
+	RewriteCond %{THE_REQUEST} ^[A-Z]+\s(.*/)/+\sHTTP/[0-9.]+$
+	RewriteRule .* http://%{HTTP_HOST}/%1 [R=301,L]
+
+	# Добавляем слэшь в конце папок:
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_URI} !(.*)/$
+	RewriteRule ^(.*)$ $1/ [R=301,L]
+
+	# Переадресуем /index.php* на / (для SEO, т.е. отсутствия дублей по index.php?category=contacts)
+	RewriteCond %{THE_REQUEST} ^.*/index\.php
+	RewriteRule ^(.*)index.php /$1 [R=301,L]
+
+	## Последнее перенаправление
+	## Если запрашиваем реальная папка или файл - ничего не делаем, иначе "заворачиваем" все запросы на index.php, который лежит в RewriteBase
+	#RewriteCond %{REQUEST_FILENAME} !-f
+	#RewriteCond %{REQUEST_FILENAME} !-d
+	#RewriteRule ^(.*)$ /index.php [L,QSA]
+
+	# Или для статического ЧПУ
+		
+	# Админка
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^admin/([^/\.]+)/?$ /admin/index.php?category=$1 [L,QSA]
+	
+	# Сайт
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/?$ index.php?category=$1 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([0-9]+)/?$ index.php?category=$1&page=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([^/\.]+)/?$ index.php?category=$1$section=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^([^/\.]+)/([^/\.]+)/([0-9]+)/?$ index.php?category=$1$section=$2&page=$3 [L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([^/\.]+)/([^/\.]+)\.html$ index.php?category=$1&element=$2 [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^theme/lorem/([^/\.]+)\.html$ theme/lorem/$1.html [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^([^/\.]+)/([^/\.]+)/([^/\.]+)\.html$ index.php?category=$1$section=$2&element=$3 [L]
+	
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^.*$ index.php?category=404
+
+</IfModule>

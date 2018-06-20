@@ -1,10 +1,40 @@
-<h2>Установка, запуск</h2>
-<pre class="prettyprint lang-sh">
-sudo service nginx stop
-sudo service nginx start
-sudo service nginx restart
-</pre>
+<h2>Остановка, запуск, статус</h2>
+<p><code class="copyToClipboard">sudo nginx -t</code> — проверить правильность настроек перед перезапуском.</p>
+<p><code class="copyToClipboard">sudo service nginx stop</code></p>
+<p><code class="copyToClipboard">sudo service nginx start</code></p>
+<p><code class="copyToClipboard">sudo service nginx restart</code></p>
+<p><code class="copyToClipboard">service nginx status</code></p>
+
 <h2>Настойки</h2>
+
+<h3>Виртуальных хостов</h3>
+<p><code class="copyToClipboard">sudo touch /etc/nginx/sites-available/nginx.local.conf</code></p>
+<p><code class="copyToClipboard">subl /etc/nginx/sites-available/nginx.local.conf</code></p>
+<p><code class="copyToClipboard">subl /etc/nginx/sites-available/default</code></p>
+<pre class="prettyprint copyToClipboard">server {
+  # listen 8080 default_server;
+  # listen [::]:8080 default_server ipv6only=on;
+  listen 8087;
+  listen [::]:8087;
+  charset UTF-8;
+
+  root /home/iadfeshchm/projects/my/nginx;
+  index index.html index.htm;
+
+  server_name nginx.local www.nginx.local;
+
+  location / {
+    try_files $uri $uri/ =404;
+  }
+}</pre>
+<p><code class="copyToClipboard">sudo rm /etc/nginx/sites-enabled/default</code></p>
+<p><code class="copyToClipboard">sudo ln -s /etc/nginx/sites-available/nginx.local.conf /etc/nginx/sites-enabled/nginx.local.conf</code></p>
+<p>В файле <code class="copyToClipboard">subl /etc/nginx/nginx.conf</code> раскомментируем: <code class="copyToClipboard">server_names_hash_bucket_size 64;</code></p>
+<p><code class="copyToClipboard">sudo service nginx restart</code></p>
+<p><code class="copyToClipboard">subl /var/log/nginx/error.log</code> =)</p>
+<p>В файл <code class="copyToClipboard">subl /etc/hosts</code> добавим <code class="copyToClipboard">127.0.0.1 nginx.local www.nginx.local</code></p>
+<p><i>И не забыть что мы бываем за прокси…</i></p>
+
 <h3>FPM</h3>
 <p><button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#collapse1"><var>/etc/php5/fpm/pool.d/forum.conf</var>:</button></p>
 <div id="collapse1" class="collapse">
@@ -72,7 +102,7 @@ env [DB_PASS] = ...
 	</li>
 </ul>
 <h3>Передача переменных окружения через сокет (пул)</h3>
-<p><code class="prettyprint lang-sh">nano /etc/php5.6/fpm/pool.d/username.conf</code></p>
+<p><code class="lang-sh">nano /etc/php5.6/fpm/pool.d/username.conf</code></p>
 <pre>
 env[FORUM_DB_HOST] = localhost
 env[FORUM_DB_PORT] = 

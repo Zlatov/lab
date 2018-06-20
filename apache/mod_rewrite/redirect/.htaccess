@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+
+  RewriteRule ^.htaccess$ - [F]
+
+  # Перенаправление на другой домен и/или протокол.
+  RewriteCond %{REQUEST_URI} .*redirect_me_to_another_domain\.html$
+  RewriteRule ^.*$ http://localhost [R=301,L]
+
+  # Перенаправление локальное:
+  # Либо так
+  # RewriteRule .* /apache/mod_rewrite/redirect/local_redirect_works.html [R=301,L]
+  # Либо так
+  # RewriteBase /
+  # RewriteRule .* apache/mod_rewrite/redirect/local_redirect_works.html [R=301,L]
+  # Либо так
+  RewriteBase /apache/mod_rewrite/redirect
+  RewriteRule redirect_me_local\.html local_redirect_works.html [R=301,L]
+  # переделывает адрес (есть R=)
+
+  # Сохранение частей изначального запроса
+  RewriteBase /apache/mod_rewrite/redirect
+  RewriteCond %{REQUEST_URI} ^/apache/mod_rewrite/redirect/redirect_whis_save_paths\.html$
+  RewriteRule ^redirect_(.*)_save_(.*)\.html$ redirect_works.php?redirect=$1&save=$2 [L]
+  # не переделывает адрес (нет R=)
+
+  # Попробуем потестить переменные сервера
+  # перейдём по адресу http://lab.local/apache/mod_rewrite/redirect/sever_variables.html?a=1&b=b#sadf
+  RewriteRule ^sever_variables\.html$ sever_variables.php?http_user_agent=%{HTTP_USER_AGENT}&http_referer=%{HTTP_REFERER}&http_cookie=%{HTTP_COOKIE}&http_forwarded=%{HTTP_FORWARDED}&http_host=%{HTTP_HOST}&http_proxy_connection=%{HTTP_PROXY_CONNECTION}&http_accept=%{HTTP_ACCEPT}&remote_addr=%{REMOTE_ADDR}&remote_host=%{REMOTE_HOST}&remote_user=%{REMOTE_USER}&remote_ident=%{REMOTE_IDENT}&request_method=%{REQUEST_METHOD}&script_filename=%{SCRIPT_FILENAME}&path_info=%{PATH_INFO}&query_string=%{QUERY_STRING}&auth_type=%{AUTH_TYPE}&document_root=%{DOCUMENT_ROOT}&server_admin=%{SERVER_ADMIN}&server_name=%{SERVER_NAME}&server_addr=%{SERVER_ADDR}&server_port=%{SERVER_PORT}&server_protocol=%{SERVER_PROTOCOL}&server_software=%{SERVER_SOFTWARE}&time_year=%{TIME_YEAR}&time_mon=%{TIME_MON}&time_day=%{TIME_DAY}&time_hour=%{TIME_HOUR}&time_min=%{TIME_MIN}&time_sec=%{TIME_SEC}&time_wday=%{TIME_WDAY}&time=%{TIME}&api_version=%{API_VERSION}&the_request=%{THE_REQUEST}&request_uri=%{REQUEST_URI}&request_filename=%{REQUEST_FILENAME}&is_subreq=%{IS_SUBREQ}
+
+</IfModule>
