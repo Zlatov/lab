@@ -83,6 +83,11 @@ b = a.gsub /\B(?=(\d{3})+(?!\d))/, ' '
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
+a = 'zenonline.ru/cgi-bin/caravans/client.cgi?phil_id=1&top=10ФывапыRub'
+b = a.gsub /[^a-z0-9_]/i, '_'
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+
 # Последняя позиция подстроки, подстрока по позиции и длинне
 puts 'Последняя позиция подстроки, подстрока по позиции и длинне'.green
 text = 'he/el/lo'

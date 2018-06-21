@@ -132,7 +132,11 @@ a = [
   {id: '3', 'children' =>
     [
       {id: '3-1'},
-      {id: '3-2', 'children' => [] }
+      {id: '3-2', 'children' =>
+        [
+          {id: '3-2-1'}
+        ]
+      }
     ]
   },
   {id: '4', 'children' => [] }
@@ -154,7 +158,7 @@ while level >= 0
 
     print 'level: '.red; puts level
     print 'node: '.red; puts node
-    print 'parents: '.red; puts parents
+    print 'parents: '.red; p parents
 
     if !node['children'].nil? && node['children'].length > 0
       level+= 1

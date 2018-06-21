@@ -7,3 +7,8 @@ a.each do |c|
   sleep 0.001
 end
 puts
+a.each do |c|
+  printf "%9s / %-9s some\r", i+= 1, b
+  # $stdout.flush
+  sleep 0.001
+end
