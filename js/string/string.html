@@ -15,6 +15,11 @@
   var b = a.split(" ")
   document.log('a: ', a)
   document.log('b: ', b)
+  document.log('> по разделениям сделанными любыми пробельными символами'.blue())
+  var a = "How are you   doing	today?";
+  var b = a.split(/\s+/ig)
+  document.log('a: ', a)
+  document.log('b: ', b)
   document.log('> по запятым, не учитывая пробелы до или после запятой'.blue())
   var a = 'Гарри Трамп ,Фрэд Барни, Хелен Ригби , Билл Абель ,Крис Ханд ';
   var b = a.split(/\s*,\s*/)
