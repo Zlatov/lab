@@ -81,8 +81,26 @@ sudo find . -type f ! -perm 644 -exec chmod 644 {} \;</pre>
 <pre>sudo service apache2 restart</pre>
 
 	
-<pre>sudo nano /etc/hosts</pre>
-<pre>127.0.0.1	test.loc</pre>
+<p><code class="copyToClipboard">sudo nano /etc/hosts</code></p>
+<p><code class="copyToClipboard">127.0.0.1	test.loc</code></p>
+
+<hr>
+
+<pre class="copyToClipboard">
+&lt;VirtualHost *:80&gt;
+	ServerName new.zenonline.local
+	ProxyPreserveHost On
+	ProxyPass / http://localhost:3001/
+	ProxyPassReverse / http://localhost:3001/
+
+	&lt;IfModule mod_rewrite.c&gt;
+		RewriteEngine on
+		RewriteRule ^.htaccess$ - [F]
+		RewriteCond %{REQUEST_URI} ^/admin/files/strict_color.*$
+		RewriteRule ^(.*)$ http://new.zenonline.ru$1 [R=301,L]
+	&lt;/IfModule&gt;
+&lt;/VirtualHost&gt;
+</pre>
 
 <hr>
 <p>Не работает команда chmod или запись на NTFS пользователем</p>
