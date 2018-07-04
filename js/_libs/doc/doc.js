@@ -1,3 +1,6 @@
+;(function() {
+  "use strict"
+
 $(document).ready(function() {
 
   var doc_headers_nested = []
@@ -29,13 +32,23 @@ $(document).ready(function() {
     })
   }
 
-  console.log('doc_headers_nested: ', doc_headers_nested)
+  // console.log('doc_headers_nested: ', doc_headers_nested)
+
+  var doc_set_url_header = function(data, textStatus, jqXHR) {
+    console.log('> doc_set_url_header')
+    var header = this.data_custom.header
+    var node = this.data_custom.node
+    console.log('header: ', header)
+    var url = this.url
+    console.log('url: ', url)
+    header.empty().append('<a href="' + url + '">' + node.header + '</a>')
+  }
 
   var doc_process_nodedata = function(node, parents, level) {
     var header_selector = 'h' + (level+2) + '[data-doc_id="' + node.id + '"]'
-    var $header = $(header_selector)
+    var header = $(header_selector)
     var path = ''
-    for(var i=1, l=parents.length; i<l; i++) {
+    for (var i = 1, l = parents.length; i < l; i++) {
       var parent = parents[i]
       if (parent == null) {
         break
@@ -43,8 +56,13 @@ $(document).ready(function() {
       path+= parent.header + '/'
     }
     var url = path + node.header + '.html'
-    $header.empty().append('<a href="' + url + '">' + node.header + '</a>')
-    console.log('url: ', url)
+    // console.log('url: ', url)
+    // new Promise(function(confirm_url) {
+      $.ajax(url, {
+        data_custom: {header: header, node: node},
+        success: doc_set_url_header
+      })
+    // }).then()
   }
 
   var level = 0
@@ -97,3 +115,5 @@ $(document).ready(function() {
   })
 
 });
+
+})();

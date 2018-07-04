@@ -21,7 +21,9 @@ IndexOptions Charset=UTF-8
 	RewriteCond %{REQUEST_URI} ^/[^/]+/all\.html$
 	RewriteRule ^.*$ /theme/index.php [L]
 
-	RewriteCond %{REQUEST_URI} ^/[^/]+/_doc/.+\.html$
+	# Перенаправления для документаций
+	RewriteCond %{REQUEST_FILENAME} -F
+	RewriteCond %{REQUEST_URI} ^/[^/]+/_doc/.+\.html$ [NC]
 	RewriteRule ^.*$ /theme/doc.php [L]
 </IfModule>
 
