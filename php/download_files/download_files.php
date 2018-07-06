@@ -1,51 +1,61 @@
 <?php
-$time_limit = 60*20;
-set_time_limit($time_limit);
-echo $time_limit;
-flush();
-ob_flush();
 
+// 
+// $sub_dir = 'Saharov - Svarog';
+// 
+// $tpl_url = 'https://audioknigi-online.site/audio/1/Popadanci/Saharov/Svarog/1/-=value=-.mp3';
+// 
+// $array = [
+//  '01.01',
+//  '01.02',
+// ];
+// 
+// или
+// 
 // $array1 = range(101,109);
 // $array2 = range(201,210);
 // $array3 = range(301,312);
 // $array = array_merge($array1, $array2, $array3);
+// 
+// или
+// 
+// $array = range(9,25);
+// 
 
+// START Настройки
 
-// $array = [
-// 	'01.01',
-// 	'01.02',
-// 	'01.03',
-// 	'01.04',
-// 	'01.05',
-// 	'01.06',
-// 	'02.01',
-// 	'02.02',
-// 	'02.03',
-// 	'02.04',
-// 	'02.05',
-// 	'03.01',
-// 	'03.02',
-// 	'03.03',
-// 	'04.01',
-// 	'04.02',
-// 	'04.03',
-// 	'04.04',
-// 	'05.01',
-// 	'05.02',
-// 	'05.03',
-// 	'06.01',
-// 	'06.02',
-// ];
-$array = range(9,25);
+$sub_dir = 'Saharov - Svarog';
+$tpl_url = 'https://audioknigi-online.site/audio/1/Popadanci/Saharov/Svarog/1/-=value=-.mp3';
+$array = range(1,29);
+$time_limit = 60*20;
+
+// FINISH Настройки
+
+set_time_limit($time_limit);
+echo $time_limit . '<br>';
+
+if (!is_dir($sub_dir)) mkdir($sub_dir);
+$sub_dir_handler = opendir($sub_dir);
+if ($sub_dir_handler) {
+  while (false !== ($file_name = readdir($sub_dir_handler))) {
+    if ($file_name !== '.' && $file_name !== '..' && is_file($sub_dir . DIRECTORY_SEPARATOR . $file_name)) {
+      unlink($sub_dir . DIRECTORY_SEPARATOR . $file_name);
+    }
+  }
+}
+
+flush();
+ob_flush();
 
 foreach ($array as $value) {
-	$url = "http://audioknigi-online.site/audio/1/STALKER/Groshev/1Stalker/$value.mp3";
+  $url = str_replace('-=value=-', $value, $tpl_url);
 	echo 'start ' . $url;
-    flush();
-    ob_flush();
-	file_put_contents("{$value}.mp3", fopen("$url", 'r'));
-	echo ' done.<br>' . PHP_EOL;
-    flush();
-    ob_flush();
+  // TODO не сбрасывает 'start url' ждёт конца file_put_contents и выводит с '…done.'
+  flush();
+  ob_flush();
+	file_put_contents("{$sub_dir}/{$value}.mp3", fopen("$url", 'r'));
+	echo ' done.' . '<br>';
+  flush();
+  ob_flush();
 }
 ob_end_clean();

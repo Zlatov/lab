@@ -35,13 +35,15 @@ $(document).ready(function() {
   // console.log('doc_headers_nested: ', doc_headers_nested)
 
   var doc_set_url_header = function(data, textStatus, jqXHR) {
-    console.log('> doc_set_url_header')
     var header = this.data_custom.header
     var node = this.data_custom.node
-    console.log('header: ', header)
     var url = this.url
-    console.log('url: ', url)
-    header.empty().append('<a href="' + url + '">' + node.header + '</a>')
+    var not_text = header.children().detach()
+    header.wrapInner('<a href="' + url + '"></a>')
+    // header.append($(document.createTextNode(' '))).append(not_text)
+    // header[0].appendChild(document.createTextNode(" "))
+    // header.append(not_text)
+    header.append('&nbsp;').append(not_text)
   }
 
   var doc_process_nodedata = function(node, parents, level) {
@@ -56,13 +58,10 @@ $(document).ready(function() {
       path+= parent.header + '/'
     }
     var url = path + node.header + '.html'
-    // console.log('url: ', url)
-    // new Promise(function(confirm_url) {
-      $.ajax(url, {
-        data_custom: {header: header, node: node},
-        success: doc_set_url_header
-      })
-    // }).then()
+    $.ajax(url, {
+      data_custom: {header: header, node: node},
+      success: doc_set_url_header
+    })
   }
 
   var level = 0
