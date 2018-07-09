@@ -157,7 +157,17 @@ p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )
 a = File.read('/asdasdasd') rescue 123
 print 'a: '.red; puts a
 
-p Dir.pwd
-p File.basename(Dir.pwd)
-p Dir.chdir '..'
-p Dir['*']
+# TODO
+# p Dir.pwd
+# p File.basename(Dir.pwd)
+# p Dir.chdir '..'
+# p Dir['*']
+
+path = './temp'
+file = File.open path, 'w'
+file.write "asd\n"
+file.write "asd\n"
+file.write "asd\n"
+file.close
+a = File.exist? path
+print 'a: '.red; puts a

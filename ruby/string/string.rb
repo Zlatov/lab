@@ -26,7 +26,10 @@ a = 'строка'
 
 # Удалить пробелы вокругтекста (`trim` в других языках)
 puts 'Удалить пробелы вокругтекста'.green
-p ' sdf sdf '.strip
+a = ' asd asd  '
+b = a.strip
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
 puts "привет Макс! asd Asd".downcase!
@@ -177,3 +180,12 @@ b, c = *a.split(',').map(&:strip).map(&:to_f)
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+
+a = 'http://asd.ru/asd/zxc?qwe=123'
+b = a.sub /^http[s]{0,1}:\/\//i, ''
+c = b[/([^\/]*)/i,1]
+d = b.sub /[^\/]*/i, ''
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d

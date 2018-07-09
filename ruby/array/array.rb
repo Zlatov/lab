@@ -416,3 +416,24 @@ a = [{a:'1'},{a:'2'},{a:'3'},{a:'2'},{a:'4'},{a:'4'},{a:'5'}]
 b = a.group_by{|v| v[:a]}.select{|k,v| v.length >1}
 print 'a: '.red; p a
 print 'b: '.red; p b
+
+a = [
+  {domain: 1, id: 1},
+  {domain: 1, id: 2},
+  {domain: 2, id: 3},
+  {domain: 2, id: 4},
+  {domain: 2, id: 5},
+  {domain: 3, id: 6},
+]
+first_domain = true
+parent_domain = nil
+print 'a: '.red; puts a
+a.each do |value|
+  domain = value[:domain]
+  puts '} '.red if domain != parent_domain && !first_domain
+  puts "#{domain} { ".red if domain != parent_domain
+  print 'value: '.red; puts value
+  first_domain = false
+  parent_domain = domain
+end
+puts '} '.red
