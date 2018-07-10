@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-// error_reporting(-1);
+error_reporting(32767); // 1 + 2 + 4 + 8 + 16 + 32 + 64 + 128 + 256 + 512 + 1024 + 2048 + 4096 + 8192 + 16384
 $errLvl = error_reporting();
 for ($i = 0; $i < 15;  $i++ ) {
     print FriendlyErrorType($errLvl & pow(2, $i)) . "<br>\n";

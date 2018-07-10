@@ -11,3 +11,5 @@ export EDITOR="$EDITOR_PATH -w"
 
 toc.js, doc.js
 php interfaces, namespaces
+
+Разнести папку projects по превалирующим технологиям!

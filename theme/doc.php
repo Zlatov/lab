@@ -1,14 +1,20 @@
 <?php
-  $pathinfo = pathinfo($_SERVER['REDIRECT_URL']);
-  $explode = explode('/',$pathinfo['dirname']);
-  $last = end($explode);
-  // echo 'end($explode): <pre>';
-  // print_r(end($explode));
-  // array_shift($explode)
-  // print_r(end($explode));
-  // echo '</pre>';
-  // die();
-  $header = $last?$last:'';
+
+  // pathinfo использует текущие настройки локали.
+  // Для корректной работы при использовании многобайтных кодировок
+  // необходимо явно устанавливать локаль через setlocale
+  // Посмотреть список установленных локалей можно так:
+  // locale -a
+  setlocale(LC_ALL, 'ru_RU.utf8');
+
+  $ruri = urldecode($_SERVER['REQUEST_URI']);
+  $dir_path = pathinfo($ruri, PATHINFO_DIRNAME);
+  $dirs = array_filter(explode('/', $dir_path), function($v) {return $v != '';});
+  $last_dir = end($dirs);
+  $doc_url = '/' . implode('/', array_slice($dirs, 0, 2)) . '/index.html';
+  $doc_header = reset($dirs);
+  $header = $last_dir ? $last_dir : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +30,7 @@
   <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css.css">
 </head>
 <body>
+  <p><a href="<?= $doc_url ?>">Документация <?= $doc_header ?></a></p>
   <h1><?= $header ?></h1>
   <div id="toc"></div>
 

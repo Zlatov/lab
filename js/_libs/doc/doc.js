@@ -50,6 +50,7 @@ $(document).ready(function() {
     var header_selector = 'h' + (level+2) + '[data-doc_id="' + node.id + '"]'
     var header = $(header_selector)
     var path = ''
+    path+= window.location.pathname.split('.')[0] + '/'
     for (var i = 1, l = parents.length; i < l; i++) {
       var parent = parents[i]
       if (parent == null) {
