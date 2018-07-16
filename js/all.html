@@ -308,7 +308,10 @@ if (years &amp;&amp; c) {
 </pre>
 
 <h3>Url</h3>
-<p><strong>encodeURI(str)</strong></p>
+<p><strong>encodeURI(str)</strong> — для кодировки <strong>полного</strong> URL, тоесть сохранит URL работающим.</p>
+<pre>
+  http://example.ru/a file with spaces.html => http://example.ru/a%20file%20with%20spaces.html
+</pre>
 <p>Неэкранируемые символы: <code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>, <code>0</code>-<code>9</code>, <code>-</code>, <code>_</code>, <code>.</code>, <code>!</code>, <code>~</code>, <code>*</code>, <code>'</code>, <code>(</code>, <code>)</code></p>
 <p>Зарезервированные символы: <code>;</code> <code>,</code> <code>/</code> <code>?</code> <code>:</code> <code>@</code> <code>&amp;</code> <code>=</code> <code>+</code> <code>$</code></p>
 <pre class="prettyprint lang-js eval_js">
@@ -318,7 +321,11 @@ if (years &amp;&amp; c) {
 <pre class="prettyprint lang-js eval_js">
   alert(decodeURI("https://developer.mozilla.org/ru/docs/JavaScript_%D1%88%D0%B5%D0%BB%D0%BB%D1%8B"));
 </pre>
-<p><strong>encodeURIComponent(str);</strong></p>
+<p><strong>encodeURIComponent(str)</strong> — для кодировки __параметра__ URL.</p>
+<pre class="prettyprint lang-js">
+  var param1 = encodeURIComponent("http://example.org/?a=12&b=55")
+  var url = "http://example.ru/?param1=" + param1 + "&param2=99" 
+</pre>
 <p>Неэкранируемые символы: <code>a</code>-<code>z</code>, <code>A</code>-<code>Z</code>, <code>0</code>-<code>9</code>, <code>-</code>, <code>_</code>, <code>.</code>, <code>!</code>, <code>~</code>, <code>*</code>, <code>'</code>, <code>(</code>, <code>)</code></p>
 <pre class="prettyprint lang-js eval_js">
   alert(encodeURIComponent('https://www.скм.рф/uri/docs.php?company=Собаки&amp;Кошки+Мышьки#life'));

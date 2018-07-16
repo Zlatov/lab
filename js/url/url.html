@@ -22,6 +22,19 @@ http://example.org:8888/foo/bar/baz.html?q=quux#bang
   <script type="text/javascript" src="../../js/_libs/lib.js"></script>
   <script type="text/javascript">
 
+    //
+    // ВНИМАНИЕ
+    // 1. Не используйте escape()
+    // 2. encodeURI() — для кодировки __полного__ URL, тоесть сохранит URL работающим.
+    // (
+    //   http://example.ru/a file with spaces.html => http://example.ru/a%20file%20with%20spaces.html
+    // )
+    // 3. encodeURIComponent() — для кодировки __параметра__ URL
+    // (
+    //   var param1 = encodeURIComponent("http://example.org/?a=12&b=55")
+    //   var url = "http://example.ru/?param1=" + param1 + "&param2=99"
+    // )
+    // 
     var encode = encodeURIComponent('zenonline.ru/cgi-bin/articles/client.cgi?action=load_articleslist&amp;phil_id=1&amp;year=2011&amp;month=9')
     var decode = decodeURIComponent('zenonline.ru%2Fcgi-bin%2Farticles%2Fclient.cgi%3Faction%3Dload_articleslist%26amp%3Bphil_id%3D1%26amp%3Byear%3D2011%26amp%3Bmonth%3D9')
 

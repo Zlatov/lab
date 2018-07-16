@@ -147,3 +147,8 @@ a = '$asd'
 b = a.gsub(/^\$/, '_')
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+
+a = 'rewrite /production/ajerozolnye-pokrytija-special.html /cat/aerozolnye-kraski-i-laki permanent;'
+b = a[/^(rewrite\s+\S+)\s/i, 1] rescue ''
+print 'a: '.red; puts a
+print 'b: '.red; puts b

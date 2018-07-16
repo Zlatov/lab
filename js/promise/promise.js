@@ -22,3 +22,7 @@ var refresh_page = Promise.all([save_data, save_files]).then(function(resolve_da
 }, function(reject_data) {
   console.log('reject_data: ', reject_data)
 })
+// 
+// Promise.all(…).then(res,rej) — res выполнится тогда, когда будут выполнены все обещания,
+// rej выполнится тогда, когда отклонено любое из переданных обещаний
+// 

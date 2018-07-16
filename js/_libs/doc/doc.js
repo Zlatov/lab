@@ -34,16 +34,30 @@ $(document).ready(function() {
 
   // console.log('doc_headers_nested: ', doc_headers_nested)
 
-  var doc_set_url_header = function(data, textStatus, jqXHR) {
+  var doc_scroll_if_hash_is_text_in = function(node, parents, level) {
+    if (window.location.hash == '#' + encodeURIComponent(node.header)) {
+      var header = $('[data-doc_id="' + node.id + '"]')
+      window.scrollTo(window.pageXOffset, header.offset().top)
+    }
+  }
+
+  var doc_set_url_for_header = function(data, textStatus, jqXHR) {
+    // console.log('> url!')
     var header = this.data_custom.header
     var node = this.data_custom.node
     var url = this.url
     var not_text = header.children().detach()
     header.wrapInner('<a href="' + url + '"></a>')
-    // header.append($(document.createTextNode(' '))).append(not_text)
-    // header[0].appendChild(document.createTextNode(" "))
-    // header.append(not_text)
     header.append('&nbsp;').append(not_text)
+    header.addClass('js_doc_linked')
+    this.data_custom.ajax_zakonchen_resolve()
+  }
+
+  var doc_header_no_url_handler = function(jqXHR, textStatus, errorThrown) {
+    // console.log('> no url')
+    // Даже если ошибка - это означает успех (у заголовка нет соответствующей страницы)
+    // this.data_custom.ajax_zakonchen_reject()
+    this.data_custom.ajax_zakonchen_resolve()
   }
 
   var doc_process_nodedata = function(node, parents, level) {
@@ -59,10 +73,24 @@ $(document).ready(function() {
       path+= parent.header + '/'
     }
     var url = path + node.header + '.html'
-    $.ajax(url, {
-      data_custom: {header: header, node: node},
-      success: doc_set_url_header
+    var obeschayu_zakonchit_ajax_ot_headera = new Promise(function(ajax_zakonchen_resolve, ajax_zakonchen_reject) {
+      $.ajax(url, {
+        data_custom: {
+          header: header,
+          node: node,
+          ajax_zakonchen_resolve: ajax_zakonchen_resolve,
+          ajax_zakonchen_reject: ajax_zakonchen_reject,
+        },
+        success: doc_set_url_for_header,
+        error: doc_header_no_url_handler,
+      })
+        // .done(doc_set_url_for_header)
+        // .fail(doc_header_no_url_handler)
     })
+    if (window.location.hash) {
+      doc_scroll_if_hash_is_text_in(node, parents, level)
+    }
+    return obeschayu_zakonchit_ajax_ot_headera
   }
 
   var level = 0
@@ -73,11 +101,16 @@ $(document).ready(function() {
   var index = []
   index[level] = 0
 
+  var vse_headeri_obeschayut = []
+
   while (level>=0) {
     var node = cache[level][index[level]]
     if (node != null) {
 
-      doc_process_nodedata(Object.assign({}, node), parent.slice(0), level)
+
+      vse_headeri_obeschayut.push(
+        doc_process_nodedata(Object.assign({}, node), parent.slice(0), level)
+      )
       // console.log('node.id: ', node.id)
       // console.log('parent: ', parent.slice(0))
 
@@ -103,16 +136,32 @@ $(document).ready(function() {
 
 
 
-  var doc_links = $('a.doc').each(function(i,d) {
-    var link = $(d)
-    console.log('link: ', link)
-    var parent_header = link.parent().parent().prevUntil('h6, h5, h4, h3, h2')
-    console.log('parent_header: ', parent_header)
-    console.log('parent_header.text(): ', parent_header.text())
-    for (var h = 2; h <= 6; h++) {
-      var header_selectror = 'h' + h
-    }
-  })
+  Promise.all(vse_headeri_obeschayut).then(function(resolve_data) {
+    console.log('> Vse zagolovki obrabotani')
+    doc_set_url_for_links()
+  }, function(reject_data) {
+    console.log('> Odin iz zagolovkov ne obrabotan')
+  }).catch(e => {
+    console.log(e);
+  });
+
+  var doc_set_url_for_links = function() {
+    var doc_links = $('a.doc').each(function(i, d) {
+      var link = $(d)
+      var link_parents = link.parentsUntil('body')
+      var body_child_node = link_parents[link_parents.length-1]
+      // debugger
+      var prev_header = (
+        $(body_child_node).prevUntil('.js_doc_linked').length ?
+        $(body_child_node).prevUntil('.js_doc_linked').last() :
+        $(body_child_node)
+      ).prev()
+      var prev_header_url = prev_header.find('a').attr('href')
+      var link_url = prev_header_url + '#' + encodeURIComponent(link.text())
+      link.attr('href', link_url)
+    })
+  }
+
 
 });
 

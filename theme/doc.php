@@ -11,9 +11,10 @@
   $dir_path = pathinfo($ruri, PATHINFO_DIRNAME);
   $dirs = array_filter(explode('/', $dir_path), function($v) {return $v != '';});
   $last_dir = end($dirs);
+  $file_name = pathinfo($ruri, PATHINFO_FILENAME);
   $doc_url = '/' . implode('/', array_slice($dirs, 0, 2)) . '/index.html';
   $doc_header = reset($dirs);
-  $header = $last_dir ? $last_dir : '';
+  $header = $file_name ? $file_name : '';
 
 ?>
 

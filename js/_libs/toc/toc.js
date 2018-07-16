@@ -15,7 +15,6 @@ $(document).ready(function() {
         if (prev_header_id != null) {
           header.attr('id', header_selectror + index)
           var link_index = prev_header_id.substring(2)
-          console.log('link_index: ', link_index)
           var ul = $('#toc_link_' + prev_header_selector + link_index).next("ul")
         }
       } else {

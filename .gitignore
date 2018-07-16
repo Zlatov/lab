@@ -4,3 +4,4 @@ theme/yarn
 !*.sublime-project
 *.sqlite3
 **/temp
+**/temp_*
