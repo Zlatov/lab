@@ -1,3 +1,28 @@
+function xhr_get(url) {
+  return $.ajax({
+    url: url,
+    type: 'get',
+    dataType: 'json',
+    beforeSend: showLoadingImgFn
+  })
+  .always(function() {
+    // remove loading image maybe
+  })
+  .fail(function() {
+    // handle request failures
+  });
+}
+
+xhr_get('/index').done(function(data) {
+  // do stuff with index data
+});
+
+xhr_get('/id').done(function(data) {
+  // do stuff with id data
+}).fail(function() {
+  asd
+});
+
 $.ajax({
   type: 'get',
   url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',

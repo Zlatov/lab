@@ -26,3 +26,17 @@ print 'b: '.red; ap b
 a = 's'
 b = a.to_i
 print 'b: '.red; puts b
+
+a = [
+  {order: 1,   id: 1},
+  {order: 100, id: 3},
+  {order: 100, id: 2},
+  {order: 20,  id: 4},
+  {order: 10,  id: 5},
+  {order: 1,   id: 6},
+  {order: 20,  id: 7},
+  {order: 10,  id: 8}
+]
+b = a.sort_by{|x| x[:id]}.reverse.sort_by{|x| x[:order]}
+print 'a: '.red; p a
+print 'b: '.red; p b

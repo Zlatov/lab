@@ -27,8 +27,45 @@ left join market_angars an on an.id = am.angar
 left join market_storehouses sh on sh.articul = am.storehouse_articul
 left join market_subdivisions_storehouses sdsh on sdsh.storehouse_uid = sh.uid
 where
-  am.product = 45415
+  am.product = 60030
+  ;
 
+select *
+from market_amounts_r1
+where market_amounts_r1.articul = '000060030';
+
+select *
+from market_amounts_r2
+where market_amounts_r2.articul = '000060030';
+
+select
+        a.id
+        ,a.main_storehouse_uid
+        ,sh.articul
+    ,sh.name as Склад
+        ,am.product
+    ,a.name as Филиал
+        ,ifnull(am.amount, 0) as amount
+      from market_angars a
+      inner join market_storehouses sh on sh.uid = a.main_storehouse_uid and sh.articul not null
+      left join temp_amounts am on am.angar = a.id and am.storehouse_articul = sh.articul
+      where
+        a.main_storehouse_uid not null
+    AND am.product = 60060
+      group by 
+      a.id
+      ,am.product
+    ;
+
+
+select
+  pr.product,
+  an.name as Филиал,
+  pr.price
+from temp_prices pr
+left join market_angars an on an.id = pr.angar
+where
+  pr.product = 65822
 
 <h2>Наличие</h2>
 <p><strong>Обновить зависимости наличий:</strong></p>

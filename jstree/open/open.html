@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../../theme/bower/jstree/dist/themes/default/style.min.css">
+</head>
+<body>
+  <div id="tree"></div>
+  <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../theme/bower/jstree/dist/jstree.min.js"></script>
+  <script type="text/javascript">
+
+    "use strict"
+
+    ;(function() {
+      $(document).ready(function() {
+
+        var struct = $('#tree')
+
+        $.ajax({url:'test_data.json'}).done(function(data, textStatus, jqXHR) {
+          init_tree(data)
+        })
+
+        var init_tree = function(flat_json) {
+          struct.jstree({
+            core: {
+              data: function(node, callback) {
+                var data = flat_json
+                if (node.id === "#") {
+                  callback.call(this, data)
+                } else {
+                  callback.call(this, data.filter(function(e){return e.parent === node.id}))
+                }
+              }
+            }
+          })
+          .on('loaded.jstree', function(event, data) {
+            console.log('> loaded.jstree')
+            console.log('event: ', event)
+            console.log('data: ', data)
+            console.log('this: ', this)
+            data.instance.open_node('1')
+          })
+          .on('open_node.jstree', function(event, data) {
+            console.log('> open_node.jstree #' + data.node.id)
+            console.log('event: ', event)
+            console.log('data: ', data)
+            if (data.node.id == '1') {
+              // Открывает только текущую (показывает её детей),
+              // сама может быть скрыта при этом
+              data.instance.open_node('4')
+              // Открывает рекурсивно себя и потомков если нода видна,
+              // если нода не видна, то открывает рекурсивно только детей текущей ноды, себя не открывает что странно
+              data.instance.open_all('11')
+              // Открывает до ноды
+              data.instance._open_to('18')
+              // Открывает до ноды с выделением
+              data.instance.select_node('23')
+            }
+          })
+        }
+
+      })
+    })();
+
+  </script>
+</body>
+</html>
