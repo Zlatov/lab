@@ -64,7 +64,7 @@ FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)
 
 puts 'Расширение файла'.green
 puts File.extname('qaer4ef24r34.rffre31.ваще не понятно что?')
-puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?')
+puts File.basename('asdasdasd/qaer4ef24r34.rffre31.ваще не понятно что?')
 puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?', '.*') # имя без расширения
 
 puts 'Открыте файла на запись.'.green
