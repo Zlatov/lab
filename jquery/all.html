@@ -1,91 +1,22 @@
 <h2>CDN</h2>
-<p>
-    CDN (Content Delivery Network - Сеть Доставки Контента), посмотреть последнее тут: <a href="https://code.jquery.com/">https://code.jquery.com/</a>
-</p>
-<p><strong>3.*:</strong></p>
-<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.1.0.min.js&quot;&gt;&lt;/script&gt;</code></p>
-<p><strong>2.*:</strong></p>
-<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
-<p><strong>1.*:</strong></p>
-<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
-<h2>Начало (start)</h2>
-<pre class="prettyprint lang-js">
-&lt;script type=&quot;text/javascript&quot;&gt;
-$(document).ready(function(){
-	$(&quot;#someId&quot;).css(&quot;color&quot;,&quot;red&quot;);
-});
-&lt;/script&gt;
+<p>CDN (Content Delivery Network - Сеть Доставки Контента), посмотреть последнее тут:</p>
+<ol>
+  <li><a href="https://code.jquery.com/" target="_blank">https://code.jquery.com/</a> (jquery.com)</li>
+  <li><a href="https://developers.google.com/speed/libraries/#jquery" target="_blank">https://developers.google.com/speed/libraries/#jquery</a> (google.com)</li>
+</ol>
+<p><strong>3.*:</strong> <code class="copyToClipboard">&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.1.0.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>2.*:</strong> <code class="copyToClipboard">&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-2.2.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<p><strong>1.*:</strong> <code class="copyToClipboard">&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;</code></p>
+
+<h2>Начало</h2>
+<pre class="prettyprint lang-js copyToClipboard">
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    $(document).ready(function() {
+      $(&quot;#someId&quot;).css(&quot;color&quot;, &quot;red&quot;);
+    });
+  &lt;/script&gt;
+
 </pre>
-
-
-<h2>Функции</h2>
-<h3>Селекторы</h3>
-<h4>Базовые</h4>
-<h5 title="Ищет элемент страницы с заданным идентификатором.">#id</h5>
-<h5 title="Ищет элементы страницы, принадлежащие заданному классу.">.class</h5>
-<h5 title="Ищет элементы страницы по имени тега.">tagName</h5>
-<h5 title="Ищет все элементы.">*</h5>
-<h4>Взаимодействия</h4>
-<h5 title="Ищет элементы страницы, которые удовлетворяют хотя бы одному из селекторов &lt;i&gt;first&lt;/i&gt;, &lt;i&gt;second&lt;/i&gt;, ...">first, second, ...</h5>
-<h5 title="Ищет элементы, удовлетворяющие селектору &lt;i&gt;inner&lt;/i&gt;, внутри элементов, удовлетворяющих &lt;i&gt;outer&lt;/i&gt;.">outer inner</h5>
-<h5 title="Ищет элементы, удовлетворяющие селектору &lt;i&gt;child&lt;/i&gt;, которые при этом являются &lt;b&gt;прямыми&lt;/b&gt; потомками элементов, удовлетворяющих &lt;i&gt;parent&lt;/i&gt;.">parent &gt; child</h5>
-<h5 title="Ищет элементы, удовлетворяющие селектору &lt;i&gt;next&lt;/i&gt;, которые следуют &lt;b&gt;непосредственно&lt;/b&gt; за элементами, удовлетворяющими &lt;i&gt;prev&lt;/i&gt;.">prev + next</h5>
-<h5 title="Ищет элементы, удовлетворяющие селектору &lt;i&gt;next&lt;/i&gt;, которые следуют за элементами, удовлетворяющими &lt;i&gt;prev&lt;/i&gt;.">prev ~ next</h5>
-<h4>По атрибутам</h4>
-<h5 title="Ищет элементы, содержащие атрибут &lt;i&gt;name&lt;/i&gt;">[name]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; совпадает с &lt;i&gt;value&lt;/i&gt;.">[name = value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; не совпадает с &lt;i&gt;value&lt;/i&gt;.">[name != value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; начинается с &lt;i&gt;value&lt;/i&gt;.">[name ^= value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; заканчивается на &lt;i&gt;value&lt;/i&gt;.">[name $= value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; содержит подстроку &lt;i&gt;value&lt;/i&gt;.">[name *= value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; содержит слово &lt;i&gt;value&lt;/i&gt;.">[name ~= value]</h5>
-<h5 title="Ищет элементы, у которых значение атрибута &lt;i&gt;name&lt;/i&gt; имеют префикс &lt;i&gt;value&lt;/i&gt; (равен value или имеет вид: &quot;value-*&quot;).">[name |= value]</h5>
-<h5 title="Ищет элементы, соответствующие всем заданным условиям на атрибуты одновременно.">[first][second][...</h5>
-<h4>Простые фильтры</h4>
-<h5 title="Оставляет первый из найденных элементов.">:first</h5>
-<h5 title="Оставляет последний найденных элементов.">:last</h5>
-<h5 title="Соответствует элементу, идущего под номером index в наборе выбранных элементов.">:eq(index)</h5>
-<h5 title="Исключает из найденных элементов те, которые удовлетворяют селектору &lt;i&gt;selector&lt;/i&gt;.">:not(selector)</h5>
-<h5 title="Оставляет только четные найденные элементы.">:even</h5>
-<h5 title="Оставляет только нечетные найденные элементы.">:odd</h5>
-<h5 title="Оставляет только те найденные элементы, чей индекс превосходит n.">:gt(n)</h5>
-<h5 title="Оставляет только те найденные элементы, чей индекс не превосходит n.">:lt(n)</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются заголовками (с тегами h1, h2 и.т.д.).">:header</h5>
-<h5 title="Оставляет те найденные элементы, которые в данный момент задействованы в анимации.">:animated</h5>
-<h5 title="Оставляет только невидимые элементы.">:hidden</h5>
-<h5 title="Соответствует элементам, в которых указан подходящий язык содержимого. В параметре language указывается код языка.">:visible</h5>
-<h5 title="Оставляет только видимые элементы.">:lang()</h5>
-<h4>Фильтры дочерних <br>элементов</h4>
-<h5 title="Оставляет те найденные элементы, которые расположены первыми в своих родительских элементах.">:first-child</h5>
-<h5 title="Оставляет те найденные элементы, которые расположены последними в своих родительских элементах.">:last-child</h5>
-<h5 title="Оставляет те найденные элементы, которые расположены определенным образом в родительских элементах (четные, нечетные, идущие под заданным номером).">:nth-child(conditions)</h5>
-<h5 title="Оставляет те найденные элементы, которые расположены определенным образом в родительских элементах (четные, нечетные, идущие под заданным номером).">:nth-child-last(conditions)</h5>
-<h5 title="Оставляет те найденные элементы, которые являются единственными потомками в своих родительских элементах.">:only-child</h5>
-<h5 title="Фильтрует набор выбранных элементов, оставляя только те элементы, которые первыми будут встречены в своих родителях.">:first-of-type</h5>
-<h5 title="Фильтрует набор выбранных элементов, оставляя только те элементы, которые последними будут встречены в своих родителях.">:last-of-type</h5>
-<h4>Фильтры по содержимому</h4>
-<h5 title="Оставляет те найденные элементы, которые содержат заданный текст.">:contains(text)</h5>
-<h5 title="Оставляет те найденные элементы, у которых нет содержимого (текста и других элементов).">:empty</h5>
-<h5 title="Оставляет те найденные элементы, которые содержат внутри хотя бы один элемент, удовлетворяющий селектору &lt;i&gt;selector&lt;/i&gt;.">:has(selector)</h5>
-<h5 title="Оставляет непустые элементы из всех найденных.">:parent</h5>
-<h4>Фильтры форм</h4>
-<h5 title="Оставляет только те найденные элементы, которые являются элементами формы (с тегами input, textarea или button).">:input</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются кнопками (с тегом button или типом button).">:button</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются переключателями.">:radio</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются флажками.">:checkbox</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются текстовыми полями.">:text</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются полями ввода пароля.">:password</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются полями загрузки файлов.">:file</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются кнопками отправки формы.">:submit</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются кнопками очистки формы.">:reset</h5>
-<h5 title="Оставляет только те найденные элементы, которые являются изображениями для отправки формы (input типа image).">:image</h5>
-<h5 title="Оставляет найденные элементы, находящиеся в данный момент в фокусе.">:focus</h5>
-<h5 title="Оставляет найденные элементы со статусом selected. Это могут быть элементы типа &lt;tt&gt;&amp;lt;option&amp;gt;&lt;/tt&gt;.">:selected</h5>
-<h5 title="Оставляет найденные элементы со статусом checked. Это могут быть элементы типа &lt;tt&gt;&amp;lt;checkbox&amp;gt;&lt;/tt&gt; или &lt;tt&gt;&amp;lt;radio&amp;gt;&lt;/tt&gt;.">:checked</h5>
-<h5 title="Из всех выбранных элементов, оставляет только активные элементы формы (со статусом enabled).">:enabled</h5>
-<h5 title="Из всех выбранных элементов, оставляет только неактивные элементы формы (со статусом disabled).">:disabled</h5>
-
-
 
 <h2>Потоки</h2>
 <p>Нет последовательного выполнения кроме как callback, например, в анимации slideDown передаем анонимную функцию, <strong>причем не передаем никаких параметров иначе ничего не работает!</strong></p>
