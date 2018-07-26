@@ -23,6 +23,49 @@ Set Character Encoding - …
 
 <h3>Shortkeys (Custom Keyboard Shortcuts)</h3>
 Shortkeys (Custom Keyboard Shortcuts) - …
+<p>По нажатию на кнопку <kbd class="copyToClipboard">tab</kbd> запустить яваскрипт при условии что сайт <code class="copyToClipboard">*.google.ru*</code>:</p>
+<pre class="copyToClipboard prettyprint lang-js">
+console.log('&gt; Shortkyes Tab!')
+document.selectedResultId=0
+function scrollToElement(el) {
+    var rect = el.getBoundingClientRect();
+    if (!(rect.top &gt;= 0 &amp;&amp; rect.bottom &lt;= window.innerHeight)) {
+        window.scrollTo(0, rect.top + window.pageYOffset - (window.innerHeight / 2));
+    }
+}
+
+function selectResult(newId){
+        els = document.querySelectorAll(&quot;h3.r&quot;)
+        if(newId &lt; 0 || newId &gt;= els.length)
+                return  //Could modify for page nav...?
+        rp = document.getElementById(&quot;result-pointer&quot;)
+        if(rp != null){
+                rp.remove()
+        }
+        document.selectedResultId=newId
+        el = els[newId]
+        el.innerHTML = &quot;&lt;div id=\&quot;result-pointer\&quot; style=\&quot;position:absolute;left:-15px;\&quot;&gt;&amp;gt;&lt;/div&gt;&quot; + el.innerHTML
+        scrollToElement(el)
+        lnk = el.querySelector('a')
+        lnk.focus()
+}
+document.onkeyup=function(event){
+        if(event.keyCode==38)
+                selectResult(document.selectedResultId-1)
+        if(event.keyCode==40)
+                selectResult(document.selectedResultId+1)
+}
+selectResult(0)
+</pre>
+
+<p>По нажатию на <kbd class="copyToClipboard">ctrl+q</kbd> запустить, если сайт <code class="copyToClipboard">*.google.ru*</code></p>
+<pre class="copyToClipboard prettyprint lang-js">
+if (window['lst-ib'] != document.activeElement) {
+  window['lst-ib'].focus();
+} else {
+  console.log('No window[\'lst-ib\']')
+}
+</pre>
 
 <h3>Duplicate Tab Shortcut Key</h3>
 Duplicate Tab Shortcut Key - …
