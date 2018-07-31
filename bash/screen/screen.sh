@@ -27,13 +27,18 @@ else
 fi
 
 echo 'Проверка экрана с именем temp.'
+
+echo `screen -list`
+
 if (( `screen -list | grep -c 'temp'` >= 2))
 then
     echo 'Экранов с таким именем много.'
+    echo $(screen -list | grep temp | head -n 1)
     screen_id=$(screen -list | grep temp | head -n 1 | sed -nr 's/(.*[0-9]+.[a-zA-Z_]+).*/\1/p')
     if [[ ! "$screen_id" = '' ]]
     then
     	echo 'Определён идентификатор экрана, удаляем экран.'
+        echo "$screen_id"
     	screen -S $screen_id -X quit
     else
     	echo 'Не удалось определить идентификатор экрана.'

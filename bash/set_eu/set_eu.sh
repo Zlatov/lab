@@ -4,7 +4,7 @@ set -eu
 # 	echo "A == 'asd'"
 # fi
 
-A='zx'
+# A='zx'
 # A='zxc'
 
 if [[ -z ${A-} ]]

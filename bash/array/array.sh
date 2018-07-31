@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# !/bin/bash
 . ../_lib/echoc
 
 array=(aaa bbb ccc)
