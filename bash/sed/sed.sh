@@ -1,12 +1,14 @@
 #!/bin/bash
+
+. ../_lib/echoc
+
+# Замена подстроки в строке на другую строку
 echo день | sed s/день/ночь/
-echo '.PNG' | sed s/'.PNG'/'.png'/
+echo +день+ | sed s/день/ночь/
 
-echo 'asd.PNG' | sed s/'.PNG'/'.png'/
-
-echo '.PNG.PNG' | sed 's/\.PNG$/.png/'
-
-echo '.png.PNG' | sed 's/.PNG/.png/'
+# Это регистрозависимо и всёравно это регулярка
+echoc "Это регистрозависимо и всёравно это регулярка" green
+echo '.PNGуPNG' | sed s/'.PNG$'/'.png'/
 
 touch temp
 echo -e "a\na \`b\nA \`b\nb" > temp
@@ -31,3 +33,7 @@ sed -ir 's/^a `/c `_/i' temp2
 echo "foobar" | sed -r 's/foo(\w+)/\1 is found/'
 echo "foo123" | sed -rn 's/foo([0-9]+)/\1 is found/p'
 echo "123.asd" | sed -nr 's/([0-9]+.\w+)/\1 is found/p'
+
+echo 'Сохранить в переменную найденное по регулярке'
+a=$(echo "asd market_assd asd zxc" | sed -nr 's/.*(market[a-zA-Z_]+).*/\1/p')
+echo $a

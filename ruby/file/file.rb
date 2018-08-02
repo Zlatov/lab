@@ -63,8 +63,10 @@ puts 'Рекурсивное создание пути.'.green
 FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)
 
 puts 'Расширение файла'.green
-puts File.extname('qaer4ef24r34.rffre31.ваще не понятно что?')
-puts File.basename('asdasdasd/qaer4ef24r34.rffre31.ваще не понятно что?')
+puts File.extname('asd.asd/qaer4ef24r34.rffre31.ваще не понятно что?') # расширение файла (с точкой) из пути
+puts File.extname('asd.asd/qaer4ef24r34.rffre31.') # или пустая строка если точка на конце
+puts File.extname('asd.asd/qaer4ef24r34').class # или пустая строка если нет
+puts File.basename('asdasdasd/qaer4ef24r34.rffre31.ваще не понятно что?') # имя файла из пути
 puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?', '.*') # имя без расширения
 
 puts 'Открыте файла на запись.'.green
