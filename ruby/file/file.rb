@@ -67,7 +67,7 @@ puts File.extname('asd.asd/qaer4ef24r34.rffre31.ваще не понятно ч�
 puts File.extname('asd.asd/qaer4ef24r34.rffre31.') # или пустая строка если точка на конце
 puts File.extname('asd.asd/qaer4ef24r34').class # или пустая строка если нет
 puts File.basename('asdasdasd/qaer4ef24r34.rffre31.ваще не понятно что?') # имя файла из пути
-puts File.basename('qaer4ef24r34.rffre31.ваще не понятно что?', '.*') # имя без расширения
+puts File.basename('qaer4ef24r3/4.rffre31.ваще не понятно что?', '.*') # имя без расширения из пути
 
 puts 'Открыте файла на запись.'.green
 
@@ -159,6 +159,14 @@ p File.basename( 'http://sadf.ru/asdf.jpg?asd', '.*' )
 a = File.read('/asdasdasd') rescue 123
 print 'a: '.red; puts a
 
+# Удаление
+puts 'Удаление.'.green
+fh = File.new 'temp_delete', 'w'
+fh.close
+File.delete('temp_delete') if File.exist?('temp_delete')
+File.delete('temp_delete') if File.exist?('temp_delete')
+File.delete('temp_delete') if File.exist?('temp_delete')
+
 # TODO
 # p Dir.pwd
 # p File.basename(Dir.pwd)
@@ -173,3 +181,26 @@ file.write "asd\n"
 file.close
 a = File.exist? path
 print 'a: '.red; puts a
+
+# Запись в файл
+puts 'Запись в файл.'.green
+File.write 'temp', '123'
+File.write 'temp', '123'
+File.write 'temp', '123'
+p File.read('temp').split("\n")
+
+# Запись в файл
+puts 'Запись в файл.'.green
+open('temp', 'w') do |f|
+  f.puts "puts."
+  f.puts "puts."
+  f.puts "puts."
+  f.write "write."
+  f.write "write."
+  f.write "write."
+  f << "<<."
+  f << "<<."
+  f << "<<."
+end
+a = File.read('temp').split("\n")
+print 'a: '.red; p a

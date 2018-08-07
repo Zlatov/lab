@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+
 Pt.products.first.c1.name
 Pt.products.first.pricelists.where(:angar_id => 36).first.amount
 SALE_STATISTIC['36'][Pt.products.first.articul]
@@ -10,33 +17,6 @@ CreateSaleStatisticConstant.new.process!
 CreateTraderConstant.new.process!
 MetricConstantCreate.new.process!
 CreateStrictColorConstant.new.process!
-
-select
-  am.product,
-  -- am.angar,
-  an.name as Филиал,
-  -- am.storehouse_articul,
-  sh.name as Склад,
-  case
-    when sdsh.subdivision_sid is null then '-'
-    else 'Да'
-  end as 'Техниковский склад?',
-  am.amount
-from temp_amounts am
-left join market_angars an on an.id = am.angar
-left join market_storehouses sh on sh.articul = am.storehouse_articul
-left join market_subdivisions_storehouses sdsh on sdsh.storehouse_uid = sh.uid
-where
-  am.product = 60030
-  ;
-
-select *
-from market_amounts_r1
-where market_amounts_r1.articul = '000060030';
-
-select *
-from market_amounts_r2
-where market_amounts_r2.articul = '000060030';
 
 select
         a.id
@@ -74,6 +54,48 @@ where
   <li><code>rails create:is_amountrule</code></li>
 </ul>
 <p><code>rails import:amountrule create:is_amountrule</code></p>
+<h3>Посмотреть наличие в БД</h3>
+
+<pre class="prettyprint lang-sql">
+-- Определить правило 1 или 2
+select *
+from market_product_info
+where market_product_info.articul = '000054508';
+
+-- Наличие товара по правилу №1
+select r1.*, an.name
+from market_amounts_r1 r1
+left join market_angars an on an.id = r1.angar_id
+where r1.articul = '000054508'
+order by an.name;
+
+-- Наличие товара по правилу №2
+select *
+from market_amounts_r2
+where market_amounts_r2.articul = '000054508';
+
+-- Наличие от 1С
+select
+  am.product,
+  -- am.angar,
+  an.name as Филиал,
+  -- am.storehouse_articul,
+  sh.name as Склад,
+  case
+    when sdsh.subdivision_sid is null then '-'
+    else 'Да'
+  end as 'Техниковский склад?',
+  am.amount
+from temp_amounts am
+left join market_angars an on an.id = am.angar
+left join market_storehouses sh on sh.articul = am.storehouse_articul
+left join market_subdivisions_storehouses sdsh on sdsh.storehouse_uid = sh.uid
+where
+  am.product = 54508
+order by an.name
+;
+</pre>
+
 <h2>Обмен с 1С</h2>
 <ul>
   <li>Класс: <code class="copyToClipboard">app/logic/concern/scopes/obmen.rb</code></li>
@@ -131,3 +153,5 @@ git pull origin master
 screen -r ma
 пока что вручную
 
+</body>
+</html>

@@ -52,6 +52,7 @@ a = a + '../zxc'
 p a.to_s
 
 # Глоб может выдавать список полуных путей к файлам, используй entries
+puts 'Глоб может выдавать список полуных путей к файлам, используй entries'.green
 p Dir.glob('*').select{|e| File.file? e}
 p Dir['*'].select{|e| File.directory? e}
 p Dir[first].select{|e| File.directory? e}
@@ -64,3 +65,13 @@ p Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}.select{|
 
 # Очистить директорию
 # FileUtils.rm_r Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}
+
+
+FileUtils.mkdir_p 'c/d'
+File.write 'c/asd', 'asd'
+# p Dir['c/*']
+# FileUtils.rm_r Dir['c/*']
+# p Dir['c/*']
+
+File.write 'c/origin_asd.jpg', 'asd'
+p Dir['c/origin_asd*'].first

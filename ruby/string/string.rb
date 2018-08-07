@@ -32,7 +32,7 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
-puts "привет Макс! asd Asd".downcase!
+puts "управление Регистром символов в строке! asd Asd".downcase!
 puts UnicodeUtils.downcase('привет Макс! asd Asd')
 # puts "привет Макс! asd Asd".mb_chars.upcase!
 # puts "привет Макс! asd Asd".mb_chars.capitalize!
@@ -41,8 +41,15 @@ puts UnicodeUtils.downcase('привет Макс! asd Asd')
 # Вырезать по позиции
 puts 'Вырезать по позиции'.green
 puts 'slice'.blue
-# "строка".slice индекс, дельта
+# "строка".slice индекс (с нуля), дельта
 p "0123456789".slice 2, 3 # "234"
+p "0123456789".slice 2 # "2"
+p "0123456789"[2] # "2"
+p "0123456789"[2, 3] # "234"
+p "0123456789"[2 .. 3] # "23"
+p "0123456789"[2 .. -1] # "23456789"
+p "0123456789"[2 .. 0] # ""
+p "0123456789"[2 .. 1] # ""
 mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
 p mysql_error_message.length
 p mysql_error_message.slice(15, mysql_error_message.length-15)

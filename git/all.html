@@ -173,6 +173,21 @@ git config --global alias.hist 'log --graph --pretty=format:"%Cred%h%Creset -%C(
 <p><code class="copyToClipboard">git config http.sslVerify "false"</code></p>
 <p><code class="copyToClipboard">git config http.sslVerify false</code></p>
 
+<h3>git status не показывает неотслеживаемые файлы, показывает только их папки</h3>
+<p><code class="copyToClipboard">git config --global status.showUntrackedFiles all</code></p>
+<p><code class="copyToClipboard">git status -uall</code></p>
+<pre>
+-u, --untracked-files[=]
+  Show untracked files (Default: all).
+
+  The mode parameter is optional, and is used to specify the handling of untracked
+  files. The possible options are:
+
+  ·  no - Show no untracked files
+  ·  normal - Shows untracked files and directories
+  ·  all - Also shows individual files in untracked directories.
+</pre>
+
 <h2>Отменить</h2>
 <h3>Отменить последний коммит <q>C</q></h3>
 <p><strong>Состояние:</strong></p>
