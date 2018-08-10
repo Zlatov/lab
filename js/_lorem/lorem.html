@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script type="text/javascript" src="../../theme/yarn/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    var a = 1;
+
+    // Изоляция js кода.
+    ;(function() {
+      "use strict"
+      console.log('window: ', window)
+      console.log('$: ', $)
+      var a = 2;
+      console.log('своя глобальная переменная a: ', a)
+      console.log('внешняя глобальная переменная window.a: ', window.a)
+    })();
+
+    console.log('внешняя глобальная переменная a: ', a)
+
+  </script>
+</body>
+</html>

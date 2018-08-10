@@ -17,6 +17,10 @@ https://developer.mozilla.org/ru/docs/Web/API/Event
   <div id="square" style="width: 100px; height: 100px; background-color: red;"></div>
 
   <script type="text/javascript">
+
+    // 
+    // Создание собственного события click_on_red
+    // 
     var click_on_red = new Event('click_on_red')
     var click_on_red_handler = function(event) {
       console.log('Red Click!!!')
@@ -27,6 +31,7 @@ https://developer.mozilla.org/ru/docs/Web/API/Event
     var click_handler = function(event) {
       if (event.target.style.backgroundColor == 'red') {
         event.target.style.backgroundColor = 'green'
+        // Отправляет событие в общую систему событий (вызов события):
         event.target.dispatchEvent(window.click_on_red)
       } else {
         event.target.style.backgroundColor = 'red'
@@ -39,7 +44,18 @@ https://developer.mozilla.org/ru/docs/Web/API/Event
     } else {
       square.removeEventListener('click_on_red', window.click_on_red_handler)
     }
+
   </script>
+
+  <div id="lovim_vse">
+    <div id="otseivaem_krasnie">
+      <div id="krasniy"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  </script>
+
 </body>
 
 </html>

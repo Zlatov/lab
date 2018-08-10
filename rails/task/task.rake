@@ -30,7 +30,7 @@ namespace :taskspace do
     puts Rails.env # > production|development|...
   end
 
-  # $ rails taskspace:taskname3[asd]
+  # $ rails taskspace:taskname3[asd,1]
   task :taskname3, [:key, :key2] do |t, args|
     puts args.key # > asd
     puts args.key2 # > zxc
