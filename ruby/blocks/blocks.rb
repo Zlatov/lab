@@ -27,6 +27,20 @@ ftp do |param|
   "#{param} - huy"
 end
 
+# def self.ftp
+#   ...
+#   yield(1, 2)
+#   ...
+# end
+
+# a = []
+# b = nil
+# a.ftp do |param, as|
+#   # "#{param} - huy"
+#   b = param
+# end
+# p b
+
 puts '-----------------------'
 
 # метод принимает один параметр, блок за параметр не считается, но тут блок именован

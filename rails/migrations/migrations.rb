@@ -1,3 +1,10 @@
+
+change_column :table_name, :column_name, :column_type, null: false, default: ''
+
+remove_column :table_name, :column_name
+
+drop_table :market_product_clips
+
 create_table "market_angars", force: :cascade do |t|
   t.string   "name"
   t.string   "address"
@@ -8,3 +15,22 @@ create_table "market_angars", force: :cascade do |t|
   t.float    "lng"
   t.index ["name"], name: "index_market_angars_on_name", unique: true
 end
+
+create_table :market_product_clips, id: :string, force: :cascade do |t|
+  t.string :tab_id, null: false
+  t.string :name,   null: false
+  t.string :url
+  t.text   :text
+
+  t.index [:id], name: :uqix_marketproductclips_id, unique: true
+  t.index [:tab_id], name: :ix_marketproductclips_tab_id
+end
+
+# Removes the index_accounts_on_column in the accounts table.
+remove_index :accounts, :column
+# Removes the index named index_accounts_on_branch_id in the accounts table.
+remove_index :accounts, column: :branch_id
+# Removes the index named index_accounts_on_branch_id_and_party_id in the accounts table.
+remove_index :accounts, column: [:branch_id, :party_id]
+# Removes the index named by_branch_party in the accounts table.
+remove_index :accounts, name: :by_branch_party

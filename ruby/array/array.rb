@@ -30,6 +30,7 @@ p arr.sample
 # [1, 2, 3]
 # %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
 # %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
+# exit 0
 
 puts 'Масси включает в себя `:b`?'.red
 p (arr.include?(:b)? 'y' : 'n')
@@ -41,6 +42,7 @@ asd
 asd
 }
 ap arr
+# exit 0
 
 
 puts '--------------------------------'
@@ -51,6 +53,7 @@ c = a & b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+# exit 0
 
 puts 'Объеденение?++++++++++++++++++++++++++++++++'.green
 a = [1,1,3,4]
@@ -73,6 +76,7 @@ a = [[1,1,3,4],[1,2,4,5]]
 b = a.flatten
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Вычитание'.green
 a = [1,1,3,4]
@@ -81,6 +85,7 @@ c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+# exit 0
 
 puts '--------------------------------'
 puts 'Перебор'.green
@@ -105,6 +110,7 @@ for val in a
   next if val == 2 # как continue во многих других языках
   puts val
 end
+# exit 0
 
 puts '--------------------------------'
 puts 'Последний элемент массива'.green
@@ -214,6 +220,7 @@ a = [{id:1}, {id:2}, {id:3}, {id:2}]
 b = a.delete_if{|v| v['id'.to_sym]==3}
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 
 puts 'Изменение массива в переборе (.map!)'.green
@@ -221,6 +228,7 @@ a = [1,2,3,4]
 b = a.map!{|e| e+= 1}
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Изменение хеш в переборе (.map)'.green
 a = {vips: {article:'000023'}}
@@ -241,6 +249,7 @@ b = Hash[ a.map { |k,v|
 }]
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Удалить по условию с учётом индекса'.green
 a = [1,2,3]
@@ -254,6 +263,7 @@ a.delete_if.with_index do |_, index|
 end
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 
 puts 'Массив хэшей в хэш-инфо'.green
@@ -333,6 +343,7 @@ while level >= 0
     level-= 1
   end
 end
+# exit 0
 
 puts 'Склеить массивы'.green
 a =  [1,2]
@@ -341,12 +352,14 @@ c = a + b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+# exit 0
 
 puts 'Назначить если нет (||=), вставить в массив (.push)'.green
 a = {}
 a[:a] ||= []
 a[:a].push({a:1})
 print 'a[:a]: '.red; p a[:a]
+# exit 0
 
 puts 'each по несколько элементов (.each_slice)'.green
 a = (1..5)
@@ -355,6 +368,7 @@ b = a.each_slice(2) do |x|
 end
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Изъять, выбрать из массива'.green
 puts 'С конца (.pop)'.blue
@@ -367,12 +381,36 @@ a = [1,2,3]
 b = a.shift 2
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Очистить от нулевых значений (.compact)'.green
 a = [nil, 1, 2, nil, 3]
 b = a.compact!
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
+
+puts 'Очистить от дубликатов'.green
+a = [ "a", "a", "b", "b", "c" ]
+b = a.uniq
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = [["student","sam"], ["student","george"], ["teacher","matz"]]
+b = a.uniq { |s| s.first }
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit 0
+
+puts 'Определить наличие дубликатов (.detect)'.green
+a = [1,2,3,2,2,4,4,5]
+b = a.detect{|v| a.count(v) > 1}
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = [1,2,3,2,2,4,4,5]
+b = a.select{|e| a.count(e) > 1}.uniq
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit 0
 
 puts 'Сложить элементы массива (.reduce, .inject)'.green
 a = (1..3)
@@ -408,12 +446,6 @@ a, b = *[1,2,3]
 print 'a: '.red; p a
 print 'b: '.red; p b
 
-puts 'Дубликаты (.)'.green
-a = [1,2,3,2,4,4,5]
-b = a.detect{|v| a.count(v) > 1}
-print 'a: '.red; p a
-print 'b: '.red; p b
-
 a = [1,2,3,2,4,4,5]
 b = a.group_by{|v| v}
 c = b.select{|k,v| v.length > 1}
@@ -445,3 +477,70 @@ a.each do |value|
   parent_domain = domain
 end
 puts '} '.red
+
+
+# Перебор nested с расширением
+puts 'Перебор nested с расширением'.green
+
+class Array
+  def each_nested
+    level = 0
+    cache = []
+    cache[level] = self
+    parents = []
+    parents[level] = nil
+    i = []
+    i[level] = 0
+    while level >= 0
+      node = cache[level][i[level]]
+      i[level]+= 1
+      if node != nil
+
+        yield(node.clone, parents.clone, level)
+
+        if !node['children'].nil? && node['children'].length > 0
+          level+= 1
+          parents[level] = node.clone
+          cache[level] = node['children']
+          i[level] = 0
+        end
+      else
+        parents[level] = nil
+        level-= 1
+      end
+    end
+    self
+  end
+end
+
+a = [
+  {id: '1'},
+  {id: '2', 'children' => [] },
+  {id: '3', 'children' =>
+    [
+      {id: '3-1'},
+      {id: '3-2', 'children' =>
+        [
+          {id: '3-2-1'}
+        ]
+      }
+    ]
+  },
+  {id: '4', 'children' => [] }
+]
+
+a.each_nested do |node, parents, level|
+  puts '-----------------------'.green
+  print 'level: '.red; puts level
+  print 'node: '.red; p node
+  print 'parents: '.red; p parents
+end
+
+
+# Клонирование массива
+puts 'Клонирование массива'.green
+a = []
+b = a.clone
+b[0] = 0
+print 'a: '.red; p a
+print 'b: '.red; p b

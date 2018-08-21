@@ -1,3 +1,39 @@
+class Parent
+  self.primary_key = 'sid'
+class Child
+  belongs_to :parent,
+    foreign_key: :parent_sid,
+    primary_key: :sid
+# один-к-одному, содержит FK,
+# один экземпляр модели "принадлежит" одному экземпляру другой модели.
+
+class User
+  has_one :account,
+    foreign_key: :user_sid,
+    primary_key: :sid
+# один-к-одному, ID совпадает с FK принадлежащей модели,
+# один экземпляр модели имеет или обладает одним экземпляром другой модели.
+
+class User
+  has_many :orders
+# один-ко-многим, ID совпадает с FK принадлежащей модели,
+# один экземпляр модели имеет или обладает несколькими экземплярами другой модели.
+
+class User
+  self.primary_key = 'sid'
+  has_and_belongs_to_many :groups,
+    join_table: :market_us_gr, # имя смежной таблицы
+    foreign_key: :user_sid, # FK в смежной таблице для этого класса
+    association_foreign_key: :group_id # FK в смежной таблице для связываемого класса
+class Group
+  has_and_belongs_to_many :users,
+    join_table: :market_us_gr,
+    foreign_key: :group_id,
+    association_foreign_key: :user_sid
+# многие-ко-многим, без промежуточной модели.
+# каждый пользователь состоит во многих группах, и каждая группа имеет много пользователей
+# НЕ ПОДДЕРЖИВАЕТ опциею :dependent
+
 # 
 # :dependent
 # Контролирует, что происходит с связанными объектами, когда их владелец уничтожается.

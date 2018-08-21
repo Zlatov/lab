@@ -200,3 +200,9 @@ a = {}
   end
 end
 print 'a: '.red; puts a
+
+a = {}
+b = a.clone
+b[:a] = 0
+print 'a: '.red; p a
+print 'b: '.red; p b

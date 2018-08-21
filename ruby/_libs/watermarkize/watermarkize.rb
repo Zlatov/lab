@@ -1,6 +1,42 @@
-# image = Watermarkize::Image.open image_path
-# image.mark watermark2_path, dx: 30, dy: 20
-# image.write output2_path
+# 
+# Watermarkize
+# =============
+# 
+# Наложение водяного знака по центру изображения или повторяя как паттерн.
+# 
+# Использоваие
+# ------------
+# 
+# 1. Открыть изображение
+#   ```
+#     image = Watermarkize::Image.open image_path
+#   ```
+# 2. Наложить водяной знак
+#   * повторяющийся:
+#     ```
+#       image.mark watermark_path, dx: 40, dy: 40
+#     ```
+#   * по центру:
+#     ```
+#       image.mark watermark120_path, repeat: false
+#     ```
+# 3. Сохранить
+#   * На то же место
+#     ```
+#       image.save
+#     ```
+#   * C указанием нового места без указания расширения (восстановит
+#     расширение из пути к оригинальному изображению)
+#     ```
+#       image.save '/path/to/image/without/extension'
+#     ```
+#   * C указанием нового места c указания расширения
+#     ```
+#       image.save '/path/to/image/with.extension', repair_image_extension: false
+#     ```
+#     При необходимости можно принудительно запретить восстанавливать расширение
+#     указав опцию `repair_image_extension: false`.
+# 
 
 module Watermarkize
 
@@ -83,6 +119,9 @@ module Watermarkize
     end
 
     def mark_center
+      # max_side = @image.width > @image.height ? @image.width : @image.height
+      min_side = @image.width < @image.height ? @image.width : @image.height
+      @watermark.resize "#{min_side}x#{min_side}"
       @output = @image.composite(@watermark) do |o|
         o.gravity 'center'
       end

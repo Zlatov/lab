@@ -21,3 +21,7 @@ print 'jc: '.light_blue; puts jc
 a = {mtime:123}
 b = a.to_json
 p b
+
+# 
+p JSON.parse('{"key": "value"}', symbolize_names: true)
+# p '{"key": "value"}'.as_json
