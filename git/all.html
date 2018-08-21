@@ -155,6 +155,28 @@ git config --global alias.hist 'log --graph --pretty=format:"%Cred%h%Creset -%C(
 <pre>$ git reset --hard</pre>
 <p>— отменит операцию слияния, очистит index область и вернёт все файлы work tree до состояния последней фиксации по текущей ветви.</p>
 
+<h3>git submodule</h3>
+<p><strong>Добавление субмодуля</strong></p>
+<p>В корне проекта к которому добавляем выполнить:</p>
+<p><code class="copyToClipboard">git submodule add SUBMODULE_URL PATH/TO/SUBMODULE</code></p>
+<p>появятся новые файлы: .gitmodules, submodule_name. Закомитить...</p>
+
+
+<p><strong>Клонирование проекта с субмодулями</strong></p>
+<p><code class="copyToClipboard">git clone REPOSITORY_URL PATH_TO_REPOSITORY</code></p>
+<p><code class="copyToClipboard">git submodule init</code></p>
+<p><code class="copyToClipboard">git submodule update</code></p>
+<p>Или</p>
+<p><code class="copyToClipboard">git clone --recursive REPOSITORY_URL</code></p>
+
+
+<p><strong>Обновление отдельного субмодуля</strong></p>
+<p>Перейти директорию субмодуля и проверить наличие изменений:</p>
+<p><code class="copyToClipboard">cd PATH/TO/SUBMODULE</code></p>
+<p><code class="copyToClipboard">git fetch</code></p>
+<p>Для обновления выполнить:</p>
+<p><code class="copyToClipboard">git merge</code></p>
+
 <h3>git tag</h3>
 <p>— отметить текущее состояние, как некоторое конечное состояние для новой версии вашего проекта. Используется для создания списка стабильных версий проекта. Имя метки tag может использоваться в командах checkout и других командах, на ровне с именами фиксаций, именами ссылок (HEAD, FETCH_HEAD) и именами веток (master и т.п.).</p>
 <pre>$ git tag</pre>
