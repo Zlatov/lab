@@ -12,9 +12,11 @@ git submodule add git@github.com:Zlatov/Zlader.git js/_libs/zlader
 git clone http:... ./
 git submodule init
 git submodule update
-# Или
+# или
 git clone --recursive https:...
 
+# Клонирование субмодулей после клонирования проекта
+git submodule update --init --recursive
 
 # Обновление отдельного субмодуля
 # перейти в его директорию и проверить наличие изменений:
@@ -23,6 +25,10 @@ git fetch
 # И затем для обновления выполнить:
 git merge
 
+# Обновление всех субмодулей
+git submodule update --recursive --remote
+# или
+git pull --recurse-submodules
 
 # Удаление подмодуля
 # 1. Удалить нужную секцию в файле .gitmodules. 
