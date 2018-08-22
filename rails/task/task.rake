@@ -50,9 +50,10 @@ namespace :temp do
   desc "Запустить задачи одна за другой"
   task all: :environment do
     Rake::Task['taskname2'].execute
-    Rake::Task['taskspace:taskname2'].execute
+    Rake::Task['taskspace:taskname2'].execute # execute запускает блок do end без зависимых задач
+    Rake::Task['taskspace:taskname2'].invoke # invoke запускает с зависимыми задачами
     # или в командной строке
-    # $ rails taskname2 taskspace:taskname2
+    # $ RAILS_ENV=production rails taskname2 taskspace:taskname2
   end
 
 end

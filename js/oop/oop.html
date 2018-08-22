@@ -9,7 +9,9 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+
 			"use strict"
+
 			function Cl() {
 				console.log('this in Cl(): ', this) // this - инстанса
 				this.foo = 'property instanse one'
@@ -17,11 +19,13 @@
 					console.log('this in this.bar(): ', this) // this - инстанса
 					return 'property instance two'
 				}
-				// Неверно, така как вызывается только при инициализации:
+				// Неверно, так как данный код вызывается только при инициализации
+				// нового экземпляра этого класса (мы в конструкторе):
 				// Cl.foo = 'baz'
 				// Cl.bar = function() {
 				// 	return 'quux'
 				// }
+				console.log('Cl.foo from instance: ', Cl.foo)
 			}
 			// Верно:
 			Cl.foo = 'property class one'
@@ -40,6 +44,7 @@
 			console.log('instance.bar(): ', instance.bar())
 			console.log('instance2.foo: ', instance2.foo)
 			console.log('instance2.bar(): ', instance2.bar())
+
 		</script>
 	</body>
 </html>

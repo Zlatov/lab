@@ -8,19 +8,38 @@
   <script type="text/javascript">
 
     window.a = {
+      "this is": "a",
       c: function() {
-        document.log('this: ', this)
         console.log('this: ', this)
       }
     }
 
     window.a.b = function() {
-      document.log('this: ', this)
       console.log('this: ', this)
     }
 
-    window.a.b()
-    window.a.c()
+    window.a.b() // > this: {this is: "a", c: ƒ, b: ƒ}
+    window.a.c() // > this: {this is: "a", c: ƒ, b: ƒ}
+
+    window.d = {
+      "this is": "d",
+      e: function() {
+        console.log('this: ', this)
+      }
+    }
+
+    // Use .bind() when you want that function to later be called with a certain context,
+    // useful in events. Use .call() or .apply() when you want to invoke the function
+    // immediately, and modify the context.
+
+    window.d.e()                // > this: {this is: "d", e: ƒ}
+    window.d.e.bind(window.a)() // > this: {this is: "a", c: ƒ, b: ƒ}
+    window.d.e.call(window.a)   // > this: {this is: "a", c: ƒ, b: ƒ}
+
+    // func.call(context, arg1, arg2);
+    // // идентичен вызову
+    // func.apply(context, [arg1, arg2]);
+
   </script>
 </body>
 </html>

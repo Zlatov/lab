@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script type="text/javascript" src="/theme/yarn/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    // window.onload = function(){
+    //   // вызов нужных функций скрипта
+    // }
+    // Однако onload происходит после того, как страница сформирована полностью,
+    // включая загрузку всех изображений, флеш-баннеров и видеороликов. В то время
+    // как структура дерева DOM (элементов страницы), с которой обычно и работает
+    // скрипт, оказывается готова гораздо раньше. В результате скрипт запускается
+    // значительно позднее чем мог бы. На этот случай в jQuery есть метод ready,
+    // вызов которого осуществляется в момент готовности дерева DOM:
+    $(document).ready(function() {
+      alert('Done.');
+    });
+
+    // Изоляция
+    ;(function($) {
+      "use strict"
+    })(jQuery);
+
+  </script>
+</body>
+</html>
