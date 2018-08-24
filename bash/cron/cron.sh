@@ -1,19 +1,12 @@
 #!/bin/bash
-set -eu
+exit 0
 
-cd $(dirname $0)
-. ../_lib/echoc
-
-echoc '_Команда_ вывода содержимого текущего файла расписания' green
-echoc 'crontab -l' blue
-
-echoc '_Команда_ удаление текущего файла расписания:' green
-echoc 'crontab -r' blue
-
-echoc '_Команда_ создания/редактирования файла crontab текущего пользователя:' green
-echoc 'crontab -e' blue
-
-# EDITOR=nano crontab -e
-
-echoc 'Текущий файл расписания:' green
+# Вывод содержимого текущего файла расписания
 crontab -l
+
+# Удаление текущего файла расписания
+crontab -r
+
+# Cоздание/редактирование файла crontab текущего пользователя
+crontab -e
+EDITOR=nano crontab -e

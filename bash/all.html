@@ -1,6 +1,14 @@
 http://www.linuxintro.org/wiki/Babe#conditions
 
 <h2>Команды</h2>
+
+<h3>du</h3>
+<p>du (disk usage) — стандартная Unix программа для оценки занимаемого файлового пространства.</p>
+<p><code class="copyToClipboard">du -sh</code> — размер только текущего каталога (-s) и в удобной для человека форме (-h).</p>
+<p><code class="copyToClipboard">du -h -d 1</code> — размеры каталогов на глубину 1.</p>
+<p><code class="copyToClipboard">du -h -d 1 ./app</code> — размеры каталогов на глубину 1 в директории app.</p>
+<p><code class="copyToClipboard">du -scm Downloads doc</code> — размеры только указанных каталогов (-s) и итоговый их размер (-c) в мегабайтах (-m).</p>
+
 <h3>diff</h3>
 <p><code>diff ./some_file ./another_file</code> — сравнить два файла.</p>
 <h3>ls</h3>
