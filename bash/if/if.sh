@@ -1,23 +1,32 @@
-#!/bin/bash
-. ../_lib/yn
+#!/usr/bin/env bash
+
 . ../_lib/echoc
 
-# Yn "Да? [YES/no]"
-
-if [[ $YN -eq 1 ]]
-  then
-    BOO=true
-  else
-    BOO=false
+a=1
+if [[ "$a" -eq 1 ]]
+then
+  echoc "Значение переменной a эквивалентно 1" green
+  if [[ ! "$a" -eq 2 ]]; then echoc -n " и не эквивалентно 2."; fi
+else
+  echoc "Значение переменной a не эквивалентно 1" red
 fi
+# exit 0
 
-# Вообще странно что это работает:
-if !($BOO)
-  then
-    echo '(1)'
-  else
-    echo '(0)'
+a=true
+if $a
+then
+  echoc 'Значение переменной a эквивалентно true' green
+else
+  echoc 'Значение переменной a не эквивалентно true' red
 fi
+a=true
+if [[ ! "$a" = true ]]
+then
+  echoc 'Значение переменной a не эквивалентно true' red
+else
+  echoc 'Значение переменной a эквивалентно true' green
+fi
+# exit 0
 
 # Условные выражения,
 # такие как [ "$x" = "$y" ], [ -e "$file" ], [ -n "$variable" ] проверка, является ли переменная пустой
@@ -75,10 +84,13 @@ else
   echoc 'файла if.sh нет' red
 fi
 
-a=true
-if [[ ! "$a" = true ]]
+# $ command -v foo >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; }
+# $ type foo >/dev/null 2>&1 || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; }
+# $ hash foo 2>/dev/null || { echo >&2 "I require foo but it's not installed.  Aborting."; exit 1; }
+
+if hash foo 2>/dev/null
 then
-  echo '$a1: ' $a
+  echoc "Программа foo найдена." green
 else
-  echo '$a2: ' $a
+  echoc "Программа foo не найдена." red
 fi
