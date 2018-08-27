@@ -44,7 +44,7 @@ fi
 ./$lab_path/linux/system_setup/system_setup/apache/apache.sh
 
 cp ./$lab_path/linux/system_setup/system_setup/sublime-text-3/Packages/User/* .config/sublime-text-3/Packages/User
-echoc "Настроен sublime CollapseFolders." green
+echoc "Настроен sublime Packages/User." green
 
 path="$(pwd)/.config/sublime-text-3/Packages/Prefixw"
 if [[ -d "$path" ]]
