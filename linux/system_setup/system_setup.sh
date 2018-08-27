@@ -14,6 +14,38 @@ lab_path=projects/my/lab
 sudo apt-get -qq update
 echoc "Обновлён список доступных пакетов." green
 
+if hash python3.7 2>/dev/null
+then
+  echoc "Уже установлен python3.7." blue
+else
+  sudo apt-get install -y python3.7 1>/dev/null
+  echoc "Установлен python3.7." green
+fi
+
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
+sudo update-alternatives --config python
+echoc "Настроена версия python." green
+
+if [[ ! $(dpkg-query -W -f='${Status}' python-pip 2>/dev/null | grep -c "ok installed") -eq 0 ]]
+then
+  echoc "Уже установлен python-pip." blue
+else
+  sudo apt-get install -y python-pip 1>/dev/null
+  echoc "Установлен python-pip." green
+fi
+
+if [[ ! $(dpkg-query -W -f='${Status}' python3-pip 2>/dev/null | grep -c "ok installed") -eq 0 ]]
+then
+  echoc "Уже установлен python3-pip." blue
+else
+  sudo apt-get install -y python3-pip 1>/dev/null
+  echoc "Установлен python3-pip." green
+fi
+
+sudo pip install termcolor 1>/dev/null
+echoc "Установлен pip пакет termcolor." green
+
+
 if hash curl 2>/dev/null
 then
   echoc "Уже установлен curl." blue
