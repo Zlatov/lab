@@ -1,0 +1,5 @@
+// Sublime Text - Build System for PHP
+{
+  "cmd": ["/usr/bin/php", "$file"],
+  "selector": "source.php"
+}

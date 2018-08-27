@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 
 . ../_lib/echoc
-
+a=1
 function foo {
+  local a=2
+  echo 'Локальная переменная $a: ' $a
   echoc "Имя функции: ${FUNCNAME}" blue
   echoc "Количество переданных параметров : $#" green
   echo "Все параметры переданные функции: '$@'"
 }
 
+echo '$a: ' $a
 foo nixCraft
+echo '$a: ' $a
 foo 1 2 3 4 5
 foo "this" "is" "a" "test"
 

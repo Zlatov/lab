@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+for (var ${1:key} in ${2:hash}) {
+  var ${3:value} = ${2:hash}[${1:key}]
+}
+]]></content>
+	<tabTrigger>zzzjforhash</tabTrigger>
+	<scope>source.js</scope>
+</snippet>

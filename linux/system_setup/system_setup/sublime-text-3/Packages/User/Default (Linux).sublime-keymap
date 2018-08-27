@@ -1,0 +1,85 @@
+[
+	// Закрытие проекта
+	{ "keys": [ "ctrl+alt+w" ], "command": "close_workspace" },
+
+	// Поиск в выделенном
+	{ "keys": [ "alt+s" ], "command": "toggle_in_selection", "context":
+		[
+			{ "key": "setting.is_widget", "operator": "equal", "operand": true }
+		]
+	},
+
+	// Удали системные клавиши и разлогинься-залогинься, чтобы работало:
+	{ "keys": ["ctrl+alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["ctrl+alt+down"], "command": "select_lines", "args": {"forward": true} },
+
+	// Aligment
+	{ "keys": ["ctrl+alt+a"], "command": "alignment" },
+
+	// SFTP
+	{ "keys": ["ctrl+alt+u","ctrl+alt+u"], "command": "sftp_upload_file" },
+	{ "keys": ["ctrl+alt+u","ctrl+alt+d"], "command": "sftp_download_file" },
+
+	// Super calculator
+	{ "keys": ["alt+c"], "command": "super_calculator" },
+
+	// Zenon
+	{ "keys": ["alt+j", "alt+a"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-a.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+s"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-a-style.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+d"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-a-seo-email.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+p"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-p.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+["], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-p-style.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+u"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-ul.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+i"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-ul-style.sublime-snippet" }},
+	{ "keys": ["alt+j", "alt+l"], "command": "insert_snippet", "args": {"name": "Packages/User/zenon-li-style.sublime-snippet" }},
+
+	// Build system
+	// Убить процесс
+	{ "keys": ["ctrl+alt+b"], "command": "exec", "args": {"kill": true }},
+
+	// Pretty json
+	// ctrl + alt + j
+
+	// Markdown Preview `md`
+	{ "keys": ["alt+m"], "command": "markdown_preview_select", "args": {"target": "browser"} },
+
+	// Super Calculator
+	// alt + c
+
+	// Emmet
+	// рускоязычная клавиша shift+ctrl+g:
+	{
+		"keys": ["shift+ctrl+п"],
+		"command": "wrap_as_you_type", 
+		"context": [
+			{"operand": false, "operator": "equal", "match_all": true, "key": "setting.is_widget"},
+			{"match_all": true, "key": "emmet_action_enabled.wrap_as_you_type"}
+		]
+	},
+
+	// { "keys": ["ctrl+9"], "command": "collapse_all_folders" },
+	{ "keys": ["ctrl+9"], "command": "collapse_folders" },
+
+	{ "keys": ["ctrl+alt+shift+s"], "command": "scope_to_clipboard" },
+
+	// Word_Wrap
+	{ "keys": ["alt+w"], "command": "toggle_setting", "args": {"setting": "word_wrap"}},
+
+	// AdvancedNewFile
+	{ "keys": ["ctrl+alt+n"], "command": "advanced_new_file_new"},
+
+	// Sublime​ERB
+	{ "keys": ["ctrl+shift+."], "command": "erb" },
+
+	// Открытие закрытого файла
+	// { "keys": ["ctrl+shift+h"], "command": "open_recent_files" },
+	{ "keys": ["ctrl+shift+h"], "command": "open_recent_file", "args": {"index" : 0} },
+
+	// Terminal
+	{ "keys": ["f8"], "command": "open_terminal_project_folder" },
+	{ "keys": ["ctrl+f8"], "command": "open_terminal" },
+
+	// TerminalView
+	{ "keys": ["ctrl+shift+t"], "command": "terminal_view_open" }
+
+]

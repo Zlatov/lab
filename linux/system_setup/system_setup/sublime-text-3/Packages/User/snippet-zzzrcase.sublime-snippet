@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+case ${1:from_something}
+when ${2:something}
+  
+else
+  
+end
+]]></content>
+	<tabTrigger>zzzrcase</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

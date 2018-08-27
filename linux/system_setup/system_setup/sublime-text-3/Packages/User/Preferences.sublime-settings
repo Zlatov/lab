@@ -1,0 +1,29 @@
+{
+	"auto_complete_selector": "source, text",
+	"binary_file_patterns":
+	[
+		"*.dds",
+		"*.eot",
+		"*.gif",
+		"*.ico",
+		"*.jar",
+		"*.jpeg",
+		"*.jpg",
+		"*.pdf",
+		"*.png",
+		"*.swf",
+		"*.tga",
+		"*.ttf",
+		"*.zip",
+		"framework/tool/tree/to_db/_data/**"
+	],
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"fallback_encoding": "Cyrillic (Windows 1251)",
+	"font_size": 14,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"show_encoding": true,
+	"theme": "Soda Dark 3.sublime-theme"
+}

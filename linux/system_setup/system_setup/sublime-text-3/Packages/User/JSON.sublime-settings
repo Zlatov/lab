@@ -1,0 +1,9 @@
+{
+  "extensions": [
+		".jsbeautifyrc"
+	],
+  "tab_size": 2,
+  "detect_indentation": true,
+  "indent_with_tabs": false,
+  "translate_tabs_to_spaces": true
+}

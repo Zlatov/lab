@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+switch(${1:true}) {
+  case ${2:true}:
+    break
+  default:
+    break
+}
+]]></content>
+	<tabTrigger>zzzjswitch</tabTrigger>
+	<scope>source.js</scope>
+</snippet>

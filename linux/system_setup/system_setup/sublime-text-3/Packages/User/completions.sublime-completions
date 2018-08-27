@@ -1,0 +1,50 @@
+{
+  "scope": "source , text ",
+  "completions": [
+    {
+      "contents": "–",
+      "trigger": "u8-min\t–"
+    },
+    {
+      "contents": "—",
+      "trigger": "u8-tir\t—"
+    },
+    {
+      "contents": "«»",
+      "trigger": "u8-kav-elki\t«»"
+    },
+    {
+      "contents": "„“",
+      "trigger": "u8-kav-lapki\t„“"
+    },
+    {
+      "contents": "&#8222;&#8220;",
+      "trigger": "u8-kav-lapki-c\t&#8222;&#8220;"
+    },
+    {
+      "contents": "…",
+      "trigger": "u8-mno\t…"
+    },
+    {
+      "contents": "&#8230;",
+      "trigger": "u8-mno-c\t&#8230;"
+    },
+    {
+      "contents": "←↑→↓",
+      "trigger": "u8-str\t←↑→↓"
+    },
+    {
+      "contents": "₽",
+      "trigger": "u8-rub\t₽"
+    },
+    {
+      "contents": "&#8381;",
+      "trigger": "u8-rub-c\t&#8381;"
+    },
+    {
+      "contents": "┌─┬─┐│ │ │├─┼─┤│ │ │└─┴─┘",
+      "trigger": "u8-table\t├─┼─┤"
+    },
+    "iadfeshchm"
+  ]
+}

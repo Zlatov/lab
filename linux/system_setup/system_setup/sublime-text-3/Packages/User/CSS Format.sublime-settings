@@ -1,0 +1,31 @@
+{
+  // Code Indentation
+  //   "\t"   : 1 tab
+  //   "  "   : 2 spaces
+  //   "    " : 4 spaces
+  "indentation": "  ",
+
+  // Block Break (Expand Mode Only)
+  //   "\n"   : 1 line break after each rules block
+  //   "\n\n" : 2 line breaks after each rules block
+  "expand_block_break": "\n\n",
+
+  // Format on Save
+  //   false : disabled
+  //   true  : enabled
+  "format_on_save": false,
+
+  // On Save Action
+  //   "expand"        : Expanded
+  //   "expand-bs"     : Expanded (Break Selectors)
+  //   "compact"       : Compact
+  //   "compact-ns"    : Compact (No Spaces)
+  //   "compact-bs"    : Compact (Break Selectors)
+  //   "compact-bs-ns" : Compact (Break Selectors, No Spaces)
+  //   "compress"      : Compressed
+  "format_on_save_action": "expand",
+
+  // On Save File Filter
+  //   Please use regular expression
+  "format_on_save_filter": "\\.(css|sass|scss|less)$"
+}

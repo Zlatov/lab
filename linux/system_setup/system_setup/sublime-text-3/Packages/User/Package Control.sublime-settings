@@ -1,0 +1,41 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Alignment",
+		"All Autocomplete",
+		"ANSIescape",
+		"ApacheConf",
+		"AutoFileName",
+		"ColorPicker",
+		"Compare Side-By-Side",
+		"CSS Format",
+		"DocBlockr",
+		"Emmet",
+		"ERB Snippets",
+		"GitGutter",
+		"HTML-CSS-JS Prettify",
+		"Language 1C (BSL)",
+		"MarkdownPreview",
+		"MoveTab",
+		"nginx",
+		"Package Control",
+		"Pretty JSON",
+		"rsub",
+		"SFTP",
+		"SideBarEnhancements",
+		"StringUtilities",
+		"SublimeCodeIntel",
+		"SublimeERB",
+		"Super Calculator",
+		"SyncedSideBar",
+		"Terminal",
+		"TerminalView",
+		"Theme - Soda",
+		"View In Browser"
+	]
+}
