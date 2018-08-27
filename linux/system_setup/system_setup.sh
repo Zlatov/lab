@@ -22,6 +22,14 @@ else
   echoc "Установлен curl." green
 fi
 
+if hash xdotool 2>/dev/null
+then
+  echoc "Уже установлен xdotool." blue
+else
+  sudo apt-get install xdotool 1>/dev/null
+  echoc "Установлен xdotool." green
+fi
+
 if hash yarn 2>/dev/null
 then
   echoc "Уже установлен yarn." blue
@@ -52,7 +60,7 @@ then
   echoc "Уже настроен sublime Prefixw." blue
 else
   mkdir -p "$path"  1>/dev/null
-  git clone https://github.com/Zlatov/prefixw.git "$path"  2>/dev/null
+  git clone https://github.com/Zlatov/prefixw.git "$path" 2>/dev/null
   echoc "Настроен sublime Prefixw." green
 fi
 
