@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+. ../_lib/echoc
 
 # 
 # -q  Немногословный режим. В стандартный выходной поток не выдается ничего,
@@ -17,4 +18,43 @@ then
   echo 'grepp'
 else
   echo 'no grepp'
+fi
+
+
+# -i - регистронезависимо;
+# -r - рекурсивно обходя папки;
+# --include=*.php - только файлы с шаблоном (--include=*.{php,html}).
+grep 'Hello world' ./example.cpp
+
+# Регистронезависимо:
+grep -i sum ./example.cpp
+
+# Регулярка (но лучше использовать egrep):
+grep -i N[ua]m1 ./example.cpp
+# . - замена любого печатного символа
+# * - отсутствие или повторение символа
+# ^ - начало строки
+# $ - конец строки
+
+# Вывести номер строки (ключ -n)
+grep -i -n hello ./example.cpp
+# egrep с использованием символьных классов POSIX (с привычными регулярными выражениями)
+egrep -i 'Hel+' ./example.cpp
+
+# Ограничить длинну выводимой (найденной) строки
+ps aux | egrep '(USER)|(nginx)' | cut -c -255
+
+# Поиск по файлам в директории
+# Во всех файлах текущей директории
+grep "BASH_VERSION" ./*
+# В скрытых файлах
+grep "BASH_VERSION" ./.*
+
+# Найдена ли строка в файле
+echo 'asd' > temp
+if [[ -f temp ]] && egrep -q "^asd" temp
+then
+  echoc yes green
+else
+  echoc no red
 fi
