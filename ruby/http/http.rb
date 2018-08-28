@@ -1,0 +1,28 @@
+# encoding: UTF-8
+require 'awesome_print'
+require 'net/http'
+require 'uri'
+require 'json'
+
+# postData = Net::HTTP.post_form(URI.parse('http://lab.local/php/post/post.php'), {'postKey'=>'postValue'})
+# print 'postData.body: '.red; puts postData.body
+
+# uri = URI("http://lab.local/php/post/post.php")
+# http = Net::HTTP.new(uri.host, uri.port)
+# http.use_ssl = false
+# request = Net::HTTP::Post.new(uri.path)
+# request["HEADER1"] = 'VALUE1'
+# request["HEADER2"] = 'VALUE2'
+
+# response = http.request(request)
+# print 'response: '.red; puts response
+
+response = Net::HTTP.post(
+  URI('http://lab.local/php/post/post.php'),
+  { "q" => "ruby", "max" => "50" }.to_json,
+  "Content-Type" => "application/json"
+)
+
+print 'response: '.red; puts response
+print 'response.body: '.red; puts response.body
+print 'response.body: '.red; p JSON.parse(response.body)['a']

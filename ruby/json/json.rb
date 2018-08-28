@@ -22,6 +22,9 @@ a = {mtime:123}
 b = a.to_json
 p b
 
-# 
+# symbolize_names
 p JSON.parse('{"key": "value"}', symbolize_names: true)
-# p '{"key": "value"}'.as_json
+
+a = '{"a": true}'
+b = JSON.parse a
+print 'b["a"].class.name: '.red; puts b["a"].class.name
