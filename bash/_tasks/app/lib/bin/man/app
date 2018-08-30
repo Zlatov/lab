@@ -1,0 +1,32 @@
+.\" Руководство к app.
+.\" Обратитесь к разработчикам для корректировки ошибок.
+.TH man 8 "30 Августа 2018" "1.0" "app man page"
+.SH НАЗВАНИЕ
+app — деплой маркета и другое.
+.SH СИНТАКСИС
+app [<options>] <command> [<args>]
+.SH ОПИСАНИЕ
+.SH ПРИМЕРЫ
+app deploy            — выложить на продакшн текущую ветку разработки.
+
+                        При необходимости можно уточнить часть: `app deploy
+                        market framework` или только `app deploy admin`.
+
+app rollback          — восстановить состояние до предыдущего деплоя.
+
+                        При необходимости можно уточнить часть: `app rollback
+                        market framework` или только `app rollback admin`.
+
+app test              — выложить в варианты текущую ветку разработки
+
+app test stop 3008
+app test market
+app test admin
+
+app pull
+.SH ОПЦИИ
+.SH SEE ALSO
+.SH БАГИ
+Нет известных багов.
+.SH АВТОР
+команда разработчиков Zenon

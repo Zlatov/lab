@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+print(colored("${1:a} [", 'red'), type(${1:a}), colored("]: ", 'red'), ${1:a}, sep='')
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzzpyy</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.python</scope>
+</snippet>
