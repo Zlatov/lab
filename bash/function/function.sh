@@ -1,9 +1,22 @@
 #!/usr/bin/env bash
 
 . ../_lib/echoc
+
+# 
+# Синтаксис, абсолютно равнозначны:
+# function copyFiles {…}
+# function copyFiles(){…}
+# function copyFiles() {…}
+# 
+
+
 a=1
 function foo {
   local a=2
+  for one_argument # по умолчанию for var in $@
+  do
+    echo $one_argument
+  done
   echo 'Локальная переменная $a: ' $a
   echoc "Имя функции: ${FUNCNAME}" blue
   echoc "Количество переданных параметров : $#" green
@@ -11,7 +24,7 @@ function foo {
 }
 
 echo '$a: ' $a
-foo nixCraft
+foo asd zxc
 echo '$a: ' $a
 foo 1 2 3 4 5
 foo "this" "is" "a" "test"

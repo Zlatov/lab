@@ -40,6 +40,16 @@ echo 'array7: ' ${array7[@]}
 declare -a array8=( "${array[@]/новый1/}" )
 echo 'array8: ' ${array8[@]}
 
+# Переменная является массивом
+echoc "Переменная является массивом" green
+a=(asd zxc)
+if [[ "$(declare -p a)" =~ "declare -a" ]]; then echo "a is array"; else echo "a is not array"; fi
+a=string
+if [[ "$(declare -p a)" =~ "declare -a" ]]; then echo "a is array!!!"; else echo "a is not array"; fi
+b=string
+if [[ "$(declare -p b)" =~ "declare -a" ]]; then echo "b is array"; else echo "b is not array"; fi
+exit 0
+
 
 echo "Количество элементов array: ${#array[*]}" # ... 4
 echo "Количество элементов array2: ${#array2[*]}" # ... 0
