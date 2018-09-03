@@ -27,6 +27,11 @@ echo ${array[@]}
 array123=( "${array[@]}" "новый элемент" )
 echo ${array123[@]}
 
+# Добавить в конец
+array123+=("новейший элемент")
+echo ${array123[@]}
+# exit 0
+
 # Объявление массива
 declare -a array2
 echo 'array2: ' ${array2[@]}
