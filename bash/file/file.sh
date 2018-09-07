@@ -12,3 +12,5 @@ echo -n 'a' > temp
 
 a=$(wc -l < temp)
 echoc "количество строк (скорее переносов) в файле: ${a}." blue
+
+echo "${BASH_SOURCE[0]}:${LINENO}"

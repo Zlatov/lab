@@ -75,7 +75,7 @@ then
 else
   echoc no red
 fi
-exit 0
+# exit 0
 
 a=1
 if [[ "$a" -eq 1 ]]
@@ -117,7 +117,7 @@ then
 else
   echoc 'Значение переменной a равно "string"' green
 fi
-exit 0
+# exit 0
 
 # Условные выражения,
 # такие как [ "$x" = "$y" ], [ -e "$file" ], [ -n "$variable" ] проверка, является ли переменная пустой
