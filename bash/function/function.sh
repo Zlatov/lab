@@ -9,25 +9,47 @@
 # function copyFiles() {…}
 # 
 
-
+# Тест области видимости переменных с функией.
+echoc "Тест области видимости переменных с функией." green
 a=1
+b=1
 function foo {
   local a=2
+  b=2
+  echo 'Локальная переменная $a: ' $a
+  echo 'Не локальная переменная $b: ' $b
+}
+echo '$a до вызова foo: ' $a
+echo '$b до вызова foo: ' $b
+foo asd zxc
+echo '$a после вызова foo: ' $a
+echo '$b после вызова foo: ' $b
+
+# Доступные данные внутри функции.
+# При передаче аргументов в кавычках `foo "$b"` параметр воспринимается как единый, даже с пробелами.
+echoc "Доступные данные внутри функции." green
+echoc 'Внимание. При передаче аргументов в кавычках `foo "$b"` параметр воспринимается как единый, даже с пробелами.' blue
+function foo {
+  echo "Имя функции: ${FUNCNAME}"
+  echo "Количество переданных параметров : $#"
+  echo "Все параметры переданные функции: '$@'"
+  echo "Запрошенная команда для вызова скрипта: $0"
+  echo "Перебор параметров:"
+  i=0
   for one_argument # по умолчанию for var in $@
   do
-    echo $one_argument
+    ((i++))
+    echo -n $one_argument
+    [[ ! $i -eq $# ]] && echo -n " | "
   done
-  echo 'Локальная переменная $a: ' $a
-  echoc "Имя функции: ${FUNCNAME}" blue
-  echoc "Количество переданных параметров : $#" green
-  echo "Все параметры переданные функции: '$@'"
+  echo
 }
 
-echo '$a: ' $a
-foo asd zxc
-echo '$a: ' $a
-foo 1 2 3 4 5
-foo "this" "is" "a" "test"
+a='someparam'
+b='one param'
+foo "this" is "a" 1 "test" $a $b
+foo "this" is "a" 1 "test" $a "$b"
+exit 0
 
 # How do I parse command line arguments in Bash?
 # Method #1: Using bash without getopt[s]
@@ -40,30 +62,32 @@ function coffee {
     case $key in
       -g|--sugar)
       SUGAR="$2"
-      shift # past argument
-      shift # past value
+      shift # забываем аргумент
+      shift # забываем значение аргумента
       ;;
       -s|--stir)
       STIR="$2"
-      shift # past argument
-      shift # past value
+      shift # забываем аргумент
+      shift # забываем значение аргумента
       ;;
       -m|--milk)
       MILK="$2"
-      shift # past argument
-      shift # past value
+      shift # забываем аргумент
+      shift # забываем значение аргумента
       ;;
       --default)
       DEFAULT=YES
-      shift # past argument
+      shift # забываем аргумент
       ;;
-      *)    # unknown option
-      POSITIONAL+=("$1") # save it in an array for later
-      shift # past argument
+      *)    # встретили неизвестную опцию
+      POSITIONAL+=("$1") # сохраним опцию как аргумент
+      shift # забываем аргумент
       ;;
     esac
   done
-  set -- "${POSITIONAL[@]}" # restore positional parameters
+  # Если были переданы аргументы
+  [[ ${#POSITIONAL[*]} -gt 0 ]] && \
+  set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
 
   echo SUGAR   = "${SUGAR}"
   echo STIR    = "${STIR}"
@@ -75,15 +99,16 @@ function coffee {
   echo "Все параметры переданные функции: '$@'"
 }
 
-# Проверка
+
+# # Проверка
 # coffee
 # coffee -g 3 -s 10
 # coffee -g 3 -s 10 покрепче
 
-# Проверка на ошибочные опции
+# # Проверка на ошибочные опции
 # coffee -d 3 -s 10 
 # coffee -d -s 10
-# Опции превращаются в параметры
+# # Т.о. ошибочные опции превращаются в параметры
 
 
 
@@ -172,3 +197,50 @@ function coffee {
 # It can handle multiple single options like -vf filename in the typical Unix way, automatically.
 # The disadvantage of getopts is that it can only handle short options (-h, not --help) without additional code.
 # There is a getopts tutorial which explains what all of the syntax and variables mean. In bash, there is also help getopts, which might be informative.
+
+
+# Передача массивов в функцию
+echoc "Передача массивов в функцию" green
+function take_two_array {
+  local array count
+  # while (( $# ))
+  # do
+  #   array=()
+  #   count=$1
+  #   shift
+  #   while (( count-- > 0 ))
+  #   do
+  #     array+=("$1")
+  #     shift
+  #   done
+  #   echo "${array[@]}"
+  # done
+
+  # Или
+
+  array1=()
+  count=$1
+  shift
+  while (( count-- > 0 ))
+  do
+    array1+=("$1")
+    shift
+  done
+  echo "${array1[@]}"
+
+  array2=()
+  count=$1
+  shift
+  while (( count-- > 0 ))
+  do
+    array2+=("$1")
+    shift
+  done
+  echo "${array2[@]}"
+
+  return 0
+}
+
+declare -a a=('asd asd' zxc 1)
+declare -a b=('zxc zxc' qwe 2 3)
+take_two_array "${#a[@]}" "${a[@]}" "${#b[@]}" "${b[@]}"

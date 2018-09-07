@@ -1,6 +1,6 @@
 #!/bin/bash
 
- . ../_lib/echoc
+. ../_lib/echoc
 
 echoc 'Просто date в текущей зоне и UTC' green
 date

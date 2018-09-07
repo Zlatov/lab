@@ -18,7 +18,26 @@ echo "some text: ${array[1]}" # some text: bbb
 # Новый элемент с номером
 array[11]=`echo "${array[1]} и ${array[2]}"`
 echo ${array[11]}              # bbb и ссс
+# array[-13]="ы" # вызывает ошибку если отрицатеьльное значение больше последнего_индекса+1
+echo "${array[@]}"
 echo "количестов: ${#array[*]}"
+echo ${!a[@]} "- Это индексы"
+for i in "${!array[@]}"; do
+  echo "$i ${array[$i]}"
+done
+exit 0
+
+# Количество count length
+echoc "Количество count length" green
+declare -a a=('asd zxc' zxc 1)
+declare -i b="${#a[@]}"
+declare -i c="${#a[*]}"
+declare -i d="${#a}"
+echo '$a: ' "${a[@]}"
+echo '$b: ' $b
+echo '$c: ' $c
+echo '$d: ' $d '(длинна первого элемента)'
+# exit 0
 
 # Новый элемент в конец массива
 array[${#array[*]}]="не в конец ((("

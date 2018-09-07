@@ -58,3 +58,9 @@ then
 else
   echoc no red
 fi
+
+# Количество строк с совпадениями
+status=$(echo 'asd' | grep -c 'f')
+echo '$status: ' $status
+status=$(echo 'asd' | grep -c 's')
+echo '$status: ' $status

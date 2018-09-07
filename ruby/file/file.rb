@@ -183,6 +183,9 @@ file.write "asd\n"
 file.write "asd\n"
 file.write "asd\n"
 file.close
+p File.read('./temp').split("\n")
+# exit 0
+
 a = File.exist? path
 print 'a: '.red; puts a
 

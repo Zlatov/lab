@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 . ../_lib/echoc
 
 # Замена
@@ -14,6 +15,43 @@ a='0'
 aa='0'
 echo "a${a}aa"
 
+# Длинна строки
+echoc "Длинна строки" green
+a=asdzxcqwe
+echo ${#a}
+echo `expr length $a`
+echo `expr "$a" : '.*'`
+# exit 0
+
+# Индекс символа в строке
+echoc "Индекс символа в строке" green
+a=asdzxcqwe
+# 123456789
+b=`expr index "$a" as`
+c=`expr index "$a" zx`
+d=`expr index "$a" q0`
+e=`expr index "$a" 0q`
+f=`expr index "$a" 01`
+echo '$a: ' $a
+echo '$b: ' $b
+echo '$c: ' $c
+echo '$d: ' $d найден один из символов
+echo '$e: ' $e найден один из символов
+echo '$f: ' $f не найден ни один из символов
+# exit 0
+
+# Индекс подстроки в строке
+echoc "Индекс подстроки в строке" green
+a=asdzxcqwe
+# 123456789
+b="${a%%zxc*}"
+c=${#b}
+i=$( temp="${a%%zxc*}" && [[ "$temp" = "$a" ]] && echo -1 || echo "${#temp}" )
+echo '$a: ' $a
+echo '$b: ' $b "удалить с конца всё что нашлось с подстроки и до конца (zxc*)"
+echo '$c: ' $c "количество оставшегося есть индекс"
+echo '$i: ' $i
+# exit 0
 
 # Вырезать по позиции
 echoc 'Вырезать по позиции' 'green'
@@ -33,6 +71,13 @@ A="foofoobar"
 B=${A#foo}
 echo 'A = ' $A # -> foofoobar
 echo 'B = ' $B # -> foobar
+
+# Отбросить известную часть с начала
+echoc "Отбросить известную часть с начала" green
+a="asd/zxc/qwe"
+b=${a##asd/zxc/}
+echo '$a: ' $a
+echo '$b: ' $b
 
 # Мультистроковая строка multyline string
 echoc 'Мультистроковая строка multyline string' green

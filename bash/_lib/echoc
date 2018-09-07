@@ -19,13 +19,31 @@ ECHOC_COLORS=(
 )
 
 function echoc {
-
-  # OLD_CD=$(pwd)
-  # cd $(dirname $BASH_SOURCE)
-  # . colorize
-  # cd $OLD_CD
+  local NOSLASHN POSITIONAL
+  NOSLASHN=false
+  while [[ $# -gt 0 ]]
+  do
+    key="$1"
+    case $key in
+      -n)
+      NOSLASHN=true
+      shift
+      ;;
+      *)
+      POSITIONAL+=("$1")
+      shift
+      ;;
+    esac
+  done
+  [[ ${#POSITIONAL[*]} -gt 0 ]] && \
+  set -- "${POSITIONAL[@]}"
 
   echo -en ${ECHOC_COLORS[$2]}
-  echo -e $1
+  if [[ "$NOSLASHN" = true ]]
+  then
+    echo -en $1
+  else
+    echo -e $1
+  fi
   echo -en ${ECHOC_COLORS[style_default]}
 }
