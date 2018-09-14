@@ -1,38 +1,54 @@
 #!/bin/bash
 
-temp_path='./temp'
+set -eu
 
-if [[ ! -f temp ]]
-then
-	touch $temp_path
-fi
+temp_single_path='./temp_single'
+temp_array_path='./temp_array'
 
-a='a'
+[[ ! -f $temp_single_path ]] && touch $temp_single_path
+[[ ! -f $temp_array_path ]] && touch $temp_array_path
 
-# echo $a > $temp_path
-# echo -n $a > $temp_path # Записывает в файл без переноса
-# echo $a >> $temp_path
+> $temp_single_path
+> $temp_array_path
 
-# b=$(cat $temp_path) # Считывает без переноса (даже если он есть зараза)
-b=$(< $temp_path) # Считывает без переноса (даже если он есть зараза)
 
-echo $b
+# Переменные
+a='val'
+b=("asd" "zxc qwe")
 
-if [[ ! "$b" = '' ]]
-then
-	echo 'не пустая строка.'
-else
-	echo 'пустая строка.'
-fi
-
-if [[ "$b" = 'a' ]]
-then
-	echo 'Одна строка считалась с a.'
-else
-	echo 'Не одна строка считалась с a.'
-fi
-
-cat temp | while read line
+# Зписываем
+echo $a > $temp_single_path
+for v in "${b[@]}"
 do
-  echo "a line: $line"
+  echo $v >> $temp_array_path
+done
+
+# Считываем
+# b=$(cat $path) # Считывает без переноса (даже если он есть зараза)
+# b=$(< $path)   # Считывает без переноса (даже если он есть зараза)
+aa=$(< $temp_single_path)
+declare -a bb
+while read line
+do
+  bb+=("$line")
+done < $temp_array_path
+
+# Сравниваем
+if [[ "${a}" = "${aa}" ]]
+then
+  echo 'Простая переменная считалась корректно.'
+else
+  echo 'Простая переменная считалась не корректно.'
+fi
+
+if [[ "${b[@]}" = "${bb[@]}" && "${#b[@]}" = "${#bb[@]}" ]]
+then
+  echo 'Массив считалась корректно.'
+else
+  echo 'Массив считалась не корректно.'
+fi
+
+for value in "${bb[@]}"
+do
+  echo $value
 done
