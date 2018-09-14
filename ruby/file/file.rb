@@ -58,6 +58,7 @@ puts 'Путь к директории файла.'.green
 
 dirname = File.dirname path_to_file
 print 'dirname: '.light_blue; puts dirname
+# exit 0
 
 puts 'Рекурсивное создание пути.'.green
 FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)

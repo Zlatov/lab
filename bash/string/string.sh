@@ -110,3 +110,8 @@ GG
 )
 echo '$a:'
 echo "$a"
+
+echo asdfasdfasdf
+a=asd
+a+=
+echo '$a:' $a

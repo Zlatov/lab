@@ -26,6 +26,10 @@ ls stdin_out_err.sh nofile 2>&1 >/dev/null
 echoc 'не наоборот (не работает)' yellow
 ls stdin_out_err.sh nofile >/dev/null 2>&1
 
+echoc 'Ошибки в лог-файл, а нормы подавляем' green
+ls stdin_out_err.sh nofile 2>>$temp_path >/dev/null
+echo '' &>/dev/null
+
 echoc 'Нормы в файл' green
 ls stdin_out_err.sh nofile 1>./temp
 echo 'asd' 1>>$temp_path
