@@ -46,3 +46,30 @@ remove_index :accounts, name: :by_branch_party
 # Note: SQLite doesn’t support index length.
 # 
 add_index :table_name, :column_name, name: :uq_tablename_columnname, unique: true
+
+gem "migration_data"
+  def change
+    stack = {}
+    ArAt.all.each do |model|
+      if !model.attachment.to_s.blank?
+        stack[model.article_id] = model.attributes.to_h.merge "id" => model.article_id
+      end
+    end
+    stack_json = stack.values.to_json
+    stack_path = Rails.root.join 'tmp', 'stack.json'
+    File.write stack_path, stack_json
+
+    drop_table :market_article_attachments
+    create_table "market_article_attachments" do |t|
+      t.integer "article_id", null: false
+      t.string  "attachment"
+    end
+  end
+  def data
+    stack_path = Rails.root.join 'tmp', 'stack.json'
+    stack_json = File.read stack_path
+    stack = JSON.parse stack_json
+
+    ArAt.reset_column_information
+    ArAt.import stack
+  end

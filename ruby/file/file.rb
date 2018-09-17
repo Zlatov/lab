@@ -178,6 +178,9 @@ File.delete('temp_delete') if File.exist?('temp_delete')
 # p Dir.chdir '..'
 # p Dir['*']
 
+
+# Запись в файл, перезаписывает весь контент (w по умолчанию)
+puts 'Запись в файл, перезаписывает весь контент.'.green
 path = './temp'
 file = File.open path, 'w'
 file.write "asd\n"
@@ -190,15 +193,16 @@ p File.read('./temp').split("\n")
 a = File.exist? path
 print 'a: '.red; puts a
 
-# Запись в файл
-puts 'Запись в файл.'.green
+# Запись в файл, перезаписывает весь контент
+puts 'Запись в файл, перезаписывает весь контент.'.green
 File.write 'temp', '123'
 File.write 'temp', '123'
 File.write 'temp', '123'
 p File.read('temp').split("\n")
+# exit 0
 
-# Запись в файл
-puts 'Запись в файл.'.green
+# Запись в файл через open()
+puts 'Запись в файл через open().'.green
 open('temp', 'w') do |f|
   f.puts "puts."
   f.puts "puts."
@@ -212,3 +216,9 @@ open('temp', 'w') do |f|
 end
 a = File.read('temp').split("\n")
 print 'a: '.red; p a
+# exit 0
+
+# Запись в файл через File с указанием режима
+puts 'Запись в файл через File с указанием режима.'.green
+File.write 'temp', 'mmm', mode: 'a'
+puts File.read 'temp'
