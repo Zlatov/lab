@@ -4,6 +4,9 @@ namespace iadfeshchm;
 /**
  * Tree
  */
-class Tree implements Tree\Interface
+class Tree implements Tree\TreeInterface
 {
+    public static function test() {
+        return null;
+    }
 }
