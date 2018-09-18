@@ -1,5 +1,7 @@
 // Sublime Text - Build System for PHP
 {
   "cmd": ["/usr/bin/php", "$file"],
-  "selector": "source.php"
+  "selector": "source.php",
+  "target": "ansi_color_build",
+  "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
 }
