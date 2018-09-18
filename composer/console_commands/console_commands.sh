@@ -34,3 +34,7 @@ composer remove zlatov/tree zlatov/sql
 composer show                 # - список всех установленных пакетов.
 composer show --all           # - список всех доступных пакетов.
 composer show zlatov/sql [v]  # - инфо об указанном пакете или его специфичной версии.
+
+# Новый пакет
+git init
+composer init
