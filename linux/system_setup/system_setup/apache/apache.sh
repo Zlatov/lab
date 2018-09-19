@@ -5,6 +5,15 @@ cd ~
 lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
+if hash apache2 2>/dev/null
+then
+  echoc "Уже установлен apache2." blue
+else
+  echoc "Установка apache2." yellow
+  sudo apt-get -y install apache2 1>/dev/null
+  echoc "Установлен apache2." green
+fi
+
 # Подключение модуля mod_rewrite
 if [[ -f /etc/apache2/mods-enabled/rewrite.load ]]
 then
@@ -21,7 +30,7 @@ then
 else
   if [ -f "/etc/apache2/conf-available/charset.conf" ]
   then
-    sudo echo "AddDefaultCharset UTF-8" >> /etc/apache2/conf-available/charset.conf
+    echo "AddDefaultCharset UTF-8" | sudo tee -a /etc/apache2/conf-available/charset.conf
     sudo service apache2 restart 1>/dev/null
     echoc "Настроен apache default encoding." green
   else

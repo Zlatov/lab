@@ -18,7 +18,7 @@ if hash curl 2>/dev/null
 then
   echoc "Уже установлен curl." blue
 else
-  sudo apt-get install curl
+  sudo apt-get -y install curl 1>/dev/null
   echoc "Установлен curl." green
 fi
 
@@ -26,7 +26,7 @@ if hash xdotool 2>/dev/null
 then
   echoc "Уже установлен xdotool." blue
 else
-  sudo apt-get install xdotool 1>/dev/null
+  sudo apt-get -y install xdotool 1>/dev/null
   echoc "Установлен xdotool." green
 fi
 
