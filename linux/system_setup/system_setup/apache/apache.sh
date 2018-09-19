@@ -46,6 +46,8 @@ then
   then
     echoc "Уже настроен список виртуальных хостов my.conf." blue
   else
+    mkdir -p /home/iadfeshchm/projects/my/lorem_yii/backend/web
+    mkdir -p /home/iadfeshchm/projects/my/lorem_yii/frontend/web
     sudo cp $lab_path/linux/system_setup/system_setup/apache/my.conf /etc/apache2/sites-available 1>/dev/null
     sudo a2ensite my.conf 1>/dev/null
     echoc "Настроен список виртуальных хостов my.conf." green
