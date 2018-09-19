@@ -1,4 +1,5 @@
 #!/bin/bash
+exit 0
 
 # -r — Обрабатывать все вложенные подкаталоги.
 #      Данный ключ необходим, если удаляемый файл является каталогом, пусть даже пустым.
@@ -13,3 +14,7 @@ rm -rf mydir # рекурсивно удалить без подтвержден
 ls -1 ./path/to/files | xargs -I {} rm ./path/to/files/{} # если _очень_ много файлов
 ls -1A ./path/to/files | xargs -I {} rm -rf ./path/to/files/{} # в том числе скрытые
 ls -1A -I .gitignore -I README.md ./path/to/files | xargs -I {} rm -rf ./path/to/files/{} # за исключением файлов
+
+# Очищаем текущую директорию для теста:
+find . -type f -not -name rm.sh -delete
+find . -type d -not -path . | xargs -I {} rm -rf {}

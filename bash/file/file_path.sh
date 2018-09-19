@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+set -eu
+
+cd $(dirname "$0")
+
 . ../_lib/echoc
 
 function paths {
