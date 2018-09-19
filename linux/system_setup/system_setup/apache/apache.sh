@@ -55,3 +55,14 @@ else
   echoc "Воспользуйтесь фалом ${lab_path}/linux/system_setup/system_setup/apache/my.conf для настройки списка виртуальных хостов my.conf." red
   echo -n "Нажмине Enter для продолжения."; read A
 fi
+
+{
+  egrep -iq "^127.0.0.1 lab.local" /etc/hosts
+} && {
+  echoc "Хост lab.local существует" blue
+} || {
+  echoc -n "Добавление хоста lab.local…" yellow
+  echo "127.0.0.1 lab.local www.lab.local" | sudo tee -a /etc/hosts >/dev/null
+  echo -ne "\r\033[0K"
+  echoc "Добавлен хост lab.local." green
+}

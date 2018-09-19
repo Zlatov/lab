@@ -2,6 +2,7 @@
 # !/bin/bash
 . ../_lib/echoc
 
+cd `dirname "$0"`
 array=(aaa bbb ccc)
 
 # Вывод массива
