@@ -11,6 +11,13 @@ print('Привет' + 'мир');
 print('asd')
 print(1)
 
+print(colored('Длинна строки', 'green'))
+a = 'asd'
+b = len(a)
+print(colored('a:', 'red'), a)
+print("b [", type(b), "]: ", b, sep='')
+# exit(0)
+
 print(colored('[:] - подстрока', 'green'))
 a='1234567890'
 
