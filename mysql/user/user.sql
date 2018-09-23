@@ -1,4 +1,4 @@
-exit;
+exit
 
 -- Просмотр пользователей mysql
 SELECT User, Host, plugin FROM mysql.user;

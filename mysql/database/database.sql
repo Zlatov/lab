@@ -1,17 +1,19 @@
+exit
+
 -- Просмотреть список соществующих баз данных.
--- SHOW databases;
+SHOW databases;
 
 -- Создать базу данных
--- CREATE SCHEMA `lab` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE SCHEMA `lab` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 -- Выбрать базу данных
--- USE lab;
+USE lab;
 
 -- Определить выбранную БД
--- SELECT DATABASE();
+SELECT DATABASE();
 
 -- Удалить базу данных
--- DROP DATABASE IF EXISTS `lab`;
+DROP DATABASE IF EXISTS `lab`;
 
 SHOW databases;
 USE `lab`;
