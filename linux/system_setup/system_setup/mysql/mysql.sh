@@ -57,6 +57,8 @@ sudo mysql -uroot -p <<- SQL
   FLUSH PRIVILEGES;
   UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE user = 'root';
   FLUSH PRIVILEGES;
+  SET GLOBAL validate_password_special_char_count = 0;
+  FLUSH PRIVILEGES;
   GRANT ALL ON *.* TO 'root'@'localhost' IDENTIFIED BY '${SYSTEM_SETUP_MYSQL_PASSWORD}' WITH GRANT OPTION;
   FLUSH PRIVILEGES;
   exit

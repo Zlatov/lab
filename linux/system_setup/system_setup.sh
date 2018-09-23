@@ -47,4 +47,6 @@ fi
 ./$lab_path/linux/system_setup/system_setup/bashrc/bashrc.sh
 ./$lab_path/linux/system_setup/system_setup/apache/apache.sh
 ./$lab_path/linux/system_setup/system_setup/mysql/mysql.sh
+./$lab_path/linux/system_setup/system_setup/php/php.sh
+./$lab_path/linux/system_setup/system_setup/composer/composer.sh
 ./$lab_path/linux/system_setup/system_setup/sublime-text/sublime-text.sh
