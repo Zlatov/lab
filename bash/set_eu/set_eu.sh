@@ -15,6 +15,7 @@ then
 else
 	echo "переменная не неустановлена"
 fi
+# exit 0
 
 if [[ -n ${A-} ]]
 then

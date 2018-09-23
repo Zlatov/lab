@@ -12,6 +12,7 @@ lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
 sudo apt-get -qq update
+SYSTEM_SETUP_APT_UPDATE=true
 echoc "Обновлён список доступных пакетов." green
 
 if hash curl 2>/dev/null
@@ -40,8 +41,10 @@ else
   echoc "Установлен yarn." green
 fi
 
+./$lab_path/linux/system_setup/system_setup/mc/mc.sh
 ./$lab_path/linux/system_setup/system_setup/python/python.sh
 ./$lab_path/linux/system_setup/system_setup/git/git.sh
 ./$lab_path/linux/system_setup/system_setup/bashrc/bashrc.sh
 ./$lab_path/linux/system_setup/system_setup/apache/apache.sh
+./$lab_path/linux/system_setup/system_setup/mysql/mysql.sh
 ./$lab_path/linux/system_setup/system_setup/sublime-text/sublime-text.sh
