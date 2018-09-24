@@ -22,11 +22,13 @@ class User
 class User
   self.primary_key = 'sid'
   has_and_belongs_to_many :groups,
+    class_name: "Market::Model::Add::Group", # имя связываемой таблицы
     join_table: :market_us_gr, # имя смежной таблицы
     foreign_key: :user_sid, # FK в смежной таблице для этого класса
     association_foreign_key: :group_id # FK в смежной таблице для связываемого класса
 class Group
   has_and_belongs_to_many :users,
+    class_name: "Market::Model::Main::User",
     join_table: :market_us_gr,
     foreign_key: :group_id,
     association_foreign_key: :user_sid
@@ -54,6 +56,9 @@ class Group
 # а записи, которые удаляются, являются записями объединений, а не соответствующими записями.
 # 
 
+# 
+# Как после обновления модели обновить пришедшие связи
+# 
 class Author < ActiveRecord::Base
   has_many :book, class_name: '::Market::Model::Book'
 
@@ -71,6 +76,9 @@ class Author < ActiveRecord::Base
 
       aff << SlAf.new(slide_id: id, affiliate_name: name)
 
+# 
+# Как в консоли добавить связи много ко многим
+# 
 
 
 
