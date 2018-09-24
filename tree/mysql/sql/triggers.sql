@@ -8,12 +8,20 @@ DELIMITER ;;
 CREATE TRIGGER `tbi_tree` BEFORE INSERT ON `tree` FOR EACH ROW
 trigger_label:BEGIN
   DECLARE level_of_parent INT DEFAULT 1;
+  DECLARE header VARCHAR(255) DEFAULT '';
   IF @disable_triggers IS NULL THEN
     -- Если родитель указан - выбираем его уровень и плюс 1.
     IF NEW.`pid` IS NOT NULL THEN
       SELECT `level` + 1 INTO level_of_parent
       FROM `tree`
       WHERE `id` = NEW.`pid`;
+    END IF;
+    IF NEW.`header` IS NULL OR NEW.`header` = '' THEN
+      SELECT CONVERT(`auto_increment`, CHAR) INTO header
+      FROM `information_schema`.`tables`
+      WHERE `table_name` = 'tree'
+        AND `table_schema` = DATABASE();
+      SET NEW.`header` = header;
     END IF;
     -- Устанавливаем уровень в любом случае (1 если нет родителя).
     SET NEW.`level` = level_of_parent;

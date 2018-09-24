@@ -1,18 +1,15 @@
 USE lab;
+SET @successes_count = 0; -- Количество пройденных тестов.
+
+-- Тест на количество связей после удаления.
 source /home/iadfeshchm/projects/my/lab/tree/mysql/sql/tables.sql;
 source /home/iadfeshchm/projects/my/lab/tree/mysql/sql/triggers.sql;
-
-INSERT INTO tree (id, pid, header)
-VALUES
-(1,  NULL, '1'),
-(2,     1, '2'),
-(3,     2, '3'),
-(4,     3, '4'),
-(5,     4, '5'),
-(6,     5, '6');
-
--- SELECT COUNT(aid) = 10 as test FROM tree_rel;
-
+-- source /home/iadfeshchm/projects/my/lab/tree/mysql/sql/procedures.sql;
+INSERT INTO tree (pid) VALUES (NULL), (1), (2), (3), (4), (5);
 DELETE FROM tree WHERE id = 4;
+SELECT @successes_count := @successes_count + CAST(COUNT(*) = 3 AS SIGNED INT) FROM tree_rel;
 
-SELECT COUNT(aid) = 3 as test_count_relations_after_delete FROM tree_rel;
+SELECT
+  IF(@successes_count = 1, 'Тест пройден.', 'Тест не пройден.') as 'Результат',
+  @successes_count as 'Пройдено',
+  1 as 'Необходимо';
