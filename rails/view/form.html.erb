@@ -1,0 +1,14 @@
+
+<%= form_for article, url: {action: "update"} do |f| %>
+  <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
+  <%= f.hidden_field :id %>
+  <%= f.submit "Отправить" %>
+<% end %>
+
+<%= form_for article, url: {action: "update"}, html: {class: 'ui mini form'} do |f| %>
+  <%= f.hidden_field :id %>
+  <p class="nobr inline field">
+    <%= f.number_field :slide_event_order, html: {class: 'ui input'} %>
+    <%= f.button '<i class="save icon"></i>'.html_safe, class: 'ui mini icon button' %>
+  </p>
+<% end %>

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[[ $(lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
+
 . ../_lib/echoc
 
 # lsof -i -P -n | grep LISTEN 
@@ -24,6 +26,10 @@ function echo_is_port_busy {
 # echo_is_port_busy 3100
 # echo_is_port_busy 3101
 
-for (( i = 0; i < 1000; i++ )); do
+for (( i = 10; i < 81; i++ )); do
   echo_is_port_busy $i
 done
+echo
+
+# Прослушиваемые кем-то порты:
+lsof -i -P -n

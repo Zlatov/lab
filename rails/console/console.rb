@@ -6,3 +6,5 @@
 > response.cookies         # hash of the cookies
 
 Controller.new.send :act_name # Вызвать метод контроллера (экшн)
+
+Ap.all.pluck :id

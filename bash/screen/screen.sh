@@ -1,4 +1,6 @@
 #!/bin/bash
+exit 0
+
 set -eu
 
 echo 'Список экранов.'
@@ -53,23 +55,28 @@ else
     echo 'Экран не существует.'
 fi
 
-echo 'Список экранов.'
-# screen -list | grep '('
+exit 0
 
-# Если вы хотите убить: screen -S name -X quit
-# Если вы хотите отсоединить: screen -dS name
+# Список экранов
+screen -list | grep '('
+
+# Если вы хотите убить:
+screen -S name -X quit
+# Если вы хотите отсоединить:
+screen -dS name
+
 # 1) send a 'quit' command:
-# screen -X -S "sessionname" quit
+screen -X -S "name" quit
 # 2) send a Ctrl-C to a screen session running a script:
-# screen -X -S "sessionname" stuff "^C"
+screen -X -S "name" stuff "^C"
 
 
 # screen -S bilbo -X exec vim /some/file
 
 # работает
-# screen -S temp -X register c $"echo 'hi'\n"
-# screen -S temp -X paste c
+screen -S name -X register c $"echo 'hi'\n"
+screen -S name -X paste c
 
 # работает
-# screen -S temp -p 0 -X stuff "echo 'hu'"
-# screen -S temp -p 0 -X eval "stuff ^M"
+screen -S name -p 0 -X stuff "echo 'hu'"
+screen -S name -p 0 -X eval "stuff ^M"
