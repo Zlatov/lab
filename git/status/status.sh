@@ -3,7 +3,8 @@
 
 exit 0
 
-git status -uall # показать не папки а каждый файл
+git status -u # показать не папки а каждый файл
+git status -uall
 
 # 
 # Состояния
