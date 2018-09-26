@@ -1,5 +1,5 @@
 {
-  "scope": "source , text ",
+  "scope": "source, text, string.quoted",
   "completions": [
     {
       "contents": "–",
