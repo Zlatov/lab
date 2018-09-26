@@ -17,11 +17,11 @@ Host *
   CHANGE_DEFAULT custom_value
 
 # Пример хоста
-Host zlatov
-  HostName zlatov.net
-  User webhobru
-  IdentityFile ~/id_rsa_iadfeshchm
-  RemoteForward 52698 localhost:5269
+Host aliasname
+  HostName ip_or_domain
+  User username
+  IdentityFile ~/id_rsa_path
+  RemoteForward 52698 localhost:52698
 
 # Опции
 # ServerAliveInterval: Эта опция может быть настроена так, чтобы SSH знал, когда отправлять пакет для проверки ответа от сервера. Это может быть полезно, если ваше соединение ненадежно, и вы хотите узнать, доступен ли он по-прежнему.
