@@ -1,94 +1,64 @@
 #!/usr/bin/env bash
 
-# 
-# Комментирование обязательно
-# Комментарии не для программиста который пишет (они только усложняют
-# написание), а для программиста который улучшает.
-# 
-
-# 
-# Консольный инструмент app
-# 
-
 # Прекращать выполнение программы если обнаружена ошибка или обращение к неустановленной переменной
 set -eu
 
 # Путь папки содержащей app
-app_path=$(dirname "${BASH_SOURCE[0]}")
+APP_PATH=$(dirname "${BASH_SOURCE[0]}")
 
-POSITIONAL=()
+# Подключаем всё
+. $APP_PATH/../lib/app/common.sh
+
+# Отчистим лог ошибок
+> $errors_log_path
+
+# Переберём аргументы, обработаем опции
+POSITIONAL=() # временный массив аргументов без опций
+O_LOCAL=false
+O_YES=false
+O_DETAIL=false
+O_TEST_ID=""
 while [[ $# -gt 0 ]]
 do
   key="$1"
   case $key in
-    -d|--development)
-    DEVELOPMENT=true
-    shift # past argument
+    -d|--detail)
+    O_DETAIL=true
+    shift # забываем аргумент
     ;;
     -s|--single_option)
     SINGLE_OPTION=true
-    shift # past argument
+    shift # забываем аргумент
+    ;;
+    -l|--local)
+    O_LOCAL=true
+    shift # забываем аргумент
+    ;;
+    -y|--yes)
+    O_YES=true
+    shift # забываем аргумент
     ;;
     -a|--advanced_option)
     ADVANCED_OPTION="$2"
-    shift # past argument
-    shift # past value
+    shift # забываем аргумент
+    shift # забываем значение аргумента
     ;;
-    *)    # unknown option
-    POSITIONAL+=("$1") # save it in an array for later
-    shift # past argument
+    -t|--test_id)
+    O_TEST_ID="$2"
+    shift # забываем аргумент
+    shift # забываем значение аргумента
+    ;;
+    *)    # встретили неизвестную опцию
+    POSITIONAL+=("$1") # сохраним опцию как аргумент
+    shift # забываем аргумент
     ;;
   esac
 done
+# Если были переданы аргументы
 [[ ${#POSITIONAL[*]} -gt 0 ]] && \
-set -- "${POSITIONAL[@]}" # restore positional parameters
+set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
 
-if [[ ${DEVELOPMENT-} = true ]]
-then
-  echo '${SINGLE_OPTION-}: ' ${SINGLE_OPTION-}
-  echo '${ADVANCED_OPTION-}: ' ${ADVANCED_OPTION-}
-fi
-
-# Подключим библиотеки
-. $app_path/../lib/yn.sh
-. $app_path/../lib/echoc.sh
-
-is_include() {
-  local element match="$1"
-  echo '$1: ' $1
-  echo '$match: ' $match
-  shift
-  for element
-  do
-    echo '$element: ' $element
-    [[ "$element" == "$match" ]] && return 0
-  done
-  return 1
-}
-
-# array=("xzc" "asd" "zxc")
-# is_include "zxc" "${array[@]}"
-# echo $?
-# echo asdasdasda
-# is_include "blaha" "${array[@]}"
-# echo $?
-# echo asdasdasda
-
-array=(111 22 3333)
-if is_include blaha "${array[@]}"; then echo y; else echo n; fi
-if is_include 22 "${array[@]}"; then echo y; else echo n; fi
-exit 0
-
-. $app_path/../lib/bin/error.sh
-. $app_path/../lib/bin/complete.sh
-. $app_path/../lib/bin/man.sh
-. $app_path/../lib/bin/deploy.sh
-. $app_path/../lib/bin/rollback.sh
-. $app_path/../lib/bin/test.sh
-
-# Настройки
-. $app_path/../etc/config.sh
-
+# Переберём аргументы, обработаем команды
 if [[ -n ${1-} ]]
 then
   function_name=$1
@@ -100,9 +70,35 @@ then
     rollback)
       app_rollback $@
       ;;
+
     test)
       app_test $@
       ;;
+    test_get_id)
+      app_test_get_id $@
+      ;;
+    test_prepare_place)
+      app_test_prepare_place $@
+      ;;
+    test_pull_domain)
+      app_test_pull_domain $@
+      ;;
+    test_pull_db)
+      app_test_pull_db $@
+      ;;
+    test_pull_constants)
+      app_test_pull_constants $@
+      ;;
+    test_pull_trees)
+      app_test_pull_trees $@
+      ;;
+    test_pull_required_items)
+      app_test_pull_required_items $@
+      ;;
+    test_start_domain)
+      app_test_start_domain $@
+      ;;
+
     complete)
       app_complete $@
       ;;
@@ -113,7 +109,14 @@ then
       app_man $@
       ;;
     *)
-      app_error $1
+      echoc "Ошибка." red
+      echoe "Неизвестная команада. „${1}“"
+      for i in ${!BASH_SOURCE[@]}
+      do
+        echo $i ' : ' ${BASH_SOURCE[$i]}
+      done
+      echo $@
+      exit 1
       ;;
   esac
 fi

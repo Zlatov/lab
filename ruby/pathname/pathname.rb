@@ -2,7 +2,7 @@
 require 'awesome_print'
 require 'pathname'
 
-puts 'Путь к текущему исполняемому файлу'.green
+puts 'Путь к текущему исполняемому файлу (не всегда, см Dir.pwd)'.green
 a = __FILE__
 print 'a: '.red; puts a
 

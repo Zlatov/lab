@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+require "awesome_print"
+require "pathname"
+
+rlab_dir_path = Pathname.new(Dir.pwd).join($0).dirname.join 'bin'
+bashrc_path = Pathname.new("#{Dir.home}/.bashrc")
+bashrc_lines = <<-TXT
+
+# Добавим баш утилиту rlab в систему
+export PATH="#{rlab_dir_path}:$PATH"
+TXT
+
+if `egrep -c "^# Добавим баш утилиту rlab в систему" ~/.bashrc | tr -d '\n'` != "0"
+  puts "Уже установлен rlab.".blue
+else
+  puts "Устанавливаем rlab…".yellow
+  File.write bashrc_path, bashrc_lines, mode: 'a'
+  puts "Устанавлен rlab.".green
+end
