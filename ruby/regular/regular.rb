@@ -152,3 +152,8 @@ a = 'rewrite /production/ajerozolnye-pokrytija-special.html /cat/aerozolnye-kras
 b = a[/^(rewrite\s+\S+)\s/i, 1] rescue ''
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+
+# yes|no
+a = 'Yes'
+yn = (a =~ /^y(?:es)?$/i) != nil
+print 'yn: '.red; puts yn
