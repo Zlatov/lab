@@ -8,6 +8,7 @@ puts 'Путь к текущему файлу'.green
 print 'Dir.pwd: '.red; puts Dir.pwd
 print '$0: '.red; puts $0
 print '__FILE__: '.red; puts __FILE__
+print '__dir__: '.red; puts __dir__
 
 # 
 # __FILE__ равен $0 при запуске из sublime, но
@@ -17,6 +18,9 @@ print '__FILE__: '.red; puts __FILE__
 # Dir.pwd: /home/iadfeshchm/projects/my/lab/ruby                                                                                
 # $0: ./file/file_path.rb                                                                                                       
 # __FILE__: ./file/file_path.rb
+# 
+# Значение __FILE__- это относительный путь, который создается и сохраняется (но не обновляется) при загрузке
+# файла rb. Это означает, что если есть вызовы в Dir.chdir другое_место, то путь __FILE__ будет уже неактуальным.
 # 
 # То есть если опереться на __FILE__ то нужно определять отностительный или абсолютный путь
 # он отдаёт, однако я выбираю Dir.pwd + $0 :

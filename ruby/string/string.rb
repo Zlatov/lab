@@ -31,6 +31,15 @@ b = a.strip
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
+puts 'Удалить специальные символы вокруг текста'.green
+a = ',asd asd ,,'
+b = a.gsub /,+$/, ''
+c = a.gsub /(?:^,+)|(?:,+$)/, ''
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+exit 0
+
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
 puts "управление Регистром символов в строке! asd Asd".downcase!
 puts UnicodeUtils.downcase('привет Макс! asd Asd')
