@@ -29,8 +29,8 @@ puts 'exec - Возвращает none, прерывает выполнение'
 # exec( "echo 'hi'" )
 # exec( a )
 
-a = `ssh user@host.newstar.ru ls ./`
-puts system('rm -rf data')
-puts system('if [ ! -d "data" ]; then mkdir data; fi')
-puts system('scp user@host.newstar.ru:~/_ZENONLINE/cgi-bin/articles/text/* ./data')
-puts data_folder_exist = ((`if [ -d "data" ]; then echo -n '1'; else echo -n '0'; fi` == '1') ? true : false)
+# a = `ssh user@host.newstar.ru ls ./`
+# puts system('rm -rf data')
+# puts system('if [ ! -d "data" ]; then mkdir data; fi')
+# puts system('scp user@host.newstar.ru:~/_ZENONLINE/cgi-bin/articles/text/* ./data')
+# puts data_folder_exist = ((`if [ -d "data" ]; then echo -n '1'; else echo -n '0'; fi` == '1') ? true : false)

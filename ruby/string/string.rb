@@ -38,7 +38,7 @@ c = a.gsub /(?:^,+)|(?:,+$)/, ''
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
-exit 0
+# exit 0
 
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
 puts "управление Регистром символов в строке! asd Asd".downcase!

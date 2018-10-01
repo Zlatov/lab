@@ -345,10 +345,16 @@ while level >= 0
 end
 # exit 0
 
-puts 'Склеить массивы'.green
+puts 'Склеить, сложить и вычесть массивы (+ -).'.green
 a =  [1,2]
 b =  [1,2]
 c = a + b
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+a = [1,2,3,4,4]
+b = [1,4,7]
+c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
@@ -412,7 +418,7 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit 0
 
-puts 'Сложить элементы массива (.reduce, .inject)'.green
+puts 'Сложить, просуммировать элементы одного массива (.reduce, .inject)'.green
 a = (1..3)
 b = a.reduce(:+)
 print 'a: '.red; p a
@@ -425,6 +431,7 @@ a = (1..3)
 b = a.inject(1){ |sum, x| sum + x }
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit 0
 
 puts 'Перемножить элементы массива (.reduce, .inject)'.green
 a = (1..3)
@@ -536,7 +543,6 @@ a.each_nested do |node, parents, level|
   print 'parents: '.red; p parents
 end
 
-
 # Клонирование массива
 puts 'Клонирование массива'.green
 a = []
@@ -544,3 +550,8 @@ b = a.clone
 b[0] = 0
 print 'a: '.red; p a
 print 'b: '.red; p b
+
+puts 'Над каждым элементом'.green
+b = [1,2,3]
+a.map(&:to_s)
+print 'a: '.red; p a

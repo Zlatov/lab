@@ -52,14 +52,17 @@ puts 'Побороть всех:'.green
 module M
   def self.included obj
     obj.extend ClassMethods
-    obj.var = 1
+    # obj.var = 1
+    obj.class_variable_set :@@var, 1
   end
   module ClassMethods
     def var= value
-      @var = value
+      # @var = value
+      class_variable_set :@@var, value
     end
     def var
-      @var
+      # @var
+      class_variable_get :@@var
     end
   end
 end
@@ -78,3 +81,11 @@ puts 'Поменяются только у одного:'.blue
 C.var = 2
 p C.var
 p C2.var
+
+p C.class_variables.include? :@@var
+p C.methods.include? :var
+p C.singleton_class.methods.include? :var
+p C.singleton_class.instance_variables.include? :@var
+p C.singleton_class.class_variables.include? :@@var
+
+# exit 0
