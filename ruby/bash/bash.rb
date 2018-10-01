@@ -3,26 +3,35 @@ require 'awesome_print'
 
 puts
 puts '` - Возвращает результат команды оболочки'.green
-a = 'echo "hi"'
-b = `echo 'hi'`
-c = `#{a}`
+a = "echo \"hi\""
+b = `#{a}`
+c = $?
+d = c.exitstatus
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+print 'd: '.red; puts d
+# exit 0
 
 puts
 puts '%x - Возвращает результат команды оболочки'.green
-b = %x( echo 'hi' )
-c = %x[ #{a} ]
+a = "echo \"hi\""
+b = %x(#{a})
+c = $?
+d = c.exitstatus
+print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+print 'd: '.red; puts d
+# exit 0
 
 puts
 puts 'system - Возвращает булево значение успешного выполения'.green
-b = system( "echo 'hi'" )
+b = system( "echoc 'hi'" )
 c = system( a )
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+# exit 0
 
 puts
 puts 'exec - Возвращает none, прерывает выполнение'.green

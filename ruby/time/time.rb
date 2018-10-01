@@ -9,8 +9,10 @@ require_relative '../colorize/colorize'
 # UNIX timestamp
 puts 'UNIX timestamp'.green
 p Time.now.to_i.to_s
+# exit
 
 print 'Time.now: '.red; puts Time.now
+# exit
 
 a = Time.new(1998, 2, 8, 9, 12, 23, "+03:00")
 print 'a: '.light_blue; puts a
@@ -72,6 +74,7 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 print 'd: '.red; puts d
+exit
 
 # puts 'Парсинг строки во время'.green
 # a = '2017-02-08 08:00'

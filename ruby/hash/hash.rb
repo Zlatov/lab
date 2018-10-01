@@ -49,8 +49,11 @@ puts 'Удаление по ключу'.green
 a = {a: 1, 'a' => 2}
 a.delete 'a'
 print 'a: '.red; puts a
-a.delete :a
+a.delete :asd
+a.delete :asd
+a.delete :asd
 print 'a: '.red; puts a
+# exit
 
 # Преобразование в hash с фильтрацией
 puts
