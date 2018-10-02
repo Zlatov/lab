@@ -16,7 +16,6 @@ require 'mini_magick'
     alias :to_info :lib_to_info
   end
 
-puts '--------------------------------'
 puts 'Задание массива'.green
 arr = []
 arr = Array.new
@@ -30,7 +29,7 @@ p arr.sample
 # [1, 2, 3]
 # %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
 # %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
-# exit 0
+# exit
 
 puts 'Масси включает в себя `:b`?'.red
 p (arr.include?(:b)? 'y' : 'n')
@@ -42,10 +41,8 @@ asd
 asd
 }
 ap arr
-# exit 0
+# exit
 
-
-puts '--------------------------------'
 puts 'Пересечение'.green
 a = [1,1,3,4]
 b = [1,2,4,5]
@@ -53,7 +50,7 @@ c = a & b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
-# exit 0
+# exit
 
 puts 'Объеденение?++++++++++++++++++++++++++++++++'.green
 a = [1,1,3,4]
@@ -87,7 +84,6 @@ print 'b: '.red; p b
 print 'c: '.red; p c
 # exit 0
 
-puts '--------------------------------'
 puts 'Перебор'.green
 puts 'each, v не является ссылкой'.blue
 a = [1,'asd',nil]
@@ -485,10 +481,7 @@ a.each do |value|
 end
 puts '} '.red
 
-
-# Перебор nested с расширением
 puts 'Перебор nested с расширением'.green
-
 class Array
   def each_nested
     level = 0
@@ -543,7 +536,6 @@ a.each_nested do |node, parents, level|
   print 'parents: '.red; p parents
 end
 
-# Клонирование массива
 puts 'Клонирование массива'.green
 a = []
 b = a.clone
@@ -555,3 +547,10 @@ puts 'Над каждым элементом'.green
 b = [1,2,3]
 a.map(&:to_s)
 print 'a: '.red; p a
+
+puts 'Удалить элемент по индексу'.green
+puts 'Возвращает удалённый элемент'.blue
+a = [1,2,3]
+b = a.delete_at -1
+print 'a: '.red; p a
+print 'b: '.red; p b
