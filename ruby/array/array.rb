@@ -544,9 +544,11 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 
 puts 'Над каждым элементом'.green
-b = [1,2,3]
-a.map(&:to_s)
+a = [1,2,3]
+b = a.map(&:to_s)
 print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
 
 puts 'Удалить элемент по индексу'.green
 puts 'Возвращает удалённый элемент'.blue

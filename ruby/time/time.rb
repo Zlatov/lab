@@ -6,12 +6,21 @@ require_relative '../colorize/colorize'
 # a = Time.now
 # p a
 
-# UNIX timestamp
 puts 'UNIX timestamp'.green
 p Time.now.to_i.to_s
 # exit
 
 print 'Time.now: '.red; puts Time.now
+# exit
+
+puts 'Пауза выполнения кода.'.green
+puts 'сек'.blue
+sleep 1
+puts '1/2 сек'.blue
+sleep 0.5
+puts '1/2 сек'.blue
+sleep 0.5
+puts 'yay'.blue
 # exit
 
 a = Time.new(1998, 2, 8, 9, 12, 23, "+03:00")
