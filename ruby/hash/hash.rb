@@ -45,10 +45,12 @@ p h.count
 
 # Удаление по ключу
 puts
-puts 'Удаление по ключу'.green
+puts 'Удаление по ключу .delete'.green
+puts 'Возвращает удаоённое'.blue
 a = {a: 1, 'a' => 2}
-a.delete 'a'
+b = a.delete 'a'
 print 'a: '.red; puts a
+print 'b: '.red; puts b
 a.delete :asd
 a.delete :asd
 a.delete :asd
