@@ -10,8 +10,28 @@
 -- psql -c "\du"
 -- 
 
+-- 
+-- Менять тип авторизации пользователей
+-- 
+-- /etc/postgresql/9.3/main/pg_hba.conf
+-- Шаблон конфигурационной строки для настройки авторизации пользователей:
+-- local     DATABASE  USER      METHOD  [OPTIONS]
+-- Примеры:
+-- local     all       root      md5
+-- local     all       postgres  peer
+-- local     lab       lab       password
+-- 
+
+-- 
+-- Немного про раздачу пользователей и прав
+-- 
 -- CREATE USER test_user WITH password 'qwerty';
 -- GRANT ALL ON DATABASE test_database TO test_user;
+-- ALTER USER user_name WITH PASSWORD 'new_password';
+-- ALTER USER lab CREATEDB;
+-- 
+
+\l
 
 SELECT
   u.usename AS "User name",
@@ -24,3 +44,5 @@ SELECT
   END AS "Attributes"
 FROM pg_catalog.pg_user u
 ORDER BY 1;
+
+\q
