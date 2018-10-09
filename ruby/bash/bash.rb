@@ -29,9 +29,11 @@ puts
 puts 'system - Возвращает булево значение успешного выполения'.green
 b = system( "echoc 'hi'" )
 c = system( a )
+d = system("[ -d data ] && exit 0 || exit 1")
 print 'b: '.red; puts b
 print 'c: '.red; puts c
-# exit 0
+print 'd: '.red; puts d
+exit 0
 
 puts
 puts 'exec - Возвращает none, прерывает выполнение'.green
