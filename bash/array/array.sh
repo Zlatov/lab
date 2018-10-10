@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # !/bin/bash
+
+set -eu
+
 . ../_lib/echoc
 
 cd `dirname "$0"`
