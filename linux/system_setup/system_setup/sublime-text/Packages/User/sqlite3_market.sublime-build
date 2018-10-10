@@ -1,6 +1,6 @@
 {
 	"cmd": [
-		"/home/iadfeshchm/projects/zenon/market/sql/sqlite3.sh",
+		"/home/iadfeshchm/projects/my/lab/sqlite/_tasks/market/sqlite3.sh",
 		"$file"
 	],
 	"selector": "source.sql"
