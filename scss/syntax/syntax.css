@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #010101;
+  font-size: 22px;
+}
+
+nav {
+  color: red;
+}
+nav li {
+  margin: 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.link {
+  text-decoration: none;
+}
+.link:hover {
+  color: red;
+}
+
+.box-rigth, .box-left, .box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.box-left {
+  border-color: green;
+}
+
+.box-rigth {
+  border-color: red;
+}
+
+aside[role=complementary] {
+  float: right;
+  width: 31.25%;
+}
+
+/*# sourceMappingURL=syntax.css.map */
