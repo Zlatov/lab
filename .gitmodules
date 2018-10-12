@@ -10,3 +10,6 @@
 [submodule "sublime-text-3/_libs/prefixw"]
 	path = sublime-text-3/_libs/prefixw
 	url = git@github.com:Zlatov/prefixw.git
+[submodule "js/_libs/ilorem"]
+	path = js/_libs/ilorem
+	url = git@github.com:Zlatov/ilorem.git
