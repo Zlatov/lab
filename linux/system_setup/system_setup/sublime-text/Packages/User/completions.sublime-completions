@@ -45,6 +45,10 @@
       "contents": "┌─┬─┐│ │ │├─┼─┤│ │ │└─┴─┘",
       "trigger": "u8-table\t├─┼─┤"
     },
+    {
+      "contents": "&#169;",
+      "trigger": "u8-copyright\t©"
+    },
     "iadfeshchm"
   ]
 }
