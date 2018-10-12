@@ -1,6 +1,9 @@
 vendor/
-theme/bower
-theme/yarn
+theme/bower/
+theme/yarn/
+node_modules/
+theme/npm/
+
 !*.sublime-project
 *.sqlite3
 **/temp
