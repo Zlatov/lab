@@ -62,6 +62,7 @@ p __FILE__
 p File.dirname(__FILE__)
 p Dir[File.dirname(__FILE__) + '/*'].select{|e| File.directory? e}
 p Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}.select{|e| File.directory? e}
+# exit
 
 # Очистить директорию
 # FileUtils.rm_r Dir.entries(File.dirname(__FILE__)).reject{|e| e == '.' || e == '..'}

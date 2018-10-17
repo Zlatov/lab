@@ -37,3 +37,6 @@ echo "123.asd" | sed -nr 's/([0-9]+.\w+)/\1 is found/p'
 echo 'Сохранить в переменную найденное по регулярке'
 a=$(echo "asd market_assd asd zxc" | sed -nr 's/.*(market[a-zA-Z_]+).*/\1/p')
 echo $a
+
+echo 'Фильтруем проток по регулярке и выводим только найденное'
+ls | sed -nr 's/^te(.*)/\1/p'

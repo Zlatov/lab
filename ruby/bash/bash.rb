@@ -27,13 +27,30 @@ print 'd: '.red; puts d
 
 puts
 puts 'system - Возвращает булево значение успешного выполения'.green
+puts "подробнее: https://apidock.com/ruby/Kernel/system".blue
+a = "echo \"hi\""
 b = system( "echoc 'hi'" )
 c = system( a )
 d = system("[ -d data ] && exit 0 || exit 1")
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 print 'd: '.red; puts d
-exit 0
+# exit
+
+puts
+puts "Установка дополнительных переменных окружения с system()".green
+puts "подробнее: https://apidock.com/ruby/Kernel/spawn".blue
+a = system({"MYVAR" => "42"}, "echo $MYVAR")
+a = system({"MYVAR" => "42"}, "echo $MYVAR", :out=>["temp_log", "w"])
+print 'STDOUT: '.red; print STDOUT; puts " Константа. Значение по умолчанию для $stdout.".blue
+print '$stdout: '.red; print $stdout; puts " Текущий стандартный выход.".blue
+a = system({"MYVAR" => "42"}, "echo $MYVAR", :out => STDOUT)
+print 'a: '.red; puts a
+# exit
+
+system("bash", "-c", "echo я использую $0 и хрен тут что сделаешь?")
+system({"MYVAR" => "42"}, "bash", "-c", "echo я использую $0 и хрен тут ${MYVAR}!", :out => STDOUT)
+# exit
 
 puts
 puts 'exec - Возвращает none, прерывает выполнение'.green
