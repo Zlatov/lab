@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eu
 
 [[ $(lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
 
