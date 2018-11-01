@@ -46,10 +46,20 @@ print 'STDOUT: '.red; print STDOUT; puts " Константа. Значение 
 print '$stdout: '.red; print $stdout; puts " Текущий стандартный выход.".blue
 a = system({"MYVAR" => "42"}, "echo $MYVAR", :out => STDOUT)
 print 'a: '.red; puts a
-# exit
+a = system({"MYVAR" => "42"}, "/home/iadfeshchm/projects/my/lab/ruby/bash/bash")
+print 'a: '.red; puts a
+exit
 
 system("bash", "-c", "echo я использую $0 и хрен тут что сделаешь?")
 system({"MYVAR" => "42"}, "bash", "-c", "echo я использую $0 и хрен тут ${MYVAR}!", :out => STDOUT)
+# exit
+
+puts "Установка дополнительных переменных окружения с %x".green
+s = %x(
+echo я использую $0
+MYVAR=43 ./bash
+)
+print 's: '.red; puts s
 # exit
 
 puts

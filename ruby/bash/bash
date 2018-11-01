@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu
+echo "Im use $0"
+echo "hi"
+echo "${MYVAR}"
+echo "hi"
+exit 0

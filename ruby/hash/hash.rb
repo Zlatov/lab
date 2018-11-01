@@ -29,7 +29,6 @@ end
 p h[0]
 p h[3]
 
-# Перебор
 puts
 puts 'Перебор'.green
 a = {a: 1, b: 2}
@@ -40,13 +39,24 @@ end
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
-# Количество элементов
-p h.count
-
-# Удаление по ключу
 puts
-puts 'Удаление по ключу .delete'.green
-puts 'Возвращает удаоённое'.blue
+puts 'Количество элементов .count()'.green
+a = {a: 1, b: 2}
+b = a.count
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit
+
+puts 'Выбрать все значения хэша, без ключей .values().'.green
+a = {a: 1, b: 2}
+b = a.values
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit
+
+puts
+puts 'Удаление по ключу .delete().'.green
+puts 'Возвращает удалённое.'.blue
 a = {a: 1, 'a' => 2}
 b = a.delete 'a'
 print 'a: '.red; puts a

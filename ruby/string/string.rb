@@ -133,10 +133,19 @@ b@b.b
 c@c.c
 d@d.d,
  a@a.a, a@a.a,    
+ e@e.e e@e.e,    
     TEXT
 b = a.strip.split("\n").map{|e|e.split(',')}.flatten.map(&:strip).uniq
 print 'a: '.red; puts a
 print 'b: '.red; p b
+c = a
+  .split("\n") # разбить в массив по переносам
+  .map{|e| e.split(/\s?,?\s+/)} # разбить каждую строку в массив по регулярке
+  .flatten # в плоский массив
+  .reject{|e| e==""} # избавляемся от пустых строк
+  .uniq
+print 'c: '.red; p c
+exit
 
 # Дату в форматированный текст
 puts 'Дату в форматированный текст'.green

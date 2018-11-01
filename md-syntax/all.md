@@ -1,4 +1,6 @@
 # Документация синтаксиса markdown
+
+<a name="id1"></a>
 ## <a id="Оглавление"></a>Оглавление
 1. [Зарезервированные символы](#Зарезервированные-символы)
 1. [Заголовки](#Заголовки)
@@ -114,14 +116,16 @@ Header 2
 [I'm a relative reference to a repository file](../blob/master/LICENSE)
 http://www.example.com or <http://www.example.com> and sometimes example.com (but not on Github, for example).
 ```
-[Абсолютная ссылка](https://www.google.com)
-[Абсолютная ссылка с тайтлом](https://www.google.com "Домашняя страница Гугла")
-[Относительная ссылка на идентификатор в текущем документе заданный немедленно](#id1)
-[Относительная ссылка на идентификатор в текущем документе заданный немедленно](#Оглавление)
-[Относительная ссылка на идентификатор в текущем документе заданный сноской (на гитхаб не работает)][id2]
-[id2]: #id2
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-http://www.example.com or <http://www.example.com> and sometimes example.com (but not on Github, for example).
+
+* [Абсолютная ссылка](https://www.google.com)
+* [Абсолютная ссылка с тайтлом](https://www.google.com "Домашняя страница Гугла")
+* [Относительная ссылка на идентификатор в текущем документе заданный немедленно __работает везде__](#id1)
+* [Относительная ссылка на идентификатор в текущем документе заданный немедленно](#Оглавление)
+* [Относительная ссылка на идентификатор в текущем документе заданный сноской (на гитхаб не работает)][id321]
+* [I'm a relative reference to a repository file](../blob/master/LICENSE)
+* http://www.example.com or <http://www.example.com> and sometimes example.com (but not on Github, for example).
+
+[id321]: #id2
 
 ## <a id="Коды"></a>Коды [↑](#Оглавление "К оглавлению")
 `cd ..`

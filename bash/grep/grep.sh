@@ -64,3 +64,19 @@ status=$(echo 'asd' | grep -c 'f')
 echo '$status: ' $status
 status=$(echo 'asd' | grep -c 's')
 echo '$status: ' $status
+
+a=' asd'
+# if echo $a | grep -e '\s]asd'
+# then
+#   echoc nashel green
+# else
+#   echoc nenashel red
+# fi
+
+echo ' asd' > temp
+if echo "${a}" | grep -e '\s\asd'
+then
+  echoc nashel green
+else
+  echoc nenashel red
+fi
