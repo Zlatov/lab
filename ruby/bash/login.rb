@@ -7,7 +7,7 @@ a = system(
 )
 print 'a: '.red; puts a
 
-puts 'Запустит баш с башэрси'.green
+puts 'Запустит баш как интерактивный и начальный командный интерпретатор.'.green
 a = system(
   "bash",
   "-lic",
