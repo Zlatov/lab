@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # !/bin/bash
 
-set -eu
+# set -eu
 
 . ../_lib/echoc
 
@@ -29,9 +29,8 @@ echo ${!a[@]} "- Это индексы"
 for i in "${!array[@]}"; do
   echo "$i ${array[$i]}"
 done
-exit 0
+# exit 0
 
-# Количество count length
 echoc "Количество count length" green
 declare -a a=('asd zxc' zxc 1)
 declare -i b="${#a[@]}"
@@ -41,7 +40,7 @@ echo '$a: ' "${a[@]}"
 echo '$b: ' $b
 echo '$c: ' $c
 echo '$d: ' $d '(длинна первого элемента)'
-# exit 0
+exit 0
 
 # Новый элемент в конец массива
 array[${#array[*]}]="не в конец ((("
@@ -76,7 +75,7 @@ a=string
 if [[ "$(declare -p a)" =~ "declare -a" ]]; then echo "a is array!!!"; else echo "a is not array"; fi
 b=string
 if [[ "$(declare -p b)" =~ "declare -a" ]]; then echo "b is array"; else echo "b is not array"; fi
-exit 0
+# exit 0
 
 
 echo "Количество элементов array: ${#array[*]}" # ... 4
