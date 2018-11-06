@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -eu
+
+function copyFiles {
+  local options
+  options=()
+  mapfile -t options
+  echo "options:" ${options[@]}
+  for i in "${!options[@]}"
+  do
+    option=${options[$i]}
+    echo "$i:$option"
+  done
+  echo "Количество переданных параметров : $#"
+  echo "Все параметры переданные функции: '$@'"
+  echo "Запрошенная команда для вызова скрипта: $0"
+}
+
+# copyFiles
+
+a=("asd" "qwe zxc")
+for i in "${!a[@]}"
+do
+  b=${a[$i]}
+  echo "$i:$b"
+done
+echo "${a[@]}" | copyFiles
+
+# copyFiles
+
+copyFiles <<< "asd\nqwe zxc"
+
+echo -e "asd\nqwe zxc" | copyFiles
