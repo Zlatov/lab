@@ -16,3 +16,16 @@ while slug_exists(new_slug)
 end
 
 print 'new_slug: '.red; puts new_slug
+
+puts 'Если значение поппадает в диапазон.'.green
+a = 2
+if 1 > a || a > 3
+  puts "bad"
+else
+  puts "good"
+end
+if 1 <= a && a <= 3
+  puts "good"
+else
+  puts "bad"
+end
