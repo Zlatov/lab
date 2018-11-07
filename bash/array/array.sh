@@ -5,26 +5,30 @@
 # -x Печатать команды и их аргументы по мере их выполнения.
 # -u Выйти немедленно, если было обращение к неопределённой переменной.
 
-# set -eu
+set -eu
+
+cd "$(dirname "${0}")"
 
 . ../_lib/echoc
 
-cd `dirname "$0"`
+# Очищаем текущую директорию для теста:
+find . -type f -not -name array.sh -delete
+find . -type d -not -path . | xargs -I {} rm -rf {}
 
 array=(aaa bbb ccc)
 
-# Вывод массива
 echoc 'Вывод массива' green
 echo $array                   # aaa - не выведет массив
 echo ${array[@]}              # aaa bbb ccc - выведет массив
 # exit 0
 
-# Вывод элемента массива
+echoc "Вывод элемента массива" green
 echo ${array[1]}              # bbb
-echo ${array[10]}             # пустая строка
+echo ${array[10]-}             # пустая строка
 echo "some text: ${array[1]}" # some text: bbb
+# exit 0
 
-# Новый элемент с номером
+echoc "Новый элемент с номером" green
 array[11]=`echo "${array[1]} и ${array[2]}"`
 echo ${array[11]}              # bbb и ссс
 # array[-13]="ы" # вызывает ошибку если отрицатеьльное значение больше последнего_индекса+1
@@ -42,102 +46,77 @@ declare -i b="${#a[@]}"
 declare -i c="${#a[*]}"
 declare -i d="${#a}"
 echo '$a: ' "${a[@]}"
+for i in ${!a[@]}
+do
+  value=${a[$i]}
+  echoc -n $i: red; echo $value
+done
 echo '$b: ' $b
 echo '$c: ' $c
 echo '$d: ' $d '(длинна первого элемента)'
 # exit 0
 
-# Новый элемент в конец массива
+echoc "Новый элемент в конец массива" green
 array[${#array[*]}]="не в конец ((("
 echo ${array[@]}
 # Добавить элемент. (переиндексация)
 array123=( "${array[@]}" "новый элемент" )
 echo ${array123[@]}
+# exit 0
 
-# Добавить в конец
+echoc "Добавить в конец" green
 array123+=("новейший элемент")
 echo ${array123[@]}
 # exit 0
 
-# Объявление массива
+echoc "Объявление массива" green
 declare -a array2
-echo 'array2: ' ${array2[@]}
+array2=("asd" "qwe zxc")
+echo '$array2: ' ${array2[@]}
+# exit 0
 
 declare -a array6=( "${array[@]#*ccc}" )
+echo 'array: ' ${array[@]}
 echo 'array6: ' ${array6[@]}
+# exit 0
 
 declare -a array7=( ${array[@]#*ccc} )
+echo 'array: ' ${array[@]}
 echo 'array7: ' ${array7[@]}
+# exit 0
 
 declare -a array8=( "${array[@]/новый1/}" )
+echo 'array: ' ${array[@]}
 echo 'array8: ' ${array8[@]}
+# exit 0
 
-# Переменная является массивом
 echoc "Переменная является массивом" green
-a=(asd zxc)
+unset a
+a=("asd" "zxc")
 if [[ "$(declare -p a)" =~ "declare -a" ]]; then echo "a is array"; else echo "a is not array"; fi
-a=string
+unset a
+a="asd"
 if [[ "$(declare -p a)" =~ "declare -a" ]]; then echo "a is array!!!"; else echo "a is not array"; fi
-b=string
+unset b
+b="ads"
 if [[ "$(declare -p b)" =~ "declare -a" ]]; then echo "b is array"; else echo "b is not array"; fi
 # exit 0
 
 
-echo "Количество элементов array: ${#array[*]}" # ... 4
-echo "Количество элементов array2: ${#array2[*]}" # ... 0
+echoc "Количество элементов array: ${#array[*]}" green
+echoc "Количество элементов array2: ${#array2[*]}" green
+# exit 0
 
-echo 
-echo "--- \"\${array[@]}\" --- as value"
-echo 
+echoc "Перебор массива с доступом к значениям value" green
 for value in "${array[@]}"
 do
-	echo $value
+  echo $value
 done
+# exit 0
 
-echo 
-echo "--- \"\${!array[@]}\" --- as key"
-echo 
-for key in "${!array[@]}"
-do
-	echo $key
-done
-
-echo 
-echo "printf array"
-echo 
+echoc "Перебор массива с доступом к индесам значений index" green
 for index in "${!array[@]}"
 do
-	printf '%d %s\n' "$index" "${array[$index]}"
+  echo $index
 done
-
-echo 
-echo "6:"
-echo 
-for index in "${!array6[@]}"
-do
-	printf '%d %s\n' "$index" "${array6[$index]}"
-done
-
-echo 
-echo "7:"
-echo 
-for index in "${!array7[@]}"
-do
-	printf '%d %s\n' "$index" "${array7[$index]}"
-done
-
-echo 
-echo "8:"
-echo 
-echoc 'Перебор массива array8' green
-for index in "${!array8[@]}"
-do
-  printf '%d %s\n' "$index" "${array8[$index]}"
-done
-
-echo
-echoc 'Перебор массива array123' green
-for index in "${!array123[@]}"
-do
-	printf '%d %s\n' "$index" "${array123[$index]}"
-done
+# exit 0
