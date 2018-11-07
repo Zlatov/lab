@@ -18,8 +18,19 @@ find . -type d -not -path . | xargs -I {} rm -rf {}
 array=(aaa bbb ccc)
 
 echoc 'Вывод массива' green
-echo $array                   # aaa - не выведет массив
-echo ${array[@]}              # aaa bbb ccc - выведет массив
+unset a
+declare -a a
+a=("asd" "qwe zxc" 1)
+echoc "первый элемент" blue
+echo $a
+echoc "массив в строку" blue
+echo ${a[@]}
+echoc "элементы построчно" blue
+for i in ${!a[@]}
+do
+  item=${a[$i]}
+  echo "$i:$item"
+done
 # exit 0
 
 echoc "Вывод элемента массива" green
@@ -120,3 +131,27 @@ do
   echo $index
 done
 # exit 0
+
+echoc "Наполним массив из файла" green
+touch temp
+echo -e "asd\nqwe zxc" | tee temp >/dev/null
+unset a
+declare -a a
+while read line
+do
+  a+=("$line")
+done < ./temp
+for i in ${!a[@]}
+do
+  item=${a[$i]}
+  echo "$i:$item"
+done
+
+echoc "Или так" blue
+unset a
+mapfile -t a < ./temp
+for i in ${!a[@]}
+do
+  item=${a[$i]}
+  echo "$i:$item"
+done
