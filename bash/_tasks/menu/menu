@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+function menu {
+  local option options index current
+  local key
+  local pointer tabulator tab
+
+  pointer="\e[32m> \e[0m"
+  tabulator="  "
+  mapfile -t options
+  current=0
+  key=""
+
+  while :
+  do
+    # Запоминаем позицию курсора перед выводом опций для того, чтобы выводить
+    # список опций со смещённым курсором с этого же места в следующий раз.
+    tput sc >/dev/tty
+
+    # Вывод заголовка если задан
+    [[ -n ${1-} && ${1-} == '-h' && -n "${2-}" ]] && printf '%s\n' "$2" >/dev/tty
+
+    # Вывод списка с курсором
+    for index in "${!options[@]}"
+    do
+      option="${options[$index]}"
+      tab=$( (( $index == $current )) && echo -n "${pointer}" || echo -n "${tabulator}" )
+      echo -e "${tab}${option}" >/dev/tty
+    done
+
+    # Вывод подсказки
+    echo "Используйте клавиши < > для выбора." >/dev/tty
+
+    # Ждём ответ пользователя
+    read -s -n 1 key </dev/tty
+
+    # Если был введён пустой символ (Enter)
+    if [[ -z $key ]]
+    then
+      echo -n "${options[$current]}"
+      break
+    # Если считан видимый символ
+    else
+      # Меняем текущий индекс опций если были нажаты соответствующие клавиши
+      case "$key" in
+        '<'|',' )
+          (( $current > 0 )) && (( current -- ))
+        ;;
+        '>'|'.' )
+          (( $current < "${#options[@]}" - 1 )) && (( current ++ ))
+        ;;
+      esac
+      # Возвращаемся к тому месту откуда печатали
+      tput rc >/dev/tty
+    fi
+  done
+}
