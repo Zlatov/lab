@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -eu
+
+# cd "$(dirname "${0}")"
+cd "$(dirname "$0")"
+
+. ../_lib/echoc
+
+# Очищаем текущую директорию для теста:
+find . -type f -not -name bash -delete
+find . -type d -not -path . | xargs -I {} rm -rf {}
+
+# 
+# << — here-document структура (здесь документ).
+# <<< — here-string структура (здесь строка).
+# <() — process substitution (замена процесса).
+# 
+
+touch temp
+echo -e "asd\nqwe zxc" | tee temp >/dev/null
+
+echoc "Неправильное наполнение массива из файла через mapfile <<< $(cat temp)" green
+mapfile -t a <<< $(cat ./temp)
+for i in ${!a[@]}
+do
+  item=${a[$i]}
+  echo "$i:$item"
+done
+
+echoc "Наполнение массива из файла через mapfile < temp" green
+mapfile -t b < ./temp
+for i in ${!b[@]}
+do
+  item=${b[$i]}
+  echo "$i:$item"
+done
+
+echoc "Наполнение массива из файла через while read a+=" green
+unset a
+declare -a a
+# a=()
+while read line
+do
+  a+=("$line")
+done < ./temp
+for i in ${!a[@]}
+do
+  item=${a[$i]}
+  echo "$i:$item"
+done
