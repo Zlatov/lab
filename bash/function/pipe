@@ -2,9 +2,38 @@
 
 set -eu
 
+. ../_lib/echoc
+
+
+# Вы можете передать строку в stdin команды следующим образом:
+echo "asd" | grep "asd"
+# Однако в bash введение в канал означает, что отдельные команды запускаются в
+# подоболочки:
+$(
+  echo "hello world" | read first second
+  echo $second $first
+) && echo "Норм" || echoc "Ошибка, неизвестная переменная second." red
+# Что случилось с моими переменными? Поскольку команда чтения находится в
+# конвейере, она запускается в подоболочке, но тогда команда завершается,
+# подоболочка выходит и переменные теряются. Иногда вы можете обойти это с
+# помощью фигурных скобок:
+echo "hello world" | {
+  read first second
+  echo $second $first
+}
+# Это нормально, если ваша потребность в значениях заканчивается, но у вас все
+# еще нет этих переменных в текущей оболочке вашего скрипта. Чтобы устранить эту
+# запутанную ситуацию, используйте следующую строку:
+read first second <<< "hello world"
+echo $second $first
+# exit 0
+# Ах, намного лучше!
+
+
+
 function copyFiles {
-  local options
-  options=()
+  # delare -a options
+  # local options
   mapfile -t options
   echo "options:" ${options[@]}
   for i in "${!options[@]}"
@@ -12,23 +41,26 @@ function copyFiles {
     option=${options[$i]}
     echo "$i:$option"
   done
-  echo "Количество переданных параметров : $#"
-  echo "Все параметры переданные функции: '$@'"
-  echo "Запрошенная команда для вызова скрипта: $0"
 }
 
-# copyFiles
-
+echoc "Массив" green
 a=("asd" "qwe zxc")
+echo '$a: ' ${a[@]}
 for i in "${!a[@]}"
 do
   b=${a[$i]}
   echo "$i:$b"
 done
-echo "${a[@]}" | copyFiles
 
-# copyFiles
+echoc "Передача массива в поток" green
+echo ${a[@]} | copyFiles
 
-copyFiles <<< "asd\nqwe zxc"
-
+echoc "Передача строки в поток" green
 echo -e "asd\nqwe zxc" | copyFiles
+
+echoc "Передача строки в поток вторым способом" green
+copyFiles <<< "asd
+qwe zxc"
+
+echoc "Передача строки в поток способом" green
+copyFiles < <(echo -e "asd\nqwe zxc")
