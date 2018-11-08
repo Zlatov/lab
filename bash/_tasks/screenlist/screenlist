@@ -6,4 +6,29 @@ cd "$(dirname "${0}")"
 
 . ../../_lib/menu
 
-screen -list
+screen_text=$(echo -e "$(screen -list)")
+# echo "${screen_text}"
+
+screen_list=$(echo -e "${screen_text}" | sed -nr 's/^\s{1,}([0-9]{1,}\.{1,1}[0-9a-z_\.-]{1,}).*/\1/Ip')
+# echo "${screen_list}"
+
+if [[ -z "${screen_list}" ]]
+then
+  echo "Нет скринов."
+  exit 0
+fi
+
+mapfile -t screen_array <<< "$screen_list"
+# for i in ${!screen_array[@]}
+# do
+#   item=${screen_array[$i]}
+#   echo "$i:$item"
+# done
+
+selected_screen=$(menu -h "Количество найденных скринов: ${#screen_array[@]}. Выберите скрин:" <<< "$screen_list")
+# echo '$selected_screen: ' $selected_screen
+
+screen_commands=$(echo -e "Войти\nУдалить\nОтсоединить\nНичего")
+
+screen_command=$(menu -h "" <<< "$screen_commands")
+echo '$screen_command: ' $screen_command
