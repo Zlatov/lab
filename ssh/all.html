@@ -4,7 +4,14 @@
 <p>Копируем публичную часть на сервер:</p>
 <pre class="prettyprint lang-sh copyToClipboard">ssh-copy-id -i ~/.ssh/id_rsa.pub myserv</pre>
 <p><strong>Принудительно запросить пароль вместо аутентификации по ключу.</strong></p>
+<p>Опция к ssh команде</p>
 <pre class="prettyprint lang-sh copyToClipboard">ssh -o PubkeyAuthentication=no login@host</pre>
+<p>Опция в настройках в <var>~/.ssh/config</var></p>
+<pre class="prettyprint lang-sh copyToClipboard">Host try
+  …
+  PreferredAuthentications password
+  PubkeyAuthentication no
+</pre>
 
 <h2>через Proxy</h2>
 <h3>GitHub и BitBucket через Proxy по 433 порту</h3>
