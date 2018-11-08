@@ -108,14 +108,11 @@ b = a.gsub /[^a-z0-9_]/i, '_'
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
-# Последняя позиция подстроки, подстрока по позиции и длинне
 puts 'Последняя позиция подстроки, подстрока по позиции и длинне'.green
 text = 'he/el/lo'
 p i = text.rindex('/')
 p text.slice(0, i+1)
 
-# В массив
-puts
 puts 'В массив'.green
 a = "1,2,3,4"
 b = a.split(",")
@@ -125,6 +122,12 @@ a = " asd, \n zxc, \n qwe "
 b = a.strip.split("\s\n\s").first.delete ','
 print 'a: '.red; puts a
 print 'b: '.red; ap b
+puts 'Лимитировать количество разбиений вторым параметром'.green
+a = "asd_qwe_zxc"
+b = a.split("_", 2)
+print 'a: '.red; puts a
+print 'b: '.red; ap b
+# exit
 
 puts 'Многострочный текст в массив'.green
 a = <<-TEXT
