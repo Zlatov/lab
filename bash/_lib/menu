@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 function menu {
+  tput smcup >/dev/tty
   local option options index current
   local key
   local pointer tabulator tab
@@ -15,6 +16,7 @@ function menu {
   do
     # Запоминаем позицию курсора перед выводом опций для того, чтобы выводить
     # список опций со смещённым курсором с этого же места в следующий раз.
+    tput clear >/dev/tty
     tput sc >/dev/tty
 
     # Вывод заголовка если задан
@@ -37,7 +39,6 @@ function menu {
     # Если был введён пустой символ (Enter)
     if [[ -z $key ]]
     then
-      echo -n "${options[$current]}"
       break
     # Если считан видимый символ
     else
@@ -54,4 +55,6 @@ function menu {
       tput rc >/dev/tty
     fi
   done
+  echo -n "${options[$current]}"
+  tput rmcup >/dev/tty
 }
