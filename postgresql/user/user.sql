@@ -7,13 +7,13 @@
 -- 
 -- или
 -- 
--- psql -c "\du"
+-- sudo -u postgres psql -c "\du"
 -- 
 
 -- 
 -- Менять тип авторизации пользователей
 -- 
--- /etc/postgresql/9.3/main/pg_hba.conf
+-- subl /etc/postgresql/9.3/main/pg_hba.conf
 -- Шаблон конфигурационной строки для настройки авторизации пользователей:
 -- local     DATABASE  USER      METHOD  [OPTIONS]
 -- Примеры:
@@ -25,6 +25,7 @@
 -- 
 -- Немного про раздачу пользователей и прав
 -- 
+-- sudo -u postgres psql -c "…"
 -- CREATE USER test_user WITH password 'qwerty';
 -- GRANT ALL ON DATABASE test_database TO test_user;
 -- ALTER USER user_name WITH PASSWORD 'new_password';
