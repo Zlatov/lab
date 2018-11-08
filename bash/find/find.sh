@@ -20,3 +20,6 @@ find . -type d -not -path .
 exit 0
 # файлы из субдиректорий в какую-то директорию
 find . -mindepth 2 -type f -print -exec mv {} . \;
+
+# Найти пути с папкой bash внутри в текущей папке (уровень 0)
+find ./*/bash -maxdepth 0 -type d
