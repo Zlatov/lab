@@ -10,7 +10,7 @@ cd "$(dirname "${0}")"
 find . -type f -not -name menu.sh -not -name menu -delete
 find . -type d -not -path . | xargs -I {} rm -rf {}
 
-. menu
+. ../../_lib/menu
 
 touch temp
 echo -e "первый\nвторой\nтретий" | tee temp >/dev/null
@@ -26,7 +26,9 @@ options=$(cat ./temp)
 # echo "$options"
 # exit 0
 
+# tput smcup
 choise=$(menu <<< "$options")
+# tput rmcup
 echo "choise: ${choise}"
 choise=$(menu -h "выберите:" <<< "$options")
 echo "choise: ${choise}"
