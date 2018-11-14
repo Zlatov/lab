@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li, form, label, select, table, tr, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+select {
+    outline: 0;
+    cursor: pointer;
+}
+label {
+    cursor: pointer;
+}
+.blocks, img, iframe, .int, .btn, .btns, .btn_buy, .select, .label, .checkbox, .radio, .i, .i:before {
+    display: inline-block;
+    display: -moz-inline-block;
+    vertical-align: top;
+}
+.label {
+    margin: 10px 10px 0 0;
+    font: 16px/18px 'Roboto-Regular', sans-serif;
+    color: #082233;
+}
+
+.form .label {
+    margin: 0;
+    padding: 0 3px;
+    background: #fff;
+    font: 300 12px/14px 'Roboto-Light', sans-serif;
+    color: #999;
+    position: absolute;
+    top: -7px;
+    left: 7px;
+}
+
+.box_m .label {
+    margin: 0;
+    padding: 0 3px;
+    background: #fff;
+    font: 300 12px/14px 'Roboto-Light', sans-serif;
+    color: #999;
+    position: absolute;
+    top: -7px;
+    left: 7px;
+}
+
+.report_error .box2 {
+    width: 270px;
+    position: relative;
+}
+
+
+  </style>
+  <link rel="stylesheet" type="text/css" href="zenoselect.css">
+</head>
+<body>
+
+<div class="box2 blocks">
+  <label class="label" for="market_model_callback_Город">Город</label>
+  <select name="market_model_callback[city]" id="market_model_callback_city" class="zenoselect">
+    <option value="Москва">Москва</option>
+    <option value="Одинцово">Одинцово</option>
+  </select>
+</div>
+
+</body>
+</html>
