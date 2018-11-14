@@ -8,6 +8,7 @@ exit 0
 echo "alias  s='git status -u'"            | tee -a ~/.bashrc >/dev/null
 echo "alias  a='git add'"                  | tee -a ~/.bashrc >/dev/null
 echo "alias aa='git add -A'"               | tee -a ~/.bashrc >/dev/null
+echo "alias  r='git reset HEAD'"           | tee -a ~/.bashrc >/dev/null
 echo "alias  c='git commit'"               | tee -a ~/.bashrc >/dev/null
 echo "alias ca='git add -A && git commit'" | tee -a ~/.bashrc >/dev/null
 
