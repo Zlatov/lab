@@ -7,6 +7,8 @@
 <pre>
 --modules-folder theme/yarn
 </pre>
+<p>При отличающемся пути вендора yarn от пути вендора npm при установке некоторых пакетов (<var>semantic-ui</var>) могут возникнуть проблемы <code>Cannot find module '...'</code> связанные с невозможностью найти необходимые пакеты. Необходимо вручную с помощью пакетного менеджера npm установить эти паки кастомизировав путь вендора с помощью опции <code>--prefix &lt;path&gt;</code>, например <code>npm install archy --prefix ./theme/yarn</code>.</p>
+<p>Хотя в случае с <var>semantic-ui</var> даже это не поможет. Лучше установить его с помощь npm.</p>
 <p><strong>Прокси:</strong></p>
 <p><code class="copyToClipboard">yarn config set https-proxy http://proxy.newstar.ru:3128</code></p>
 <p><code class="copyToClipboard">yarn config delete proxy</code></p>
