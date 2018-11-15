@@ -7,6 +7,14 @@ console.log('a: ', a)
 // return
 
 console.log("\n")
+console.log('> Последний элемент.')
+a = [1, 2, 3, 4]
+b = a.slice(-1)[0]
+console.log('a: ', a)
+console.log('b: ', b)
+// return
+
+console.log("\n")
 console.log('> Перебор forEach().')
 var a = ['a', 2, true, , null, undefined, { a: 'a' }]
 console.log('a: ', a)
