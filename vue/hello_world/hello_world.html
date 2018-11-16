@@ -5,55 +5,15 @@
   <title>Document</title>
 </head>
 <body>
+  <script type="text/javascript" src="/theme/yarn/vue/dist/vue.min.js"></script>
 
   <!-- Пример 1 -->
   <div id="app">
     {{ message }}
   </div>
 
-  <!-- Пример 2 -->
-  <div id="app-2">
-    <span v-bind:title="message">
-      Наведи на меня курсор на пару секунд,
-      чтобы увидеть динамически связанное значение title!
-    </span>
-  </div>
-
-  <!-- Пример 3 -->
-  <div id="app-3">
-    <span v-if="seen">Сейчас меня видно</span>
-  </div>
-
-  <!-- Пример 4 -->
-  <div id="app-4">
-    <ol>
-      <li v-for="todo in todos">
-        {{ todo.text }}
-      </li>
-    </ol>
-  </div>
-
-  <!-- Пример 5 -->
-  <div id="app-5">
-    <p>{{ message }}</p>
-    <button v-on:click="reverseMessage">Перевернуть сообщение</button>
-  </div>
-
-  <!-- Пример 6 -->
-  <div id="app-6">
-    <p>{{ message }}</p>
-    <input v-model="message">
-  </div>
-
-  <!-- Пример 7 -->
-  <div id="app-7">
-    <ol>
-      <vue-component-li v-for="text in groceryList" v-bind:arg1="text"></vue-component-li>
-    </ol>
-  </div>
-
-  <script type="text/javascript" src="/theme/yarn/vue/dist/vue.min.js"></script>
   <script type="text/javascript">
+
     "use strict"
 
     // Пример 1
@@ -69,6 +29,20 @@
     }
     setTimeout(ch_app, 1000)
 
+  </script>
+
+  <!-- Пример 2 -->
+  <div id="app-2">
+    <span v-bind:title="message">
+      Наведи на меня курсор на пару секунд,
+      чтобы увидеть динамически связанное значение title!
+    </span>
+  </div>
+
+  <script type="text/javascript">
+
+    "use strict"
+
     // Пример 2
     var app2 = new Vue({
       el: "#app-2",
@@ -76,6 +50,17 @@
         message: 'Вы загрузили эту страницу: ' + new Date().toLocaleString()
       }
     })
+
+  </script>
+
+  <!-- Пример 3 -->
+  <div id="app-3">
+    <span v-if="seen">Сейчас меня видно</span>
+  </div>
+
+  <script type="text/javascript">
+
+    "use strict"
 
     // Пример 3
     var app3 = new Vue({
@@ -87,6 +72,21 @@
     setTimeout(function() {
       window.app3.seen = false
     }, 2000)
+
+  </script>
+
+  <!-- Пример 4 -->
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <script type="text/javascript">
+
+    "use strict"
 
     // Пример 4
     var app4 = new Vue({
@@ -103,6 +103,18 @@
       window.app4.todos.push({ text: 'Profit' })
     }, 2000)
 
+  </script>
+
+  <!-- Пример 5 -->
+  <div id="app-5">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Перевернуть сообщение</button>
+  </div>
+
+  <script type="text/javascript">
+
+    "use strict"
+
     // Пример 5
     var app5 = new Vue({
       el: '#app-5',
@@ -116,6 +128,17 @@
       }
     })
 
+  </script>
+
+  <!-- Пример 6 -->
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <input v-model="message">
+  </div>
+  <script type="text/javascript">
+
+    "use strict"
+
     // Пример 6
     var app6 = new Vue({
       el: '#app-6',
@@ -123,6 +146,18 @@
         message: 'Привет, Vue!'
       }
     })
+
+  </script>
+
+  <!-- Пример 7 -->
+  <div id="app-7">
+    <ol>
+      <vue-component-li v-for="text in groceryList" v-bind:arg1="text"></vue-component-li>
+    </ol>
+  </div>
+  <script type="text/javascript">
+
+    "use strict"
 
     // Пример 7
     Vue.component('vue-component-li', {

@@ -1,0 +1,22 @@
+.basket-list {}
+
+.basket-list .list {}
+
+.basket-list .remove_all {
+  display: inline-block;
+  background-color: red;
+}
+
+.basket-list .list .img {
+  width: 64px;
+  height: 64px;
+  background-size: cover; 
+  background-position: center center;
+}
+
+.basket-list .list .remove {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+}

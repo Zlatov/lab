@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="basket.css">
+</head>
+<body>
+  <div id="app">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+    <basket-list ref="basketList"></basket-list>
+  </div>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="test.js"></script>
+  <script type="text/javascript">
+    "use strict"
+    Vue.config.devtools = true
+    var app = new Vue({
+      el: '#app',
+      data: {
+        todos: [
+          { text: 'Изучить JavaScript' },
+          { text: 'Изучить Vue' },
+          { text: 'Создать что-нибудь классное' }
+        ],
+        basket: [
+        ]
+      },
+      methods: {
+        basket_new_data: function(data) {
+          this.basket.splice(0)
+          for (var i = 0, l = data.length; i < l; i++) {
+            var item = data[i]
+            this.basket.push(item)
+          }
+        },
+        basket_remove_item: function(articul) {
+          console.log('this: ', this)
+          console.log('articul2: ', articul)
+        }
+      }
+    })
+    setTimeout(function() {
+      window.app.todos.push({ text: 'Profit' })
+    }, 2000)
+  </script>
+  <script type="text/javascript" src="basket.js"></script>
+  <script type="text/javascript">
+    setTimeout(window.test, 1000)
+  </script>
+</body>
+</html>
