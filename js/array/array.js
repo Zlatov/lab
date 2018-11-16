@@ -15,6 +15,34 @@ console.log('b: ', b)
 // return
 
 console.log("\n")
+console.log('> splice().')
+// 
+// array.splice(start, delete, [item1, [item2, [...]]])
+// start
+//  Индекс, по которому начинать изменять массив.
+// deleteCount
+//  Целое число, показывающее количество удаляемых элементов.
+// itemN
+//  Необязательные параметры. Добавляемые к массиву элементы.
+
+console.log('> splice(0) удалит всё.')
+a = [1,2,3]
+b = a.splice(0)
+console.log('a: ', a)
+console.log('b: ', b)
+console.log('> splice(0, 1) удалит 1.')
+a = [1,2,3]
+b = a.splice(0, 1)
+console.log('a: ', a)
+console.log('b: ', b)
+a = [1,2,3]
+b = a.splice(0, 0)
+console.log('> splice(0, 0) удалит 0 (ниечего не сделает).')
+console.log('a: ', a)
+console.log('b: ', b)
+return
+
+console.log("\n")
 console.log('> Перебор forEach().')
 var a = ['a', 2, true, , null, undefined, { a: 'a' }]
 console.log('a: ', a)
@@ -116,7 +144,11 @@ a.map((element, index, array) => {
 console.log('a: ', a)
 console.log('> for вместе с i-- :'.blue())
 var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
-for(var i=0; i<a.length; i++) {
+// 
+// Важно вычислять длинну на каждой итерации: `i < a.length`
+// Важно уменьшать текущий индекс при удалении: `i--`
+// 
+for(var i = 0; i < a.length; i++) {
   if (a[i].id == 4 || a[i].id == 5) {
     console.log('i: ', i)
     a.splice(i, 1)
