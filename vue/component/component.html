@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="app">
+    <my-global-component></my-global-component>
+    <my-local-component></my-local-component>
+    <my-global-component></my-global-component>
+    <my-local-component></my-local-component>
+  </div>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    "use strict"
+
+    var app_data = {
+      data_local: {
+        list: [
+          "1", "2"
+        ]
+      },
+      data_global: {
+        header: "Lorem ipsum dolor"
+      }
+    }
+
+    var MyLocalComponent = {
+      data: function() {
+        return window.app_data.data_local
+      },
+      template: `
+        <ul>
+          <li v-for="item in list">
+            <span>{{ item }}</span>
+          </li>
+        </ul>
+      `
+    }
+
+    Vue.component("MyGlobalComponent", {
+      data: function() {
+        return window.app_data.data_global
+      },
+      template: "<h1>{{ header }}</h1>"
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: window.app_data,
+      components: {
+        "my-local-component": window.MyLocalComponent
+      }
+    })
+  </script>
+</body>
+</html>
