@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="number-corrector.css">
+</head>
+<body>
+  <div id="app">
+    <basket-list ref="basketList"></basket-list>
+  </div>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+
+    "use strict"
+
+    Vue.config.devtools = true
+    
+  </script>
+  <script type="text/javascript" src="NumberCorrector.js"></script>
+  <script type="text/javascript">
+
+    "use strict"
+
+    var BasketList = {
+      data: function() {
+        return {
+          list: [
+            {count: 1},
+            {count: 2},
+            {count: 3},
+            {count: 2},
+          ]
+        }
+      },
+      template: `
+        <div class="basket-list">
+          <ul>
+            <li v-for="item in list">
+              <number-corrector :count="item.count"></number-corrector>
+            </li>
+          </ul>
+        </div>
+      `
+    }
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+      },
+      components: {
+        "basket-list": window.BasketList
+      }
+    })
+
+  </script>
+</body>
+</html>
