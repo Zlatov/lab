@@ -145,11 +145,14 @@ console.log('-0000.100: ', parseFloat('-0000.100'))
 var a = 'asd'
 var b = parseFloat(a)
 var bt = typeof b
-var c = (b==NaN)
+var c = (b == NaN)
+var d = isNaN(b)
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('bt: ', bt)
 console.log('c: ', c)
+console.log('d: ', d)
+// return null
 
 console.log('Number(\'-0000.100\'): ', Number('-0000.100'))
 
