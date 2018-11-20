@@ -25,10 +25,10 @@
       data: function() {
         return {
           list: [
-            {count: 1},
-            {count: 2},
-            {count: 3},
-            {count: 2},
+            {count: 1, articul: "1"},
+            {count: 2, articul: "2"},
+            {count: 3, articul: "3"},
+            {count: 2, articul: "4"},
           ]
         }
       },
@@ -36,11 +36,26 @@
         <div class="basket-list">
           <ul>
             <li v-for="item in list">
-              <number-corrector :count="item.count"></number-corrector>
+              <number-corrector
+                @m="m(item)"
+                @p="p"
+                :articul="item.articul"
+                :count="item.count"
+              ></number-corrector>
             </li>
           </ul>
         </div>
-      `
+      `,
+      methods: {
+        m: function(a) {
+          console.log('this: ', this)
+          console.log('a: ', a)
+        },
+        p: function(a) {
+          console.log('this: ', this)
+          console.log('a: ', a)
+        }
+      }
     }
 
     var app = new Vue({

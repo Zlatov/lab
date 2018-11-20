@@ -4,20 +4,23 @@
 
 window.Vue.component("NumberCorrector", {
   props: {
-    count: Number
+    count: Number,
+    // артикул можно было не передавать, но можно
+    articul: String
   },
   data: function() {
     return {}
   },
   template: `
     <div class="number-corrector">
-      <span class="m"></span>
+      {{ articul }}
+      <!-- тут вызываем события родительского компонента "m" -->
+      <span class="m" @click="$emit('m')"></span>
       <input type="text" name="count" v-bind:value="count">
-      <span class="p"></span>
+      <!-- тут вызываем события родительского компонента "m" с параметром -->
+      <span class="p" @click="$emit('p', articul)"></span>
     </div>
-  `,
-  methods: {
-  }
+  `
 })
 
 })();
