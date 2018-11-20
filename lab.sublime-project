@@ -6,7 +6,8 @@
 			"index_exclude_patterns": [
 				"*.log",
 				"*.sql",
-				"theme/bower/*.*"
+				"theme/bower/*.*",
+				"node_modules/*.*"
 			],
 			"folder_exclude_patterns": [
 				"bogacho",
