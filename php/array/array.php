@@ -19,3 +19,8 @@ $c = key($a);
 echo '$a: ' . PHP_EOL; var_dump($a);
 echo '$b: ' . PHP_EOL; var_dump($b);
 echo '$c: ' . PHP_EOL; var_dump($c);
+
+$a = [1,2,3];
+foreach ($a as $key => $value) {
+    echo "${key} ${value}" . PHP_EOL;
+}
