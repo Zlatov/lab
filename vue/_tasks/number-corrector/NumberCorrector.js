@@ -2,7 +2,8 @@
 
 "use strict"
 
-window.Vue.component("NumberCorrector", {
+// window.Vue.component("NumberCorrector", {
+window.NumberCorrector = {
   props: {
     count: Number,
     // артикул можно было не передавать, но можно
@@ -21,6 +22,7 @@ window.Vue.component("NumberCorrector", {
       <span class="p" @click="$emit('p', articul)"></span>
     </div>
   `
-})
+// })
+}
 
 })();
