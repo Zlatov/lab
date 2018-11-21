@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <form id="form_lorem" action="" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Fields</legend>
+      <p>
+        <label>
+          Name
+          <input type="text" name="name" autofocus>
+        </label>
+      </p>
+      <p>
+        <label style="vertical-align: top;">
+          Comment
+          <textarea name="comment" placeholder="Comment message"></textarea>
+        </label>
+      </p>
+      <p>
+        <label>
+          Sex
+          <select name="sex">
+            <optgroup label="Сommon">
+              <option>male</option>
+              <option>female</option>
+            </optgroup>
+            <optgroup label="Nonconforming">
+              <option>other</option>
+            </optgroup>
+          </select>
+        </label>
+      </p>
+      <p>
+        <label style="vertical-align: top;">
+          Menu
+          <select name="menu[]" multiple>
+            <option value="1">tea</option>
+            <option value="2">coffee</option>
+            <option value="3">cocoa</option>
+          </select>
+        </label>
+      </p>
+    </fieldset>
+    <fieldset>
+      <legend>Attachments</legend>
+      <p>
+        <label>
+          File
+          <input type="file" name="file">
+        </label>
+      </p>
+      <p>
+        <label>
+          Files
+          <input type="file" name="files[]" multiple>
+        </label>
+      </p>
+    </fieldset>
+    <p>
+      <button type="reset">Reset</button>
+      <button type="submit" name="submit" value="submit" class="submit">Submit</button>
+    </p>
+  </form>
+</body>
+</html>
