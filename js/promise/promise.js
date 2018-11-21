@@ -1,3 +1,19 @@
+// 
+// var promise = new Promise(function(resolve, reject) {
+//   // resolve(результат) при успешном выполнении
+//   // reject(ошибка) при ошибке
+// })
+// 
+// promise.then(onFulfilled, onRejected)
+// // onFulfilled – функция, которая будет вызвана с результатом при resolve.
+// // onRejected – функция, которая будет вызвана с ошибкой при reject.
+// 
+// .catch()
+// Для того, чтобы поставить обработчик только на ошибку, вместо .then(null, onRejected) можно написать .catch(onRejected) – это то же самое.
+// 
+// Синхронный throw – то же самое, что reject (Если в функции промиса происходит синхронный throw (или иная ошибка), то вызывается reject)
+// 
+
 var files = false
 
 var save_data = new Promise(function(resolve, reject) {
