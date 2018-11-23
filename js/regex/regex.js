@@ -19,6 +19,13 @@
 console.log('"asdf".match(/s/gim): ', "asdf".match(/s/gim))
 console.log('/s/gim.test("asd"): ', /s/gim.test("asd"))
 console.log('/f/gim.test("asd"): ', /f/gim.test("asd"))
+console.log('12-34-56'.replace("-", ":"))
+console.log('12-34-56'.replace(/-/, ":"))
+console.log('12-34-56'.replace(/-/g, ":"))
+console.log('01234567,8a.sd90.,q('.replace(/[^0-9.,]/gi, ''))
+console.log('01234567,8a.sd90.,q('.replace(/,/g, '.'))
+return null
+
 var versions = [
   '.',
   'a',

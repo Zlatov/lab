@@ -93,6 +93,12 @@ console.log('d: ', d) // 456789
 console.log('e: ', e) // 4567
 // return
 
+// Всё после второй точки удалить вместе с точкой.
+a = '5.234.3'
+r = (a.split('.').length > 2) ? a.split('.').slice(0, 2).join('.') : a
+console.log('r: ', r)
+return null
+
 // Сгенерировать regex из стринги
 console.log('----------------------------------------')
 console.log('> Сгенерировать regex из стринги')

@@ -1,3 +1,26 @@
+"use strict"
+
+console.log("> Параметры функии в js хранятся в объекте arguments,\n\
+  хотя должны называться \"параметрами\" или \"переданными аргументами\",\n\
+  так как аргументами они били тогда, когда их ещё передавали в функию.")
+var a = function() {
+  // arguments - объект с параметрами (переданными аргументами)
+  console.log('arguments: ', arguments)
+  console.log('arguments.length: ', arguments.length)
+  console.log('arguments[0]: ', arguments[0])
+  // аргументамы в массив
+  var params = [...arguments]
+  console.log('params: ', params)
+  // передать массив как аргументы
+  b(...params)
+}
+function b() {
+  console.log('arguments: ', arguments)
+}
+a()
+a(1)
+return null
+
 a = {
   "this is": "a",
   c: function() {
