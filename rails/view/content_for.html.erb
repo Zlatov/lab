@@ -1,0 +1,16 @@
+layout:
+
+<html>
+  <head>
+  <%= yield :head %>
+  </head>
+  <body>
+  <%= yield %>
+  </body>
+</html>
+
+view:
+
+<% content_for :head do %>
+  <title>A simple page</title>
+<% end %>

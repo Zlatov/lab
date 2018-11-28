@@ -8,46 +8,56 @@
       display: block;
       clear: both;
     }
-    .t {
+    .ibw {
+      font-size: 0;
+      height: 100px;
+    }
+    .ibw:before {
+      content: "";
       display: inline-block;
-      width: 33%;
-      background-color: red;
-      vertical-align: bottom;
+      vertical-align: middle;
+      height: 100%;
+    }
+    .ib {
+      display: inline-block;
       font-size: 12px;
-      /*min-height: 100px;*/
     }
   </style>
 
 </head>
 <body>
-	<div style="float: left; width: 70%;">1</div>
-	<div style="">2</div>
-	<div style="clear: both;">3</div>
+  <h1>Обтекание float или «позиционирование рядом»</h1>
+  <p>Пример 1, <code>float: left</code> - обтечь следующий элемент слева; <code>clear: both|left|right</code> - отменяет обтекание:</p>
+  <div style="float: left; width: 25%; background-color: red;">1</div>
+  <div style="float: left; width: 25%; background-color: red;">2</div>
+  <div style="clear: left; background-color: green;">3</div>
   <hr>
-  <div style="overflow: hidden; ">
+  <p>Пример 2, <code>overflow: hidden</code> - отменяет обтекание:</p>
+  <div style="overflow: hidden;">
     <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="clear: both;"></div>
+    <div style="float: left; width: 33%; background-color: red;">2</div>
   </div>
-  <div style="float: left; width: 33%; background-color: black;">2</div>
+  <div style="float: left; width: 33%; background-color: green;">22</div>
   <div style="clear: both;"></div>
+
+  <hr>
+  <p>Пример 3, <code>:after {clear: both}</code> - псевдоэлемент отменяет обтекание:</p>
 
   <div class="cle">
     <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
-    <div style="float: left; width: 33%; background-color: red;">1</div>
+    <div style="float: left; width: 33%; background-color: red;">2</div>
   </div>
-  <div style="float: left; width: 33%; background-color: black;">2</div>
-
+  <div style="float: left; width: 33%; background-color: black;">22</div>
   <div style="clear: both;"></div>
-  <div style="font-size: 0">
-    asdf sd <div class="t">2<br>22</div>
-    <div class="t">2</div>
-    <div class="t" style="vertical-align: top;">2</div>
-    <div class="t">2</div>
+
+  <h2>Позиционирование рядом <code>display: inline-block</code></h2>
+
+  <div class="ibw">
+    asdf sd
+    <div class="ib" style="background-color: red;">1</div>
+    <div class="ib" style="vertical-align: top; background-color: green;">2 (top)</div>
+    <div class="ib" style="vertical-align: bottom; background-color: red; height: 50px; line-height: 50px;">3 (bottom)</div>
+    <div class="ib" style="background-color: gray;">4</div>
   </div>
 </body>
 </html>
