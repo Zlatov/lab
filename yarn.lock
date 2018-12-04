@@ -7,9 +7,9 @@ bulma@^0.7.1:
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.1.tgz#73c2e3b2930c90cc272029cbd19918b493fca486"
 
 ilorem@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/ilorem/-/ilorem-1.0.4.tgz#fef894fb9d368e02f6a0beaee9cc640ba2285fd6"
-  integrity sha512-rGW5M5uc+Xj5mRURAc+jTrDciVF3sJxkD8fcho+CO7TOiZet9AVgnopxl6gaAvwdC8zLWvGlTD5FYMCjyMA4Xw==
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/ilorem/-/ilorem-1.0.5.tgz#5cb11cbccb6e2bbe83e00315509dda935dae01c1"
+  integrity sha512-HQfo/RUR/njuykYgrzFe+ltMyiyvt6ETweMIzVipLNGSrIsCyVAUtEcAP8VRrXUj2qryDO3IfBH2mFvNcQIO+g==
 
 jquery@^3.3.1:
   version "3.3.1"
