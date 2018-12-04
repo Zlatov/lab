@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+    @charset "utf-8";
+
+/* clear */
+* { margin: 0; padding: 0; }
+html { height: 100%; }
+body { min-height:100%; height: 100%; }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+#page { height: auto !important; min-height:100%; height:100%; overflow:hidden; }
+#footer_guarantor { height:150px; }
+#footer { height:150px; overflow:hidden; margin:-150px auto 0; }
+
+/* add */
+html { background-color:#EDEDED; }
+body { background-color:#EDEDED; }
+#page { position:relative; min-width:940px; max-width:1310px; background-color:#EDEDED; padding:0 25px; margin:0 auto; }
+#footer { position:relative; min-width:940px; max-width:1310px; background-color:#EDEDED; padding:0 25px; color:#777777; font-size:11px; line-height:15px; text-shadow:0 1px 0 rgba(255, 255, 255, 0.4); }
+
+
+
+    .width-100 { width: 100%; }
+
+    .width-16 { width: 16.666%; } /* 1/6 */
+    .width-20 { width: 20%; }     /* 1/5 */
+    .width-25 { width: 25%; }     /* 1/4 */
+    .width-33 { width: 33.333%; } /* 1/3 */
+    .width-50 { width: 50%; }     /* 1/2 */
+
+    .width-66 { width: 66.666%; } /* +1/3 = 100 */
+    .width-75 { width: 75%; }     /* +1/4 = 100 */
+    .width-80 { width: 80%; }     /* +1/5 = 100 */
+    .width-83 { width: 83.333%; } /* +1/6 = 100 */
+
+    .width-30 { width: 30%; }     /* 30+70 = 100 */
+    .width-70 { width: 70%; }     /* 30+70 = 100 */
+    .width-35 { width: 35%; }     /* 70/2 */
+
+    .width-40 { width: 40%; }     /* 40+60 */
+    .width-60 { width: 60%; }     /* 40+60 */
+
+    .float-l { float:left; }
+    .float-r { float:right; }
+    .clear-b { clear:both; }
+
+    .position-r { position:relative; }
+    .position-a { position:absolute; }
+
+
+/* clear */
+.wrap { overflow:hidden; }
+.wrap-h { margin-left:2px; margin-right:2px; overflow:hidden; }
+.wrap-h-l { margin-right:2px; overflow:hidden; }
+.wrap-h-r { margin-left:2px; overflow:hidden; }
+.wrap-h2 { margin-left:16px; margin-right:16px; overflow:hidden; }
+.wrap-h2-l { margin-right:16px; overflow:hidden; }
+.wrap-h2-r { margin-left:16px; overflow:hidden; }
+
+.wrap-v { margin-top:2px; margin-bottom:2px; overflow:hidden; }
+.wrap-v-t { margin-bottom:2px; overflow:hidden; }
+.wrap-v-b { margin-top:2px; overflow:hidden; }
+.wrap-v2 { margin-top:16px; margin-bottom:16px; overflow:hidden; }
+.wrap-v2-t { margin-bottom:16px; overflow:hidden; }
+.wrap-v2-b { margin-top:16px; overflow:hidden; }
+
+/* new wrap */
+.wrap-p { padding:16px; }
+
+.wrap-p-h { padding-left:16px; padding-right:16px; }
+.wrap-p-l { padding-left:16px; }
+.wrap-p-r { padding-right:16px; }
+
+.wrap-p-v { padding-top:16px; padding-bottom:16px; }
+.wrap-p-t { padding-top:16px; }
+.wrap-p-b { padding-bottom:16px; }
+
+.wrap-m { margin:2px; }
+
+.wrap-m-h { margin-left:2px; margin-right:2px; }
+.wrap-m-l { margin-left:2px; }
+.wrap-m-r { margin-right:2px; }
+
+.wrap-m-v { margin-top:2px; margin-bottom:2px; }
+.wrap-m-t { margin-top:2px; }
+.wrap-m-b { margin-bottom:2px; }
+
+.wrap-b {
+border-style:solid;
+border-width:1px;
+border-color:#D9D9D9 #D9D9D9 #BFBFBF;
+border-color:rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+border-radius:4px 4px 4px 4px;
+box-shadow:0 1px 1px rgba(0, 0, 0, 0.06);
+}
+.wrap-p-2px { padding:2px; }
+.wrap-bg { background-color:#FFFFFF; }
+
+.overflow-h { overflow:hidden; }
+.ufk_google a{
+  color:#666666;
+}
+.ufk_google a:hover{
+ color:#666666;
+}
+
+/* wrap-tabl */
+table.wrap-tabl {
+padding:0;
+border-collapse:separate;
+border-spacing:0;
+margin-top:0px;
+width:100%;
+border-style:none;
+border-width:0px;
+box-shadow:0 1px 1px rgba(0, 0, 0, 0.06);
+}
+table.wrap-tabl td {
+padding:0;
+border-left:none 0;
+border-top:none 0;
+border-right:solid 1px #D9D9D9;
+border-bottom:solid 1px #D9D9D9;
+background-color:#FFFFFF;
+vertical-align:top;
+}
+table.wrap-tabl tr:first-child td:first-child { border-top-left-radius:4px; }
+table.wrap-tabl tr:first-child td:last-child { border-top-right-radius:4px; }
+table.wrap-tabl tr:last-child td:first-child { border-bottom-left-radius:4px; }
+table.wrap-tabl tr:last-child td:last-child { border-bottom-right-radius:4px; }
+
+table.wrap-tabl tr:last-child td { border-bottom-color:#BFBFBF; }
+table.wrap-tabl tr:first-child td { border-top:solid 1px #D9D9D9; }
+table.wrap-tabl tr td:first-child { border-left:solid 1px #D9D9D9; }
+
+table.wrap-tabl td.wrap-bg2 { background-color:#2D2D2D; }
+table.wrap-tabl td.wrap-bg3 { background-color:#317AC4; }
+
+
+/* wrap-cel */
+table.wrap-cel {
+padding:0;
+border-collapse:separate;
+border-spacing:4px;
+margin-top:-2px;
+margin-bottom:-2px;
+width:100%;
+border-style:none;
+border-width:0px;
+}
+table.wrap-cel td {
+border-style:solid;
+border-width:1px;
+border-color:#D9D9D9 #D9D9D9 #BFBFBF;
+border-color:rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+border-radius:4px 4px 4px 4px;
+box-shadow:0 1px 1px rgba(0, 0, 0, 0.06);
+background-color:#FFFFFF;
+vertical-align:top;
+padding:0;
+}
+
+table.wrap-cel td.wrap-bg2 { background-color:#2D2D2D; }
+table.wrap-cel td.wrap-bg3 { background-color:#317AC4; }
+
+
+
+.wrapper { margin:0 2px; clear:both; overflow:hidden; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* add color 2 */
+.wrap-bg2 { background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABQCAYAAAAZQFV3AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMS8yMS8xMRTK2QYAAAAedEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzUuMasfSOsAAABYSURBVFiF7c9BEcBADMPAXKfIwp9TSiIP9SwD2LFOd08t7p1Z9epZ1eoPDwOT+Q8Dk30IBPnJ/IeByT4Egvxk/sPAZB8CQX6yD4FgYLKgoKCgoKCg4E3gB2tWQVBKeW6BAAAAAElFTkSuQmCC") repeat-x scroll 0 0 #2D2D2D;
+color:#AAAAAA; }
+.wrap-bg2 legend { color:#AAAAAA; }
+.wrap-bg2 h1, .wrap-bg2 h2, .wrap-bg2 h3, .wrap-bg2 h4, .wrap-bg2 h5, .wrap-bg2 h6 { color:#FFFFFF; }
+.wrap-bg2 a:hover, .wrap-bg2 a:active { color:#FFFFFF; }
+.wrap-bg2 hr { border-color:#CCCCCC; border-color:rgba(255,255,255,.4); }
+.wrap-bg2 table { border-color:#666666; }
+.wrap-bg2 table td, .wrap-bg2 table th { border-color:#666666; }
+.wrap-bg2 table thead {
+background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.15))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#26ffffff',GradientType=0 ); /* IE6-9 */
+}
+.wrap-bg2 table.table-zebra tr:nth-child(6n+3) td { background-color:rgba(214, 69, 20, .1); }
+.wrap-bg2 table.table-zebra tr:nth-child(6n) td { background-color:rgba(255, 255, 255, .1); }
+
+
+/* add color 3 */
+.wrap-bg3 { background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAABQCAYAAAAZQFV3AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwMS8yMS8xMRTK2QYAAAAedEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzUuMasfSOsAAAB8SURBVFiF7dXBDYAwDENRg7IfuzEb+4QNuPAruYo7wFOkpPZx3U8LfCWUk6phsRqe8GQ5qRoeccWENEhvecEd0uC4Lfv/FH7L9nnofzYTw0H2h41vWSn6/yDK7RBfG/zleUU/saTs42tiSfnHl31JBQwYMGDAgAEDBvx4L61NSWCe37LZAAAAAElFTkSuQmCC") repeat-x scroll 0 0 #317AC4;
+color:#FFFFFF; }
+.wrap-bg3 legend { color:#FFFFFF; }
+.wrap-bg3 h1, .wrap-bg3 h2, .wrap-bg3 h3, .wrap-bg3 h4, .wrap-bg3 h5, .wrap-bg3 h6 { color:#D6E5F3; }
+.wrap-bg3 small, .wrap-bg3 caption { color:#bccbd9; }
+.wrap-bg3 a { color:#0c3152; }
+.wrap-bg3 a:hover, .wrap-bg3 a:active { color:#D6E5F3; }
+.wrap-bg3 abbr { border-color:#FFF; }
+.wrap-bg3 table thead {
+background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0.15))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.15) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#26ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+
+  </style>
+</head>
+<body>
+<div id="page">
+  <table class="wrap-cel">
+    <tr>
+      <td class="width-33"><div class="wrap-p">222</div></td>
+      <td class="width-33"><div class="wrap-p">111</div></td>
+      <td class="width-33"><div class="wrap-p">333</div></td>
+    </tr>
+  </table>
+  <div class="wrapper">
+    <div class="wrap-m">
+      <table class="wrap-tabl">
+        <tr>
+          <td class="width-33"><div class="wrap-p"></div></td>
+          <td class="width-33"><div class="wrap-p"></div></td>
+          <td class="width-33"><div class="wrap-p"></div></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="wrap-v2 light-shadow">
+    <div class="wrapper">
+      <div class="width-25 float-l"><div class="wrap-h">111</div></div>
+      <div class="width-25 float-l"><div class="wrap-h">222</div></div>
+      <div class="width-25 float-l"><div class="wrap-h">333</div></div>
+      <div class="width-25 float-l"><div class="wrap-h">444</div></div>
+    </div>
+  </div>
+  <!-- FINISH prefooter -->
+  <div id="footer_guarantor"></div>
+</div>
+<div id="footer">
+  <div class="wrapper">
+    <div class="float-l width-25"><div class="wrap-h2-l">111</div></div>
+    <div class="float-l width-50"><div class="wrap-h2">222</div></div>
+    <div class="float-l width-25"><div class="wrap-h2-r wrap-v2-b">33</div></div>
+    <div class="clear-b"></div>
+  </div>
+</div>
+</body>
+</html>
+

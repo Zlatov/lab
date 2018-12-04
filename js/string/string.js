@@ -94,10 +94,10 @@ console.log('e: ', e) // 4567
 // return
 
 // Всё после второй точки удалить вместе с точкой.
-a = '5.234.3'
-r = (a.split('.').length > 2) ? a.split('.').slice(0, 2).join('.') : a
+var a = '5.234.3'
+var r = (a.split('.').length > 2) ? a.split('.').slice(0, 2).join('.') : a
 console.log('r: ', r)
-return null
+// return null
 
 // Сгенерировать regex из стринги
 console.log('----------------------------------------')
@@ -158,11 +158,19 @@ console.log('b: ', b)
 console.log('bt: ', bt)
 console.log('c: ', c)
 console.log('d: ', d)
-// return null
+return null
 
 console.log('Number(\'-0000.100\'): ', Number('-0000.100'))
 
 var a = '234'
 var b = '0'.repeat(5-a.length) + a
+console.log('a: ', a)
+console.log('b: ', b)
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+a = "ёж"
+b = capitalizeFirstLetter(a)
 console.log('a: ', a)
 console.log('b: ', b)

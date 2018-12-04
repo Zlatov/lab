@@ -5,18 +5,46 @@
   <style type="text/css"></style>
 </head>
 <body>
+  <h2>Вертикальное выравнивание по центру в «табличное»</h2>
   <style type="text/css">
     .a {
       display: table;
       height: 100px;
+      background-color: red;
     }
     .a div {
       display: table-cell;
+      background-color: green;
+    }
+    .b {
       vertical-align: middle;
+    }
+    .c {
+      vertical-align: bottom;
     }
   </style>
   <div class="a">
-    <div>1<br>2</div>
+    {display: table; height: ...}<div>1<br>{display: table-cell}</div>...
+    ...<div class="b">2<br>vertical-align: middle</div>...
+    ...<div class="c">3<br>vertical-align: bottom</div>...
+  </div>...
+
+  <h2>Вертикальное выравнивание по центру в строке</h2>
+  <style type="text/css">
+    .b {
+      background-color: red;
+    }
+    .b div {
+      display: inline-block;
+      vertical-align: middle;
+
+      background-color: green;
+    }
+  </style>
+  <div class="b">
+    <div>1</div>
+    <div>2<br>2</div>
+    <div>1</div>
   </div>
 </body>
 </html>
