@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <script type="text/javascript" src="/theme/yarn/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../theme/yarn/vue-yandex-maps/vue-yandex-maps.js"></script>
+  <div id="app">
+    <yandex-map
+      :coords="[54.62896654088406, 39.731893822753904]"
+      zoom="10"
+      style="width: 600px; height: 600px;"
+      map-type="hybrid"
+    ></yandex-map>
+  </div>
+  <script type="text/javascript">
+    "use strict"
+    // const YmapPlugin =  require('vue-yandex-maps');
+    // Vue.use(YmapPlugin)
+    Vue.use(window['vueYandexMaps'].default.install)
+    var app = new Vue({
+      el: '#app',
+      data: {},
+    })
+  </script>
+</body>
+</html>

@@ -3,6 +3,7 @@
     "bulma": "^0.7.1",
     "jquery": "^3.3.1",
     "lazyload": "^2.0.0-beta.2",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-yandex-maps": "^0.7.15"
   }
 }

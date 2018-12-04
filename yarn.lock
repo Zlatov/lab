@@ -14,6 +14,11 @@ lazyload@^2.0.0-beta.2:
   version "2.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/lazyload/-/lazyload-2.0.0-beta.2.tgz#1dc729c3739f06fdc825702c33b9dd99f89ebcbd"
 
+vue-yandex-maps@^0.7.15:
+  version "0.7.15"
+  resolved "https://registry.yarnpkg.com/vue-yandex-maps/-/vue-yandex-maps-0.7.15.tgz#d187144e8394e3c2e2c1095550b14f5e4ee3e927"
+  integrity sha512-hO/eyNgt0NmKOeR6rTagxz+0vLFqN0iUrGrLyJUvbNsEsfO0VxIwy+3jROjSkVN+9cmiCaFK0XwYyXKHwkvt5w==
+
 vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"

@@ -36,7 +36,7 @@ console.log('.toFixed(precision) округляет до точности precis
 var b = a.toFixed(2).split(".")[1] || ""
 console.log('a: ', a)
 console.log('b: ', b)
-return null
+// return null
 
 console.log()
 console.log('> toFixed()')
@@ -61,4 +61,14 @@ var c = numberWithSpaces(a.toFixed(0))
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('c: ', c)
+// return null
+
+var a = "1111111"
+var b = a.replace(/\B(?=(\d{3})+(?!\d))/, "s")
+//                 граница между символами одного типа
+//                   после которой есть
+//                      одна или более групп из трёх цифр
+//                              после которой/которых нет цифр
+console.log('a: ', a)
+console.log('b: ', b)
 // return null
