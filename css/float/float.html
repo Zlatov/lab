@@ -61,15 +61,29 @@
   </div>
 
   <h2>Пример 4</h2>
-  <div class="container4">
-    <div class="floated4">
-      <p include-lorem="37"></p>
-    </div>
-    <div class="fixed4"></div>
+  <div class="w4">
+    <div class="f4" include-lorem="50"></div>
+    <div class="fixed4" include-lorem="1"></div>
   </div>
   <style type="text/css">
-    .container4 {
+    .w4 {
       background-color: red;
+    }
+    .w4:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .f4 {
+      float: left;
+      margin-right: 120px;
+      background-color: yellow;
+    }
+    .fixed4 {
+      float: right;
+      width: 100px;
+      height: 20px;
+      background-color: green;
     }
   </style>
   <script type="text/javascript" src="../../js/_libs/ilorem/dist/ilorem.js"></script>
