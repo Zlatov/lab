@@ -60,14 +60,22 @@
     <div class="ib" style="background-color: gray;">4</div>
   </div>
 
-  <h2>Пример 4</h2>
+  <h2>Пример 4, фиксирование правого блока по ширине</h2>
+  <p>Обтекание слева === обтечь следующий элемент слева.</p>
+  <p>Обтекание выбивает элемент из потока === ширина не как у блока (100%), а минимизирует по контенту. Для создания сеток </p>необходимо задать ширину.
+  <p>Внутренний контент продолжает «толкаться» с потоком с учётом правила обтекания.</p>
+  <div>
+    <div style="float: left;">1<br>222</div>
+  </div>
   <div class="w4">
-    <div class="f4" include-lorem="50"></div>
-    <div class="fixed4" include-lorem="1"></div>
+    <div class="f4" include-lorem="10"></div>
+    <div class="l4" include-lorem="250"></div>
   </div>
   <style type="text/css">
     .w4 {
       background-color: red;
+      resize: both;
+      overflow: scroll;
     }
     .w4:after {
       content: '';
@@ -75,17 +83,43 @@
       clear: both;
     }
     .f4 {
+      width: 300px;
+      float: right;
+      background-color: green;
+    }
+    .l4 {
+      margin-right: 300px;
+      background-color: blue;
+    }
+  </style>
+
+  <h2>Пример 5, фиксирование левого блока по ширине</h2>
+  <div class="w5">
+    <div class="l5" include-lorem="50"></div>
+    <div class="r5" include-lorem="250"></div>
+  </div>
+  <style type="text/css">
+    .w5 {
+      background-color: red;
+      resize: both;
+      overflow: scroll;
+    }
+    .w5:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .l5 {
+      width: 300px;
       float: left;
-      margin-right: 120px;
       background-color: yellow;
     }
-    .fixed4 {
-      float: right;
-      width: 100px;
-      height: 20px;
+    .r5 {
+      margin-left: 300px;
       background-color: green;
     }
   </style>
+
   <script type="text/javascript" src="../../js/_libs/ilorem/dist/ilorem.js"></script>
   <script type="text/javascript">
     ILorem();
