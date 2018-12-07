@@ -2,3 +2,6 @@
 *.sublime-project
 *.log
 sftp-config.json
+
+# Sublime Text при использовании плагина phpintel создаёт ненужные для проекта файлы
+.phpintel
