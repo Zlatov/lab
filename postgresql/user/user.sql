@@ -13,23 +13,26 @@
 -- 
 -- Менять тип авторизации пользователей
 -- 
--- subl /etc/postgresql/9.3/main/pg_hba.conf
+-- sudo subl /etc/postgresql/9.3/main/pg_hba.conf
 -- Шаблон конфигурационной строки для настройки авторизации пользователей:
 -- local     DATABASE  USER      METHOD  [OPTIONS]
 -- Примеры:
 -- local     all       root      md5
 -- local     all       postgres  peer
--- local     lab       lab       password
+-- local     lab,template1 lab   password
 -- 
 
 -- 
 -- Немного про раздачу пользователей и прав
 -- 
 -- sudo -u postgres psql -c "…"
--- CREATE USER test_user WITH password 'qwerty';
--- GRANT ALL ON DATABASE test_database TO test_user;
--- ALTER USER user_name WITH PASSWORD 'new_password';
--- ALTER USER lab CREATEDB;
+-- sudo -u postgres psql -c "CREATE USER test_user WITH password 'qwerty';"
+-- sudo -u postgres psql -c "GRANT ALL ON DATABASE test_database TO test_user;"
+-- sudo -u postgres psql -c "ALTER USER user_name WITH PASSWORD 'new_password';"
+-- sudo -u postgres psql -c "ALTER USER lab CREATEDB;"
+-- 
+-- Следующая команда позволит второму пользователю управлять объектами созданными первым пользователем:
+-- sudo -u postgres psql -c "grant lab to iadfeshchm;"
 -- 
 
 \l

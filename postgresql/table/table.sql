@@ -13,3 +13,5 @@ CREATE TABLE lorem (
   address CHAR(50),
   salary REAL
 );
+
+\dt
