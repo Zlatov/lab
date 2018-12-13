@@ -42,3 +42,22 @@ print("b [", type(b), "]: ", b, sep='')
 print("c [", type(c), "]: ", c, sep='')
 print("d [", type(d), "]: ", d, sep='')
 print("e, f, g, h, i: ", e, f, g, h, sep=' ')
+
+a = [1, 1, 1, 1, 2]
+b = (max(a) == min(a))
+# print(colored(a, "red"))
+print("a:", a)
+print("b:", b)
+
+a = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
+print("a:", a)
+
+i = 0
+j = 0
+for x in a:
+  i+= 1
+  for y in x:
+    j+= 1
+    print("i:", i)
+    print("j:", j)
+    print("y:", y)

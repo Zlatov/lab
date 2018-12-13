@@ -1,4 +1,8 @@
 <?php
+
+$value = 'что-то откуда-то';
+setcookie("TestCookie2", $value);
+
 if (isset($_GET['action'])) {
     switch ($_GET['action']) {
         case 'hash':

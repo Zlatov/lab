@@ -8,7 +8,11 @@ cd "$(dirname "${0}")"
 find . -type f -not -name pg_restore.sh -delete
 find . -type d -not -path . | xargs -I {} rm -rf {}
 
-pg_restore --clean --create --exit-on-error --no-owner --dbname=lab ../pg_dump/temp/temp_pg.pg
+# pg_restore --clean --create --exit-on-error --no-owner ../pg_dump/temp/temp_pg.pg
+
+psql -c "DROP DATABASE IF EXISTS lab;"
+psql -c "CREATE DATABASE lab;"
+psql -a -f ../pg_dump/temp/temp_sql.sql
 
 exit 0
 
