@@ -4,7 +4,11 @@
     "ilorem": "^1.0.4",
     "jquery": "^3.3.1",
     "lazyload": "^2.0.0-beta.2",
+    // "node-sass": "^4.11.0",
     "vue": "^2.5.17",
     "vue-yandex-maps": "^0.7.15"
+  },
+  "scripts": {
+    // "scss": "node-sass --watch sass/_task/market_lorem/sass/style.scss -o sass/_task/market_lorem/temp_css"
   }
 }
