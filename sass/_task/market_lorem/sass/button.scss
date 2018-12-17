@@ -1,0 +1,30 @@
+%button {
+  @include form_z_font();
+  display: inline-block;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: $border_radius;
+  padding: 11px 21px;
+  font-weight: bold;
+  background-color: #FFFFFF;
+  border-color: $lighter_secondary_color;
+  color: $lighter_secondary_color;
+  transition: .3s;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    border-color: $secondary_color;
+    color: $secondary_color;
+  }
+  &.submit, &.primary {
+    background-color: $primary_color;
+    border-color: $primary_color;
+    color: #FFFFFF;
+    border-width: 2px;
+    padding: 10px 20px;
+    &:hover {
+      background-color: #FFFFFF;
+      color: $primary_color;
+    }
+  }
+}

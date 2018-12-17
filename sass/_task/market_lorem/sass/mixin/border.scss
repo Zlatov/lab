@@ -1,0 +1,13 @@
+@mixin base_border() {
+  border-style: solid;
+  border-width: 1px;
+}
+@mixin border($color) {
+  @include base_border();
+  border-color: $color;
+}
+@mixin radius_border($color) {
+  @include base_border();
+  border-color: $color;
+  border-radius: $border_radius;
+}

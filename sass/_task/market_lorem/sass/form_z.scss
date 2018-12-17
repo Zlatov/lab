@@ -1,0 +1,92 @@
+@mixin form_z_padding() {
+  padding: 11px 21px;
+}
+
+.form_z {
+
+  fieldset {
+    padding: 10px;
+    margin-top: 10px;
+    @include radius_border($lighter_gray);
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  legend {
+    & + p {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .button {
+    @extend %button;
+  }
+
+  input {
+    @include radius_border($lighter_gray);
+    @include form_z_padding();
+    @include form_z_font();
+    background-color: white;
+  }
+  .button {
+    @extend %button;
+  }
+
+  select {
+    @include radius_border($lighter_gray);
+    @include form_z_font();
+    background-color: white;
+    color: #666666;
+    margin: 0px;
+    padding: 11px 29px 11px 9px;
+    height: 44px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -moz-line-height: 18px;
+    appearance: none;
+    background: url("\
+      data:image/svg+xml;\
+      utf8,\
+      <svg\
+        baseProfile='full'\
+        width='11px'\
+        height='7px'\
+        viewBox='0 0 11 7'\
+        xmlns='http://www.w3.org/2000/svg'\
+        xmlns:xlink='http://www.w3.org/1999/xlink'\
+        xmlns:ev='http://www.w3.org/2001/xml-events'\
+        version='1.1'>\
+        <path d='\
+          M 0 0\
+          L 11 0\
+          L 5.5 7\
+          Z\
+          ' stroke='none' style='fill:rgb(246,108,0);' />\
+        Sorry, your browser does not support inline SVG.\
+      </svg>\
+    ") no-repeat right 9px center;
+  }
+
+  select::-ms-expand { 
+    /* CAUTION: IE hackery ahead */
+    display: none; /* remove default arrow on ie10 and ie11 */
+  }
+
+  @media screen and (min-width:0\0) {
+    select {
+    /* target Internet Explorer 9 to undo the custom arrow */
+      background:none\9;
+      padding: 5px\9;
+    } 
+  }
+}
