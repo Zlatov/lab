@@ -1,5 +1,36 @@
 .wrap {
   &.padded {
     padding: 20px;
+
+    &.shred {
+      padding: 10px;
+    }
+
+    &.cell {
+      padding: 10px;
+    }
+  }
+}
+
+.grid {
+  .row {
+    .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+      &:first-child {
+        & .wrap.shred.padded {
+          padding-left: 0px;
+        }
+        & .wrap.cell.padded {
+          padding-left: 20px;
+        }
+      }
+      &:last-child {
+        & .wrap.shred.padded {
+          padding-right: 0px;
+        }
+        & .wrap.cell.padded {
+          padding-right: 20px;
+        }
+      }
+    }
   }
 }

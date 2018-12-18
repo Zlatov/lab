@@ -6,47 +6,212 @@
 </head>
 <body>
   <div class="wrap padded bg white">
-    <form class="form_z">
+    <form class="form_z grid">
       <fieldset>
         <legend>Данные пользователя</legend>
+        <h2>Инлановая форма</h2>
         <p>
-          <label for="market_model_form_order_name">Name</label>
-          <input type="text" name="market_model_form_order[name]" id="market_model_form_order_name">
+          <label>Name</label>
+          <input type="text">
         </p>
         <p>
-          <label for="market_model_form_order_nameselect">Name</label>
-          <input type="text" name="market_model_form_order[name]" id="market_model_form_order_nameselect">
-          <select name="market_model_form_order[city]" id="market_model_form_order_city" class="zenoselect">
+          <label>Name</label>
+          <input type="text">
+          <select class="zenoselect">
             <option value="Москва">Москва</option>
             <option value="Одинцово">Одинцово</option>
           </select>
         </p>
         <p>
-          <label for="market_model_form_order_email">Email</label>
-          <input type="text" name="market_model_form_order[email]" id="market_model_form_order_email">
-          <input type="submit" name="commit" value="Отправить" data-disable-with="Отправить" class="primary button">
-          <input type="reset" name="commit" value="Отправить" data-disable-with="Отправить" class="button">
+          <label>Email</label>
+          <input type="text">
+          <input type="submit" value="Отправить" class="primary button">
+          <input type="reset" value="Отправить" class="button">
         </p>
         <p>
-          <label for="market_model_form_order_email2">Email</label>
-          <input type="text" name="market_model_form_order[email]" id="market_model_form_order_email2">
+          <label>Email</label>
+          <input type="text">
           <a href="" class="button">a href</a>
           <a href="" class="button primary">a href primary</a>
         </p>
         <p>
-          <label for="market_model_form_order_city">Город</label>
-          <select name="market_model_form_order[city2]" id="market_model_form_order_city" class="zenoselect">
+          <label>Город</label>
+          <select class="zenoselect">
             <option value="Москва">Москва</option>
             <option value="Одинцово">Одинцово</option>
           </select>
         </p>
+        <h2>Гридовое поведение</h2>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>Name</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <input type="text">
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>Name</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <input type="text">
+                <select class="zenoselect">
+                  <option value="Москва">Москва</option>
+                  <option value="Одинцово">Одинцово</option>
+                </select>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>Email</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <input type="text">
+                <input type="submit" value="Отправить" class="primary button">
+                <input type="reset" value="Отправить" class="button">
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>Email</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <input type="text">
+                <a href="" class="button">a href</a>
+                <a href="" class="button primary">a href primary</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>Город</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <select class="zenoselect">
+                  <option value="Москва">Москва</option>
+                  <option value="Одинцово">Одинцово</option>
+                </select>
+              </p>
+            </div>
+          </div>
+        </div>
+        <h2>Без p</h2>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <label>Name</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <input type="text">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <label>Name</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <input type="text">
+              <select class="zenoselect">
+                <option value="Москва">Москва</option>
+                <option value="Одинцово">Одинцово</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <label>Email</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <input type="text">
+              <input type="submit" value="Отправить" class="primary button">
+              <input type="reset" value="Отправить" class="button">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <label>Email</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <input type="text">
+              <a href="" class="button">a href</a>
+              <a href="" class="button primary">a href primary</a>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <label>Город</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <select class="zenoselect">
+                <option value="Москва">Москва</option>
+                <option value="Одинцово">Одинцово</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </fieldset>
       <fieldset>
         <legend>Подтвердите что вы не робот</legend>
       </fieldset>
       <p>
-        <input type="submit" name="commit" value="Отправить" data-disable-with="Отправить" class="primary button">
-        <input type="reset" name="commit" value="Отправить" data-disable-with="Отправить" class="button">
+        <input type="submit" value="Отправить" class="primary button">
+        <input type="reset" value="Отправить" class="button">
         <a href="" class="button">a href</a>
         <a href="" class="button primary">a href primary</a>
       </p>
