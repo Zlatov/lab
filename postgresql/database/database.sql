@@ -1,3 +1,7 @@
+-- dropdb -U lorem_rails lorem_rails -W
+-- createdb -U lorem_rails lorem_rails -W
+-- или psql -U lorem_rails -d template1 -c "create database lorem_rails;"
+
 -- sudo -u postgres psql
 
 DROP DATABASE IF EXISTS temp;
