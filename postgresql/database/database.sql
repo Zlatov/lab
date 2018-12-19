@@ -6,7 +6,8 @@ CREATE DATABASE temp;
 DROP DATABASE IF EXISTS lab2;
 
 -- 
--- Список баз данных:
+-- Список баз данных
+-- 
 -- \l
 -- или
 -- SELECT datname FROM pg_database
@@ -22,7 +23,8 @@ WHERE datistemplate = false;
 SELECT current_database();
 
 -- 
--- Переконнектиться к базе данных:
+-- Переконнектиться к базе данных
+-- 
 -- postgres=# \c lab;
 -- 
 \c lab
