@@ -5,7 +5,6 @@ DROP SEQUENCE IF EXISTS tree_id_seq;
 CREATE SEQUENCE tree_id_seq;
 
 CREATE TABLE IF NOT EXISTS tree (
-  -- id serial PRIMARY KEY,
   id integer DEFAULT nextval('tree_id_seq') PRIMARY KEY,
   pid integer REFERENCES tree (id) ON DELETE CASCADE ON UPDATE CASCADE,
 

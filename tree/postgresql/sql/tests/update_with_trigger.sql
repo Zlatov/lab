@@ -10,5 +10,5 @@ INSERT INTO tree (pid) VALUES
 -- SELECT * FROM tree;
 SELECT * FROM tree_rel;
 
-UPDATE tree SET pid = 4 WHERE id = 1;
+UPDATE tree SET pid = 4 WHERE id = 2;
 SELECT * FROM tree_rel;

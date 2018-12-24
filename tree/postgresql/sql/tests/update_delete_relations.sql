@@ -1,5 +1,3 @@
--- ┌─┬─┐│ │ │├─┼─┤│ │ │└─┴─┘
-
 \i ../tables.sql
 \i ../triggers.sql
 
@@ -27,41 +25,35 @@ SELECT * FROM tree_rel ORDER BY aid, did;
 --   3 |   4
 --   3 |   5
 --   4 |   5
-
+-- \q
 
 \set moved_id 3
--- UPDATE tree SET pid = 6 WHERE :moved_id = 3;
+-- UPDATE tree SET pid = 6 WHERE id = 3;
 
 SELECT 'Что будет удалено' AS " ";
 SELECT *
-FROM tree_rel descendants -- descendants.did это id потомков (descendants.aid = OLD.id)
-LEFT JOIN tree_rel descendant_ancestors ON descendant_ancestors.did = descendants.did -- descendant_ancestors.aid это id предков потомков ()
-INNER JOIN tree_rel r ON r.did = :moved_id
-  AND (
-    r.aid = descendant_ancestors.aid
-    -- OR descendant_ancestors.aid = :moved_id
-  )
-WHERE descendants.aid = :moved_id;
+FROM tree_rel r1 -- потомки
+INNER JOIN tree_rel r2 ON r2.did = r1.did -- предки потомков, связи в том числе потомков с потомками, поэтому далее:
+INNER JOIN tree_rel r3 ON r3.did = :moved_id AND r3.aid <> :moved_id -- чистые предки, позволят удалить связи потомков с потомками
+  AND r3.aid = r2.aid
+WHERE r1.aid = :moved_id;
+-- \q
 
 DELETE
 FROM tree_rel tr
 USING (
-  SELECT descendant_ancestors.*
-  FROM tree_rel descendants -- descendants.did это id потомков (descendants.aid = OLD.id)
-  LEFT JOIN tree_rel descendant_ancestors ON descendant_ancestors.did = descendants.did -- descendant_ancestors.aid это id предков потомков ()
-  LEFT JOIN tree_rel r ON r.did = :moved_id
-    AND r.aid = descendant_ancestors.aid
-    -- AND (
-    --   r.aid = descendant_ancestors.aid
-    --   -- OR descendant_ancestors.aid = :moved_id
-    -- )
-  WHERE descendants.aid = :moved_id
+  SELECT r2.aid, r2.did
+  FROM tree_rel r1 -- потомки
+  INNER JOIN tree_rel r2 ON r2.did = r1.did -- предки потомков, связи в том числе потомков с потомками, поэтому далее:
+  INNER JOIN tree_rel r3 ON r3.did = :moved_id AND r3.aid <> :moved_id -- чистые предки, позволят удалить связи потомков с потомками
+    AND r3.aid = r2.aid
+  WHERE r1.aid = :moved_id
 ) AS rels
 WHERE tr.aid = rels.aid AND tr.did = rels.did;
 
 SELECT 'Получилось №1' AS " ";
 SELECT * FROM tree_rel ORDER BY aid, did;
-\q
+-- \q
 
 
 
@@ -80,13 +72,12 @@ SELECT *
 FROM (
   SELECT aid
   FROM tree_rel
-  WHERE did = :moved_id
+  WHERE did = :moved_id AND aid != :moved_id
 ) AS a
 CROSS JOIN (
   SELECT did
   FROM tree_rel
   WHERE aid = :moved_id
-  UNION ALL SELECT :moved_id
 ) AS b;
 
 DELETE
@@ -96,13 +87,12 @@ USING (
   FROM (
     SELECT aid
     FROM tree_rel
-    WHERE did = :moved_id
+    WHERE did = :moved_id AND aid != :moved_id
   ) AS a
   CROSS JOIN (
     SELECT did
     FROM tree_rel
     WHERE aid = :moved_id
-    UNION ALL SELECT :moved_id
   ) AS b
 ) AS rel
 WHERE tr.aid = rel.aid AND tr.did = rel.did;

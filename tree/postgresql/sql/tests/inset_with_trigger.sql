@@ -3,6 +3,8 @@
 
 INSERT INTO tree (pid) VALUES
 (NULL),
-(1);
+(1),
+(2);
+
 SELECT * FROM tree;
 SELECT * FROM tree_rel;
