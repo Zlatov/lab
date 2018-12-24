@@ -9,8 +9,8 @@ CREATE TABLE b (
 
 BEGIN;
 
-INSERT INTO a VALUES (1), (2);
-INSERT INTO b VALUES (1), (3);
+INSERT INTO a VALUES (1), (3);
+INSERT INTO b VALUES (2), (3);
 
 -- 
 -- В SQL есть Внутреннее объединение, Внешние объединения и Перекрёстное объединение таблиц.
@@ -46,5 +46,67 @@ select * from a CROSS JOIN b;
 
 select 'FROM' as " ";
 select * from a, b;
+
+
+-- Варианты объединения:
+--   A   B
+-- ┌──┬─┬──┐
+-- │▓▓│▓│░░│
+-- └──┴─┴──┘
+select '▓▓│▓│░░' as " ";
+select *
+from a
+LEFT JOIN b on a.a_id = b.b_id;
+--   A   B
+-- ┌──┬─┬──┐
+-- │▓▓│░│░░│
+-- └──┴─┴──┘
+select '▓▓│░│░░' as " ";
+select *
+from a
+LEFT JOIN b on a.a_id = b.b_id
+WHERE b.b_id IS NULL;
+--   A   B
+-- ┌──┬─┬──┐
+-- │░░│▓│▓▓│
+-- └──┴─┴──┘
+select '░░│▓│▓▓' as " ";
+select *
+from a
+RIGHT JOIN b on a.a_id = b.b_id;
+--   A   B
+-- ┌──┬─┬──┐
+-- │░░│░│▓▓│
+-- └──┴─┴──┘
+select '░░│░│▓▓' as " ";
+select *
+from a
+RIGHT JOIN b on a.a_id = b.b_id
+WHERE a.a_id IS NULL;
+--   A   B
+-- ┌──┬─┬──┐
+-- │░░│▓│░░│
+-- └──┴─┴──┘
+select '░░│▓│░░' as " ";
+select *
+from a
+INNER JOIN b on a.a_id = b.b_id;
+--   A   B
+-- ┌──┬─┬──┐
+-- │▓▓│▓│▓▓│
+-- └──┴─┴──┘
+select '▓▓│▓│▓▓' as " ";
+select *
+from a
+FULL JOIN b on a.a_id = b.b_id;
+--   A   B
+-- ┌──┬─┬──┐
+-- │▓▓│░│▓▓│
+-- └──┴─┴──┘
+select '▓▓│░│▓▓' as " ";
+select *
+from a
+FULL JOIN b on a.a_id = b.b_id
+WHERE a.a_id IS NULL OR b.b_id IS NULL;
 
 COMMIT;
