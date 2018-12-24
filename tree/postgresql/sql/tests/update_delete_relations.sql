@@ -5,7 +5,7 @@
 
 DELETE FROM tree_rel;
 DELETE FROM tree;
-ALTER SEQUENCE tree_id_seq START 1;
+ALTER SEQUENCE tree_id_seq RESTART 1;
 INSERT INTO tree (pid) VALUES (NULL), (1), (2), (3), (4), (NULL);
 SELECT 'Начальные данные' AS " ";
 SELECT * FROM tree_rel ORDER BY aid, did;

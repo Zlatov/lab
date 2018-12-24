@@ -7,6 +7,9 @@ DROP FUNCTION IF EXISTS fai_tree();
 DROP TRIGGER IF EXISTS tbu_tree ON tree;
 DROP FUNCTION IF EXISTS fbu_tree();
 
+DROP TRIGGER IF EXISTS tbd_tree ON tree;
+DROP FUNCTION IF EXISTS fbd_tree();
+
 
 CREATE OR REPLACE FUNCTION fbi_tree()
 RETURNS trigger AS $$
@@ -120,3 +123,33 @@ $$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER tbu_tree BEFORE UPDATE ON tree FOR EACH ROW EXECUTE PROCEDURE fbu_tree();
+
+-- Пред удалением удаляем связи.
+CREATE OR REPLACE FUNCTION fbd_tree()
+RETURNS trigger AS $$
+BEGIN
+  DELETE
+  FROM tree_rel rel
+  USING (
+    -- Удалить связи между удаляемым элементом и его детьми с предками элемента
+    SELECT a.aid, b.did
+    FROM (
+      -- Ид-ры чистых предков перемещаемого элемента
+      SELECT aid
+      FROM tree_rel
+      WHERE did = OLD.id AND aid != OLD.id
+    ) AS a
+    CROSS JOIN (
+      -- Ид-ры потомков перемещаемого элемента и самого элемента 
+      SELECT did
+      FROM tree_rel
+      WHERE aid = OLD.id
+    ) AS b
+  ) AS del
+  WHERE del.aid = rel.aid AND del.did = rel.did;
+  RETURN OLD;
+END;
+$$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER tbd_tree BEFORE UPDATE ON tree FOR EACH ROW EXECUTE PROCEDURE fbd_tree();
