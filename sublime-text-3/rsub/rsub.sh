@@ -10,3 +10,4 @@ RemoteForward 52698 localhost:5269
 # 3. На удалённой машин установить rmate:
 wget -O ~/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate
 chmod u+x ~/rmate
+cd ~ && touch temp && ~/rmate temp
