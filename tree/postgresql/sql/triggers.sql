@@ -60,8 +60,9 @@ BEGIN
     SELECT count(*) INTO count_descendant
     FROM tree_rel r
     WHERE
-      r.aid = OLD.id
-      AND r.did = NEW.pid;
+      r.aid = OLD.id -- потомки перемещаемого элемента
+      AND r.did = NEW.pid -- один из потомков равен новому предку
+    ;
     IF count_descendant > 0 THEN
       RAISE EXCEPTION 'Не верный NEW.pid.' USING HINT = 'Нельзя перемещать элеиент в своих потомков.';
     END IF;
@@ -88,20 +89,17 @@ BEGIN
 
     -- Создаём связи с новыми предками
     INSERT INTO tree_rel
-    SELECT a.aid, b.did
+    SELECT a.aid, b.did, b.gen + a.gen + 1
     FROM (
-      SELECT r1.aid
+      SELECT r1.aid, r1.gen
       FROM tree_rel r1
       WHERE r1.did = NEW.pid AND r1.aid <> OLD.id
     ) AS a
     CROSS JOIN (
-      SELECT r1.did
+      SELECT r1.did, r1.gen
       FROM tree_rel r1
       WHERE r1.aid = OLD.id
     ) AS b;
-
-    -- INSERT INTO tree_rel (aid, did) VALUES
-    -- (4, 2);
 
   END IF;
   RETURN NEW;
@@ -139,4 +137,4 @@ END;
 $$
 LANGUAGE plpgsql;
 
-CREATE TRIGGER tbd_tree BEFORE UPDATE ON tree FOR EACH ROW EXECUTE PROCEDURE fbd_tree();
+CREATE TRIGGER tbd_tree BEFORE DELETE ON tree FOR EACH ROW EXECUTE PROCEDURE fbd_tree();

@@ -12,14 +12,15 @@ SELECT 'Начальные данные' AS " ";
 SELECT * FROM tree ORDER BY id, pid;
 SELECT * FROM tree_rel ORDER BY aid, did;
 
-SELECT a.aid, b.did
+SELECT 'Что будет добавлено' AS " ";
+SELECT a.aid, b.did, b.gen + a.gen + 1
 FROM (
-  SELECT r1.aid
+  SELECT r1.aid, r1.gen
   FROM tree_rel r1
   WHERE r1.did = :new_pid AND r1.aid <> :moved_id
 ) AS a
 CROSS JOIN (
-  SELECT r1.did
+  SELECT r1.did, r1.gen
   FROM tree_rel r1
   WHERE r1.aid = :moved_id
 ) AS b;
