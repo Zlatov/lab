@@ -53,7 +53,6 @@ CREATE OR REPLACE FUNCTION fbu_tree()
 RETURNS trigger AS $$
 DECLARE
   count_descendant int DEFAULT 0;
-  delta_level int DEFAULT 0;
 BEGIN
   -- Если родитель изменился.
   IF OLD.pid IS DISTINCT FROM NEW.pid THEN
@@ -73,7 +72,7 @@ BEGIN
     USING (
       SELECT *
       FROM (
-        -- Ид-ры чистых предков перемещаемого элемента
+        -- Ид-ры предков перемещаемого элемента
         SELECT aid
         FROM tree_rel
         WHERE did = OLD.id AND aid != OLD.id
@@ -87,35 +86,23 @@ BEGIN
     ) AS rel
     WHERE tr.aid = rel.aid AND tr.did = rel.did;
 
-    -- Если переместили не в корень то создаём связи с новыми предками
-    IF NEW.pid IS NOT NULL THEN
+    -- Создаём связи с новыми предками
+    INSERT INTO tree_rel
+    SELECT a.aid, b.did
+    FROM (
+      SELECT r1.aid
+      FROM tree_rel r1
+      WHERE r1.did = NEW.pid AND r1.aid <> OLD.id
+    ) AS a
+    CROSS JOIN (
+      SELECT r1.did
+      FROM tree_rel r1
+      WHERE r1.aid = OLD.id
+    ) AS b;
 
-      INSERT INTO tree_rel
-      SELECT a.aid, b.did
-      FROM (
-        SELECT r1.aid
-        FROM tree_rel r1
-        WHERE r1.did = NEW.pid AND r1.aid <> OLD.id
-      ) AS a
-      CROSS JOIN (
-        SELECT r1.did
-        FROM tree_rel r1
-        WHERE r1.aid = OLD.id
-      ) AS b;
+    -- INSERT INTO tree_rel (aid, did) VALUES
+    -- (4, 2);
 
-      -- Обновляем уровень перемещаемого элемента
-      -- Определяем смещение по уровню
-      -- SELECT CAST(`newparent`.`level` + 1 AS SIGNED) - CAST(`moveditem`.`level` AS SIGNED) INTO delta_level
-      -- FROM `categories` `newparent`
-      -- LEFT JOIN `categories` `moveditem` ON `moveditem`.`id` = OLD.`id`
-      -- WHERE `newparent`.`id` = NEW.`pid`;
-
-      -- IF delta_level <> 0 THEN
-      --   SET NEW.`level` = OLD.`level` + delta_level;
-      -- END IF;
-    ELSE
-      -- SET NEW.`level` = 1;
-    END IF;
   END IF;
   RETURN NEW;
 END;
