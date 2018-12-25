@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS tree_rel (
   aid integer NOT NULL REFERENCES tree (id) ON DELETE CASCADE ON UPDATE CASCADE,
   did integer NOT NULL REFERENCES tree (id) ON DELETE CASCADE ON UPDATE CASCADE,
   -- gen integer NOT NULL,
+  gen integer,
   UNIQUE (aid, did)
 );
 COMMENT ON TABLE tree_rel IS 'Таблица связей древовидной структуры по шаблону Closure Table.';

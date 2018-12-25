@@ -30,16 +30,16 @@ RETURNS trigger AS $$
 BEGIN
   -- Если вставляем элемент в корень, то добавляем связь только на себя.
   IF NEW.pid IS NULL THEN
-    INSERT INTO tree_rel (aid, did)
-    VALUES (NEW.id, NEW.id);
+    INSERT INTO tree_rel (aid, did, gen)
+    VALUES (NEW.id, NEW.id, 0);
   ELSE
-    INSERT INTO tree_rel (aid, did)
+    INSERT INTO tree_rel (aid, did, gen)
     -- Выбираем предков указанного родителя (did = idРодителя)
     -- и вставляем записи типа: idПредка, нашId.
-    SELECT aid, NEW.id
+    SELECT aid, NEW.id, gen + 1
     FROM tree_rel
     WHERE did = NEW.pid
-    UNION ALL SELECT NEW.id, NEW.id;
+    UNION ALL SELECT NEW.id, NEW.id, 0;
   END IF;
   RETURN NEW;
 END;
