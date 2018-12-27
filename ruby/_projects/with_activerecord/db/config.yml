@@ -1,0 +1,21 @@
+---
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: war
+  pool: 5
+  timeout: 5000
+  user: war
+  password: war
+
+development:
+  <<: *default
+  database: war
+
+test:
+  <<: *default
+  database: war_test
+
+production:
+  <<: *default
+  database: war
