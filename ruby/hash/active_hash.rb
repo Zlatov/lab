@@ -31,6 +31,7 @@ end
 
 a = News.find 2
 print 'a.name: '.red; puts a.name
-News.new id:3, name: 'zxc'
+c = News.new id: 3, name: 'zxc'
+c.save
 b = News.find 3
 print 'b.name: '.red; puts b.name
