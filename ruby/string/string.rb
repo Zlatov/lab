@@ -36,7 +36,7 @@ b = {
   zxc: 2
 }
 print 'b: '.red; puts b
-exit
+# exit
 
 # Удалить пробелы вокругтекста (`trim` в других языках)
 puts 'Удалить пробелы вокругтекста'.green
@@ -98,9 +98,15 @@ print 'b: '.red; puts b
 # Текст даты в дату
 puts 'Текст даты в дату'.green
 require 'date'
-d1 = DateTime.parse("2015-01-10","%Y%-m%-d")
-p d2 = DateTime.parse("1979-12-12","%Y%-m%-d")
-p d1<d2
+d = "01-02-03"
+a = DateTime.parse(d)
+b = DateTime.strptime(Time.now.strftime("%Y-%m-%d").to_s, "%Y-%m-%d")
+c = Date.strptime(d, "%m-%Y-%d")
+print 'd: '.red; puts d
+print 'a: '.red; puts a.strftime("%m/%d/%Y")
+print 'b: '.red; puts b.strftime("%m/%d/%Y")
+print 'c: '.red; puts c.strftime("%m/%d/%Y")
+# exit
 
 # Замена в строке
 puts 'Замена в строке'.green
