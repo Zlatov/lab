@@ -10,3 +10,4 @@ print 'a: '.red; puts a
 
 a = Time.now
 print 'a: '.red; puts a.to_s
+print 'a.strftime("%m/%d/%Y"): '.red; puts a.strftime("%m/%d/%Y")
