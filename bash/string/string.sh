@@ -115,3 +115,6 @@ echo asdfasdfasdf
 a=asd
 a+=
 echo '$a:' $a
+PGPASSWORD="lorem_rails_password" psql -U lorem_rails -c "\
+  SELECT * FROM stat;\
+"

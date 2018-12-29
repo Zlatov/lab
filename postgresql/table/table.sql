@@ -8,8 +8,9 @@ DROP TABLE IF EXISTS lorem;
 DROP TABLE IF EXISTS lorem;
 CREATE TABLE lorem (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  age INT NOT NULL,
+  name TEXT NOT NULL UNIQUE,
+  age INT NOT NULL DEFAULT 18,
+  CHECK (age > 0),
   address CHAR(50),
   salary REAL
 );
@@ -24,3 +25,6 @@ CREATE TABLE lorem (
 \dt+
 -- список всех таблиц, содержащих s в имени.
 \dt *s*
+
+INSERT INTO lorem (id, name, address) VALUES (DEFAULT, 'name1', 'address1');
+SELECT * FROM lorem LIMIT 1;

@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-# require 'rubygems'
+require 'rubygems'
+require "test-unit"
+
 require "test/unit"
 require "awesome_print"
 require_relative "test_class"
