@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -eu
 
 cd ~
@@ -23,6 +24,16 @@ else
   echoc "Настроен apache2 подключён модуль mod_rewrite." green
 fi
 
+# Подключение модуля proxy
+if [[ -z ${RECONFIGURE-} && -f /etc/apache2/mods-enabled/proxy.load ]]
+then
+  echoc "Уже подключён модуль proxy." blue
+else
+  echoc "Подключение модуля proxy." yellow
+  sudo a2enmod proxy 1>/dev/null
+  echoc "Подключён модуль proxy." green
+fi
+
 # AddDefaultCharset
 if [[ -f "/etc/apache2/conf-available/charset.conf" ]] && egrep -q "^AddDefaultCharset UTF-8" /etc/apache2/conf-available/charset.conf
 then
@@ -42,15 +53,25 @@ fi
 
 if [[ -d /etc/apache2/sites-available && -d /etc/apache2/sites-enabled ]]
 then
-  if [[ -f /etc/apache2/sites-available/my.conf && -f /etc/apache2/sites-enabled/my.conf ]]
+  if [[ -z ${RECONFIGURE-} && -f /etc/apache2/sites-available/my.conf && -f /etc/apache2/sites-enabled/my.conf ]]
   then
     echoc "Уже настроен список виртуальных хостов my.conf." blue
   else
+    echoc "Настройка списока виртуальных хостов my.conf." yellow
     mkdir -p /home/iadfeshchm/projects/my/lorem_yii/backend/web
     mkdir -p /home/iadfeshchm/projects/my/lorem_yii/frontend/web
     sudo cp $lab_path/linux/system_setup/system_setup/apache/my.conf /etc/apache2/sites-available 1>/dev/null
     sudo a2ensite my.conf 1>/dev/null
     echoc "Настроен список виртуальных хостов my.conf." green
+  fi
+  if [[ -z ${RECONFIGURE-} && -f /etc/apache2/sites-available/zenon.conf && -f /etc/apache2/sites-enabled/zenon.conf ]]
+  then
+    echoc "Уже настроен список виртуальных хостов zenon.conf." blue
+  else
+    echoc "Настройка списока виртуальных хостов zenon.conf." yellow
+    sudo cp -t /etc/apache2/sites-available $lab_path/linux/system_setup/system_setup/apache/zenon.conf 1>/dev/null
+    sudo a2ensite zenon.conf 1>/dev/null
+    echoc "Настроен список виртуальных хостов zenon.conf." green
   fi
 else
   echoc "Неизвестная для скрипта файловая конфигурация." red
@@ -61,10 +82,26 @@ fi
 {
   egrep -iq "^127.0.0.1 lab.local" /etc/hosts
 } && {
-  echoc "Хост lab.local существует" blue
+  echoc "Хост lab.local существует." blue
 } || {
   echoc -n "Добавление хоста lab.local…" yellow
   echo "127.0.0.1 lab.local www.lab.local" | sudo tee -a /etc/hosts >/dev/null
   echo -ne "\r\033[0K"
   echoc "Добавлен хост lab.local." green
 }
+
+{
+  egrep -iq "^127.0.0.1 admin.zenonline.local" /etc/hosts
+} && {
+  echoc "Хост admin.zenonline.local существует." blue
+} || {
+  echoc -n "Добавление хоста admin.zenonline.local…" yellow
+  echo "127.0.0.1 admin.zenonline.local www.admin.zenonline.local" | sudo tee -a /etc/hosts >/dev/null
+  echo -ne "\r\033[0K"
+  echoc "Добавлен хост admin.zenonline.local." green
+}
+
+echoc -n "Перезапуск сервиса apache2…" yellow
+sudo service apache2 restart 1>/dev/null
+echo -ne "\r\033[0K"
+echoc "Перезапущен сервис apache2." green
