@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
+
 set -eu
 
 cd ~
 lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
-if [[ -f ~/.bashrc-iadfeshchm && -f ~/.bashrc ]] && egrep -q "^\[\[ -s ~/.bashrc-iadfeshchm \]\] && source ~/.bashrc-iadfeshchm" ~/.bashrc
+echoc "Копируем файл .bashrc-iadfeshchm в домашнюю директорию." yellow
+cp ~/$lab_path/linux/system_setup/system_setup/bashrc/.bashrc-iadfeshchm ~/
+echoc "Скопирован файл .bashrc-iadfeshchm в домашнюю директорию." green
+
+if [[ -f ~/.bashrc ]] && egrep -q "^\[\[ -s ~/.bashrc-iadfeshchm \]\] && source ~/.bashrc-iadfeshchm" ~/.bashrc
 then
-  echoc "Уже настроен .bashrc." blue
+  echoc "Уже настроено подключение .bashrc-iadfeshchm в .bashrc." blue
 else
-  cp ~/$lab_path/linux/system_setup/system_setup/bashrc/.bashrc-iadfeshchm ~/
-  echo "[[ -s ~/.bashrc-iadfeshchm ]] && source ~/.bashrc-iadfeshchm" >> ~/.bashrc
-  echoc "Настроен .bashrc." green
+  echoc "Настраиваем подключение .bashrc-iadfeshchm в .bashrc." yellow
+  echo "[[ -s ~/.bashrc-iadfeshchm ]] && source ~/.bashrc-iadfeshchm" | tee -a ~/.bashrc
+  echoc "Настроено подключение .bashrc-iadfeshchm в .bashrc." green
 fi

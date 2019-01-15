@@ -89,10 +89,12 @@ puts 'each, v не является ссылкой'.blue
 a = [1,'asd',nil]
 print 'a: '.red; ap a
 a.each do |v|
+  next if v == 'asd'
   print 'v: '.red; puts v
   v = 3
 end
 print 'a: '.red; ap a
+# exit 0
 
 puts 'each_with_index'.blue
 a = [1,'asd',nil]
