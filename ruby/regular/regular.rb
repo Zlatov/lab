@@ -1,6 +1,22 @@
 # encoding: UTF-8
-require_relative '../colorize/colorize'
 require 'awesome_print'
+
+puts 'Соответствует ли регулярному выражению.'.green
+a = /s/
+b = "asd"
+c = "zxc"
+puts !(a =~ b).nil?
+puts !(b =~ a).nil?
+puts !(a =~ c).nil?
+puts !(c =~ a).nil?
+# exit
+
+puts 'Поиск подстрок(и) в тексте.'.green
+a = "asd123asd$$$\nasd456asd$$$"
+b = /(\d+)\w+(.*)/
+c = a.scan(b)
+print 'c: '.red; p c
+exit
 
 # Найдена ли подстрока | соответствует ли регулярке
 puts 'Найдена ли подстрока | соответствует ли регулярке'.green
