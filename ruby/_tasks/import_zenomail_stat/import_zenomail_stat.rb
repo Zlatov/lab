@@ -20,30 +20,32 @@ class ImportZenomailStat
   attr_reader :options
   attr_reader :html
   attr_reader :errors
-  attr_reader :errors_date
+  attr_reader :relayed
+  attr_reader :stat_date
 
   def initialize options={}
     @html = nil
     @errors = []
-    @errors_date = nil
+    @stat_date = nil
     @options = @@default_options.merge options
   end
 
   def process! date=nil
-    set_errors_date date
+    set_stat_date date
     grab_html
-    parse_errors
+    # parse_errors
+    parse_relayed
     import_errors
   end
 
-  def set_errors_date string_date
+  def set_stat_date string_date
     string_date ||= Time.now.strftime("%Y-%m-%d")
-    @errors_date = DateTime.strptime(string_date, "%Y-%m-%d")
+    @stat_date = DateTime.strptime(string_date, "%Y-%m-%d")
   end
 
   # Пытаемся наполнить @html
   def grab_html
-    raise "Не установлена дата отчёта." if @errors_date.nil?
+    raise "Не установлена дата отчёта." if @stat_date.nil?
     # if File.exist? options[:temp_cache_path]
     #   @html = File.read options[:temp_cache_path]
     #   return
@@ -137,8 +139,51 @@ class ImportZenomailStat
     end
   end
 
+  # Пытаемся наполнить @relayed из @html
+  def parse_relayed
+    nokogiri_document = Nokogiri::HTML(@html)
+    relayed_texts = []
+
+    File.write 'temp_relayed_texts', '', mode: 'w'
+    File.write 'temp_relayed_detected', '', mode: 'w'
+    File.write 'temp_relayed_undetected', '', mode: 'w'
+
+    # Заполняем relayed_texts
+    nokogiri_document.css('a[name="Relayed messages"] + h2 + table tr').each do |tr|
+      count = tr.css('td:nth-child(1)')
+      from = tr.css('td:nth-child(2)')
+      to = tr.css('td:nth-child(3)')
+      next if count.nil? or count.empty? || from.nil? or from.empty? || to.nil? or to.empty?
+      File.write 'temp_relayed_texts', "#{count.text.strip}\t#{from.text.strip}\t#{to.text.strip}\n", mode: 'a'
+      relayed_texts.push({
+        count: count.text.strip,
+        from: from.text.strip,
+        to: to.text.strip,
+      })
+    end
+
+    for texts in relayed_texts
+      count = texts[:count].to_i
+      # next if !count.is_a?(Integer) || count <= 0
+      regex = /.+\] (\S+)$/
+      array_email = texts[:to].scan(regex).flatten.select{|v| !v.nil? && !v.empty?}
+      # next if array_email.count != 1
+      email = array_email.first
+      if (
+        count.is_a?(Integer) && count > 0 &&
+        array_email.count == 1
+      )
+        File.write 'temp_relayed_detected', "#{count}\t#{email}\n", mode: 'a'
+        @relayed.push({
+          count: count,
+          email: email,
+        })
+        next
+      end
+    end
+  end
+
   def import_errors
-    
   end
 
   def url
@@ -146,8 +191,8 @@ class ImportZenomailStat
   end
 
   def url_date
-    raise "Не установлена дата отчёта." if @errors_date.nil?
-    @errors_date.strftime("%d-%m-%Y")
+    raise "Не установлена дата отчёта." if @stat_date.nil?
+    @stat_date.strftime("%d-%m-%Y")
   end
 end
 
@@ -156,5 +201,5 @@ end
 # ImportZenomailStat.new.process! '2018-10-31' # +
 # ImportZenomailStat.new.process! '2018-08-30' # +
 # ImportZenomailStat.new.process! '2018-07-30' # +
-ImportZenomailStat.new.process! '2018-12-29' # 
-# ImportZenomailStat.new.process! '2017-11-29' # 
+ImportZenomailStat.new.process! '2018-12-29' # +
+# ImportZenomailStat.new.process! '2017-11-29' # +
