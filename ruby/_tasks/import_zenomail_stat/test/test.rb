@@ -3,6 +3,7 @@ require 'pg'
 require 'active_record'
 require 'byebug'
 
+require 'awesome_print'
 require 'date'
 require 'active_support/all'
 
@@ -47,9 +48,21 @@ puts Ss.count
 puts l1 = Sl.create(label: 'a')
 puts Sl.count
 
-puts r1 = Sr.create(date_id: d1.id, email_id: e1.id, status_id: s1.id, label_id: l1.id, count: 2)
-puts r1 = Sr.create(date_id: d1.id, email_id: e2.id, status_id: s1.id, label_id: nil, count: 2)
-puts r2 = Sr.create(date_id: d2.id, email_id: e1.id, status_id: s1.id, label_id: l1.id, count: 1)
+puts r1 = Sr.create(date_id: d1.id, email_id: e1.id, status_id: s3.id, label_id: l1.id, count: 2)
+puts r2 = Sr.create(date_id: d1.id, email_id: e2.id, status_id: s1.id, label_id: nil, count: 2)
+puts r3 = Sr.create(date_id: d2.id, email_id: e1.id, status_id: s1.id, label_id: l1.id, count: 1)
 puts Sr.count
+
+puts 'связи от desl'.green
+puts d1.stat_relays.count
+puts e1.stat_relays.count
+puts s1.stat_relays.count
+puts l1.stat_relays.count
+
+puts 'связи от relay'.green
+puts r1.stat_date.date
+puts r1.stat_email.email
+puts r1.stat_status.name
+puts r1.stat_label.label
 
 puts "Done."
