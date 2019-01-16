@@ -26,6 +26,7 @@ class ImportZenomailStat
   def initialize options={}
     @html = nil
     @errors = []
+    @relayed = []
     @stat_date = nil
     @options = @@default_options.merge options
   end
@@ -33,9 +34,10 @@ class ImportZenomailStat
   def process! date=nil
     set_stat_date date
     grab_html
-    # parse_errors
+    parse_errors
     parse_relayed
     import_errors
+    import_relayed
   end
 
   def set_stat_date string_date
@@ -186,6 +188,9 @@ class ImportZenomailStat
   def import_errors
   end
 
+  def import_relayed
+  end
+
   def url
     "#{options[:protocol]}://#{options[:domain]}/#{url_date}.html"
   end
@@ -198,8 +203,8 @@ end
 
 # ImportZenomailStat.new.process!
 # ImportZenomailStat.new.process! '2018-10-10'
-# ImportZenomailStat.new.process! '2018-10-31' # +
+ImportZenomailStat.new.process! '2018-10-31' # +
 # ImportZenomailStat.new.process! '2018-08-30' # +
 # ImportZenomailStat.new.process! '2018-07-30' # +
-ImportZenomailStat.new.process! '2018-12-29' # +
+# ImportZenomailStat.new.process! '2018-12-29' # +
 # ImportZenomailStat.new.process! '2017-11-29' # +

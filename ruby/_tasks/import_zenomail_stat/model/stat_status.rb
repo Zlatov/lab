@@ -1,0 +1,2 @@
+class StatStatus < Base
+end

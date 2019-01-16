@@ -1,0 +1,2 @@
+class StatRelay < Base
+end
