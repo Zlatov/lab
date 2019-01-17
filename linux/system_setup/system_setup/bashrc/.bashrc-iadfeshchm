@@ -21,6 +21,9 @@ alias openbashrc='subl ~/.bashrc'
 alias opensshconfig='subl ~/.ssh/config'
 
 alias cdlab='cd ~/projects/my/lab'
+alias cdadmin='cd ~/projects/zenon/admin'
+alias cdframework='cd ~/projects/zenon/framework'
+alias cdmarket='cd ~/projects/zenon/market'
 
 alias  s='git status -u'
 alias  a='git add'
