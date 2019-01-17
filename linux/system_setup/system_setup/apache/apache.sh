@@ -27,11 +27,12 @@ fi
 # Подключение модуля proxy
 if [[ -z ${RECONFIGURE-} && -f /etc/apache2/mods-enabled/proxy.load ]]
 then
-  echoc "Уже подключён модуль proxy." blue
+  echoc "Уже подключён модуль proxy, proxy_http." blue
 else
-  echoc "Подключение модуля proxy." yellow
+  echoc "Подключение модуля proxy, proxy_http." yellow
   sudo a2enmod proxy 1>/dev/null
-  echoc "Подключён модуль proxy." green
+  sudo a2enmod proxy_http 1>/dev/null
+  echoc "Подключён модуль proxy, proxy_http." green
 fi
 
 # AddDefaultCharset
