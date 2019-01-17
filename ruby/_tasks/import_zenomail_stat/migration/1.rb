@@ -15,27 +15,26 @@ class Migration < ActiveRecord::Migration[5.0]
       );
       COMMENT ON TABLE stat_dates IS 'Все даты в которые проводилась рассылки хоть на какие-то адреса.';
     SQL
-    create_table :stat_statuses do |t|
+    create_table :stat_statuses, comment: "Все возможные статусы." do |t|
       t.boolean :delivered, null: false
-      t.string  :name,      null: false, unique: true, :limit => 511
       t.string  :code,      null: true, unique: true, :limit => 3
+      t.string  :name,      null: false, :limit => 511
     end
-    execute <<-SQL
-      COMMENT ON TABLE stat_statuses IS 'Все возможные статусы.';
-    SQL
+    add_index :stat_statuses, [:delivered, :code], name: :uq_statstatuses_deliveredcode, unique: true
     create_table :stat_labels do |t|
       t.string :label, null: false, unique: true, :limit => 255
     end
     execute <<-SQL
       COMMENT ON TABLE stat_labels IS 'Все возможные метки для рассылок и остальнного.';
+      INSERT INTO "stat_labels" ("label") VALUES ('Without label.');
     SQL
     execute <<-SQL
       CREATE TABLE stat_relays (
-        date_id smallint REFERENCES stat_dates (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        email_id integer REFERENCES stat_emails (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        status_id integer REFERENCES stat_statuses (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        label_id integer REFERENCES stat_labels (id) ON DELETE RESTRICT ON UPDATE CASCADE,
-        count integer NOT NULL DEFAULT 1,
+        date_id smallint NOT NULL REFERENCES stat_dates (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        email_id integer NOT NULL REFERENCES stat_emails (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        status_id integer NOT NULL REFERENCES stat_statuses (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        label_id integer NOT NULL REFERENCES stat_labels (id) ON DELETE RESTRICT ON UPDATE CASCADE,
+        count integer NOT NULL,
         CHECK (count > 0),
         UNIQUE (date_id, email_id, status_id, label_id)
       );

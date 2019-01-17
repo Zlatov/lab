@@ -9,13 +9,24 @@ require 'date'
 require 'byebug'
 require 'nokogiri'
 
+require 'pg'
+require 'active_record'
+
+require_relative "migration/migration/settings"
+require_relative "model/base"
+require_relative "model/stat_date"
+require_relative "model/stat_email"
+require_relative "model/stat_status"
+require_relative "model/stat_label"
+require_relative "model/stat_relay"
+require_relative "console/nicks"
+
 class ImportZenomailStat
   @@default_options = {
     protocol: "http",
     domain: "zenomail.newstar.ru",
     login: ENV["MAILSTAT_LOGIN"],
     password: ENV["MAILSTAT_PASSWORD"],
-    # temp_cache_path: 'temp_response_body',
   }
   attr_reader :options
   attr_reader :html
@@ -36,8 +47,7 @@ class ImportZenomailStat
     grab_html
     parse_errors
     parse_relayed
-    import_errors
-    import_relayed
+    import
   end
 
   def set_stat_date string_date
@@ -48,10 +58,10 @@ class ImportZenomailStat
   # Пытаемся наполнить @html
   def grab_html
     raise "Не установлена дата отчёта." if @stat_date.nil?
-    # if File.exist? options[:temp_cache_path]
-    #   @html = File.read options[:temp_cache_path]
-    #   return
-    # end
+    if File.exist? 'temp_response_body'
+      @html = File.read 'temp_response_body'
+      return
+    end
     uri = URI url
     Net::HTTP.start(
       uri.host,
@@ -62,7 +72,7 @@ class ImportZenomailStat
       request = Net::HTTP::Get.new uri.request_uri
       request.basic_auth options[:login], options[:password]
       response = http.request request # Net::HTTPResponse object
-      # File.write options[:temp_cache_path], response.body, mode: 'w'
+      File.write 'temp_response_body', response.body, mode: 'w'
       @html = response.body
     end
   end
@@ -86,54 +96,62 @@ class ImportZenomailStat
     # Пытаемся определить email, code и message из текста ошибки
     error_texts.each do |text|
       # Email в теговых скобках
-      regex = /<(.+?)>:\W(\d+)(.*)/i
+      regex = /(\d+) - .*?<(.+?)>:\W(\d+)(.*)/i
       error_parts = text.scan(regex).flatten.select{|v| !v.nil? && !v.empty? }
-      if error_parts.count == 3
+      if error_parts.count == 4
         @errors.push({
-          email: error_parts[0],
-          code: error_parts[1],
-          message: error_parts[2],
+          count: error_parts[0],
+          email: error_parts[1],
+          code: error_parts[2],
+          message: error_parts[3],
+          delivered: false,
         })
-        File.write 'temp_detected', "#{error_parts[0]}\t#{error_parts[1]}\t#{error_parts[2]}\n", mode: 'a'
+        File.write 'temp_detected', "#{error_parts[0]}\t#{error_parts[1]}\t#{error_parts[2]}\t#{error_parts[3]}\n", mode: 'a'
         next
       end
 
       # Email сразу, номер ошибки после "SMTP"
-      regex = /\d+ - (\S+) .*? SMTP .*?: (\d+) (.*)/i
+      regex = /(\d+) - (\S+) .*? SMTP .*?: (\d+) (.*)/i
+      error_parts = text.scan(regex).flatten.select{|v| !v.nil? && !v.empty? }
+      if error_parts.count == 4
+        @errors.push({
+          count: error_parts[0],
+          email: error_parts[1],
+          code: error_parts[2],
+          message: error_parts[3],
+          delivered: false,
+        })
+        File.write 'temp_detected', "#{error_parts[0]}\t#{error_parts[1]}\t#{error_parts[2]}\t#{error_parts[3]}\n", mode: 'a'
+        next
+      end
+
+      # Email сразу но с двоеточием, неизвестные ошибки без кода
+      regex = /(\d+) - (\S+): (.*)/i
       error_parts = text.scan(regex).flatten.select{|v| !v.nil? && !v.empty? }
       if error_parts.count == 3
         @errors.push({
-          email: error_parts[0],
-          code: error_parts[1],
+          count: error_parts[0],
+          email: error_parts[1],
+          code: nil,
           message: error_parts[2],
+          delivered: false,
         })
         File.write 'temp_detected', "#{error_parts[0]}\t#{error_parts[1]}\t#{error_parts[2]}\n", mode: 'a'
         next
       end
 
-      # Email сразу но с двоеточием, неизвестные ошибки без кода
-      regex = /\d+ - (\S+): (.*)/i
-      error_parts = text.scan(regex).flatten.select{|v| !v.nil? && !v.empty? }
-      if error_parts.count == 2
-        @errors.push({
-          email: error_parts[0],
-          code: nil,
-          message: error_parts[1],
-        })
-        File.write 'temp_detected', "#{error_parts[0]}\t\t#{error_parts[1]}\n", mode: 'a'
-        next
-      end
-
       # Email сразу, неизвестные ошибки без кода
-      regex = /\d+ - (\S+) (.*)/i
+      regex = /(\d+) - (\S+) (.*)/i
       error_parts = text.scan(regex).flatten.select{|v| !v.nil? && !v.empty? }
-      if error_parts.count == 2
+      if error_parts.count == 3
         @errors.push({
-          email: error_parts[0],
+          count: error_parts[0],
+          email: error_parts[1],
           code: nil,
-          message: error_parts[1],
+          message: error_parts[2],
+          delivered: false,
         })
-        File.write 'temp_detected', "#{error_parts[0]}\t\t#{error_parts[1]}\n", mode: 'a'
+        File.write 'temp_detected', "#{error_parts[0]}\t#{error_parts[1]}\t#{error_parts[2]}\n", mode: 'a'
         next
       end
 
@@ -166,10 +184,8 @@ class ImportZenomailStat
 
     for texts in relayed_texts
       count = texts[:count].to_i
-      # next if !count.is_a?(Integer) || count <= 0
       regex = /.+\] (\S+)$/
       array_email = texts[:to].scan(regex).flatten.select{|v| !v.nil? && !v.empty?}
-      # next if array_email.count != 1
       email = array_email.first
       if (
         count.is_a?(Integer) && count > 0 &&
@@ -179,16 +195,18 @@ class ImportZenomailStat
         @relayed.push({
           count: count,
           email: email,
+          delivered: true,
         })
         next
       end
     end
   end
 
-  def import_errors
-  end
-
-  def import_relayed
+  def import
+    all = errors + relayed
+    # Sr.import stat_date, errors, true
+    # Sr.import stat_date, relayed, true
+    Sr.import_zenomailstat stat_date, all
   end
 
   def url
