@@ -13,7 +13,7 @@
 -- 
 -- Добавлять пользователей в систему, настраивать тип авторизации пользователей
 -- 
--- sudo su root subl /etc/postgresql/9.3/main/pg_hba.conf
+-- sudo subl -n /etc/postgresql/9.3/main/pg_hba.conf
 -- Шаблон конфигурационной строки для настройки авторизации пользователей:
 -- local     DATABASE  USER      METHOD  [OPTIONS]
 -- Примеры:
