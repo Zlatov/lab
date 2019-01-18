@@ -31,3 +31,5 @@ alias aa='git add -A'
 alias  r='git reset HEAD'
 alias  c='git commit'
 alias ca='git add -A && git commit'
+
+export DISABLE_SPRING=1

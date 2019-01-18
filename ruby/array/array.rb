@@ -249,6 +249,15 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit 0
 
+puts 'Массив в хеш.'.green
+a = ['asd','zxc qwe']
+b = Hash[ a.map{|v|
+  [v, v]
+}]
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit 0
+
 puts 'Удалить по условию с учётом индекса'.green
 a = [1,2,3]
 b = []

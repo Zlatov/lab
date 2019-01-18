@@ -6,6 +6,7 @@
 			"index_exclude_patterns": [
 				"*.log",
 				"*.sql",
+				"*.sqlite3",
 				"theme/bower/*.*",
 				"node_modules/*.*"
 			],
