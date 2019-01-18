@@ -1,0 +1,12 @@
+[
+  {
+    "caption": "Reg Replace: zzz_ruby_namespace_without_colon",
+    "command": "reg_replace",
+    "args": {"replacements": ["zzz_ruby_namespace_without_colon"]}
+  },
+  {
+    "caption": "Reg Replace: zzz_ruby_namespace_with_colon",
+    "command": "reg_replace",
+    "args": {"replacements": ["zzz_ruby_namespace_with_colon"]}
+  }
+]

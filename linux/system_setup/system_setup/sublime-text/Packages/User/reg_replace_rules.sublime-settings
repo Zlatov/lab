@@ -1,0 +1,12 @@
+{
+  "replacements": {
+    "zzz_ruby_namespace_without_colon": {
+      "find": "::",
+      "replace": " "
+    },
+    "zzz_ruby_namespace_with_colon": {
+      "find": " ",
+      "replace": "::"
+    }
+  }
+}
