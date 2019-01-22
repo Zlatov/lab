@@ -3,6 +3,12 @@ require 'active_support/all'
 require 'awesome_print'
 require 'date'
 
+# def set_stat_date string_date
+#   string_date ||= Time.now.strftime("%Y-%m-%d")
+#   @stat_date = DateTime.strptime(string_date, "%Y-%m-%d")
+#   puts "Дата парсинга: #{@stat_date.strftime("%Y-%m-%d").blue}."
+# end
+
 puts 'DateTime'.green
 a = DateTime.new()
 print 'a: '.red; puts a
@@ -40,3 +46,14 @@ print 'c.to_i: '.red; puts c.to_i
 puts 'Использование activesupport с DateTime'.green
 a = DateTime.new(2000,1,1) - 1.day
 print 'a: '.red; puts a
+
+puts 'Интервал дат'.green
+a = DateTime.strptime('2018-12-30', "%Y-%m-%d")
+b = DateTime.strptime('2019-01-22', "%Y-%m-%d")
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+c = a
+while c <= b do
+  puts c.strftime("%Y-%m-%d")
+  c += 1.day
+end

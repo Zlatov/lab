@@ -36,9 +36,20 @@
 -- Немного про раздачу пользователей и прав
 -- 
 -- sudo -u postgres psql -c "…"
--- sudo -u postgres psql -c "CREATE USER test_user WITH password 'qwerty';"
--- sudo -u postgres psql -c "GRANT ALL ON DATABASE test_database TO test_user;"
--- sudo -u postgres psql -c "ALTER USER user_name WITH PASSWORD 'new_password';"
+-- sudo -u postgres psql -c "CREATE USER username WITH password 'password';"
+-- 
+-- Следующее даст не все:
+-- sudo -u postgres psql -c "GRANT ALL ON DATABASE database_name TO username;"
+-- 
+-- Нужно грандиьт таблицы:
+-- sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON TABLE table_name TO username;"
+-- 
+-- Грандим все таблицы:
+-- sudo -u postgres psql
+-- \c database_name;
+-- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO username;"
+--
+-- sudo -u postgres psql -c "ALTER USER username WITH PASSWORD 'new_password';"
 -- sudo -u postgres psql -c "ALTER USER lab CREATEDB;"
 -- 
 -- Следующая команда позволит второму пользователю управлять объектами созданными первым пользователем:
