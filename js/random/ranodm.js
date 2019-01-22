@@ -26,6 +26,7 @@ function random(min, max) {
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
+// С заданной вероятностью возвращает true
 function probability(p) {
   return p != 0 && Math.random() <= p
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="temp_autocomplete_input.css">
+</head>
+<body>
+  <form id="form" action="" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Fields</legend>
+      <p>
+        <label>
+          Name
+          <span class="autocompletei">
+            <input type="text" name="name" autofocus>
+          </span>
+        </label>
+      </p>
+      <p>
+        <label>
+          Name
+          <span class="autocompletei">
+            <input type="text" name="date">
+          </span>
+        </label>
+      </p>
+    </fieldset>
+    <p>
+      <button type="reset">Reset</button>
+      <button type="submit" name="submit" value="submit" class="submit">Submit</button>
+    </p>
+  </form>
+  <script type="text/javascript" src="/theme/yarn/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="autocomplete_input.js"></script>
+  <script type="text/javascript">
+    "use strict"
+    var autocompleteis = []
+    $(".autocompletei").each(function(index, dom) {
+      var e = $(dom)
+      autocompleteis.push(e.autocompletei({zzz: "asd"}))
+    })
+    // autocompleteis = $(".autocompletei").autocompletei({zzz: "asd"})
+  </script>
+</body>
+</html>
