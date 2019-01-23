@@ -80,6 +80,9 @@
 	{ "keys": ["ctrl+f8"], "command": "open_terminal" },
 
 	// TerminalView
-	{ "keys": ["ctrl+shift+t"], "command": "terminal_view_open" }
+	{ "keys": ["ctrl+shift+t"], "command": "terminal_view_open" },
+
+	// FocusFileOnSidebar
+	{ "keys": ["ctrl+\\"], "command": "focus_file_on_sidebar" }
 
 ]
