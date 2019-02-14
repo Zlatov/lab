@@ -1,31 +1,34 @@
 {
-  "folders":
-  [
-    {
-      "path": ".",
-      "index_exclude_patterns": [
-        "*.log",
-        "*.sql",
-        "*.sqlite3",
-        "theme/bower/*.*",
-        "node_modules/*.*"
-      ],
-      "folder_exclude_patterns": [
-        "bogacho",
-        "argo-ds"
-      ],
-      "file_exclude_patterns": [
-        "js/_tasks/videopl/data/*"
-      ],
-      "temp_setting_1": "\"follow_symlinks\": true"
-    }
-  ],
-  "settings":
-  {
-    "sublime-view-in-browser":
-    {
-      "basePath": "/home/iadfeshchm/projects/my/lab/",
-      "baseUrl": "http://lab.local/"
-    }
-  }
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"js/_tasks/videopl/data/*"
+			],
+			"folder_exclude_patterns":
+			[
+				"bogacho",
+				"argo-ds"
+			],
+			"index_exclude_patterns":
+			[
+				"*.log",
+				"*.sql",
+				"*.sqlite3",
+				"theme/bower/*.*",
+				"node_modules/*.*"
+			],
+			"path": ".",
+			"temp_setting_1": "\"follow_symlinks\": true"
+		}
+	],
+	"settings":
+	{
+		"sublime-view-in-browser":
+		{
+			"basePath": "/home/iadfeshchm/projects/my/lab/",
+			"baseUrl": "http://lab.local/"
+		}
+	}
 }
