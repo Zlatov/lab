@@ -1,4 +1,9 @@
 
+<% for relay in @relays %>
+  <% lookup_context.variants = [:list] %>
+  <%= render relay %>
+<% end %>
+
 <%= form_for article, url: {action: "update"} do |f| %>
   <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
   <%= f.hidden_field :id %>
@@ -12,3 +17,5 @@
     <%= f.button '<i class="save icon"></i>'.html_safe, class: 'ui mini icon button' %>
   </p>
 <% end %>
+
+<%= form_tag(subscription_subscriber_path, method: "get", class: "ui mini form", id: "form_subscription") do %>

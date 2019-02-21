@@ -1,4 +1,6 @@
 # encoding: UTF-8
+require 'awesome_print'
+require 'date'
 
 # Не ловите все ошибки! иначе вы их не увидите а они будут, не делайте так:
 # 
@@ -46,3 +48,12 @@ rescue => e
 ensure
   p 'Но мы всёравно выполнили это.'
 end
+
+# Очень не рекомендуют делать однострочные rescue:
+# a = DateTime.strptime('мусор', "%Y-%m-%d") rescue nil
+begin
+  a = DateTime.strptime('мусор', "%Y-%m-%d")
+rescue ArgumentError => e
+  a = "false"
+end
+print 'a: '.red; puts a

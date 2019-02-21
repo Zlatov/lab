@@ -19,6 +19,7 @@ print 'a: '.red; puts a
 print 'a.hour: '.red; puts a.hour
 print 'a.zone: '.red; puts a.zone
 print 'a.strftime("%m/%d/%Y"): '.red; puts a.strftime("%m/%d/%Y")
+# exit
 
 puts 'Time'.green
 a = Time.now
@@ -26,6 +27,7 @@ print 'a: '.red; puts a
 print 'a.hour: '.red; puts a.hour
 print 'a.zone: '.red; puts a.zone
 print 'a.strftime("%m/%d/%Y"): '.red; puts a.strftime("%m/%d/%Y")
+# exit
 
 puts 'Арифметика'.blue
 puts 'Разность дат DateTime'.green
