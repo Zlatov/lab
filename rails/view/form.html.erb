@@ -19,3 +19,14 @@
 <% end %>
 
 <%= form_tag(subscription_subscriber_path, method: "get", class: "ui mini form", id: "form_subscription") do %>
+
+<form action="<%= subscription_subscriber_read_url(subscriber.id) %>" method="post" class="ui mini form">
+  <%
+    @angar_list = [["Не выбран", 0]] + Angar.all.map do |e|
+      label = e.display_name == e.name ? e.name : "#{e.display_name} (#{e.name})"
+      [label, e.id]
+    end.sort_by{|e| e[0]}
+    @angar_selected = Angar.where(id: params[:angar]).map{|e| e.id}
+  %>
+  <%= select_tag :angar, options_for_select(@angar_list, @angar_selected), multiple: true, class: 'ui dropdown' %>
+</form>

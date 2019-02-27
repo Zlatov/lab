@@ -12,20 +12,20 @@ a.each do |value|
   end
 end
 
-a = 3
+a = 7
 
 b = case a
 when 1..5
   "It's between 1 and 5"
-when 6
-  "It's 6"
+when 6, 7
+  "It's 6 or 7"
 when String
   "You passed a string"
 else
   "You gave me #{a} -- I have no idea what to do with that."
 end
-
 puts b.red
+# exit
 
 b = case true
 when a===3

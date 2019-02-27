@@ -24,7 +24,12 @@ console.log('12-34-56'.replace(/-/, ":"))
 console.log('12-34-56'.replace(/-/g, ":"))
 console.log('01234567,8a.sd90.,q('.replace(/[^0-9.,]/gi, ''))
 console.log('01234567,8a.sd90.,q('.replace(/,/g, '.'))
-return null
+// return null
+
+var regexp = /\d{9}/
+console.log('regexp.test("123456789"): ', regexp.test("123456789"))
+console.log('regexp.test("12345678"): ', regexp.test("12345678"))
+// return null
 
 var versions = [
   '.',
