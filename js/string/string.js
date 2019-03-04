@@ -44,6 +44,7 @@ console.log("\n")
 console.log('> Заменить')
 var a = '.A.A.a'
 var b = a.replace(/A/gi, '!')
+var b = a.replace('A', '!')
 console.log('a: ', a)
 console.log('b: ', b)
 // return

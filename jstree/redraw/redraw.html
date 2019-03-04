@@ -10,6 +10,7 @@
   <div id="tree"></div>
   <button type="button" id="change">Изменить ноды и перерисовать.</button>
   <button type="button" id="change_data">Добавить детей и перерисовать.</button>
+  <button type="button" id="add_deep">Добавить детей глубоко и обновить.</button>
   <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="../../theme/bower/jstree/dist/jstree.min.js"></script>
   <script type="text/javascript">
@@ -37,10 +38,12 @@
           if (node.id === "#") {
             callback.call(this, data)
           } else {
-            callback.call(this, data.filter(e=>{return e.parent === node.id}))
+            callback.call(this, data.filter(function(e){return e.parent === node.id}))
           }
         }
       }
+    }).on('open_node.jstree', function(event, data) {
+      window.open_node_deep(event, data)
     })
 
     $('body').on('click', '#change', function(event) {
@@ -63,12 +66,65 @@
 
     })
 
+    // 
+    // redraw_node(node[mixed], deep[Boolean], is_callback[Boolean], force_render[Boolean]) - перерисовывает один узел Используется внутри.
+    // 
+    // refresh_node(obj[mixed]) - обновляет узел в дереве (перезагружая его дочерние элементы), все открытые узлы внутри этого узла перезагружаются с вызовами load_node.
+    // 
+    // load_node(obj[mixed], callback[function]) - загружает узел (выбирает его дочерние элементы, используя core.data настройки). Несколько узлов могут быть переданы с помощью массива.
+    // 
+    // load_all(obj[mixed], callback[function]) - загружает все ненагруженные узлы
+    // 
+
     $('body').on('click', '#change_data', function(event) {
       var struct = $('#tree')
       var tree = struct.jstree(true)
       tree.settings.data_custom.json.push({id: '10', text: '10', parent: '4'})
       tree.refresh_node('4')
     })
+
+    var add_deep = function() {
+      var struct = $('#tree')
+      var tree = struct.jstree(true)
+      window.tree = tree
+      tree.settings.data_custom.json.push({id: '111', text: '111', parent: '6'})
+      tree.load_node('6')
+      tree.refresh_node('6')
+      tree.settings.data_custom.json.push({id: '222', text: '222', parent: '111'})
+      tree.load_node('111')
+      tree.refresh_node('111')
+      // tree.load_all('111', function() {
+      //   tree.refresh_node('111')
+      // })
+      console.log('> add_deep done.')
+    }
+
+    var open_deep = function() {
+      var struct = $('#tree')
+      var tree = struct.jstree(true)
+      tree.open_node('4')
+      tree.open_node('6')
+      tree.open_node('111')
+      console.log('> open_node done.')
+    }
+
+    function open_node_deep(event, data) {
+      console.log('event: ', event)
+      console.log('data: ', data)
+      var tree = data.instance
+      var node = data.node
+      node.children.forEach(function(e, i, a) {
+        var node_id = e
+        tree.refresh_node(node_id)
+      })
+    }
+
+    $('body').on('click', '#add_deep', function(event) {
+      window.add_deep()
+    })
+
+    window.setTimeout(window.add_deep, 100)
+    window.setTimeout(window.open_deep, 1000)
 
   </script>
 </body>

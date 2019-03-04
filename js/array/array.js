@@ -44,7 +44,7 @@ b = a.splice(0, 0)
 console.log('> splice(0, 0) удалит 0 (ниечего не сделает).')
 console.log('a: ', a)
 console.log('b: ', b)
-return
+// return
 
 console.log("\n")
 console.log('> Перебор forEach().')
@@ -62,7 +62,7 @@ console.log('a: ', a)
 console.log('b: ', b)
 // return
 
-console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}'.blue())
+console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}')
 // var a = ['a','b','a','b']
 // a[8] = 'c'
 l = a.length // l = 9 !!!
@@ -79,7 +79,7 @@ for (var i = 0, l = a.length; i < l; i++) {
 
 
 
-console.log('> concat'.green())
+console.log('> concat')
 var a = ['1', '2']
 var b = ['3', 4]
 var c = a.concat(b)
@@ -90,8 +90,8 @@ console.log(c)
 console.log(d)
 
 
-console.log('> Объеденить массив в строку'.green())
-console.log('join'.blue())
+console.log('> Объеденить массив в строку')
+console.log('join')
 a = [1,2,3,4]
 b = a.join()
 c = a.join('-')
@@ -101,31 +101,31 @@ console.log(c)
 
 
 
-console.log('> Отфильтровать элементы массива'.green())
-console.log('возвращает новый массив'.blue())
+console.log('> Отфильтровать элементы массива')
+console.log('возвращает новый массив')
 var a = ['', 'asd']
 var b = a.filter((element, index, array) => { return element != '' })
 console.log('a: ', a)
 console.log('b: ', b)
 
 
-console.log('> Пересечение массивов'.green())
+console.log('> Пересечение массивов')
 var a = [1,2,3,2]
 var b = [2,3,2,0]
 var c = a.filter((e) => b.includes(e))
 console.log('c: ', c)
 
 
-console.log('> привести к уникальным значениям примерно как в _.uniq()'.green())
-console.log('возвращает новый массив'.blue())
+console.log('> привести к уникальным значениям примерно как в _.uniq()')
+console.log('возвращает новый массив')
 var a = ['2', 1, 'asd', 2, 1, 'asd', '1', 2, '', , 0]
 var b = a.filter((element, index, array) => { return array.indexOf(element) === index })
 console.log('a: ', a)
 console.log('b: ', b)
 
 
-console.log('> Преобразовать элементы массива'.green())
-console.log('возвращает новый массив'.blue())
+console.log('> Преобразовать элементы массива')
+console.log('возвращает новый массив')
 var a = ['', 'asd', , 3, undefined]
 var b = a.map(function(element, index, array) {
   if (element=='asd') {
@@ -136,8 +136,8 @@ console.log('a: ', a)
 console.log('b: ', b)
 
 
-console.log('> Удалить элементы массива по значению в переборе'.green())
-console.log('> индексы ведь меняются после удаления, map накосячит:'.blue())
+console.log('> Удалить элементы массива по значению в переборе')
+console.log('> индексы ведь меняются после удаления, map накосячит:')
 var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
 a.map((element, index, array) => {
   if (element.id == 4 || element.id == 5) {
@@ -146,7 +146,7 @@ a.map((element, index, array) => {
   }
 })
 console.log('a: ', a)
-console.log('> for вместе с i-- :'.blue())
+console.log('> for вместе с i-- :')
 var a = [{id:0},{id:1},{id:2},{id:3},{id:4},{id:5}]
 // 
 // Важно вычислять длинну на каждой итерации: `i < a.length`
@@ -162,7 +162,7 @@ for(var i = 0; i < a.length; i++) {
 console.log('a: ', a)
 
 
-console.log('> Преобразовать массив чего-то в hash'.green())
+console.log('> Преобразовать массив чего-то в hash')
 var a = [
   { id: 'id1', val: [1, 2, 3] },
   { id: 'id2', val: [2, 3, 4] },
@@ -183,28 +183,28 @@ console.log('a: ', a)
 console.log('b: ', b)
 
 
-console.log('> Часть массива'.green())
+console.log('> Часть массива')
 
-console.log('> slice([begin[, end]]) (кусочек) возврящает новый массив.'.blue())
+console.log('> slice([begin[, end]]) (кусочек) возврящает новый массив.')
 a = [1, 2, 3, 4]
 b = a.slice(1)
 a[1] = 100
 console.log('a: ', a)
 console.log('b: ', b)
 
-console.log('> без последнего элемента.'.blue())
+console.log('> без последнего элемента.')
 a = [1, 2, 3, 4]
 b = a.slice(0, -1)
 console.log('a: ', a)
 console.log('b: ', b)
 
 
-console.log('> Массив содержит в себе хотя бы один элемент другого массива'.green())
+console.log('> Массив содержит в себе хотя бы один элемент другого массива')
 console.log([1, 2, 3].some(id => [4, 5, 6, 2].includes(id)))
 console.log([1, 2, 3].some(id => [4, 5, 6, 2].indexOf(id) >= 0))
 
 
-console.log('> Перебор nested массива'.green())
+console.log('> Перебор nested массива')
 a = [
   {id: '1'},
   {id: '2', children:
@@ -231,51 +231,52 @@ a = [
   }
 ]
 
-console.log('a: ', a)
+// console.log('a: ', a)
 
-var level = 0
-var cache = []
-cache[level] = a.clone()
-cache[level].reset()
-var parent = []
-parent[level] = null
+// var level = 0
+// var cache = []
+// cache[level] = a.clone()
+// cache[level].reset()
+// var parent = []
+// parent[level] = null
 
-while (level>=0) {
-  var node = cache[level].next()
-  if (node != null) {
+// while (level>=0) {
+//   var node = cache[level].next()
+//   if (node != null) {
 
-    console.log('node.id: ', node.id)
-    console.log('parent: ', parent)
+//     console.log('node.id: ', node.id)
+//     console.log('parent: ', parent)
 
-    if (
-      node['children'] != null &&
-      Object.prototype.toString.call(node['children']) === '[object Array]' &&
-      node['children'].length
-    ) {
-      level++
-      parent[level] = Object.assign({}, node)
-      delete parent[level]['children']
-      cache[level] = node['children'].clone()
-      cache[level].reset()
-    }
-  } else {
-    parent[level] = null
-    level--
-  }
-}
+//     if (
+//       node['children'] != null &&
+//       Object.prototype.toString.call(node['children']) === '[object Array]' &&
+//       node['children'].length
+//     ) {
+//       level++
+//       parent[level] = Object.assign({}, node)
+//       delete parent[level]['children']
+//       cache[level] = node['children'].clone()
+//       cache[level].reset()
+//     }
+//   } else {
+//     parent[level] = null
+//     level--
+//   }
+// }
 
-console.log('Перебор nested массива без next/reset'.blue())
+console.log('Перебор nested массива без next/reset')
 console.log('a: ', a)
 var level = 0
 var cache = []; cache[level] = a.slice(0)
 var parent = []; parent[level] = null
 var index = []; index[level] = 0
-while (level>=0) {
+while (level >= 0) {
   var node = cache[level][index[level]]
   if (node != null) {
 
     console.log('node.id: ', node.id)
     console.log('parent: ', parent)
+    console.log('level: ', level)
 
     if (
       node['children'] != null &&
@@ -296,35 +297,35 @@ while (level>=0) {
     index[level]++
   }
 }
+return
 
-
-console.log('> Сортировка'.green())
-console.log('> Строки, запятые'.green())
+console.log('> Сортировка')
+console.log('> Строки, запятые')
 var a = ['0,41', '100', '1,24', '1,22', '0,92', '1,23', '0,375', '1', '1,52', '0,61', '1,27']
 console.log('a: ', a)
 var b = a.sort()
 console.log('a: ', a)
 console.log('b: ', b)
-console.log('> Строки, точки'.green())
+console.log('> Строки, точки')
 var a = ['0.41', '100', '1.24', '1.22', '0.92', '1.23', '0.375', '1', '1.52', '0.61', '1.27']
 console.log('a: ', a)
 var b = a.sort()
 console.log('a: ', a)
 console.log('b: ', b)
-console.log('> float'.green())
+console.log('> float')
 var a = [1.8, 10, 100, 14.7, 17, 18.92, 299, 5, 516, 7]
 console.log('a: ', a)
 var b = a.sort()
 console.log('a: ', a)
 console.log('b: ', b)
-console.log('> float'.green())
+console.log('> float')
 var a = [1.8, 10, 100, 14.7, 17, 18.92, 299, 5, 516, 7]
 console.log('a: ', a)
 var b = a.sort((a,b)=>{return a-b})
 console.log('a: ', a)
 console.log('b: ', b)
 
-console.log('> filter short syntax'.green())
+console.log('> filter short syntax')
 var a = [1,2,3]
 var b = a.filter(e=>e != 2)
 console.log('a: ', a)
