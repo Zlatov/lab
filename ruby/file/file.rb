@@ -110,23 +110,23 @@ if flock2==false
 end
 file.close
 
-# max_waiting_time = 20
-# puts "#{max_waiting_time} секунд ожидания закрытия файла другим процессом, без остановки процесса.".green
-# waiting_time = 0
-# step_wait = 0.2
-# file = File.open path_to_file, 'r+'
-# while file.flock(File::LOCK_EX|File::LOCK_NB) != 0
-#   sleep step_wait
-#   waiting_time += step_wait
-#   if waiting_time > max_waiting_time
-#     raise 'Слишком долго ждем!'
-#   else
-#     puts "ждём ещё до #{waiting_time} секунд".green
-#   end
-# end
-# puts 'наконец мы получили исключительный доступ к файлу, поработаем с ним 5 секунд.'.light_blue
-# sleep 5
-# file.close
+max_waiting_time = 20
+puts "#{max_waiting_time} секунд ожидания закрытия файла другим процессом, без остановки процесса.".green
+waiting_time = 0
+step_wait = 0.2
+file = File.open path_to_file, 'r+'
+while file.flock(File::LOCK_EX|File::LOCK_NB) != 0
+  sleep step_wait
+  waiting_time += step_wait
+  if waiting_time > max_waiting_time
+    raise 'Слишком долго ждем!'
+  else
+    puts "ждём ещё до #{waiting_time} секунд".green
+  end
+end
+puts 'наконец мы получили исключительный доступ к файлу, поработаем с ним 5 секунд.'.light_blue
+sleep 5
+file.close
 # exit 0
 
 puts "Ожидание эксклюзивного доступа к файлу, с остановкой процесса.".green
@@ -228,7 +228,7 @@ open('temp', 'w') do |f|
 end
 a = File.read('temp').split("\n")
 print 'a: '.red; p a
-# exit 0
+exit 0
 
 # Запись в файл через File с указанием режима
 puts 'Запись в файл через File с указанием режима.'.green

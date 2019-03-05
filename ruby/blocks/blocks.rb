@@ -117,3 +117,49 @@ end
 
 puts st :zxc
 puts st :qwe
+
+puts '-----------------------'
+puts 'В блоке список команд, выполнение команд в методе.'.green
+def self.terminal
+  if block_given?
+    commands = yield.split "\n"
+    commands.each do |command|
+      begin 
+        eval(command).inspect
+      rescue => e
+        puts e.to_s + "\n" + e.backtrace.join("\n")
+      end
+    end
+  end
+end
+
+terminal do
+  <<-RUBY
+    print "a"
+    puts "b"
+    print "c"
+    puts "d"
+  RUBY
+end
+
+puts '-----------------------'
+puts 'В блоке выполнение команд, список в инстансе метода (в методе).'.green
+
+class Array
+  def each_as_tree
+    each do |e|
+      yield(e)
+    end
+  end
+end
+
+<<-RUBY
+  print "a"
+  puts "b"
+  print "c"
+  puts "d"
+RUBY
+.split("\n")
+.each_as_tree do |command|
+  puts command
+end
