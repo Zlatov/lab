@@ -44,10 +44,10 @@ end
 puts '-----------------------'
 
 # метод принимает один параметр, блок за параметр не считается, но тут блок именован
-def self.mtp a, &block
+def self.mtp a, &block100
   p a
   if block_given?
-    p "var - #{block.call("2")}"
+    p "var - #{block100.call("2")}"
   end
 end
 
@@ -55,9 +55,10 @@ mtp 100 do |param|
   "#{param} - huy"
 end
 mtp 200
+# exit
 
 puts '-----------------------'
-
+puts 'Блок можно передавать по ссылке, как блок, и брать его елду. Или передавать как значение в переменной и колить его.'.green
 def self.another default=nil
   if block_given?
     p "like do end #{yield('block like block')}"
@@ -70,12 +71,13 @@ end
 def self.stp &block
   another 1, &block
   another block
-  p "var - #{block.call("2")}"
+  p "имея по ссылке, его можно всёравно колить: - #{block.call("2")}"
 end
 
 stp do |param|
   "#{param} - huy"
 end
+# exit
 
 puts '-----------------------'
 

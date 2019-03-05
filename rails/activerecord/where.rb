@@ -39,7 +39,11 @@ Post.new(header: "3", visible: true, date: DateTime.new(2000,1,2)).save
 # Если есть необходимость задавать условия как в хеш так и в строковом SQL:
 a = Post.where("date >= '2000-01-01' AND date <= '2000-01-01'").where(visible: true)
 puts a.to_sql
-puts a.first.header
+# puts a.first.header
+puts a.class.name
+puts a.klass.name
+puts a.each{|e| e.class.name}
+puts a.all.each{|e| e.class.name}
 
 # 
 # Includes использует нетерпеливую загрузку

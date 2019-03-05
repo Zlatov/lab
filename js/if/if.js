@@ -1,4 +1,4 @@
-console.log('this: ', this)
+// console.log('this: ', this)
 
 console.log('> Полный синтаксис')
 // a = false
@@ -23,7 +23,6 @@ if (true) console.log('a')
 // }
 function a(argument) {
   if (argument) {
-    console.log('this: ', this)
     return 'true'
   }
   if (argument===false) return 'false'
@@ -38,8 +37,16 @@ console.log(a(true))
 console.log(a(false))
 console.log(a(null))
 
-// console.log('> Тернарный оператор')
-// a = true
-// b = a ? 'a' : '!a'
-// console.log('a: ', a)
-// console.log('b: ', b)
+console.log('> Тернарный оператор')
+a = true
+b = a ? 'a' : '!a'
+console.log('a: ', a)
+console.log('b: ', b)
+
+console.log('> Вложенный тернарный оператор')
+a = false
+b = true
+c = a == true ? 'a=t' : b == true ? 'b=t' : 'b=f'
+d = a == true ? b == true ? 'b=t' : 'b=f' : 'a=f'
+console.log('c: ', c)
+console.log('d: ', d)
