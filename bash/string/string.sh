@@ -9,6 +9,17 @@ b=${a/oo/aa}
 echo $a
 echo $b
 
+# Замена в файле `replace` (от MySQL)
+# В состав MySQL входит утилита replace, которая умеет производить замену в файле:
+# Она умеет менять пары подстрок, что позволяет производить такие замены:
+# echo ABBA | replace A B B A  --
+# BAAB
+echoc 'Замена в файле `replace` (от MySQL)' green
+touch temp
+echo "asd zxc" | tee temp >/dev/null
+replace 'd z' 'dd zz' -- temp
+# exit 0
+
 # Вывод переменных в строке
 echoc 'Вывод переменных в строке' 'green'
 a='0'
