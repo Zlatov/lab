@@ -2,6 +2,29 @@
 
 <h3>Установка</h3>
 <p>из гит репозитория <a href="https://github.com/rbenv/rbenv">https://github.com/rbenv/rbenv</a></p>
+<pre class="prettyprint lang-sh">
+# Установка.
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+cd ~/.rbenv && src/configure && make -C src
+
+# bashrc.
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+~/.rbenv/bin/rbenv init
+# Добавить код в ~/.bashrc:
+# eval "$(rbenv init -)"
+
+# Перезапустить shell.
+
+# Протестить.
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+
+# Установить ruby-build.
+mkdir -p "$(rbenv root)"/plugins
+git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+
+# Протестить.
+curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
+</pre>
 <p>так же установить плагин для rbenv для установки версий <a href="https://github.com/rbenv/ruby-build">https://github.com/rbenv/ruby-build</a></p>
 <h3>Установка ruby через rbenv</h3>
 <p><code class="copyToClipboard">rbenv install -l</code> — список доступных для установки версий;</p>
