@@ -33,3 +33,9 @@ alias  c='git commit'
 alias ca='git add -A && git commit'
 
 export DISABLE_SPRING=1
+
+# function ssh_alias() {
+#     ssh $@;
+#     setterm --default --clear all;
+# }
+# alias ssh=ssh_alias
