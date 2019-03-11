@@ -37,6 +37,7 @@
 -- 
 -- sudo -u postgres psql -c "…"
 -- sudo -u postgres psql -c "CREATE USER username WITH password 'password';"
+-- sudo -u postgres psql -c "ALTER USER username CREATEDB;"
 -- 
 -- Следующее даст не все:
 -- sudo -u postgres psql -c "GRANT ALL ON DATABASE database_name TO username;"
