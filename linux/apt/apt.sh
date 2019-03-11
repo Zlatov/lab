@@ -22,3 +22,10 @@ apt-cache policy foo # — показать краткую (статутс: ут
 apt-cache depends foo # — показать зависимости пакета
 apt-cache showpkg foo # — показать подробную информацию о доступных версиях пакета и о пакетах, от него зависящих (об обратных зависимостях пакета)
 apt list --upgradable # — показать список пакетов доступных для обновления
+
+# Проксирование apt
+cd /etc/apt/apt.conf.d && sudo touch proxy.conf && sudo subl proxy.conf
+# Acquire::http::Proxy "http://user:password@proxy.server:port/";
+# Acquire::https::Proxy "http://user:password@proxy.server:port/";
+# Acquire::http::Proxy "http://proxy.server:port/";
+# Acquire::https::Proxy "http://proxy.server:port/";
