@@ -1,6 +1,3 @@
-# export PATH="$HOME/.rbenv/bin:$PATH"
-# eval "$(rbenv init -)"
-
 function set_title() {
   if [[ -z "$ORIG" ]]
   then
@@ -22,6 +19,7 @@ alias openhosts='subl /etc/hosts'
 alias opensshconfig='subl ~/.ssh/config'
 alias openapacheconfigmy='subl /etc/apache2/sites-available/my.conf'
 alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
+alias openpostgresqlconfiguser='bash --noprofile -lc "sudo subl -n /etc/postgresql/10/main/pg_hba.conf"'
 
 alias cdlab='cd ~/projects/my/lab'
 alias cdadmin='cd ~/projects/zenon/admin'
