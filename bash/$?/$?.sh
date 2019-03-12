@@ -15,6 +15,7 @@ echo $BASHPID
 a="a1"
 echo '$a: ' $a
 {
+  echo "Этот же процесс что и родительский."
   echo "block ${BASHPID}"
   echo '$a: ' $a
   ls ttt

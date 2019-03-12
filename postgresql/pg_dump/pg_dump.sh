@@ -8,21 +8,24 @@ cd "$(dirname "${0}")"
 find . -type f -not -name pg_dump.sh -delete
 find . -type d -not -path . | xargs -I {} rm -rf {}
 
-# Дамипим
-pg_dump --file=temp_1_no-owner.sql --dbname=lab --no-owner
-pg_dump --file=temp_2_schema-only.sql --dbname=lab --schema-only
-pg_dump --file=temp_3_lorem.sql --dbname=lab --table=lorem
-pg_dump --file=temp_4_no-privileges.sql --dbname=lab --no-privileges
-pg_dump --file=temp_5_inserts.sql --verbose --dbname=lab --inserts
-pg_dump --file=temp_6_column-inserts.sql --dbname=lab --column-inserts
+export PGPASSWORD='lab'
 
-# Дамипим
-pg_dump --file=temp_sql.sql --dbname=lab --no-owner
+# Тестируем дамипинг
+pg_dump --file=temp_1_no-owner.sql       -Ulab --dbname=lab --no-owner
+pg_dump --file=temp_2_schema-only.sql    -Ulab --dbname=lab --schema-only
+pg_dump --file=temp_3_lorem.sql          -Ulab --dbname=lab --table=lorem
+pg_dump --file=temp_4_no-privileges.sql  -Ulab --dbname=lab --no-privileges
+pg_dump --file=temp_5_inserts.sql        -Ulab --dbname=lab --verbose --inserts
+pg_dump --file=temp_6_column-inserts.sql -Ulab --dbname=lab --column-inserts
+
+# Дамипим через .sql
+pg_dump --file=temp_sql.sql              -Ulab --dbname=lab --no-owner
 tar -czf temp_sql.sql.tar.gz temp_sql.sql
 mkdir temp
 tar -xf temp_sql.sql.tar.gz -C temp
-# Дамипим
-pg_dump --file=temp/temp_pg.pg --dbname=lab --no-owner --format=c
+
+# Дамипим через .pg
+pg_dump --file=temp/temp_pg.pg           -Ulab --dbname=lab --no-owner --format=c
 
 exit 0
 

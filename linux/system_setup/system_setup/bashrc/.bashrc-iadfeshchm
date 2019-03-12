@@ -22,9 +22,11 @@ alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
 alias openpostgresqlconfiguser='bash --noprofile -lc "sudo subl -n /etc/postgresql/10/main/pg_hba.conf"'
 
 alias cdlab='cd ~/projects/my/lab'
+
 alias cdadmin='cd ~/projects/zenon/admin'
 alias cdframework='cd ~/projects/zenon/framework'
 alias cdmarket='cd ~/projects/zenon/market'
+alias cdforum='cd ~/projects/zenon/sign-forum'
 
 alias  s='git status -u'
 alias  a='git add'
