@@ -1,5 +1,7 @@
 {
   "extensions": [
+    ".bashrc-iadfeshchm",
+    ".bashrc-env",
     "sh"
   ],
   "tab_size" : 2,
