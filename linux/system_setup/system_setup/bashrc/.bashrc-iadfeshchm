@@ -23,6 +23,7 @@ alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
 alias openpostgresqlconfiguser='bash --noprofile -lc "sudo subl -n /etc/postgresql/10/main/pg_hba.conf"'
 
 alias cdlab='cd ~/projects/my/lab'
+alias cdloremrails='cd ~/projects/my/lorem_rails'
 
 alias cdadmin='cd ~/projects/zenon/admin'
 alias cdframework='cd ~/projects/zenon/framework'
