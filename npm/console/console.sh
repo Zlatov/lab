@@ -7,9 +7,9 @@ exit 0
 # 
 # Настройки
 # 
-npm config list 
-npm config ls -l 
-npm config edit 
+npm config list
+npm config ls -l
+npm config edit
 
 # 
 # Список установленных пакетов
