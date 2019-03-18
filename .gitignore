@@ -3,6 +3,7 @@ theme/bower/
 theme/yarn/
 node_modules/
 theme/npm/
+semantic/
 
 !*.sublime-project
 *.sqlite3
