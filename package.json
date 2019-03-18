@@ -6,7 +6,8 @@
     "lazyload": "^2.0.0-beta.2",
     "semantic-ui": "^2.2.13",
     "vue": "^2.5.17",
-    "vue-yandex-maps": "^0.7.15"
+    "vue-yandex-maps": "^0.7.15",
+    "zlader": "^1.1.3"
   },
   "scripts-example": {
     "scss": "node-sass --watch sass/_task/market_lorem/sass/style.scss -o sass/_task/market_lorem/temp_css"
