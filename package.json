@@ -5,6 +5,7 @@
     "jquery": "^3.3.1",
     "lazyload": "^2.0.0-beta.2",
     "semantic-ui": "^2.2.13",
+    "underscore": "^1.9.1",
     "vue": "^2.5.17",
     "vue-yandex-maps": "^0.7.15",
     "zlader": "^1.1.3"

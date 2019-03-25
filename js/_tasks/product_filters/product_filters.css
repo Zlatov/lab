@@ -1,0 +1,16 @@
+label, input[type='checkbox'] {
+  cursor: pointer;
+}
+#filters {
+  float: left;
+  width: 25%;
+}
+#filters > div::before {
+  display: block;
+  font-weight: bold;
+  content: attr(data-filter);
+}
+#products {
+  width: 75%;
+  margin-left: 25%;
+}

@@ -56,6 +56,11 @@
 			{"match_all": true, "key": "emmet_action_enabled.wrap_as_you_type"}
 		]
 	},
+	// рускоязычная клавиша ctrl+/:
+	{
+		"keys": ["ctrl+."],
+		"command": "toggle_comment"
+	},
 
 	// { "keys": ["ctrl+9"], "command": "collapse_all_folders" },
 	{ "keys": ["ctrl+9"], "command": "collapse_folders" },

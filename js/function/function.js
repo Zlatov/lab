@@ -47,9 +47,11 @@ d.e.bind(a)()     // > this: {this is: "a", c: ƒ, b: ƒ}
 d.e.call(a, 0)    // > this: {this is: "a", c: ƒ, b: ƒ}
 d.e.apply(a, [0]) // > this: {this is: "a", c: ƒ, b: ƒ}
 
-// Use .bind() возвращает новую функцию с новым контекстом, можно вызвать позже,
-// useful in events. Use .call() or .apply() when you want to invoke the function
-// immediately, and modify the context.
-// func.call(context, arg1, arg2);
-// // идентичен вызову
-// func.apply(context, [arg1, arg2]);
+// 
+// Использование .bind() возвращает новую функцию с новым контекстом, можно вызвать позже, удобно для назначения обработчиков событий.
+// Использование .call() или .apply() если вы хотите немедленно вызвать функцию, изменив её контекст.
+// 
+// func.call(context, arg1, arg2)
+// идентичен вызову
+// func.apply(context, [arg1, arg2])
+// 

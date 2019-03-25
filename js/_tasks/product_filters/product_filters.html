@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="product_filters.css">
+</head>
+<body>
+  <div id="filters">
+    <div data-filter="Длинна" data-filter_type="checkbox">
+      <label><input type="checkbox" name="Длинна[]" value="1.1">1.1</label>
+      <label><input type="checkbox" name="Длинна[]" value="1.2">1.2</label>
+      <label><input type="checkbox" name="Длинна[]" value="1.3">1.3</label>
+      <label><input type="checkbox" name="Длинна[]" value="1.4">1.4</label>
+    </div>
+    <!-- <div data-filter="Цена" data-filter_type="interval">
+      <label>от <input type="text" name="Цена[]" value=""></label>
+      <label>до <input type="text" name="Цена[]" value=""></label>
+    </div> -->
+    <div data-filter="Цвет" data-filter_type="checkbox">
+      <label><input type="checkbox" name="Цвет[]" value="красный">красный</label>
+      <label><input type="checkbox" name="Цвет[]" value="зелёный">зелёный</label>
+      <label><input type="checkbox" name="Цвет[]" value="синий">синий</label>
+    </div>
+  </div>
+  <div id="products">
+    <div class="product" data-id="1">1</div>
+    <div class="product" data-id="2">2</div>
+    <div class="product" data-id="3">3</div>
+    <div class="product" data-id="4">4</div>
+    <div class="product" data-id="5">5</div>
+    <div class="product" data-id="6">6</div>
+  </div>
+  <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="./product_filters.js"></script>
+  <script type="text/javascript" src="./filter.js"></script>
+  <script type="text/javascript">
+
+    /**
+     * Список данных необходимых для функционирования фильтров на стороне клиента.
+     * @type {Object}
+     */
+    window.uncached = {}
+    window.uncached.product_filters = {}
+    // Выбранные значения
+    window.uncached.product_filters.selected_values = {
+      "Длинна": ["1.1"],
+      // TODO: подумать над тем, что null попадает в напиканное
+      // "Цена": ["100", null],
+    }
+    // Занчения фильтров
+    window.uncached.product_filters.filter_values = {
+      "Длинна": [1.1, 1.2, 1.3, 1.4],
+      "Цена": [100, 200.5],
+      "Цвет": ["красный", "зелёный", "синий"],
+    }
+    // Соответствия значениям
+    window.uncached.product_filters.value_matches = {
+      "Длинна 1.1": [1,5,6],
+      "Длинна 1.2": [2,4],
+      "Длинна 1.3": [3],
+      "Длинна 1.4": [],
+      "Цена 100": [1,2,3],
+      "Цена 150.55": [4,5],
+      "Цена 200.5": [6],
+      "Цвет красный": [],
+      "Цвет зелёный": [2,3],
+      "Цвет синий": [1],
+    }
+
+  </script>
+  <script type="text/javascript">
+    window.ProductFilters.activate()
+  </script>
+</body>
+</html>

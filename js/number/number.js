@@ -72,3 +72,11 @@ var b = a.replace(/\B(?=(\d{3})+(?!\d))/, "s")
 console.log('a: ', a)
 console.log('b: ', b)
 // return null
+
+console.log()
+console.log('> .toString()')
+a = [0, 0.00001, 0.09, 1.00009]
+for (var i = 0, l = a.length; i < l; i++) {
+  var item = a[i]
+  console.log('item: ', item, item.toString())
+}

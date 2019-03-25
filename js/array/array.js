@@ -60,7 +60,7 @@ var b = a.forEach(function(element, index, array) {
 })
 console.log('a: ', a)
 console.log('b: ', b)
-// return
+return
 
 console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}')
 // var a = ['a','b','a','b']
