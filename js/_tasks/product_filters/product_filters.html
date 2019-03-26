@@ -7,27 +7,26 @@
 <body>
   <div id="filters">
     <div data-filter="Длинна" data-filter_type="checkbox">
-      <label><input type="checkbox" name="Длинна[]" value="1.1">1.1</label>
-      <label><input type="checkbox" name="Длинна[]" value="1.2">1.2</label>
-      <label><input type="checkbox" name="Длинна[]" value="1.3">1.3</label>
-      <label><input type="checkbox" name="Длинна[]" value="1.4">1.4</label>
+      <label><input type="checkbox" value="1,5,6">1,5,6</label>
+      <label><input type="checkbox" value="2,4">2,4</label>
+      <label><input type="checkbox" value="3">3</label>
     </div>
     <div data-filter="Аудио" data-filter_type="checkbox">
-      <label><input type="checkbox" name="Аудио[]" value="AC3">AC3</label>
-      <label><input type="checkbox" name="Аудио[]" value="DTS">DTS</label>
-      <label><input type="checkbox" name="Аудио[]" value="MP3">MP3</label>
-      <label><input type="checkbox" name="Аудио[]" value="AAC">AAC</label>
-      <label><input type="checkbox" name="Аудио[]" value="Ogg">Ogg</label>
-      <label><input type="checkbox" name="Аудио[]" value="WMA">WMA</label>
+      <label><input type="checkbox" value="AC3">AC3</label>
+      <label><input type="checkbox" value="DTS">DTS</label>
+      <label><input type="checkbox" value="MP3">MP3</label>
+      <label><input type="checkbox" value="AAC">AAC</label>
+      <label><input type="checkbox" value="Ogg">Ogg</label>
+      <label><input type="checkbox" value="WMA">WMA</label>
     </div>
     <!-- <div data-filter="Цена" data-filter_type="interval">
       <label>от <input type="text" name="Цена[]" value=""></label>
       <label>до <input type="text" name="Цена[]" value=""></label>
     </div> -->
     <div data-filter="Цвет" data-filter_type="checkbox">
-      <label><input type="checkbox" name="Цвет[]" value="красный">красный</label>
-      <label><input type="checkbox" name="Цвет[]" value="зелёный">зелёный</label>
-      <label><input type="checkbox" name="Цвет[]" value="синий">синий</label>
+      <label><input type="checkbox" value="красный">красный</label>
+      <label><input type="checkbox" value="зелёный">зелёный</label>
+      <label><input type="checkbox" value="синий">синий</label>
     </div>
   </div>
   <div id="products">
@@ -52,24 +51,24 @@
     window.uncached.product_filters = {}
     // Выбранные значения
     window.uncached.product_filters.selected_values = {
-      "Длинна": ["1.1"],
+      "Длинна": ["1,5,6"],
+      // "Аудио": ["DTS"],
       // TODO: подумать над тем, что null попадает в напиканное
       // "Цена": ["100", null],
     }
     // Занчения фильтров
     window.uncached.product_filters.filter_values = {
-      "Длинна": [1.1, 1.2, 1.3, 1.4],
+      "Длинна": ["1,5,6", "2,4", "3"],
       "Аудио": ["AC3", "DTS", "MP3", "AAC", "Ogg", "WMA"],
-      "Цена": [100, 200.5],
+      // "Цена": [100, 200.5],
       "Цвет": ["красный", "зелёный", "синий"],
     }
     // Соответствия значениям
     window.uncached.product_filters.value_matches = {
       "Длинна": {
-        "1.1": [1,5,6],
-        "1.2": [2,4],
-        "1.3": [3],
-        "1.4": [],
+        "1,5,6": [1,5,6],
+        "2,4": [2,4],
+        "3": [3],
       },
       "Аудио": {
         "AC3": [1, 2, 4, 5],
@@ -79,13 +78,13 @@
         "Ogg": [6],
         "WMA": [1],
       },
-      "Цена": {
-        "100": [1,2,3],
-        "150.55": [4,5],
-        "200.5": [6],
-      },
+      // "Цена": {
+      //   "100": [1,2,3],
+      //   "150.55": [4,5],
+      //   "200.5": [6],
+      // },
       "Цвет": {
-        "красный": [],
+        "красный": [3],
         "зелёный": [2,3],
         "синий": [1],
       },
