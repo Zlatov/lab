@@ -151,7 +151,7 @@
           var input = this.inputs[value]
           // label.css({"color": "inherit"})
           label.removeClass('disabled')
-          input.prop('disabled', false)
+          // input.prop('disabled', false)
         }
       } else {
         for (var i = 0, l = values.length; i < l; i++) {
@@ -166,7 +166,7 @@
           }
           // label.css({"color": "inherit"})
           label.removeClass('disabled')
-          input.prop('disabled', false)
+          // input.prop('disabled', false)
         }
       }
     }
@@ -177,7 +177,7 @@
           var input = this.inputs[value]
           // label.css({"color": "gray"})
           label.addClass('disabled')
-          input.prop('disabled', true)
+          // input.prop('disabled', true)
         }
       } else {
         for (var i = 0, l = values.length; i < l; i++) {
@@ -192,7 +192,7 @@
           }
           // label.css({"color": "gray"})
           label.addClass('disabled')
-          input.prop('disabled', true)
+          // input.prop('disabled', true)
         }
       }
     }
@@ -215,8 +215,14 @@
   window.FilterCheckbox.change_handler = function function_name(event) {
     var instance = event.data.instance
     var input = $(this)
+    var label = input.parents('label').first()
+    var disabled = label.hasClass('disabled')
     var value = input.val().trim()
     if (this.checked) {
+      if (disabled) {
+        input.prop('checked', false)
+        return null
+      }
       instance.selected_values_push(value)
     } else {
       instance.selected_values_pull(value)
