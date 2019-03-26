@@ -4,11 +4,15 @@ label, input[type='checkbox'] {
 #filters {
   float: left;
   width: 25%;
+  user-select: none;
 }
 #filters > div::before {
   display: block;
   font-weight: bold;
   content: attr(data-filter);
+}
+#filters label.disabled {
+  color: gray;
 }
 #products {
   width: 75%;

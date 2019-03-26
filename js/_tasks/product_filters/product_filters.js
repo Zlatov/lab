@@ -45,6 +45,8 @@
         activate_filters: activate_filters,
         generate_products: generate_products,
         apply_filters: apply_filters,
+        anable_values: anable_values,
+        disable_values: disable_values,
         hide_products: hide_products,
         show_products: show_products,
         calc_intersection_ids: calc_intersection_ids,
@@ -68,7 +70,7 @@
     }
 
     function apply_filters() {
-      // this.anable_all_pickers()
+      this.anable_values()
       // Если не выбрано не одного значения, то
       if (this.calc_selected_values_count() == 0) {
         // показать все товары
@@ -81,10 +83,52 @@
         this.show_products(intersection_ids)
         // и засерить значения
         var disabled_values = this.calc_disabled_values()
-        console.log('disabled_values: ', disabled_values)
-        // this.disable_values(disabled_values)
+        this.disable_values(disabled_values)
       }
+    }
 
+    function anable_values(filter_values=null) {
+      if (filter_values == null) {
+        for (var filter_name in this.filters) {
+          var filter = this.filters[filter_name]
+          if (filter == null) {
+            continue
+          }
+          filter.anable_values()
+        }
+        return null
+      } else {
+        for (var filter_name in filter_values) {
+          var filter = this.filters[filter_name]
+          if (filter == null) {
+            continue
+          }
+          var values = filter_values[filter_name]
+          filter.anable_values(values)
+        }
+      }
+    }
+
+    function disable_values(filter_values=null) {
+      if (filter_values == null) {
+        for (var filter_name in this.filters) {
+          var filter = this.filters[filter_name]
+          if (filter == null) {
+            continue
+          }
+          filter.disable_values()
+        }
+        return null
+      } else {
+        for (var filter_name in filter_values) {
+          var filter = this.filters[filter_name]
+          if (filter == null) {
+            continue
+          }
+          var values = filter_values[filter_name]
+          filter.disable_values(values)
+        }
+      }
     }
 
     function calc_selected_values_count() {
@@ -138,7 +182,7 @@
         for (var i = 0, l = values.length; i < l; i++) {
           var value = values[i]
           // выбрать массивы идентификаторов товаров из соответствий
-          var ids = this.value_matches[filter_name + " " + value]
+          var ids = (this.value_matches[filter_name] || {})[value] || []
           // и наполнить массивы объеденений (уникализировав) по имени фильтра
           union_ids[filter_name] = _.uniq((union_ids[filter_name] || []).concat(ids))
         }
@@ -166,7 +210,7 @@
         for (var i = 0, l = values.length; i < l; i++) {
           var value = values[i]
           // выбрать массивы идентификаторов товаров из соответствий
-          var ids = this.value_matches[filter_name + " " + value]
+          var ids = (this.value_matches[filter_name] || {})[value] || []
           // и наполнить массив объеденения
           union_ids = _.uniq(union_ids.concat(ids))
         }
@@ -175,39 +219,46 @@
     }
 
     function calc_disabled_values() {
-      var disabled_values = []
+      var disabled_values = {}
       var union_ids = this.calc_union_ids()
       var intersection_ids = this.calc_intersection_ids()
       // Если количество выбранных фильтров равно единице, то
       var selected_filters = this.calc_selected_filters()
-      console.log()
-      console.log('selected_filters.length: ', selected_filters.length)
       if (selected_filters.length == 1) {
-        var filter_name = selected_filters[0]
+        var selected_filter_name = selected_filters[0]
         // ищем пересечение каждого нового соответствия с Объеденением исключая текущий фильтр,
-        for (var name_value in this.value_matches) {
-          if (name_value.substring(0, filter_name.length - 1) == filter_name) {
+        for (var filter_name in this.value_matches) {
+          if (selected_filter_name == filter_name) {
             continue
           }
-          var matches = this.value_matches[name_value]
-          var intersection = _.intersection(union_ids, matches)
-          if (!intersection.length) {
-            disabled_values.push(name_value)
+          var filter_matches = this.value_matches[filter_name]
+          for (var value in filter_matches) {
+            var matches = filter_matches[value]
+            // if (matches.length == 0) {
+            //   console.log('filter_name: ', filter_name)
+            //   console.log('value: ', value)
+            // }
+            var intersection = _.intersection(union_ids, matches)
+            if (!intersection.length) {
+              disabled_values[filter_name] = disabled_values[filter_name] || []
+              disabled_values[filter_name].push(value)
+            }
           }
         }
       // иначе
       } else {
         // ищем пересечение каждого нового соответствия с Пересечением
-        for (var name_value in this.value_matches) {
-          var matches = this.value_matches[name_value]
-          var intersection = _.intersection(intersection_ids, matches)
-          if (!intersection.length) {
-            disabled_values.push(name_value)
+        for (var filter_name in this.value_matches) {
+          for (var value in this.value_matches[filter_name]) {
+            var matches = this.value_matches[filter_name][value]
+            var intersection = _.intersection(intersection_ids, matches)
+            if (!intersection.length) {
+              disabled_values[filter_name] = disabled_values[filter_name] || []
+              disabled_values[filter_name].push(value)
+            }
           }
         }
       }
-      console.log('union_ids: ', union_ids)
-      console.log('intersection_ids: ', intersection_ids)
       return disabled_values
     }
 
@@ -216,6 +267,9 @@
       this.filters_place.find(this.options.selectors.filter).each(function(index, dom) {
         var filter = $(dom)
         var filter_name = filter.data(instance.options.data_attributes.filter_name)
+        if (instance.filter_values[filter_name] == null) {
+          instance.filter_values[filter_name] = []
+        }
         var filter_values = instance.filter_values[filter_name]
         if (instance.selected_values[filter_name] == null) {
           instance.selected_values[filter_name] = []

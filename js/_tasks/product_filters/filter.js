@@ -100,24 +100,37 @@
   window.FilterCheckbox = function FilterCheckbox(place, filter_values, selected_values) {
     window.Filter.apply(this, [...arguments])
     this.type = 'checkbox'
+    this.labels = {}
+    this.inputs = {}
     this.activate = function() {
+      this.fill_parts()
       this.activate_change()
       this.apply_data_to_ui()
     }
     this.apply_data_to_ui = function() {
       for (var i = 0, l = this.selected_values.length; i < l; i++) {
         var value = this.selected_values[i].toString()
-        var input = this.place.find(this.options.selectors.input + '[value="' + value + '"]')
+        var input = this.place.find(this.options.selectors.inputs + '[value="' + value + '"]')
         input[0].checked = true
       }
     }
     this.activate_change = function() {
       this.place.on(
         this.options.events.change,
-        this.options.selectors.input,
+        this.options.selectors.inputs,
         {instance: this},
         window.FilterCheckbox.change_handler
       )
+    }
+    this.fill_parts = function() {
+      var instance = this
+      this.place.find(this.options.selectors.labels).each(function(index, dom) {
+        var label = $(dom)
+        var input = label.find(instance.options.selectors.inputs)
+        var value = input.val()
+        instance.labels[value] = label
+        instance.inputs[value] = input
+      })
     }
     this.selected_values_push = function(value) {
       if (!this.selected_values.includes(value)) {
@@ -131,13 +144,66 @@
         }
       }
     }
+    this.anable_values = function(values) {
+      if (values == null) {
+        for (var value in this.labels) {
+          var label = this.labels[value]
+          var input = this.inputs[value]
+          // label.css({"color": "inherit"})
+          label.removeClass('disabled')
+          input.prop('disabled', false)
+        }
+      } else {
+        for (var i = 0, l = values.length; i < l; i++) {
+          var value = values[i]
+          var label = this.labels[value]
+          var input = this.inputs[value]
+          if (label == null) {
+            continue
+          }
+          if (input == null) {
+            continue
+          }
+          // label.css({"color": "inherit"})
+          label.removeClass('disabled')
+          input.prop('disabled', false)
+        }
+      }
+    }
+    this.disable_values = function(values) {
+      if (values == null) {
+        for (var value in this.labels) {
+          var label = this.labels[value]
+          var input = this.inputs[value]
+          // label.css({"color": "gray"})
+          label.addClass('disabled')
+          input.prop('disabled', true)
+        }
+      } else {
+        for (var i = 0, l = values.length; i < l; i++) {
+          var value = values[i]
+          var label = this.labels[value]
+          var input = this.inputs[value]
+          if (label == null) {
+            continue
+          }
+          if (input == null) {
+            continue
+          }
+          // label.css({"color": "gray"})
+          label.addClass('disabled')
+          input.prop('disabled', true)
+        }
+      }
+    }
   }
   window.FilterCheckbox.options = {
     selectors: {
-      input: 'input[type="checkbox"]'
+      inputs: 'input[type="checkbox"]',
+      labels: 'label',
     },
     events: {
-      change: "change"
+      change: "change",
     },
   }
 
