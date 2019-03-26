@@ -52,6 +52,7 @@
         calc_intersection_ids: calc_intersection_ids,
         calc_union_ids: calc_union_ids,
         calc_disabled_values: calc_disabled_values,
+        calc_empty_matches: calc_empty_matches,
         calc_selected_values_count: calc_selected_values_count,
         calc_selected_filters: calc_selected_filters,
       })
@@ -71,6 +72,8 @@
 
     function apply_filters() {
       this.anable_values()
+      // Значения без соответствий должны быть засерены в любом случае:
+      this.disable_values(this.calc_empty_matches())
       // Если не выбрано не одного значения, то
       if (this.calc_selected_values_count() == 0) {
         // показать все товары
@@ -226,7 +229,7 @@
       var selected_filters = this.calc_selected_filters()
       if (selected_filters.length == 1) {
         var selected_filter_name = selected_filters[0]
-        // ищем пересечение каждого нового соответствия с Объеденением исключая текущий фильтр,
+        // ищем пересечение каждого нового соответствия с Объеденением, исключая текущий фильтр,
         for (var filter_name in this.value_matches) {
           if (selected_filter_name == filter_name) {
             continue
@@ -234,10 +237,6 @@
           var filter_matches = this.value_matches[filter_name]
           for (var value in filter_matches) {
             var matches = filter_matches[value]
-            // if (matches.length == 0) {
-            //   console.log('filter_name: ', filter_name)
-            //   console.log('value: ', value)
-            // }
             var intersection = _.intersection(union_ids, matches)
             if (!intersection.length) {
               disabled_values[filter_name] = disabled_values[filter_name] || []
@@ -260,6 +259,21 @@
         }
       }
       return disabled_values
+    }
+
+    function calc_empty_matches() {
+      var empty_matches = {}
+      for (var filter_name in this.value_matches) {
+        var filter_matches = this.value_matches[filter_name]
+        for (var value in filter_matches) {
+          var matches = filter_matches[value]
+          if (matches.length == 0) {
+            empty_matches[filter_name] = empty_matches[filter_name] || []
+            empty_matches[filter_name].push(value)
+          }
+        }
+      }
+      return empty_matches
     }
 
     function generate_filters() {
