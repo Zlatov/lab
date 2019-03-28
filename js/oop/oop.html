@@ -12,6 +12,7 @@
 
 			"use strict"
 
+			window.aaa = {}
 			function Cl() {
 				console.log('this in Cl(): ', this) // this - инстанса
 				this.foo = 'property instanse one'
@@ -26,6 +27,7 @@
 				// 	return 'quux'
 				// }
 				console.log('Cl.foo from instance: ', Cl.foo)
+				return this // если без new, просто var = Cl , тогда нужен call(что-то)
 			}
 			// Верно:
 			Cl.foo = 'property class one'
@@ -36,7 +38,8 @@
 
 			var instance = new Cl()
 			instance.foo = 2
-			var instance2 = new Cl()
+			var instance2 = Cl.call(window.aaa)
+			console.log('instance2: ', instance2)
 			console.log('> log result ========================')
 			console.log('Cl.foo: ', Cl.foo)
 			console.log('Cl.bar(): ', Cl.bar())
