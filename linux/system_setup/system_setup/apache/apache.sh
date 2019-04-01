@@ -70,6 +70,7 @@ then
     echoc "Уже настроен список виртуальных хостов zenon.conf." blue
   else
     echoc "Настройка списока виртуальных хостов zenon.conf." yellow
+    mkdir -p ~/projects/zenon/sign-forum
     sudo cp -t /etc/apache2/sites-available $lab_path/linux/system_setup/system_setup/apache/zenon.conf 1>/dev/null
     sudo a2ensite zenon.conf 1>/dev/null
     echoc "Настроен список виртуальных хостов zenon.conf." green
