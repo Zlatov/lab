@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName 'Authorization...'
-AuthUserFile /home/iadfeshchm/projects/my/lab/lab/php/htaccess/test/.htpasswd
+AuthUserFile /home/iadfeshchm/projects/my/lab/php/htaccess/test/.htpasswd
 Require valid-user
 # or
 # Require user test
