@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="component-switcher">
+    ComponentSwitcher {{cs_var}}
+    <p>
+      <router-link to="/vue/_tasks/router/CompanyRegistration.html">Перейти к CompanyRegistration</router-link>
+      <router-link to="/vue/_tasks/router/PersonalInfo.html">Перейти к PersonalInfo</router-link>
+    </p>
+    <router-view></router-view>
+  </div>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/vue-router/dist/vue-router.min.js"></script>
+  <script type="text/javascript" src="router.js"></script>
+</body>
+</html>

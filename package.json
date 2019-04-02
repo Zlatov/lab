@@ -7,6 +7,7 @@
     "semantic-ui": "^2.2.13",
     "underscore": "^1.9.1",
     "vue": "^2.5.17",
+    "vue-router": "^3.0.2",
     "vue-yandex-maps": "^0.7.15",
     "zlader": "^1.1.3"
   },
