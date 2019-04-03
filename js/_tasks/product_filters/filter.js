@@ -370,9 +370,6 @@
           if (to_user_value == '') {
             to_user_value = instance.values[instance.values.length - 1].replace(',', '.')
           }
-          // Влияние на себя
-          instance.from.val(from_user_value)
-          instance.to.val(to_user_value)
           // Пройдём значения с начала, чтобы найти первое удовлетворяющее пользователя как ОТ
           var from_index = null
           for (var i = 0, l = instance.values.length; i < l; i++) {
@@ -395,14 +392,24 @@
               break
             }
           }
-          // Не найдены все индексы или не найден один:
+          // Не найдены все индексы или не найден один (данные пользователя не входят
+          // в интервал присутствующих значений):
           if (from_index == null && to_index == null) {
+            // разносим по краям
             from_index = 0
             to_index = instance.values.length - 1
+            from_user_value = instance.values[from_index]
+            to_user_value = instance.values[to_index]
           } else if (from_index == null || to_index == null) {
+            // ненайденный прибиваем к найденному
+            from_user_value = from_index == null ? instance.values[to_index] : from_user_value
+            to_user_value = to_index == null ? instance.values[from_index] : to_user_value
             from_index = from_index == null ? to_index : from_index
             to_index = to_index == null ? from_index : to_index
           }
+          // Влияние на себя
+          instance.from.val(from_user_value)
+          instance.to.val(to_user_value)
           // Влияние на слайдер
           slider.slider({values: [from_index, to_index]})
           // Вызываем update_selected_values(from_value, to_value)
