@@ -4411,6 +4411,11 @@ sver-compat@^1.5.0:
     es6-iterator "^2.0.1"
     es6-symbol "^3.1.1"
 
+systemjs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-3.1.0.tgz#135f3e7a32e4f6f2d50b41e09a02d5ef8aa46633"
+  integrity sha512-91NK7BcuqGbfP/CjL4N3uaT+pupmNp7nCtEQr0gzCfn7SrpPpl6j0EIidLGnuO/E4NfWIDbQkTK2X2Pmdfw+kg==
+
 tar@^4:
   version "4.4.8"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.8.tgz#b19eec3fde2a96e64666df9fdb40c5ca1bc3747d"
