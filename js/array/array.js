@@ -60,7 +60,7 @@ var b = a.forEach(function(element, index, array) {
 })
 console.log('a: ', a)
 console.log('b: ', b)
-return
+// return
 
 console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}')
 // var a = ['a','b','a','b']
@@ -182,15 +182,20 @@ var b = a.reduce(function(previousValue, curr, index, array) {
 console.log('a: ', a)
 console.log('b: ', b)
 
-
+console.log()
 console.log('> Часть массива')
-
 console.log('> slice([begin[, end]]) (кусочек) возврящает новый массив.')
+console.log('> begin - индекс с которого извлекаются элементы.')
+console.log('> end - индекс до которого извлекаются элементы, не включая указанный.')
 a = [1, 2, 3, 4]
-b = a.slice(1)
-a[1] = 100
+b = a.slice(1) // [2, 3, 4]
+c = a.slice(1,3) // [2, 3]
+d = a.slice(1,100) // [2, 3, 4]
 console.log('a: ', a)
 console.log('b: ', b)
+console.log('c: ', c)
+console.log('d: ', d)
+// return null
 
 console.log('> без последнего элемента.')
 a = [1, 2, 3, 4]

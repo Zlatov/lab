@@ -1,5 +1,7 @@
-;(function(){
-"use strict"
+;(function() {
+
+  "use strict"
+
   $(document).ready(function(){
     var body = window.document.getElementsByTagName('body')
     window.pressed_keys = {}
@@ -13,13 +15,15 @@
       window.pressed_keys[event.keyCode] = true
     })
     $('body').on('keyup', function(event) {
+      console.log('event.keyCode: ', event.keyCode)
       // if ( !e.metaKey ) {
       //   e.preventDefault();
       // }
       window.pressed_keys[event.keyCode] = false
     })
   })
-})()
+
+})();
 
 var body = document.querySelector('body')
 body.onclick = function() {

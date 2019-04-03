@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="product_filters.css">
+  <link rel="stylesheet" type="text/css" href="../../../node_modules/jquery-ui/themes/base/all.css">
+  <link rel="stylesheet" type="text/css" href="../../../node_modules/jquery-ui/themes/base/slider.css">
 </head>
 <body>
   <div id="filters">
@@ -19,10 +21,11 @@
       <label><input type="checkbox" value="Ogg">Ogg</label>
       <label><input type="checkbox" value="WMA">WMA</label>
     </div>
-    <!-- <div data-filter="Цена" data-filter_type="interval">
-      <label>от <input type="text" name="Цена[]" value=""></label>
-      <label>до <input type="text" name="Цена[]" value=""></label>
-    </div> -->
+    <div data-filter="Цена" data-filter_type="interval">
+      <label>от <input class="from" type="text" value=""></label>
+      <label>до <input class="to" type="text" value=""></label>
+      <div class="slider"></div>
+    </div>
     <div data-filter="Цвет" data-filter_type="checkbox">
       <label><input type="checkbox" value="красный">красный</label>
       <label><input type="checkbox" value="зелёный">зелёный</label>
@@ -37,10 +40,27 @@
     <div class="product" data-id="5">5</div>
     <div class="product" data-id="6">6</div>
   </div>
+
+  <!-- jQuery -->
   <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- Подключение виджета slider из jquery-ui -->
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/widget.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/widgets/mouse.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/keycode.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/version.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/widgets/slider.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery-ui/ui/ie.js"></script>
+
+  <!-- Underscore -->
   <script type="text/javascript" src="../../../node_modules/underscore/underscore-min.js"></script>
+
+  <!--
   <script type="text/javascript" src="./temp_product_filters.min.js"></script>
   <script type="text/javascript" src="./temp_filter.min.js"></script>
+  -->
+  <script type="text/javascript" src="./product_filters.js"></script>
+  <script type="text/javascript" src="./filter.js"></script>
   <script type="text/javascript">
 
     /**
@@ -60,7 +80,7 @@
     window.uncached.product_filters.filter_values = {
       "Длинна": ["1,5,6", "2,4", "3"],
       "Аудио": ["AC3", "DTS", "MP3", "AAC", "Ogg", "WMA"],
-      // "Цена": [100, 200.5],
+      "Цена": ["110", "120.55", "130.50", "140.5", "150", "200,5"],
       "Цвет": ["красный", "зелёный", "синий"],
     }
     // Соответствия значениям
@@ -78,11 +98,14 @@
         "Ogg": [6],
         "WMA": [1],
       },
-      // "Цена": {
-      //   "100": [1,2,3],
-      //   "150.55": [4,5],
-      //   "200.5": [6],
-      // },
+      "Цена": {
+        "110": [1],
+        "120.55": [2],
+        "130.50": [3],
+        "140.5": [4],
+        "150": [5],
+        "200,5": [6],
+      },
       "Цвет": {
         "красный": [3],
         "зелёный": [2,3],
@@ -93,6 +116,7 @@
   </script>
   <script type="text/javascript">
     window.ProductFilters.activate()
+    console.log('ProductFilters.get_instance().filters: ', ProductFilters.get_instance().filters)
   </script>
 </body>
 </html>
