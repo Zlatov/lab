@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,minimal-ui">
+  <title>system demo(Babel)</title>
+</head>
+<body>
+  <div id="content"></div>
+  <script src="/node_modules/systemjs/dist/system.js"></script>
+  <script>
+    System.config({
+      baseURL: './',
+      transpiler: 'plugin-babel',
+      map: {
+        'plugin-babel': '/node_modules/systemjs-plugin-babel/plugin-babel.js',
+        'systemjs-babel-build': '/node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
+        'css': '/node_modules/systemjs-plugin-css/css.js'
+      },
+      babelOptions: {
+        react: true
+      },
+      meta: {
+        '*.css': {
+          loader: 'css'
+        }
+      }
+    });
+    System.import('boot.js');
+  </script>
+</body>
+</html>
