@@ -5,7 +5,7 @@ cd ~
 lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
-cp ./$lab_path/linux/system_setup/system_setup/sublime-text/Packages/User/* .config/sublime-text-3/Packages/User
+cp -r ./$lab_path/linux/system_setup/system_setup/sublime-text/Packages/User/* .config/sublime-text-3/Packages/User
 echoc "Настроен sublime Packages/User." green
 
 path="$(pwd)/.config/sublime-text-3/Packages/Prefixw"
