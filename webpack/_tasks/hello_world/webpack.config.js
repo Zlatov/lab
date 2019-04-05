@@ -28,7 +28,7 @@ module.exports = {
     path: __dirname,
     filename: "assets/temp_build.js",
 
-    library: "app", // app - имя переменной в которую помещается экспорт пакета app.
+    library: "app", // app - имя переменной в которую помещается экспорт основного пакета app (точки входа).
   },
 
   watch: NODE_ENV == "development",
