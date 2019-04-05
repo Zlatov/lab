@@ -17,5 +17,12 @@
   },
   "scripts-example": {
     "scss": "node-sass --watch sass/_task/market_lorem/sass/style.scss -o sass/_task/market_lorem/temp_css"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }
