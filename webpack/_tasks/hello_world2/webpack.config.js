@@ -30,8 +30,9 @@ module.exports = {
     about: "./about",
   },
   output: {
-    // Общий путь для точек выхода
-    path: __dirname + "/public/webpack",
+    // Общий путь для точек выхода.
+    path: __dirname + "/public/assets/webpack",
+    publicPath: "assets/webpack/",
     filename: "temp_[name].js",
     library: "[name]", // имя переменной в которую помещается экспорт основных пакетов (точек входа).
   },
@@ -100,12 +101,22 @@ module.exports = {
       // npm i style-loader css-loader
       {
         test: /\.css$/,
-        use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+        use: [
+          {
+            loader: 'style-loader',
+            options: {
+              // convertToAbsoluteUrls: true,
+            }
+          },
+          {
+            loader: 'css-loader',
+          }
+        ],
       },
       // File loader
       // npm i file-loader
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -115,6 +126,20 @@ module.exports = {
           },
         ],
       }
+      // // Url loader
+      // // Преобразует в base64 data-url при допустимых размерах.
+      // // npm i url-loader
+      // {
+      //   test: /\.(png|jpg|gif)$/i,
+      //   use: [
+      //     {
+      //       loader: 'url-loader',
+      //       options: {
+      //         limit: 4096
+      //       },
+      //     },
+      //   ],
+      // }
     ]
   },
 
