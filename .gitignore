@@ -5,6 +5,9 @@ node_modules/
 theme/npm/
 semantic/
 
+images/jpg/
+images/sources/
+
 !*.sublime-project
 *.sqlite3
 **/temp
