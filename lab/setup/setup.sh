@@ -5,4 +5,4 @@ cd ~
 lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
-./$lab_path/lab/setup/setup/mysql/mysql.sh
+./$lab_path/lab/setup/setup/mysql.sh
