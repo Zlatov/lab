@@ -3,7 +3,7 @@ change_column :table_name, :column_name, :column_type, null: false, default: ''
 
 remove_column :table_name, :column_name
 
-drop_table :market_product_clips
+drop_table :market_product_clips, if_exists: true
 
 create_table "market_angars", force: :cascade do |t|
   t.string   "name"

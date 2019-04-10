@@ -1,0 +1,10 @@
+<%= render partial: "link_area", layout: "graybar" %>
+<%= render partial: "form", locals: {zone: @zone} %>
+
+Рендеринг коллекций
+<%= render partial: "product", collection: @products %>
+<%= render partial: "product", collection: @products, as: :item %>
+<%= render partial: "product", collection: @products, as: :item, locals: {title: "Products Page"} %>
+
+Разделяющие шаблоны
+<%= render partial: @products, spacer_template: "product_ruler" %>

@@ -59,6 +59,11 @@ nav {
   border-color: red;
 }
 
+.boxs {
+  @extend .link;
+  color: red;
+}
+
 // Пример математики
 aside[role="complementary"] {
   float: right;
