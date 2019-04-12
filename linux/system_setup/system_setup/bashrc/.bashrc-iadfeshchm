@@ -28,6 +28,7 @@ alias cdloremrails='cd ~/projects/my/lorem_rails'
 alias cdadmin='cd ~/projects/zenon/admin'
 alias cdframework='cd ~/projects/zenon/framework'
 alias cdmarket='cd ~/projects/zenon/market'
+alias cdtasker='cd ~/projects/zenon/tasker'
 alias cdforum='cd ~/projects/zenon/sign-forum'
 
 alias  s='git status -u'
