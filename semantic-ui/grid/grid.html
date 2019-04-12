@@ -1,119 +1,81 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
-		<style type="text/css">
-			.ui.grid.collapsed > .column {
-				padding-top: 4px;
-				padding-bottom: 4px;
-			}
-		</style>
-	</head>
-	<body>
-
-		<div class="ui fluid container grid">
-			<div class="eight wide column">
-				<pre>
-&lt;div class=&quot;ui fluid container grid&quot;&gt;
-	&lt;div class=&quot;eight wide column&quot;&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;eight wide column&quot;&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-				</pre>
-			</div>
-			<div class="eight wide column">
-				<p>Если грид контейнер вместе, то - поведение сложное, отступы большие...</p>
-			</div>
-		</div>
-
-		<div class="ui divider"></div>
-
-
-		<div class="ui fluid container">
-			<div class="ui grid">
-				<div class="eight wide column">
-					<pre>
-&lt;div class=&quot;ui fluid container&quot;&gt;
-	&lt;div class=&quot;ui grid&quot;&gt;
-		&lt;div class=&quot;eight wide column&quot;&gt;
-			...
-					</pre>
-				</div>
-				<div class="eight wide column">
-					<p>Так норм</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="ui divider"></div>
-
-
-		<div class="ui fluid container">
-			<div class="ui two column grid">
-				<div class="column">
-					<pre>
-&lt;div class=&quot;ui fluid container&quot;&gt;
-	&lt;div class=&quot;ui two column grid&quot;&gt;
-		&lt;div class=&quot;column&quot;&gt;
-					</pre>
-				</div>
-				<div class="column">
-					<p>q</p>
-				</div>
-			</div>
-		</div>
-
-<div class="ui four column grid container">
-  <div class="column">
-		<p ilorem></p>
-		<p ilorem></p>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+  <style type="text/css">
+    .ui.grid.collapsed > .column {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui fluid container">
+    <div class="ui grid">
+      <div class="eight wide column">
+        <p ilorem></p>
+      </div>
+      <div class="eight wide column">
+        <p>Так норм</p>
+      </div>
+    </div>
   </div>
-  <div class="column">
-		<p ilorem></p>
-		<p ilorem></p>
+  <div class="ui container">
+    <div class="ui grid">
+      <div class="eight wide column">
+        <p ilorem></p>
+      </div>
+      <div class="eight wide column">
+        <p>Так норм</p>
+      </div>
+    </div>
   </div>
-  <div class="column">
-		<p ilorem></p>
-		<p ilorem></p>
+  <div class="ui divider"></div>
+  <div class="ui four column grid container">
+    <div class="column">
+      <p ilorem></p>
+      <p ilorem></p>
+    </div>
+    <div class="column">
+      <p ilorem></p>
+      <p ilorem></p>
+    </div>
+    <div class="column">
+      <p>Газета какая то в 4 колонки <code>.ui.four.column.grid.container&gt;.column</code></p>
+    </div>
+    <div class="column">
+      <p ilorem></p>
+      <p ilorem></p>
+    </div>
   </div>
-  <div class="column">
-		<p ilorem></p>
-		<p ilorem></p>
+  <div class="ui fluid container grid">
+    <div class="four wide column">
+      <p ilorem></p>
+    </div>
+    <div class="four wide column">
+      <p ilorem></p>
+    </div>
+    <div class="four wide column">
+      <p>И снова 4 колонки</p>
+    </div>
+    <div class="four wide column">
+      <p ilorem></p>
+    </div>
   </div>
-</div>
-		<div class="ui fluid container grid">
-			<div class="four wide column">
-					<p ilorem></p>
-			</div>
-			<div class="four wide column">
-					<p ilorem></p>
-			</div>
-			<div class="four wide column">
-					<p ilorem></p>
-			</div>
-			<div class="four wide column">
-					<p ilorem></p>
-			</div>
-		</div>
-
-
-<div class="ui fluid container">
-	<div class="ui two column collapsed grid">
-		<div class="column"><p>2222</p></div>
-		<div class="column"><p>2222</p></div>
-	</div>
-	<div class="ui two column collapsed grid">
-		<div class="column"><p>2222</p></div>
-		<div class="column"><p>2222</p></div>
-	</div>
-</div>
-
-
-
-		<script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
-		<script type="text/javascript" src="/semantic/dist/semantic.min.js"></script>
-		<script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
-	</body>
+  <div class="ui divider"></div>
+  <div class="ui container">
+    <div class="ui collapsed grid">
+      <div class="four wide column"><p ilorem></p></div>
+      <div class="twelve wide column"><p>Колапсед пример</p></div>
+    </div>
+    <div class="ui two column collapsed grid">
+      <div class="column"><p ilorem></p></div>
+      <div class="column"><p ilorem></p></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/semantic/dist/semantic.min.js"></script>
+  <script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
+</body>
 </html>

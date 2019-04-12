@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="node_modules/semantic-ui-css/semantic.min.css">
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/ilorem/dist/ilorem.js"></script>
+  <script type="text/javascript" src="node_modules/semantic-ui-css/semantic.min.js"></script>
+</head>
+<body>
+  <div class="ui container">
+    <div class="ui grid">
+      <div class="eight wide column">
+        <p ilorem></p>
+      </div>
+      <div class="eight wide column">
+        <p>Так норм</p>
+      </div>
+    </div>
+    <div class="ui grid">
+      <div class="wide column">
+        <div class="ui accordion">
+          <div class="active title">
+            <i class="dropdown icon"></i>
+            <span ilorem></span>
+          </div>
+          <div class="active content">
+            <p ilorem></p>
+          </div>
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <span ilorem></span>
+          </div>
+          <div class="content">
+            <p ilorem></p>
+          </div>
+          <div class="title">
+            <i class="dropdown icon"></i>
+            <span ilorem></span>
+          </div>
+          <div class="content">
+            <p ilorem></p>
+            <p ilorem></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      $(".ui.accordion").accordion()
+    });
+
+  </script>
+</body>
+</html>
