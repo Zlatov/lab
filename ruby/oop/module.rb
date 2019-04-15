@@ -2,38 +2,6 @@ require "rubygems"
 require "awesome_print"
 require "active_support"
 
-
-=begin
-
-при стандартном расширении
-
-file1:
-
-require_relative "file2"
-class MyApp
-  include Command
-end
-
-file2:
-
-require_relative "file3"
-module Command
-  include Test
-end
-
-file3:
-module Command
-module Test
-
-  def app_test
-    say 'test'
-  end
-end
-end
-
-=end
-
-
 module Entity
 
   # Плохой способ расширения класса:
