@@ -32,9 +32,16 @@
       <label><input type="checkbox" value="синий">синий</label>
     </div>
   </div>
-  <div id="products">
+  <div id="products" class="js_group_filters_place">
     <div class="product" data-id="1">1</div>
-    <div class="product" data-id="2">2</div>
+    <div class="product js_group" data-id="2">
+      2
+      <div class="js_filter" data-filter="Цвет">
+        <label><input type="radio" name="Цвет2" class="js_value" value="красный">красный</label>
+        <label><input type="radio" name="Цвет2" class="js_value" value="зелёный">зелёный</label>
+        <label><input type="radio" name="Цвет2" class="js_value" value="синий">синий</label>
+      </div>
+    </div>
     <div class="product" data-id="3">3</div>
     <div class="product" data-id="4">4</div>
     <div class="product" data-id="5">5</div>
@@ -60,6 +67,7 @@
   <script type="text/javascript" src="./temp_filter.min.js"></script>
   -->
   <script type="text/javascript" src="./product_filters.js"></script>
+  <script type="text/javascript" src="./group_filters.js"></script>
   <script type="text/javascript" src="./filter.js"></script>
   <script type="text/javascript">
 
@@ -71,7 +79,7 @@
     window.uncached.product_filters = {}
     // Выбранные значения
     window.uncached.product_filters.selected_values = {
-      "Длинна": ["1,5,6"],
+      // "Длинна": ["1,5,6"],
       // "Аудио": ["DTS"],
       // TODO: подумать над тем, что null попадает в напиканное
       // "Цена": ["100", null],
@@ -112,10 +120,45 @@
         "синий": [1],
       },
     }
+    /**
+     * Групповые фильтры
+     * @type {Object}
+     */
+    window.uncached.group_filters = {}
+    // Соответствия значений артикулам
+    window.uncached.group_filters.value_matches = {
+      "2": {
+        "Цвет": {
+          "красный": ["003000"],
+          "зелёный": ["020000"],
+          "синий": ["100000"],
+        },
+      },
+      "3": {
+        "Длинна": {
+          "1,56": ["100000", "000050", "000060"],
+          "2,4": ["020000", "000400"],
+          "3": ["003000"],
+        },
+      },
+      "4": {
+        "Цвет": {
+          "красный": ["003000", "000050"],
+          "зелёный": ["020000", "000400"],
+          "синий": ["100000"],
+        },
+        "Длинна": {
+          "1,56": ["100000", "000050"],
+          "2,4": ["020000", "000400"],
+          "3": ["003000"],
+        },
+      },
+    }
 
   </script>
   <script type="text/javascript">
     window.ProductFilters.activate()
+    window.GroupFilters.activate(window.uncached.group_filters.value_matches)
     console.log('ProductFilters.get_instance().filters: ', ProductFilters.get_instance().filters)
   </script>
 </body>

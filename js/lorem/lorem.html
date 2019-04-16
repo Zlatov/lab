@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- Underscore -->
+  <script type="text/javascript" src="../../node_modules/underscore/underscore-min.js"></script>
+
+  <script type="text/javascript">
+
+    var a = 1;
+
+    // Изоляция js кода.
+    ;(function() {
+      "use strict"
+      console.log('window: ', window)
+      console.log('$: ', $)
+      var a = 2;
+      console.log('своя глобальная переменная a: ', a)
+      console.log('внешняя глобальная переменная window.a: ', window.a)
+    })();
+
+    console.log('внешняя глобальная переменная a: ', a)
+
+    // Контроль запуска кода после загрузки Dom и всего остального
+    window.onload = function(){
+    }
+
+    // Контроль запуска кода после загрузки Dom
+    $(document).ready(function() {
+    });
+
+    // Изоляция и передача jQuery чтобы не писать `window.$`.
+    ;(function($) {
+      "use strict"
+    })(jQuery);
+
+/**
+ * Пример модуля управления
+ * @return {GroupFilters}
+ */
+;(function($, _) {
+
+  "use strict"
+
+  var instance
+
+  /**
+   * Конструктор синглтона.
+   * @param {Object} options
+   */
+  function GroupFilters(options=null) {
+    this.options = Object.assign(this.constructor.default_options, options || {})
+    this.activate = function() {
+      this.activate_handlers()
+      return this
+    }
+    this.activate_handlers = function() {
+      var groups = $(this.options.selectors.groups)
+      console.log('groups.length: ', groups.length)
+    }
+  }
+  /**
+   * Опции по умолчанию для создания синглтона хранятся в классе.
+   * @type {Object}
+   */
+  GroupFilters.default_options = {
+    selectors: {
+      groups: ".group"
+    }
+  }
+  /**
+   * Метод класса, для удобства, получить синглтон (с опциями, если нужно) и активировать его.
+   * @param  {[type]} options [description]
+   * @return {GroupFilters {}}
+   */
+  GroupFilters.activate = function(options=null) {
+    return this.get_instance(options).activate()
+  }
+  /**
+   * Основной метод класса возвращающий синглтон.
+   * @param  {Object} options
+   * @return {GroupFilters {}}
+   */
+  GroupFilters.get_instance = function(options=null) {
+    if (instance == null) {
+      instance = new this(options)
+    }
+    return instance
+  }
+
+  /**
+   * Экспортируем класс управления
+   * @type {GroupFilters}
+   */
+  window.GroupFilters = GroupFilters
+
+})(jQuery, _);
+
+
+
+  </script>
+</body>
+</html>
