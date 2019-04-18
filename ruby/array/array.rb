@@ -352,6 +352,75 @@ while level >= 0
 end
 # exit 0
 
+puts 'to_html_nested'.green
+a = [
+  { name: '1' },
+  { name: '2', children:
+    [
+      { name: '3' },
+      { name: '4' }
+    ]
+  },
+  { name: '5', children:
+    [
+      { name: '6', children:
+        [
+          { name: '7' }
+        ]
+      }
+    ]
+  },
+  { name: '8', children:
+    [
+      { name: '9' }
+    ]
+  }
+]
+class Array
+  def to_html_nested
+    html = ''
+    level = 0
+    cache = []
+    cache[level] = self.clone
+    parents = []
+    parents[level] = nil
+    i = []
+    i[level] = 0
+    while level >= 0
+      node = cache[level][i[level]]
+      i[level]+= 1
+      if node != nil
+
+        html+= '    ' * (level * 2 + 1) + '<li>'
+        html+= yield(node.clone, parents.clone, level)
+
+        if !node[:children].nil? && node[:children].length > 0
+          level+= 1
+          html+= "\n" + '    ' * (level * 2) + '<ul>' + "\n"
+          parents[level] = node.clone
+          cache[level] = node[:children]
+          i[level] = 0
+        else
+          html+= '</li>' + "\n"
+        end
+      else
+        parents[level] = nil
+        if level > 0
+          html+= '    ' * (level * 2) + '</ul>' + "\n"
+          html+= '    ' * (level * 2 - 1) + '</li>' + "\n"
+        end
+        level-= 1
+      end
+    end
+    html
+  end
+end
+
+puts (a.to_html_nested do |node, parents, level|
+  "<a href=\"\">#{node[:name]}</a>"
+end)
+# exit 0
+
 puts 'Склеить, сложить и вычесть массивы (+ -).'.green
 a =  [1,2]
 b =  [1,2]
