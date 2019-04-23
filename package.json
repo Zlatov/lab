@@ -6,6 +6,7 @@
     "jquery-ui": "^1.12.1",
     "lazyload": "^2.0.0-beta.2",
     "semantic-ui": "^2.2.13",
+    "semantic-ui-css": "^2.2.12",
     "systemjs": "^0.20.12",
     "systemjs-plugin-babel": "^0.0.21",
     "systemjs-plugin-css": "^0.1.33",
