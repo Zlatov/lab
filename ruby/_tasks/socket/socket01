@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+# https://ru.wikibooks.org/wiki/Ruby/%D0%A1%D0%B5%D1%82%D0%B8#%D0%94%D0%B0%D1%82%D1%87%D0%B8%D0%BA_%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D1%81%D0%B0%D0%B9%D1%82%D0%B0
+
+require 'socket'
+
+# socket через TCPServer работает, к сожалению, на одно подключение (в одном потоке).
+# Для многопоточной обработки соединений необходимо использовать gserver.
+
+# Для подключения набрать telnet localhost 48888
+
+TCPServer.open('localhost', 48888) do |server|
+  if (session = server.accept)
+    session.print "Welcome to server\r\nYou can enter commands: ls <dir> | cd <dir> | shutdown\r\n"
+    loop do
+      cmd, arg = session.gets.chomp.split
+      case cmd
+        when "ls"
+          begin
+            session.print Dir[arg || "*"].map{ |str| str + "\r\n" }
+          rescue
+            session.print "No such file or directory - #{ arg.inspect }\r\n"
+          end
+        when "cd"
+          begin
+            Dir.chdir(arg)
+            session.print "OK.\r\n"
+          rescue
+            session.print "No such file or directory - #{ arg.inspect }\r\n"
+          end
+        when "shutdown"
+          session.close
+          break
+        else
+          session.print "Bad command!\r\n"
+      end
+    end
+  end
+end

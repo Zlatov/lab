@@ -88,6 +88,9 @@
 	{ "keys": ["ctrl+shift+t"], "command": "terminal_view_open" },
 
 	// FocusFileOnSidebar
-	{ "keys": ["ctrl+\\"], "command": "focus_file_on_sidebar" }
+	{ "keys": ["ctrl+\\"], "command": "focus_file_on_sidebar" },
+
+	// Increment Selection
+	{ "keys": ["ctrl+k", "ctrl+i"], "command": "increment_selection" }
 
 ]

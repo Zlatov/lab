@@ -2,6 +2,31 @@
 
 <p><code>flatrack start -p4001</code> - гем flatrack (отдельный фрейворк для статичных сайтов)</p>
 
+<h3>Подготовка</h3>
+<h4>Версии</h4>
+
+<ul>
+  <li>ruby 2.5.3 (rbenv install 2.5.3 (ruby -v))</li>
+  <li>gem 3.0.3 (gem update --system # Для обновления gem. (gem -v))</li>
+  <li>bundler 2.0.1 (gem install bundler -v 2.0.1 (gem list bundler))</li>
+  <li>rails 5.2.2 (gem install rails -v 5.2.2 (gem list rails))</li>
+  <li>Следить за состоянием rbenv:</li>
+  <li>~/.rbenv git pull</li>
+  <li>~/.rbenv/plugins/ruby-build git pull</li>
+</ul>
+
+<h4>Команды установки</h4>
+
+<ul>
+  <li>cd framework && ssh://git@git2.newstar.ru:7999/ruby/framework.git ./</li>
+  <li>cd market && git clone ssh://git@git2.newstar.ru:7999/ruby/app-market.git ./</li>
+  <li>rbenv install 2.5.3</li>
+  <li>rbenv local 2.5.3</li>
+  <li>gem install bundler -v 2.0.1</li>
+  <li>bundle</li>
+  <li>yarn</li>
+</ul>
+
 <h3>Приложение</h3>
 <p><code class="copyToClipboard">rails new testApp</code> - создание нового приложения (или <code>rails new ./</code>).</p>
 <p><code class="copyToClipboard">rails s</code> - запуск приложения.</p>

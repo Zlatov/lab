@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `lorem` (
   `sid` VARCHAR(255) NOT NULL COMMENT 'Строковый идентификатор.',
   `key` VARCHAR(64) NOT NULL,
   `tag` VARCHAR(64) NOT NULL DEFAULT 'def',
+  `type` ENUM("int", "str", "flo") NULL DEFAULT 'flo',
   `numbers` INT,
   `header` VARCHAR(161) NOT NULL,
   `infoid` VARCHAR(64) NULL COMMENT 'Проверить что уникальность не влияет на NULL',

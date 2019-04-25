@@ -471,12 +471,10 @@ echo $(dirname "$SCRIPT")   # .
 <h3>Убить процесс</h3>
 <p><code class="copyToClipboard">kill -9 process_id</code></p>
 <h3>Список процессов</h3>
-<p>
-    <code class="copyToClipboard">ps aux</code>
-</p>
-<p>
-    <code class="copyToClipboard">ps aux | grep process_name</code>
-</p>
+<p><code class="copyToClipboard">ps aux</code></p>
+<p><code class="copyToClipboard">ps aux | grep process_name</code></p>
+<h3>Есть ли процесс</h3>
+<p><code class="copyToClipboard">pgrep -f process_name > /dev/null; if [ $? == "0" ] ...</code></p>
 <h3>Функции баш</h3>
 <pre class="prettyprint lang-sh">
 function getDbVersion {
