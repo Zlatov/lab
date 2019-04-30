@@ -29,3 +29,4 @@ cd /etc/apt/apt.conf.d && sudo touch proxy.conf && sudo subl proxy.conf
 # Acquire::https::Proxy "http://user:password@proxy.server:port/";
 # Acquire::http::Proxy "http://proxy.server:port/";
 # Acquire::https::Proxy "http://proxy.server:port/";
+# Перезагрузить ubuntu!
