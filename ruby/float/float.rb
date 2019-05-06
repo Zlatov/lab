@@ -13,7 +13,7 @@ c = b.to_f / a.to_f * 100
 d = sprintf "%#.2f", c
 print 'c: '.red; puts c
 print 'd: '.red; puts d
-exit
+# exit
 
 a = 1.01
 ap a.is_a? Float

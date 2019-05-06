@@ -1,5 +1,9 @@
 # Rails.root/lib/tasks/temp.rake:
 
+# Создать задачи генератором
+rails g task closure_tree rebuild
+
+# Данный код в начале Задач позволяет использовать метаданные задач, такие как имя, описание.
 Rake::TaskManager.record_task_metadata = true
 
 # $ rails taskname

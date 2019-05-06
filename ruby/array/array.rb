@@ -17,30 +17,36 @@ require 'mini_magick'
   end
 
 puts 'Задание массива'.green
-arr = []
-arr = Array.new
-arr = Array.new(5)
-arr = Array.new(5,"aaaaa")
-arr << :a
-arr << :b
-arr << :c
-arr << :d
-p arr.sample
-# [1, 2, 3]
-# %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
-# %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
+a = []
+a = Array.new
+a = Array.new(5)
+a = Array.new(5,"aaaaa")
+a << :a
+a << :b
+a << :c
+a << :d
+b = %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
+c = %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
+d = (1..3 ).to_a
+e = (1...3).to_a
+print 'a: '.red; p a
+print 'a.sample: '.red; puts a.sample
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
 # exit
 
-puts 'Масси включает в себя `:b`?'.red
-p (arr.include?(:b)? 'y' : 'n')
-arr = ['asd', 'asd', 'asd']
-p arr
-arr = %w{
+puts 'Масси включает в себя `:b`?'.green
+p (a.include?(:b)? 'y' : 'n')
+
+puts 'Многострочное задание массива'.green
+a = %w{
 asd
-asd
+  asd
 asd
 }
-ap arr
+print 'a: '.red; p a
 # exit
 
 puts 'Пересечение'.green
@@ -113,7 +119,10 @@ end
 puts '--------------------------------'
 puts 'Последний элемент массива'.green
 a = [1,'asd',nil]
-puts arr.last.to_s.red
+b = a.last.to_s
+print 'a: '.red; p a
+print 'b: '.red; puts b
+# exit
 
 puts 'Перебо, остаток от деления'.green
 a = 1..5
@@ -121,6 +130,12 @@ a.each_with_index do |value, key|
   puts "#{'ключ:'.light_blue} #{key.to_s}, #{'остаток от деления на 2:'.light_blue} #{(key%2).to_s}"
   p 'значение: ' + value.to_s
 end
+b = a.to_a
+print 'a: '.red; p a
+print 'a.class: '.red; puts a.class
+print 'b: '.red; p b
+print 'b.class: '.red; puts b.class
+# exit
 
 puts 'flat - перебор вверх до нужного родителя'.green
 a = {
@@ -467,6 +482,9 @@ print 'b: '.red; p b
 
 puts 'Очистить от нулевых значений (.compact)'.green
 a = [nil, 1, 2, nil, 3]
+b = a.compact
+print 'a: '.red; p a
+print 'b: '.red; p b
 b = a.compact!
 print 'a: '.red; p a
 print 'b: '.red; p b

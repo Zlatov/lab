@@ -26,6 +26,9 @@ create_table :market_product_clips, id: :string, force: :cascade do |t|
   t.index [:tab_id], name: :ix_marketproductclips_tab_id
 end
 
+add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
+add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
+
 # Removes the index_accounts_on_column in the accounts table.
 remove_index :accounts, :column
 # Removes the index named index_accounts_on_branch_id in the accounts table.
