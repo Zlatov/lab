@@ -5,16 +5,27 @@ require_relative '../colorize/colorize'
 require "open-uri"
 require 'mini_magick'
 
-  class Array
-    def lib_to_info i
-      Hash[ self.map{ |value|
-        -> value {
-          [value[i], value]
-        }.call(value) if !value[i].nil?
-      }]
-    end
-    alias :to_info :lib_to_info
+class Array
+  def lib_to_info i
+    Hash[ self.clone.compact.select{|e| e.keys.include? i}.map{ |h|
+      -> h {
+        [h[i], h]
+      }.call(h)
+    }]
   end
+  alias :to_info :lib_to_info
+end
+
+puts 'Массив хэшей в хэш-инфо'.green
+a = [{id: 1}, {id: 2}]
+b = a.to_info :id
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = [{id: 1}, {id: 2}, nil, {}]
+b = a.to_info :id
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
 
 puts 'Задание массива'.green
 a = []
@@ -91,16 +102,26 @@ print 'c: '.red; p c
 # exit 0
 
 puts 'Перебор'.green
-puts 'each, v не является ссылкой'.blue
-a = [1,'asd',nil]
-print 'a: '.red; ap a
-a.each do |v|
-  next if v == 'asd'
-  print 'v: '.red; puts v
-  v = 3
+puts 'В each, value не является ссылкой.'.blue
+a = [1, 'asd', nil]
+print 'a: '.red; p a
+b = a.each do |value|
+  next if value == 'asd'
+  value = 2
+  print 'value: '.red; puts value
 end
-print 'a: '.red; ap a
-# exit 0
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = [{a: nil},{a: 1}]
+print 'a: '.red; p a
+puts 'В each, value не является ссылкой, но если value это не скалярная переменная, то value[:key] является ссылкой.'.blue
+b = a.each do |value|
+  value[:a] = 2
+  value = 3 if value[:a].nil?
+end
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
 
 puts 'each_with_index'.blue
 a = [1,'asd',nil]
@@ -285,11 +306,7 @@ a.delete_if.with_index do |_, index|
 end
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
-
-
-puts 'Массив хэшей в хэш-инфо'.green
-p [{id: 1}, {id: 2}].to_info :id
+# exit
 
 puts 'Массив строку'.green
 ap ['asd','zxc'].join('|')
