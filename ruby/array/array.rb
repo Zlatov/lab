@@ -27,6 +27,21 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
+puts 'Массив в хеш массивов (разбиение элементов по признаку)'.green
+a = [
+  {a: 1, b: 1},
+  {a: 2, b: 2},
+  {a: 3, b: 1}
+]
+b = {}
+a.each{|v|
+  b[v[:b]] ||= []
+  b[v[:b]] << v
+}
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
 puts 'Задание массива'.green
 a = []
 a = Array.new
@@ -90,7 +105,7 @@ a = [[1,1,3,4],[1,2,4,5]]
 b = a.flatten
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Вычитание'.green
 a = [1,1,3,4]
@@ -99,7 +114,7 @@ c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
-# exit 0
+# exit
 
 puts 'Перебор'.green
 puts 'В each, value не является ссылкой.'.blue
@@ -135,7 +150,7 @@ for val in a
   next if val == 2 # как continue во многих других языках
   puts val
 end
-# exit 0
+# exit
 
 puts '--------------------------------'
 puts 'Последний элемент массива'.green
@@ -254,7 +269,7 @@ a = [{id:1}, {id:2}, {id:3}, {id:2}]
 b = a.delete_if{|v| v['id'.to_sym]==3}
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 
 puts 'Изменение массива в переборе (.map!)'.green
@@ -262,28 +277,25 @@ a = [1,2,3,4]
 b = a.map!{|e| e+= 1}
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Изменение хеш в переборе (.map)'.green
-a = {vips: {article:'000023'}}
-b = Hash[ a.map { |k,v|
-  -> k, v {
-    return nil if v[:article].nil?
-    return [v[:article].to_sym, k.to_s]
-  }.call k,v
-}]
+a = {vips: {article: nil}}
+b = Hash[a.map{|k, v|
+  next if v[:article].nil?
+  [v[:article].to_sym, k.to_s]
+}.compact]
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit
 
 a = {vips: {article:'000023'}}
-logic = ->(k,v) do
-end
 b = Hash[ a.map { |k,v|
   [v[:article], k]
 }]
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Массив в хеш.'.green
 a = ['asd','zxc qwe']
@@ -292,7 +304,7 @@ b = Hash[ a.map{|v|
 }]
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Удалить по условию с учётом индекса'.green
 a = [1,2,3]
@@ -382,7 +394,7 @@ while level >= 0
     level-= 1
   end
 end
-# exit 0
+# exit
 
 puts 'to_html_nested'.green
 a = [
@@ -451,7 +463,7 @@ end
 puts (a.to_html_nested do |node, parents, level|
   "<a href=\"\">#{node[:name]}</a>"
 end)
-# exit 0
+# exit
 
 puts 'Склеить, сложить и вычесть массивы (+ -).'.green
 a =  [1,2]
@@ -466,14 +478,14 @@ c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
-# exit 0
+# exit
 
 puts 'Назначить если нет (||=), вставить в массив (.push)'.green
 a = {}
 a[:a] ||= []
 a[:a].push({a:1})
 print 'a[:a]: '.red; p a[:a]
-# exit 0
+# exit
 
 puts 'each по несколько элементов (.each_slice)'.green
 a = (1..5)
@@ -482,7 +494,7 @@ b = a.each_slice(2) do |x|
 end
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Изъять, выбрать из массива'.green
 puts 'С конца (.pop)'.blue
@@ -495,7 +507,7 @@ a = [1,2,3]
 b = a.shift 2
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Очистить от нулевых значений (.compact)'.green
 a = [nil, 1, 2, nil, 3]
@@ -505,7 +517,7 @@ print 'b: '.red; p b
 b = a.compact!
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Очистить от дубликатов'.green
 a = [ "a", "a", "b", "b", "c" ]
@@ -516,7 +528,7 @@ a = [["student","sam"], ["student","george"], ["teacher","matz"]]
 b = a.uniq { |s| s.first }
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Определить наличие дубликатов (.detect)'.green
 a = [1,2,3,2,2,4,4,5]
@@ -527,7 +539,7 @@ a = [1,2,3,2,2,4,4,5]
 b = a.select{|e| a.count(e) > 1}.uniq
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Сложить, просуммировать элементы одного массива (.reduce, .inject)'.green
 a = (1..3)
@@ -542,7 +554,7 @@ a = (1..3)
 b = a.inject(1){ |sum, x| sum + x }
 print 'a: '.red; p a
 print 'b: '.red; p b
-# exit 0
+# exit
 
 puts 'Перемножить элементы массива (.reduce, .inject)'.green
 a = (1..3)

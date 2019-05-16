@@ -1,5 +1,12 @@
 # Rails.root/lib/tasks/temp.rake:
 
+#
+# Посмотреть список задач:
+# `rails -T`    - у которых есть описание
+# `rails -P`    - все
+# `rails -T -A` - все с описанием
+#
+
 # Создать задачи генератором
 rails g task closure_tree rebuild
 
