@@ -1,9 +1,14 @@
 # encoding: UTF-8
 require 'rubygems'
 require 'awesome_print'
-require_relative '../colorize/colorize'
 require "open-uri"
 require 'mini_magick'
+require 'active_support/concern'
+
+require_relative '../_libs/array/nested.rb'
+class Array
+  include Array::Nested
+end
 
 class Array
   def lib_to_info i
@@ -163,7 +168,7 @@ print 'b: '.red; puts b
 puts 'Перебо, остаток от деления'.green
 a = 1..5
 a.each_with_index do |value, key|
-  puts "#{'ключ:'.light_blue} #{key.to_s}, #{'остаток от деления на 2:'.light_blue} #{(key%2).to_s}"
+  puts "#{'ключ:'.blue} #{key.to_s}, #{'остаток от деления на 2:'.blue} #{(key%2).to_s}"
   p 'значение: ' + value.to_s
 end
 b = a.to_a
@@ -609,38 +614,7 @@ a.each do |value|
 end
 puts '} '.red
 
-puts 'Перебор nested с расширением'.green
-class Array
-  def each_nested
-    level = 0
-    cache = []
-    cache[level] = self
-    parents = []
-    parents[level] = nil
-    i = []
-    i[level] = 0
-    while level >= 0
-      node = cache[level][i[level]]
-      i[level]+= 1
-      if node != nil
-
-        yield(node.clone, parents.clone, level)
-
-        if !node['children'].nil? && node['children'].length > 0
-          level+= 1
-          parents[level] = node.clone
-          cache[level] = node['children']
-          i[level] = 0
-        end
-      else
-        parents[level] = nil
-        level-= 1
-      end
-    end
-    self
-  end
-end
-
+puts 'Перебор nested с расширением из Array::Nested.'.green
 a = [
   {id: '1'},
   {id: '2', 'children' => [] },
@@ -663,6 +637,30 @@ a.each_nested do |node, parents, level|
   print 'node: '.red; p node
   print 'parents: '.red; p parents
 end
+
+puts 'Склеивание древовидных структур.'.green
+a = [
+  [
+    {'text' => 'asd', 'children' => [
+      {'text' => 'rty'}
+    ]}
+  ],
+  [
+    {'text' => 'asd', 'children' => [
+      {'text' => 'qwe', 'children' => [
+        {'text' => 'fgh'}
+      ]}
+    ]}
+  ]
+]
+b = []
+a.each do |tree|
+  b.concat_nested tree, children: 'children', path_key: 'text'
+end
+b.each_nested children: 'children' do |node, parents, level|
+  puts "#{"  " * level}#{node["text"]}"
+end
+# exit
 
 puts 'Клонирование массива'.green
 a = []
