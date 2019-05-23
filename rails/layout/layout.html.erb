@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Title</title>
+  <%= javascript_tag do %>
+    window.uncached = {
+      config: {
+        proj: {
+          itypes: <%= Conf.domain.admin.proj.itypes.to_json.html_safe %>
+        }
+      }
+    }
+  <% end %>
+  <%= csrf_meta_tags %>
+  <!-- webpack css: -->
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'true' %>
+  <!-- webpack js: -->
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'true' %>
+  <!-- pipeline css: -->
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <!-- pipeline js: -->
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</head>
+<body>
+  <div class="ui fluid container" id="page">
+    <div class="ui tiny menu" id="top">
+      <%= render partial: 'layouts/top_menu/items' %>
+    </div>
+    <%= yield %>
+  </div>
+  <%= render partial: 'layouts/modals/test' %>
+</body>
+</html>

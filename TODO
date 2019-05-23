@@ -15,3 +15,7 @@ toc.js, doc.js
 php interfaces, namespaces
 
 Разнести папку projects по превалирующим технологиям!
+
+Sphinx - поисковая машина.
+Sidekiq - воркер.
+Redis(+Sentinel) - NoSQL бд.
