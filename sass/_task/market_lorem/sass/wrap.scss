@@ -13,12 +13,35 @@
   &.marged {
     margin: 20px;
 
+    &>:first-child {
+      margin-top: 0;
+    }
+
+    &>:last-child {
+      margin-bottom: 0;
+    }
+
     &.shred {
       margin: 10px;
     }
 
     &.cell {
       margin: 10px;
+    }
+
+    // Убирает вертикальные отсупы
+    &.horizontal {
+      margin-top: 0px;
+      margin-bottom: 0px;
+
+      &.shred {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+      &.cell {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
     }
   }
 }

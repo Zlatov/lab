@@ -1,6 +1,12 @@
 .bg {
+  background-clip: border-box;
+  &.white {background-color: white;}
+  &.gray {background-color: gray;}
   &.red {background-color: red;}
   &.green {background-color: green;}
   &.blue {background-color: blue;}
   &.yellow {background-color: yellow;}
+  &.contended {
+    background-clip: content-box;
+  }
 }

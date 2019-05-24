@@ -1,0 +1,90 @@
+.message {
+  color: #777777;
+
+  &.success {
+    color: #3c763d;
+  }
+  &.info {
+    color: #31708f;
+  }
+  &.warning {
+    color: #8a6d3b;
+  }
+  &.danger {
+    color: #a94442;
+  }
+
+  &.iconed {
+    &::before {
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin-right: 0.25em;
+    }
+
+    &.success {
+      &::before {
+        content: "\f058";
+      }
+    }
+    &.info {
+      &::before {
+        content: "\f05a";
+      }
+    }
+    &.warning {
+      &::before {
+        content: "\f071";
+      }
+    }
+    &.danger {
+      &::before {
+        content: "\f05e";
+      }
+    }
+  }
+
+  &.bordered {
+    padding: 10px;
+    margin-bottom: 18px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    &.success {
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+    }
+    &.info {
+      background-color: #d9edf7;
+      border-color: #bce8f1;
+    }
+    &.warning {
+      background-color: #fcf8e3;
+      border-color: #faebcc;
+    }
+    &.danger {
+      background-color: #f2dede;
+      border-color: #ebccd1;
+    }
+  }
+
+  &.explained {
+    &.bordered {
+      &>:first-child {
+        margin-top: 0;
+      }
+      &>:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &.iconed {
+      &::before {
+        display: block;
+        float: left;
+      }
+    }
+  }
+}
