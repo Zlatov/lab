@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="sass/temp_style.css">
+  <link rel="stylesheet" type="text/css" href="/node_modules/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
   <div class="wrap padded bg white">
@@ -11,31 +12,52 @@
         <legend>Данные пользователя</legend>
         <h2>Инлановая форма</h2>
         <p>
-          <label>Name</label>
+          <label ilorem="1"></label>
           <input type="text">
         </p>
         <p>
-          <label>Name</label>
+          <label ilorem="2"></label>
           <input type="text">
           <select class="zenoselect">
-            <option value="Москва">Москва</option>
-            <option value="Одинцово">Одинцово</option>
+            <option ilorem="5"></option>
+            <option value="1" ilorem="1"></option>
           </select>
+          <label class="check_b">
+            <input type="checkbox" name="param[]" value="1">
+            <span></span>
+          </label>
+          <label class="radio_b">
+            <input type="radio" name="param[radio_1]" value="1">
+            <span></span>
+          </label>
+          <label class="radio_b">
+            <input type="radio" name="param[radio_1]" value="1" checked>
+            <span></span>
+          </label>
         </p>
         <p>
-          <label>Email</label>
+          <label ilorem="1"></label>
           <input type="text">
+          <label for="checkbox_01">
+            Да
+          </label>
+          <label class="check_b">
+            <input type="checkbox" name="param[]" value="1" id="checkbox_01">
+            <span></span>
+          </label>
           <input type="submit" value="Отправить" class="primary button">
           <input type="reset" value="Отправить" class="button">
         </p>
         <p>
-          <label>Email</label>
+          <label ilorem="5"></label>
           <input type="text">
+          <label class="check_b"><input type="checkbox" name="param[]" value="1" id="checkbox_02" checked><span></span></label>
+          <label for="checkbox_02">Да</label>
           <a href="" class="button">a href</a>
           <a href="" class="button primary">a href primary</a>
         </p>
         <p>
-          <label>Город</label>
+          <label ilorem=1>Город</label>
           <select class="zenoselect">
             <option value="Москва">Москва</option>
             <option value="Одинцово">Одинцово</option>
@@ -62,7 +84,7 @@
           <div class="col-3">
             <div class="wrap shred padded">
               <p>
-                <label>Name</label>
+                <label ilorem></label>
               </p>
             </div>
           </div>
@@ -74,6 +96,22 @@
                   <option value="Москва">Москва</option>
                   <option value="Одинцово">Одинцово</option>
                 </select>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label ilorem=4></label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <textarea ilorem></textarea>
               </p>
             </div>
           </div>
@@ -110,6 +148,27 @@
                 <input type="text">
                 <a href="" class="button">a href</a>
                 <a href="" class="button primary">a href primary</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
+              <p>
+                <label>И меню</label>
+              </p>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <p>
+                <label for="checkbox_03">Первое</label>
+                <label class="check_b"><input type="checkbox" name="" id="checkbox_03"><span></span></label>
+                <label for="checkbox_04">Второе</label>
+                <label class="check_b"><input type="checkbox" name="" id="checkbox_04"><span></span></label>
+                <label for="checkbox_05">Теретье</label>
+                <label class="check_b"><input type="checkbox" name="" id="checkbox_05"><span></span></label>
               </p>
             </div>
           </div>
@@ -193,6 +252,23 @@
         <div class="row">
           <div class="col-3">
             <div class="wrap shred padded">
+              <label>И меню</label>
+            </div>
+          </div>
+          <div class="col-9">
+            <div class="wrap shred padded">
+              <label for="checkbox_09">Первое</label>
+              <label class="check_b"><input type="checkbox" name="" id="checkbox_09"><span></span></label>
+              <label for="checkbox_10">Второе</label>
+              <label class="check_b"><input type="checkbox" name="" id="checkbox_10"><span></span></label>
+              <label for="checkbox_11">Теретье</label>
+              <label class="check_b"><input type="checkbox" name="" id="checkbox_11"><span></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <div class="wrap shred padded">
               <label>Город</label>
             </div>
           </div>
@@ -217,7 +293,7 @@
       </p>
     </form>
   </div>
-  <script type="text/javascript" src="/theme/yarn/ilorem/dist/ilorem.js"></script>
+  <script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
   <script type="text/javascript">
     ILorem();
   </script>

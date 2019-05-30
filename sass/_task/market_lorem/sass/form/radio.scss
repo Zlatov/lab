@@ -1,0 +1,37 @@
+.form_z {
+  .radio_b {
+    cursor: pointer;
+    vertical-align: -5px;
+    font-size: 1.25em;
+    @include noselect();
+
+    & > input {
+      visibility: hidden;
+      position: absolute;
+    }
+
+    & > input + span {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      position: relative;
+    }
+
+    & > input + span::after {
+      font-family: FontAwesome;
+      content: "\f10c";
+      color: $secondary_color;
+      display: inline;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 0.9em;
+      line-height: 1.0em;
+      text-indent: 0.0em;
+    }
+
+    & > input:checked + span::after {
+      content: "\f192";
+    }
+  }
+}
