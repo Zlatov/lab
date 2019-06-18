@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="scss/temp_scss.css">
+</head>
+<body>
+  <h2>Список</h2>
+  <ul>
+    <li><a href="">menu</a></li>
+    <li><a href="">menu</a>
+      <ul>
+        <li><a href="">menu</a></li>
+        <li><a href="">menu</a></li>
+      </ul>
+    </li>
+    <li><a href="">menu</a>
+      <ul>
+        <li><a href="">menu</a>
+          <ul>
+            <li><a href="">menu</a></li>
+            <li><a href="">menu</a></li>
+          </ul>
+        </li>
+        <li><a href="">menu</a></li>
+      </ul>
+    </li>
+  </ul>
+  <h2>Меню</h2>
+  <div style="width: 200px;">
+    <ul class="menu">
+      <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+      <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+        <ul>
+          <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+          <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+        </ul>
+      </li>
+      <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+        <ul>
+          <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a>
+            <ul>
+              <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+              <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+            </ul>
+          </li>
+          <li><a href="">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h2>Выпадающее меню</h2>
+
+  <div class="dropdown_menu dropdowned">
+    Тут ссылки
+    <ul>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+    </ul>
+  </div>
+  или
+  <div class="dropdown_menu hoverable">
+    прям тут
+    <ul>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+    </ul>
+  </div>
+  ну или
+  <div class="dropdown_menu hoverable ri aligned">
+    по правому краю
+    <ul>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+    </ul>
+  </div>
+  и
+  <div class="dropdown_menu ri aligned">
+    только по нажатию
+    <ul>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+      <li><a href="" ilorem="4"></a></li>
+    </ul>
+  </div>
+
+  <div style="font-size: 2em;">
+    <div class="dropdown_menu">
+      Тут ссылки
+      <ul>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+      </ul>
+    </div>
+    или
+    <div class="dropdown_menu hoverable">
+      прям тут
+      <ul>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+      </ul>
+    </div>
+    ну или
+    <div class="dropdown_menu hoverable ri aligned">
+      по правому краю
+      <ul>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+      </ul>
+    </div>
+    и
+    <div class="dropdown_menu ri aligned dropdowned">
+      только по нажатию
+      <ul>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+        <li><a href="" ilorem="4"></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/node_modules/underscore/underscore-min.js"></script>
+  <script type="text/javascript" src="./js/sass_framework.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      window.SassFramework.activate()
+    })
+  </script>
+</body>
+</html>
