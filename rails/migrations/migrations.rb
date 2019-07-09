@@ -1,5 +1,13 @@
 
 change_column :table_name, :column_name, :column_type, null: false, default: ''
+# add_column table_name, column_name, type, options = {
+#   :limit - Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
+#   :default - The column’s default value. Use nil for NULL.
+#   :null - Allows or disallows NULL values in the column.
+#   :precision - Specifies the precision for the :decimal and :numeric columns.
+#   :scale - Specifies the scale for the :decimal and :numeric columns.
+#   :comment - Specifies the comment for the column. This option is ignored by some backends.
+# }
 
 remove_column :table_name, :column_name
 

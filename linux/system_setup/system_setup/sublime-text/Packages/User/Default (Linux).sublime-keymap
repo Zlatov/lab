@@ -80,6 +80,9 @@
 	// { "keys": ["ctrl+shift+h"], "command": "open_recent_files" },
 	{ "keys": ["ctrl+shift+h"], "command": "open_recent_file", "args": {"index" : 0} },
 
+	// Форматирование HTMLPrettify
+	{ "keys": ["ctrl+alt+h"], "command": "htmlprettify" },
+
 	// Terminal
 	{ "keys": ["f8"], "command": "open_terminal_project_folder" },
 	{ "keys": ["ctrl+f8"], "command": "open_terminal" },

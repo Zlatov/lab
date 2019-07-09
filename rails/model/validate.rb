@@ -12,3 +12,12 @@ class Model < ActiveRecord::Base
   validates :phonenumber,
     presence: true,
     length: {minimum: 8, maximum: 64}
+
+  validates :ogrn,
+    presence: false, # Разрешает отсутствовать значению
+    length: {is: 13},
+    format: {with: /\d+/i},
+    allow_nil: true
+
+  # Булево поле
+  validates :field, inclusion: { in: [ true, false ] }

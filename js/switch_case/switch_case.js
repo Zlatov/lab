@@ -1,6 +1,6 @@
 "use strict"
 
-var a = 3
+var a = 2
 switch(a) {
   case 1:
   console.log("1!")

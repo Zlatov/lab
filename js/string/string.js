@@ -152,8 +152,8 @@ console.log('-0000.100: ', parseFloat('-0000.100'))
 var a = 'asd'
 var b = parseFloat(a)
 var bt = typeof b
-var c = (b == NaN)
-var d = isNaN(b)
+var c = (b == NaN) // неверно
+var d = isNaN(b) // верно
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('bt: ', bt)

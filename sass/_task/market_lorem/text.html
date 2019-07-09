@@ -10,6 +10,23 @@
   <div class="container">
     <div class="wrap padded bg white">
       <h1>Text</h1>
+      <h2>Аккордион</h2>
+
+      <div class="accordion">
+        <div class="header" ilorem></div>
+        <div class="text">
+          <h2 ilorem></h2>
+          <p ilorem></p>
+          <p ilorem></p>
+          <p ilorem></p>
+          <ul>
+            <li ilorem></li>
+            <li ilorem></li>
+            <li ilorem></li>
+          </ul>
+        </div>
+      </div>
+
       <h2>Сообщения</h2>
       <p>Обычный параграф текста.</p>
       <p class="message" ilorem></p>
@@ -82,8 +99,56 @@
   </div>
 
   <script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
+  <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      accordion_click = function() {
+        var thisaccordion = $(this).parent();
+        var headers = thisaccordion.find('div.header');
+        var texts = thisaccordion.find('div.text');
+        if ( $(this).hasClass("current") ) {
+          // нажимаем на раскрытый блок блок
+          $(this).removeClass('current').next().slideUp(800);
+        } else {
+          // нажимаем на скрытый блок
+          $(this)
+            .addClass('current') // кликнутый
+            .next().slideDown(800) // разворачиваем нужный блок
+            .end() // кликнутый
+            .siblings('.header') // остальные заголовки
+            .removeClass('current') // убираем флаг
+            .next().slideUp(800); // сворачиваем блоки за остальными заголовками
+        }
+      }
+      $("div.accordion").find("div.header").on('click', accordion_click);
+      
+      // сворачиваем все блоки следующие за заголовками без флага
+      $("div.accordion").find("div.header").not(".current").next().slideUp(200);
+
+
+      accordion_oid = function() {
+        var thisaccordion = $(this).parentsUntil(".accordion").parent();
+        var headers = thisaccordion.find('div.header');
+        var texts = thisaccordion.find('div.text');
+        var oid = $(this).data('oid');
+        var openid = texts.eq(oid);
+        var openidheader = headers.eq(oid);
+        openidheader
+          .addClass('current') // открываемый заголовок
+          .next().slideDown(800) // разворачиваем нужный блок
+          .end() // открываемый заголовок
+          .siblings('.header') // остальные заголовки
+          .removeClass('current') // убираем флаг
+          .next().slideUp(800); // сворачиваем блоки за остальными заголовками
+      }
+      $(".accordion_oid").on('click', accordion_oid);
+
+    });
+
     ILorem();
+
   </script>
 </body>
 </html>
