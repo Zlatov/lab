@@ -276,10 +276,16 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
-
 puts 'Изменение массива в переборе (.map!)'.green
 a = [1,2,3,4]
 b = a.map!{|e| e+= 1}
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
+puts 'Изменение массива хэшей в переборе (.map!)'.green
+a = [{a:1},{a:2},{a:3},{a:4}]
+b = a.map!{|e| e[:a] += 1}
 print 'a: '.red; p a
 print 'b: '.red; p b
 # exit

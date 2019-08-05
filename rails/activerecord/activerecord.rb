@@ -58,3 +58,17 @@ User.transaction do
     raise ActiveRecord::Rollback
   end
 end
+
+
+# 
+# find_or_create_by VS first_or_create
+# 
+# В принципе строки аналогичны:
+Foo.find_or_create_by(attributes)
+Foo.where(attributes).first_or_create
+# first_or_create не будет искать по заданным атрибутам! Неправильно: Foo.first_or_create(attributes).
+# first_or_create полезно, если условия для поиска являются подмножеством хэш, используемого для создания:
+Foo.where(something: value).first_or_create(attributes)
+# Не подтверждено:
+# first_or_createбудет использовать `ORDER BY id LIMIT 1`,
+# тогда как find_or_create_by просто будет использовать `LIMIT 1`

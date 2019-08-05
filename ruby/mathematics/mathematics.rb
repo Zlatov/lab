@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require 'awesome_print'
+require 'active_support/all'
 
 puts 'Остаток от деления'.green
 a = 81
@@ -7,6 +8,20 @@ b = a % 10
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 
+puts 'Окружение строки тэгом враппера при выводе массива записей'.green
+o = nil
+n = 3
+(0..7).each do |i|
+  o = i % n
+  b = o == 0 ? '[' : ''
+  e = o == n - 1 ? ']' : ''
+  puts "#{b}" if b.present?
+  print 'i, o: '.red; puts "#{i}, #{o}"
+  puts "#{e}" if e.present?
+end
+e = o != n - 1 ? ']' : ''
+puts "#{e}" if e.present?
+# exit
 
 puts 'Неполное частное'.green
 a = 81

@@ -11,7 +11,7 @@ then
   exit 0
 fi
 
-if [ -f device.key ]
+if [ -f temp_device.key ]
 then
   KEY_OPT="-key"
 else
@@ -24,7 +24,7 @@ COMMON_NAME=${2:-$1}
 SUBJECT="/C=RU/ST=MO/L=Moscow/O=Zlatov/CN=$COMMON_NAME"
 NUM_OF_DAYS=999
 
-openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT device.key -subj "$SUBJECT" -out device.csr
+openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT temp_device.key -subj "$SUBJECT" -out device.csr
 
 cat v3.ext | sed s/%%DOMAIN%%/$COMMON_NAME/g > temp_v3.ext
 

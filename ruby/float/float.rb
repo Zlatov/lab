@@ -2,17 +2,23 @@
 require 'rubygems'
 require 'awesome_print'
 
+a = 20.95
+b = a * 3
+c = b.round 2
+d = (b * 10**2).round.to_f / 10**2
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+print 'd: '.red; puts d
+# exit
+
 a = 1.016
 b = sprintf("%#.2f", a)
 print 'b: '.red; puts b
 # exit
 
-a = 100000
-b = 6
-c = b.to_f / a.to_f * 100
-d = sprintf "%#.2f", c
-print 'c: '.red; puts c
-print 'd: '.red; puts d
+a = 1.1
+b = sprintf("%#.2f", a)
+print 'b: '.red; puts b
 # exit
 
 a = 1.01

@@ -19,6 +19,24 @@ class User
 # один-ко-многим, ID совпадает с FK принадлежащей модели,
 # один экземпляр модели имеет или обладает несколькими экземплярами другой модели.
 
+# 
+# has_many options:
+# 
+# :class_name
+# :foreign_key - имя внешнего ключа (_id).
+# :foreign_type - имя столбеца, используемого для хранения типа связанного объекта, если это полиморфная ассоциация.
+# :primary_key - имя первичного ключа (id).
+# :counter_cache -
+# :as -
+# :through -
+# :source -
+# :source_type -
+# :validate -
+# :autosave -
+# :inverse_of -
+# :extend -
+# 
+
 class User
   self.primary_key = 'sid'
   has_and_belongs_to_many :groups,

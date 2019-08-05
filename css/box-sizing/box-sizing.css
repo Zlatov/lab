@@ -1,0 +1,7 @@
+/* 
+content-box
+Основывается на стандартах CSS, при этом свойства width и height задают ширину и высоту содержимого и не включают в себя значения margin, padding и border.
+
+border-box
+Свойства width и height включают в себя значения padding и border, но не margin.
+*/
