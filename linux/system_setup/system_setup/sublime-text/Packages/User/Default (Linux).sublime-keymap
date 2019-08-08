@@ -94,6 +94,11 @@
 	{ "keys": ["ctrl+\\"], "command": "focus_file_on_sidebar" },
 
 	// Increment Selection
-	{ "keys": ["ctrl+k", "ctrl+i"], "command": "increment_selection" }
+	{ "keys": ["ctrl+k", "ctrl+i"], "command": "increment_selection" },
 
+	// MdFormat
+	{ "keys": ["alt+f", "alt+b"], "command": "insert_snippet", "args": { "name": "Packages/User/snippets/snippet-zzzf-b.sublime-snippet" } },
+
+	// FocusSideBar
+	{ "keys": ["ctrl+'"], "command": "collapse_folders_focus"}
 ]
