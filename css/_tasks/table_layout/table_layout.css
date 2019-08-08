@@ -1,0 +1,43 @@
+/* https://htmlacademy.ru/blog/useful/css/display-table-anti-hero */
+* { margin:0; padding:0;}
+html, body { height: 100%; }
+
+body {
+  background: #FFFAD5;
+  color: black;
+}
+
+.wrapper {
+  height: 100%;
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+
+.header {
+  display: table-row;
+  height: 1px;
+  background: #FFD34E;
+}
+
+.main {
+  height: 100%;
+  display: table;
+  width: 100%;
+}
+
+.box {
+  display: table-cell;
+}
+
+.sidebar {
+  width: 100px;
+  background: #BD4932;
+}
+
+.footer {
+  display: table-row;
+  height:1px;
+  background: #105B63;
+  color: #FFFAD5;
+}
