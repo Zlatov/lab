@@ -5,3 +5,8 @@ content-box
 border-box
 Свойства width и height включают в себя значения padding и border, но не margin.
 */
+
+.item {
+  box-sizing: content-box;  /* width не включает в себя значения margin, padding и border */
+  box-sizing: border-box;  /* width включает в себя значения padding и border, но не margin */
+}
