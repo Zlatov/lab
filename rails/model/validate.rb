@@ -21,3 +21,9 @@ class Model < ActiveRecord::Base
 
   # Булево поле
   validates :field, inclusion: { in: [ true, false ] }
+
+  validate :valid_date, :valid_email
+
+  def valid_date
+    errors.add('asdasdff')
+  end

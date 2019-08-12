@@ -1,6 +1,7 @@
 
 change_column :table_name, :column_name, :column_type, null: false, default: ''
-# add_column table_name, column_name, type, options = {
+add_column table_name, column_name, type, options
+# options = {
 #   :limit - Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
 #   :default - The column’s default value. Use nil for NULL.
 #   :null - Allows or disallows NULL values in the column.
@@ -46,7 +47,7 @@ remove_index :accounts, column: [:branch_id, :party_id]
 # Removes the index named by_branch_party in the accounts table.
 remove_index :accounts, name: :by_branch_party
 
-# 
+add_index :table_name, :column_name, name: :uq_tablename_columnname, unique: true
 # add_index(table_name, column_name, options = {}) public
 # add_index(table_name, [column_name, column_name2], options = {}) public
 # Options: `unique: true, name: 'by_branch_party', length: 10`
@@ -55,8 +56,6 @@ remove_index :accounts, name: :by_branch_party
 # add_index(:accounts, [:name, :surname], name: 'by_name_surname', length: {name: 10, surname: 15})
 # ```
 # Note: SQLite doesn’t support index length.
-# 
-add_index :table_name, :column_name, name: :uq_tablename_columnname, unique: true
 
 gem "migration_data"
   def change

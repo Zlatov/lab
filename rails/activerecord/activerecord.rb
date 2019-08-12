@@ -72,3 +72,19 @@ Foo.where(something: value).first_or_create(attributes)
 # Не подтверждено:
 # first_or_createбудет использовать `ORDER BY id LIMIT 1`,
 # тогда как find_or_create_by просто будет использовать `LIMIT 1`
+
+# 
+# .order()
+# 
+User.order(:name)
+# SELECT "users".* FROM "users" ORDER BY "users"."name" ASC
+User.order(email: :desc)
+# SELECT "users".* FROM "users" ORDER BY "users"."email" DESC
+User.order(:name, email: :desc)
+# SELECT "users".* FROM "users" ORDER BY "users"."name" ASC, "users"."email" DESC
+User.order('name')
+# SELECT "users".* FROM "users" ORDER BY name
+User.order('name DESC')
+# SELECT "users".* FROM "users" ORDER BY name DESC
+User.order('name DESC, email')
+# SELECT "users".* FROM "users" ORDER BY name DESC, email
