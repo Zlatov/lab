@@ -29,6 +29,19 @@ console.log('> splice().')
 // itemN
 //  Необязательные параметры. Добавляемые к массиву элементы.
 
+console.log('> Очистить массив.')
+console.log('работает всегда:')
+var a = [1, 2]
+console.log('a: ', a)
+a.splice(0,a.length)
+console.log('a: ', a)
+console.log('работает не всегда:')
+var a = [1, 2]
+console.log('a: ', a)
+a.length = 0
+console.log('a: ', a)
+// return null
+
 console.log('> splice(0) удалит всё.')
 a = [1,2,3]
 b = a.splice(0)

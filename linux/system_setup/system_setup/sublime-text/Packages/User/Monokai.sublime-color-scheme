@@ -1,0 +1,23 @@
+{
+  // "variables":
+  // {
+  //     "yellow": "hsl(54, 100%, 50%)",
+  // },
+  // "globals":
+  // {
+  //     "background": "hsl(70, 0%, 15%)",
+  // },
+  "rules":
+  [
+    {
+      "name": "debug",
+      "scope": "meta.debug",
+      "foreground": "var(yellow)",
+      "settings": {
+        "background": "",
+        "fontStyle": "",
+        "foreground": "#00FF00"
+      }
+    },
+  ]
+}
