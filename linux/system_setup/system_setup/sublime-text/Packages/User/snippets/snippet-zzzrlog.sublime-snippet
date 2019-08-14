@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+Rails.logger.unknown "rlog: ${1:var}: #{${1:var}}"
+]]></content>
+	<tabTrigger>zzzrlog</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

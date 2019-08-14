@@ -7,5 +7,5 @@ file_extensions:
 scope: text.plain
 contexts:
   main:
-    - match: '\bDEBUG\b'
-      scope: meta.debug
+    - match: 'rlog\: '
+      scope: meta.rails_log

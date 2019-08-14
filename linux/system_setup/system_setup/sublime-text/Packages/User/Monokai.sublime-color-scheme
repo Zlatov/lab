@@ -10,14 +10,10 @@
   "rules":
   [
     {
-      "name": "debug",
-      "scope": "meta.debug",
-      "foreground": "var(yellow)",
-      "settings": {
-        "background": "",
-        "fontStyle": "",
-        "foreground": "#00FF00"
-      }
+      "name": "rails_log",
+      "scope": "meta.rails_log",
+      // "foreground": "var(yellow)",
+      "foreground": "#ff7429",
     },
   ]
 }
