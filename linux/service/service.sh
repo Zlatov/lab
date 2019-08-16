@@ -4,8 +4,31 @@ exit 0
 # sudo systemctl disable nginx
 # 
 
+# 
+# Добавление сервиса в systemctl
+# 
+# файл /etc/systemd/system/elasticsearch.service:
+# 
+# ```
+# [Unit]
+# Description=elas demo service
+# After=network.target
+# StartLimitIntervalSec=0
+# [Service]
+# Type=simple
+# Restart=always
+# RestartSec=1
+# User=iadfeshchm
+# ExecStart=/usr/bin/env php /path/to/server.php
+# [Install]
+# WantedBy=multi-user.target
+# ```
+# 
+# systemctl start elasticsearch
+# 
+
 # Список сервисов Centos
 systemctl
-systemctl | grep httpd
+systemctl | grep httpd # Список запущенных сервисов.
 systemctl list-units --type service
 systemctl list-units --type mount
