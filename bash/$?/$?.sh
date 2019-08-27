@@ -1,15 +1,17 @@
 #!/usr/bin/env bash
 
-set -eu 
+set -eu
 
-echo $BASHPID
+echo '$BASHPID 1: ' $BASHPID
 
 (
-  echo "sub ${BASHPID}"
-  # ls ttt
+  echo '$BASHPID 2: ' "${BASHPID-}"
+  ls ttt
   ls ./
+  echo "Done. =================================="
 ) && (
-  echo hi1
+  echo "Команды подпроцесса выполнены нормально."
+  echo '$BASHPID 3: ' $BASHPID
 )
 
 a="a1"

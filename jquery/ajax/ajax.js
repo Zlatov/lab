@@ -27,7 +27,10 @@ $.ajax({
   type: 'get',
   url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',
   cache: false,
-  beforeSend: function() {
+  // Передадим данные запроса в объект jqXHR для получения их в .then(…) и .fail(…)
+  beforeSend: function(jqXHR) {
+    jqXHR.custom_data = {id: data.id}
+    return true
   },
   error: function(jqXHR, textStatus, errorThrown) {
   },

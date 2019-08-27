@@ -8,7 +8,14 @@ console.log('> Массив.')
 var a = ['a', 1, true, , null, undefined, { a: 'a' }]
 a[7] = 9
 console.log('a: ', a)
-// return
+
+var b = new Array(10);
+console.log('b: ', b)
+
+var c = [...new Array(10).keys()]
+var c = [...Array(10).keys()]
+console.log('c: ', c)
+// return null
 
 console.log("\n")
 console.log('> Последний элемент.')
@@ -101,6 +108,7 @@ console.log(a)
 console.log(b)
 console.log(c)
 console.log(d)
+// return null
 
 
 console.log('> Объеденить массив в строку')
@@ -181,6 +189,15 @@ var a = [
   { id: 'id2', val: [2, 3, 4] },
   { id: 'id3', val: [3, 4, 5] },
 ]
+
+console.log('> Клонирование массива ~ .clone')
+var temp = {a:1}
+var a = [temp, 1]
+var b = a.slice(0)
+b[1] = 2 // Скалярные данные передаются как значение.
+b[0].a = 2 // Структруированные данные передаются по ссылке.
+console.log('a: ', a) // a:  [ { a: 2 }, 1 ]
+// return null
 
 // initialValue (второй параметр ф-ии reduce) - то, с каким значением переменной previousValue начинаем перебор,
 // если не задан второй параметр, то перебор начинается со второго элемента, а previousValue = первому элементу
@@ -315,7 +332,7 @@ while (level >= 0) {
     index[level]++
   }
 }
-return
+// return
 
 console.log('> Сортировка')
 console.log('> Строки, запятые')

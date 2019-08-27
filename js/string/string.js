@@ -159,7 +159,7 @@ console.log('b: ', b)
 console.log('bt: ', bt)
 console.log('c: ', c)
 console.log('d: ', d)
-return null
+// return null
 
 console.log('Number(\'-0000.100\'): ', Number('-0000.100'))
 
@@ -175,3 +175,44 @@ a = "ёж"
 b = capitalizeFirstLetter(a)
 console.log('a: ', a)
 console.log('b: ', b)
+
+console.log('> Склонение (declension())')
+function declension(number, words) {
+  if (typeof words === "string") {
+    words = words.split(" ")
+  }
+  if (words[1] == null || words[1] == "") {
+    words[1] = words[0]
+  }
+  if (words[2] == null || words[2] == "") {
+    words[2] = words[1]
+  }
+  if (typeof number !== 'number') {
+    number = 0
+  }
+  var modulo_100 = Math.abs(number) % 100
+  if (11 <= modulo_100 && modulo_100 <= 19) {
+    return words[0]
+  }
+  var modulo_10 = Math.abs(number) % 10
+  switch(modulo_10) {
+    case 1:
+      return words[1]
+    break
+    case 2:
+    case 3:
+    case 4:
+      return words[2]
+    break
+    default:
+      return words[0]
+    break
+  }
+}
+
+var a = [...Array(45).keys()]
+for (var i = 0, l = a.length; i < l; i++) {
+  var number = a[i]
+  var word = declension(number, "ежей ёж ежа")
+  console.log('number, word: ', number, word)
+}

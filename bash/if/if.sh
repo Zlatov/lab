@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 . ../_lib/echoc
 
+# Очищаем текущую директорию для теста:
+find . -type f -not -name if.sh -not -name iftest.sh -delete
+find . -type d -not -path . | xargs -I {} rm -rf {}
+# exit 0
+
 # 
 # If принимает выражение и проверяет статус выполнения этого выражения, т.е.
 # выражение `if echo hi` будет истинно, если оно выполнится без ошибок, этого мало,
@@ -185,3 +190,15 @@ then
 else
   echoc "Программа foo не найдена." red
 fi
+
+echoc "if в строку" green
+echoc 'О подпроцессах можно почитать тут /bash/$?/$?.sh' blue
+echoc 'Код снимающий ошибку: `|| echo &>/dev/null`' green
+touch temp
+[[ -f temp ]] && rm ./tem && rm ./temp || echo &>/dev/null
+echo $?
+[[ -f tem ]] && rm ./temp || echo &>/dev/null
+echo $?
+[[ -f tem ]] && rm ./temp || echo &>/dev/null
+echo $?
+echoc "Done." green

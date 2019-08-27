@@ -4,6 +4,20 @@ require 'unicode_utils' # UnicodeUtils.downcase 'String'
 require 'rubygems'
 require 'awesome_print'
 
+puts 'Почти альтернатива php str_replace'.green
+puts 'sentence["??Robert??"] = "Roger" -- Для одиночных случаем удобно'.green
+sentence = '1daswfdsf ??Robert?? ??Dashoff?? ??Robert??'
+a = 'Заранее определил'
+[
+  ['??Dashoff??', a],
+  ['??Robert??', 'b']
+].each do |val|
+  # print 'val: '.red; p val
+  sentence.gsub! val[0], val[1]
+end
+print 'sentence: '.red; puts sentence
+# exit
+
 # Многострочность multiline
 puts 'Многострочность multiline'.green
 a = 'строка'
@@ -132,6 +146,7 @@ a = '1231231'
 b = a.gsub /\B(?=(\d{3})+(?!\d))/, ' '
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit
 
 a = 'zenonline.ru/cgi-bin/caravans/client.cgi?phil_id=1&top=10ФывапыRub'
 b = a.gsub /[^a-z0-9_]/i, '_'

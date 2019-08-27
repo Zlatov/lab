@@ -23,6 +23,7 @@ create_table "market_angars", force: :cascade do |t|
   t.float    "lat"
   t.float    "lng"
   t.index ["name"], name: "index_market_angars_on_name", unique: true
+  # t.references :market_order, index: true, foreign_key: {on_delete: :cascade} 
 end
 
 create_table :market_product_clips, id: :string, force: :cascade do |t|
@@ -37,6 +38,7 @@ end
 
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
+# t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
 
 # Removes the index_accounts_on_column in the accounts table.
 remove_index :accounts, :column

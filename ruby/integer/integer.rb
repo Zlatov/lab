@@ -104,3 +104,19 @@ puts '--------------------------------'
 ].each do |n|
   ap number_to_human n
 end
+
+puts 'between?'.green
+puts 'Returns false if obj <=> min is less than zero or if anObject <=> max is greater than zero, true otherwise.'.green
+# Returns false if obj <=> min is less than zero or if anObject <=> max is greater than zero, true otherwise.
+# Returns false if 5   <=> 1   is less than zero or if 5        <=> 5   is greater than zero, true otherwise.
+# Returns false if 1           is less than zero or if 0                is greater than zero, true otherwise.
+# Returns false if 1           is <    than 0    or if 0                is >       than 0   , true otherwise.
+# Returns false if 1              <         0    or    0                   >            0   , true otherwise.
+# Returns false if false                         or    false                                , true otherwise.
+print 5.between?(1, 5); puts ' <<<'
+puts 5 <=> 1 # -> 1
+puts 5 <=> 5 # -> 0
+puts 1 < 0
+puts 0 > 0
+print false || false; puts ' <<<'
+puts "Рубисты дибилоиды."

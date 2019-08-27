@@ -29,3 +29,16 @@ switch(true) {
   console.log("Default: none.")
 }
 // return
+
+console.log('> Множество значений в case НЕ РАБОТАЮТ.')
+var a = 1
+switch(a) {
+  case 0, 1, 2:
+    console.log("1!")
+  case 3, 4:
+    console.log("2!")
+  break
+  default:
+    console.log("default")
+}
+// return
