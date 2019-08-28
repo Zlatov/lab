@@ -45,3 +45,24 @@ Vue.config.keyCodes.f1 = 112 // позволит использовать `@keyu
 '<input @keyup.alt.67="clear">' // Alt + C
 '<div @click.ctrl="doSomething">Сделать что-нибудь</div>' // Ctrl + Click
 '<button @click.ctrl.exact="onCtrlClick">A</button>' // Сработает, только когда нажат Ctrl и не нажаты никакие другие клавиши.
+
+// CSS классы
+`
+<div
+  class="static"
+  v-bind:class="{ active: isActive, 'text-danger': hasError }"
+></div>
+`
+// или определить этот хэш с помощью вычисляемых данных
+`
+<div
+  :class="computedVariable"
+></div>
+`
+computed: {
+  computedVariable: function() {
+    return {
+      'class-name': this.is_active
+    }
+  },
+}
