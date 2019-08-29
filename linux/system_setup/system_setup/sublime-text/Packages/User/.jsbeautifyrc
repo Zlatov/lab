@@ -1,7 +1,9 @@
 {
-  "all":
-  {
+  "all": {
     "indent_size": 2,
     "end_with_newline": true
+  },
+  "js": {
+    "keep_array_indentation": true
   }
 }

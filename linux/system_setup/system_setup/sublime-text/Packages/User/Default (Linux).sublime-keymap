@@ -100,5 +100,8 @@
 	{ "keys": ["alt+f", "alt+b"], "command": "insert_snippet", "args": { "name": "Packages/User/snippets/snippet-zzzf-b.sublime-snippet" } },
 
 	// FocusSideBar
-	{ "keys": ["ctrl+'"], "command": "collapse_folders_focus"}
+	{ "keys": ["ctrl+'"], "command": "collapse_folders_focus"},
+
+	// Pretty js code with npm package sublime-js-prettier
+	{ "keys": ["ctrl+alt+f"], "command": "js_prettier" }
 ]

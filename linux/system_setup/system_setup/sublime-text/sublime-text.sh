@@ -6,6 +6,7 @@ lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
 
 cp -r ./$lab_path/linux/system_setup/system_setup/sublime-text/Packages/User/* .config/sublime-text-3/Packages/User
+[[ -f ./$lab_path/linux/system_setup/system_setup/sublime-text/Packages/User/.jsbeautifyrc ]] && cp ./$lab_path/linux/system_setup/system_setup/sublime-text/Packages/User/.jsbeautifyrc .config/sublime-text-3/Packages/User/.jsbeautifyrc || echo &>/dev/null
 echoc "Настроен sublime Packages/User." green
 
 path="$(pwd)/.config/sublime-text-3/Packages/Prefixw"
