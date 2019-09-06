@@ -36,7 +36,7 @@ console.log('> splice().')
 // itemN
 //  Необязательные параметры. Добавляемые к массиву элементы.
 
-console.log('> Очистить массив.')
+console.log('> Очистить массив. ~.clear empty?')
 console.log('работает всегда:')
 var a = [1, 2]
 console.log('a: ', a)
@@ -139,11 +139,11 @@ console.log('c: ', c)
 
 console.log('> привести к уникальным значениям примерно как в _.uniq()')
 console.log('возвращает новый массив')
-var a = ['2', 1, 'asd', 2, 1, 'asd', '1', 2, '', , 0]
+var a = ['2', 1, 'asd', 2, 1, 'asd', '1', 2, null, '', , 0, null]
 var b = a.filter((element, index, array) => { return array.indexOf(element) === index })
 console.log('a: ', a)
 console.log('b: ', b)
-
+// return
 
 console.log('> Преобразовать элементы массива')
 console.log('возвращает новый массив')

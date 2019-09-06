@@ -5,12 +5,16 @@
 // v-if
 // v-else
 // v-show
+// v-show не работает на элементе <template> и не работает с v-else.
 '<div v-if="!is_data_error">' // Создает DOM только в случае истины.
 '</div>'
+`<div v-else-if="type === 'B'">`
+`</div>`
 '<div v-else>' // Аналогично
 '</div>'
 '<div v-show="fields.some.is_editable"></div>' // Дом создаёт всегда и переключает CSS-свойство display.
 '</div>'
+
 
 // События
 // v-on сокращение: @

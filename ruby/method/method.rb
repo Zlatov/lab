@@ -31,3 +31,12 @@ a = A.new
 print 'a.brand: '.red; puts a.brand
 sleep 2
 print 'a.brand: '.red; puts a.brand
+
+puts 'Метод []'.green
+class Asd
+  CONST = [1, 2, 3]
+  def self.[](key)
+    CONST[key]
+  end
+end
+print 'Asd[1]: '.red; puts Asd[1]

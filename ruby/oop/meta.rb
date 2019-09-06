@@ -4,16 +4,26 @@ module M
 end
 
 class Base
+
   @ins = 1
   @@var = nil
+
   extend M
+
   def self.publ_cl_meth
   end
+
   def inst_meth
   end
+
   private
+
+  def self.class_private_method
+  end
+
   def priva
   end
+
   class << self
     @singl = 0
     @@csing = 3

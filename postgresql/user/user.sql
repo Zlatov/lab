@@ -51,7 +51,7 @@
 -- Грандим все таблицы:
 -- sudo -u postgres psql
 -- \c database_name;
--- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO username;"
+-- GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO username;
 --
 -- sudo -u postgres psql -c "ALTER USER username WITH PASSWORD 'new_password';"
 -- sudo -u postgres psql -c "ALTER USER lab CREATEDB;"

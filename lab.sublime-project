@@ -29,6 +29,17 @@
 		{
 			"basePath": "/home/iadfeshchm/projects/my/lab/",
 			"baseUrl": "http://lab.local/"
+		},
+		"todoreview":
+		{
+			"exclude_folders":
+			[
+				"*.git*",
+				"*node_modules*",
+				"framework/*",
+				"public/*"
+			],
+			"resolve_symlinks": false
 		}
 	}
 }

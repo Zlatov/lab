@@ -29,6 +29,8 @@ end
 
 # От модели
 Account.transaction do
+  # Вызываем save! с восклицательным знаком для
+  # автоматического бросания ошибки при неверных запросах/данных запроса.
   balance.save!
   account.save!
 end
@@ -36,6 +38,8 @@ end
 # От экземпляра модели
 balance.transaction do
   balance.save!
+  # Откат по какой-либо бизнес логике:
+  raise ActiveRecord::Rollback if account.sid.empty?
   account.save!
 end
 

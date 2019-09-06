@@ -62,4 +62,6 @@ git add .
 git commit -m "init"
 git push -u origin master
 yarn add webpack --dev
+…
+yarn publish
 ```
