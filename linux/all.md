@@ -343,6 +343,11 @@ passwd <имяпользователя>
 # Добавиьт пользователя в группу
 usermod -a -G group user
 
+# Судорес
+adduser deployer sudo
+# или лучше
+usermod -a -G sudo deployer
+
 # Списко групп пользователя
 id -Gn iadfeshchm
 # или
