@@ -42,7 +42,7 @@ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 ~/.rbenv/bin/rbenv init
-# mc edit file ...
+# Те команды которые рекомендую записать в bash_profile, нужно записать в bashrc ДО ПРОВЕРКИ НА ИНТЕРАКТИВНОСТЬ
 # relogin!
 mkdir -p "$(rbenv root)"/plugins
 git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
