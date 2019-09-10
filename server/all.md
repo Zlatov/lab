@@ -22,3 +22,38 @@ https://www.ovh.ie/
 https://ru.hetzner.com/
 https://www.vultr.com/
 https://www.ihor.ru
+
+## Расширение SWAP файла
+
+```bash
+sudo dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+
+#Only the root user should be able to write and read the swap file. Set the correct permissions by typing:
+
+sudo chmod 600 /swapfile
+
+#Use the mkswap utility to set up a Linux swap area on the file:
+
+sudo mkswap /swapfile
+
+#Activate the swap file using the following command:
+
+sudo swapon /swapfile
+#To make the change permanent open the /etc/fstab file:
+
+sudo nano /etc/fstab
+#and paste the following line:
+
+/etc/fstab
+/swapfile swap swap defaults 0 0
+#Verify that the swap is active by using either the swapon or the free command as shown below:
+
+sudo swapon --show
+#NAME      TYPE  SIZE   USED PRIO
+#/swapfile file 1024M 507.4M   -1
+
+sudo free -h
+#              total        used        free      shared  buff/cache   available
+#Mem:           488M        158M         83M        2.3M        246M        217M
+#Swap:          1.0G        506M        517M
+```
