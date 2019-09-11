@@ -1,17 +1,26 @@
 #!/usr/bin/env bash
 
-# 
-# Выполнить из консоли (не билдом сублайма).
-# 
-
 set -eu
 
 cd "$(dirname "${0}")"
 
-mkdir -p ../jpg
+if [[ -z "${YANDEX_PASSWORD-}" ]]
+then
+  echo -n "Введите пароль: "
+  read -s YANDEX_PASSWORD
+  echo ""
+fi
 
-find ../jpg -type f -delete
-find ../jpg -type d -not -path ../jpg | xargs -I {} rm -rf {}
+if [[ -z "${YANDEX_PASSWORD-}" ]]
+then
+  echo "Пароль не задан." 1>&2
+  exit 1
+fi
+
+mkdir -p ~/images/jpg
+
+find ~/images/jpg -type f -delete
+find ~/images/jpg -type d -not -path ~/images/jpg | xargs -I {} rm -rf {}
 
 sources=(
   'beautiful-beauty.jpg'
@@ -70,6 +79,6 @@ do
   for format_index in ${!formats[@]}
   do
     format=${formats[$format_index]}
-    wget "https://webdav.yandex.ru/images/jpg/${format}-${source}" --user=Zlatov --password=$YANDEX_PASSWORD -P ../jpg
+    wget "https://webdav.yandex.ru/images/jpg/${format}-${source}" --user=Zlatov --password=$YANDEX_PASSWORD -P ~/images/jpg
   done
 done

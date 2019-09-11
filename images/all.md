@@ -2,9 +2,11 @@
 
 ## Установить
 
-<del>Скачать вручную с яндекс диска папки `jpg` и `sources`.</del>
+Скачать __jpg__ файлы можно запустив
 
-Скачать __jpg__ файлы можно запустив _./images/pull/jpg.sh_
+```
+curl -L -o ~/images_pull_jpg.sh https://raw.githubusercontent.com/Zlatov/lab/master/images/pull/jpg.sh && chmod u+x ~/images_pull_jpg.sh && ~/images_pull_jpg.sh
+```
 
 На данный момент 8 источников, 37 jpg форматов каждго источника - 296 файлов jpg.
 
