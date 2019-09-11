@@ -18,6 +18,7 @@ sudo apt install -y mc
 sudo apt install -y gnupg2
 sudo apt install -y npm
 sudo apt install -y postgresql
+sudo apt install -y nginx
 
 # yarn
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -76,4 +77,23 @@ gem install bundler -v 2.0.1 --force
 # rails
 gem install rails
 gem install rails -v 5.1.6
+
+# DB
+sudo mcedit /etc/postgresql/10/main/pg_hba.conf
+# # TYPE  DATABASE        USER            ADDRESS                 METHOD
+# local   lorem_rails,lorem_rails_test,template1  lorem_rails     md5
+sudo service postgresql restart
+sudo -u postgres psql
+CREATE USER lorem_rails WITH password '<password>';
+ALTER USER lorem_rails CREATEDB;
+ALTER USER myuser WITH SUPERUSER;
+mcedit ~/.bashrc
+# export LOREM_RAILS_PSQL_USER=lorem_rails
+# export LOREM_RAILS_PSQL_PASSWORD=<password>
+PGPASSWORD=$LOREM_RAILS_PSQL_PASSWORD createdb -U lorem_rails lorem_rails
+PGPASSWORD=$LOREM_RAILS_PSQL_PASSWORD createdb -U lorem_rails lorem_rails_test
+
+# media
+curl -L -o ~/images_pull_jpg.sh https://raw.githubusercontent.com/Zlatov/lab/master/images/pull/jpg.sh && chmod u+x ~/images_pull_jpg.sh && ~/images_pull_jpg.sh
+ln -s ~/images/jpg ~/app/lorem_rails/shared/public/images
 ```

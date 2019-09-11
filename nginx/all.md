@@ -1,5 +1,9 @@
 # Nginx
 
+## Установка
+
+`sudo apt update && sudo apt install -y nginx`
+
 ## Остановка, запуск, статус
 
 * `sudo nginx -t` — проверить кофигурацию.
@@ -8,15 +12,17 @@
 * `sudo service nginx start`
 * `sudo service nginx restart`
 * `sudo service nginx reload`
-* `service nginx status`
+* `sudo service nginx status`
 
 
 ## Настойки
 
 ### Виртуальных хостов
+
 `sudo touch /etc/nginx/sites-available/nginx.local.conf`
 `subl /etc/nginx/sites-available/nginx.local.conf`
 `subl /etc/nginx/sites-available/default`
+
 ```
 server {
   # listen 8080 default_server;
