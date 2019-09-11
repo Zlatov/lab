@@ -40,6 +40,31 @@ server {
     try_files $uri $uri/ =404;
   }
 }
+server {
+    # listen 127.0.0.1:8000;
+    # listen 127.0.0.1;
+    # listen 8000;
+    # listen *:8000;
+    # listen localhost:8000;
+    # listen [::]:8000;
+    # listen [::1];
+    # listen unix:/var/run/nginx.sock;
+    listen *:80;
+
+    server_name lorem_rails.ihor, www.lorem_rails.ihor;
+    client_max_body_size 256m;
+    location / {
+        # auth_basic "Authentificate, please";
+        # auth_basic_user_file /etc/nginx/conf.d/market_admin/.htpasswd;
+        proxy_pass http://127.0.0.1:48888;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        port_in_redirect off;
+        proxy_connect_timeout 600;
+        proxy_read_timeout 600;
+        fastcgi_read_timeout 600s;
+    }
+}
 ```
 
 `sudo rm /etc/nginx/sites-enabled/default`
