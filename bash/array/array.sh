@@ -155,3 +155,12 @@ do
   item=${a[$i]}
   echo "$i:$item"
 done
+
+echoc "Создание массива последовательности чисел" green
+echoc "seq FIRST STEP LAST" blue
+a=($(seq 0 0.1 2.5))
+for v in "${a[@]}"
+do
+  echo $v
+done
+echo ${a[@]}

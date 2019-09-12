@@ -5,7 +5,7 @@ set -eu
 cd $(dirname "$0")
 
 # Очищаем текущую директорию для теста:
-find . -type f -not -name file.sh -not -name file_path.sh -not -name file_path_included.sh -delete
+find . -type f -not -name file.sh -not -name file_path.sh -not -name file_path_included.sh -not -name csplit.sh -delete
 find . -type d -not -path . | xargs -I {} rm -rf {}
 # exit 0
 
@@ -15,6 +15,13 @@ if [[ ! -f temp ]]
 then
 	touch temp
 fi
+
+echoc "Запись в файл." green
+{
+  echo 'записывается первая строчка'
+  echo 'записывается вторая строчка'
+  echo 'записывается третья строчка'
+} > temp_file.txt
 
 echo -n 'asd' > temp
 echoc "Контент файла temp:" green
