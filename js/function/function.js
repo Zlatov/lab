@@ -8,11 +8,17 @@ var a = function() {
   console.log('arguments: ', arguments)
   console.log('arguments.length: ', arguments.length)
   console.log('arguments[0]: ', arguments[0])
-  // аргументамы в массив
+
+  // аргументы в массив
   var params = [...arguments]
+  // ES5 аналог:
+  var params = Array.prototype.slice.call(arguments)
   console.log('params: ', params)
-  // передать массив как аргументы
+
+  // массив в аргументы
   b(...params)
+  // ES5 аналог:
+  b.apply(null, params)
 }
 function b() {
   console.log('arguments: ', arguments)
