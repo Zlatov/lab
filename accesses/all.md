@@ -1,9 +1,20 @@
 # Доступы
 
-перед добавлением pull, после push:
+Общая логика внесения изменений: перед добавлением — `pull`, после — `push`.
 
-cdlab
+Как бы я хотел чтобы выглядели команды:
 
-`accesses my`:
+```
+accesses pull my
+accesses open my
+accesses push my
+accesses open zenon
+accesses open sshconfig
+accesses open hosts
+```
 
-./accesses/bash/pull "my" && subl ~/projects/my/lab/accesses/accesses/"my".yml
+<del>./accesses/bash/pull "my" && subl \~/projects/my/lab/accesses/accesses/"my".yml</del>
+
+## Установка
+
+`curl -L -o ~/accesses https://raw.githubusercontent.com/Zlatov/lab/master/accesses/bin/accesses && chmod u+x ~/accesses && sudo ~/accesses`
