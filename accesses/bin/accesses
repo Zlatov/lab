@@ -2,4 +2,231 @@
 
 set -eu
 
-echo 'hi'
+# Переберём аргументы, обработаем опции
+POSITIONAL=() # временный массив аргументов без опций
+OPTION_DETAIL=false
+OPTION_LOCAL=false
+OPTION_YES=false
+OPTION_TEST_ID=""
+
+while [[ $# -gt 0 ]]
+do
+	key="$1"
+	case $key in
+		-d|--detail)
+		OPTION_DETAIL=true
+		shift # забываем аргумент
+		;;
+		-s|--single_option)
+		SINGLE_OPTION=true
+		shift # забываем аргумент
+		;;
+		-l|--local)
+		OPTION_LOCAL=true
+		shift # забываем аргумент
+		;;
+		-y|--yes)
+		OPTION_YES=true
+		shift # забываем аргумент
+		;;
+		-a|--advanced_option)
+		ADVANCED_OPTION="$2"
+		shift # забываем аргумент
+		shift # забываем значение аргумента
+		;;
+		-t|--test_id)
+		OPTION_TEST_ID="$2"
+		shift # забываем аргумент
+		shift # забываем значение аргумента
+		;;
+		*)    # встретили неизвестную опцию
+		POSITIONAL+=("$1") # сохраним опцию как аргумент
+		shift # забываем аргумент
+		;;
+	esac
+done
+# Если были переданы аргументы
+[[ ${#POSITIONAL[*]} -gt 0 ]] && \
+set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
+
+if [[ "$OPTION_DETAIL" == true ]]
+then
+	echo -n 'Количество переданных параметров: '
+	echo $#
+fi
+
+
+
+function app_man {
+	# man $APP_PATH/../lib/app/command/man/app
+	echo "man"
+}
+
+function echoe {
+	echo -en "\033[31m" >&2
+	echo -e $1 >&2
+	echo -en "\033[0m" >&2
+}
+
+# Объявления hash-подобного массива:
+declare -A ECHOC_COLORS
+ECHOC_COLORS=(
+	['style_default']='\033[0m'
+
+	['red']='\033[31m'
+	['green']='\033[32m'
+	['blue']='\033[36m'
+	['yellow']='\033[33m'
+
+	['bold']='\033[1m'
+)
+
+function echoc {
+	local NOSLASHN POSITIONAL
+	NOSLASHN=false
+	while [[ $# -gt 0 ]]
+	do
+		key="$1"
+		case $key in
+			-n)
+			NOSLASHN=true
+			shift
+			;;
+			*)
+			POSITIONAL+=("$1")
+			shift
+			;;
+		esac
+	done
+	[[ ${#POSITIONAL[*]} -gt 0 ]] && \
+	set -- "${POSITIONAL[@]}"
+
+	echo -en ${ECHOC_COLORS[$2]}
+	if [[ "$NOSLASHN" = true ]]
+	then
+		echo -en $1
+	else
+		echo -e $1
+	fi
+	echo -en ${ECHOC_COLORS[style_default]}
+}
+
+
+function app_install {
+	# Кладём бинарник /usr/local/bin/accesses
+	cp ~/accesses.sh /usr/local/bin/accesses
+	chmod g+x /usr/local/bin/accesses
+	chmod a+x /usr/local/bin/accesses
+
+	# Кладём мануал /usr/local/man/man1/accesses.1
+	temp_path=`pwd`
+	cd /usr/local/man
+	mkdir -p man1
+	touch man1/accesses.1
+	echo "$(cat \
+		<<-'EOF'
+			.\" Руководство к app.
+			.\" Обратитесь к разработчикам для корректировки ошибок.
+			.TH man 8 "30 Августа 2018" "1.0" "app man page"
+			.SH НАЗВАНИЕ
+			app — деплой маркета и другое.
+			.SH СИНТАКСИС
+			app [<options>] <command> [<args>]
+			.SH ОПИСАНИЕ
+			Основная задача утилиты упростить деплой доменных приложений ЗЕНОН
+			.SH ПРИМЕРЫ
+			app test              — выложить в тесты текущую ветку разработки
+			app test market admin
+			app deploy            — выложить на продакшн текущую ветку разработки.
+			                        При необходимости можно уточнить часть: `app deploy
+			                        market framework` или только `app deploy admin`.
+			app rollback          — восстановить состояние до предыдущего деплоя.
+			                        При необходимости можно уточнить часть: `app rollback
+			                        market framework` или только `app rollback admin`.
+			.SH ОПЦИИ
+			.TP
+			\fB\-l\fP | \fB\-\-local\fP
+			Запустить процесс на \fIлокальной\fP машине.
+			.TP
+			\fB\-t ID_ТЕСТА\fP | \fB\-\-test_id ID_ТЕСТА\fP
+			Не создавать новый тест, а использовать уже существующий.
+			.TP
+			\fB\-y\fP | \fB\-\-yes\fP
+			\fIНе запрашивать подтверждения\fP на выполнение действий.
+			.TP
+			\fB\-d\fP | \fB\-\-detail\fP
+			выводить детальный лог выполнения программы.
+			.SH SEE ALSO
+			.SH БАГИ
+			Нет известных багов.
+			.SH АВТОР
+			Максим Златов
+
+		EOF
+	)" > man1/accesses.1
+	gzip -f /usr/local/man/man1/accesses.1
+	# mandb
+	cd "$temp_path"
+
+	# Кладём автодополнение /etc/bash_completion.d/accesses
+	# touch /etc/bash_completion.d/accesses
+	echo "$(cat \
+		<<-'EOF'
+			#!/usr/bin/env bash
+
+			function _accesses_completions {
+			  current_word="${COMP_WORDS[COMP_CWORD]}"
+			  completions=$(accesses complete "${COMP_WORDS[@]}" "${COMP_CWORD}")
+			  COMPREPLY=( $(compgen -W "${completions}" -- ${current_word}) )
+			}
+			complete -F _accesses_completions accesses
+
+		EOF
+	)" > /etc/bash_completion.d/accesses
+
+	echoс 'Перезапустите консоль для корректной работы автодополнения.' green
+}
+
+function app_complete() {
+	echo 'deploy rollback complete pull pull install help'
+}
+
+# Переберём аргументы, обработаем команды
+if [[ -n ${1-} ]]
+then
+	function_name=$1
+	shift
+	case $function_name in
+		deploy)
+			app_deploy $@
+			;;
+		rollback)
+			app_rollback $@
+			;;
+		complete)
+			app_complete $@
+			;;
+		pull)
+			app_pull $@
+			;;
+		pull)
+			app_push $@
+			;;
+		--install)
+			app_install
+			;;
+		man|-h|--help)
+			app_man
+			;;
+		*)
+			echoc "Ошибка." red
+			echoe "Неизвестная команада. „${1}“"
+			for i in ${!BASH_SOURCE[@]}
+			do
+				echo $i ' : ' ${BASH_SOURCE[$i]}
+			done
+			echo $@
+			exit 1
+			;;
+	esac
+fi

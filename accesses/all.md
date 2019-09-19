@@ -17,4 +17,4 @@ accesses open hosts
 
 ## Установка
 
-`curl -L -o ~/accesses.sh https://raw.githubusercontent.com/Zlatov/lab/master/accesses/bin/accesses && chmod u+x ~/accesses.sh && sudo ~/accesses.sh`
+`curl -L -o ~/accesses.sh https://raw.githubusercontent.com/Zlatov/lab/master/accesses/bin/accesses && chmod u+x ~/accesses.sh && sudo ~/accesses.sh -i`
