@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function _zaccesses_completions {
+  current_word="${COMP_WORDS[COMP_CWORD]}"
+  completions=$(zaccesses complete "${COMP_WORDS[@]}" "${COMP_CWORD}")
+  COMPREPLY=( $(compgen -W "${completions}" -- ${current_word}) )
+}
+
+complete -F _zaccesses_completions zaccesses

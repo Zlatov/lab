@@ -1,0 +1,141 @@
+#!/usr/bin/env bash
+
+set -eu
+
+# Переберём аргументы, обработаем опции
+POSITIONAL=() # временный массив аргументов без опций
+OPTION_DETAIL=false
+OPTION_LOCAL=false
+OPTION_YES=false
+OPTION_TEST_ID=""
+
+while [[ $# -gt 0 ]]
+do
+	key="$1"
+	case $key in
+		-d|--detail)
+		OPTION_DETAIL=true
+		shift # забываем аргумент
+		;;
+		-s|--single_option)
+		SINGLE_OPTION=true
+		shift # забываем аргумент
+		;;
+		-l|--local)
+		OPTION_LOCAL=true
+		shift # забываем аргумент
+		;;
+		-y|--yes)
+		OPTION_YES=true
+		shift # забываем аргумент
+		;;
+		-a|--advanced_option)
+		ADVANCED_OPTION="$2"
+		shift # забываем аргумент
+		shift # забываем значение аргумента
+		;;
+		-t|--test_id)
+		OPTION_TEST_ID="$2"
+		shift # забываем аргумент
+		shift # забываем значение аргумента
+		;;
+		*)    # встретили неизвестную опцию
+		POSITIONAL+=("$1") # сохраним опцию как аргумент
+		shift # забываем аргумент
+		;;
+	esac
+done
+# Если были переданы аргументы
+[[ ${#POSITIONAL[*]} -gt 0 ]] && \
+set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
+
+if [[ "$OPTION_DETAIL" == true ]]
+then
+	echo -n 'Количество переданных параметров: '
+	echo $#
+fi
+
+function app_man {
+	man zaccesses
+}
+
+function echoe {
+	echo -en "\033[31m" >&2
+	echo -e $1 >&2
+	echo -en "\033[0m" >&2
+}
+
+# Объявления hash-подобного массива:
+declare -A ECHOC_COLORS
+ECHOC_COLORS=(
+	['style_default']='\033[0m'
+
+	['red']='\033[31m'
+	['green']='\033[32m'
+	['blue']='\033[36m'
+	['yellow']='\033[33m'
+
+	['bold']='\033[1m'
+)
+
+function echoc {
+	local NOSLASHN POSITIONAL
+	NOSLASHN=false
+	while [[ $# -gt 0 ]]
+	do
+		key="$1"
+		case $key in
+			-n)
+			NOSLASHN=true
+			shift
+			;;
+			*)
+			POSITIONAL+=("$1")
+			shift
+			;;
+		esac
+	done
+	[[ ${#POSITIONAL[*]} -gt 0 ]] && \
+	set -- "${POSITIONAL[@]}"
+
+	echo -en ${ECHOC_COLORS[$2]}
+	if [[ "$NOSLASHN" = true ]]
+	then
+		echo -en $1
+	else
+		echo -e $1
+	fi
+	echo -en ${ECHOC_COLORS[style_default]}
+}
+
+function app_complete() {
+	echo 'deploy rollback complete pull pull install help'
+}
+
+# Переберём аргументы, обработаем команды
+if [[ -n ${1-} ]]
+then
+	function_name=$1
+	shift
+	case $function_name in
+		temp)
+			app_temp $@
+			;;
+		complete)
+			app_complete $@
+			;;
+		man|-h|--help)
+			app_man
+			;;
+		*)
+			echoc "Ошибка." red
+			echoe "Неизвестная команада. „${1}“"
+			for i in ${!BASH_SOURCE[@]}
+			do
+				echo $i ' : ' ${BASH_SOURCE[$i]}
+			done
+			echo $@
+			exit 1
+			;;
+	esac
+fi
