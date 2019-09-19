@@ -49,11 +49,15 @@ done
 
 if [[ "$OPTION_DEVELOPMENT" == true ]]
 then
-  echo "Имя функции: ${FUNCNAME}"
-  echo "Количество переданных параметров : $#"
-  echo "Все параметры переданные функции: '$@'"
-  echo "Запрошенная команда для вызова скрипта: $0"
-  echo "Возможные аргументы ${ARGUMENTS[@]}"
+	echo "Имя функции: ${FUNCNAME-}"
+	echo "Количество переданных параметров : $#"
+	echo "Все параметры переданные функции: '$@'"
+	echo "Запрошенная команда для вызова скрипта: $0"
+	echo "Возможные аргументы ${ARGUMENTS[@]}"
+	echo '$OPTION_DEVELOPMENT: ' $OPTION_DEVELOPMENT
+	echo '$OPTION_SAVE: ' $OPTION_SAVE
+	echo '$OPTION_OPEN: ' $OPTION_OPEN
+	echo '$OPTION_ADVANCED: ' $OPTION_ADVANCED
 fi
 
 function app_man {
@@ -116,11 +120,35 @@ function app_complete() {
 function app_my() {
 	if [[ "$OPTION_SAVE" == true ]]
 	then
-		echo 'save'
+		if [[ -z ${YANDEX_PASSWORD-} ]]
+		then
+			echo -n "Введите пароль: "
+			read -s YANDEX_PASSWORD
+			if [[ -z ${YANDEX_PASSWORD-} ]]
+			then
+				echo "Пароль пустой." >&2
+				exit 1
+			fi
+		fi
+		curl -T ~/accesses/my.yml https://webdav.yandex.ru/accesses/my.yml --user Zlatov:"${YANDEX_PASSWORD}"
+		echoc "my.yml сохранён." green
+	else
+		if [[ -z ${YANDEX_PASSWORD-} ]]
+		then
+			echo -n "Введите пароль: "
+			read -s YANDEX_PASSWORD
+			if [[ -z ${YANDEX_PASSWORD-} ]]
+			then
+				echo "Пароль пустой." >&2
+				exit 1
+			fi
+		fi
+		wget https://webdav.yandex.ru/accesses/my.yml --user=Zlatov --password=$YANDEX_PASSWORD -P ~/accesses
+		echoc "my.yml загружен." blue
 	fi
-	if [[ "$OPTION_OPEN" == true ]]
+	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
 	then
-		echo 'open'
+		subl ~/accesses/my.yml
 	fi
 }
 
