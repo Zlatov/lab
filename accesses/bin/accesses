@@ -184,7 +184,7 @@ function app_install {
 		EOF
 	)" > /etc/bash_completion.d/accesses
 
-	echoc 'Перезапустите консоль для корректной работы автодополнения.' green
+	echoс 'Перезапустите консоль для корректной работы автодополнения.' green
 }
 
 function app_complete() {
@@ -212,7 +212,7 @@ then
 		pull)
 			app_push $@
 			;;
-		--install)
+		-i|--install)
 			app_install
 			;;
 		man|-h|--help)
