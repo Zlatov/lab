@@ -2,57 +2,58 @@
 
 set -eu
 
-# Переберём аргументы, обработаем опции
-POSITIONAL=() # временный массив аргументов без опций
-OPTION_DETAIL=false
-OPTION_LOCAL=false
-OPTION_YES=false
-OPTION_TEST_ID=""
+# 
+# Массив для хранения __аргументов__, без __опций__ (отфильтровывается из всех переданных __параметров__).
+# 
+ARGUMENTS=()
 
+# Зададим __опции__ по умолчанию.
+OPTION_DEVELOPMENT=false
+OPTION_SAVE=false
+OPTION_OPEN=false
+OPTION_ADVANCED=""
+
+# Переберём все __параметры__,
+# если встречена известная опция - отфильтровываем её.
 while [[ $# -gt 0 ]]
 do
 	key="$1"
 	case $key in
-		-d|--detail)
-		OPTION_DETAIL=true
-		shift # забываем аргумент
+		-d|--develop)
+		OPTION_DEVELOPMENT=true
+		shift # забываем параметр (он - опция)
 		;;
-		-s|--single_option)
-		SINGLE_OPTION=true
-		shift # забываем аргумент
+		-s|--save)
+		OPTION_SAVE=true
+		shift # забываем параметр (он - опция)
 		;;
-		-l|--local)
-		OPTION_LOCAL=true
-		shift # забываем аргумент
+		-o|--open)
+		OPTION_OPEN=true
+		shift # забываем параметр (он - опция)
 		;;
-		-y|--yes)
-		OPTION_YES=true
-		shift # забываем аргумент
+		-a|--advanced)
+		OPTION_ADVANCED="$2"
+		shift # забываем параметр (он - опция)
+		shift # забываем параметр (он - значение опции)
 		;;
-		-a|--advanced_option)
-		ADVANCED_OPTION="$2"
-		shift # забываем аргумент
-		shift # забываем значение аргумента
-		;;
-		-t|--test_id)
-		OPTION_TEST_ID="$2"
-		shift # забываем аргумент
-		shift # забываем значение аргумента
-		;;
-		*)    # встретили неизвестную опцию
-		POSITIONAL+=("$1") # сохраним опцию как аргумент
-		shift # забываем аргумент
+		*)    # встретили неизвестный (для опций) параметр - он вероятно аргумент
+		ARGUMENTS+=("$1") # сохраним параметр как аргумент
+		shift # забываем параметр
 		;;
 	esac
 done
-# Если были переданы аргументы
-[[ ${#POSITIONAL[*]} -gt 0 ]] && \
-set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
+# Опции отфильтрованы, в параметрах отались аргументы (если остались).
+# Если остались необработанные параметры - они аргументы, восстановим аргументы.
+[[ ${#ARGUMENTS[*]} -gt 0 ]] && \
+	set -- "${ARGUMENTS[@]}"
 
-if [[ "$OPTION_DETAIL" == true ]]
+if [[ "$OPTION_DEVELOPMENT" == true ]]
 then
-	echo -n 'Количество переданных параметров: '
-	echo $#
+  echo "Имя функции: ${FUNCNAME}"
+  echo "Количество переданных параметров : $#"
+  echo "Все параметры переданные функции: '$@'"
+  echo "Запрошенная команда для вызова скрипта: $0"
+  echo "Возможные аргументы ${ARGUMENTS[@]}"
 fi
 
 function app_man {
@@ -112,6 +113,17 @@ function app_complete() {
 	echo 'deploy rollback complete pull pull install help'
 }
 
+function app_my() {
+	if [[ "$OPTION_SAVE" == true ]]
+	then
+		echo 'save'
+	fi
+	if [[ "$OPTION_OPEN" == true ]]
+	then
+		echo 'open'
+	fi
+}
+
 # Переберём аргументы, обработаем команды
 if [[ -n ${1-} ]]
 then
@@ -120,6 +132,9 @@ then
 	case $function_name in
 		temp)
 			app_temp $@
+			;;
+		my)
+			app_my
 			;;
 		complete)
 			app_complete $@

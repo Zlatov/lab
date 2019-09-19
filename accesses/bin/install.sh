@@ -21,5 +21,6 @@ rm ~/zaccesses.man
 
 # Кладём автодополнение /etc/bash_completion.d/zaccesses.completion
 cp ~/zaccesses.completion /etc/bash_completion.d/zaccesses.completion
+rm ~/zaccesses.completion
 
 echo 'Перезапустите консоль для корректной работы автодополнения.'
