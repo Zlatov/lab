@@ -2,9 +2,14 @@
 
 set -eu
 
+
+
+
 # 
+# Значение опций по умолчанию и локальные переменные
+# 
+
 # Массив для хранения __аргументов__, без __опций__ (отфильтровывается из всех переданных __параметров__).
-# 
 ARGUMENTS=()
 
 # Зададим __опции__ по умолчанию.
@@ -12,6 +17,13 @@ OPTION_DEVELOPMENT=false
 OPTION_SAVE=false
 OPTION_OPEN=false
 OPTION_ADVANCED=""
+
+
+
+
+# 
+# Отфильтровка опций из параметров
+# 
 
 # Переберём все __параметры__,
 # если встречена известная опция - отфильтровываем её.
@@ -47,6 +59,13 @@ done
 [[ ${#ARGUMENTS[*]} -gt 0 ]] && \
 	set -- "${ARGUMENTS[@]}"
 
+
+
+
+# 
+# Состояние
+# 
+
 if [[ "$OPTION_DEVELOPMENT" == true ]]
 then
 	echo "Имя функции: ${FUNCNAME-}"
@@ -60,10 +79,14 @@ then
 	echo '$OPTION_ADVANCED: ' $OPTION_ADVANCED
 fi
 
-function app_man {
-	man zaccesses
-}
 
+
+
+# 
+# Вспомогательные функции
+# 
+
+# Вывод сообщение об ошибке
 function echoe {
 	echo -en "\033[31m" >&2
 	echo -e $1 >&2
@@ -113,66 +136,76 @@ function echoc {
 	echo -en ${ECHOC_COLORS[style_default]}
 }
 
-function app_complete() {
-	echo 'my zenon --help'
+function check_password() {
+	if [[ -z ${YANDEX_PASSWORD-} ]]
+	then
+		echo -n "Введите пароль: "
+		read -s YANDEX_PASSWORD
+		if [[ -z ${YANDEX_PASSWORD-} ]]
+		then
+			echo "Пароль пустой." >&2
+			exit 1
+		fi
+	fi
 }
 
+
+
+
+# 
+# Функции команд
+# 
+
+# Показать мануал
+function app_man {
+	man zaccesses
+}
+
+# Автодополнение
+function app_complete() {
+	echo 'my zenon --help sshconfig'
+}
+
+# Мои пароли
 function app_my() {
+
+	# Загрузка
 	if [[ "$OPTION_SAVE" == true ]]
 	then
-		if [[ -z ${YANDEX_PASSWORD-} ]]
-		then
-			echo -n "Введите пароль: "
-			read -s YANDEX_PASSWORD
-			if [[ -z ${YANDEX_PASSWORD-} ]]
-			then
-				echo "Пароль пустой." >&2
-				exit 1
-			fi
-		fi
+		check_password
 		curl -T ~/accesses/my.yml https://webdav.yandex.ru/accesses/my.yml --user Zlatov:"${YANDEX_PASSWORD}"
 		echoc "my.yml сохранён." green
-	else
-		if [[ -z ${YANDEX_PASSWORD-} ]]
-		then
-			echo -n "Введите пароль: "
-			read -s YANDEX_PASSWORD
-			if [[ -z ${YANDEX_PASSWORD-} ]]
-			then
-				echo "Пароль пустой." >&2
-				exit 1
-			fi
-		fi
+	fi
+
+	# Скачивание
+	# только когда пользователь не открывает.
+	if [[ "$OPTION_SAVE" == false && "$OPTION_OPEN" != true ]]
+	then
+		check_password
 		wget \
 			https://webdav.yandex.ru/accesses/my.yml\
 			--user=Zlatov\
 			--password=$YANDEX_PASSWORD\
-			-P ~/accesses\
-			-O my.yml
+			-O ~/accesses/my.yml
 		echoc "my.yml загружен." blue
 	fi
+
+	# Открытие
+	# и когда пользователь скачивает.
 	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
 	then
 		subl ~/accesses/my.yml
 	fi
 }
 
+# Пароли Зенон
 function app_zenon() {
 
 	# Загрузка
 	if [[ "$OPTION_SAVE" == true ]]
 	then
-		if [[ -z ${YANDEX_PASSWORD-} ]]
-		then
-			echo -n "Введите пароль: "
-			read -s YANDEX_PASSWORD
-			if [[ -z ${YANDEX_PASSWORD-} ]]
-			then
-				echo "Пароль пустой." >&2
-				exit 1
-			fi
-		fi
-		curl -T ~/accesses/my.yml https://webdav.yandex.ru/accesses/zenon.yml --user Zlatov:"${YANDEX_PASSWORD}"
+		check_password
+		curl -T ~/accesses/zenon.yml https://webdav.yandex.ru/accesses/zenon.yml --user Zlatov:"${YANDEX_PASSWORD}"
 		echoc "zenon.yml сохранён." green
 	fi
 
@@ -180,21 +213,12 @@ function app_zenon() {
 	# только когда пользователь не открывает.
 	if [[ "$OPTION_SAVE" == false && "$OPTION_OPEN" != true ]]
 	then
-		if [[ -z ${YANDEX_PASSWORD-} ]]
-		then
-			echo -n "Введите пароль: "
-			read -s YANDEX_PASSWORD
-			if [[ -z ${YANDEX_PASSWORD-} ]]
-			then
-				echo "Пароль пустой." >&2
-				exit 1
-			fi
-		fi
+		check_password
 		wget \
 			https://webdav.yandex.ru/accesses/zenon.yml\
-			--user=Zlatov --password=$YANDEX_PASSWORD\
-			-P ~/accesses\
-			-O zenon.yml
+			--user=Zlatov\
+			--password=$YANDEX_PASSWORD\
+			-O ~/accesses/zenon.yml
 		echoc "zenon.yml загружен." blue
 	fi
 
@@ -206,6 +230,45 @@ function app_zenon() {
 	fi
 }
 
+# Общий конфиг ssh хостов
+function app_sshconfig() {
+
+	# Загрузка
+	if [[ "$OPTION_SAVE" == true ]]
+	then
+		check_password
+		curl -T ~/.ssh/config https://webdav.yandex.ru/accesses/ssh/config --user Zlatov:"${YANDEX_PASSWORD}"
+		echoc ".ssh/config сохранён." green
+	fi
+
+	# Скачивание
+	# только когда пользователь не открывает.
+	if [[ "$OPTION_SAVE" == false && "$OPTION_OPEN" != true ]]
+	then
+		check_password
+		wget \
+			https://webdav.yandex.ru/accesses/ssh/config\
+			--user=Zlatov\
+			--password=$YANDEX_PASSWORD\
+			-O ~/.ssh/config
+		chmod 600 ~/.ssh/config
+		echoc ".ssh/config загружен." blue
+	fi
+
+	# Открытие
+	# и когда пользователь скачивает.
+	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
+	then
+		subl ~/.ssh/config
+	fi
+}
+
+
+
+
+# 
+# Определение команды
+# 
 # Возьмём первый аргумент, определим команду
 if [[ -n ${1-} ]]
 then
@@ -220,6 +283,9 @@ then
 			;;
 		zenon)
 			app_zenon
+			;;
+		sshconfig)
+			app_sshconfig
 			;;
 		complete)
 			app_complete $@
