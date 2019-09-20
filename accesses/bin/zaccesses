@@ -114,7 +114,7 @@ function echoc {
 }
 
 function app_complete() {
-	echo 'deploy rollback complete pull pull install help'
+	echo 'my zenon --help'
 }
 
 function app_my() {
@@ -143,7 +143,12 @@ function app_my() {
 				exit 1
 			fi
 		fi
-		wget https://webdav.yandex.ru/accesses/my.yml --user=Zlatov --password=$YANDEX_PASSWORD -P ~/accesses
+		wget \
+			https://webdav.yandex.ru/accesses/my.yml\
+			--user=Zlatov\
+			--password=$YANDEX_PASSWORD\
+			-P ~/accesses\
+			-O my.yml
 		echoc "my.yml загружен." blue
 	fi
 	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
@@ -152,17 +157,69 @@ function app_my() {
 	fi
 }
 
-# Переберём аргументы, обработаем команды
+function app_zenon() {
+
+	# Загрузка
+	if [[ "$OPTION_SAVE" == true ]]
+	then
+		if [[ -z ${YANDEX_PASSWORD-} ]]
+		then
+			echo -n "Введите пароль: "
+			read -s YANDEX_PASSWORD
+			if [[ -z ${YANDEX_PASSWORD-} ]]
+			then
+				echo "Пароль пустой." >&2
+				exit 1
+			fi
+		fi
+		curl -T ~/accesses/my.yml https://webdav.yandex.ru/accesses/zenon.yml --user Zlatov:"${YANDEX_PASSWORD}"
+		echoc "zenon.yml сохранён." green
+	fi
+
+	# Скачивание
+	# только когда пользователь не открывает.
+	if [[ "$OPTION_SAVE" == false && "$OPTION_OPEN" != true ]]
+	then
+		if [[ -z ${YANDEX_PASSWORD-} ]]
+		then
+			echo -n "Введите пароль: "
+			read -s YANDEX_PASSWORD
+			if [[ -z ${YANDEX_PASSWORD-} ]]
+			then
+				echo "Пароль пустой." >&2
+				exit 1
+			fi
+		fi
+		wget \
+			https://webdav.yandex.ru/accesses/zenon.yml\
+			--user=Zlatov --password=$YANDEX_PASSWORD\
+			-P ~/accesses\
+			-O zenon.yml
+		echoc "zenon.yml загружен." blue
+	fi
+
+	# Открытие
+	# и когда пользователь скачивает.
+	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
+	then
+		subl ~/accesses/zenon.yml
+	fi
+}
+
+# Возьмём первый аргумент, определим команду
 if [[ -n ${1-} ]]
 then
-	function_name=$1
+	argument=$1
 	shift
-	case $function_name in
+	case $argument in
 		temp)
 			app_temp $@
 			;;
 		my)
 			app_my
+			;;
+		zenon)
+			app_zenon
 			;;
 		complete)
 			app_complete $@
@@ -172,7 +229,7 @@ then
 			;;
 		*)
 			echoc "Ошибка." red
-			echoe "Неизвестная команада. „${1}“"
+			echoe "Неизвестная команада. „$argument“"
 			for i in ${!BASH_SOURCE[@]}
 			do
 				echo $i ' : ' ${BASH_SOURCE[$i]}
