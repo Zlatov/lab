@@ -22,3 +22,4 @@ mkdir -p ./split/separated
 #           ┌─── что разбивать ────┐ ┌─ куда разбивать и префикс ──┐
 #           │                      │ │                             │
 split -l 10 ./split/temp_big_content ./split/separated/temp_content_
+split -l 10 --additional-suffix=.css ./split/temp_big_content ./split/separated/temp_css_
