@@ -10,6 +10,8 @@ echoc "все" green
 find ./
 echoc "файлы" green
 find ./ -type f
+echoc "png файлы" green
+find ./ -type f -name "*.png"
 echoc "папки" green
 find . -type d
 echoc "папки кроме" green
