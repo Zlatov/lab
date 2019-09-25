@@ -5,7 +5,7 @@ set -eu
 cd $(dirname "$0")
 
 # Очищаем текущую директорию для теста:
-find . -type f -not -name file.sh -not -name file_path.sh -not -name file_path_included.sh -not -name csplit.sh -delete
+find . -type f -not -name file.sh -not -name file_path.sh -not -name file_path_included.sh -not -name csplit.sh -not -name split.sh -delete
 find . -type d -not -path . | xargs -I {} rm -rf {}
 # exit 0
 
@@ -22,6 +22,7 @@ echoc "Запись в файл." green
 	echo 'записывается вторая строчка'
 	echo 'записывается третья строчка'
 } > temp_file.txt
+
 # Смотри как удаляются табы в начале строк за счёт знака «минус»!
 {
 	echo "$(cat \
@@ -35,6 +36,8 @@ echoc "Запись в файл." green
 		EOF
 	)"
 } > temp_file2.txt
+
+echoc "Очищается любое количество повторяющихся табов в начале строки." blue
 echo "$(cat \
 	<<-EOF
 	!@#$%^&*()-=/.,?><\';|":][}{
