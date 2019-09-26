@@ -20,7 +20,7 @@ alias openhosts='subl /etc/hosts'
 alias opensshconfig='subl ~/.ssh/config'
 alias openapacheconfigmy='subl /etc/apache2/sites-available/my.conf'
 alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
-alias openpostgresqlconfiguser='bash --noprofile -lc "sudo subl -n /etc/postgresql/10/main/pg_hba.conf"'
+alias openpostgresqlconfiguser='sudo mcedit /etc/postgresql/10/main/pg_hba.conf'
 
 alias cdlab='cd ~/projects/my/lab'
 alias cdloremrails='cd ~/projects/my/lorem_rails'
@@ -32,11 +32,11 @@ alias cdtasker='cd ~/projects/zenon/tasker'
 alias cdforum='cd ~/projects/zenon/sign-forum'
 
 alias  s='git status -u'
-alias  a='git add'
-alias aa='git add -A'
-alias  r='git reset HEAD'
-alias  c='git commit'
-alias ca='git add -A && git commit'
+# alias  a='git add'
+# alias aa='git add -A'
+# alias  r='git reset HEAD'
+# alias  c='git commit'
+# alias ca='git add -A && git commit'
 
 export DISABLE_SPRING=1
 
