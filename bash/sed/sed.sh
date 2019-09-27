@@ -14,6 +14,7 @@ find . -type d -not -path . | xargs -I {} rm -rf {}
 # Замена подстроки в строке на другую строку
 echo день | sed s/день/ночь/
 echo +день+ | sed s/день/ночь/
+# exit 0
 
 # Это регистрозависимо и всёравно это регулярка
 echoc "Это регистрозависимо и всёравно это регулярка" green
@@ -45,6 +46,12 @@ sed -ibackup -r 's/^qwe `/qwe `_/i' temp_2
 echo "foobar" | sed -r 's/foo(\w+)/\1 is found/'
 echo "foo123" | sed -rn 's/foo([0-9]+)/\1 is found/p'
 echo "123.asd" | sed -nr 's/([0-9]+.\w+)/\1 is found/p'
+{
+	echo 'asd'
+	echo 'zxc'
+	echo 'qwe'
+} | sed -r 's/^.{1}//'
+# exit 0
 
 echo 'Сохранить в переменную найденное по регулярке'
 a=$(echo "asd market_assd asd zxc" | sed -nr 's/.*(market[a-zA-Z_]+).*/\1/p')

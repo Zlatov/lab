@@ -57,7 +57,7 @@ for i in "${!array[@]}"; do
 done
 # exit 0
 
-echoc "Количество count length" green
+echoc 'Количество count length ${#a[@]}' green
 declare -a a=('asd zxc' zxc 1)
 declare -i b="${#a[@]}"
 declare -i c="${#a[*]}"
