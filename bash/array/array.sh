@@ -11,9 +11,15 @@ cd "$(dirname "${0}")"
 
 . ../_lib/echoc
 
-# Очищаем текущую директорию для теста:
-find . -type f -not -name array.sh -delete
-find . -type d -not -path . | xargs -I {} rm -rf {}
+# Очищаем директорию для теста:
+filename=$(basename -- "${BASH_SOURCE[0]}") # Имя текущего исполняемого файла.
+test_dirname="${filename%.*}" # Имя тестовой директории - это имя текущего файла без расширения.
+mkdir -p ./$test_dirname
+# find . -type f -not -name array.sh -delete
+# find . -type d -not -path . | xargs -I {} rm -rf {}
+find ./$test_dirname -type f -delete
+find ./$test_dirname -type d -not -path ./$test_dirname | xargs -I {} rm -rf {}
+# exit 0
 
 array=(aaa bbb ccc)
 
@@ -133,14 +139,14 @@ done
 # exit 0
 
 echoc "Наполним массив из файла" green
-touch temp
-echo -e "asd\nqwe zxc" | tee temp >/dev/null
+touch $test_dirname/temp
+echo -e "asd\nqwe zxc" | tee $test_dirname/temp >/dev/null
 unset a
 declare -a a
 while read line
 do
   a+=("$line")
-done < ./temp
+done < $test_dirname/temp
 for i in ${!a[@]}
 do
   item=${a[$i]}
@@ -149,7 +155,7 @@ done
 
 echoc "Или так" blue
 unset a
-mapfile -t a < ./temp
+mapfile -t a < $test_dirname/temp
 for i in ${!a[@]}
 do
   item=${a[$i]}

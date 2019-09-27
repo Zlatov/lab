@@ -21,3 +21,8 @@ https://dev.to/pixelgoo/how-to-configure-webpack-from-scratch-for-a-basic-websit
 
 На [сайт](http://webpack.github.io/analyse/) загрузить json файл сегенерированный `./bin/webpack --json --profile > tmp/webpack-stat.json`
 
+## В rails
+
+* `./bin/webpack-dev-server`
+* `./bin/webpack-dev-server --verbose` - в подробном режиме.
+* `./bin/webpack-dev-server --profile` - показывает, сколько времени потребовалось для каждого из пакетов.
