@@ -3,37 +3,52 @@ set -eu
 
 cd $(dirname "$0")
 
-# Очищаем текущую директорию для теста:
-find . -type f -not -name scp.sh -delete
-find . -type d -not -path . | xargs -I {} rm -rf {}
+. ../_lib/echoc
+
+# Очищаем директорию для теста:
+filename=$(basename -- "${BASH_SOURCE[0]}") # Имя текущего исполняемого файла.
+test_dirname="${filename%.*}" # Имя тестовой директории - это имя текущего файла без расширения.
+mkdir -p ./$test_dirname
+find ./$test_dirname -type f -delete
+find ./$test_dirname -type d -not -path ./$test_dirname | xargs -I {} rm -rf {}
 # exit 0
 
-# ssh zlatov mkdir temp
-# ssh zlatov echo "hi"
-# ssh zlatov pwd
-# ssh zlatov "cd temp && touch temp"
-# ssh zlatov "[[ ! -d temp ]] && mkdir temp || echo 'dir exist'; rm -rf temp"
+echo
+echoc "Команды на сервер." green
+ssh local pwd
+ssh local 'set -eu; cd ~; pwd'
+ssh local	"$(cat \
+	<<-EOF
+		set -eu
+		cd ~
+		mkdir -p temp
+		cd temp
+		pwd
+	EOF
+)"
 
-ssh zlatov '
-  [[ -d temp ]] && rm -rf temp || echo "temp not exists"
-  mkdir temp
-  touch temp/temp_f
-  mkdir -p temp/temp_d
-  touch temp/temp_d/temp_f2
+echo
+echoc 'Копирование файла с переименованием и с "подставой"' green
+ssh local '
+	set -eu
+	[[ -d temp ]] && rm -rf temp || echo "temp not exists"
+	mkdir temp
+	touch temp/temp_f
+	mkdir -p temp/temp_d
+	touch temp/temp_d/temp_f2
 '
-# Копирование файла с переименованием и с "подставой"
-mkdir temp_f_copy2
-scp zlatov:~/temp/temp_f temp_f_copy  # создаст с новым именеи
-scp zlatov:~/temp/temp_f temp_f_copy2 # положит в папку
+mkdir -p $test_dirname/temp_f_copy2
+scp local:~/temp/temp_f $test_dirname/temp_f_copy  # создаст с новым именеи
+scp local:~/temp/temp_f $test_dirname/temp_f_copy2 # положит в папку
+echoc 'Выход: указать имя файла с помощью mv -T' blue
+scp local:~/temp/temp_f $test_dirname && mv -T $test_dirname/temp_f $test_dirname/temp_f_copy3
 
-# Выход:
-# mkdir temp_f_copy3
-scp zlatov:~/temp/temp_f ./ && mv -T temp_f temp_f_copy3
+echo
+echoc 'Рекурсивное копирование папки' green
+mkdir -p $test_dirname/temp_dest
+scp -r local:~/temp $test_dirname/temp_dest
 
-# Рекурсивное копирование папки
-mkdir temp_dest
-scp -r zlatov:~/temp ./temp_dest
-
-# Рекурсивное копирование содержимого папки
-mkdir temp_dest2
-scp -r zlatov:~/temp/* ./temp_dest2
+echo
+echoc 'Рекурсивное копирование содержимого папки' green
+mkdir $test_dirname/temp_dest2
+scp -r local:~/temp/* $test_dirname/temp_dest2
