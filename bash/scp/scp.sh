@@ -75,13 +75,14 @@ ssh local	"$(cat \
 		pwd
 	EOF
 )"
+# Создадим папки назначения
+mkdir -p $test_dirname/scp_first_n_folders
 echoc 'Список имён директорий с сервера.' blue
 a=($(ssh local 'set -eu; cd temp; find . -type d ! -path . -maxdepth 1 | head -5 | sed -r s/^.{2}//'))
 echo "${a[@]}"
 echoc 'Массив первых N элементов в директории на сервере.' blue
 b=($(ssh local 'set -eu; cd temp; find $(pwd) -type d ! -path $(pwd) -maxdepth 1 | head -5'))
 echo "${b[@]}"
-mkdir -p $test_dirname/scp_first_n_folders
 echoc 'Если массив не пуст - скачиваем.' blue
 [[ "${#a[@]}" > 0 ]] && scp -r local:"${b[@]}" $test_dirname/scp_first_n_folders || true
 # exit 0
