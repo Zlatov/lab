@@ -49,7 +49,7 @@ a='someparam'
 b='one param'
 foo "this" is "a" 1 "test" $a $b
 foo "this" is "a" 1 "test" $a "$b"
-exit 0
+# exit 0
 
 # How do I parse command line arguments in Bash?
 # Method #1: Using bash without getopt[s]
@@ -79,6 +79,10 @@ function coffee {
       DEFAULT=YES
       shift # забываем аргумент
       ;;
+      --exit)
+      EXIT=true
+      shift # забываем аргумент
+      ;;
       *)    # встретили неизвестную опцию
       POSITIONAL+=("$1") # сохраним опцию как аргумент
       shift # забываем аргумент
@@ -94,22 +98,26 @@ function coffee {
   echo MILK    = "${MILK}"
   echo DEFAULT = "${DEFAULT}"
 
+  # Выход из функции
+  [[ "${EXIT-}" == true ]] && return 0 || true
+
   echoc "Имя функции: ${FUNCNAME}" blue
   echoc "Количество переданных параметров: $#" green
   echo "Все параметры переданные функции: '$@'"
 }
 
 
-# # Проверка
-# coffee
-# coffee -g 3 -s 10
-# coffee -g 3 -s 10 покрепче
+# Проверка
+coffee
+coffee -g 3 -s 10
+coffee -g 3 -s 10 покрепче
 
-# # Проверка на ошибочные опции
-# coffee -d 3 -s 10 
-# coffee -d -s 10
-# # Т.о. ошибочные опции превращаются в параметры
-
+# Проверка на ошибочные опции
+coffee -d 3 -s 10 
+coffee -d -s 10
+coffee -d -s 10 --exit
+# Т.о. ошибочные опции превращаются в параметры
+# exit 0
 
 
 
