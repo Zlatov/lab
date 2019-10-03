@@ -21,8 +21,10 @@ alias opensshconfig='subl ~/.ssh/config'
 alias openapacheconfigmy='subl /etc/apache2/sites-available/my.conf'
 alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
 alias openpostgresqlconfiguser='sudo mcedit /etc/postgresql/10/main/pg_hba.conf'
+alias xopen='xdg-open'
 
 alias cdlab='cd ~/projects/my/lab'
+alias cdprojects='cd ~/projects'
 alias cdloremrails='cd ~/projects/my/lorem_rails'
 
 alias cdadmin='cd ~/projects/zenon/admin'

@@ -2,7 +2,8 @@
 from termcolor import colored
 
 a = [1, 2, 3]
-print("a [", type(a), "]: ", a, sep='')
+# print("a [", type(a), "]: ", a, sep='')
+print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
 
 # Python List append()  Add Single Element to The List
 # Python List extend()  Add Elements of a List to Another List
@@ -33,31 +34,56 @@ print("a [", type(a), "]: ", a, sep='')
 # Python sum()  Add items of an Iterable
 # Python zip()  Returns an Iterator of Tuples
 
+print colored('Массив в переменные', 'green')
 a = [1, 2, 3, 1]
 b = a.count(1)
 c = len(a)
 d = a[0]
 e, f, g, h = a
-print("b [", type(b), "]: ", b, sep='')
-print("c [", type(c), "]: ", c, sep='')
-print("d [", type(d), "]: ", d, sep='')
-print("e, f, g, h, i: ", e, f, g, h, sep=' ')
+# print("b [", type(b), "]: ", b, sep='')
+# print("c [", type(c), "]: ", c, sep='')
+# print("d [", type(d), "]: ", d, sep='')
+# print("e, f, g, h, i: ", e, f, g, h, sep=' ')
+print colored('a:', 'red'), a
+print colored('b:', 'red'), b
+print colored('c:', 'red'), c
+print colored('d:', 'red'), d
+print colored('e, f, g, h:', 'red'), e, f, g, h
+# exit(0)
 
+print colored('Массив имеет различные значения (max != min)', 'green')
 a = [1, 1, 1, 1, 2]
 b = (max(a) == min(a))
-# print(colored(a, "red"))
-print("a:", a)
-print("b:", b)
+print colored('a:', 'red'), a
+print colored('b:', 'red'), b
+# exit(0)
 
-a = [[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]
-print("a:", a)
-
+print colored('Перебор многомерного массива', 'green')
+a = [[1, 2], [3, 4], [5, 6]]
+print colored('a:', 'red'), a
 i = 0
 j = 0
-for x in a:
+for row in a:
   i+= 1
-  for y in x:
+  for x in row:
     j+= 1
-    print("i:", i)
-    print("j:", j)
-    print("y:", y)
+    print "[{}, {}] = {}".format(i, j, x)
+# exit(0)
+
+print colored('Массив в строку', 'green')
+a = ['1', '2', '3']
+b = ''.join(a)
+print colored('a:', 'red'), a
+print colored('b:', 'red'), b
+a = [1, 2, 3]
+b = ''.join(str(e) for e in a)
+print colored('a:', 'red'), a
+print colored('b:', 'red'), b
+# exit(0)
+
+print colored('Преобразование элементов массива', 'green')
+a = [1, 2, 3]
+b = [str(e) for e in a]
+print colored('a:', 'red'), a
+print colored('b:', 'red'), b
+# exit(0)

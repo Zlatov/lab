@@ -1,5 +1,5 @@
-<pre class="prettyprint lang-py">
-# 
+```python
+#
 import sublime, sublime_plugin, pprint, subprocess, random
 
 class EventListener(sublime_plugin.EventListener):
@@ -28,10 +28,9 @@ class ExampleCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		self.view.insert(edit, 0, "Hello, World!")
 		self.view.run_command('examp')
+```
 
-</pre>
-
-<pre class="prettyprint lang-py">
+```python
 import sublime, sublime_plugin, pprint, subprocess
 
 class EventListener(sublime_plugin.EventListener):
@@ -42,5 +41,4 @@ class EventListener(sublime_plugin.EventListener):
 		pprint.pprint(vtype)
 		if output!='done':
 			pprint.pprint(output)
-
-</pre>
+```
