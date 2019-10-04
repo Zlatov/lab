@@ -1,7 +1,7 @@
 {
 	"auto_complete_selector": "source, text",
 	"hot_exit": false,
-	"remember_open_files": false,
+	"remember_open_files": true,
 	"binary_file_patterns":
 	[
 		"*.dds",

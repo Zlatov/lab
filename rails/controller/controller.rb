@@ -2,8 +2,9 @@ class NewsController < ApplicationController
   before_filter :find_model
 
   layout 'admin/special'
-  prepend_view_path 'app/views/admin'
+  layout false
   layout :resolve_layout
+  prepend_view_path 'app/views/admin'
 
   def index
   end
