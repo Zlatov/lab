@@ -64,7 +64,7 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/i,
         use: [
-          {loader: MiniCssExtractPlugin.loader, options: {hmr: is_development}/*, reloadAll: true*/},
+          {loader: MiniCssExtractPlugin.loader, options: {hmr: is_development}},
           {loader: "css-loader", options: {importLoaders: 1}},
           {loader: "postcss-loader", options:{options: {}}},
           {loader: "sass-loader", options: {implementation: require("node-sass")}}
