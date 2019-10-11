@@ -1,0 +1,19 @@
+.clear-blocks {
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .block {
+    display: inline-block;
+    float: left;
+    width: 200px;
+    height: 200px;
+    padding-top: 20px;
+    background: url("./sass/clear-blocks/treangle.svg") no-repeat center top;
+
+    border: solid 1px red;
+  }
+}
