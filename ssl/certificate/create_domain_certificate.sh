@@ -11,12 +11,10 @@ then
   exit 0
 fi
 
-if [ -f temp_device.key ]
-then
-  KEY_OPT="-key"
-else
-  KEY_OPT="-keyout"
-fi
+rm -rf temp
+rm -rf temp_out
+mkdir -p temp
+mkdir -p temp_out
 
 DOMAIN=$1
 COMMON_NAME=${2:-$1}
@@ -24,13 +22,27 @@ COMMON_NAME=${2:-$1}
 SUBJECT="/C=RU/ST=MO/L=Moscow/O=Zlatov/CN=$COMMON_NAME"
 NUM_OF_DAYS=999
 
-openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT temp_device.key -subj "$SUBJECT" -out device.csr
 
-cat v3.ext | sed s/%%DOMAIN%%/$COMMON_NAME/g > temp_v3.ext
+# 1. Закрытый ключ.
+openssl genrsa -out temp/rootCA.key 2048
 
-openssl x509 -req -in device.csr -CA ~/rootCA.pem -CAkey ~/rootCA.key -CAcreateserial -out device.crt -days $NUM_OF_DAYS -sha256 -extfile temp_v3.ext
+# 2. Корневой сертификат.
+openssl req -x509 -new -nodes -key temp/rootCA.key -sha256 -days 1024 -out temp/rootCA.pem
 
-mv device.csr ~/$DOMAIN.csr
-cp device.crt ~/$DOMAIN.crt
+# 3. Создадим файл запроса (.csr - Certificate Signing Request) на основе ключа.
+if [ -f temp/rootCA.key ]
+then
+  KEY_OPT="-key"
+else
+  KEY_OPT="-keyout"
+fi
+openssl req -new -newkey rsa:2048 -sha256 -nodes $KEY_OPT temp/rootCA.key -subj "$SUBJECT" -out temp/device.csr
 
-rm -f device.crt
+# 4. Файл настроек
+cat v3.ext | sed s/%%DOMAIN%%/$COMMON_NAME/g > temp/temp_v3.ext
+
+openssl x509 -req -in temp/device.csr -CA temp/rootCA.pem -CAkey temp/rootCA.key -CAcreateserial -out temp/device.crt -days $NUM_OF_DAYS -sha256 -extfile temp/temp_v3.ext
+
+cp temp/device.csr temp_out/$DOMAIN.csr
+cp temp/device.crt temp_out/$DOMAIN.crt
+cp temp/rootCA.key temp_out/$DOMAIN.key
