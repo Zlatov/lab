@@ -3,7 +3,10 @@ require 'rubygems'
 require 'awesome_print'
 require "open-uri"
 require 'mini_magick'
-require 'active_support/concern'
+
+# require 'active_support/concern'
+require 'active_support'
+require 'active_support/core_ext'
 
 require_relative '../_libs/array/nested.rb'
 class Array
