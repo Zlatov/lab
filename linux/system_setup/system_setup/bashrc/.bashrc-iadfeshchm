@@ -32,6 +32,7 @@ alias cdframework='cd ~/projects/zenon/framework'
 alias cdmarket='cd ~/projects/zenon/market'
 alias cdtasker='cd ~/projects/zenon/tasker'
 alias cdforum='cd ~/projects/zenon/sign-forum'
+alias cdzenonline='cd ~/projects/zenon/zenonline'
 
 alias  s='git status -u'
 # alias  a='git add'
