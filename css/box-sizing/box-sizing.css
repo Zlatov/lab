@@ -1,5 +1,5 @@
 /* 
-content-box
+content-box (по умолчанию)
 Основывается на стандартах CSS, при этом свойства width и height задают ширину и высоту содержимого и не включают в себя значения margin, padding и border.
 
 border-box
