@@ -45,7 +45,7 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 `gem which gem_name` — где же гем gem_name;
 `gem environment` — инфа обо всей гем среде (верия руби, рубигема, пути и т.д.);
 `gem list ^rails$ --remote --all` — посмотреть доступные версии пакета
-`gem install bundler`
+`bundler --version`, `gem list bundler`, `gem install bundler`, `gem install bundler -v 2.0.2`
 `gem install rails`
 `bundle` - установить пакеты
 

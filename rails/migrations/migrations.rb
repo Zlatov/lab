@@ -1,3 +1,9 @@
+# 
+# `rails generate migration <migration_name>`
+# `rails db:migrate`
+# `rails db:rollback`
+# 
+
 
 change_column :table_name, :column_name, :column_type, null: false, default: ''
 add_column table_name, column_name, type, options

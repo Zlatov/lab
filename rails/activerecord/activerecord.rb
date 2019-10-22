@@ -1,3 +1,10 @@
+# 
+# ```
+# User.table_name
+# User.column_names
+# User.columns_hash
+# ```
+# 
 
 # 
 # Синтаксис логических выражений в SQL операторе WHERE переведён

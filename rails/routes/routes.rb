@@ -1,4 +1,10 @@
 
+# 
+# `$ rails routes` - список всех путей;
+# `> app.products_path` - проверка пути, вернёт url;
+# `> app.product_path 123` - -//-
+# 
+
 get "lorem/grid"
 
 get "lorem/grid" => "lorem#grid"
