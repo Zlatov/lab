@@ -1,0 +1,106 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  border: solid 1px black;
+  width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+
+  .item {
+    width: 200px;
+    border: solid 1px red;
+    box-sizing: border-box;
+  }
+}
+
+.container {
+  width: 900px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 0, 0.5);
+}
+
+.wrapper2 {
+  // border: solid 4px gray;
+  width: 830px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  padding-top: 5px;
+
+  &:after {
+    content: "";
+    flex: auto;
+  }
+
+  .item {
+    width: 200px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.4), 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    background-color: white;
+
+    // Проблема выравнивания последней строки решается добавлением N скрытых домов в конец:
+    // ВОТ ЭТО КАПЕЦ ФЛЕКСЫ - ТАКИЕ ФЛЕКСЫ!!!
+    &.hidden {
+      visibility: hidden;
+      margin: 0;
+    }
+
+    img {
+      max-width: 100%;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+    .content {
+      padding: 10px;
+      &>:first-child {
+        margin-top: 0;
+      }
+      &>:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.container2 {
+  width: 830px;
+  margin: 0 auto;
+  background-color: rgba(0, 255, 255, 0.5);
+}
+
+.wrapper3 {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -5px;
+
+  .item {
+    width: 200px;
+    margin: 5px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 0 3px 0px rgba(0, 0, 0, 0.4), 0 0 5px 0 rgba(0, 0, 0, 0.5);
+    background-color: white;
+
+    img {
+      max-width: 100%;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+    .content {
+      padding: 10px;
+      &>:first-child {
+        margin-top: 0;
+      }
+      &>:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

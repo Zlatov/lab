@@ -1,0 +1,69 @@
+<!--
+  Задача:
+  Создать динамически изменяющуюся высоту строк созданными нодами с общим предком.
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="./temp_public/css.css">
+  <script type="text/javascript" src="./temp_public/js.js"></script>
+</head>
+<body>
+  <h2>Флексы вроде работают, но</h2>
+  <div class="wrapper">
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+    <div class="item"><p ilorem="20"></p></div>
+  </div>
+  <h2>Проблема флексбоксов - выравнивание последней строки</h2>
+  <div class="container">
+    <div class="wrapper2">
+      <div class="item"><img src="./temp_public/images/200-200-beautiful-beauty.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-blooming-flora.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-classic-car.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-colorful-autumn.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-headlights-lamborghini.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-natural-nature.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-redhead-girl.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-ripe-apple.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-beautiful-beauty.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-blooming-flora.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-classic-car.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <!-- <div class="item"><img src="./temp_public/images/200-200-colorful-autumn.jpg"><div class="content"><p ilorem="20"></p></div></div> -->
+      <div class="item hidden"></div>
+      <div class="item hidden"></div>
+      <div class="item hidden"></div>
+      <div class="item hidden"></div>
+    </div>
+  </div>
+  <h2>Отступы не флексом а марджином</h2>
+  <p>Ширина контейнера: 200*4 + 10*3 </p>
+  <div class="container2">
+    <div class="wrapper3">
+      <div class="item"><img src="./temp_public/images/200-200-beautiful-beauty.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-blooming-flora.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-classic-car.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-colorful-autumn.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-headlights-lamborghini.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-natural-nature.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-redhead-girl.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-ripe-apple.jpg"><div class="content"><p ilorem="10"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-beautiful-beauty.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-blooming-flora.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <div class="item"><img src="./temp_public/images/200-200-classic-car.jpg"><div class="content"><p ilorem="20"></p></div></div>
+      <!-- <div class="item"><img src="./temp_public/images/200-200-colorful-autumn.jpg"><div class="content"><p ilorem="20"></p></div></div> -->
+    </div>
+  </div>
+</body>
+</html>
