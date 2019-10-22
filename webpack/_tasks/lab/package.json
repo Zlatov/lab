@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "ilorem": "^1.1.2",
     "jquery": "^3.4.1"
   },
   "devDependencies": {

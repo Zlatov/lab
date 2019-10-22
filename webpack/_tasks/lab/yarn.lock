@@ -2221,6 +2221,11 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
+ilorem@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ilorem/-/ilorem-1.1.2.tgz#afad39f4a4673a1d0e7e85870b385cac288b05fd"
+  integrity sha512-fD85bPpLWwdhgKhZ9/y7nZXzqV/n9vAZDdqcWgfGHo/7HFFMUXoxhN5o1A0O5JnOQVhwV7Cd7717AbX2DFaGTA==
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"

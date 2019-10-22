@@ -5,4 +5,4 @@ cd ../..
 
 rm -rf temp_public
 
-./bin/webpack
+./node_modules/webpack/bin/webpack.js

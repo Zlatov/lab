@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-cd "$(dirname "${BASH_SOURCE[0]}")"
-cd ..
-
-./node_modules/webpack/bin/webpack.js
