@@ -56,6 +56,12 @@ sudo apt-get install g++
 sudo apt-get install build-essential
 ```
 
+## bundle - менеджер пакетов приложения
+
+* `bundle gem gem_name` - создать Gem;
+* `bundle init` - создать Gemfile;
+* `bundle` - установить гемы из Gemfile.lock или, если его нет, установить гемы из Gemfile и сформировать Gemfile.lock.
+
 ## Консоль
 
 `load './somefile.rb'` — выполнить файл из рельсовой консоли (rails c).

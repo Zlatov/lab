@@ -7,6 +7,9 @@
 
 change_column :table_name, :column_name, :column_type, null: false, default: ''
 add_column table_name, column_name, type, options
+add_column :table_name, "column_name", :string,
+  null: true,
+  limit: 256
 # options = {
 #   :limit - Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
 #   :default - The column’s default value. Use nil for NULL.

@@ -16,6 +16,7 @@
 -- sudo subl /etc/postgresql/10/main/pg_hba.conf
 -- или в другом месте, узнать место конфигов:
 -- psql -U postgres -c 'SHOW config_file'
+-- sudo -u postgres psql -c 'SHOW config_file'
 -- 
 -- Шаблон конфигурационной строки для настройки авторизации пользователей:
 -- local     DATABASE  USER      METHOD  [OPTIONS]
