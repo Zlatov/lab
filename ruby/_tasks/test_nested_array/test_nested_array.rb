@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'active_support/all'
 require 'awesome_print'
 require 'nested_array'
 
@@ -11,6 +12,8 @@ a = [
   {id: 3, pid: nil},
 ]
 
-b = a.to_nested
+a = NestedArray::Array.new a
+
+b = a.to_nested parent_id: :pid
 
 print 'b: '.red; p b
