@@ -2,6 +2,7 @@
 # `rails generate migration <migration_name>`
 # `rails db:migrate`
 # `rails db:rollback`
+# `rails db:migrate VERSION=20191029065940`
 # 
 
 
@@ -48,6 +49,7 @@ end
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
+# add_reference :table_name, "ref_name", foreign_key: true
 
 # Removes the index_accounts_on_column in the accounts table.
 remove_index :accounts, :column

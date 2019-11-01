@@ -1,5 +1,7 @@
 # Docker
 
+https://habr.com/ru/post/310460/
+
 ## Установка
 
 ```bash
@@ -41,4 +43,8 @@ docker run -d -P --name <container_name> <image_name>
 # 
 docker port <container_id>|<container_name>
 docker run -p 8888:80 <image_name> # Задать порт который будет переадресовываться на 80-внутренний
+```
+
+```
+docker pull ubuntu:12.04
 ```

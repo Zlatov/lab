@@ -22,6 +22,15 @@ Post.where(a).where(b).or(Post.where(c))
 
 # (A || B) && C:
 Post.where(a).or(Post.where(b)).where(c)
+Post.where(c).where(a).or(Post.where(b).where(c))
+
+# 
+# JOIN
+# 
+# INNER JOIN
+User.joins(:posts) # Только те пользователи у которых есть посты
+# LEFT JOIN
+User.left_outer_join(:posts) # Все пользователи, с учётом постов если они есть
 
 
 # 

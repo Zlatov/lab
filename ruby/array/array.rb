@@ -69,7 +69,7 @@ print 'b: '.red; p b
 print 'c: '.red; p c
 print 'd: '.red; p d
 print 'e: '.red; p e
-# exit
+exit
 
 puts 'Масси включает в себя `:b`?'.green
 p (a.include?(:b)? 'y' : 'n')

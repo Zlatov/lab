@@ -1,0 +1,12 @@
+{
+    "name": "iadfeshchm/xlsx",
+    "authors": [
+        {
+            "name": "zlatov",
+            "email": "zlatov@ya.ru"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.9"
+    }
+}
