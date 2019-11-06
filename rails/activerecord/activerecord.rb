@@ -25,6 +25,12 @@ Post.where(a).or(Post.where(b)).where(c)
 Post.where(c).where(a).or(Post.where(b).where(c))
 
 # 
+# Примеры .where()
+# 
+Pt.joins(:total_sales).where('market_product_total_sales.is_sale' => true)
+
+
+# 
 # JOIN
 # 
 # INNER JOIN
@@ -92,6 +98,7 @@ Foo.where(something: value).first_or_create(attributes)
 # Не подтверждено:
 # first_or_createбудет использовать `ORDER BY id LIMIT 1`,
 # тогда как find_or_create_by просто будет использовать `LIMIT 1`
+
 
 # 
 # .order()
