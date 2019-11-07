@@ -11,6 +11,10 @@ git push --tags  # — push all tags (not recommended)
 # Получить
 git fetch --tags  # — fetch tags.
 
+# Удалить все локальные тэги и получить с ориджин
+git tag -l | xargs git tag -d
+git fetch --tags
+
 # Удалить
 git tag -d tagname  # — удалить метку tag с именем tagname
 git push --delete origin 12345  # — запушить удаление тега.

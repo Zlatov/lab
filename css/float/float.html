@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <style type="text/css">
-    .clear:after {
+    .clear::after {
       content: "";
       display: block;
       clear: both;
@@ -49,6 +49,18 @@
   </div>
   <div style="float: left; width: 33%; background-color: black;">22</div>
   <div style="clear: both;"></div>
+  <p><b>Отмена в флоате:</b></p>
+  <div class="clear">
+    <div style="float: left; width: 33%; background-color: red;">1<br>1<br>1<br>1<br>1</div>
+    <div style="margin-left: 33%; width: 33%; background-color: gray;">
+      это не флоат лефт и тут есть клеар:
+      <div class="clear">
+        <div style="float: left; width: 33%; background-color: red;">11</div>
+        <div style="float: left; width: 33%; background-color: red;">22</div>
+      </div>
+      <div style="float: left; width: 33%; background-color: red;">33</div>
+    </div>
+  </div>
 
   <h2>Позиционирование рядом <code>display: inline-block</code></h2>
 
