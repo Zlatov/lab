@@ -1,6 +1,6 @@
 <snippet>
 	<content><![CDATA[
-print colored('${1:a}', 'green')
+print(colored('${1:a}', 'green'))
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>zzzpy</tabTrigger>
