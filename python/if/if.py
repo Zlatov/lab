@@ -8,7 +8,7 @@ elif True:
 else:
   print(True)
 
-if True:
+if True & (False | True):
   print(True)
 
 a = True if True else False
