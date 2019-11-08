@@ -1,13 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# ^^^^^^^^^^^^^^^^^^^^^ Позволим использовать UTF8 символы в выполняемом файле
+
+# В версии 2 print это оператор а не функция,
+# импортируем из 3 версии функцию принт для расширенных возможностей (end='')
+from __future__ import print_function
+
 from termcolor import colored
+
 import sys
 # sudo apt-get install python-pip
 # sudo pip install termcolor
 
 print(colored('hello ', 'red') + colored('world', 'green'))
 
-print("Привет мир")
+print("Привет мир", end=' ')
 print('Привет мир');
 print('Привет' + 'мир');
 print('asd')
@@ -50,47 +57,50 @@ b=a[-6:-2]; print(b) # индексы с конца
 # """
 # print(b)
 
-print colored('Форматирование строки', 'green')
-a = 1
-b = "B {} b b b.".format(a)
-print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
-print colored('b:', 'red'), b
-# exit(0)
 
-print colored('Строку в массив', 'green')
-a = "asd  \t   zxc"
-b = a.split()
-print colored('a:', 'red'), a
-print colored('b [', 'red') + type(b).__name__ + colored(']:', 'red'), b
-a = "asd  \t   zxc"
-b = a.split("\t")
-print colored('a:', 'red'), a
-print colored('b [', 'red') + type(b).__name__ + colored(']:', 'red'), b
-# exit(0)
+# # SYNTAX VERSION 2.6+ >>>>>>>>>>>>>>>>>
 
-print colored('Многострочный текст', 'green')
-if True:
-  a = \
-  """1
-  2
-  3"""
+# print colored('Форматирование строки', 'green')
+# a = 1
+# b = "B {} b b b.".format(a)
+# print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
+# print colored('b:', 'red'), b
+# # exit(0)
 
-print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
-# exit(0)
+# print colored('Строку в массив', 'green')
+# a = "asd  \t   zxc"
+# b = a.split()
+# print colored('a:', 'red'), a
+# print colored('b [', 'red') + type(b).__name__ + colored(']:', 'red'), b
+# a = "asd  \t   zxc"
+# b = a.split("\t")
+# print colored('a:', 'red'), a
+# print colored('b [', 'red') + type(b).__name__ + colored(']:', 'red'), b
+# # exit(0)
 
-print colored('Форматирование строки', 'green')
-a = "a"
-b = "b"
-c = "c {1:} c {0:} c".format(a,b)
-# print(colored("c [", 'red'), type(c) + colored("]: ", 'red'), c)
-print colored('c:', 'red'), c
-# exit(0)
+# print colored('Многострочный текст', 'green')
+# if True:
+#   a = \
+#   """1
+#   2
+#   3"""
 
-print colored('Форматирование многострочного текста', 'green')
-a = 1
-b = """
-b {} b
-""".format(a)
-# print(colored("b [", 'red'), type(b) + colored("]: ", 'red'), b)
-print colored('b:', 'red'), b
-# exit(0)
+# print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
+# # exit(0)
+
+# print colored('Форматирование строки', 'green')
+# a = "a"
+# b = "b"
+# c = "c {1:} c {0:} c".format(a,b)
+# # print(colored("c [", 'red'), type(c) + colored("]: ", 'red'), c)
+# print colored('c:', 'red'), c
+# # exit(0)
+
+# print colored('Форматирование многострочного текста', 'green')
+# a = 1
+# b = """
+# b {} b
+# """.format(a)
+# # print(colored("b [", 'red'), type(b) + colored("]: ", 'red'), b)
+# print colored('b:', 'red'), b
+# # exit(0)
