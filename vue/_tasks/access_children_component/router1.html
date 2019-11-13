@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/vue-router/dist/vue-router.min.js"></script>
+  <script type="text/javascript" src="component1.js"></script>
+  <script type="text/javascript" src="component2.js"></script>
+  <script type="text/javascript" src="router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div>{{message}}</div>
+    <ul>
+      <li>
+        <router-link to="/vue/_tasks/access_children_component/router1.html">1</router-link>
+      </li>
+      <li>
+        <router-link to="/vue/_tasks/access_children_component/router2.html">2</router-link>
+      </li>
+    </ul>
+    <h2><code>&lt;keep-alive&gt;</code> позволяет запомнить состояние</h2>
+    <keep-alive>
+      <router-view rel="asd"></router-view>
+    </keep-alive>
+  </div>
+  <script type="text/javascript">
+
+    "use strict"
+
+    window.Vue.use(window['VueRouter'])
+
+    window.app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      },
+      router: window.router
+    })
+
+    setTimeout(function() {
+      window.app.$route.matched[0].instances.default.name = 'asdasd'
+    }, 1000);
+
+  </script>
+</body>
+</html>

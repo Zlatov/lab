@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/vue-router/dist/vue-router.min.js"></script>
+  <script type="text/javascript" src="denis_component.js"></script>
+  <script type="text/javascript" src="router.js"></script>
+</head>
+<body>
+  <h2>Тест просто с компонентом</h2>
+  <div id="app">
+    <div>{{message}}</div>
+    <d-component ref="asd"></denis-component>
+  </div>
+  <script type="text/javascript">
+
+    "use strict"
+
+    Vue.component("DenisComponent", window.DenisComponent)
+
+    window.app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      }
+    })
+
+  </script>
+</body>
+</html>
