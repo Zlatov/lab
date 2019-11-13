@@ -18,6 +18,7 @@ sudo systemctl enable docker
 ```bash
 sudo usermod -aG docker $(whoami)
 # Затем перезагрузить компьютер нахер (релогин нахере помогает)!
+sudo chmod 777 /var/run/docker.sock # 777 ??? TODO загуглить и понять кто тут придумал 777
 ```
 
 ```bash
@@ -47,4 +48,6 @@ docker run -p 8888:80 <image_name> # Задать порт который буд
 
 ```
 docker pull ubuntu:12.04
+docker volume create portainer_data
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
