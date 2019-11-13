@@ -4,10 +4,15 @@
 
   console.log('> Shortkyes Tab!')
 
+  // 
+  // Настройки
+  // 
   window.google_tabulation = {
     options: {
-      result_list_item_selector: "div.rc", // element with css style "position: relative"
+      // Селектор для поиска элементов списка результатов поиска.
+      result_list_item_selector: "div.rc div.r",
     },
+    // Индекс текущего выбранного элемента из списка результатов поиска (по умолчанию: первый индекс - 0).
     selected_element_index: 0
   }
 
@@ -18,7 +23,14 @@
     }
   }
 
+  // Обработчик нажатия на клавишу Tab и вверх, вниз (точка входа в скрипт).
+  // 1. Поиск списка элементов результата поиска;
+  // 2. Поиск текущего элемента по индексу;
+  // 3. Скрол к текущему элементу;
+  // 4. Поиск ссылки в текущем элементе и фокус на ней;
+  // 5. Сохранение индекса текущего элемента.
   function select_element(index) {
+    // 1.
     var elements = window.document.querySelectorAll(window.google_tabulation.options.result_list_item_selector)
     if (elements.length == 0) {
       console.log('> google_tabulation: no elements.')
@@ -32,11 +44,18 @@
     if (result_pointer != null) {
       result_pointer.remove()
     }
+    // 2.
     var element = elements[index]
     element.innerHTML = '<div id="result-pointer" style="position:absolute;left:-15px;">&gt;</div>' + element.innerHTML
+    // 3.
     scroll_to_element(element)
-    var link = element.querySelector('a')
+    // 4.
+    // var link = element.querySelector('a')
+    // Добавили всякую хрень с дополнительными ссылками в div.r
+    // поэтому, теперь ищем непосредственно ссылку-ребёнка `.r > a`, а не потомка `.querySelector('a')`.
+    var link = element.querySelectorAll('.r > a')[0]
     link.focus()
+    // 5.
     window.google_tabulation.selected_element_index = index
   }
 

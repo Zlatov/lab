@@ -60,7 +60,7 @@ remove_index :accounts, column: [:branch_id, :party_id]
 # Removes the index named by_branch_party in the accounts table.
 remove_index :accounts, name: :by_branch_party
 
-add_index :table_name, :column_name, name: :uq_tablename_columnname, unique: true
+add_index :table_name, "column_name", name: :uq_tablename_columnname, unique: true
 # add_index(table_name, column_name, options = {}) public
 # add_index(table_name, [column_name, column_name2], options = {}) public
 # Options: `unique: true, name: 'by_branch_party', length: 10`
