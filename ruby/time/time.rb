@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
+require_relative '../string/declension'
 
 # a = Time.new
 # p a
@@ -13,15 +14,15 @@ p Time.now.to_i.to_s
 print 'Time.now: '.red; puts Time.now
 # exit
 
-puts 'Пауза выполнения кода.'.green
-puts 'сек'.blue
-sleep 1
-puts '1/2 сек'.blue
-sleep 0.5
-puts '1/2 сек'.blue
-sleep 0.5
-puts 'yay'.blue
-# exit
+# puts 'Пауза выполнения кода.'.green
+# puts 'сек'.blue
+# sleep 1
+# puts '1/2 сек'.blue
+# sleep 0.5
+# puts '1/2 сек'.blue
+# sleep 0.5
+# puts 'yay'.blue
+# # exit
 
 a = Time.new(1998, 2, 8, 9, 12, 23, "+03:00")
 print 'a: '.light_blue; puts a
@@ -30,27 +31,6 @@ print 'b: '.light_blue; puts b
 c = (b - a).to_i
 print 'c: '.light_blue; puts c
 diff = c
-
-def declension number, words
-  if words.is_a? String
-    words = words.split(',').map{|v|v.strip}
-  end
-  words[1] = words[0] if (!words[1]||words[1].empty?)
-  words[2] = words[1] if (!words[2]||words[2].empty?)
-  number = number.abs%100
-  if number.between?(11,19)
-    return words[0]
-  end
-  i = number%10
-  case i
-  when 1
-    return words[1]
-  when 2..4
-    return words[2]
-  else
-    return words[0]
-  end
-end
 
 if diff >= 86400
   days = diff/86400
@@ -83,7 +63,76 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 print 'd: '.red; puts d
-exit
+# exit
+
+# Возвращает строку "прошло времени" в днях, часах, минутах, секундах
+# возможен полный и краткий вариант, пример:
+# краткий вариант: "1 день 1 минута"
+# полный вариант:  "1 день 0 часов 1 минута 0 секунд"
+# @param [Int|Time] time_start_finish
+# @param [Int|Time] time_finish_start
+# @param [Hash|null] options
+# @return [String]
+# Зависимость: declension
+def diff_time time_start_finish, time_finish_start, options={full: false}
+  diff_string = ''
+  diff = (time_start_finish - time_finish_start).to_i.abs
+  if diff >= 24 * 60 * 60 || options[:full]
+    days = diff/(24 * 60 * 60)
+    diff_string += "#{days} #{declension days, 'дней, день, дня'}"
+    diff_string += " "
+    diff = diff - days * 24 * 60 * 60
+  end
+  if diff >= 60 * 60 || options[:full]
+    hours = diff/(60 * 60)
+    diff_string += "#{hours} #{declension hours, 'часов, час, часа'}"
+    diff_string += " "
+    diff = diff - hours * 60 * 60
+  end
+  if diff >= 60 || options[:full]
+    minutes = diff/(60)
+    diff_string += "#{minutes} #{declension minutes, 'минут, минута, минуты'}"
+    diff_string += " "
+    diff = diff - minutes * 60
+  end
+  if diff > 0 || diff_string.empty? || options[:full]
+    diff_string += "#{diff} #{declension diff, 'секунд, секунда, секунды'}"
+  end
+  diff_string
+end
+
+print 'diff_time 0, 0: '.red; puts diff_time 0, 0
+print 'diff_time 0, 1: '.red; puts diff_time 0, 1
+print 'diff_time 0, 59: '.red; puts diff_time 0, 59
+print 'diff_time 0, 60: '.red; puts diff_time 0, 60
+print 'diff_time 0, 61: '.red; puts diff_time 0, 61
+print 'diff_time 0, 3599: '.red; puts diff_time 0, 3599
+print 'diff_time 0, 3600: '.red; puts diff_time 0, 3600
+print 'diff_time 0, 3601: '.red; puts diff_time 0, 3601
+print 'diff_time 0, 3660: '.red; puts diff_time 0, 3660
+print 'diff_time 0, 86399: '.red; puts diff_time 0, 86399
+print 'diff_time 0, 86400: '.red; puts diff_time 0, 86400
+print 'diff_time 0, 86401: '.red; puts diff_time 0, 86401
+print 'diff_time 0, 86460: '.red; puts diff_time 0, 86460
+print 'diff_time 0, 86461: '.red; puts diff_time 0, 86461
+print 'diff_time 0, 90061: '.red; puts diff_time 0, 90061
+
+print 'diff_time 0, 0, full:true: '.red; puts diff_time 0, 0, full:true
+print 'diff_time 0, 1, full:true: '.red; puts diff_time 0, 1, full:true
+print 'diff_time 0, 59, full:true: '.red; puts diff_time 0, 59, full:true
+print 'diff_time 0, 60, full:true: '.red; puts diff_time 0, 60, full:true
+print 'diff_time 0, 61, full:true: '.red; puts diff_time 0, 61, full:true
+print 'diff_time 0, 3599, full:true: '.red; puts diff_time 0, 3599, full:true
+print 'diff_time 0, 3600, full:true: '.red; puts diff_time 0, 3600, full:true
+print 'diff_time 0, 3601, full:true: '.red; puts diff_time 0, 3601, full:true
+print 'diff_time 0, 3660, full:true: '.red; puts diff_time 0, 3660, full:true
+print 'diff_time 0, 86399, full:true: '.red; puts diff_time 0, 86399, full:true
+print 'diff_time 0, 86400, full:true: '.red; puts diff_time 0, 86400, full:true
+print 'diff_time 0, 86401, full:true: '.red; puts diff_time 0, 86401, full:true
+print 'diff_time 0, 86460, full:true: '.red; puts diff_time 0, 86460, full:true
+print 'diff_time 0, 86461, full:true: '.red; puts diff_time 0, 86461, full:true
+print 'diff_time 0, 90061, full:true: '.red; puts diff_time 0, 90061, full:true
+
 
 # puts 'Парсинг строки во время'.green
 # a = '2017-02-08 08:00'

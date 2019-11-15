@@ -2,13 +2,12 @@
 require_relative '../colorize/colorize'
 
 def declension number, words
-  if words.is_a? String
+  if words.is_a? ::String
     words = words.split(',').map{|v|v.strip}
   end
   words[1] = words[0] if (!words[1]||words[1].empty?)
   words[2] = words[1] if (!words[2]||words[2].empty?)
   number = number.abs%100
-  # if number.between?(11,19)
   if 11 <= number && number <= 19
     return words[0]
   end
@@ -23,7 +22,7 @@ def declension number, words
   end
 end
 
-40.times{ |i|
-  print i.to_s + ' '
-  puts declension i, ['ежей', 'ёж', 'ежа']
-}
+# 40.times{ |i|
+#   print i.to_s + ' '
+#   puts declension i, ['ежей', 'ёж', 'ежа']
+# }
