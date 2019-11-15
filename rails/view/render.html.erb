@@ -1,3 +1,4 @@
+layout - в виде паршела.
 <%= render partial: "link_area", layout: "graybar" %>
 <%= render partial: "form", locals: {zone: @zone} %>
 
@@ -8,3 +9,13 @@
 
 Разделяющие шаблоны
 <%= render partial: @products, spacer_template: "product_ruler" %>
+
+Рендеринг контента обёрнутого паршелом
+<%= render layout: 'account_wrapper' do %>
+  <p>Find me in app/views/account/index.html.erb</p>
+<% end %>
+Пример паршела:
+<p>Find me in app/views/account/_account_wrapper.html.erb</p>
+<div>
+  <%= yield %>
+</div>
