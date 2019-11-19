@@ -7,6 +7,8 @@ class NewsController < ApplicationController
   prepend_view_path 'app/views/admin'
 
   def index
+    if request.post?
+    end
   end
 
   private

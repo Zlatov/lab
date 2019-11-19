@@ -1,5 +1,16 @@
 exit
 
+  private
+
+  def create_client_params
+    params.require(:market_model_client).permit(
+      :fio, :phone_number, :affiliate_id,
+      auth_user_attributes: [
+        :email, :password, :password_confirmation
+      ]
+    )
+  end
+
 params.permit(:from, :to_free, :subject, :content)
 
 # Вложенные параметры вынуть и разрешить так:

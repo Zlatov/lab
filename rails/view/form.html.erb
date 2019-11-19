@@ -11,6 +11,19 @@ render variants: [:mobile, :desktop]
 <%= form_for article, url: {action: "update"} do |f| %>
   <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
   <%= f.hidden_field :id %>
+
+  <div class="grid row field_row <%= @new_client.class.field_show_with_form(:fio) %>">
+    <div class="col-3">
+      <div class="wrap shred padded"><%= cl.label :fio, class: with_required(@new_client, :fio) %></div>
+    </div>
+    <div class="col-9">
+      <div class="wrap shred padded">
+        <%= cl.text_field :fio %>
+        <%= field_errors @new_client, :fio %>
+      </div>
+    </div>
+  </div>
+
   <%= f.text_field :title %>
   <%= f.submit "Отправить" %>
 <% end %>
