@@ -2,9 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <!-- Подсветка синтаксиса кода -->
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 <body>
-  <pre>
+  <pre class="prettyprint lang-js">
 
 window.location.[...]
 
@@ -19,6 +21,19 @@ http://example.org:8888/foo/bar/baz.html?q=quux#bang
         hostname    port                             
 
   </pre>
+
+  <pre class="prettyprint lang-js">
+// Не оставляет оригинальную страницу в истории сессии - симуляция поведения HTTP редиректа.
+window.location.replace("http://stackoverflow.com");
+
+// Простое поведения нажатия на ссылку
+window.location.href = "http://stackoverflow.com";
+
+// Ещё по теме:
+window.history.back()
+window.history.go(-1)
+  </pre>
+
   <script type="text/javascript" src="../../js/_libs/lib.js"></script>
   <script type="text/javascript">
 
