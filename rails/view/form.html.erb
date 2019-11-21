@@ -47,4 +47,15 @@ render variants: [:mobile, :desktop]
     @angar_selected = Angar.where(id: params[:angar]).map{|e| e.id}
   %>
   <%= select_tag :angar, options_for_select(@angar_list, @angar_selected), multiple: true, class: 'ui dropdown' %>
+  <%=
+    select_tag(
+      :client, options_for_select(
+        @options_for_select_client,
+        selected: @selected_client.id,
+        disabled: ''
+      ),
+      class: 'client_select',
+      title: 'Выбрать другого клиента для просмотра его свойств.'
+    )
+  %>
 </form>
