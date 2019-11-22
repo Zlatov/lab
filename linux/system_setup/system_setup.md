@@ -14,3 +14,11 @@
 * Установить „Автозагрузка“ из менеджера приложений.
 * Установить „Auto Move Windows“ из менеджера приложений — дополнение в „Доп. настройки GNOME“.
 * Установить сочетания клавишь для события Win+A->`параметры`->Устройства->Клавиатура->Перемещение->Переместить на рабочее местов вверх/низ на клавиши <kbd>Super + Page Up/Down</kbd>, не смотря на то что они там уже установлены (кроме этих клавишь там так же назначены Ctrl+Alt+Вниз/Вверх, данная настройка отменит использование этих клавишь).
+* Установить `sudo apt-get install imwheel` и запустить? `imwheel` - устранит на 18 убунте баг скрола.
+    1. Add following lines to _~/.imwheelrc_ and save
+    ```
+".*"
+    Control_L, Up,   Control_L|Button4
+    Control_L, Down, Control_L|Button5
+    ```
+    2. Add following command to Startup Application Preferences `imwheel --kill --buttons "4 5"`
