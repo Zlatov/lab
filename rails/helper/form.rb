@@ -37,4 +37,29 @@ module FormHelper
     end
     _with_required
   end
+
+  # Рендерит флэш сообщение не в попап, а в простое закрывающееся сообщение со
+  # статусом, например:
+  # В контроллере устанавливаем флэш с ключём и редиректим
+  # ```
+  # flash[:form_success] = 'Клиент добавлен.'
+  # redirect_to ...
+  # ```
+  # а во вьюхе принимающей редирект просто
+  # ```
+  # <%= form_flashes %>
+  # ```
+  def form_flashes
+    flashes = []
+    flash.each do |key, message|
+      next if key.to_s[0,5] != 'form_'
+      flashes.push({
+        message: message,
+        message_class: key.to_s[4 .. -1]
+      })
+    end
+    render partial: 'market/desktop/partial/form/form_flashes', locals: {
+      flashes: flashes
+    }
+  end
 end

@@ -2,4 +2,30 @@ class Model < ApplicationRecord
 
   # Kaminari (pagination)
   paginates_per 3
+
+  # Полей в таблице до едрени фени, а при создании Клиента
+  # определённой правовой формы используются только некоторые поля.
+  # Принадлежность полей к созданию Клиента с формой:
+  FIELD_SHOW_WITH_FORM = {
+    form: %w(fiz yur ip),
+
+    name: %w(yur),
+    fio: %w(fiz ip),
+
+    inn: %w(yur ip),
+    kpp: %w(yur),
+  }
+
+  # Возвращает необходимо ли переданное поле для редактирования текущего клиента
+  # (с текущей организационно правовой формой).
+  # @param field_name [String|Symbol]
+  # @return [Boolean]
+  def field_show_with_form? field_name
+    field_name = field_name.to_sym
+    forms = FIELD_SHOW_WITH_FORM[field_name] || []
+    return true if \
+      self.class::FIELD_SHOW_WITH_FORM.keys.include?(field_name) &&
+      self.class::FIELD_SHOW_WITH_FORM[field_name].include?(form)
+    return false
+  end
 end

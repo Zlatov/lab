@@ -10,6 +10,8 @@ set -eu
 cd "$(dirname "${0}")"
 # cd "$(dirname "${BASH_SOURCE[0]}")"
 
+# cd ../..
+
 . ../_lib/echoc
 
 # Очищаем директорию для теста:

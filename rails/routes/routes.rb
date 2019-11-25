@@ -24,3 +24,6 @@ if Rails.env.development?
 end
 
 match "lorem/grid", via: [:get, :post]
+
+# В контроллере проверка текущего пути (только для GET запросов).
+current_page?(account_order_history_path(@client.id))

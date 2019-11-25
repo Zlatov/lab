@@ -1,0 +1,5 @@
+<% flash.each do |key, message| %>
+  <% next if key.to_s[0, 5] != 'form_' %>
+  <% class_name = key.to_s[5 .. -1] %>
+  <p class="message bordered iconed closing <%= class_name %>"><%= message %></p>
+<% end %>
