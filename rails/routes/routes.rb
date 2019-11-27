@@ -7,23 +7,48 @@
 # `> app.products_url` - проверка пути, вернёт Абсолютный url (с http).
 # 
 
-get "lorem/grid"
 
-get "lorem/grid" => "lorem#grid"
+  # 
+  # Общий случай
+  # 
 
-# Сразу как :id добавлено не формируется автоматический строковый идентификатор пути,
-# поэтому добавляем as: '...'
-get "lorem/grid/:id" => "lorem#grid", as: "lorem_grid"
-
-scope module: "market/desktop/vision" do
   get "lorem/grid"
-end
+  get "lorem/grid" => "lorem#grid"
+  # Сразу как :id добавлено не формируется автоматический строковый идентификатор пути,
+  # поэтому добавляем as: '...'
+  get "lorem/grid/:id" => "lorem#grid", as: "lorem_grid"
 
-if Rails.env.development?
-  get "lorem/grid"
-end
 
-match "lorem/grid", via: [:get, :post]
+  # 
+  # Уточнения
+  # 
+
+# # 
+# # _config/initializers/routing.rb_
+# # 
+# class DesktopDevice
+#   def self.matches?(request)
+#     # !Browser.new(request.user_agent).device.mobile?
+#     true
+#   end
+# end
+  # 
+  # _config/routes.rb_
+  # 
+  constraints DesktopDevice do
+    scope module: "market/desktop/vision" do
+      get '/users/undeleteds/confirm/:hash' => 'undeleteds#confirm', as: :confirm_undeleted
+      resources :undeleteds, path: '/users/undeleteds', only: [:new, :create]
+    end
+  end
+
+  # Появление путей в зависимости от энвиронмента
+  if Rails.env.development?
+    get "lorem/grid"
+  end
+
+  # Возможные методы запросы для маршрута
+  match "lorem/grid", via: [:get, :post]
 
 # В контроллере проверка текущего пути (только для GET запросов).
 current_page?(account_order_history_path(@client.id))
