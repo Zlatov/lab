@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+<div class="grid row">
+  <div class="col-3">
+    <div class="wrap shred padded">
+      <%= f.label :field %>
+
+      <%= f.label :field, class: with_required(f.object, :field) %>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="wrap shred padded">
+      <%= text_field_tag :field, f.object.class.human_enum_name(:field, f.object.form), disabled: true %>
+
+      <%= f.text_field :field %>
+
+      <%= f.select :field, @model_select_list %>
+
+      <%= f.password_field :field %>
+
+      <%= field_errors f.object, :field %>
+    </div>
+  </div>
+</div>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzz-erb-zenon-form-field</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.html.ruby text.html.basic</scope>
+</snippet>

@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[
 <%= form_flashes %>
-<%= form_for @model, url: model_edit_path, html: {class: 'form_z'} do |f| %>
+<%= form_for @model, url: model_edit_path, method: :POST, html: {class: 'form_z'} do |f| %>
 
   <div class="grid row">
     <div class="col-3">
