@@ -1,4 +1,6 @@
 <?php
+require_once '../../vendor/autoload.php';
+use Zlatov\ConsoleTools\Color as ConsoleColor;
 
 // mode | Чтение  | Запись  | Указатель в         | Создаёт файл
 //  r   |    +    |         |  начало             |   
@@ -45,19 +47,38 @@
 
 // rmdir(__DIR__ . DIRECTORY_SEPARATOR . 'temp_file');
 exec('rm -rf ' . __DIR__ . DIRECTORY_SEPARATOR . 'temp_file');
+
+
+// 
+// Тест логирования
+// 
 $test_folder = __DIR__ . DIRECTORY_SEPARATOR . 'temp_file' . DIRECTORY_SEPARATOR . 'asd';
 // rwxrwxrwx
 // 111100100
 mkdir($test_folder, 0744, $recursive = true);
-$file = fopen($test_folder . DIRECTORY_SEPARATOR . 'log.txt', 'ab');
-for ($i=0; $i < 10; $i++) {
-    $a = fwrite($file, $i . PHP_EOL);
-    echo '$a: ' . print_r($a, true) . PHP_EOL;
+$file = fopen($test_folder . DIRECTORY_SEPARATOR . 'log.log', 'ab');
+for ($i=0; $i < 100; $i++) {
+    $log_string = "${i}-${i} ${i}";
+    $log_item = "<#${log_string}> ";
+    $log_line = $log_string . PHP_EOL;
+    // $a = fwrite($file, $log_line);
+    fwrite($file, $log_item);
+    // echo '$a: ' . print_r($a, true) . PHP_EOL;
 }
 fclose($file);
-exit;
+// exit;
 
 
-file_put_contents('temp', print_r(["asd" => 0], true));
-echo '__DIR__: ' . var_export(__DIR__, true) . PHP_EOL;
-file_put_contents('/home/iadfeshchm/projects/my/lab/php/file_put_contents/temp.txt', print_r(["asd" => 0], true));
+// TODO подсветка заголовка в конслои
+$log_file_path = $test_folder . DIRECTORY_SEPARATOR . 'log2.log';
+date_default_timezone_set("Europe/Moscow");
+$date_string = date('Y-m-d H:i:s', time());
+$log_string = <<< STRING
+{$date_string}: f:1 t:2 p:3
+STRING;
+$log_string .= PHP_EOL;
+for ($i=0; $i < 100; $i++) {
+    $log_string .= "<#{$i}> ";
+}
+$log_string .= PHP_EOL . PHP_EOL;
+file_put_contents($log_file_path, $log_string, FILE_APPEND | LOCK_EX);

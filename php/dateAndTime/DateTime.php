@@ -6,6 +6,9 @@ print_r($dt1);
 print_r($a = $dt1->getTimestamp().PHP_EOL);
 print_r($dt1->format('Y m d H i s'));
 
+print_r((new DateTime())->format('Y-m-d H:i:s').PHP_EOL);
+// exit();
+
 print_r($dt1->setTimestamp($a+0));
 print_r(PHP_EOL.$dt1->format('Y m d H i s'));
 

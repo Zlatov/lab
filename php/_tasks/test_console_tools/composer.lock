@@ -1,0 +1,51 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2b72f57504c96c05eee223fc41a838b6",
+    "packages": [
+        {
+            "name": "zlatov/console_tools",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zlatov/php-console_tools.git",
+                "reference": "6e263876d8ab343f3cf1c12db2d6b8b7658f7749"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zlatov/php-console_tools/zipball/6e263876d8ab343f3cf1c12db2d6b8b7658f7749",
+                "reference": "6e263876d8ab343f3cf1c12db2d6b8b7658f7749",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zlatov\\ConsoleTools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zlatov",
+                    "email": "zlatov@ya.ru"
+                }
+            ],
+            "description": "Консольный вывод и другие инструменты.",
+            "time": "2019-11-27T18:21:26+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

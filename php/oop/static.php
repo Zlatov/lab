@@ -18,5 +18,3 @@ $m->b = 'f';
 var_dump($m->b);
 My::$a = 'h';
 var_dump(My::$a);
-
-
