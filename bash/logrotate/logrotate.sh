@@ -43,3 +43,18 @@ subl /etc/logrotate.d/app
 
 # Протестировать созданный файл
 sudo logrotate --force /etc/logrotate.d/app
+
+# Пример
+/home/appf/appf/log/{email.log,emails.log} {
+    su appf appf
+    weekly
+    rotate 3
+    nocreate
+    nomail
+    noolddir
+    missingok
+    notifempty
+    compress
+    dateext
+    dateformat .%Y-%m-%d
+}

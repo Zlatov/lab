@@ -49,7 +49,8 @@ render variants: [:mobile, :desktop]
   <%= select_tag :angar, options_for_select(@angar_list, @angar_selected), multiple: true, class: 'ui dropdown' %>
   <%=
     select_tag(
-      :client, options_for_select(
+      :client,
+      options_for_select(
         @options_for_select_client,
         selected: @selected_client.id,
         disabled: ''
