@@ -1,6 +1,10 @@
 class NewsController < ApplicationController
   before_filter :find_model
 
+  before_action :asd, only: [:new, :create]
+  before_action :require_login
+  skip_before_action :require_login, only: [:new, :create]
+
   layout 'admin/special'
   layout false
   layout :resolve_layout

@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+DEV_LOGGER.info("${1:var}: #{${1:var}}")
+]]></content>
+	<tabTrigger>zzz-ruby-vv-dev_log</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

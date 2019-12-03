@@ -3,22 +3,34 @@
 <div class="grid row">
   <div class="col-3">
     <div class="wrap shred padded">
-      <%= f.label :field %>
+      <%= f.label :field_name %>
 
-      <%= f.label :field, class: with_required(f.object, :field) %>
+      <%= f.label :field_name, class: with_required(f.object, :field_name) %>
     </div>
   </div>
   <div class="col-9">
     <div class="wrap shred padded">
-      <%= text_field_tag :field, f.object.class.human_enum_name(:field, f.object.form), disabled: true %>
 
-      <%= f.text_field :field %>
+      <!-- Радиокнопки -->
+      <% f.object.class.field_names.each do |value_s, value_i| %>
+        <div>
+          <label class="radio_b">
+            <%= f.radio_button :field_name, value_s %>
+            <span></span>
+          </label>
+          <%= f.label :field_name, f.object.class.human_enum_name(:field_name, value_s), :value => value_s %>
+        </div>
+      <% end %>
 
-      <%= f.select :field, @model_select_list %>
+      <%= text_field_tag :field_name, f.object.class.human_enum_name(:field_name, f.object.form), disabled: true %>
 
-      <%= f.password_field :field %>
+      <%= f.text_field :field_name %>
 
-      <%= field_errors f.object, :field %>
+      <%= f.select :field_name, @model_select_list %>
+
+      <%= f.password_field :field_name %>
+
+      <%= field_errors f.object, :field_name %>
     </div>
   </div>
 </div>
