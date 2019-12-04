@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-console.log('${1:var}: ', ${1:var})
-]]></content>
-	<tabTrigger>zzzjj</tabTrigger>
-	<scope>source.js</scope>
-</snippet>

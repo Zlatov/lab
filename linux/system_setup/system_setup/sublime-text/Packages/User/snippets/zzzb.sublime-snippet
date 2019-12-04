@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-echoc ${1:text} ${2:green}
-]]></content>
-	<tabTrigger>zzzb</tabTrigger>
-	<scope>source.shell</scope>
-</snippet>

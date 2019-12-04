@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-print '${1:var}: '.red; puts ${1:var}
-]]></content>
-	<tabTrigger>zzzrr</tabTrigger>
-	<scope>source.ruby</scope>
-</snippet>

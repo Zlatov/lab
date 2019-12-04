@@ -4,7 +4,8 @@ require 'awesome_print'
 require "open-uri"
 require 'mini_magick'
 
-# require 'active_support/concern'
+# require 'active_support/concern' u8 
+source.ruby comment.line.number-sign.ruby
 require 'active_support'
 require 'active_support/core_ext'
 

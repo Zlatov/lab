@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-puts '${1:message}'.green
-]]></content>
-	<tabTrigger>zzzr</tabTrigger>
-	<scope>source.ruby</scope>
-</snippet>

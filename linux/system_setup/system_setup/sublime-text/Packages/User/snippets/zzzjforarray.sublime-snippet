@@ -1,9 +1,0 @@
-<snippet>
-	<content><![CDATA[
-for (var i = 0, l = ${1:flat}.length; i < l; i++) {
-  var ${2:item} = ${1:flat}[i]
-}
-]]></content>
-	<tabTrigger>zzzjforarray</tabTrigger>
-	<scope>source.js</scope>
-</snippet>

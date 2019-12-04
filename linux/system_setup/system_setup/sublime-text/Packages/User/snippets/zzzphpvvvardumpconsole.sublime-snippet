@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+echo '\$${1:this}: '
+var_dump(\$${1:this});
+echo PHP_EOL;
+die();
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzzphpvvvardumpconsole</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

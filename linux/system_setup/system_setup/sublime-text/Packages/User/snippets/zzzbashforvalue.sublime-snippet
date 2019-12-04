@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+for ${1:value} in "\${${2:array}[@]}"
+do
+  echo \$${1:value}
+done
+]]></content>
+	<tabTrigger>zzzbashforvalue</tabTrigger>
+	<scope>source.shell</scope>
+</snippet>

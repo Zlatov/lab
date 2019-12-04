@@ -1,7 +1,0 @@
-<snippet>
-	<content><![CDATA[
-SELECT '> ${1:message}' as " ";
-]]></content>
-	<tabTrigger>zzzs</tabTrigger>
-	<scope>source.sql</scope>
-</snippet>

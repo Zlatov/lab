@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+begin
+  ${1:}
+rescue => e
+  ${2:}
+end
+]]></content>
+	<tabTrigger>zzzrubytry</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

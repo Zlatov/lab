@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+concat '<b>${1:var}</b>: <tt>'.html_safe
+concat pp ${1:var}
+concat '</tt><br><br>'.html_safe
+]]></content>
+	<tabTrigger>zzzrubyvvconcat</tabTrigger>
+	<!-- <scope>source.ruby</scope> -->
+	<scope>text.html.ruby source.ruby.rails.embedded.html</scope>
+	<!-- <scope>text.html.ruby</scope> -->
+</snippet>

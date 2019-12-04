@@ -1,8 +1,0 @@
-<snippet>
-	<content><![CDATA[
-__${1:$SELECTION}__
-]]></content>
-	<tabTrigger>zzzfb</tabTrigger>
-	<scope>source.md</scope>
-	<description>Выделить жирным</description>
-</snippet>

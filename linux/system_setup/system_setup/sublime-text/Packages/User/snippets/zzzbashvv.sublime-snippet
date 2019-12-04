@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+echo '\$${1:a}: ' \$${1:a}
+]]></content>
+	<tabTrigger>zzzbashvv</tabTrigger>
+	<scope>source.shell</scope>
+</snippet>

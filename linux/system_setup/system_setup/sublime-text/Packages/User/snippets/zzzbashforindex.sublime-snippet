@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+for ${1:index} in "\${!${2:array}[@]}"
+do
+  echo \$${1:index}
+done
+]]></content>
+	<tabTrigger>zzzbashforindex</tabTrigger>
+	<scope>source.shell</scope>
+</snippet>
