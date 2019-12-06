@@ -5,6 +5,7 @@ aa = a.to_i
 b = a + 1
 c = a + 1 & 255
 print 'a: '.red; puts "%b"%a
+print 'a: '.red; puts a
 print 'aa: '.red; puts aa
 print 'b: '.red; puts b
 print 'b: '.red; puts "%b"%b

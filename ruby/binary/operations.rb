@@ -2,9 +2,9 @@ require 'awesome_print'
 
 a = 0b0011
 b = 0b0101
-c = a & b
-d = a | b
-e = a ^ b
+c = a & b # AND 0001
+d = a | b # OR  0111
+e = a ^ b # XOR 0110
 f = a << 1
 g = a >> 1
 print 'a: '.red; print a; puts " (%04b)" % a

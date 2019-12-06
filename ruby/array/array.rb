@@ -5,7 +5,6 @@ require "open-uri"
 require 'mini_magick'
 
 # require 'active_support/concern' u8 
-source.ruby comment.line.number-sign.ruby
 require 'active_support'
 require 'active_support/core_ext'
 
@@ -70,7 +69,7 @@ print 'b: '.red; p b
 print 'c: '.red; p c
 print 'd: '.red; p d
 print 'e: '.red; p e
-exit
+# exit
 
 puts 'Масси включает в себя `:b`?'.green
 p (a.include?(:b)? 'y' : 'n')

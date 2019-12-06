@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+console.log('${1:var}: ', Object.prototype.toString.call(${1:var}), ${1:var})
+]]></content>
+	<tabTrigger>zzzjsvvtype</tabTrigger>
+	<scope>source.js</scope>
+</snippet>

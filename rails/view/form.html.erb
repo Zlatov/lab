@@ -1,19 +1,9 @@
-_controller_:
-```
-render variants: [:mobile, :desktop]
-```
-
-<% for relay in @relays %>
-  <% lookup_context.variants = [:list] %>
-  <%= render relay %>
-<% end %>
-
 <%= form_for article, url: {action: "update"} do |f| %>
-  <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
-  <!-- Чтобы задать выбранные - задать в модели выбранные на стадии контролера - так будет правильнее -->
-  <%= f.select :pickup_affiliate_id, @affiliate_select_options, include_blank: true, disabled: [33, 60] %>
-  <%= f.hidden_field :id %>
 
+
+  <!--
+    Текст (input)
+  -->
   <div class="grid row field_row <%= @new_client.class.field_show_with_form(:fio) %>">
     <div class="col-3">
       <div class="wrap shred padded"><%= cl.label :fio, class: with_required(@new_client, :fio) %></div>
@@ -25,6 +15,40 @@ render variants: [:mobile, :desktop]
       </div>
     </div>
   </div>
+
+
+  <!--
+    Селект
+  -->
+  <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
+  <!-- Чтобы задать выбранные - задать в модели выбранные на стадии контролера - так будет правильнее -->
+  <%= f.select :pickup_affiliate_id, @affiliate_select_options, include_blank: true, disabled: [33, 60] %>
+  <%=
+    select_tag(
+      :client,
+      options_for_select(@angar_list, @angar_selected),
+      multiple: true,
+      class: 'ui dropdown'
+    )
+    select_tag(
+      :client,
+      options_for_select(@options_for_select_client, selected: @selected_client.id, disabled: ''),
+      class: 'client_select',
+      title: 'Выбрать другого клиента для просмотра его свойств.'
+    )
+  %>
+
+
+  <!--
+    Флажек
+  -->
+  <%= f.label :pickup, class: "check_b" do %>
+    <%= f.check_box(:pickup) %>
+    <span></span>
+  <% end %>
+
+
+  <%= f.hidden_field :id %>
 
   <%= f.text_field :title %>
   <%= f.submit "Отправить" %>
@@ -47,18 +71,5 @@ render variants: [:mobile, :desktop]
       [label, e.id]
     end.sort_by{|e| e[0]}
     @angar_selected = Angar.where(id: params[:angar]).map{|e| e.id}
-  %>
-  <%= select_tag :angar, options_for_select(@angar_list, @angar_selected), multiple: true, class: 'ui dropdown' %>
-  <%=
-    select_tag(
-      :client,
-      options_for_select(
-        @options_for_select_client,
-        selected: @selected_client.id,
-        disabled: ''
-      ),
-      class: 'client_select',
-      title: 'Выбрать другого клиента для просмотра его свойств.'
-    )
   %>
 </form>
