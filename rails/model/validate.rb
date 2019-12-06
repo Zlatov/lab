@@ -52,6 +52,7 @@ class Model < ActiveRecord::Base
   # presence
   # атрибуты не пустые
   validates :name, :login, :email, presence: true
+  validates :name, :login, :email, presence: { strict: true } # Бросает исключение а не добавляет ошибку в модель
 
   # absence
   # атрибуты отсутствуют.

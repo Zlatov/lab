@@ -33,7 +33,7 @@
       <%= f.text_field :field_name %>
 
       <!-- Выпадающий список select -->
-      <%= f.select :field_name, @model_select_options, include_blank: true, disabled: [33, 60] %>
+      <%= f.select :field_name, @model_select_options, {include_blank: true, disabled: [33, 60]}, {'data-initial_user_id': current_user.id} %>
 
       <!-- Пароль -->
       <%= f.password_field :field_name %>

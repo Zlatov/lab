@@ -23,6 +23,7 @@
   <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
   <!-- Чтобы задать выбранные - задать в модели выбранные на стадии контролера - так будет правильнее -->
   <%= f.select :pickup_affiliate_id, @affiliate_select_options, include_blank: true, disabled: [33, 60] %>
+  <%= f.select :pickup_affiliate_id, @affiliate_select_options, {}, {'data-initial_client_id': @current_client.id} %>
   <%=
     select_tag(
       :client,
