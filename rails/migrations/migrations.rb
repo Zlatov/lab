@@ -1,26 +1,43 @@
 # 
+# Создание файла миграций
+# 
+
+# 
 # `rails generate migration <migration_name>`
+# `rails g migration AddColumnNameToTableName column_name:type`
 # `rails db:migrate`
 # `rails db:rollback`
 # `rails db:migrate VERSION=20191029065940`
 # 
 
 
+
+
+# 
+# Колонки
+# 
+
 change_column :table_name, :column_name, :column_type, null: false, default: ''
 add_column table_name, column_name, type, options
 add_column :table_name, "column_name", :string,
   null: true,
   limit: 256
-# options = {
-#   :limit - Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
-#   :default - The column’s default value. Use nil for NULL.
-#   :null - Allows or disallows NULL values in the column.
-#   :precision - Specifies the precision for the :decimal and :numeric columns.
-#   :scale - Specifies the scale for the :decimal and :numeric columns.
-#   :comment - Specifies the comment for the column. This option is ignored by some backends.
-# }
+# options
+  :limit # Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
+  :default # The column’s default value. Use nil for NULL.
+  :null # Allows or disallows NULL values in the column.
+  :precision # Specifies the precision for the :decimal and :numeric columns.
+  :scale # Specifies the scale for the :decimal and :numeric columns.
+  :comment # Specifies the comment for the column. This option is ignored by some backends.
 
 remove_column :table_name, :column_name
+
+
+
+
+# 
+# Таблицы
+# 
 
 drop_table :market_product_clips, if_exists: true
 
@@ -46,10 +63,24 @@ create_table :market_product_clips, id: :string, force: :cascade do |t|
   t.index [:tab_id], name: :ix_marketproductclips_tab_id
 end
 
+
+
+
+# 
+# Внешние ключи
+# 
+
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
 # add_reference :table_name, "ref_name", foreign_key: true
+
+
+
+
+# 
+# Индексы
+# 
 
 # Removes the index_accounts_on_column in the accounts table.
 remove_index :accounts, :column

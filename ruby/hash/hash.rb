@@ -38,6 +38,15 @@ a.each do |k,v|
 end
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit
+
+puts
+puts 'Фильтрация ключей'.green
+a = {a: 1, b: 2, c: 3}
+b = a.slice :a, :c
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit
 
 puts
 puts 'Количество элементов .count()'.green

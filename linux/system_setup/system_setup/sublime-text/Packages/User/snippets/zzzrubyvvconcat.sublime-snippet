@@ -1,7 +1,7 @@
 <snippet>
 	<content><![CDATA[
 concat '<b>${1:var}</b>: <tt>'.html_safe
-concat pp ${1:var}
+concat pp ${1:var}.as_json
 concat '</tt><br><br>'.html_safe
 ]]></content>
 	<tabTrigger>zzzrubyvvconcat</tabTrigger>
