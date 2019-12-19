@@ -118,6 +118,7 @@ c = a.merge!(b)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+# exit 0
 
 # Ключи в стрингу
 puts
