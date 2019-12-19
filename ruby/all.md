@@ -4,6 +4,7 @@
 
 Управление версиями ruby.
 
+
 ### Установка rbenv
 
 Из [гит репозитория](https://github.com/rbenv/rbenv) по мануалу или:
@@ -27,7 +28,12 @@ git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-b
 curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor | bash
 ```
 
-Так же установить плагин для rbenv [для установки версий](https://github.com/rbenv/ruby-build)
+__Так же установить плагин для rbenv__
+[для установки версий](https://github.com/rbenv/ruby-build)
+
+__Следить за состоянием rbenv__:
+* ~/.rbenv git pull
+* ~/.rbenv/plugins/ruby-build git pull
 
 
 ### Установка ruby через rbenv

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    .example1 {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      background-color: gray;
+    }
+    .example1::before {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      width: 100px;
+      height: 100px;
+      top: 10px;
+      left: 10px;
+      background-color: black;
+    }
+    .example2 > div {
+      width: 100px;
+      height: 100px;
+      position: relative;
+      background-color: gray;
+    }
+    .example2 > div::before {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      width: 100px;
+      height: 100px;
+      top: 10px;
+      left: 10px;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <h2>example1</h2>
+  <div class="example1"></div>
+  <h2>example2</h2>
+  <div class="example2">
+    <div></div>
+  </div>
+</body>
+</html>

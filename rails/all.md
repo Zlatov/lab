@@ -4,15 +4,11 @@ Rails - фреймворк ruby
 
 ## Установка
 
-* ruby 2.5.3 (rbenv install 2.5.3 (ruby -v))
-* gem 3.0.3 (gem update --system # Для обновления gem. (gem -v))
-* bundler 2.0.1 (gem install bundler -v 2.0.1 (gem list bundler))
-
-rails 5.2.2 (`gem install rails -v 5.2.2`, `gem list rails`)
-
-* Следить за состоянием rbenv:
-* ~/.rbenv git pull
-* ~/.rbenv/plugins/ruby-build git pull
+1. Проверить версию руби `ruby -v`, установить необходимую - см. _ruby/all.md_;
+2. gem 3.0.3 (gem update --system # Для обновления gem. (gem -v))
+3. bundler 2.0.1 (gem install bundler -v 2.0.1 (gem list bundler))
+4. Проверить доступные версии rails `gem list ^rails$ --remote --all`
+5. Проверить конкретную версию rails `gem install rails -v 5.2.0`
 
 ## Приложение
 

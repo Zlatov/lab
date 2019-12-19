@@ -1,3 +1,47 @@
+Number.prototype.declension = function(words) {
+  var number = this
+  if (typeof words === "string") {
+    words = words.split(/\s*,\s*/)
+  }
+  if (words[1] == null || words[1] == "") {
+    words[1] = words[0]
+  }
+  if (words[2] == null || words[2] == "") {
+    words[2] = words[1]
+  }
+  if (!Number.isInteger(number.valueOf())) {
+    return words[2]
+  }
+  var modulo_100 = Math.abs(number) % 100
+  if (11 <= modulo_100 && modulo_100 <= 19) {
+    return words[0]
+  }
+  var modulo_10 = Math.abs(number) % 10
+  switch(modulo_10) {
+    case 1:
+      return words[1]
+    break
+    case 2:
+    case 3:
+    case 4:
+      return words[2]
+    break
+    default:
+      return words[0]
+    break
+  }
+}
+var a = 3.3
+var b = a.declension('ежей,ёж,ежа')
+console.log('a: ', a)
+console.log('b: ', b)
+var c = [...Array(30).keys()]
+for (var i = 0, l = c.length; i < l; i++) {
+  var item = c[i]
+  console.log('item + " " + item.declension("ежей,ёж,ежа"): ', item + " " + item.declension("ежей,ёж,ежа"))
+}
+return null
+
 console.log('> Math.floor')
 var a = 10.99
 var b = Math.floor(a)

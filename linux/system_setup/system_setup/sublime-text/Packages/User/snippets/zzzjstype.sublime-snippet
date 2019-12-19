@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+Object.prototype.toString.call(${1:var}) === '[object Array|Object|String|Number|Boolean|RegExp|Function]'
+]]></content>
+	<tabTrigger>zzzjstype</tabTrigger>
+	<scope>source.js</scope>
+</snippet>

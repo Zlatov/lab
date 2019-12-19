@@ -12,3 +12,4 @@ gem list ^rails$ --remote --all # — посмотреть доступные в
 
 gem install bundler #
 gem install rails #
+gem install rails -v 5.2.0 #
