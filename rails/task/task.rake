@@ -68,3 +68,6 @@ namespace :temp do
   end
 
 end
+
+# Зависимые задачи
+task :all => [:pricelist, :catalog, :images]

@@ -14,4 +14,5 @@ _config/application.rb_
 
 ```bash
 rails g scaffold_controller catalog_order --no-test-framework --no-helper --no-javascripts --no-jbuilder
+rails g model street --no-test-framework --skip-migration
 ```
