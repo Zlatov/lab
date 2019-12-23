@@ -12,6 +12,11 @@
 ```bash
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
+# ВЕСЬ ПОСЛЕДУЮЩИЙ КОД ДЛЯ ФАЙЛА ~/.bashrc ДОЛЖЕН БЫТЬ ВСТАВЛЕН
+# ДО ПРОВЕРКИ НА ИНТЕРАКТИВНОСТЬ!!!
+# ```
+# # If not running interactively, don't do anything
+# ```
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 
 ~/.rbenv/bin/rbenv init
