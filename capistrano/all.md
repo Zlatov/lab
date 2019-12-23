@@ -19,3 +19,10 @@ bundle exec cap install
 __Глобально:__
 
 `gem install capistrano` или см. [capistranorb.com](https://capistranorb.com/documentation/getting-started/installation/)
+
+## Использование
+
+Проверка создания структуры на сервере
+```
+bundle exec cap production deploy:check
+```

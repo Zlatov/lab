@@ -14,9 +14,13 @@ Rails - фреймворк ruby
 
 __Создание нового__
 
+`gem list ^rails$ --remote --all`
+`gem install rails -v 6.0.2.1`
+
 * `rails new testApp`
 * `rails new .`
 * `rails _5.2.3_ new lorem_rails --webpack --skip-sprockets`
+* `rails _6.0.2.1_ new . --webpack --skip-sprockets`
 
 __Запуск__
 

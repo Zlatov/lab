@@ -26,6 +26,7 @@ alias xopen='xdg-open'
 alias cdlab='cd ~/projects/my/lab'
 alias cdprojects='cd ~/projects'
 alias cdloremrails='cd ~/projects/my/lorem_rails'
+alias cdzlatov='cd ~/projects/my/zlatov'
 
 alias cdadmin='cd ~/projects/zenon/admin'
 alias cdframework='cd ~/projects/zenon/framework'
