@@ -15,7 +15,7 @@ subl /etc/logrotate.d/app
   daily                # ежедневная ротация
   weekly               # ротация раз в неделю
   missingok            # отсутствие файла не является ошибкой
-  rotate 17            # кол-во хранимых сжатых фрагментов (сохраняется последние n ротированных файла)
+  rotate 18            # кол-во хранимых сжатых фрагментов (сохраняется последние n ротированных файла)
   size=16M             # максимальный размер несжатого файла; пока ..., файл не будет "ротирован"
   compress             # сжимать ротируемый файл
   nocopytruncate       # не сбрасывать файл журнала после копирования
@@ -44,11 +44,26 @@ subl /etc/logrotate.d/app
 # Протестировать созданный файл
 sudo logrotate --force /etc/logrotate.d/app
 
-# Пример
-/home/appf/appf/log/{email.log,emails.log} {
+# Пример раз в неделю
+/home/appf/appf/log/email.log {
     su appf appf
     weekly
     rotate 3
+    nocreate
+    nomail
+    noolddir
+    missingok
+    notifempty
+    compress
+    dateext
+    dateformat .%Y-%m-%d
+}
+
+# Пример раз в день
+/home/appf/appf/log/email.log {
+    su appf appf
+    daily
+    rotate 18
     nocreate
     nomail
     noolddir

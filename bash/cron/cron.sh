@@ -43,4 +43,4 @@ EDITOR=mcedit crontab -e
 0 1 1-7 * * [ "$(date '+\%u')" -eq 7 ] && echo "Эта надпись выводится каждое первое воскресенье каждого месяца в 1:00"
 
 # Запуск с башем и с переменными окружения
-*/2 * * * * /bin/bash -c ". ~/.bashrc; /home/zlatov/app/market/bash/exchange/order_push.sh"
+*/2 * * * * /bin/bash -l -i -c ". $HOME/.bashrc && cd $HOME/app/market && ./bash/exchange/order_push.sh" >> $HOME/app/market/log/exchange_cron.log 2>&1
