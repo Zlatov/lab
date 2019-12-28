@@ -37,8 +37,8 @@ __Так же установить плагин для rbenv__
 [для установки версий](https://github.com/rbenv/ruby-build)
 
 __Следить за состоянием rbenv__:
-* ~/.rbenv git pull
-* ~/.rbenv/plugins/ruby-build git pull
+* `cd ~/.rbenv && git pull`
+* `cd ~/.rbenv/plugins/ruby-build && git pull`
 
 
 ### Установка ruby через rbenv
