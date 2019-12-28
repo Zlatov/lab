@@ -9,9 +9,9 @@ cd "$(dirname "${0}")"
 . ~/.bashrc-env
 
 # Список пользователей.
-mysql -uroot -t <<< "SELECT User, Host, plugin FROM mysql.user;"
+mysql -uroot -t -p <<< "SELECT User, Host, plugin FROM mysql.user;"
 
 exit 0
 
 # Добавить пользователя.
-mysql -uroot "CREATE USER 'userLogin'@'localhost' IDENTIFIED BY 'userPassword';"
+mysql -uroot -p <<< "CREATE USER 'userLogin'@'localhost' IDENTIFIED BY 'userPassword';"

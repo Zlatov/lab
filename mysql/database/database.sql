@@ -1,6 +1,6 @@
 -- Просмотреть список соществующих баз данных.
 SHOW databases;
--- exit
+exit
 
 -- Удалить базу данных
 DROP DATABASE IF EXISTS `lab`;
