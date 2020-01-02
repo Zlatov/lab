@@ -27,8 +27,11 @@ exit 0
 # systemctl start elasticsearch
 # 
 
-# Список сервисов Centos
+# Список сервисов
 systemctl
 systemctl | grep httpd # Список запущенных сервисов.
 systemctl list-units --type service
 systemctl list-units --type mount
+
+# Применить изменения конфигурационных файлов _/etc/systemd/system/*.service_
+systemctl daemon-reload
