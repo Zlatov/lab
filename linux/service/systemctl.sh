@@ -1,8 +1,15 @@
 exit 0
-# 
-# sudo service nginx stop
-# sudo systemctl disable nginx
-# 
+
+sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+sudo service nginx status
+
+sudo systemctl disable nginx
+sudo systemctl enable custom_service
+
+# Применить изменения конфигурационных файлов _/etc/systemd/system/*.service_
+systemctl daemon-reload
 
 # 
 # Добавление сервиса в systemctl
@@ -32,6 +39,3 @@ systemctl
 systemctl | grep httpd # Список запущенных сервисов.
 systemctl list-units --type service
 systemctl list-units --type mount
-
-# Применить изменения конфигурационных файлов _/etc/systemd/system/*.service_
-systemctl daemon-reload

@@ -1,4 +1,4 @@
--- dropdb -U lorem_rails lorem_rails -W
+-- dropdb -U lorem_rails lorem_rails --if-exists -W
 -- createdb -U lorem_rails lorem_rails -W
 -- createdb --encoding=UTF8 --locale=ru_RU.utf8 -U lorem_rails lorem_rails -W
 -- или psql -U lorem_rails -d template1 -c "create database lorem_rails;"
