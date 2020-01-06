@@ -1,24 +1,51 @@
 # Настройки для Ubuntu 18
 
-* В хроме, в параметрах плагина __Shortkeys (Custom Keyboard Shortcuts)__ нажать кнопку __Save__ для сёрфа по поиску без использования мыши.
-* В пакете __Compare Side-By-Side.sublime-package__ (`nautilus /home/iadfeshchm/.config/sublime-text-3/Installed\ Packages/Compare\ Side-By-Side.sublime-package`) удалить горячие клафиши нахрен очистив содержимое файла _Default (Linux).sublime-keymap_ что позволит восстановить поведение стандартного сочетяния клавиши __Alt+n__.
-* Установить плагин сублайма вручную https://github.com/aziz/SublimeANSI/issues откатив его версию на коммит `git checkout f7188b9d5991f0ea04bac8f6040c50b4c2c8fd48`.
-* Установить сочетяние Win+E на домашнюю папку: Win+A->`параметры`->Устройства->Клавиатура->Запуск приложений->Домашняя папка.
-* Установить сочетание Ctrl+Alt+T на `gnome-terminal --window --full-screen`, а лучше `gnome-terminal --window --maximize` (см. справку `gnome-terminal --help-window-options`), удалив стандартное сочетание.
-* Установить сочетание Ctrl+Alt+End на `gnome-session-quit --power-off` (см. справку `gnome-session-quit --help`).
-* Установить rbenv, см. `ruby/all.html`.
-* Настроить проксирование для apt если необходимо, см. настройки в `linux/apt/apt.sh`
-* Установить „AlternateTab“ из менеджера приложений.
-* Установить „Дополнительные настройки Gnome“ из менеджера приложений или `sudo apt install gnome-tweaks`, установить три рабочих места и комбинации Win+Z/+X/+C.
+* Настроить проксирование для apt если необходимо, см. настройки в _linux/apt/apt.sh_
+* Установить „Дополнительные настройки Gnome“ из менеджера приложений или `sudo apt install gnome-tweaks`<del>, установить три рабочих места и комбинации Win+Z/+X/+C</del>.
 * Установить sudo apt install dconf-editor.
+* В хроме, в параметрах плагина __Shortkeys (Custom Keyboard Shortcuts)__ нажать кнопку __Save__ для сёрфа по поиску без использования мыши.
+* <del>В пакете __Compare Side-By-Side.sublime-package__ (`nautilus /home/iadfeshchm/.config/sublime-text-3/Installed\ Packages/Compare\ Side-By-Side.sublime-package`) удалить горячие клафиши нахрен очистив содержимое файла _Default (Linux).sublime-keymap_ что позволит восстановить поведение стандартного сочетяния клавиши __Alt+n__.</del>
+* <del>Установить плагин сублайма вручную https://github.com/aziz/SublimeANSI/issues откатив его версию на коммит `git checkout f7188b9d5991f0ea04bac8f6040c50b4c2c8fd48`.</del>
+* <del>Установить сочетяние Win+E на домашнюю папку: Win+A->`параметры`->Устройства->Клавиатура->Запуск приложений->Домашняя папка.</del>
+* <del>Установить сочетание Ctrl+Alt+T на `gnome-terminal --window --full-screen`, а лучше `gnome-terminal --window --maximize` (см. справку `gnome-terminal --help-window-options`), удалив стандартное сочетание.</del>
+* <del>Установить сочетание Ctrl+Alt+End на `gnome-session-quit --power-off` (см. справку `gnome-session-quit --help`).</del>
+* 
+  ```bash
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Терминал"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal --window --maximize"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Primary><Alt>t"
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Выключить"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-session-quit --power-off"
+  gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Alt>End"
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/']"
+
+  gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ""
+  gsettings set org.gnome.settings-daemon.plugins.media-keys home "<Super>e"
+  ```
+* <del>Установить „AlternateTab“ из менеджера приложений.</del>
+* 
+  ```bash
+  gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Super>Tab','<Alt>Tab']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-windows-backward "['<Shift><Super>Tab','<Shift><Alt>Tab']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-applications "['<Super>grave']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-applications-backward "['<Shift><Super>grave']"
+
+  ```
 * Установить „Автозагрузка“ из менеджера приложений.
-* Установить „Auto Move Windows“ из менеджера приложений — дополнение в „Доп. настройки GNOME“.
-* Установить сочетания клавишь для события Win+A->`параметры`->Устройства->Клавиатура->Перемещение->Переместить на рабочее местов вверх/низ на клавиши <kbd>Super + Page Up/Down</kbd>, не смотря на то что они там уже установлены (кроме этих клавишь там так же назначены Ctrl+Alt+Вниз/Вверх, данная настройка отменит использование этих клавишь).
-* Установить `sudo apt-get install imwheel` и запустить? `imwheel` - устранит на 18 убунте баг скрола.
-    1. Add following lines to _~/.imwheelrc_ and save
+* Установить „Auto Move Windows“ (позволит при автозагрузке открывать приложения в указанных рабочих столах) из менеджера приложений — дополнение в „Доп. настройки GNOME“.
+* <del>Установить сочетания клавишь для события Win+A->`параметры`->Устройства->Клавиатура->Перемещение->Переместить на рабочее местов вверх/низ на клавиши <kbd>Super + Page Up/Down</kbd>, не смотря на то что они там уже установлены (кроме этих клавишь там так же назначены Ctrl+Alt+Вниз/Вверх, данная настройка отменит использование этих клавишь).</del>
+* 
+  ```bash
+  gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Super>Page_Down']"
+  gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up']"
+  ```
+* `imwheel` - устранит на 18 убунте баг скрола. Установить: `sudo apt-get install imwheel` и настроить:
+  1. `mcedit ~/.imwheelrc` добавить:
     ```
-".*"
-    Control_L, Up,   Control_L|Button4
-    Control_L, Down, Control_L|Button5
+    ".*"
+        Control_L, Up,   Control_L|Button4
+        Control_L, Down, Control_L|Button5
     ```
-    2. Add following command to Startup Application Preferences `imwheel --kill --buttons "4 5"`
+  2. Добавить код в автозагрузку системы: <kbd>Win + A</kbd> → `Автоматически запускаемые приложения`, код: `imwheel --kill --buttons "4 5"`
