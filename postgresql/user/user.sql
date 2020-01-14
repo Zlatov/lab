@@ -42,6 +42,7 @@
 -- sudo -u postgres psql -c "…"
 -- sudo -u postgres psql -c "CREATE USER username WITH password 'password';"
 -- sudo -u postgres psql -c "ALTER USER username CREATEDB;"
+-- sudo systemctl restart postgresql
 -- 
 -- sudo -u postgres psql -c "DROP USER username;"
 -- 

@@ -92,6 +92,10 @@ end
 # В принципе строки аналогичны:
 Foo.find_or_create_by(attributes)
 Foo.where(attributes).first_or_create
+# 
+# find_or_create_by - поисковый хэш равен хэшу создания что не всегда удобно
+# first_or_create   - сначало найти с where, если нет, то создаёт другим хэшем
+# 
 # first_or_create не будет искать по заданным атрибутам! Неправильно: Foo.first_or_create(attributes).
 # first_or_create полезно, если условия для поиска являются подмножеством хэш, используемого для создания:
 Foo.where(something: value).first_or_create(attributes)

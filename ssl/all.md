@@ -15,3 +15,6 @@ http://oddstyle.ru/veb-razrabotka/kak-ustanovit-https-lokalno-bez-nadoedlivyx-uv
 https://www.leaderssl.ru/articles/207-vse-pro-openssl-za-5-minut
 
 Выпуск верифицированного сертификата бесплатно: https://letsencrypt.org/ru
+
+## Certbot
+

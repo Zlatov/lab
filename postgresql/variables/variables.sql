@@ -1,6 +1,9 @@
 -- Способ раз
 \set myvar 5
 SELECT :myvar + 1 AS my_var_plus_1;
+\set myvar 'asd'
+SELECT :'myvar' AS my_var;
+\q
 
 
 -- Способ 2

@@ -18,7 +18,7 @@
       </select>
     </form>
     <script type="text/javascript" src="../_libs/lib.js"></script>
-    <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript">
     var form = document.forms.my; // document.forms[0]
     document.log('form: ', form)
@@ -58,6 +58,9 @@
     document.log('> $(selector).serializeArray()'.blue())
     console.log('> $(selector).serializeArray()')
     var data = $('form').serializeArray()
+    document.log('data: ', data)
+    console.log('data: ', data)
+    var data = $('form').serialize()
     document.log('data: ', data)
     console.log('data: ', data)
     </script>
