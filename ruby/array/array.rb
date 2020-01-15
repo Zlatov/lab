@@ -691,3 +691,10 @@ a = [1,2,3]
 b = a.delete_at -1
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit
+
+puts 'Перемешать'.green
+a = [1,2,3,4,5]
+b = a.shuffle
+print 'a: '.red; p a
+print 'b: '.red; p b
