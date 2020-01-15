@@ -1,0 +1,307 @@
+<p><b>Чего ожидать от статьи:</b></p>
+<p class="left"><img src="/upload/publication/78/tree.png" alt="Пример вывода древовидного списка" title="Пример вывода древовидного списка"></p>
+<p class="caption">Пример вывода древовидного списка</p>
+<p class="left"><img src="/upload/publication/78/tree-2.png" alt="Древовидный список в pre" title="Древовидный список в pre"></p>
+<p class="caption">Древовидный список в <code>&lt;pre></code>.</p>
+
+
+<ul>
+  <li>
+    <a href="#1">Пример массива с id, pid (parant id)</a>
+  </li>
+  <li>
+    <a href="#2">Скрипт PHP преобразования массива перед выводом</a>
+  </li>
+  <li>
+    <a href="#3">Вывод с учетом уровней</a>
+  </li>
+  <li>
+    <a href="#4">Полный код скрипта и рабочий пример</a>
+  </li>
+  <li>
+    <a href="#5">Рекурсия на PHP и пример вывода древовидной структуры для <code>&lt;select></code></a>
+  </li>
+</ul>
+
+
+<p>Алгоритм и для вывода многоуровневого меню (главного меню сайта) и для древовидного списка (меню категорий и т.п.) <b>одинаков</b>. В обоих случаях цель — <strong>создать многоуровневый список на HTML</strong>. Пример такого списка, а так же его оформление в древовидный раскрывающийся список вы можете просмотреть в статье <a href="/publication/drevovidnyy-spisok.html"><strong>Простой древовидный список без картинок на любом фоне, только HTML CSS и раскрывающийся древовидный список на jQuery с &#8222;плюсиками&#8220;</strong></a>, а в этой статье — про преобразование и вывод.</p>
+<p>Обычно <em>иерархию</em> хранят в БД, останавливаться на этом не будем… Отметим, что при выборе данных мы получаем список отсортированный не в желаемом порядке, а так же <b>часто неизвестен уровень вложенности</b> каждого элемента (<i>зависит от способа хранения иерархичных данных в реляционных БД…</i>).</p>
+<h3 id="1">Пример массива с id, pid (parant id)</h3>
+<p>Представлю данные сразу в PHP массиве. Каждый элемент нашего иерархического списка содержит информацию о своем предке (родителе) — „pid“. Ну и остальное…</p>
+<pre class="prettyprint lang-php">$array = array();
+$array[] = array('id'=>1, 'pid'=>0, 'header'=>'A');
+$array[] = array('id'=>2, 'pid'=>0, 'header'=>'B');
+$array[] = array('id'=>3, 'pid'=>0, 'header'=>'C');
+$array[] = array('id'=>4, 'pid'=>0, 'header'=>'D');
+$array[] = array('id'=>5, 'pid'=>1, 'header'=>'E');
+$array[] = array('id'=>6, 'pid'=>1, 'header'=>'F');
+$array[] = array('id'=>7, 'pid'=>3, 'header'=>'G');
+$array[] = array('id'=>8, 'pid'=>4, 'header'=>'H');
+$array[] = array('id'=>9, 'pid'=>5, 'header'=>'K');
+$array[] = array('id'=>10,  'pid'=>5, 'header'=>'L');
+$array[] = array('id'=>11,  'pid'=>10,  'header'=>'M');
+$array[] = array('id'=>12,  'pid'=>9, 'header'=>'N');</pre>
+
+<p>В этом примере порядок прослеживается — это для наглядности, далее, в тестовом скрипте я специально перепутаю, и вы убедитесь в корректности скрипта.</p>
+<p>Представленный метод основан на рекурсивном обходе массива данных без использования рекурсии в классическом смысле (обращения функции к самой себе). К слову: в методе вообще не будет пользовательских функций.</p>
+<h3 id="2">Скрипт PHP преобразования массива перед выводом</h3>
+<p>Пока не углубляйтесь в изучение кода, в конце статьи выложу полный код с максимально уточненными комментариями.</p>
+<pre class="prettyprint lang-php">// Преобразование
+$result = array();
+$pid[$level] = $level = 0;
+while ($level >= 0) {
+  if ( $e = each($array) ) {
+    if ($e[1]['pid'] === $pid[$level]) {
+      $e[1]['level'] = $level;
+      $result[] = $e[1];
+      unset($array[$e[0]]);
+      foreach ($t = $array as $val) {
+        if ( $val['pid'] === $e[1]['id'] ) {
+          $pid[++$level] = $e[1]['id'];
+          reset($array);
+          break;
+        }
+      }
+    }
+  } else {
+    $level--;
+    reset($array);
+  }
+}</pre>
+
+<p>Этот код „преобразования“ создаёт новый массив $result в котором подготовлены данные (отсортированы в нужном порядке и добавлен уровень каждого элемента) для вывода иерархического многоуровнего списка.</p>
+<h3 id="3">Вывод с учетом уровней</h3>
+<p>Осталось только вывести с помощью линейного (foreach) перебора, учтя только уровень вложенности.</p>
+<pre class="prettyprint lang-php">// Вывод
+$echo = "&lt;ul class='tree'>";
+foreach ($result as $key => $val) {
+  $replace = array();
+  foreach ($val as $key2 => $val2 ) { $replace["??$key2??"] = $val2; }
+  $echo .= str_replace(array_keys($replace),$replace,'&lt;li>??header??');
+  if ( isset($result[$key+1]) ) {
+    if ($result[$key+1]['level']>$val['level']) { $echo .= "&lt;ul>"; }
+    if ($result[$key+1]['level']==$val['level']) { $echo .= "&lt;/li>"; }
+    if ($result[$key+1]['level']&lt;$val['level']) {
+      $k = $val['level'] - $result[$key+1]['level'];
+      for ( $i=0; $i&lt;$k; $i++ ) {
+        $echo .= "&lt;/li>&lt;/ul>";
+      }
+    }
+  } else {
+    $echo .= "&lt;/li>";
+    $k = $val['level'];
+    for ( $i=0; $i&lt;$k; $i++ )
+    {
+      $echo .= "&lt;/ul>&lt;/li>";
+    }
+  }
+}
+$echo .= '&lt;/ul>';
+echo $echo;
+</pre>
+<p>Хоть алгоритм и линейный, но пришлось добавить несколько if для определения „родства“ следующего элемента.</p>
+<p>Про оформление выпадающее многоуровневого меню напишу статью позднее.</p>
+
+
+
+
+
+<h3 id="4">Полный код скрипта и рабочий пример</h3>
+<p>Ах, ну да, смотрите полный исходный код файла примера с комментариями, и смотрите результат выполнения <a href="/upload/publication/78/ierarhiya.php">тут (ссылка)</a>:</p>
+<p class="left"><img src="/upload/publication/78/tree.png" alt="Пример вывода древовидного списка" title="Пример вывода древовидного списка"></p>
+<p class="caption">Пример вывода древовидного списка</p>
+
+<pre class="prettyprint lang-php">
+// Исходные данные с перепутанным порядком, ага, как и обещал
+$array = array();
+$array[] = array('id'=>8, 'pid'=>4, 'header'=>'H');
+$array[] = array('id'=>1, 'pid'=>0, 'header'=>'A');
+$array[] = array('id'=>11,  'pid'=>10,  'header'=>'M');
+$array[] = array('id'=>10,  'pid'=>5, 'header'=>'L');
+$array[] = array('id'=>9, 'pid'=>5, 'header'=>'K');
+$array[] = array('id'=>4, 'pid'=>0, 'header'=>'D');
+$array[] = array('id'=>12,  'pid'=>9, 'header'=>'N');
+$array[] = array('id'=>5, 'pid'=>1, 'header'=>'E');
+$array[] = array('id'=>7, 'pid'=>3, 'header'=>'G');
+$array[] = array('id'=>3, 'pid'=>0, 'header'=>'C');
+$array[] = array('id'=>2, 'pid'=>0, 'header'=>'B');
+$array[] = array('id'=>6, 'pid'=>1, 'header'=>'F');
+
+
+// Преобразование
+$result = array(); // Пустой массив для результата преобразования
+$pid[$level] = $level = 0; // Начальные условия: уровень вложенности — 0, родитель у нулевой вложенности — 0
+
+// Пока не будут перебраны все элементы уровень не будет уменьшаться...
+while ($level >= 0)
+{
+  // Если взяли непустой элемент
+  if ( $e = each($array) )
+  {
+    // Да ещё и подходящий к нашему текущему родителю
+    if ($e[1]['pid'] === $pid[$level])
+    {
+      // Сохраняем в результирующий массив, запомнив уровень элемента
+      $e[1]['level'] = $level;
+      $result[] = $e[1];
+      // Удаляем из исходного массива, чтобы повторно не перебирать его и не возиться с ним.
+      unset($array[$e[0]]);
+      // А вдруг, у нашего нашедшегося элемента есть дети? Проверим:
+      foreach ($t = $array as $val)
+      {
+        // Если вдруг есть ребенок
+        if ( $val['pid'] === $e[1]['id'] )
+        {
+          // Определим нового родителя, перейдём на уровень глубже
+          // Сначала разберемся с детьми, а братьями и сестрами займемся после детей
+          $pid[++$level] = $e[1]['id'];
+          // И начнем потрошить исходный массив с самого начала, ища детей
+          reset($array);
+          break;
+        }
+      }
+    }
+  }
+  // Если элементы кончились - значит мы закончили обходить текущий уровень
+  else
+  {
+    $level--;
+    reset($array);
+  }
+}
+
+
+// Вывод
+$echo = "&lt;ul class='tree'>"; // открываем основной список нулевой вложенности
+// Пройдёмся линейно, массив уже упорядочен и уровни известны
+foreach ($result as $key => $val)
+{
+  // Я привык делать замены в шаблоне именно так
+  $replace = array(); // Создать массив замены
+  foreach ($val as $key2 => $val2 )
+  {
+    // Ключи массива — заменяемые теги (??header??), а значения — то, чем заменяем.
+    $replace["??$key2??"] = $val2;
+  }
+  // Выводим элемент
+  $echo .= str_replace(array_keys($replace),$replace,'&lt;li>#??id??, ??header??, my parent id: ??pid??');
+  // А дальше вопрос: следующий элемент является братом (последует так же — в &lt;li>) или ребенком (вставляем вложенный список)?
+  // Ответ получим узнав уровень следующего элемента (Если он есть вообще!).
+  if ( isset($result[$key+1]) )
+  {
+    // Следующий элемент в древовидном списке — глубже (уровень элемента key+1 больше уровня элемента key)
+    if ($result[$key+1]['level']>$val['level'])
+    {
+      $echo .= "&lt;ul>";
+    }
+    // Уровни равны — брат
+    if ($result[$key+1]['level']==$val['level'])
+    {
+      $echo .= "&lt;/li>";
+    }
+    // Уровень меньше — брат отца или брат деда или прадеда! =)
+    if ($result[$key+1]['level']&lt;$val['level'])
+    {
+      $k = $val['level'] - $result[$key+1]['level'];
+      for ( $i=0; $i&lt;$k; $i++ )
+      {
+        $echo .= "&lt;/li>&lt;/ul>";
+      }
+    }
+  }
+  // Если следующего элемента не оказалось, то закрываем все списки в соответствии с тем уровнем на котором находились
+  else
+  {
+    $echo .= "&lt;/li>";
+    $k = $val['level'];
+    for ( $i=0; $i&lt;$k; $i++ )
+    {
+      $echo .= "&lt;/ul>&lt;/li>";
+    }
+  }
+}
+$echo .= '&lt;/ul>';
+echo $echo;
+</pre>
+
+
+<h3 id="5">Рекурсия на PHP и пример вывода древовидной структуры в <code>&lt;pre></code> / <code>&lt;select></code></h3>
+<p>Рекурсия в полном смысле — вызов функцией самой себя (а не рекусрсивный обход массива). Или &#171;Как делать не желательно&#187;. Зато полезно посмотреть как красиво оформить древовидный список в <code>&lt;pre></code> / <code>&lt;select></code>. <a href="/upload/publication/78/recurs.php">Работающий пример</a>.</p> 
+<p class="left"><img src="/upload/publication/78/tree-2.png" alt="Древовидный список в pre" title="Древовидный список в pre"></p>
+<p class="caption">Древовидный список в <code>&lt;pre></code>.</p>
+<p><strong>PHP скрипт:</strong></p>
+<pre>&lt;style type="text/css">
+  * {
+    font-size: 19px;
+    line-height: 19px;
+    font-family: monospace;
+  }
+&lt;/style>
+&lt;?php
+
+
+$array = array();
+$array[] = array('id'=>1, 'pid'=>0, 'header'=>'Abvgd 1');
+$array[] = array('id'=>2, 'pid'=>0, 'header'=>'Bcdeg 2');
+$array[] = array('id'=>3, 'pid'=>0, 'header'=>'Cdklm 3');
+$array[] = array('id'=>4, 'pid'=>0, 'header'=>'Dejkm 4');
+$array[] = array('id'=>5, 'pid'=>1, 'header'=>'Efjkm 1.1');
+$array[] = array('id'=>6, 'pid'=>1, 'header'=>'Flmkr 1.2');
+$array[] = array('id'=>7, 'pid'=>3, 'header'=>'Ghklm 3.1');
+$array[] = array('id'=>8, 'pid'=>4, 'header'=>'Hstrp 4.1');
+$array[] = array('id'=>9, 'pid'=>5, 'header'=>'Klmns 1.1.1');
+$array[] = array('id'=>10,  'pid'=>5, 'header'=>'Lmrpt 1.1.2');
+$array[] = array('id'=>11,  'pid'=>10,  'header'=>'Mnstr 1.1.2.1');
+$array[] = array('id'=>12,  'pid'=>9, 'header'=>'Nklns 1.1.1.1');
+
+$a2 = $array;
+
+
+// Рекурсия с оформлением для выпадающего списка select
+echo '&lt;br>';
+$pid = 0;
+$level = 0;
+$e = array();
+function find2($a2,$pid,$level)
+{
+  global $e;
+  $j = 0;
+  $c = 0;
+  foreach ($a2 as $key => $value) {
+    if ($value['pid']===$pid)
+    {
+      $c++;
+    }
+  }
+  $level++;
+
+  foreach ($a2 as $key => $val)
+  {
+    if ($val['pid']===$pid)
+    {
+      for ($i=1; $i &lt; $level; $i++)
+      {
+        echo ($e[$i]===1)?"&#9475;":"&nbsp;&nbsp;";
+        //echo "&nbsp;";
+      }
+      if ($j===($c-1))
+      {
+        echo "&#9495;";
+        $e[$level] = 0;
+      }
+      else
+      {
+        echo "&#9507;";
+        $e[$level] = 1;
+      }
+      $j++;
+      echo "&#9592;&nbsp;".$val['header']."&lt;br>";
+      find2($a2,$val['id'],$level);
+    }
+  }
+}
+find2($a2,$pid,$level);
+</pre>
+
+
+<p>Удачи!</p>
