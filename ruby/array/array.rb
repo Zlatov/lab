@@ -13,6 +13,12 @@ class Array
   include Array::Nested
 end
 
+# 
+# Все методы
+# 
+# reverse
+# 
+
 class Array
   def lib_to_info i
     Hash[ self.clone.compact.select{|e| e.keys.include? i}.map{ |h|

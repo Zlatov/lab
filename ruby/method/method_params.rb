@@ -40,6 +40,20 @@ def options_merge options={}
   p res_options
 end
 
+def param_and_options param, opt1: 1, opt2: 2
+  args = method(__method__).parameters.map do |_, name|
+    binding.local_variable_get(name)
+  end
+  args_hash = Hash[ method(__method__).parameters.map {|_, name|
+    [name, binding.local_variable_get(name)]
+  }]
+  p args
+  p args_hash
+  print 'param: '.red; puts param
+  print 'opt1: '.red; puts opt1
+  print 'opt2: '.red; puts opt2
+end
+
 # meth 'asd'
 
 # meth2 'asd'
@@ -66,3 +80,6 @@ options_merge a:'aa', c:'cc'
 puts 'meth3 передаём Hash'.green
 meth3 pid: 'custom_pid'
 
+puts 'param_and_options'.green
+param_and_options 1
+param_and_options 1, opt2: nil
