@@ -1,4 +1,4 @@
-_model/user.rb_
+_app/model/user.rb_
 
 ```ruby
 class User < ApplicationRecord
@@ -17,9 +17,16 @@ class User < ApplicationRecord
     end
   end
 
-  # Лучше разместить этот метод в базовой модели
+  # 
+  # Лучше разместить эти методы в базовой модели
+  # 
+  # Если поле модели имеет перечисляемый тип (enum), то данный метод позволяет
+  # перевести значения в базе данных в i18n-ое, в соответствии с конфигурацией.
   def self.human_enum_name(enum_name, enum_value)
     I18n.t("activerecord.attributes.#{model_name.i18n_key}.#{enum_name.to_s.pluralize}.#{enum_value}")
+  end
+  def human_enum_name(enum_name)
+    self.class.human_enum_name enum_name, self[enum_name]
   end
 end
 ```

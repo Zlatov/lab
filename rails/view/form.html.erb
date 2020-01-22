@@ -48,6 +48,17 @@
     <span></span>
   <% end %>
 
+  <!--
+    Радиокнопка
+  -->
+  <% f.object.class.payment_types.each do |value_s, value_i| %>
+    <label>
+      <%= f.radio_button :payment_type, value_s %>
+    </label>
+    <%= f.label :payment_type, f.object.class.human_enum_name(:payment_type, value_s), :value => value_s %>
+  <% end %>
+  <%= field_errors f.object, :payment_type %>
+
 
   <%= f.hidden_field :id %>
 
