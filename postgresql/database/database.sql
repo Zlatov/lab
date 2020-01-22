@@ -2,6 +2,7 @@
 -- createdb -U lorem_rails lorem_rails -W
 -- createdb --encoding=UTF8 --locale=ru_RU.utf8 -U lorem_rails lorem_rails -W
 -- или psql -U lorem_rails -d template1 -c "create database lorem_rails;"
+-- sudo -u postgres psql -c "\l"
 
 -- sudo -u postgres psql
 
