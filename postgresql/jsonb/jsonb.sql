@@ -31,7 +31,7 @@ INSERT INTO a VALUES
 (DEFAULT, '12', '3'),
 -- (DEFAULT, '121', '{"asd": "asdasd"}'),
 (DEFAULT, '122', '{"asd": null}'),
-(DEFAULT, '123', '{"asd": "1"}'),
+-- (DEFAULT, '123', '{"asd": "1"}'),
 (DEFAULT, '124', '{"asd": 1}'),
 (DEFAULT, '13', '""'),
 (DEFAULT, '14', '-3.6'),
@@ -42,13 +42,14 @@ INSERT INTO a VALUES
 (DEFAULT, '19', '"\t"'),
 (DEFAULT, '20', '"\n"'),
 (DEFAULT, '21', '"\r"'),
-(DEFAULT, '22', '"  asd  \n  "'),
-(DEFAULT, '23', '
-  {
-    "asd":     "33",
-    "zxc qwe": 1
-  }  
-');
+(DEFAULT, '22', '"  asd  \n  "')
+-- (DEFAULT, '23', '
+--   {
+--     "asd":     "33",
+--     "zxc qwe": 1
+--   }  
+-- ')
+;
 -- \q
 
 select 'Выбираем data' as " ";
@@ -66,8 +67,8 @@ SELECT data->>'asd' FROM a;
 
 -- \q
 
-select 'Выбираем data->asd' as " ";
--- SELECT data->>'asd' FROM a WHERE ((data->>'asd')::int) > 3;
+select 'Выбираем >' as " ";
+-- SELECT * FROM a WHERE (data ->> 'asd')::int > 0;
 SELECT data->>'asd' FROM a WHERE ((data->>'asd')::int) > '2';
 
 \q

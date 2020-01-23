@@ -595,6 +595,7 @@ print 'b: '.red; p b
 a, b = *[1,2,3]
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit
 
 a = [1,2,3,2,4,4,5]
 b = a.group_by{|v| v}
