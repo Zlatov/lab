@@ -28,3 +28,32 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
+
+```bash
+[Unit]
+Description=zenonline
+#Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+User=iadfeshchm
+Group=iadfeshchm
+WorkingDirectory=/home/iadfeshchm/projects/zenon/zenonline
+EnvironmentFile=/home/iadfeshchm/projects/zenon/zenonline/variables.env
+
+ExecStart=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec puma -C /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb
+ExecStop=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb stop
+ExecReload=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb phased-restart
+
+TimeoutSec=5
+RestartSec=10s
+Restart=always
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+`sudo systemctl daemon-reload` — применить изменения конфигурационных файлов _/etc/systemd/system/*.service_
