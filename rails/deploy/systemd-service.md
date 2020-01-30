@@ -31,29 +31,53 @@ WantedBy=multi-user.target
 
 ```bash
 [Unit]
-Description=zenonline
-#Requires=network.target
+Description=<service_name>
+Requires=network.target
 After=network.target
 
 [Service]
-Type=simple
-User=iadfeshchm
-Group=iadfeshchm
-WorkingDirectory=/home/iadfeshchm/projects/zenon/zenonline
-EnvironmentFile=/home/iadfeshchm/projects/zenon/zenonline/variables.env
+# Процесс разветвляется с завершением родительского процесса (позволяет
+# демонизировать).
+Type=forking
+# Оставлять пид процесса при остановке приложения (не сервиса).
+RemainAfterExit=yes
+# Где лежит пид
+PIDFile=<working_directory>/tmp/pids/server.pid
 
-ExecStart=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec puma -C /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb
+User=deployer
+Group=deployer
+
+WorkingDirectory=<working_directory>
+EnvironmentFile=<working_directory>/variables.env
+
+ExecStart=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec puma -C /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb --daemon
 ExecStop=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb stop
-ExecReload=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb phased-restart
+ExecReload=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb restart
 
-TimeoutSec=5
+# По истечении какого времени считать запуск проваленным.
+TimeoutStartSec=20
+# По истечении какого времени считать остановку проваленой и запускать SIGTERM
+# остановку процесса.
+TimeoutStopSec=10
+# Синоним для задания одновременно TimeoutStartSec и TimeoutStopSec.
+# TimeoutSec=5
+
+# Время ожидания перед перезапуском службы. Принимает значение без единиц
+# измерения в секундах или значение промежутка времени, например, «5min 20s». По
+# умолчанию 100ms.
 RestartSec=10s
-Restart=always
+
+# Когда производить автоматический перезапуск.
+# no|always|on-success|on-failure|on-abnormal|on-abort|on-watchdog
+Restart=on-failure
+
+# Уничтожается только основной процесс при убийстве сервиса
+# control-group|process|mixed|none
 KillMode=process
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-
-`sudo systemctl daemon-reload` — применить изменения конфигурационных файлов _/etc/systemd/system/*.service_
+`sudo systemctl enable <service_name>` — добавить в сервисы.
+`sudo systemctl daemon-reload` — применить изменения конфигурационных файлов _/etc/systemd/system/*.service_.

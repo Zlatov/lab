@@ -32,7 +32,8 @@ usermod -a -G group user
 # Судорес
 adduser deployer sudo
 # или лучше
-usermod -a -G sudo deployer
+usermod -a -G sudo deployer # Ubuntu
+usermod -aG wheel username # Centos
 
 # Списко групп пользователя
 id -Gn iadfeshchm
