@@ -15,8 +15,11 @@ end
 module NormalizeBlankValues
   extend ActiveSupport::Concern
 
-  included do
+  included do |base|
     before_save :normalize_blank_values
+    base.class_eval do
+      @@status_busy = {}
+    end
   end
 
   def normalize_blank_values

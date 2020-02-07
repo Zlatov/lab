@@ -12,6 +12,10 @@ curl -u name:password https://mail.google.com/gmail/feed/atom
 # https://curl.haxx.se/docs/httpscripting.html
 
 
+curl --unix-socket /var/run/docker.sock http://localhost/images/json
+curl --no-buffer -XGET --unix-socket /docker.sock http://localhost/events
+# Курллим юникс сокет на локальной машине
+
 curl http://proft.me
 # получаем содержания главной страницы
 

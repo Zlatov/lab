@@ -1,20 +1,31 @@
-layout - в виде паршела.
+<!-- 
+  layout - в виде паршела.
+ -->
 <%= render partial: "link_area", layout: "graybar" %>
 <%= render partial: "form", locals: {zone: @zone} %>
 
-Рендеринг коллекций
+<!-- 
+  Рендеринг коллекций
+ -->
 <%= render partial: "product", collection: @products %>
 <%= render partial: "product", collection: @products, as: :item %>
 <%= render partial: "product", collection: @products, as: :item, locals: {title: "Products Page"} %>
 
-Разделяющие шаблоны
+<!-- 
+  Разделяющие шаблоны
+ -->
 <%= render partial: @products, spacer_template: "product_ruler" %>
 
-Рендеринг контента обёрнутого паршелом
+<!-- 
+  Рендеринг контента обёрнутого layout-ом - в виде паршела
+ -->
 <%= render layout: 'account_wrapper' do %>
   <p>Find me in app/views/account/index.html.erb</p>
 <% end %>
-Пример паршела:
+
+<!-- 
+  Пример паршела
+ -->
 <p>Find me in app/views/account/_account_wrapper.html.erb</p>
 <div>
   <%= yield %>

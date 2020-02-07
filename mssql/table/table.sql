@@ -12,4 +12,9 @@ CREATE TABLE [dbo].[Market_1c_order] (
 GO
 
 -- Очистить
-TRUNCATE TABLE dbo.Market_1c_order;
+TRUNCATE TABLE dbo.Market_1c_order
+GO
+
+-- Добавить поле
+ALTER TABLE [dbo].[staging_zlatov_Market_1c_order]
+ADD [order_data_1c] NVARCHAR(MAX)

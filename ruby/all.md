@@ -402,7 +402,7 @@ module Domain::Admin::Controller::WideController::Task
 
   # собственно полётное расширение (рельсовая тема!)
   included do |base|
-    base.class_eval do 
+    base.class_eval do
       @@status_busy = {}
     end
     # рельсовая тема!
