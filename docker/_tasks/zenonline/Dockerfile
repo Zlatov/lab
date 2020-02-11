@@ -37,10 +37,16 @@ RUN /root/.rbenv/bin/rbenv install 2.6.5
 RUN /root/.rbenv/bin/rbenv global 2.6.5
 RUN /root/.rbenv/shims/gem install bundler -v 2.1.4
 
-RUN apt-get install -qq -y --no-install-recommends libsqlite3-dev
+# Для sqlite
+RUN apt-get install -qq -y --no-install-recommends \
+	sudo \
+	libsqlite3-dev
 
-# RUN	apt install systemd
-# RUN	systemctl
+# Для yarn
+RUN apt-get update && apt-get install -y gnupg2
+
+# Для освобождения дискового пространствва за счет удаления полученных *.deb-файлов пакетов.
+RUN apt-get -qq clean
 
 ENTRYPOINT service postgresql start && bash
 
@@ -49,8 +55,11 @@ ENTRYPOINT service postgresql start && bash
 
 # docker volume create zenonline_postgresql
 # docker rm zenonline
-# docker run --name zenonline -it zenoweb/zenonline:dockerfile
-# docker run --name zenonline -itd -p 9432:5432 -v $(pwd):/app/zenonline -v zenonline_dockerfile_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:dockerfile
-# docker exec -it zenonline bash -c 'cd /app/zenonlien && bundle'
-# docker attach zenonline
+# docker run --name zenonline -itd -p 9432:5432 -v $(pwd):/app/zenonline -v zenonline_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:dockerfile
 # docker push zenoweb/zenonline:dockerfile
+
+
+
+
+# docker run --name zenonline -itd -p 9432:5432 -v $(pwd):/app/zenonline -v zenonline_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:latest
+# docker exec -it zenonline bash -lic 'cd /app/zenonline && bundle'
