@@ -50,11 +50,33 @@ docker ps # запущенные
 docker ps -a # запущенные и оставновленные
 docker start <container> # запустить остановленный контейнер
 docker attach <container> # получить интерактивную консоль контейнера
+# [Ctrl+p, Ctrl+q] - для выхода из консоли, незавершая текущий процесс
 docker commit -m "<tag>" <container> <image>:<tag> # создать новый образ из контейнера
 docker push <image>:<tag> # запушить образ
 docker rm <container>|<container_id> # удалить контейнер
 docker rm $(docker ps -a -q -f status=exited) # удалить все оставновленные контейнеры
+# или
+docker system prune
 docker port <container_id>|<container> # посмотреть пробрасываемые порты
+```
+
+__Тома (volume) - пробросы каталогов__
+
+```bash
+docker volume ls # список томов
+docker volume create # создать том
+docker volume inspect # инфа тома
+docker volume rm # удалить
+docker volume prune # удалить все неиспользуемые
+```
+
+__Система докера__
+
+```bash
+docker system df # использование диска
+docker system events # в режиме реального времени наблюдать за логом сервера докера
+docker system info # о программе (расширенная инфа: версия, текущий пользователь...)
+docker system prune # удалить неиспользуемые контейнеры и другое...
 ```
 
 __Portainer - веб интерфейс докера__
