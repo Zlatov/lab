@@ -58,6 +58,7 @@ docker rm $(docker ps -a -q -f status=exited) # удалить все остав
 # или
 docker system prune
 docker port <container_id>|<container> # посмотреть пробрасываемые порты
+docker exec -it zenonline bash -c 'cd /app && ls -lah' # отправка команды в контейнер
 ```
 
 __Тома (volume) - пробросы каталогов__

@@ -18,6 +18,7 @@ cd ~/.rbenv && src/configure && make -C src
 # # If not running interactively, don't do anything
 # ```
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 
 ~/.rbenv/bin/rbenv init
 # Добавить код в ~/.bashrc или ~/.bash-profile:
