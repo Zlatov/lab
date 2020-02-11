@@ -60,6 +60,8 @@ ENTRYPOINT service postgresql start && bash
 
 
 
-
+# git clone ssh://git@git2.newstar.ru:7999/ruby/zenonline.git ./
+# cp variables-example.env variables.env && mcedit variables.env
 # docker run --name zenonline -itd -p 9432:5432 -v $(pwd):/app/zenonline -v zenonline_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:latest
 # docker exec -it zenonline bash -lic 'cd /app/zenonline && bundle'
+# docker exec -it zenonline bash -lic 'cd /app/zenonline && yarn'
