@@ -9,8 +9,9 @@ module Api
 
     before_action :set_headers
 
+    around_action :raise_action_on_unpermitted_parameters
+
     base.class_eval do
-      ActionController::Parameters.action_on_unpermitted_parameters = :raise
 
       rescue_from(ActionController::UnpermittedParameters) do |e|
         render json: {
@@ -34,6 +35,15 @@ module Api
     response.headers["Cache-Control"] = "no-cache, no-store"
     response.headers["Pragma"] = "no-cache"
     response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+  end
+
+  def raise_action_on_unpermitted_parameters
+    begin
+      ActionController::Parameters.action_on_unpermitted_parameters = :raise
+      yield
+    ensure
+      ActionController::Parameters.action_on_unpermitted_parameters = :log
+    end
   end
 
   module ClassMethods
