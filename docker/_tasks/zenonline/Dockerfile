@@ -37,6 +37,8 @@ RUN /root/.rbenv/bin/rbenv install 2.6.5
 RUN /root/.rbenv/bin/rbenv global 2.6.5
 RUN /root/.rbenv/shims/gem install bundler -v 2.1.4
 
+RUN apt-get install -qq -y --no-install-recommends libsqlite3-dev
+
 # RUN	apt install systemd
 # RUN	systemctl
 
@@ -49,5 +51,6 @@ ENTRYPOINT service postgresql start && bash
 # docker rm zenonline
 # docker run --name zenonline -it zenoweb/zenonline:dockerfile
 # docker run --name zenonline -itd -p 9432:5432 -v $(pwd):/app/zenonline -v zenonline_dockerfile_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:dockerfile
+# docker exec -it zenonline bash -c 'cd /app/zenonlien && bundle'
 # docker attach zenonline
 # docker push zenoweb/zenonline:dockerfile
