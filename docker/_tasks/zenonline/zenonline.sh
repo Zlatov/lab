@@ -5,12 +5,6 @@ docker run --name zenonline -it zenoweb/zenonline:ubuntu-18.04
 	locale-gen ru_RU.UTF-8
 	dpkg-reconfigure locales
 	apt install postgresql
-	apt install systemd
-	apt install systemd
-	systemctl
-	service postgresql status
-	service postgresql start
-	service postgresql status
 	apt install mc
 	alias mc='LANG=ru_RU.UTF-8 mc'
 	mc
