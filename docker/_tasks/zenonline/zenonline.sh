@@ -94,7 +94,8 @@ docker volume create zenonline_postgresql
 cp variables-example.env variables.env && mcedit variables.env
 docker run --name zenonline -itd -v $(pwd):/app/zenonline -v zenonline_postgresql:/var/lib/postgresql/10/main/base zenoweb/zenonline:step5_yarn
 docker exec -it zenonline bash -lic 'cd /app/zenonline && bundle'
-docker exec -it zenonline bash -lic 'cd /app/zenonline && yarn'
+docker exec -it zenonline bash -lic 'cd /app/zenonline && yarn --network-timeout 1000000'
+docker exec -it zenonline bash -lic 'cd /app/zenonline && ./bash/recreate/database.sh'
 docker exec -it zenonline bash -lic 'cd /app/zenonline && /root/.rbenv/bin/rbenv exec bundle exec puma -C /app/zenonline/config/puma.rb --daemon'
 docker exec -it zenonline bash -lic 'cd /app/zenonline && /root/.rbenv/bin/rbenv exec bundle exec pumactl -F /app/zenonline/config/puma.rb stop'
 docker exec -it zenonline bash -lic 'cd /app/zenonline && /root/.rbenv/bin/rbenv exec bundle exec pumactl -F /app/zenonline/config/puma.rb phased-restart'
