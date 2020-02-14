@@ -37,6 +37,44 @@ class User
 # :extend -
 # 
 
+# 
+# Пример has_many has_many
+# 
+
+class Tovar
+
+  has_many :video_cards_rels,
+    class_name: '::TovarsVideoCard',
+    foreign_key: :tovar_articul,
+    primary_key: :articul
+
+  has_many :video_cards,
+    class_name: '::VideoCard',
+    through: :video_cards_rels
+
+class TovarsVideoCard
+
+  belongs_to :video_card,
+    class_name: '::VideoCard',
+    foreign_key: :video_id,
+    primary_key: :id
+
+  belongs_to :tovar,
+    class_name: '::Tovar',
+    foreign_key: :tovar_articul,
+    primary_key: :articul
+
+class VideoCard
+
+  has_many :tovars_rels,
+    class_name: '::TovarsVideoCard',
+    foreign_key: :video_id,
+    primary_key: :id
+
+# 
+# Пример has_and_belongs_to_many
+# 
+
 class User
   self.primary_key = 'sid'
   has_and_belongs_to_many :groups,
@@ -95,8 +133,13 @@ class Author < ActiveRecord::Base
       aff << SlAf.new(slide_id: id, affiliate_name: name)
 
 # 
-# Как в консоли добавить связи много ко многим
+# Как в консоли добавить связи
 # 
 
-
-
+# Один ко многим
+post = Post.find
+post.comments << Comment.create! text: 'asd'
+post.comments = [
+  Comment.new(post_id: post.id, text: 'qwe')
+]
+post.comment_ids = [1, 7, 15]

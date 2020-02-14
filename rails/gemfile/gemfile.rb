@@ -21,3 +21,6 @@ Operator  Meaning
 >=        Greater than or equal to
 <=        Less than or equal to
 ~>        Pessimistically greater than or equal to
+
+# Подключение локальных гемов для тестирования
+gem 'nested_array', path: '../nested_array'

@@ -2,4 +2,7 @@ source "https://rubygems.org"
 
 gem 'activesupport'
 gem 'awesome_print'
-gem 'nested_array'
+# gem 'nested_array', path: '../../../../nested_array'
+# gem 'nested_array', '~> 1.1.0'
+gem 'nested_array', '1.1.0'
+# gem 'nested_array'

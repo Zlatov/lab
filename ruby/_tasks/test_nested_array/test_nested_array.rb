@@ -1,27 +1,14 @@
-#!/usr/bin/env ruby
-
 require 'active_support/all'
 require 'awesome_print'
 require 'nested_array'
 
-print 'NestedArray: '.red; puts NestedArray
-
-a = [
-  {id: 1, pid: nil},
-  {id: 2, pid: 1},
-  {id: 3, pid: nil},
-]
-
-a = NestedArray::Array.new a
-
-b = a.to_nested parent_id: :pid
-
-print 'b: '.red; p b
-
-c = NestedArray::Array.new b
-
-d = c.nested_to_html do |node, parents, level|
-  node[:id].to_s
+puts 'Попробуем загрузить temp_tree.json'.green
+if File.exist? 'temp_tree.json'
+  tree = JSON.parse File.read('temp_tree.json')
+  puts 'Загружен'.green
+  tree = NestedArray::Array.new tree
+  print 'tree[2]: '.red; puts tree[2]
+  nested = tree.to_nested(parent_id: 'parent', root_id: '#')
+  print 'nested.length: '.red; puts nested.length
+  print 'nested: '.red; puts nested
 end
-
-print 'd: '.red; p d
