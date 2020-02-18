@@ -28,5 +28,6 @@
 	],
 	"show_encoding": true,
 	"close_sidebar_if_opened": false,
-	"theme": "Soda Dark 3.sublime-theme"
+	// "theme": "Soda Dark 3.sublime-theme",
+	"theme": "Adaptive.sublime-theme"
 }

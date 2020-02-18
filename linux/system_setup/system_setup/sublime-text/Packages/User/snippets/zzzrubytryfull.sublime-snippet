@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+begin
+  ${1:}
+rescue => e
+  ${2:}Rails.logger.error '>>> Ошибка.'
+  Rails.logger.error e.message
+  Rails.logger.error e.backtrace.join("\n")
+else
+  ${3:on_ok}
+ensure
+  ${4:anyway}
+end
+]]></content>
+	<tabTrigger>zzzrubytryfull</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

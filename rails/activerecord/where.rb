@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'awesome_print'
 require 'active_record'
-require 'standalone_migrations'
+# require 'standalone_migrations'
 require 'date'
 require 'active_support/all'
 
@@ -42,6 +42,8 @@ puts a.to_sql
 # puts a.first.header
 puts a.class.name
 puts a.klass.name
+puts a.to_a.class.name
+p a.to_a.each{|e| e}
 puts a.each{|e| e.class.name}
 puts a.all.each{|e| e.class.name}
 

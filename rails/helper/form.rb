@@ -38,17 +38,24 @@ module FormHelper
     _with_required
   end
 
+  # 
   # Рендерит флэш сообщение не в попап, а в простое закрывающееся сообщение со
   # статусом, например:
   # В контроллере устанавливаем флэш с ключём и редиректим
+  # 
   # ```
   # flash[:form_success] = 'Клиент добавлен.'
   # redirect_to ...
   # ```
+  # 
   # а во вьюхе принимающей редирект просто
   # ```
   # <%= form_flashes %>
   # ```
+  # 
+  # Исходя из semantic ui возможно применять следующие ключи: 
+  # `form_success|form_error|form_info|form_warning`.
+  # 
   def form_flashes
     flashes = []
     flash.each do |key, message|
