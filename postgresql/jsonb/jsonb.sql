@@ -31,8 +31,11 @@ INSERT INTO a VALUES
 (DEFAULT, '12', '3'),
 -- (DEFAULT, '121', '{"asd": "asdasd"}'),
 (DEFAULT, '122', '{"asd": null}'),
--- (DEFAULT, '123', '{"asd": "1"}'),
+(DEFAULT, '123', '{"asd": "1"}'),
 (DEFAULT, '124', '{"asd": 1}'),
+(DEFAULT, '125', '{"asd": 1, "zxc": 2}'),
+(DEFAULT, '126', '{"asd": 1, "zxc": 2, "qwe": 2}'),
+(DEFAULT, '127', '{"zxc": 2}'),
 (DEFAULT, '13', '""'),
 (DEFAULT, '14', '-3.6'),
 (DEFAULT, '15', 'null'),
@@ -42,13 +45,13 @@ INSERT INTO a VALUES
 (DEFAULT, '19', '"\t"'),
 (DEFAULT, '20', '"\n"'),
 (DEFAULT, '21', '"\r"'),
-(DEFAULT, '22', '"  asd  \n  "')
--- (DEFAULT, '23', '
---   {
---     "asd":     "33",
---     "zxc qwe": 1
---   }  
--- ')
+(DEFAULT, '22', '"  asd  \n  "'),
+(DEFAULT, '23', '
+  {
+    "asd":     "33",
+    "zxc qwe": 1
+  }  
+')
 ;
 -- \q
 
@@ -71,10 +74,16 @@ select 'Выбираем >' as " ";
 -- SELECT * FROM a WHERE (data ->> 'asd')::int > 0;
 SELECT data->>'asd' FROM a WHERE ((data->>'asd')::int) > '2';
 
-\q
+-- \q
+
+select 'Выбираем по JSON' as " ";
+-- SELECT * FROM a WHERE (data ->> 'asd')::int > 0;
+SELECT * FROM a WHERE data @> '{"asd": 1, "zxc": 2}';
+
+-- \q
 
 select 'Выбираем data->asd' as " ";
-SELECT data->'asd' FROM a WHERE data->'asd' = '"33"';
+SELECT *, data->>'asd' FROM a WHERE data->>'asd' = '33';
 
 -- jsonb является более строгим, и поэтому запрещает экранирование Unicode для
 -- символов, не относящихся к ASCII (те, что выше U+007F), если только кодировка
