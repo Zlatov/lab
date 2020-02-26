@@ -1,8 +1,8 @@
 {
   "extensions": [
     ".bashrc-iadfeshchm",
-    ".bashrc-env",
-    "sh"
+    "sh",
+    ".env"
   ],
   "tab_size" : 2,
   "detect_indentation": true,
