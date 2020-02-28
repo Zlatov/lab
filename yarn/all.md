@@ -32,7 +32,8 @@ __Прокси:__
 
 * `yarn add [package]`;
 * `yarn add [package]@[version]`;
-* `yarn add [package]@[tag]`.
+* `yarn add [package]@[tag]`;
+* пример: `yarn add jquery@^2`.
 
 Указать категорию зависимостей devDependencies, peerDependencies, и optionalDependencies соответственно:
 
