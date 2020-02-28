@@ -3,16 +3,18 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../../theme/bower/jstree/dist/themes/default/style.min.css">
+  <link rel="stylesheet" type="text/css" href="node_modules/jstree/dist/themes/default/style.min.css">
 </head>
 
 <body>
+  <div ilorem=2></div>
   <div id="tree"></div>
   <button type="button" id="change">Изменить ноды и перерисовать.</button>
   <button type="button" id="change_data">Добавить детей и перерисовать.</button>
   <button type="button" id="add_deep">Добавить детей глубоко и обновить.</button>
-  <script type="text/javascript" src="../../theme/bower/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="../../theme/bower/jstree/dist/jstree.min.js"></script>
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/jstree/dist/jstree.min.js"></script>
+  <script type="text/javascript" src="node_modules/ilorem/dist/ilorem.js"></script>
   <script type="text/javascript">
     var struct = $('#tree')
     struct.jstree({
