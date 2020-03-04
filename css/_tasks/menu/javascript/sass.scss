@@ -26,6 +26,7 @@ $color: inherit;
 
   li {
     position: relative;
+    margin-right: -1px;
     &:first-child {
       border-top-left-radius: $border_radius;
       border-top-right-radius: $border_radius;
@@ -62,7 +63,6 @@ $color: inherit;
   ul {
     width: 100%;
     margin: 0;
-    margin-left: 1px;
     padding: 0;
     list-style: none;
     position: absolute;
