@@ -1,4 +1,5 @@
 .style {
   letter-spacing: 1px; /* межбуквенное расстояние */
   text-indent: 1px; /* отступ первой строки */
+  word-break: break-word; /* переносить длинные слова принудительно */
 }

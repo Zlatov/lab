@@ -1,0 +1,103 @@
+$imenu_width: 150px;
+$background_color: #ffffff;
+$hover_background_color: #dddddd;
+$current_background_color: #eeeeee;
+$border_color: #dddddd;
+$border_radius: 4px;
+$color: inherit;
+
+.imenu {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: $imenu_width;
+  border: solid 1px $border_color;
+  border-radius: $border_radius;
+  background-color: $background_color;
+  box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.2);
+
+  a, span {
+    display: block;
+    padding: 10px 15px 10px 10px;
+    color: $color;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  li {
+    position: relative;
+    transition-duration: 0.5s;
+    width: auto;
+    &:first-child {
+      border-top-left-radius: $border_radius;
+      border-top-right-radius: $border_radius;
+    }
+    &:last-child {
+      border-bottom-left-radius: $border_radius;
+      border-bottom-right-radius: $border_radius;
+    }
+
+    &:hover {
+      background-color: $hover_background_color;
+
+      &>ul {
+        visibility: visible;
+        display: block;
+      }
+    }
+    &:focus-within > ul {
+      visibility: visible;
+      display: block;
+    }
+
+    &.current {
+      background-color: $current_background_color;
+
+      &:hover {
+        background-color: $hover_background_color;
+      }
+    }
+  }
+
+  ul {
+    width: $imenu_width;
+    margin: 0;
+    margin-left: 1px;
+    padding: 0;
+    list-style: none;
+    display: none;
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    left: 100%;
+    border: solid 1px $border_color;
+    border-radius: $border_radius;
+    background-color: $background_color;
+    box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      visibility: visible;
+      display: block;
+    }
+
+    &+i {
+      display: block;
+      width: 10px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &::after {
+        content: "";
+        display: block;
+        width: 0px;
+        height: 0px;
+        position: absolute;
+        top: 50%;
+        margin-top: -4px;
+        border: solid 4px;
+        border-color: transparent transparent transparent black;
+      }
+    }
+  }
+}
