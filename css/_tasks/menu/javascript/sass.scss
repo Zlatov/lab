@@ -1,3 +1,22 @@
+body {
+  position: relative;
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+body::after {
+  content: "";
+  background: url("../../../../images/tokolo/10pppK80.gif") repeat 0 0;
+  opacity: 0.05;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+  z-index: -1;   
+}
+
 $imenu_width: 150px;
 $background_color: #ffffff;
 $hover_background_color: #dddddd;
@@ -62,10 +81,12 @@ $color: inherit;
 
   ul {
     width: 100%;
+    min-width: $imenu_width;
     margin: 0;
     padding: 0;
     list-style: none;
     position: absolute;
+    z-index: 1000;
     visibility: hidden;
     opacity: 0;
     top: 0;
@@ -102,6 +123,38 @@ $color: inherit;
         border: solid 4px;
         border-color: transparent transparent transparent black;
       }
+    }
+  }
+
+  &.horisonatal {
+    width: max-content;
+
+    &>li {
+      float: left;
+      &>ul {
+        top: 100%;
+        left: 0;
+        &+i::after {
+          left: -2px;
+          margin-top: -2px;
+          border-color: black transparent transparent transparent;
+        }
+      }
+    }
+
+    li {
+      &:first-child {
+        border-radius: $border_radius 0 0 $border_radius;
+      }
+      &:last-child {
+        border-radius: 0 $border_radius $border_radius 0;
+      }
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
     }
   }
 }
