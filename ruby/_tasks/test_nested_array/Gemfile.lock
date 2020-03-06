@@ -1,3 +1,8 @@
+PATH
+  remote: ../../../../nested_array
+  specs:
+    nested_array (2.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,7 +17,6 @@ GEM
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     minitest (5.14.0)
-    nested_array (1.1.0)
     thread_safe (0.3.6)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
@@ -24,7 +28,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   awesome_print
-  nested_array (= 1.1.0)
+  nested_array!
 
 BUNDLED WITH
    2.1.4

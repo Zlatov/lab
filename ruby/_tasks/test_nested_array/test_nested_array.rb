@@ -12,3 +12,17 @@ if File.exist? 'temp_tree.json'
   print 'nested.length: '.red; puts nested.length
   print 'nested: '.red; puts nested
 end
+
+a = [
+  {"id" => 1, "parent_id" => nil},
+  {"id" => 2, "parent_id" => 1},
+]
+print 'a: '.red; puts a
+
+b = a.to_nested
+print 'b: '.red; puts b
+
+c = a.nested_to_html do |node|
+  node["id"]
+end
+print 'b: '.red; puts b

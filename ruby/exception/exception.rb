@@ -33,6 +33,7 @@ rescue C1::Error => e
   # Rails.logger.error '>>> Ошибка.'
   # Rails.logger.error e.message
   # Rails.logger.error e.backtrace.join("\n")
+  Rails.logger.error "#{e.message}\n#{e.backtrace.join("\n")}"
   puts '>>> Ошибка.'
   puts e.message
   puts e.backtrace.join("\n")
