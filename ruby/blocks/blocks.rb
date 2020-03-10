@@ -100,6 +100,7 @@ jtp do |param, &block2|
 end
 
 puts '-----------------------'
+puts 'Хранение и вызов лямбда функций в константе класса.'.green
 
 MYCONST = {
   asd: 'asd',
@@ -163,3 +164,18 @@ RUBY
 .each_as_tree do |command|
   puts command
 end
+
+puts 'Возвращение блоком несколько параметров'.green
+
+def block_several_params
+  main_param, options = yield
+  print 'main_param: '.red; puts main_param
+  print 'options: '.red; p options
+end
+
+a = block_several_params do 'asd' end
+a = block_several_params do ['asd'] end
+a = block_several_params do ['asd', nil] end
+a = block_several_params do ['asd', {}] end
+a = block_several_params do ['asd', {asd: "zxc", qwe: 2}] end
+a = block_several_params do ['asd', asd: "zxc", qwe: 2] end

@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+# Gem
 
+Система управления пакетами для языка программирования Руби.
+
+```bash
 gem --help
 gem help commands
-
-exit 0
 
 gem list # — список установленных гемов с версиями;
 gem which gem_name # — где же гем gem_name;
@@ -13,3 +14,4 @@ gem list ^rails$ --remote --all # — посмотреть доступные в
 gem install bundler #
 gem install rails #
 gem install rails -v 5.2.0 #
+```

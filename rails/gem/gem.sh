@@ -1,12 +1,3 @@
 #!/usr/bin/env bash
-
-exit 0
-
-# 
-# Каккую версию гема использует рельса
-# 
-bundle show font-awesome-rails
-
-# 
-# Базовые команды смотри в ruby/gem.
-# 
+# см. файл ruby/bundle/bundler.md для управления гемами рельсы с помощью гема bundler.
+# см. файл ruby/gem/gem.md для управления системными гемами текущей версии ruby.
