@@ -25,8 +25,9 @@ files_name = []
 if Dir.exist? path_files
   Dir.entries(path_files).each do |file_name|
     files_name << file_name if file_name != '.' && file_name != '..'
-    p file_name
-    puts 'DIR!!!'.green if File.directory? file_name
+    print file_name
+    print ' DIR!!!'.green if File.directory? file_name
+    puts "\n"
   end
 end
 puts '-----------'.red
@@ -35,6 +36,7 @@ files_name.each do |file_name|
   p file_name
 end
 puts '-----------'.red
+exit 0
 
 
 require 'pathname'

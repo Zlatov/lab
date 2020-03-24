@@ -73,6 +73,7 @@ print 'a.class: '.red; puts a.class
 # exit 0
 puts File.basename('asdasdasd/qaer4ef24r34.rffre31.ваще не понятно что?') # имя файла из пути
 puts File.basename('qaer4ef24r3/4.rffre31.ваще не понятно что?', '.*') # имя без расширения из пути
+# exit 0
 
 puts 'Открыте файла на запись.'.green
 
