@@ -12,4 +12,6 @@ RemoteForward 52698 127.0.0.1:52698
 wget -O ~/rmate https://raw.githubusercontent.com/aurora/rmate/master/rmate
 chmod u+x ~/rmate
 cd ~ && touch temp && ~/rmate temp
+# для судорес
+sudo cp rmate /usr/bin/
 # или установить как в доке: https://github.com/textmate/rmate

@@ -14,16 +14,24 @@
   </script>
   <!-- Semantic ui CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </head>
 <body>
   <div class="ui container">
+    <p class="ui header">ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=?random=1>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=200x200?random=1>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=200X200?random=1>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=?random=1&grayscale>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=640x480?seed=asd>ilorem</p>
+    <p><img class="ui middle aligned medium image" ilorem=seed=asd>ilorem</p>
     <p class="ui header">По номеру</p>
     <p><img class="ui middle aligned medium image" src="https://picsum.photos/id/0/320/240">https://picsum.photos/id/0/320/240</p>
     <p><img class="ui middle aligned medium image" src="https://picsum.photos/id/237/320/240">https://picsum.photos/id/237/320/240</p>
-    <p class="ui header">Рандомная статика по сиду (на мой взгляд не работающая)</p>
-    <p><img class="ui middle aligned medium image" src="https://picsum.photos/seed/picsum/320/240">https://picsum.photos/seed/picsum/320/240</p>
-    <p><img class="ui middle aligned medium image" src="https://picsum.photos/seed/picsu/320/240">https://picsum.photos/seed/picsu/320/240</p>
+    <p class="ui header">Рандомная статика по сиду</p>
+    <p><img class="ui middle aligned medium image" src="https://picsum.photos/seed/asd/300/300">https://picsum.photos/seed/asd/300/300</p>
+    <p><img class="ui middle aligned medium image" src="https://picsum.photos/seed/asd/200/200">https://picsum.photos/seed/asd/200/200</p>
     <p class="ui header">Рандомное и черно-белое</p>
     <p><img class="ui middle aligned medium image" src="https://picsum.photos/320/240">https://picsum.photos/320/240</p>
     <p><img class="ui middle aligned medium image" src="https://picsum.photos/320/240">https://picsum.photos/320/240</p>
@@ -35,5 +43,90 @@
     <p class="ui header">Размытое</p>
     <p><img class="ui middle aligned medium image" src="https://picsum.photos/320/240/?blur=2">https://picsum.photos/320/240/?blur=2</p>
   </div>
+  <script type="text/javascript">
+    all = document.getElementsByTagName("img")
+    console.log('all: ', all)
+    for (i = 0, l = all.length; i < l; i++) {
+      e = all[i]
+
+      console.log('e.tagName: ', e.tagName)
+
+      has_ilorem = e.hasAttribute("include-lorem") || e.hasAttribute("ilorem")
+      if (!has_ilorem) {
+        continue
+      }
+      // lorem_length = e.getAttribute("include-lorem") || e.getAttribute("ilorem") || random(2, 100).toString()
+      // if (
+      //   lorem_length == null ||
+      //   Object.prototype.toString.call(lorem_length) !== "[object String]"
+      // ) {
+      //   continue
+      // }
+      // lorem_length = parseInt(lorem_length)
+      // if (isNaN(lorem_length)) {
+      //   continue
+      // }
+
+      // e.innerHTML = loremText(lorem_length)
+      // 
+
+
+      var size_x = "300"
+      var size_y = "300"
+      var random = i.toString()
+      var seed = ""
+
+      var ilorem_string = e.getAttribute("include-lorem") || e.getAttribute("ilorem")
+      if (
+        ilorem_string == null ||
+        Object.prototype.toString.call(ilorem_string) !== "[object String]"
+      ) {
+        continue
+      }
+      console.log('ilorem_string: ', ilorem_string)
+
+      var size_regex = /[123456789]{1}\d{0,3}x[123456789]{1}\d{0,3}/i
+      var size_exist = size_regex.test(ilorem_string)
+      if (size_exist) {
+        var size = ilorem_string.match(size_regex)
+        if (size != null && size[0] != null) {
+          var size_array = size[0].split(/x/i)
+          if (size_array[0] != null && size_array[1] != null) {
+            [size_x, size_y] = size_array
+          }
+        }
+      }
+
+      var random_regex = /random=\d+/i
+      if (random_regex.test(ilorem_string)) {
+        var ilorem_random = ilorem_string.match(random_regex)
+        if (ilorem_random != null && ilorem_random[0] != null) {
+          ilorem_random = ilorem_random[0].match(/\d/)
+          if (ilorem_random != null && ilorem_random[0] != null) {
+            random = ilorem_random[0]
+          }
+        }
+      }
+
+      var seed_regex = /seed=[^&]+/i
+      if (seed_regex.test(ilorem_string)) {
+        var ilorem_seed = ilorem_string.match(seed_regex)[0]
+        ilorem_seed = ilorem_seed.match(/=([^&]+)/)[1]
+        if (ilorem_seed != null && Object.prototype.toString.call(ilorem_seed) === '[object String]') {
+          seed = ilorem_seed
+        }
+      }
+
+      var picsum = "https://picsum.photos/"
+      if (seed.length > 0) {
+        picsum += "seed/" + seed + "/"
+      }
+      picsum += size_x + "/" + size_y
+      picsum += "?random=" + random
+
+      console.log('picsum: ', picsum)
+      e.setAttribute("src", picsum)
+    }
+  </script>
 </body>
 </html>
