@@ -41,24 +41,24 @@ remove_column :table_name, :column_name
 
 drop_table :market_product_clips, if_exists: true
 
-create_table "market_angars", force: :cascade do |t|
-  t.string   "name"
+create_table "lorem", force: :cascade do |t|
+  t.string   "name", null: true
   t.string   "address"
   t.integer  "stages"
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
   t.float    "lat"
   t.float    "lng"
+  t.text   :text
   t.index ["name"], name: "index_market_angars_on_name", unique: true
   # t.references :market_order, index: true, foreign_key: {on_delete: :cascade} 
 end
+add_index :lorem, :name, unique: true
 
 create_table :market_product_clips, id: :string, force: :cascade do |t|
   t.string :tab_id, null: false
   t.string :name,   null: false
   t.string :url
-  t.text   :text
-
   t.index [:id], name: :uqix_marketproductclips_id, unique: true
   t.index [:tab_id], name: :ix_marketproductclips_tab_id
 end

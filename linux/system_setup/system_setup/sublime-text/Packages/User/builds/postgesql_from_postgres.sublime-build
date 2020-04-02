@@ -1,6 +1,0 @@
-{
-  // Задать пароль перед импользованием.
-  "env": {"PGPASSWORD": ""},
-  "cmd": ["psql", "-h", "localhost", "-U", "postgres", "-d", "lab", "-f", "$file"],
-  "selector": "source.sql"
-}
