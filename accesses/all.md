@@ -21,3 +21,9 @@ zaccesses hosts -s
 ## Установка
 
 `curl -L -o ~/install_accesses.sh https://raw.githubusercontent.com/Zlatov/lab/master/accesses/bin/install.sh && chmod u+x ~/install_accesses.sh && sudo ~/install_accesses.sh && rm ~/install_accesses.sh`
+
+Добавить в `mcedit ~/.bashrc`
+
+```bash
+export YANDEX_PASSWORD=password
+```
