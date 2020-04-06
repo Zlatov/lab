@@ -4,18 +4,20 @@ require 'unicode_utils' # UnicodeUtils.downcase 'String'
 require 'rubygems'
 require 'awesome_print'
 
-puts 'Почти альтернатива php str_replace'.green
-puts 'sentence["??Robert??"] = "Roger" -- Для одиночных случаем удобно'.green
-sentence = '1daswfdsf ??Robert?? ??Dashoff?? ??Robert??'
-a = 'Заранее определил'
-[
-  ['??Dashoff??', a],
-  ['??Robert??', 'b']
-].each do |val|
-  # print 'val: '.red; p val
-  sentence.gsub! val[0], val[1]
-end
-print 'sentence: '.red; puts sentence
+puts 'Альтернатива php str_replace, замена подстрок в тексте.'.green
+a = '??asd?? ??asd??'
+b = a.gsub '??asd??', 'asd'
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+
+a = "??asd?? ??asd?? ??zxc??"
+b = {
+  "??asd??" => "asdasd",
+  "??zxc??" => "zxczxc",
+}
+print 'a: '.red; puts a
+b.each{|k,v| a.gsub! k, v}
+print 'a: '.red; puts a
 # exit
 
 # Многострочность multiline
