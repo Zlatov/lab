@@ -4,7 +4,7 @@ npm — это пакетный менеджер node.js.
 
 ## Установка
 
-`sudo apt-get install npm`
+`sudo apt install -y npm`
 
 ## Обновление node.js до последней версии
 

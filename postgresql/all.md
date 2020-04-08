@@ -5,7 +5,7 @@
 
 ## Утсановка
 
-`sudo apt-get install postgresql`
+`sudo apt-get install -y postgresql`
 
 
 ## Кофигурирование

@@ -9,7 +9,7 @@ sudo apt install libnss3-tools
 wget https://github.com/FiloSottile/mkcert/releases/download/v1.1.2/mkcert-v1.1.2-linux-amd64
 mv mkcert-v1.1.2-linux-amd64 mkcert
 chmod +x mkcert
-cp mkcert /usr/local/bin/
+sudo cp mkcert /usr/local/bin/
 ```
 
 __Создание локального Центра Сертификации__
@@ -33,5 +33,6 @@ listen 127.0.0.1:443 ssl;
 ssl_certificate /etc/ssl/certs/myapp.local.pem;
 ssl_certificate_key /etc/ssl/private/myapp.local-key.pem;
 …
-proxy_set_header X-Forwarded-Proto $scheme;
+# proxy_set_header X-Forwarded-Proto $scheme;
+proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
 ```
