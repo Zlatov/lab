@@ -33,6 +33,5 @@ listen 127.0.0.1:443 ssl;
 ssl_certificate /etc/ssl/certs/myapp.local.pem;
 ssl_certificate_key /etc/ssl/private/myapp.local-key.pem;
 …
-# proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
+proxy_set_header X-Forwarded-Proto $scheme;
 ```
