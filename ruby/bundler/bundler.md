@@ -2,6 +2,19 @@
 
 Один из гемов, который позволяет управлять гемами приложения.
 
+## Установка
+
+`gem install bundler`
+
+Создать файл Gemfile с содержимым:
+
+```ruby
+source 'https://rubygems.org'
+
+gem 'awesome_print'
+
+```
+
 ## Использование
 
 ```bash

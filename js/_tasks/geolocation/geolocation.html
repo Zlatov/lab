@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="">
+  <style type="text/css"></style>
+</head>
+<body>
+  <script type="text/javascript">
+    navigator.geolocation.getCurrentPosition(
+
+    // Функция обратного вызова при успешном извлечении локации
+    function(position) {
+      console.log('position: ', position)
+      console.log('position.coords.latitude: ', position.coords.latitude)
+      console.log('position.coords.longitude: ', position.coords.longitude)
+
+        /*
+        В объекте position изложена подробная информация
+        о позиции устройства:
+
+        position = {
+            coords: {
+                latitude - Широта.
+                longitude - Долгота.
+                altitude - Высота в метрах над уровнем моря.
+                accuracy - Погрешность в метрах.
+                altitudeAccuracy - Погрешность высоты над уровнем моря в метрах.
+                heading - Направление устройства по отношению к северу.
+                speed - Скорость в метрах в секунду.
+            }
+            timestamp - Время извлечения информации.
+        }
+        */
+
+    },
+
+    // Функция обратного вызова при неуспешном извлечении локации
+    function(error){
+      console.log('error: ', error)
+
+        /*
+        При неудаче, будет доступен объект error:
+
+        error = {
+            code - Тип ошибки
+                    1 - PERMISSION_DENIED
+                    2 - POSITION_UNAVAILABLE
+                    3 - TIMEOUT
+
+            message - Детальная информация.
+        }
+        */
+
+    }
+);
+  </script>
+</body>
+</html>
