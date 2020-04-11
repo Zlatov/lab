@@ -23,7 +23,7 @@ Rails - фреймворк ruby
   psql -XAt -U postgres -c 'SHOW config_file'
   ```
 * __Sqlite__ (гем sqlite3) потребует библиотеку `sudo apt install libsqlite3-dev`
-* __Mysql__ (гем mysql2) потребует библиотеку `sudo apt-get install libmysqlclient-dev`
+* __Mysql__ (гем mysql2) потребует библиотеку `sudo apt-get install -y libmysqlclient-dev`
 * __Система__ (ubuntu) потребует изменение параметров ядра `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
 

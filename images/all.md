@@ -4,7 +4,7 @@
 
 Скачать __jpg__ файлы можно запустив
 
-```
+```bash
 curl -L -o ~/images_pull_jpg.sh https://raw.githubusercontent.com/Zlatov/lab/master/images/pull/jpg.sh && chmod u+x ~/images_pull_jpg.sh && ~/images_pull_jpg.sh
 ```
 
