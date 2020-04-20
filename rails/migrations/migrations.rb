@@ -70,7 +70,7 @@ end
 # Внешние ключи
 # 
 
-add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
+add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
 # add_reference :table_name, "ref_name", foreign_key: true
