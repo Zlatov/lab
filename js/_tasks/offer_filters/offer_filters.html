@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <style type="text/css">
+
+    label {
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="offers" class="js_group_filters_place">
+    <div class="offer" data-id="1">
+      1
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="1[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="1[cvet]" value="зелёный"> зелёный</label>
+          <label><input type="radio" name="1[cvet]" value="синий"> синий</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="offer" data-id="2">
+      2
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="2[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="2[cvet]" value="зелёный"> зелёный</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="offer" data-id="3">
+      3
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="3[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="3[cvet]" value="зелёный"> зелёный</label>
+          <label><input type="radio" name="3[cvet]" value="синий"> синий</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="offer" data-id="4">
+      4
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="4[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="4[cvet]" value="зелёный"> зелёный</label>
+          <label><input type="radio" name="4[cvet]" value="синий"> синий</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="offer" data-id="5">
+      5
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="5[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="5[cvet]" value="зелёный"> зелёный</label>
+          <label><input type="radio" name="5[cvet]" value="синий"> синий</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="offer" data-id="6">
+      6
+      <div class="filters">
+        <div class="filter" data-type="radio" data-slug="cvet">
+          <label><input type="radio" name="6[cvet]" value="красный"> красный</label>
+          <label><input type="radio" name="6[cvet]" value="зелёный"> зелёный</label>
+          <label><input type="radio" name="6[cvet]" value="синий"> синий</label>
+        </div>
+        <div class="filter" data-type="select" data-slug="dlina">
+          <select>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+
+  <!-- Underscore -->
+  <script type="text/javascript" src="../../../node_modules/underscore/underscore-min.js"></script>
+
+  <script type="text/javascript">
+
+    window.offer_filter_data = {
+      1: {
+        "010000001": {
+          "cvet": "красный",
+          "dlina": "1.5",
+        },
+        "010000002": {
+          "cvet": "зелёный",
+          "dlina": "2",
+        },
+        "010000003": {
+          "cvet": "синий",
+          "dlina": "2.5",
+        },
+        "010000004": {
+          "cvet": "зелёный",
+          "dlina": "1.5",
+        },
+        "010000005": {
+          "cvet": "зелёный",
+          "dlina": "2.5",
+        },
+        "010000006": {
+          "cvet": "синий",
+          "dlina": "2",
+        },
+      },
+      2: {
+        "020000001": {
+          "cvet": "красный",
+          "dlina": "1.5",
+        },
+        "020000002": {
+          "cvet": "зелёный",
+          "dlina": "1.5",
+        },
+        "020000003": {
+          "cvet": "зелёный",
+          "dlina": "2",
+        },
+      },
+    }
+
+  </script>
+  <script type="text/javascript" src="./offer_filters.js"></script>
+  <script type="text/javascript">
+
+    window.OfferFilters.init(window.offer_filter_data)
+
+  </script>
+</body>
+</html>

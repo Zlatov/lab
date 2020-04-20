@@ -3,6 +3,17 @@ SELECT table_schema, table_name
 FROM information_schema.tables
 ORDER BY table_schema, table_name;
 
+SELECT '> таблица a' as " ";
+DROP TABLE IF EXISTS a;
+CREATE TABLE a (
+  id SERIAL PRIMARY KEY
+);
+CREATE INDEX ix_a_id ON a (id);
+INSERT INTO a VALUES
+(DEFAULT),
+(DEFAULT);
+SELECT * FROM a;
+-- \q
 
 DROP TABLE IF EXISTS lorem;
 DROP TABLE IF EXISTS lorem;

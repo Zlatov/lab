@@ -103,5 +103,12 @@
 	{ "keys": ["ctrl+'"], "command": "collapse_folders_focus"},
 
 	// Pretty js code with npm package sublime-js-prettier
-	{ "keys": ["ctrl+alt+f"], "command": "js_prettier" }
+	{ "keys": ["ctrl+alt+f"], "command": "js_prettier" },
+
+	// Wrap line by 80 chars
+	{
+    "keys": ["ctrl+k", "ctrl+w"],
+    "command": "wrap_lines",
+    "args": {"width": 80}
+	}
 ]
