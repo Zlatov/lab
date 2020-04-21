@@ -4,11 +4,36 @@
 "use strict"
 
 window.OfferFilters = {
-  data: null
+  // Данные о группах, например, группа "1", состоящая из двух товаров, со
+  // свойствами:
+  // 1: {
+  //   "010000001": {
+  //     "cvet": "красный",
+  //     "dlina": "1.5",
+  //   },
+  //   "010000002": {
+  //     "cvet": "зелёный",
+  //     "dlina": "2",
+  //   },
+  // }
+  data: null,
+  // Соответствия значений. Расчитывается автоматически из входных данных. Пример расчитанных соответствий:
+  // 1: {
+  //   "cvet": {
+  //     "красный": ["010000001"]
+  //     "зелёный": ["010000002"]
+  //   }
+  //   "dlina": {
+  //     "1.5": ["010000001"]
+  //     "2": ["010000002"]
+  //   }
+  // }
+  value_matches: null
 }
 
 window.OfferFilters.init = function(data, callback) {
   this.data = data
+  this.calc_value_matches()
   $('#offers .offer .filter[data-type="select"]').on("change", "select", {instance: this, callback: callback}, this.change)
   $('#offers .offer .filter[data-type="radio"]').on("change", "input", {instance: this, callback: callback}, this.change)
 }
@@ -23,18 +48,27 @@ window.OfferFilters.change = function(event) {
   var value = changer.val()
 
   // Определяем какие значения выбраны в Предложении.
-  var selected = instance.calc_selected(id)
+  var selected = instance.find_selected(id)
+
+  // Первое в пересечении = решению.
+  var code = instance.calc_intersection(id, selected)[0]
+  // Если нет решения при выборе значения - находми решение по данным и тому на что кликнули.
+  if (code == undefined) {
+    selected = instance.calc_selected(id, slug, value)
+    instance.set_selected(id, selected)
+    code = instance.calc_intersection(id, selected)[0]
+  }
+
   // Разрешим выбирать все значения.
   instance.anable_all_values(id)
   // Запретим выбирать те значения, выбор которых будет приводить к пустому пересечению.
   var disabled = instance.calc_empty_match_values(id, selected)
   instance.disable_values(id, disabled)
-  // Первое в пересечении = решению.
-  var code = instance.calc_intersection(id, selected, null)[0]
+
   event.data.callback(id, code)
 }
 
-window.OfferFilters.calc_selected = function(id) {
+window.OfferFilters.find_selected = function(id) {
   var selected = {}
   var filters = $('#offers .offer[data-id="' + id + '"] .filter')
   filters.each(function(index, dom) {
@@ -49,12 +83,11 @@ window.OfferFilters.calc_selected = function(id) {
       }
     }
     if (type == "radio") {
-      var checked_input = filter.find("input:checked")
+      var checked_input = filter.find("input:checked").first()
       if (checked_input.length != 1) {
-        var inputs = filter.find("input")
-        if (inputs.length > 0) {
-          var input = $(inputs[0])
-          input.prop("checked", true)
+        var input = filter.find("input").first()
+        input.prop("checked", true)
+        if (input.length == 1) {
           checked_input = input
         }
       }
@@ -69,6 +102,42 @@ window.OfferFilters.calc_selected = function(id) {
   return selected
 }
 
+window.OfferFilters.calc_selected = function(id, slug, value) {
+  var selected = {}
+  if (
+    this.value_matches[id] != null &&
+    this.value_matches[id][slug] != null &&
+    this.value_matches[id][slug][value] != null &&
+    this.value_matches[id][slug][value][0] != null &&
+    this.data[id] != null &&
+    this.data[id][this.value_matches[id][slug][value][0]] != null
+  ) {
+    selected = Object.assign(selected, this.data[id][this.value_matches[id][slug][value][0]])
+  }
+  return selected
+}
+
+window.OfferFilters.set_selected = function(id, selected) {
+  $('#offers .offer[data-id="' + id + '"] .filter').each(function(index, dom) {
+    var filter = $(dom)
+    var type = filter.data("type")
+    var slug = filter.data("slug")
+    var value = null
+    if (type == "select") {
+      if (selected[slug] != null) {
+        var select = filter.find("select").first()
+        select.val(selected[slug])
+      }
+    }
+    if (type == "radio") {
+      if (selected[slug] != null) {
+        var input = filter.find("input[value=\"" + selected[slug] + "\"]").first()
+        input.prop("checked", true)
+      }
+    }
+  })
+}
+
 window.OfferFilters.anable_all_values = function(id) {
   var filters = $('#offers .offer[data-id="' + id + '"] .filter')
   filters.each(function(index, dom) {
@@ -77,12 +146,15 @@ window.OfferFilters.anable_all_values = function(id) {
     var slug = filter.data("slug")
     if (type == "select") {
       var options = filter.find("select option").each(function(index, dom) {
-        $(dom).prop("disabled", false)
+        var option = $(dom)
+        option.removeClass("disabled")
       })
     }
     if (type == "radio") {
       var inputs = filter.find("input").each(function(index, dom) {
-        $(dom).prop("disabled", false)
+        var input = $(dom)
+        var label = input.parents("label").first()
+        label.removeClass("disabled")
       })
     }
   })
@@ -101,7 +173,7 @@ window.OfferFilters.disable_values = function(id, values) {
           var option = $(dom)
           value = option.attr("value")
           if (values[slug] != null && values[slug].includes(value)) {
-            option.prop("disabled", true)
+            option.addClass("disabled")
           }
         })
       })
@@ -111,29 +183,35 @@ window.OfferFilters.disable_values = function(id, values) {
         var input = $(dom)
         value = input.val()
         if (values[slug] != null && values[slug].includes(value)) {
-          input.prop("disabled", true)
+          var label = input.parents("label").first()
+          label.addClass("disabled")
         }
       })
     }
   })
 }
 
-window.OfferFilters.calc_empty_match_values = function(id, selected) {
-  var code, slug, filters, value
-  var imatches_value = {}
-  for (code in this.data[id]) {
-    filters = this.data[id][code]
-    for (slug in filters) {
-      value = filters[slug]
-      if (imatches_value[slug] == null) {
-        imatches_value[slug] = {}
+window.OfferFilters.calc_value_matches = function() {
+  var id, offer, code, filters, slug, value
+  this.value_matches = {}
+  for (id in this.data) {
+    offer = this.data[id]
+    for (code in offer) {
+      filters = offer[code]
+      for (slug in filters) {
+        value = filters[slug]
+        this.value_matches[id] = this.value_matches[id] || {}
+        this.value_matches[id][slug] = this.value_matches[id][slug] || {}
+        this.value_matches[id][slug][value] = this.value_matches[id][slug][value] || []
+        this.value_matches[id][slug][value].push(code)
       }
-      if (imatches_value[slug][value] == null) {
-        imatches_value[slug][value] = []
-      }
-      imatches_value[slug][value].push(code)
     }
   }
+  console.log('this.value_matches: ', this.value_matches)
+}
+
+window.OfferFilters.calc_empty_match_values = function(id, selected) {
+  var code, slug, filters, value
   var disabled_values = {}
   for (code in this.data[id]) {
     filters = this.data[id][code]
@@ -142,7 +220,10 @@ window.OfferFilters.calc_empty_match_values = function(id, selected) {
     }
     for (slug in filters) {
       value = filters[slug]
-      var value_match = imatches_value[slug][value] || []
+      var value_match = []
+      if (this.value_matches[id] != null && this.value_matches[id][slug] != null && this.value_matches[id][slug][value] != null) {
+        value_match = this.value_matches[id][slug][value]
+      }
       var intersection_without_value = this.calc_intersection(id, selected, slug)
       var intersection = _.intersection(intersection_without_value, value_match)
       if (intersection.length == 0) {

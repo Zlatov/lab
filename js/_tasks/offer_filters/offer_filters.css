@@ -2,3 +2,12 @@ label, input[type="radio"] {
   cursor: pointer;
   user-select: none;
 }
+label.disabled {
+  color: gray;
+}
+label.disabled input {
+  opacity: 0.33;
+}
+option.disabled {
+  color: gray;
+}
