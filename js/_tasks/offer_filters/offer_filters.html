@@ -2,18 +2,16 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <style type="text/css">
-
-    label {
-      cursor: pointer;
-    }
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="offer_filters.css">
 </head>
 <body>
+  <h1>Фильтры групп</h1>
+  <p>Отличается от классических фильтров тем, что нет способа снять выбор с со значений - в каждом фильтре одно из значений должно быть выбрано.</p>
+  <p>Исходя из этого, отключение значений приводящих к пустому пересечению может завести в тупик классический фильтр. Например, два товара со двумя свойствами: первый: цвет - красный, длинна - 1м, второй: цвет - зелёный, длина 2м. При "выборе" одного из товаров второй выбрать невозможно.</p>
+  <p>Таким образом, отключение значений должно быть только визуальным, или не быть вообще, при переключение на отключённое значение, второе значение должно перевыбираться в соответствии с данными.</p>
   <div id="offers" class="js_group_filters_place">
     <div class="offer" data-id="1">
-      1
+      1, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="1[cvet]" value="красный"> красный</label>
@@ -30,7 +28,7 @@
       </div>
     </div>
     <div class="offer" data-id="2">
-      2
+      2, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="2[cvet]" value="красный"> красный</label>
@@ -45,41 +43,32 @@
       </div>
     </div>
     <div class="offer" data-id="3">
-      3
+      3, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="3[cvet]" value="красный"> красный</label>
           <label><input type="radio" name="3[cvet]" value="зелёный"> зелёный</label>
           <label><input type="radio" name="3[cvet]" value="синий"> синий</label>
         </div>
-        <div class="filter" data-type="select" data-slug="dlina">
-          <select>
-            <option value="1.5">1.5</option>
-            <option value="2">2</option>
-            <option value="2.5">2.5</option>
-          </select>
-        </div>
       </div>
     </div>
     <div class="offer" data-id="4">
-      4
+      4, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="4[cvet]" value="красный"> красный</label>
           <label><input type="radio" name="4[cvet]" value="зелёный"> зелёный</label>
-          <label><input type="radio" name="4[cvet]" value="синий"> синий</label>
         </div>
         <div class="filter" data-type="select" data-slug="dlina">
           <select>
             <option value="1.5">1.5</option>
             <option value="2">2</option>
-            <option value="2.5">2.5</option>
           </select>
         </div>
       </div>
     </div>
     <div class="offer" data-id="5">
-      5
+      5, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="5[cvet]" value="красный"> красный</label>
@@ -96,7 +85,7 @@
       </div>
     </div>
     <div class="offer" data-id="6">
-      6
+      6, <span class="code"></span>
       <div class="filters">
         <div class="filter" data-type="radio" data-slug="cvet">
           <label><input type="radio" name="6[cvet]" value="красный"> красный</label>
@@ -163,13 +152,48 @@
           "dlina": "2",
         },
       },
+      3: {
+        "020000001": {
+          "cvet": "красный",
+        },
+        "020000002": {
+          "cvet": "зелёный",
+        },
+        "020000003": {
+          "cvet": "зелёный",
+        },
+      },
+      4: {
+        "020000001": {
+          "cvet": "красный",
+          "dlina": "1.5",
+        },
+        "020000002": {
+          "cvet": "зелёный",
+          "dlina": "2",
+        },
+      },
     }
 
   </script>
   <script type="text/javascript" src="./offer_filters.js"></script>
   <script type="text/javascript">
 
-    window.OfferFilters.init(window.offer_filter_data)
+    window.Offers = {}
+    window.Offers.change_product = function(id, code) {
+      if (code == null) {
+        return null
+      }
+      if (typeof id !== "number") {
+        return null
+      }
+      var offer = $("#offers .offer[data-id=\"" + id + "\"]")
+      var code_block = offer.find(".code")
+      code_block = $(code_block[0])
+      code_block.html(code)
+    }
+
+    window.OfferFilters.init(window.offer_filter_data, window.Offers.change_product)
 
   </script>
 </body>

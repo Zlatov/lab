@@ -1,0 +1,4 @@
+label, input[type="radio"] {
+  cursor: pointer;
+  user-select: none;
+}

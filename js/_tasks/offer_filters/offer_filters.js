@@ -7,10 +7,10 @@ window.OfferFilters = {
   data: null
 }
 
-window.OfferFilters.init = function(data) {
+window.OfferFilters.init = function(data, callback) {
   this.data = data
-  $('#offers .offer .filter[data-type="select"]').on("change", "select", {instance: this}, this.change)
-  $('#offers .offer .filter[data-type="radio"]').on("change", "input", {instance: this}, this.change)
+  $('#offers .offer .filter[data-type="select"]').on("change", "select", {instance: this, callback: callback}, this.change)
+  $('#offers .offer .filter[data-type="radio"]').on("change", "input", {instance: this, callback: callback}, this.change)
 }
 
 window.OfferFilters.change = function(event) {
@@ -27,10 +27,11 @@ window.OfferFilters.change = function(event) {
   // Разрешим выбирать все значения.
   instance.anable_all_values(id)
   // Запретим выбирать те значения, выбор которых будет приводить к пустому пересечению.
-  instance.disable_values(id, instance.calc_empty_match_values(id, selected))
+  var disabled = instance.calc_empty_match_values(id, selected)
+  instance.disable_values(id, disabled)
   // Первое в пересечении = решению.
   var code = instance.calc_intersection(id, selected, null)[0]
-  console.log('code: ', code)
+  event.data.callback(id, code)
 }
 
 window.OfferFilters.calc_selected = function(id) {
@@ -81,7 +82,7 @@ window.OfferFilters.anable_all_values = function(id) {
     }
     if (type == "radio") {
       var inputs = filter.find("input").each(function(index, dom) {
-        $(dom).prop("disabled", true)
+        $(dom).prop("disabled", false)
       })
     }
   })
@@ -136,11 +137,13 @@ window.OfferFilters.calc_empty_match_values = function(id, selected) {
   var disabled_values = {}
   for (code in this.data[id]) {
     filters = this.data[id][code]
+    if (Object.keys(filters).length < 2) {
+      continue
+    }
     for (slug in filters) {
       value = filters[slug]
       var value_match = imatches_value[slug][value] || []
       var intersection_without_value = this.calc_intersection(id, selected, slug)
-      console.log('intersection_without_value: ', intersection_without_value)
       var intersection = _.intersection(intersection_without_value, value_match)
       if (intersection.length == 0) {
         disabled_values[slug] = disabled_values[slug] || []
@@ -153,7 +156,6 @@ window.OfferFilters.calc_empty_match_values = function(id, selected) {
     var values = disabled_values[slug]
     disabled_values[slug] = _.uniq(values)
   }
-  console.log('disabled_values: ', disabled_values)
   return disabled_values
 }
 
