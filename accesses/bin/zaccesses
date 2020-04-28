@@ -198,6 +198,38 @@ function app_my() {
 	fi
 }
 
+# Пароли anton
+function app_anton() {
+
+	# Загрузка
+	if [[ "$OPTION_SAVE" == true ]]
+	then
+		check_password
+		curl -T ~/accesses/anton.yml https://webdav.yandex.ru/accesses/anton.yml --user Zlatov:"${YANDEX_PASSWORD}"
+		echoc "anton.yml сохранён." green
+	fi
+
+	# Скачивание
+	# только когда пользователь не открывает.
+	if [[ "$OPTION_SAVE" == false && "$OPTION_OPEN" != true ]]
+	then
+		check_password
+		wget \
+			https://webdav.yandex.ru/accesses/anton.yml\
+			--user=Zlatov\
+			--password=$YANDEX_PASSWORD\
+			-O ~/accesses/anton.yml
+		echoc "anton.yml загружен." blue
+	fi
+
+	# Открытие
+	# и когда пользователь скачивает.
+	if [[ "$OPTION_OPEN" == true || "$OPTION_SAVE" != true ]]
+	then
+		subl ~/accesses/anton.yml
+	fi
+}
+
 # Пароли Зенон
 function app_zenon() {
 
@@ -280,6 +312,9 @@ then
 			;;
 		my)
 			app_my
+			;;
+		anton)
+			app_anton
 			;;
 		zenon)
 			app_zenon
