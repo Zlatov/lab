@@ -4,6 +4,9 @@ set -eu
 
 cd "$(dirname "${0}")"
 
+# Архивы можно раз-/архивировать с помощью утилит: gzip, gunzip (разархиватор gzip), tar
+# описание смотреть в соответствущих файлах: bash/gzip/gzip.sh, bash/gunzip/gunzip.sh, bash/tar/tar.sh.
+
 # Очищаем директорию для теста:
 filename=$(basename -- "${BASH_SOURCE[0]}") # Имя текущего исполняемого файла.
 test_dirname="${filename%.*}" # Имя тестовой директории - это имя текущего файла без расширения.

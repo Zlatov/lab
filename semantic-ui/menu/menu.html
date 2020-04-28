@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="ru">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="/theme/bower/semantic/dist/semantic.min.css">
-	</head>
-	<body>
 
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/node_modules/semantic-ui-css/semantic.min.css">
+</head>
 
-		<div class="ui menu">
-			<a class="item">adcfgfa</a>
-			<div class="ui dropdown item">Categories <i class="dropdown icon"></i> <div class="menu">
-					<a class="item">Electronics</a>
-					<a class="item">Automotive</a>
-					<a class="item">Home</a>
-				</div>
-			</div>
-		</div>
+<body>
+  <div class="ui menu">
+    <a class="item">adcfgfa</a>
+    <div class="ui dropdown item">Categories <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item">Electronics</a>
+        <a class="item">Automotive</a>
+        <a class="item">Home</a>
+      </div>
+    </div>
+  </div>
+  <div class="ui inverted menu">
+    <a class="yellow item active" style="background-color: #ffecba;">adcfgfa</a>
+    <a class="yellow item" style="background-color: #ffecba;">adcfgfa</a>
+    <div class="ui dropdown item">Categories <i class="dropdown icon"></i>
+      <div class="ui inverted menu">
+        <a class="item active red">Bag inverted dropdown menu</a>
+        <a class="item red">Automotive</a>
+        <a class="item">Home</a>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/node_modules/semantic-ui-css/semantic.min.js"></script>
+  <script type="text/javascript" src="/node_modules/ilorem/dist/ilorem.js"></script>
+  <script type="text/javascript">
+  $('.ui.dropdown').dropdown()
 
-		<div class="ui inverted menu">
-			<a class="yellow item active" style="background-color: #ffecba;">adcfgfa</a>
-			<a class="yellow item" style="background-color: #ffecba;">adcfgfa</a>
-			<div class="ui dropdown item">Categories <i class="dropdown icon"></i>
-				<div class="ui inverted menu">
-					<a class="item active red">Bag inverted dropdown menu</a>
-					<a class="item red">Automotive</a>
-					<a class="item">Home</a>
-				</div>
-			</div>
-		</div>
+  </script>
+</body>
 
-
-		<script type="text/javascript" src="/theme/bower/jquery/dist/jquery.js"></script>
-		<script type="text/javascript" src="/theme/bower/semantic/dist/semantic.min.js"></script>
-		<script type="text/javascript">
-      $('.ui.dropdown').dropdown()
-		</script>
-	</body>
 </html>

@@ -111,4 +111,16 @@
     "command": "wrap_lines",
     "args": {"width": 80}
 	}
+
+	// Автоматическое определение длинны таба иногда хромает в сублайме.
+	{
+		"keys": ["ctrl+k", "ctrl+t", "ctrl+2"],
+		"command": "set_setting",
+		"args": {"setting": "tab_size", "value": 2}
+	},
+	{
+		"keys": ["ctrl+k", "ctrl+t", "ctrl+4"],
+		"command": "set_setting",
+		"args": {"setting": "tab_size", "value": 4}
+	}
 ]
