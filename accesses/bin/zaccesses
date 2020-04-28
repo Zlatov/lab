@@ -163,7 +163,7 @@ function app_man {
 
 # Автодополнение
 function app_complete() {
-	echo 'my zenon --help sshconfig'
+	echo 'my zenon anton --help sshconfig'
 }
 
 # Мои пароли
