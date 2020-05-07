@@ -1,54 +1,150 @@
 {
   "scope": "source, text, string.quoted",
   "completions": [
+    "iadfeshchm",
+    {
+      "contents": "−",
+      "trigger": "zzz-minus\t−"
+    },
+    {
+      "contents": "&#8722;",
+      "trigger": "zzz-minus-code\t−"
+    },
     {
       "contents": "–",
-      "trigger": "u8-min\t–"
+      "trigger": "zzz-ndash\t–"
+    },
+    {
+      "contents": "&#8211;",
+      "trigger": "zzz-ndash-code\t–"
     },
     {
       "contents": "—",
-      "trigger": "u8-tir\t—"
+      "trigger": "zzz-mdash\t—"
+    },
+    {
+      "contents": "&#8212;",
+      "trigger": "zzz-mdash-code\t—"
     },
     {
       "contents": "«»",
-      "trigger": "u8-kav-elki\t«»"
+      "trigger": "zzz-quotes-fir\t«»"
+    },
+    {
+      "contents": "&#171;&#187;",
+      "trigger": "zzz-quotes-fir-code\t«»"
     },
     {
       "contents": "„“",
-      "trigger": "u8-kav-lapki\t„“"
+      "trigger": "zzz-quotes-paws\t„“"
     },
     {
       "contents": "&#8222;&#8220;",
-      "trigger": "u8-kav-lapki-c\t&#8222;&#8220;"
+      "trigger": "zzz-quotes-paws-code\t„“"
     },
     {
       "contents": "…",
-      "trigger": "u8-mno\t…"
+      "trigger": "zzz-dots\t…"
     },
     {
       "contents": "&#8230;",
-      "trigger": "u8-mno-c\t&#8230;"
+      "trigger": "zzz-dots-code\t…"
     },
     {
       "contents": "←↑→↓",
-      "trigger": "u8-str\t←↑→↓"
+      "trigger": "zzz-arrow\t←↑→↓"
+    },
+    {
+      "contents": "&#8592;&#8593;&#8594;&#8595;",
+      "trigger": "zzz-arrow-code\t←↑→↓"
     },
     {
       "contents": "₽",
-      "trigger": "u8-rub\t₽"
+      "trigger": "zzz-ruble\t₽"
     },
     {
       "contents": "&#8381;",
-      "trigger": "u8-rub-c\t&#8381;"
+      "trigger": "zzz-ruble-code\t₽"
     },
     {
-      "contents": "┌─┬─┐│ │ │├─┼─┤│ │ │└─┴─┘",
-      "trigger": "u8-table\t├─┼─┤"
+      "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
+      "trigger": "zzz-table\t├┼┤┣╋┫"
     },
     {
       "contents": "&#169;",
-      "trigger": "u8-copyright\t©"
+      "trigger": "zzz-copyright\t©"
     },
-    "iadfeshchm"
+    {
+      "contents": "−",
+      "trigger": "яяя-minus\t−"
+    },
+    {
+      "contents": "&#8722;",
+      "trigger": "яяя-minus-code\t−"
+    },
+    {
+      "contents": "–",
+      "trigger": "яяя-ndash\t–"
+    },
+    {
+      "contents": "&#8211;",
+      "trigger": "яяя-ndash-code\t–"
+    },
+    {
+      "contents": "—",
+      "trigger": "яяя-mdash\t—"
+    },
+    {
+      "contents": "&#8212;",
+      "trigger": "яяя-mdash-code\t—"
+    },
+    {
+      "contents": "«»",
+      "trigger": "яяя-quotes-fir\t«»"
+    },
+    {
+      "contents": "&#171;&#187;",
+      "trigger": "яяя-quotes-fir-code\t«»"
+    },
+    {
+      "contents": "„“",
+      "trigger": "яяя-quotes-paws\t„“"
+    },
+    {
+      "contents": "&#8222;&#8220;",
+      "trigger": "яяя-quotes-paws-code\t„“"
+    },
+    {
+      "contents": "…",
+      "trigger": "яяя-dots\t…"
+    },
+    {
+      "contents": "&#8230;",
+      "trigger": "яяя-dots-code\t…"
+    },
+    {
+      "contents": "←↑→↓",
+      "trigger": "яяя-arrow\t←↑→↓"
+    },
+    {
+      "contents": "&#8592;&#8593;&#8594;&#8595;",
+      "trigger": "яяя-arrow-code\t←↑→↓"
+    },
+    {
+      "contents": "₽",
+      "trigger": "яяя-ruble\t₽"
+    },
+    {
+      "contents": "&#8381;",
+      "trigger": "яяя-ruble-code\t₽"
+    },
+    {
+      "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
+      "trigger": "яяя-table\t├┼┤┣╋┫"
+    },
+    {
+      "contents": "&#169;",
+      "trigger": "яяя-copyright\t©"
+    }
   ]
 }
