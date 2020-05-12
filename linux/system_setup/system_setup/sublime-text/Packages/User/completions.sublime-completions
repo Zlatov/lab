@@ -75,75 +75,75 @@
     },
     {
       "contents": "−",
-      "trigger": "яяя-minus\t−"
+      "trigger": "яяя-минус\t−"
     },
     {
       "contents": "&#8722;",
-      "trigger": "яяя-minus-code\t−"
+      "trigger": "яяя-минус-код\t−"
     },
     {
       "contents": "–",
-      "trigger": "яяя-ndash\t–"
+      "trigger": "яяя-нтире\t–"
     },
     {
       "contents": "&#8211;",
-      "trigger": "яяя-ndash-code\t–"
+      "trigger": "яяя-нтире-код\t–"
     },
     {
       "contents": "—",
-      "trigger": "яяя-mdash\t—"
+      "trigger": "яяя-мтире\t—"
     },
     {
       "contents": "&#8212;",
-      "trigger": "яяя-mdash-code\t—"
+      "trigger": "яяя-мтире-код\t—"
     },
     {
       "contents": "«»",
-      "trigger": "яяя-quotes-fir\t«»"
+      "trigger": "яяя-кавычки-ёлки\t«»"
     },
     {
       "contents": "&#171;&#187;",
-      "trigger": "яяя-quotes-fir-code\t«»"
+      "trigger": "яяя-кавычки-ёлки-код\t«»"
     },
     {
       "contents": "„“",
-      "trigger": "яяя-quotes-paws\t„“"
+      "trigger": "яяя-кавычки-лапки\t„“"
     },
     {
       "contents": "&#8222;&#8220;",
-      "trigger": "яяя-quotes-paws-code\t„“"
+      "trigger": "яяя-кавычки-лапки-код\t„“"
     },
     {
       "contents": "…",
-      "trigger": "яяя-dots\t…"
+      "trigger": "яяя-многоточие\t…"
     },
     {
       "contents": "&#8230;",
-      "trigger": "яяя-dots-code\t…"
+      "trigger": "яяя-многоточие-код\t…"
     },
     {
       "contents": "←↑→↓",
-      "trigger": "яяя-arrow\t←↑→↓"
+      "trigger": "яяя-стрелки\t←↑→↓"
     },
     {
       "contents": "&#8592;&#8593;&#8594;&#8595;",
-      "trigger": "яяя-arrow-code\t←↑→↓"
+      "trigger": "яяя-стрелки-код\t←↑→↓"
     },
     {
       "contents": "₽",
-      "trigger": "яяя-ruble\t₽"
+      "trigger": "яяя-рубль\t₽"
     },
     {
       "contents": "&#8381;",
-      "trigger": "яяя-ruble-code\t₽"
+      "trigger": "яяя-рубль-код\t₽"
     },
     {
       "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
-      "trigger": "яяя-table\t├┼┤┣╋┫"
+      "trigger": "яяя-таблица\t├┼┤┣╋┫"
     },
     {
       "contents": "&#169;",
-      "trigger": "яяя-copyright\t©"
+      "trigger": "яяя-копирайт\t©"
     }
   ]
 }

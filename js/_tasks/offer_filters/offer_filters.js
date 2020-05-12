@@ -49,6 +49,7 @@ window.OfferFilters.change = function(event) {
 
   // Определяем какие значения выбраны в Предложении.
   var selected = instance.find_selected(id)
+  console.log('selected: ', selected)
 
   // Первое в пересечении = решению.
   var code = instance.calc_intersection(id, selected)[0]
@@ -258,7 +259,9 @@ window.OfferFilters.calc_intersection = function(id, selected, exclude_slug) {
       }
     }
   }
+  console.log('unions: ', unions)
   var intersection = _.uniq(_.intersection(...Object.values(unions)))
+  console.log('intersection: ', intersection)
   return intersection
 }
 
