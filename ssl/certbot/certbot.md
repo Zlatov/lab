@@ -6,6 +6,7 @@ sudo certbot certonly --webroot -w /var/www/test.losst.ru -d test.losst.ru -d ww
 sudo certbot certonly --webroot -w /home/zlatov/app/market/public -d zenonline-zlatov-stage.klej.ru
 sudo certbot certonly --webroot -w /home/zlatov/app/admin/public -d admin.zenonline-zlatov-stage.klej.ru
 sudo certbot certonly --webroot -w /home/dan/app/zenonline/current/public -d newzenonline-dan-stage.klej.ru
+sudo certbot certonly --webroot -w /home/zlatov/app/zenonline/current/public -d newzenonline-zlatov-stage.klej.ru
 ```
 
 
