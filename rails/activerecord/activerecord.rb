@@ -119,3 +119,16 @@ User.order('name DESC')
 # SELECT "users".* FROM "users" ORDER BY name DESC
 User.order('name DESC, email')
 # SELECT "users".* FROM "users" ORDER BY name DESC, email
+
+
+# 
+# После find_by_sql можно разве что preload сделать, с третьим параметром он
+# вообще не работал у меня ни в консоли ни в контроллере, хотя запрос выполнял
+# адекватный, но не заполнял переданный массив необходимыми отношениями.
+# 
+ActiveRecord::Associations::Preloader.new.preload(@offers, :offer_filters)
+# ActiveRecord::Associations::Preloader.new.preload(@offers, :offer_filters, OfferFilter.order(order: :desc))
+ActiveRecord::Associations::Preloader.new.preload(@offers, :filters)
+# ActiveRecord::Associations::Preloader.new.preload(@offers, {:offer_filters => :filter})
+ActiveRecord::Associations::Preloader.new.preload(@offers, :product)
+ActiveRecord::Associations::Preloader.new.preload(@offers, :products)

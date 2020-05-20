@@ -120,6 +120,11 @@
     "command": "wrap_lines",
     "args": {"width": 80}
 	},
+	{
+    "keys": ["ctrl+л", "ctrl+ц"],
+    "command": "wrap_lines",
+    "args": {"width": 80}
+	},
 
 	// Автоматическое определение длинны таба иногда хромает в сублайме.
 	{

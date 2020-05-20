@@ -1,19 +1,54 @@
-<meta charset="utf-8">
+## Установка
 
-<h2>Установка</h2>
-<p><code class="prettyprint lang-sh copyToClipboard">sudo apt-get install php-mbstring</code></p>
-<p><code class="prettyprint lang-sh copyToClipboard">sudo apt-get install php-xml</code></p>
+sudo apt-get install php-mbstring
+sudo apt-get install php-xml
 
-<h2>php.ini</h2>
-<pre class="prettyprint lang-apache">
+### PHP 5.6 Centos 7
+
+Репозиторий remirepo (https://rpms.remirepo.net/wizard/) предоставляет следующую инструкцию установки своей сборки:
+
+```bash
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install yum-utils
+yum install php56
+# Дополнительные пакеты
+yum install -y php56-php-devel.x86_64
+yum install -y php56-php-fpm.x86_64
+yum install -y php56-php-pdo.x86_64
+yum install -y php56-php-mysqlnd.x86_64
+yum install -y php56-php-mbstring.x86_64
+yum install -y php56-php-mcrypt.x86_64
+yum install -y php56-php-ldap.x86_64
+yum-config-manager --enable remi-php56
+# Проверка
+php56 --version
+php56 --modules
+# Установка fpm
+yum install php-fpm
+systemctl start php-fpm
+systemctl enable php-fpm
+# Редактирование настройки сокета в файле /etc/php-fmp.d/www.conf
+listen /var/run/php-fpm/php-fpm.sock
+# Применим настройки
+systemctl restart php-fpm.service
+```
+
+## php.ini
+
+```
 upload_max_filesize = 10M
 max_file_uploads = 20
 post_max_size = 210M
-</pre>
+```
+
 посмотреть конкретные настройки php.ini пыхом:
-<pre class="prettyprint lang-php copyToClipboard">&lt;?php
-echo 'post_max_size = ' . ini_get('post_max_size') . &quot;\n&quot;;
-echo 'max_input_vars = ' . ini_get('max_input_vars') . &quot;\n&quot;;</pre>
+
+```php
+<?php
+echo 'post_max_size = ' . ini_get('post_max_size') . "\n";
+echo 'max_input_vars = ' . ini_get('max_input_vars') . "\n";
+```
 
 <pre class="prettyprint lang-sh">sudo service apache2 restart</pre>
 <h3>Переменные окружения</h3>

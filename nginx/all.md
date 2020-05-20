@@ -17,13 +17,31 @@
 
 ## Настойки
 
-### Виртуальных хостов
+### Настойки права пользователя из-под которого запущен nginx
+
+```bash
+# Пользователь nginx должен присутствовать в группе пользователя у которого
+# лежит приложение.
+sudo usermod -a -G fpm deployer
+# Проверить право nginx-пользователя на доступ к файлам приложения.
+sudo -u nginx stat /home/deployer/app/name
+# Зачастую нехватает +x прав на корневые каталоги пользователя.
+chmod g+x /home/
+chmod g+x /home/username
+# Пользователь nginx должен присутствовать в группе пользователя fpm.
+sudo usermod -a -G fpm nginx
+# Проверить
+id -Gn nginx
+```
+
+
+### Настройка виртуальных хостов
 
 `sudo touch /etc/nginx/sites-available/nginx.local.conf`
 `subl /etc/nginx/sites-available/nginx.local.conf`
 `subl /etc/nginx/sites-available/default`
 
-```
+```bash
 server {
   # listen 8080 default_server;
   # listen [::]:8080 default_server ipv6only=on;
@@ -139,11 +157,6 @@ env [DB_PASS] = ...
 ;php_admin_value[memory_limit] = 32M
 
 ```
-
-
-### Права пользователя из-под которого запущен nginx
-
-Пользователь nginx должен присутствовать в группе пользователя fpm. `sudo usermod -a -G fpm nginx`
 
 
 ### Разные версии php из-под разных пользователей для разных хостов

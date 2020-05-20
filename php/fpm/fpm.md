@@ -1,16 +1,16 @@
-```
+```bash
 sudo systemctl status php5.6-fpm
 sudo systemctl start php5.6-fpm
 sudo systemctl stop php5.6-fpm
 sudo systemctl restart php5.6-fpm
 ```
 
-```
+```bash
 sudo apt update
 sudo apt install apache2 libapache2-mod-fastcgi
 ```
 
-```
+```bash
 a2enmod actions fastcgi alias proxy_fcgi
 ```
 
