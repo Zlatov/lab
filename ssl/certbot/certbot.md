@@ -1,3 +1,12 @@
+## Установка
+
+```bash
+sudo yum install certbot
+# ? надо ли
+sudo yum install certbot python2-certbot-nginx
+```
+
+## Использование
 
 ```bash
 sudo certbot certonly --webroot -w /var/www/test.losst.ru -d test.losst.ru -d www.test.losst.ru
@@ -7,9 +16,13 @@ sudo certbot certonly --webroot -w /home/zlatov/app/market/public -d zenonline-z
 sudo certbot certonly --webroot -w /home/zlatov/app/admin/public -d admin.zenonline-zlatov-stage.klej.ru
 sudo certbot certonly --webroot -w /home/dan/app/zenonline/current/public -d newzenonline-dan-stage.klej.ru
 sudo certbot certonly --webroot -w /home/zlatov/app/zenonline/current/public -d newzenonline-zlatov-stage.klej.ru
+
+# Добавился параметр --register-unsafely-without-email чтобы команда не
+# приводила к ошибке при неуказании email адреса.
+sudo certbot … --register-unsafely-without-email
 ```
 
-
+Пример настройки nginx с использованием фалов сертификата.
 
 ```bash
 

@@ -20,6 +20,8 @@ yum install -y php56-php-mysqlnd.x86_64
 yum install -y php56-php-mbstring.x86_64
 yum install -y php56-php-mcrypt.x86_64
 yum install -y php56-php-ldap.x86_64
+# Сука непонятно почему этот модуль поставился именно так а не иначе.
+yum install php-mysqli
 yum-config-manager --enable remi-php56
 # Проверка
 php56 --version

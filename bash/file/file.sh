@@ -37,6 +37,8 @@ echoc "Создание файла." green
 if [[ ! -f "${test_dirname}/temp" ]]
 then
 	touch $test_dirname/temp
+	FILE_REALPATH=$(realpath "${test_dirname}/temp")
+	echo '$FILE_REALPATH: ' $FILE_REALPATH
 fi
 
 echo

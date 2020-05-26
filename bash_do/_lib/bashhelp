@@ -1,0 +1,43 @@
+# ./bash/_lib/bashhelp
+# 
+# Подключение и использование
+# 
+# ```
+# BASHHELP="
+# Описание для скрипта, к которому подключаем библиотеку.
+# "
+# . ../_lib/bashhelp
+# ```
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+  key="$1"
+  case $key in
+    --help)
+    BASHHELP_KEY=true
+    shift # забываем аргумент
+    ;;
+    *)    # встретили неизвестную опцию
+    POSITIONAL+=("$1") # сохраним опцию как аргумент
+    shift # забываем аргумент
+    ;;
+  esac
+done
+# Если были переданы аргументы
+[[ ${#POSITIONAL[*]} -gt 0 ]] && \
+set -- "${POSITIONAL[@]}" # восстановим из временного массива аргументов
+
+# Выход
+[[ "${BASHHELP_KEY-}" == true ]] && {
+  path="$(pwd)/$(basename "${BASH_SOURCE[1]}")"
+  path_to_script="./$(basename $(dirname $(dirname $path)))/$(basename $(dirname $path))/$(basename $path)"
+  if [[ -n ${BASHHELP-} ]]
+  then
+    echo -e "\e[96mПомощь по использованию скрипта \e[7m$path_to_script“:\e[0m"
+  else
+    echo -e "\e[31mОтсутствует помощь по использованию скрипта „$path_to_script“.\e[0m"
+  fi
+  echo -e "${BASHHELP-}"
+  exit 0
+} || true

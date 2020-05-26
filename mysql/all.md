@@ -22,6 +22,44 @@ sudo apt update && sudo apt install -y mysql-server
 sudo apt update && sudo apt install -y mysql-server-5.7
 ```
 
+### Установка необходимой версии на Centos 7
+
+```bash
+sudo yum update
+# Тут https://dev.mysql.com/downloads/repo/yum/ узнать какой файл скачивать
+wget http://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# Проверить хеш сумму
+md5sum mysql80-community-release-el7-3.noarch.rpm
+sudo rpm -Uvh mysql80-community-release-el7-3.noarch.rpm
+yum repolist all | grep mysql
+sudo yum-config-manager --enable mysql56-community
+sudo yum-config-manager --disable mysql80-community
+yum repolist all | grep mysql
+yum repolist enabled | grep mysql
+sudo yum install mysql-server
+sudo service mysqld status
+sudo service mysqld start
+sudo service mysqld status
+mysql_secure_installation
+# Поехали ставить пользователей
+mysql -uroot -p
+```
+
+
+## Настройка
+
+```bash
+# Просмотр ...
+mysql -uroot -p "password" -se "SHOW VARIABLES" | grep -e log
+```
+
+__/etc/my.cnf__
+
+```
+wait_timeout = 600
+max_allowed_packet = 64M
+```
+
 
 ## Типы данных
 
