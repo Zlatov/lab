@@ -5,10 +5,24 @@ ___Redis___ — NoSQL база данных со структурами данн
 ## Установка
 
 ```bash
+# Ubuntu
 sudo apt-get update
 sudo apt-get install redis-server
 # sudo apt-get install ruby-redis
 sudo systemctl enable redis-server.service
+
+# Centos
+# из epel репозитория
+sudo yum install epel-release # Из epel установилась старая версия
+sudo yum update
+sudo yum install redis
+sudo systemctl start redis
+sudo systemctl enable redis
+# из remi репозитория
+sudo yum --enablerepo=remi install redis
+# Проверить версию
+rpm -qi redis
+redis-server --version
 ```
 
 `sudo nano /etc/redis/redis.conf`

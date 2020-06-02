@@ -13,7 +13,7 @@ set -eu
 
 . ../_lib/echoc
 
-# lsof -i -P -n | grep LISTEN 
+# lsof -i -P -n | grep LISTEN
 # netstat -tulpn | grep LISTEN
 # nmap -sTU -O IP-address-Here
 

@@ -39,3 +39,7 @@ systemctl
 systemctl | grep httpd # Список запущенных сервисов.
 systemctl list-units --type service
 systemctl list-units --type mount
+
+
+# Лог сервиса по имени
+journalctl -u nginx.service

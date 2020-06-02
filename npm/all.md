@@ -4,7 +4,25 @@ npm — это пакетный менеджер node.js.
 
 ## Установка
 
-`sudo apt install -y npm`
+```bash
+# Ubuntu
+sudo apt install -y npm
+
+# Centos7 через nvm
+# Установку nvm смотреть тут: https://github.com/nvm-sh/nvm
+# Список версий для установки
+nvm list-remote
+# Установка необходимой версии
+nvm install v12.17.0
+# Список установленных версий
+nvm list
+# Переключиться на версию
+nvm use v12.17.0
+# Установить версию по умолчанию
+nvm alias default v12.17.0
+# Проверить версию
+node --version
+```
 
 ## Обновление node.js до последней версии
 
