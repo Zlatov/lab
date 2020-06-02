@@ -11,8 +11,10 @@ Rails - фреймворк ruby
 5. Проверить конкретную версию rails `gem install rails -v 5.2.0`
 
 * __Postgres__ (гем pg) потребует библиотеку
-  * `sudo apt install libpq-dev` (Ubuntu);
-  * `yum install postgresql-devel` (Centos).
+  ```bash
+  sudo apt install -y libpq-dev
+  sudo yum install -y postgresql-devel
+  ```
   Если несколько постгресов, то потребуется дополнительная настройка:
   ```bash
   # Либо установить вручную gem:
@@ -22,8 +24,16 @@ Rails - фреймворк ruby
   # Это НЕ тот путь который нужно использовать!!:
   psql -XAt -U postgres -c 'SHOW config_file'
   ```
-* __Sqlite__ (гем sqlite3) потребует библиотеку `sudo apt install libsqlite3-dev`
-* __Mysql__ (гем mysql2) потребует библиотеку `sudo apt-get install -y libmysqlclient-dev`
+* __Sqlite__ (гем sqlite3) потребует библиотеку
+  ```bash
+  sudo apt install -y libsqlite3-dev
+  sudo yum install -y sqlite-devel
+  ```
+* __Mysql__ (гем mysql2) потребует библиотеку
+  ```bash
+  sudo apt install -y libmysqlclient-dev
+  sudo yum install -y mysql-devel
+  ```
 * __Система__ (ubuntu) потребует изменение параметров ядра `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
 

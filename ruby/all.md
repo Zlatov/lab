@@ -37,13 +37,20 @@ curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-doctor 
 ```
 
 __Так же установить плагин для rbenv__
+
 [для установки версий](https://github.com/rbenv/ruby-build)
 
 __Следить за состоянием rbenv__:
+
 * `cd ~/.rbenv && git pull`
 * `cd ~/.rbenv/plugins/ruby-build && git pull`
 
+__Наверняка понадобится__
 
+```bash
+sudo yum install gcc-c++
+sudo apt install gcc
+```
 
 
 ### Установка ruby через rbenv
