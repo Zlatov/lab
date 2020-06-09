@@ -14,4 +14,5 @@ chmod u+x ~/rmate
 cd ~ && touch temp && ~/rmate temp
 # для судорес
 sudo cp rmate /usr/bin/
+sudo chmod u+rwx,g+rx,g-w,o+rx,o-w /usr/bin/rmate
 # или установить как в доке: https://github.com/textmate/rmate

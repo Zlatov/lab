@@ -12,13 +12,13 @@ sudo apt-get install redis-server
 sudo systemctl enable redis-server.service
 
 # Centos
-# из epel репозитория
-sudo yum install epel-release # Из epel установилась старая версия
+# 1. Из epel репозитория (установилась старая версия, на 7 центосе)
+sudo yum install epel-release
 sudo yum update
 sudo yum install redis
 sudo systemctl start redis
 sudo systemctl enable redis
-# из remi репозитория
+# 2. Из remi репозитория
 sudo yum --enablerepo=remi install redis
 # Проверить версию
 rpm -qi redis
