@@ -16,6 +16,10 @@ useradd -d /home/vasyapupkin -s /bin/false -g nogroup vasyapupkin
 # Более «дружественный» вариант adduser
 adduser [-home <домашняя_директория>] [-shell <ОБОЛОЧКА>] [-ingroup <ГРУППА>] <имя_пользователя>
 adduser -home /home/deployer -shell /bin/bash deployer
+# centos
+adduser --home-dir /home/username --shell /bin/bash --password passWord username
+# поскольку в разных версиях я обнаружил разный синтаксис, поэтому перед использованием:
+adduser --help
 
 # Удалить пользователя
 userdel <имяпользователя>

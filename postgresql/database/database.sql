@@ -34,3 +34,17 @@ SELECT current_database();
 -- postgres=# \c lab;
 -- 
 \c lab
+
+-- Индексы в текущей базе данных
+SELECT '> Индексы в текущей базе данных' as " ";
+SELECT
+  tablename,
+  indexname,
+  indexdef
+FROM
+  pg_indexes
+WHERE
+  schemaname = 'public'
+ORDER BY
+  tablename,
+  indexname;

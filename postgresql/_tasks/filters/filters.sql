@@ -1,3 +1,5 @@
+\c lab;
+
 DROP TABLE IF EXISTS "values";
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS filters;
