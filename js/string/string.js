@@ -117,6 +117,12 @@ console.log('----------------------------------------')
 console.log('substring')
 console.log('\'Цвет кармана\'.substring(0,4): ', 'Цвет кармана'.substring(0, 4))
 
+console.log('> Вырезать с конца строки')
+a = "123456"
+b = a.substring(a.length - 2)
+console.log('b: ', b)
+// return null
+
 
 console.log('----------------------------------------')
 console.log('> Преобразование в int')
