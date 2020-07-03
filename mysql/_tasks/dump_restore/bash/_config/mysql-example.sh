@@ -1,0 +1,4 @@
+DATABASE_NAME=database
+MYSQL_USERNAME=deployer
+MYSQL_HOST=localhost
+MYSQL_PWD=password

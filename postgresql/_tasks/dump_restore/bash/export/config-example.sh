@@ -1,0 +1,3 @@
+DATABASE_NAME=zenonline
+USERNAME=deployer
+PGPASSWORD=password
