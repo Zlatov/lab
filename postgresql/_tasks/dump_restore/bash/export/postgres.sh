@@ -8,46 +8,24 @@ set -eu
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-if [[ -f ./config.sh ]]
-then
-	set -a
-	. ./config.sh
-	set +a
-else
-	echo "Отсутствует конфигурационный файл, выполните: cp config-example.sh config.sh" 1>&2
-	exit 1
-fi
+. ../_lib/postgres.sh
 
-if [[ -d ./postgres ]]
+if [[ -d ./postgres/exports ]]
 then
 	echo "Директория для дампа существует."
 else
-	mkdir -p ./postgres
+	mkdir -p ./postgres/exports
 	echo "Создана директория для дампа."
 fi
 
-if [[ -z ${DATABASE_NAME-} ]]
-then
-	echo "Переменная DATABASE_NAME не установлена." 1>&2
-	exit 1
-fi
-if [[ -z ${USERNAME-} ]]
-then
-	echo "Переменная USERNAME не установлена." 1>&2
-	exit 1
-fi
-if [[ -z ${PGPASSWORD-} ]]
-then
-	echo "Переменная PGPASSWORD не установлена." 1>&2
-	exit 1
-fi
-
 DATABASE_DATE=$(date +%Y-%m-%d-%H-%M-%S)
-DATABASE_PATH="postgres/${DATABASE_NAME}-${DATABASE_DATE}.pg"
+DATABASE_PATH="postgres/exports/${DATABASE_NAME}-${DATABASE_DATE}.pg"
 
 {
+	echo "Начат процесс экспорта ${DATABASE_NAME}…"
   pg_dump --file="${DATABASE_PATH}" --dbname="${DATABASE_NAME}" --username="${USERNAME}" --no-owner --format=c
 } && {
+	echo "Экспорт ${DATABASE_NAME} успешно завершен."
 	if tty -s
 	then
 		echo "Удаление дампов до пяти последних производится не будет (произведён интерактивный запуск скрипта)."
@@ -55,7 +33,6 @@ DATABASE_PATH="postgres/${DATABASE_NAME}-${DATABASE_DATE}.pg"
 		echo "Производим удаление до пяти послидних дампов."
 		(ls postgres -t | head -n 5; ls postgres) | sort | uniq -u | xargs -I {} rm postgres/{}
 	fi
-	echo "${DATABASE_PATH} done."
 } || {
 	echo "Ошибка экспортирования." 1>&2
 }
