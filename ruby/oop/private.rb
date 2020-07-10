@@ -7,16 +7,18 @@ class C
 
   # Но не через точку, в этом суть =)
   def wrap2
+    # Типа какой то хер пытается прямо от инстанса обратиться напрямую к
+    # приватному методу
     self.priv
   end
 
   private
+
   def priv
     'asd'
   end
 
   # Приватный метод класса так не удастся сделать:
-  private
   def self.cpriv
     'asd'
   end
@@ -27,6 +29,19 @@ class C
 end
 
 p C.cpriv
-# p C.new.priv # Неа
+
+begin
+  p C.new.priv # Неа
+rescue => e
+  p 'Неа'
+  p e.message
+end
+
 p C.new.wrap
-# p C.new.wrap2 # Неа
+
+begin
+  p C.new.wrap2 # Неа
+rescue => e
+  p 'Неа'
+  p e.message
+end
