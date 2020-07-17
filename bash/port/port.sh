@@ -11,6 +11,9 @@ set -eu
 
 [[ $(lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
 
+# Определить процесс и его PID занимающий порт:
+lsof -wni tcp:3000
+
 . ../_lib/echoc
 
 # lsof -i -P -n | grep LISTEN

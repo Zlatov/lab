@@ -30,3 +30,8 @@
 <div>
   <%= yield %>
 </div>
+
+<!-- 
+  При рендере экземпляра передача параметров не требует "locals"
+ -->
+<%= render @user, is_foldered_view: @folder.present? %>

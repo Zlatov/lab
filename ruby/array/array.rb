@@ -166,12 +166,32 @@ for val in a
 end
 # exit
 
+puts 'break'.green
+for i in 0...3
+  print 'i: '.red; puts i
+  break if i == 1
+end
+(0..2).each do |i|
+  print 'i: '.red; puts i
+  break if i == 1
+end
+# exit
+
 puts '--------------------------------'
 puts 'Последний элемент массива'.green
 a = [1,'asd',nil]
 b = a.last.to_s
 print 'a: '.red; p a
 print 'b: '.red; puts b
+# exit
+
+puts 'Часть массива a[интервал] a[индекс старта, сколько]'.green
+a = ('a'..'c').to_a
+b = a[1...a.length]
+c = a[1,2]
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
 # exit
 
 puts 'Перебо, остаток от деления'.green
