@@ -132,3 +132,5 @@ ActiveRecord::Associations::Preloader.new.preload(@offers, :filters)
 # ActiveRecord::Associations::Preloader.new.preload(@offers, {:offer_filters => :filter})
 ActiveRecord::Associations::Preloader.new.preload(@offers, :product)
 ActiveRecord::Associations::Preloader.new.preload(@offers, :products)
+
+Post.offset(10).limit(1)
