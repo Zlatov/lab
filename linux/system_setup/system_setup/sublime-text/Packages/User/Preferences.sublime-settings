@@ -1,7 +1,5 @@
 {
 	"auto_complete_selector": "source, text",
-	"hot_exit": false,
-	"remember_open_files": true,
 	"binary_file_patterns":
 	[
 		"*.dds",
@@ -19,15 +17,17 @@
 		"*.zip",
 		"framework/tool/tree/to_db/_data/**"
 	],
+	"close_sidebar_if_opened": false,
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
 	"fallback_encoding": "Cyrillic (Windows 1251)",
 	"font_size": 14,
+	"hot_exit": false,
 	"ignored_packages":
 	[
+		"CSS",
 		"Vintage"
 	],
+	"remember_open_files": true,
 	"show_encoding": true,
-	"close_sidebar_if_opened": false,
-	// "theme": "Soda Dark 3.sublime-theme",
 	"theme": "Adaptive.sublime-theme"
 }
