@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    .test_wrapper {
+      padding: 20px;
+    }
+    #test1 {
+      width: 16px;
+      height: 16px;
+      background-image: url("../../images/jpg/16-16-ripe-apple.jpg");
+    }
+    #test1:hover {
+      transform: scale(2);
+    }
+    #test2 {
+      width: 64px;
+      height: 64px;
+      background-image: url("../../images/jpg/64-64-ripe-apple.jpg");
+      transition: transform .5s;
+    }
+    #test2:hover {
+      transform: scale(.5);
+    }
+    #test3 {
+      width: 64px;
+      height: 64px;
+      background-image: url("../../images/jpg/64-64-ripe-apple.jpg");
+      transition: transform .5s;
+    }
+    #test3:hover {
+      transform: scale(.5) translate(32px);
+    }
+  </style>
+</head>
+<body>
+  <div class="test_wrapper">
+    <div id="test1"></div>
+  </div>
+  <div class="test_wrapper">
+    <div id="test2"></div>
+  </div>
+  <div class="test_wrapper">
+    <div id="test3"></div>
+  </div>
+</body>
+</html>
