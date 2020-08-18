@@ -154,7 +154,7 @@ b = a.scan(regex)
 
 print 'b: '.red; puts b
 print 'b: '.red; puts b.flatten.inspect
-
+# exit
 
 # Замена по регулярке
 puts 'Замена по регулярке'.green

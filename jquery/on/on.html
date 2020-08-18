@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="">
+  <style type="text/css">
+
+    #click {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+      text-align: center;
+      line-height: 100px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+    #click:hover {
+      box-shadow: 0px 0px 5px 5px black;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="click">click me</div>
+  <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+    
+    $("#click").on("click", function(event) {
+      event.target.textContent = event.offsetX + " " + event.offsetY
+      console.log('event: ', event)
+    })
+
+  </script>
+</body>
+</html>

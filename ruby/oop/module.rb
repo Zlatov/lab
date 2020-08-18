@@ -112,3 +112,22 @@ p Cl.class_var
 a = Cl.new
 p a.array
 p a.asd
+
+puts 'Расширить экземпляр класса методом из модуля'.green
+class Point
+end
+a = Point.new
+module Origin
+  def origin!
+    @x = @y = 0
+  end
+end
+
+a.extend Origin
+puts a.methods.include? :origin!
+
+class Point
+  include Origin
+end
+a = Point.new
+puts a.methods.include? :origin!

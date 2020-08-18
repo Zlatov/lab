@@ -65,8 +65,9 @@ a << :a
 a << :b
 a << :c
 a << :d
-b = %w(foo bar baz #{1+1}) == ["foo", "bar", "baz", "\#{1+1}"]
-c = %W(foo bar baz #{1+1}) == ["foo", "bar", "baz", "2"]
+b = %w(foo bar baz #{1+1})
+c = %W(foo bar baz #{1+1})
+f = %W/foo bar baz #{1+1}/
 d = (1..3 ).to_a
 e = (1...3).to_a
 print 'a: '.red; p a
@@ -75,6 +76,7 @@ print 'b: '.red; p b
 print 'c: '.red; p c
 print 'd: '.red; p d
 print 'e: '.red; p e
+print 'f: '.red; p f
 # exit
 
 puts 'Масси включает в себя `:b`?'.green
@@ -725,3 +727,25 @@ a = [1,2,3,4,5]
 b = a.shuffle
 print 'a: '.red; p a
 print 'b: '.red; p b
+
+puts 'Модуль перечисления'.green
+class PersonCollection
+
+  include Enumerable
+
+  def each &each_block
+    @persons.each do |person|
+      each_block.call(person)
+      # yield(person)
+    end
+  end
+
+  def initialize(*persons)
+    @persons = persons
+  end
+end
+
+a = PersonCollection.new ['asd', 2, {a: 3}]
+a.each do |per|
+  puts per
+end
