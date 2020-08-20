@@ -1,5 +1,6 @@
 {
-	"env": {"PGPASSWORD": "lab"},
-	"cmd": ["psql", "-h", "localhost", "-U", "lab", "-d", "lab", "-f", "$file"],
-	"selector": "source.sql"
+  "env": {"PGPASSWORD": "lab"},
+  "cmd": ["psql", "-h", "localhost", "-U", "lab", "-d", "lab", "-f", "$file"],
+  "working_dir": "$file_path",
+  "selector": "source.sql"
 }
