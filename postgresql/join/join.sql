@@ -40,6 +40,7 @@ select 'FULL OUTER JOIN' as " ";
 select * from a LEFT JOIN b on b.b_id = a.a_id
 UNION
 select * from a RIGHT JOIN b on b.b_id = a.a_id;
+-- или
 select * from a FULL OUTER JOIN b on b.b_id = a.a_id;
 
 select 'CROSS JOIN' as " ";
@@ -47,6 +48,7 @@ select * from a CROSS JOIN b;
 
 select 'FROM' as " ";
 select * from a, b;
+-- \q
 
 
 -- Варианты объединения:

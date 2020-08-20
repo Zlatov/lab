@@ -476,3 +476,68 @@ from product
 where
   type = 'printer'
 ;
+-- \q
+
+-- Задание: 26 (Serge I: 2003-02-14)
+-- Найдите среднюю цену ПК и ПК-блокнотов, выпущенных производителем A
+-- (латинская буква). Вывести: одна общая средняя цена.
+
+select avg(price::numeric)
+from (
+  select price from pc, product where product.model = pc.model and product.maker = 'A'
+  union all
+  select price from laptop, product where product.model = laptop.model and product.maker = 'A'
+) a
+;
+-- \q
+
+-- Задание: 27 (Serge I: 2003-02-03)
+-- Найдите средний размер диска ПК каждого из тех производителей, которые
+-- выпускают и принтеры. Вывести: maker, средний размер HD.
+
+-- select m.maker, g.avg
+-- from (
+--   select distinct maker
+--   from product
+--   where type = 'printer'
+-- ) as m
+-- inner join
+-- (
+--   select a.maker, avg(b.hd) as avg
+--   from product a
+--   inner join pc b on b.model = a.model
+--   group by a.maker
+-- ) as g on g.maker = m.maker
+-- ;
+
+select product.maker, avg(pc.hd)
+from pc, product
+where
+  product.model = pc.model
+  and product.maker IN (
+    select maker
+    from product
+    where type = 'printer'
+  )
+group by product.maker
+;
+-- \q
+
+-- Задание: 28 (Serge I: 2012-05-04)
+-- Используя таблицу Product, определить количество производителей, выпускающих
+-- по одной модели.
+
+select count(a.maker)
+from (
+  select maker
+  from product
+  group by maker
+  having
+    count(model) = 1
+) a
+;
+-- \q
+
+
+
+

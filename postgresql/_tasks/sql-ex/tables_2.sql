@@ -1,99 +1,101 @@
-DROP TABLE IF EXISTS outcomes;
-DROP TABLE IF EXISTS battles;
-DROP TABLE IF EXISTS ships;
-DROP TABLE IF EXISTS classes;
+drop table if exists income_o;
+drop table if exists outcome_o;
+drop table if exists income;
+drop table if exists outcome;
 
--- 1. Classes (class, type, country, numGuns, bore, displacement)
-CREATE TABLE classes (
-  class VARCHAR(50) PRIMARY KEY,
-  type VARCHAR(2) NOT NULL,
-  country VARCHAR(20) NOT NULL,
-  numGuns SMALLINT,
-  bore REAL,
-  displacement INTEGER
-);
-CREATE INDEX ON classes (class);
-CREATE INDEX ON classes (type);
-
--- 2. Ships (name, class, launched)
-CREATE TABLE ships (
-  name VARCHAR(50) PRIMARY KEY,
-  class VARCHAR(50) NOT NULL REFERENCES classes ON DELETE CASCADE ON UPDATE CASCADE,
-  launched SMALLINT
-);
-CREATE INDEX ON ships (class);
-
--- 3. Battles (name, date)
-CREATE TABLE battles (
-  name VARCHAR(20) PRIMARY KEY,
-  date timestamp NOT NULL
+create table income_o (
+  point smallint not null,
+  date date not null,
+  inc decimal(8,2) not null,
+  PRIMARY KEY (point, date)
 );
 
--- 4. Outcomes (ship, battle, result)
-CREATE TABLE outcomes (
-  ship VARCHAR(50) PRIMARY KEY,
-  battle VARCHAR(20) REFERENCES battles (name) ON DELETE CASCADE ON UPDATE CASCADE,
-  result varchar(10) NOT NULL
+create table outcome_o (
+  point smallint not null,
+  date date not null,
+  out decimal(8,2) not null,
+  PRIMARY KEY (point, date)
 );
-CREATE INDEX ON outcomes (result);
+
+create table income (
+  code int PRIMARY KEY,
+  point smallint not null,
+  date date not null,
+  inc decimal(8,2) not null
+);
+CREATE INDEX ON income (point);
+CREATE INDEX ON income (date);
+
+create table outcome (
+  code int PRIMARY KEY,
+  point smallint not null,
+  date date not null,
+  out decimal(8,2) not null
+);
+CREATE INDEX ON outcome (point);
+CREATE INDEX ON outcome (date);
 
 
-insert into classes (class, type, country, numGuns, bore, displacement) values
-('Bismarck',       'bb', 'Germany',    8,  15.0, 42000),
-('Iowa',           'bb', 'USA',        9,  16.0, 46000),
-('Kongo',          'bc', 'Japan',      8,  14.0, 32000),
-('North Carolina', 'bb', 'USA',        12, 16.0, 37000),
-('Renown',         'bc', 'Gt.Britain', 6,  15.0, 32000),
-('Revenge',        'bb', 'Gt.Britain', 8,  15.0, 29000),
-('Tennessee',      'bb', 'USA',        12, 14.0, 32000),
-('Yamato',         'bb', 'Japan',      9,  18.0, 65000);
+insert into income_o (point, date, inc) values
+(1, '2001-03-22 00:00:00.000', 15000.0000),
+(1, '2001-03-23 00:00:00.000', 15000.0000),
+(1, '2001-03-24 00:00:00.000', 3400.0000),
+(1, '2001-04-13 00:00:00.000', 5000.0000),
+(1, '2001-05-11 00:00:00.000', 4500.0000),
+(2, '2001-03-22 00:00:00.000', 10000.0000),
+(2, '2001-03-24 00:00:00.000', 1500.0000),
+(3, '2001-09-13 00:00:00.000', 11500.0000),
+(3, '2001-10-02 00:00:00.000', 18000.0000);
 
-insert into ships (name, class, launched) values
-('California',      'Tennessee',     1921),
-('Haruna',          'Kongo',         1916),
-('Hiei',            'Kongo',         1914),
-('Iowa',            'Iowa',          1943),
-('Kirishima',       'Kongo',         1915),
-('Kongo',           'Kongo',         1913),
-('Missouri',        'Iowa',          1944),
-('Musashi',         'Yamato',        1942),
-('New Jersey',      'Iowa',          1943),
-('North Carolina',  'North Carolina',1941),
-('Ramillies',       'Revenge',       1917),
-('Renown',          'Renown',        1916),
-('Repulse',         'Renown',        1916),
-('Resolution',      'Renown',        1916),
-('Revenge',         'Revenge',       1916),
-('Royal Oak',       'Revenge',       1916),
-('Royal Sovereign', 'Revenge',       1916),
-('South Dakota',    'North Carolina',1941),
-('Tennessee',       'Tennessee',     1920),
-('Washington',      'North Carolina',1941),
-('Wisconsin',       'Iowa',          1944),
-('Yamato',          'Yamato',        1941);
 
-insert into battles (name, date) values
-('#Cuba62a',       '1962-10-20 00:00:00.000'),
-('#Cuba62b',       '1962-10-25 00:00:00.000'),
-('Guadalcanal',    '1942-11-15 00:00:00.000'),
-('North Atlantic', '1941-05-25 00:00:00.000'),
-('North Cape',     '1943-12-26 00:00:00.000'),
-('Surigao Strait', '1944-10-25 00:00:00.000');
+insert into outcome_o (point, date, out) values
+(1, '2001-03-14 00:00:00.000', 15348.0000),
+(1, '2001-03-24 00:00:00.000', 3663.0000),
+(1, '2001-03-26 00:00:00.000', 1221.0000),
+(1, '2001-03-28 00:00:00.000', 2075.0000),
+(1, '2001-03-29 00:00:00.000', 2004.0000),
+(1, '2001-04-11 00:00:00.000', 3195.0400),
+(1, '2001-04-13 00:00:00.000', 4490.0000),
+(1, '2001-04-27 00:00:00.000', 3110.0000),
+(1, '2001-05-11 00:00:00.000', 2530.0000),
+(2, '2001-03-22 00:00:00.000', 1440.0000),
+(2, '2001-03-29 00:00:00.000', 7848.0000),
+(2, '2001-04-02 00:00:00.000', 2040.0000),
+(3, '2001-09-13 00:00:00.000', 1500.0000),
+(3, '2001-09-14 00:00:00.000', 2300.0000),
+(3, '2002-09-16 00:00:00.000', 2150.0000);
 
-insert into outcomes (ship, battle, result) values
-('Bismarck',        'North Atlantic', 'sunk'),
-('California',      'Guadalcanal',    'damaged'),
-('CAlifornia',      'Surigao Strait', 'ok'),
-('Duke of York',    'North Cape',     'ok'),
-('Fuso',            'Surigao Strait', 'sunk'),
-('Hood',            'North Atlantic', 'sunk'),
-('King George V',   'North Atlantic', 'ok'),
-('Kirishima',       'Guadalcanal',    'sunk'),
-('Prince of Wales', 'North Atlantic', 'damaged'),
-('Rodney',          'North Atlantic', 'OK'),
-('Schamhorst',      'North Cape',     'sunk'),
-('South Dakota',    'Guadalcanal',    'damaged'),
-('Tennessee',       'Surigao Strait', 'ok'),
-('Washington',      'Guadalcanal',    'ok'),
-('West Virginia',   'Surigao Strait', 'ok'),
-('Yamashiro',       'Surigao Strait', 'sunk');
+insert into income (code, point, date, inc) values
+(1,  1, '2001-03-22 00:00:00.000', 15000.0000),
+(2,  1, '2001-03-23 00:00:00.000', 15000.0000),
+(3,  1, '2001-03-24 00:00:00.000', 3600.0000),
+(4,  2, '2001-03-22 00:00:00.000', 10000.0000),
+(5,  2, '2001-03-24 00:00:00.000', 1500.0000),
+(6,  1, '2001-04-13 00:00:00.000', 5000.0000),
+(7,  1, '2001-05-11 00:00:00.000', 4500.0000),
+(8,  1, '2001-03-22 00:00:00.000', 15000.0000),
+(9,  2, '2001-03-24 00:00:00.000', 1500.0000),
+(10, 1, '2001-04-13 00:00:00.000', 5000.0000),
+(11, 1, '2001-03-24 00:00:00.000', 3400.0000),
+(12, 3, '2001-09-13 00:00:00.000', 1350.0000),
+(13, 3, '2001-09-13 00:00:00.000', 1750.0000);
+
+insert into outcome (code, point, date, out) values
+(1,  1, '2001-03-14 00:00:00.000', 15348.0000),
+(2,  1, '2001-03-24 00:00:00.000', 3663.0000),
+(3,  1, '2001-03-26 00:00:00.000', 1221.0000),
+(4,  1, '2001-03-28 00:00:00.000', 2075.0000),
+(5,  1, '2001-03-29 00:00:00.000', 2004.0000),
+(6,  1, '2001-04-11 00:00:00.000', 3195.0400),
+(7,  1, '2001-04-13 00:00:00.000', 4490.0000),
+(8,  1, '2001-04-27 00:00:00.000', 3110.0000),
+(9,  1, '2001-05-11 00:00:00.000', 2530.0000),
+(10, 2, '2001-03-22 00:00:00.000', 1440.0000),
+(11, 2, '2001-03-29 00:00:00.000', 7848.0000),
+(12, 2, '2001-04-02 00:00:00.000', 2040.0000),
+(13, 1, '2001-03-24 00:00:00.000', 3500.0000),
+(14, 2, '2001-03-22 00:00:00.000', 1440.0000),
+(15, 1, '2001-03-29 00:00:00.000', 2006.0000),
+(16, 3, '2001-09-13 00:00:00.000', 1200.0000),
+(17, 3, '2001-09-13 00:00:00.000', 1500.0000),
+(18, 3, '2001-09-14 00:00:00.000', 1150.0000);
