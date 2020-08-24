@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
+
+<h3>append</h3>
+
+<div id="append">
+  <span>1</span><span>2</span><span>3</span><span>4</span>
+</div>
+
+<script type="text/javascript">
+
+  var html_data = '\
+    <div id="wrapper">\
+      <span>5</span><span>6</span>\
+    </div>\
+  '
+  var wrapper = $(html_data)
+  $("#append").append(wrapper.html())
+
+</script>
+
+
+<h3>after</h3>
+
+<div id="after">
+  <span>1</span><span>2</span><span>3</span><span>4</span>
+</div>
+
+<script type="text/javascript">
+  
+  var html_data = '\
+    <div id="wrapper">\
+      <span>5</span><span>6</span>\
+    </div>\
+  '
+  var wrapper = $(html_data)
+  $("#after").find("span:last-child").after(wrapper[0].innerHTML.trim())
+
+</script>
