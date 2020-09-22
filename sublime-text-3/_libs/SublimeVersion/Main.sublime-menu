@@ -1,9 +1,0 @@
-[  
-  {  
-    "id": "edit",  
-    "children":  
-    [  
-      { "command": "sublime_version" }  
-    ]  
-  }    
-]

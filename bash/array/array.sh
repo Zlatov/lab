@@ -82,6 +82,8 @@ echo ${array[@]}
 # Добавить элемент. (переиндексация)
 array123=( "${array[@]}" "новый элемент" )
 echo ${array123[@]}
+array123=( "${array[@]}" "новый элемент" "новый элемент2" )
+echo ${array123[@]}
 # exit 0
 
 echoc "Добавить в конец" green
@@ -155,6 +157,23 @@ do
   item=${a[$i]}
   echo "$i:$item"
 done
+# exit 0
+
+echoc "Наполним массив из файла с одной строкой (ну или с двумя) с разделением элементов пробелом." green
+touch $test_dirname/temp_fil_array_from_file_one_line
+echo -e "asd zxc qweqwe" > $test_dirname/temp_fil_array_from_file_one_line
+echo -en "asd zxc qweqwe" >> $test_dirname/temp_fil_array_from_file_one_line
+unset a
+declare -a a
+while read line || [ -n "$line" ]
+do
+  a+=($line)
+done < $test_dirname/temp_fil_array_from_file_one_line
+for value in "${a[@]}"
+do
+  echo $value
+done
+# exit 0
 
 echoc "Или так" blue
 unset a

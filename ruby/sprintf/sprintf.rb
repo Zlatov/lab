@@ -91,3 +91,11 @@ puts 'Форматирование значений с плавающей точ
 #          |               | If negative, left-justify the result. If the
 #          |               | asterisk is followed by a number and a dollar
 #          |               | sign, use the indicated argument as the width.
+
+puts "%g" % 1
+puts "%g" % 1.0
+puts "%g" % 1.1
+puts "%g" % 1.6
+puts "%g" % 1.006
+puts "%.3g" % 1.006
+

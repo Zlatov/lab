@@ -10,7 +10,7 @@
   window.google_tabulation = {
     options: {
       // Селектор для поиска элементов списка результатов поиска.
-      result_list_item_selector: "div.rc div.r",
+      result_list_item_selector: "div.rc>div:first-child",
     },
     // Индекс текущего выбранного элемента из списка результатов поиска (по умолчанию: первый индекс - 0).
     selected_element_index: 0
@@ -52,8 +52,9 @@
     // 4.
     // var link = element.querySelector('a')
     // Добавили всякую хрень с дополнительными ссылками в div.r
-    // поэтому, теперь ищем непосредственно ссылку-ребёнка `.r > a`, а не потомка `.querySelector('a')`.
-    var link = element.querySelectorAll('.r > a')[0]
+    // поэтому, теперь ищем непосредственно ссылку-ребёнка
+    // `querySelectorAll('.r > a')`, а не потомка `.querySelector('a')`.
+    var link = element.querySelectorAll('a')[0]
     link.focus()
     // 5.
     window.google_tabulation.selected_element_index = index
@@ -62,10 +63,26 @@
   document.onkeyup = function(event) {
     if(event.keyCode == 38) {
       console.log('> up')
+      var input = document.querySelector("input.gLFyf")
+      if (input == null) {
+        console.log('> no google input.')
+        return null
+      }
+      if (input == document.activeElement) {
+        return null
+      }
       select_element(window.google_tabulation.selected_element_index - 1)
     }
     if(event.keyCode==40) {
       console.log('> down')
+      var input = document.querySelector("input.gLFyf")
+      if (input == null) {
+        console.log('> no google input.')
+        return null
+      }
+      if (input == document.activeElement) {
+        return null
+      }
       select_element(window.google_tabulation.selected_element_index + 1)
     }
   }

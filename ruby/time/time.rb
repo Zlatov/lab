@@ -8,7 +8,8 @@ require_relative '../string/declension'
 # p a
 
 puts 'UNIX timestamp'.green
-p Time.now.to_i.to_s
+p Time.now
+p Time.now.to_i
 # exit
 
 print 'Time.now: '.red; puts Time.now

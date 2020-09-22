@@ -2,8 +2,8 @@
 from termcolor import colored
 
 a = [1, 2, 3]
-# print("a [", type(a), "]: ", a, sep='')
-print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
+print(colored('a [' + type(a).__name__ + ']:', 'red'), a)
+# exit(0)
 
 # Python List append()  Add Single Element to The List
 # Python List extend()  Add Elements of a List to Another List
@@ -34,7 +34,7 @@ print colored('a [', 'red') + type(a).__name__ + colored(']:', 'red'), a
 # Python sum()  Add items of an Iterable
 # Python zip()  Returns an Iterator of Tuples
 
-print colored('Массив в переменные', 'green')
+print(colored('Массив в переменные', 'green'))
 a = [1, 2, 3, 1]
 b = a.count(1)
 c = len(a)
@@ -44,46 +44,46 @@ e, f, g, h = a
 # print("c [", type(c), "]: ", c, sep='')
 # print("d [", type(d), "]: ", d, sep='')
 # print("e, f, g, h, i: ", e, f, g, h, sep=' ')
-print colored('a:', 'red'), a
-print colored('b:', 'red'), b
-print colored('c:', 'red'), c
-print colored('d:', 'red'), d
-print colored('e, f, g, h:', 'red'), e, f, g, h
+print(colored('a:', 'red'), a)
+print(colored('b:', 'red'), b)
+print(colored('c:', 'red'), c)
+print(colored('d:', 'red'), d)
+print(colored('e, f, g, h:', 'red'), e, f, g, h)
 # exit(0)
 
-print colored('Массив имеет различные значения (max != min)', 'green')
+print(colored('Массив имеет различные значения (max != min)', 'green'))
 a = [1, 1, 1, 1, 2]
 b = (max(a) == min(a))
-print colored('a:', 'red'), a
-print colored('b:', 'red'), b
+print(colored('a:', 'red'), a)
+print(colored('b:', 'red'), b)
 # exit(0)
 
-print colored('Перебор многомерного массива', 'green')
+print(colored('Перебор многомерного массива', 'green'))
 a = [[1, 2], [3, 4], [5, 6]]
-print colored('a:', 'red'), a
+print(colored('a:', 'red'), a)
 i = 0
 j = 0
 for row in a:
   i+= 1
   for x in row:
     j+= 1
-    print "[{}, {}] = {}".format(i, j, x)
+    print("[{}, {}] = {}".format(i, j, x))
 # exit(0)
 
-print colored('Массив в строку', 'green')
+print(colored('Массив в строку', 'green'))
 a = ['1', '2', '3']
 b = ''.join(a)
-print colored('a:', 'red'), a
-print colored('b:', 'red'), b
+print(colored('a:', 'red'), a)
+print(colored('b:', 'red'), b)
 a = [1, 2, 3]
-b = ''.join(str(e) for e in a)
-print colored('a:', 'red'), a
-print colored('b:', 'red'), b
+b = ', '.join("-" + str(e) for e in a)
+print(colored('a:', 'red'), a)
+print(colored('b:', 'red'), b)
 # exit(0)
 
-print colored('Преобразование элементов массива', 'green')
+print(colored('Преобразование элементов массива', 'green'))
 a = [1, 2, 3]
 b = [str(e) for e in a]
-print colored('a:', 'red'), a
-print colored('b:', 'red'), b
+print(colored('a:', 'red'), a)
+print(colored('b:', 'red'), b)
 # exit(0)

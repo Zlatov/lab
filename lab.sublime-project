@@ -25,6 +25,12 @@
 	],
 	"settings":
 	{
+		"find_and_replace_by_project_with_exclusions":
+		[
+			"*.log",
+			"*.sqlite3",
+			"node_modules/"
+		],
 		"sublime-view-in-browser":
 		{
 			"basePath": "/home/iadfeshchm/projects/my/lab/",

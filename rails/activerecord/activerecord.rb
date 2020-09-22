@@ -122,15 +122,16 @@ User.order('name DESC, email')
 
 
 # 
-# После find_by_sql можно разве что preload сделать, с третьим параметром он
-# вообще не работал у меня ни в консоли ни в контроллере, хотя запрос выполнял
-# адекватный, но не заполнял переданный массив необходимыми отношениями.
+# После find_by_sql можно разве что preload сделать.
 # 
-ActiveRecord::Associations::Preloader.new.preload(@offers, :offer_filters)
-# ActiveRecord::Associations::Preloader.new.preload(@offers, :offer_filters, OfferFilter.order(order: :desc))
-ActiveRecord::Associations::Preloader.new.preload(@offers, :filters)
-# ActiveRecord::Associations::Preloader.new.preload(@offers, {:offer_filters => :filter})
-ActiveRecord::Associations::Preloader.new.preload(@offers, :product)
-ActiveRecord::Associations::Preloader.new.preload(@offers, :products)
+@users = User.find_by_sql(
+  <<-SQL
+  SQL
+)
+ActiveRecord::Associations::Preloader.new.preload(@users, :company)
+ActiveRecord::Associations::Preloader.new.preload(@users, [:company, :account])
+ActiveRecord::Associations::Preloader.new.preload(@users, {company: :category})
+ActiveRecord::Associations::Preloader.new.preload(@users, [{company: :category}, :account])
 
+# Limit
 Post.offset(10).limit(1)

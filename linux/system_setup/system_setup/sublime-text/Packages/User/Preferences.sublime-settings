@@ -15,16 +15,17 @@
 		"*.tga",
 		"*.ttf",
 		"*.zip",
-		"framework/tool/tree/to_db/_data/**"
+		"*.log",
+		"*.sqlite3",
+		".byebug_history",
+		"node_modules/**"
 	],
 	"close_sidebar_if_opened": false,
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
 	"fallback_encoding": "Cyrillic (Windows 1251)",
 	"font_size": 14,
 	"hot_exit": false,
 	"ignored_packages":
 	[
-		"CSS",
 		"Vintage"
 	],
 	"remember_open_files": true,

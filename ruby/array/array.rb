@@ -363,7 +363,9 @@ print 'b: '.red; p b
 # exit
 
 puts 'Массив строку'.green
+ap ['asd','zxc'].join # по умолчанию пустая строка
 ap ['asd','zxc'].join('|')
+# exit
 
 puts 'Массив в sql строку'.green
 a = [1, '2', nil, 0]

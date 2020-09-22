@@ -18,3 +18,23 @@ print('a:', a)
 print('a[\'a\']:', a['a'])
 print('a["a"]:', a["a"])
 # exit(0)
+
+print(colored('Слияние словарей.', 'green'))
+
+print(colored('update', 'cyan'))
+a = {"asd": 1, "zxc": 2}
+b = {"asd": 3, "qwe": 4}
+c = a.update(b)
+print('a:', a)
+print('b:', b)
+print('c:', c)
+
+print(colored('**a, **b', 'cyan'))
+a = {"asd": 1, "zxc": 2}
+b = {"asd": 3, "qwe": 4}
+c = {**a, **b}
+print('a:', a)
+print('b:', b)
+print('c:', c)
+
+

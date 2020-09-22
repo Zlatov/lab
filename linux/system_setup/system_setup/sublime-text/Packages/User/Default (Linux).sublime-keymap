@@ -48,13 +48,21 @@
 
 	// Emmet
 	// рускоязычная клавиша shift+ctrl+g:
+	// {
+	// 	"keys": ["shift+ctrl+п"],
+	// 	"command": "wrap_as_you_type", 
+	// 	"context": [
+	// 		{"operand": false, "operator": "equal", "match_all": true, "key": "setting.is_widget"},
+	// 		{"match_all": true, "key": "emmet_action_enabled.wrap_as_you_type"}
+	// 	]
+	// },
 	{
 		"keys": ["shift+ctrl+п"],
-		"command": "wrap_as_you_type", 
-		"context": [
-			{"operand": false, "operator": "equal", "match_all": true, "key": "setting.is_widget"},
-			{"match_all": true, "key": "emmet_action_enabled.wrap_as_you_type"}
-		]
+		"command": "emmet_wrap_with_abbreviation"
+	},
+	{
+		"keys": ["shift+ctrl+g"],
+		"command": "emmet_wrap_with_abbreviation"
 	},
 	// рускоязычная клавиша ctrl+/:
 	{

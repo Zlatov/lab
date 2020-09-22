@@ -28,13 +28,14 @@
         "tmp",
         "framework"
       ],
+      // Файлы и папки которые не будут отображаться в левой панели:
+      "file_exclude_patterns": [
+        "config/settings.yml"
+      ],
       "folder_exclude_patterns": [
         "temp",
         "app/models/admin", // Найти симлинки: ls -lR ./ | grep ^l
         "public/admin"
-      ],
-      "file_exclude_patterns": [
-        "config/settings.yml"
       ],
       "follow_symlinks": false
     }
