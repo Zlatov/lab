@@ -144,5 +144,21 @@
 		"keys": ["ctrl+k", "ctrl+t", "ctrl+4"],
 		"command": "set_setting",
 		"args": {"setting": "tab_size", "value": 4}
-	}
+	},
+
+	// FindAndReplaceByProjectWithExclusions
+  { "keys": ["ctrl+k", "ctrl+f"], "command": "find_and_replace_by_project_with_exclusions" },
+  {
+    "keys": ["ctrl+shift+k", "ctrl+shift+f"],
+    "command": "find_and_replace_by_project_with_exclusions",
+    "args": {"from_current_file_path": true}
+  },
+
+  // RegReplace bindings
+  // ctrl+j without space
+  {
+    "keys": ["ctrl+i"],
+    "command": "reg_replace",
+    "args": {"replacements": ["zzz_join_lines"]}
+  }
 ]

@@ -8,5 +8,10 @@
     "caption": "Reg Replace: zzz_ruby_namespace_with_colon",
     "command": "reg_replace",
     "args": {"replacements": ["zzz_ruby_namespace_with_colon"]}
+  },
+  {
+    "caption": "Reg Replace: zzz_join_lines",
+    "command": "reg_replace",
+    "args": {"replacements": ["zzz_join_lines"]}
   }
 ]

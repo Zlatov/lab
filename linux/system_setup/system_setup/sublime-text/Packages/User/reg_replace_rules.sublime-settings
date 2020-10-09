@@ -7,6 +7,10 @@
     "zzz_ruby_namespace_with_colon": {
       "find": " ",
       "replace": "::"
+    },
+    "zzz_join_lines": {
+      "find": "\\n\\s*",
+      "replace": ""
     }
   }
 }

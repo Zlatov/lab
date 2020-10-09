@@ -247,6 +247,10 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 
 ## Дополнительное ПО
 
+### Incscape
+
+Неплохой редактор векторных изображений.
+
 ### FreeRdp
 
 ```
@@ -282,10 +286,8 @@ xfreerdp -u username servername:port
 
 ### Shutter (PrintScreen as PicPick)
 
-#### Settings
-
 * Set to run this application with the system.
-* Customize hotkey printskrin to run the application in selection screen area mode: 
+* Customize hotkey printskrin to run the application in selection screen area mode.
 
 
 ### pv (Pipe Viewer)
