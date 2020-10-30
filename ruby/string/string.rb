@@ -1,6 +1,6 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
-require 'unicode_utils' # UnicodeUtils.downcase 'String'
+# require 'unicode_utils' # UnicodeUtils.downcase 'String'
 require 'rubygems'
 require 'awesome_print'
 
@@ -82,11 +82,13 @@ print 'c: '.red; puts c
 # exit 0
 
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
+puts 'Управление регистром символов в строке'.green
 puts "управление Регистром символов в строке! asd Asd".downcase!
-puts UnicodeUtils.downcase('привет Макс! asd Asd')
-# puts "привет Макс! asd Asd".mb_chars.upcase!
-# puts "привет Макс! asd Asd".mb_chars.capitalize!
-# puts "привет Макс!".titleize #rails
+puts "привет Макс! asd Asd".upcase!
+puts "привет Макс! asd Asd".capitalize!
+# `titleize` только в рельсе
+# puts "привет Макс! asd Asd".titleize
+# exit
 
 # Вырезать по позиции
 puts 'Вырезать по позиции'.green

@@ -59,8 +59,10 @@ print 'b: '.red; p b
 puts 'Задание массива'.green
 a = []
 a = Array.new
-a = Array.new(5)
-a = Array.new(5,"aaaaa")
+a = Array.new(5){rand}
+print 'a: '.red; p a
+a = Array.new 5, "aaaaa"
+print 'a: '.red; p a
 a << :a
 a << :b
 a << :c

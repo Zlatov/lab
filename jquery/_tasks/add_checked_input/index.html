@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+</head>
+<body>
+
+  <div id="id1"></div>
+  <button type="button" id="find">Найти количество выбранных</button>
+
+  <script type="text/javascript" src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../../../js/_libs/lib.js"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      var html = '\
+        <div>\
+          <input type="radio" name="asd" value="zxc" checked="checked">\
+          <input type="radio" name="asd" value="qwe">\
+        </div>\
+      '
+      $("#id1").after(html)
+      $("#find").on("click", function(event, target) {
+        var el = $("body")
+        var input = el.find("input:checked")
+        document.log(input.length)
+      })
+    });
+
+  </script>
+</body>
+</html>
