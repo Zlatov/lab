@@ -143,3 +143,13 @@ post.comments = [
   Comment.new(post_id: post.id, text: 'qwe')
 ]
 post.comment_ids = [1, 7, 15]
+
+# 
+# Дополнительный фильтр на связь, которая может отдавать множестов
+# 
+  has_many :comments,
+    through: :comment_posts do
+      def by_angar angar_code
+        where angar: angar_code
+      end
+    end

@@ -45,13 +45,14 @@ create_table "lorem", force: :cascade do |t|
   t.string   "name", null: true
   t.string   "address"
   t.integer  "stages"
+  t.decimal  "price", precision: 10, scale: 2
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
   t.float    "lat"
   t.float    "lng"
   t.text   :text
   t.index ["name"], name: "index_market_angars_on_name", unique: true
-  # t.references :market_order, index: true, foreign_key: {on_delete: :cascade} 
+  # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
 end
 add_index :lorem, :name, unique: true
 
