@@ -90,10 +90,12 @@ puts "привет Макс! asd Asd".capitalize!
 # puts "привет Макс! asd Asd".titleize
 # exit
 
-# Вырезать по позиции
-puts 'Вырезать по позиции'.green
-puts 'slice'.blue
-# "строка".slice индекс (с нуля), дельта
+puts 'Вырезать часть строки по позиции'.green
+puts '.slice(start,length)'.blue
+puts '.slice(start .. finish)'.blue
+p "0123456789".slice 0, 5 # "01234"
+p "0123456789".[](0, 5) # "01234"
+p "0123456789"[0, 5] # "01234"
 p "0123456789".slice 2, 3 # "234"
 p "0123456789".slice 2 # "2"
 p "0123456789"[2] # "2"
@@ -105,11 +107,13 @@ p "0123456789"[2 .. 1] # ""
 mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
 p mysql_error_message.length
 p mysql_error_message.slice(15, mysql_error_message.length-15)
+p mysql_error_message.slice(15 .. -1)
 puts 'Простой пример с префиксом'.blue
 a = 'prefix_needle'
 c = 'prefix_'
 b = a.slice c.length, a.length
 print 'needle: '.red; puts b
+# exit
 
 
 # Скопировать часть строки регуляркой

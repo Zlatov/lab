@@ -10,6 +10,9 @@ class Model < ApplicationRecord
   # 4. Дополнительные методы класса
   # 5. Дополнительные методы инстанса
 
+  # Множественный первичный ключ
+  self.primary_key = [:articul, :angar, :discount]
+
   # Kaminari (pagination)
   paginates_per 3
 
@@ -37,5 +40,13 @@ class Model < ApplicationRecord
       self.class::FIELD_SHOW_WITH_FORM.keys.include?(field_name) &&
       self.class::FIELD_SHOW_WITH_FORM[field_name].include?(form)
     return false
+  end
+
+  # Что ж, прямо на лету эта модель может переобуться в другую БД
+  def self.reconnect_to database_name
+    current_spec = configurations['postgres']
+    new_spec = current_spec.clone
+    new_spec['database'] = database_name
+    establish_connection(new_spec)
   end
 end
