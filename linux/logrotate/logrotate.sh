@@ -56,11 +56,12 @@ subl /etc/logrotate.d/app
 sudo logrotate --force /etc/logrotate.d/app
 
 # Пример раз в неделю
-/home/appf/appf/log/email.log {
-    su appf appf
+/home/deployer/app/appname/log/email.log {
+    su deployer deployer
     weekly
     rotate 3
     nocreate
+    copytruncate
     nomail
     noolddir
     missingok
@@ -71,16 +72,18 @@ sudo logrotate --force /etc/logrotate.d/app
 }
 
 # Пример раз в день
-/home/appf/appf/log/email.log {
-    su appf appf
+/home/deployer/app/appname/shared/log/*.log {
+    su deployer deployer
     daily
     rotate 18
     nocreate
+    copytruncate
     nomail
     noolddir
     missingok
     notifempty
-    compress
+    #compress
+    delaycompress
     dateext
     dateformat .%Y-%m-%d
 }
