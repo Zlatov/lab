@@ -12,6 +12,19 @@ SELECT FOUND_ROWS();
 SELECT SQL_CALC_FOUND_ROWS * from test where numbers > 3 limit 2; -- SQL_CALC_FOUND_ROWS работает только на лимит.
 SELECT FOUND_ROWS();
 
+DROP table if exists test;
+create table test (asd INT, zxc INT, qwe INT);
+insert into test values
+(1,2,2),
+(1,2,3),
+(1,2,4)
+;
+
+select *
+from test
+where asd + zxc + qwe > 6;
+
+
 /*
 SELECT
     [ALL | DISTINCT | DISTINCTROW ]

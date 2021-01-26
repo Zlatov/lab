@@ -9,8 +9,10 @@
   // 
   window.google_tabulation = {
     options: {
-      // Селектор для поиска элементов списка результатов поиска.
-      result_list_item_selector: "div.rc>div:first-child",
+      // Селектор для поиска элементов списка результатов поиска (должен быть
+      // блоком, содержащим где-то в себе ссылку)
+      // result_list_item_selector: "div.rc>div:first-child",
+      result_list_item_selector: "div#search div.yuRUbf",
     },
     // Индекс текущего выбранного элемента из списка результатов поиска (по умолчанию: первый индекс - 0).
     selected_element_index: 0

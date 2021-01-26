@@ -16,6 +16,7 @@ sudo certbot certonly --webroot -w /home/zlatov/app/market/public -d zenonline-z
 sudo certbot certonly --webroot -w /home/zlatov/app/admin/public -d admin.zenonline-zlatov-stage.klej.ru
 sudo certbot certonly --webroot -w /home/dan/app/zenonline/current/public -d newzenonline-dan-stage.klej.ru
 sudo certbot certonly --webroot -w /home/zlatov/app/zenonline/current/public -d newzenonline-zlatov-stage.klej.ru
+sudo certbot certonly --webroot -w /home/deployer/app/forum -d sign-forum.ru
 
 # Добавился параметр --register-unsafely-without-email чтобы команда не
 # приводила к ошибке при неуказании email адреса.

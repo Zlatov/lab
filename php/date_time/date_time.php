@@ -23,3 +23,10 @@ $a = new DateTime('2018-03-29 19:00:54');
 $b = $a->getTimestamp();
 echo '$a: ' . print_r($a, true) . PHP_EOL;
 echo '$b: ' . print_r($b, true) . PHP_EOL;
+
+echo '> Перевод DateTime в строку' . PHP_EOL;
+$a = new DateTime();
+$b = $a->format('Y-m-d H:i:s');
+$b = (new DateTime())->format('Y-m-d H:i:s');
+echo '$a: ' . var_export($a, true) . PHP_EOL;
+echo '$b: ' . var_export($b, true) . PHP_EOL;

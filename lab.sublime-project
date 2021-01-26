@@ -46,6 +46,10 @@
 				"public/*"
 			],
 			"resolve_symlinks": false
+		},
+		"xdebug":
+		{
+			"url": "http://lab.local/"
 		}
 	}
 }

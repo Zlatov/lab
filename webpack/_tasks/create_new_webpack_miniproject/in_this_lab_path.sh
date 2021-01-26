@@ -28,7 +28,9 @@ then
 	cp -t "${init_path}/javascript" "${lab_path}/webpack/_tasks/lab/javascript/js.js"
 	cp -t "${init_path}/javascript" "${lab_path}/webpack/_tasks/lab/javascript/sass.scss"
 	cp -t "${init_path}" "${lab_path}/webpack/_tasks/lab/webpack.config.js"
+	cp -t "${init_path}" "${lab_path}/webpack/_tasks/lab/index.html"
 	cd $init_path
+	yarn init -y
 	yarn add @babel/core -D #": "^7.6.4",
 	yarn add @babel/plugin-transform-runtime -D #": "^7.6.2",
 	yarn add @babel/preset-env -D #": "^7.6.3",
@@ -41,6 +43,21 @@ then
 	yarn add sass-loader -D #": "^8.0.0",
 	yarn add style-loader -D #": "^1.0.0",
 	yarn add webpack -D #": "^4.41.1"
+
+	# TODO
+	# yarn add @babel/core@^7.6.4 -D #": "^7.6.4",
+	# yarn add @babel/plugin-transform-runtime@^7.6.2 -D #": "^7.6.2",
+	# yarn add @babel/preset-env@^7.6.3 -D #": "^7.6.3",
+	# yarn add babel-loader@^8.0.6 -D #": "^8.0.6",
+	# yarn add css-loader@^3.2.0 -D #": "^3.2.0",
+	# yarn add file-loader@^4.2.0 -D #": "^4.2.0",
+	# yarn add mini-css-extract-plugin@^0.8.0 -D #": "^0.8.0",
+	# yarn add node-sass@^4.12.0 -D #": "^4.12.0",
+	# yarn add postcss-loader@^3.0.0 -D #": "^3.0.0",
+	# yarn add sass-loader@^8.0.0 -D #": "^8.0.0",
+	# yarn add style-loader@^1.0.0 -D #": "^1.0.0",
+	# yarn add webpack@^4.41.1 -D #": "^4.41.1"
+
 	cd -
 else
 	echoc "Прервано пользователем" blue

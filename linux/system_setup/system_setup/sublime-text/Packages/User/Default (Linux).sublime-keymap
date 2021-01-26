@@ -64,6 +64,12 @@
 		"keys": ["shift+ctrl+g"],
 		"command": "emmet_wrap_with_abbreviation"
 	},
+	{
+		"keys": ["alt+up"], "command": "emmet_increment_number", "args": { "delta": 1 }
+	},
+	{
+		"keys": ["alt+down"], "command": "emmet_increment_number", "args": { "delta": -1 }
+	},
 	// рускоязычная клавиша ctrl+/:
 	{
 		"keys": ["ctrl+."],
@@ -86,6 +92,10 @@
 
 	// Word_Wrap
 	{ "keys": ["alt+w"], "command": "toggle_setting", "args": {"setting": "word_wrap"}},
+
+	// Xdebug
+	{ "keys": ["ctrl+shift+f11"], "command": "xdebug_layout", "args": {"restore": true}},
+	{ "keys": ["ctrl+shift+f12"], "command": "xdebug_breakpoint"},
 
 	// AdvancedNewFile
 	{ "keys": ["ctrl+alt+n"], "command": "advanced_new_file_new"},
@@ -124,14 +134,14 @@
 
 	// Wrap line by 80 chars
 	{
-    "keys": ["ctrl+k", "ctrl+w"],
-    "command": "wrap_lines",
-    "args": {"width": 80}
+		"keys": ["ctrl+k", "ctrl+w"],
+		"command": "wrap_lines",
+		"args": {"width": 80}
 	},
 	{
-    "keys": ["ctrl+л", "ctrl+ц"],
-    "command": "wrap_lines",
-    "args": {"width": 80}
+		"keys": ["ctrl+л", "ctrl+ц"],
+		"command": "wrap_lines",
+		"args": {"width": 80}
 	},
 
 	// Автоматическое определение длинны таба иногда хромает в сублайме.
@@ -147,18 +157,18 @@
 	},
 
 	// FindAndReplaceByProjectWithExclusions
-  { "keys": ["ctrl+k", "ctrl+f"], "command": "find_and_replace_by_project_with_exclusions" },
-  {
-    "keys": ["ctrl+shift+k", "ctrl+shift+f"],
-    "command": "find_and_replace_by_project_with_exclusions",
-    "args": {"from_current_file_path": true}
-  },
+	{ "keys": ["ctrl+k", "ctrl+f"], "command": "find_and_replace_by_project_with_exclusions" },
+	{
+		"keys": ["ctrl+shift+k", "ctrl+shift+f"],
+		"command": "find_and_replace_by_project_with_exclusions",
+		"args": {"from_current_file_path": true}
+	},
 
-  // RegReplace bindings
-  // ctrl+j without space
-  {
-    "keys": ["ctrl+i"],
-    "command": "reg_replace",
-    "args": {"replacements": ["zzz_join_lines"]}
-  }
+	// RegReplace bindings
+	// ctrl+j without space
+	{
+		"keys": ["ctrl+i"],
+		"command": "reg_replace",
+		"args": {"replacements": ["zzz_join_lines"]}
+	}
 ]
