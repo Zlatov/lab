@@ -93,9 +93,21 @@
 	// Word_Wrap
 	{ "keys": ["alt+w"], "command": "toggle_setting", "args": {"setting": "word_wrap"}},
 
+
+	// 
 	// Xdebug
+	// 
+
+	// Редактировать отслеживаемые переменные/выражения
+	{ "keys": ["ctrl+shift+f4"],  "command": "xdebug_watch", "args": {"edit": true}},
+	// Удалить все отслеживаемые переменные/выражения
+	{ "keys": ["ctrl+shift+f3"],  "command": "xdebug_watch", "args": {"clear": true}},
+
+	// Закрыть окна Xdebug (обязательно после ctrl+shift+f10 - остановки отслеживания)
 	{ "keys": ["ctrl+shift+f11"], "command": "xdebug_layout", "args": {"restore": true}},
+	// Добавить/удалить точку останова
 	{ "keys": ["ctrl+shift+f12"], "command": "xdebug_breakpoint"},
+
 
 	// AdvancedNewFile
 	{ "keys": ["ctrl+alt+n"], "command": "advanced_new_file_new"},

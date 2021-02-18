@@ -3,6 +3,9 @@
 $a = [];
 array_push($a, 0);
 var_dump($a);
+var_dump(array_keys($a));
+echo var_export(array_keys($a), true) . PHP_EOL;
+// exit;
 
 $a = array();
 $a[] = 0;

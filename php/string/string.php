@@ -1,5 +1,19 @@
 <?php
 
+echo '> Строку в массив' . PHP_EOL;
+$a = 'asd/zxc/qwe';
+$b = explode('/', $a);
+echo '$a: ' . var_export($a, true) . PHP_EOL;
+echo '$b: ' . var_export($b, true) . PHP_EOL;
+echo '> null в массив, желательно после разбиения фильтрация' . PHP_EOL;
+$a = null;
+$b = explode('/', $a);
+$c = array_filter($b, function($value) {return $value ? true : false;});
+echo '$a: ' . var_export($a, true) . PHP_EOL;
+echo '$b: ' . var_export($b, true) . PHP_EOL;
+echo '$c: ' . var_export($c, true) . PHP_EOL;
+// exit;
+
 echo '> Многострочный текст' . PHP_EOL;
 $a = <<< STRING
 1

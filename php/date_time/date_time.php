@@ -6,9 +6,12 @@ $a = 1522339254;
 $b = new DateTime();
 $b->setTimestamp($a);
 $c = $b->format('Y m d H i s');
+$d = (new DateTime())->setTimestamp(1522339254)->format('Y-m-d H:i:s');
 echo '$a: ' . print_r($a, true) . PHP_EOL;
 echo '$b: ' . print_r($b, true) . PHP_EOL;
 echo '$c: ' . print_r($c, true) . PHP_EOL;
+echo '$d: ' . print_r($d, true) . PHP_EOL;
+// exit;
 
 // Строку формата [Y-m-d H:i:s] в дату [DateTime]
 echo PHP_EOL . 'Строку формата [Y-m-d H:i:s] в дату [DateTime]' . PHP_EOL;

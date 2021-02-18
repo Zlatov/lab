@@ -1,12 +1,11 @@
 <snippet>
 	<content><![CDATA[
-echo '\$${1:this}: <pre>';
-var_export(\$${1:this});
-echo '</pre>';
-die();
+echo '\$${1:this}: '
+var_dump(\$${1:this});
+echo PHP_EOL;
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>zzzphpvvvarexport</tabTrigger>
+	<tabTrigger>zzzvv-vardump-console</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.php</scope>
 </snippet>

@@ -189,13 +189,17 @@ print 'a: '.red; p a
 print 'b: '.red; puts b
 # exit
 
-puts 'Часть массива a[интервал] a[индекс старта, сколько]'.green
-a = ('a'..'c').to_a
-b = a[1...a.length]
-c = a[1,2]
+puts 'Часть массива a[индекс старта..индекс конца] или a[индекс старта, сколько]'.green
+a = (0..9).to_a
+b = a[3..5] # [3, 4, 5]
+c = a[3...5] # [3, 4]
+d = a[7..-1] # [7, 8, 9]
+e = a[4, 2] # [4, 5]
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
 # exit
 
 puts 'Перебо, остаток от деления'.green

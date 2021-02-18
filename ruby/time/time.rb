@@ -10,6 +10,10 @@ require_relative '../string/declension'
 puts 'UNIX timestamp'.green
 p Time.now
 p Time.now.to_i
+p Time.now.zone
+p Time.now.utc
+p Time.utc(2012,3,3,3,3,3,999999).usec
+p Time.now.utc.usec
 # exit
 
 print 'Time.now: '.red; puts Time.now
