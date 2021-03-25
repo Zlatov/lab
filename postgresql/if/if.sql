@@ -16,13 +16,22 @@ FROM (
 ;
 
 -- Пример с COALESCE
+-- Возвращает первый попавшийся аргумент, отличный от NULL. Если же все
+-- аргументы равны NULL, результатом тоже будет NULL.
 SELECT 'COALESCE:' AS " ";
-SELECT COALESCE(a.a, a.b, '(none)') AS "a or b or (none)"
+SELECT COALESCE("a", "b", 'default') AS "a or b or 'default'"
 FROM (
   SELECT
     NULL::varchar(255) AS "a",
     NULL::varchar(255) AS "b"
-) AS a;
+) "a";
+SELECT COALESCE("a", "b", 100) AS "a or b or 100"
+FROM (
+  SELECT
+    NULL::int AS "a",
+    3::int AS "b"
+) "a";
+-- \q
 
 
 -- Пример с NULLIF

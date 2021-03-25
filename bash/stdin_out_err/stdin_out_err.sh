@@ -46,3 +46,10 @@ echo '' &>/dev/null
 echoc 'Нормы в файл' green
 ls stdin_out_err.sh nofile 1>./temp
 echo 'asd' 1>>$temp_path
+
+echoc 'Всё в обычный вывод и в лог файл' green
+echo 'Норма в обычный вывод и в лог файл' 2>&1 | tee -a $temp_path
+echo 'Ошибка в обычный вывод и в лог файл' 2>&1 | tee -a $temp_path
+# или
+echo 'Норма в обычный вывод и в лог файл' |& tee -a $temp_path
+echo 'Ошибка в обычный вывод и в лог файл' |& tee -a $temp_path

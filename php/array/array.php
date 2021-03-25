@@ -27,3 +27,12 @@ $a = [1,2,3];
 foreach ($a as $key => $value) {
     echo "${key} ${value}" . PHP_EOL;
 }
+// exit(0);
+
+echo '> Последний ключ' . PHP_EOL;
+$a = [1, 2, 3];
+end($a);
+$last_key = key($a);
+echo '$a: ' . var_export($a, true) . PHP_EOL;
+echo '$last_key: ' . var_export($last_key, true) . PHP_EOL;
+// exit(0);

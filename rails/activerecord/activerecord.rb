@@ -122,8 +122,9 @@ User.order('name DESC, email')
 
 
 # 
-# После find_by_sql можно разве что preload сделать.
+# Ассоциации
 # 
+# После find_by_sql можно разве что preload сделать.
 @users = User.find_by_sql(
   <<-SQL
   SQL
@@ -132,6 +133,77 @@ ActiveRecord::Associations::Preloader.new.preload(@users, :company)
 ActiveRecord::Associations::Preloader.new.preload(@users, [:company, :account])
 ActiveRecord::Associations::Preloader.new.preload(@users, {company: :category})
 ActiveRecord::Associations::Preloader.new.preload(@users, [{company: :category}, :account])
+# Получить класс ассоциации (.klass) через связь:
+@user.groups.klass
+# Ассоциация с дополнительным методом (не путать со статическим условием
+# ассоциации).
+class Profile
+  has_many :actions do
+    def latest
+      where("action_at <= ?", proxy_association.owner.timezone.now.to_date)
+    end
+  end
+# Похоже на получение последник событий профиля в зависимости от данных профиля:
+Profile.first.actions.latest
+
+
+# 
+# Способы подгрузки ассоциаций
+# 
+# .preload - отдельный подзапрос
+class Person < ActiveRecord::Base
+  has_many :notes
+  # Ассоциация со статическим условием
+  has_many :important_notes, -> { where(important: true) }, class_name: "Note"
+end
+Person.preload(:important_notes)
+# Зато позволяет связывать с динамическим условием две модели. Однако обязателен
+# вызов через `ActiveRecord::Associations::Preloader.new.preload` так как это
+# позволяет избежать выборки `Price.where(currency_code: 'USD')` без условия на
+# выбранные прежде основные модели, что сожрало бы память.
+products = Product.all.to_a
+ActiveRecord::Associations::Preloader.new.preload(
+  products, :prices,
+  # Вынуть именно USD цены из этой модели, с учётом выбранных products
+  Price.where(currency_code: 'USD')
+)
+products.each do |product|
+  product.prices.first.cents
+end
+
+# .eager_load - LEFT JOIN -  загружает ассоциации в одном запросе с
+# использованием Left Outer Join, точно так же, как действует includes в
+# сочетании с references.
+class Person < ActiveRecord::Base
+  has_many :notes
+  has_many :important_notes, -> { where(important: true) }, class_name: "Note"
+end
+Person.eager_load(:important_notes)
+# Попробовать:
+Post.eager_load(:goods).joins("AND goods.user_id = 3").to_sql
+
+# .includes - действует так же, как и preload, но в случае наличия условия по
+# ассоциированной таблице переключается на создание единственного запроса с LEFT
+# OUTER JOIN. Однако по каким-то причинам иногда необходимо форсировать
+# применение такого подхода, в таких случаях необходимо использовать метод
+# .references
+User.includes(:posts).references(:posts).to_a
+
+# .joins - INNER JOIN
+User.joins(:posts)
+# При этом, загружаются данные только из таблицы users. Кроме того, этот запрос
+# может возвратить дублирующие друг друга записи (Избежать повторений можем с
+# использованием distinct)
+User.joins(:posts).select('distinct users.*').to_a
+
 
 # Limit
 Post.offset(10).limit(1)
+
+
+# Select, дополнительное поле в модель при сложном запросе
+# Нет необходимо в модель User добавлять метод group_id
+users = ::User
+  .select('users.* groups.id as group_id')
+  .joins(:group)
+users.first.group_id

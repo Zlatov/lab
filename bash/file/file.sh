@@ -16,6 +16,10 @@ find ./$test_dirname -type f -delete
 find ./$test_dirname -type d -not -path ./$test_dirname | xargs -I {} rm -rf {}
 # exit 0
 
+
+# Поиск файлов см bash/egrep.sh
+
+
 echo
 echoc "Преобразование пути к файлу в путь, имя файла, расширение, имя без расширения." green
 echo ${BASH_SOURCE[0]}

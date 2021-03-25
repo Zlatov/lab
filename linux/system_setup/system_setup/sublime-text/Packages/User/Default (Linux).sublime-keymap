@@ -182,5 +182,12 @@
 		"keys": ["ctrl+i"],
 		"command": "reg_replace",
 		"args": {"replacements": ["zzz_join_lines"]}
+	},
+
+	// Показать выпадающий список от плагина AutoFileName
+	{
+		"keys": ["ctrl+k", "ctrl+d"],
+		"command": "afn_show_filenames",
+		"context": [{"key": "afn_use_keybinding", "operator": "equal", "operand": true }]
 	}
 ]

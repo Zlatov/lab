@@ -48,7 +48,7 @@ a = system({"MYVAR" => "42"}, "echo $MYVAR", :out => STDOUT)
 print 'a: '.red; puts a
 a = system({"MYVAR" => "42"}, "/home/iadfeshchm/projects/my/lab/ruby/bash/bash")
 print 'a: '.red; puts a
-exit
+# exit
 
 system("bash", "-c", "echo я использую $0 и хрен тут что сделаешь?")
 system({"MYVAR" => "42"}, "bash", "-c", "echo я использую $0 и хрен тут ${MYVAR}!", :out => STDOUT)

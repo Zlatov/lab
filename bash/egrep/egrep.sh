@@ -37,3 +37,8 @@ fi
 } || {
   echo n
 }
+
+echoc 'Поиск фалов содержащих подстроки' green
+egrep -lir "(zxcc|файле|zxc)" .
+echoc 'Поиск фалов учитывая расширение' green
+egrep -lir --include=*.{js,sh} "(zxcc|файле|zxc)" .
