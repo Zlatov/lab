@@ -2,12 +2,14 @@
 
   "use strict"
   
-  // var input = window['lst-ib']
   var input = document.querySelector("input.gLFyf")
   if (input == null) {
-    console.log('> no google input.')
+    console.log('> Не найден поиск google.')
     return null
+  } else {
+    console.log('> Поиск google найден.')
   }
+
   if (input != document.activeElement) {
     input.focus()
   }
