@@ -4,7 +4,11 @@
 
 Открыть консоль Ctrl+\` или View → Show Console
 
-Отображать все команды в консоли: `sublime.log_commands(True)`
+Отображать все команды в консоли:
+
+```python
+sublime.log_commands(True)
+```
 
 ## API
 

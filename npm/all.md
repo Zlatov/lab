@@ -1,14 +1,17 @@
 # NPM
 
-npm — это пакетный менеджер node.js.
+Npm — это пакетный менеджер языка javascript исполняемый ядром Node.js.
+
+Nvm — это bash сценарий управления версиями Node.js. Для установки nvm
+используйте репозиторий https://github.com/nvm-sh/nvm
 
 ## Установка
 
 ```bash
-# Ubuntu
+# Через системную команду (ubuntu)
 sudo apt install -y npm
 
-# Centos7 через nvm
+# Через nvm
 # Установку nvm смотреть тут: https://github.com/nvm-sh/nvm
 # Список версий для установки
 nvm list-remote

@@ -20,9 +20,12 @@ env[DB_PASS] = ...
 
 ## Установка
 
-sudo apt-get install php-mbstring
-sudo apt-get install php-xml
-sudo apt-get install php5.6-xml
+```sh
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+apt-cache search php5.6
+sudo apt-get install php5.6 php5.6-fpm php5.6-mcrypt php5.6-mbstring php5.6-curl php5.6-cli php5.6-mysql php5.6-gd php5.6-xml php5.6-xsl php5.6-yaml php5.6-zip
+```
 
 ### PHP 5.6 Centos 7
 

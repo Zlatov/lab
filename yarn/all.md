@@ -1,13 +1,24 @@
 # Yarn
 
-Yarn — это менеджер пакетов для вашего кода.
+Yarn — это менеджер пакетов для javascript-проекта/кода.
 
+Npm — это пакетный менеджер языка javascript исполняемый ядром Node.js.
+
+Nvm — это bash сценарий управления версиями Node.js. Для установки nvm
+используйте репозиторий https://github.com/nvm-sh/nvm
 
 ## Установка
 
 ```bash
 # deb
-sudo apt-get update && sudo apt-get install yarn
+# sudo apt-get update && sudo apt-get install yarn
+
+# Глобально (для этой версии nodejs?)
+npm install -g yarn
+yarn --version
+yarn set version latest
+yarn set version from sources
+yarn set version from sources --branch 1211
 ```
 
 

@@ -12,6 +12,12 @@
 Из [гит репозитория](https://github.com/rbenv/rbenv) по мануалу или:
 
 ```bash
+# Наверняка понадобится
+sudo yum install gcc-c++
+sudo apt install gcc
+# или
+sudo apt-get install build-essential
+
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 cd ~/.rbenv && src/configure && make -C src
 # ВЕСЬ ПОСЛЕДУЮЩИЙ КОД ДЛЯ ФАЙЛА ~/.bashrc ДОЛЖЕН БЫТЬ ВСТАВЛЕН
@@ -45,15 +51,14 @@ __Следить за состоянием rbenv__:
 * `cd ~/.rbenv && git pull`
 * `cd ~/.rbenv/plugins/ruby-build && git pull`
 
-__Наверняка понадобится__
-
-```bash
-sudo yum install gcc-c++
-sudo apt install gcc
-```
-
 
 ### Установка ruby через rbenv
+
+```sh
+# Наверняка понадобится
+sudo apt install -y libssl-dev
+sudo apt install -y zlib1g-dev
+```
 
 `rbenv install -l` — список доступных для установки версий;
 `rbenv install 2.3.1` — установить указанную версию;
@@ -98,52 +103,14 @@ sudo apt install gcc
 
 ### load, require, include, extend
 
-* `load` — включить файл в другой файл, файл загружается каждый раз в момент вызова (не нужно перезапускать сервер рельсы чтобы получить результат изменений в файле).
-* `require` — включить файл в другой файл, файл загружается в память и используется (нужно пезапустить сервер рельсы для получения результата изменений в файле).
+*   `load` — включить файл в другой файл, файл загружается каждый раз в момент
+    вызова (не нужно перезапускать сервер рельсы чтобы получить результат
+    изменений в файле).
+*   `require` — включить файл в другой файл, файл загружается в память и
+    используется (нужно пезапустить сервер рельсы для получения результата
+    изменений в файле).
 
-* `include` — методы модуля становятся доступными для выполнения в классе, для добавления функционала к объекту класса.
-* `extend` — методы модуля становятся доступными для выполнения в классе, для расширения функционала класса.
-
-
-
-
-
-### Различия синглтон, класс, инстанс
-
-```ruby
-class Foo  
-  def an_instance_method  
-    puts "I am an instance method"  
-  end  
-  def self.a_class_method  
-    puts "I am a class method"  
-  end  
-end
-
-foo = Foo.new
-
-def foo.a_singleton_method
-  puts "I am a singletone method"
-end
-
-```
-```ruby
-foo = Foo.new
-
-class << foo
-  def a_singleton_method
-    puts "I am a singleton method"
-  end
-end
-
-```
-```ruby
-class Foo
-  class << self
-    def a_singleton_and_class_method
-      puts "I am a singleton method for self and a class method for Foo"
-    end
-  end
-end
-
-```
+*   `include` — методы модуля становятся доступными для выполнения в классе, для
+    добавления функционала к объекту класса.
+*   `extend` — методы модуля становятся доступными для выполнения в классе, для
+    расширения функционала класса.
