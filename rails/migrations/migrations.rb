@@ -53,6 +53,9 @@ create_table "lorem", force: :cascade do |t|
   t.text   :text
   t.index ["name"], name: "index_market_angars_on_name", unique: true
   # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
+  # t.timestamps
+  t.datetime "created_at"
+  t.datetime "updated_at"
 end
 add_index :lorem, :name, unique: true
 

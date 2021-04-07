@@ -44,3 +44,4 @@ EDITOR=mcedit crontab -e
 
 # Запуск с башем и с переменными окружения
 */2 * * * * /bin/bash -l -i -c ". $HOME/.bashrc && cd $HOME/app/market && ./bash/exchange/order_push.sh" >> $HOME/app/market/log/exchange_cron.log 2>&1
+*/1 * * * * /bin/bash -l -c 'cd /home/deployer/app/market && RAILS_ENV=production bundle exec rake ftp_upload:service_repeir --silent'

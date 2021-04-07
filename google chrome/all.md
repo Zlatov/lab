@@ -1,11 +1,17 @@
-<h2>Настройки</h2>
+## Настройки
 
 ### Удаление принудительного https запроса к сайту
+
 chrome://net-internals/#hsts
 
-<h3>Отключение запроса пароля на связки ключей при запуске хрома</h3>
+### Отключение запроса пароля на связки ключей при запуске хрома
+
 <p>First of all, we have to search for Passwords and Encryption Keys. Also you can open it from terminal:</p>
-<pre>seahorse</pre>
+
+```sh
+seahorse
+```
+
 <p>You have to go to Passwords Tab, and there you will se a folder: Passwords: login</p>
 <p>Right Click and then Change Password. Enter your old password, and leave blank the new password fields.</p>
 <p>Now you can try rebooting, it shouldn't appear now!</p>
