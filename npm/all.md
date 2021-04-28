@@ -13,6 +13,8 @@ sudo apt install -y npm
 
 # Через nvm
 # Установку nvm смотреть тут: https://github.com/nvm-sh/nvm
+# Чтобы проверить, что nvm был установлен, выполните:
+command -v nvm
 # Список версий для установки
 nvm list-remote
 # Установка необходимой версии
