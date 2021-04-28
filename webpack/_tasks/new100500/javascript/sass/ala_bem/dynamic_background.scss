@@ -1,0 +1,15 @@
+.dynamic_background {
+  background-size: 400% auto;
+  background-position: 100% 50%;
+  background-image: linear-gradient(90deg, #ffe4ca 0%, #ffd0d0 25%, #f1d9ff 50%, #ffe4ca 75%, #ffd0d0 100%);
+  animation: dynamic_background_motion 20s infinite linear;
+}
+
+@keyframes dynamic_background_motion {
+  0% {
+    background-position-x: 100%;
+  }
+  100% {
+    background-position-x: 0;
+  }
+}
