@@ -3,10 +3,11 @@ require 'awesome_print'
 require 'active_support/all'
 
 puts 'Остаток от деления'.green
-a = 81
-b = a % 10
+a = 1.15
+b = a % 0.5
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit
 
 puts 'Окружение строки тэгом враппера при выводе массива записей'.green
 o = nil
@@ -24,12 +25,13 @@ puts "#{e}" if e.present?
 # exit
 
 puts 'Неполное частное'.green
-a = 81
-b = a.divmod(11)
+a = 0
+b = a.divmod(0.5)
 c = b[0]
 print 'a: '.red; puts a
 print 'b: '.red; p b
 print 'c: '.red; p c
+# exit
 
 puts 'Деление целого возвращает всегда целое'.green
 a = 3 / 2

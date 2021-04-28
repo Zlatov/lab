@@ -17,6 +17,7 @@ exit
 # | User::update_all | No   | Yes | No  | No  | No  | No  | http://apidock.com/rails/v4.0.2/ActiveRecord/Relation/update_all
 
 # Обновить значение поля/полей у экземпляра
+user.update_column(:last_request_at, Time.current)
 user.update_columns(last_request_at: Time.current)
 
 # Обновить значение поля/полей у подмножества

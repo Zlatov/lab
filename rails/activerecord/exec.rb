@@ -59,7 +59,9 @@ a.each do |row|
   print 'row: '.red; p row
   print 'row: '.red; p row['id']
 end
-exit
+b = a.pluck 'id'
+print 'b: '.red; p b
+# exit
 
 # exec_update(sql, name = nil, binds = []) Executes update sql statement in
 # the context of this connection using binds as the bind substitutes. name is

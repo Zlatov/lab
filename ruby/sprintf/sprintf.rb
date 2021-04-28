@@ -38,6 +38,23 @@ puts 'Форматирование значений с плавающей точ
 #       | which is consisted from optional sign, "0x", fraction part
 #       | as hexadecimal, "p", and exponential part as decimal.
 #   A   | Equivalent to `a', but use uppercase `X' and `P'.
+numbers = [
+  0,
+  0.0,
+  0.001,
+  0.0001,
+  0.00001,
+  0.000001,
+  0.999999,
+  1,
+  1.0,
+  1.01,
+  1.000001
+]
+numbers.each do |x|
+  print "#{x.to_s} ".red; puts '%g' % x
+end
+# exit
 
 # Field |  Other Format
 # ------+--------------------------------------------------------------

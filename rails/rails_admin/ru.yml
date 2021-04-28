@@ -1,0 +1,9 @@
+---
+ru:
+  admin:
+    actions:
+      orders_analysis:
+        menu: Анализ заказов
+        title: Анализ заказов
+        breadcrumb: Анализ заказов
+# ...

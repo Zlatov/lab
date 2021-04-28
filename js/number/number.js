@@ -40,7 +40,27 @@ for (var i = 0, l = c.length; i < l; i++) {
   var item = c[i]
   console.log('item + " " + item.declension("ежей,ёж,ежа"): ', item + " " + item.declension("ежей,ёж,ежа"))
 }
-return null
+// return null
+
+console.log('> Остаток от деления (mod в других языках)')
+a = 10.5
+b = 3
+c = a % b
+console.log('a: ', a)
+console.log('b: ', b)
+console.log('c: ', c)
+console.log('2 % 2: ', 2 % 2)
+// return null
+
+console.log('> Целая часть частного (div в других языках)')
+a = 10.5
+b = 3
+c = Math.floor(a / b)
+console.log('a: ', a)
+console.log('b: ', b)
+console.log('c: ', c)
+console.log('Math.floor(4.1 / 2): ', Math.floor(4.1 / 2))
+// return null
 
 console.log('> Math.floor')
 var a = 10.99
@@ -75,22 +95,33 @@ var a = -2.001
 var b = String(a).split(".")[1] || ""
 console.log('a: ', a)
 console.log('b: ', b)
-var a = -2.006
 console.log('.toFixed(precision) округляет до точности precision, возвращает строку.')
+var a = -2.006
 var b = a.toFixed(2).split(".")[1] || ""
 console.log('a: ', a)
 console.log('b: ', b)
 // return null
 
 console.log()
-console.log('> toFixed()')
+console.log('> Округление')
+// Таблица округления
+//        Math.floor  Math.ceil Math.round  Math.trunc
+//  3.1       3           4         3           3
+//  3.6       3           4         4           3
+// -1.1      -2          -1        -1          -1
+// -1.6      -2          -1        -2          -1
+console.log('> Округление с помощью функции .toFixed(precision) округляет до точности precision, возвращает строку.')
 var a = 1
 var b = a.toFixed(2)
 var c = a.toFixed(0)
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('c: ', c)
-// return null
+console.log('> Округление с помощью выражения Math.round(...*100)/100')
+console.log('Math.round(1.00003 * 100) / 100: ', Math.round(1.00003 * 100) / 100)
+console.log('Math.round(1.554 * 100) / 100: ', Math.round(1.554 * 100) / 100)
+console.log('Math.round(1.555 * 100) / 100: ', Math.round(1.555 * 100) / 100)
+return null
 
 console.log()
 console.log('> numberWithSpaces()')

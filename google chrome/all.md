@@ -1,3 +1,5 @@
+# Google Chrome
+
 ## Настройки
 
 ### Удаление принудительного https запроса к сайту
@@ -6,89 +8,16 @@ chrome://net-internals/#hsts
 
 ### Отключение запроса пароля на связки ключей при запуске хрома
 
-<p>First of all, we have to search for Passwords and Encryption Keys. Also you can open it from terminal:</p>
+Прежде всего, нам нужно найти пароли и ключи шифрования. Также вы можете открыть
+его из терминала:
 
 ```sh
 seahorse
 ```
 
-<p>You have to go to Passwords Tab, and there you will se a folder: Passwords: login</p>
-<p>Right Click and then Change Password. Enter your old password, and leave blank the new password fields.</p>
-<p>Now you can try rebooting, it shouldn't appear now!</p>
+Вам нужно перейти на вкладку «Пароли», и там вы увидите папку: «Пароли: логин».
 
-<h2>Дополнения</h2>
-<h3>Adblock для Youtube™</h3>
-Adblock для Youtube™ - …
+Щелкните правой кнопкой мыши, а затем измените пароль. Введите свой старый
+пароль и оставьте пустыми поля для нового пароля.
 
-<h3>Browsec VPN</h3>
-Browsec VPN - …
-
-<h3>ColorZilla</h3>
-ColorZilla - …
-
-<h3>ColorPick Eyedropper</h3>
-ColorPick Eyedropper - …
-
-<h3>JSON Formatter</h3>
-JSON Formatter - …
-
-<h3>Keyboard Shortcuts for Google Translate</h3>
-Keyboard Shortcuts for Google Translate - …
-
-<h3>Set Character Encoding</h3>
-Set Character Encoding - …
-
-<h3>Shortkeys (Custom Keyboard Shortcuts)</h3>
-Shortkeys (Custom Keyboard Shortcuts) - …
-<p>По нажатию на кнопку <kbd class="copyToClipboard">tab</kbd> запустить яваскрипт при условии что сайт <code class="copyToClipboard">*.google.ru*</code>:</p>
-<pre class="copyToClipboard prettyprint lang-js">
-console.log('&gt; Shortkyes Tab!')
-document.selectedResultId=0
-function scrollToElement(el) {
-    var rect = el.getBoundingClientRect();
-    if (!(rect.top &gt;= 0 &amp;&amp; rect.bottom &lt;= window.innerHeight)) {
-        window.scrollTo(0, rect.top + window.pageYOffset - (window.innerHeight / 2));
-    }
-}
-
-function selectResult(newId){
-        els = document.querySelectorAll(&quot;h3.r&quot;)
-        if(newId &lt; 0 || newId &gt;= els.length)
-                return  //Could modify for page nav...?
-        rp = document.getElementById(&quot;result-pointer&quot;)
-        if(rp != null){
-                rp.remove()
-        }
-        document.selectedResultId=newId
-        el = els[newId]
-        el.innerHTML = &quot;&lt;div id=\&quot;result-pointer\&quot; style=\&quot;position:absolute;left:-15px;\&quot;&gt;&amp;gt;&lt;/div&gt;&quot; + el.innerHTML
-        scrollToElement(el)
-        lnk = el.querySelector('a')
-        lnk.focus()
-}
-document.onkeyup=function(event){
-        if(event.keyCode==38)
-                selectResult(document.selectedResultId-1)
-        if(event.keyCode==40)
-                selectResult(document.selectedResultId+1)
-}
-selectResult(0)
-</pre>
-
-<p>По нажатию на <kbd class="copyToClipboard">ctrl+q</kbd> запустить, если сайт <code class="copyToClipboard">*.google.ru*</code></p>
-<pre class="copyToClipboard prettyprint lang-js">
-if (window['lst-ib'] != document.activeElement) {
-  window['lst-ib'].focus();
-} else {
-  console.log('No window[\'lst-ib\']')
-}
-</pre>
-
-<h3>Duplicate Tab Shortcut Key</h3>
-Duplicate Tab Shortcut Key - …
-
-<h3>EditThisCookie</h3>
-EditThisCookie - управление cookie
-
-<h3>ModHeader</h3>
-ModHeader - замена HTTP заголовков
+Теперь вы можете попробовать перезапустить, теперь запрос не должен появиться!
