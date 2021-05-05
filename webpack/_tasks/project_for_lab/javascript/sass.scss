@@ -1,11 +1,10 @@
 // bootstrap
 @import "sass/custom_bootstrap";
 @import "~bootstrap/scss/bootstrap";
+@import "sass/fix_bootstrap";
 
 // ala_bem
-@import "sass/ala_bem/other_sources";
 @import "sass/ala_bem/logo";
-@import "sass/ala_bem/dynamic_background";
 @import "sass/ala_bem/footer";
 
 // fontawesome-free

@@ -24,7 +24,7 @@ body {
   margin: -150px auto 0;
 }
 
-// ---
+// Настройка дизайна подвала
 
 #footer {
   background-color: #000000;
@@ -46,11 +46,5 @@ body {
 
   p {
     margin-bottom: 0.5rem;
-  }
-
-  .logo {
-    &:hover {
-      opacity: 0.6;
-    }
   }
 }

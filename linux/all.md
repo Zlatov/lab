@@ -247,7 +247,7 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 
 ## Дополнительное ПО
 
-### Incscape
+### Inkscape
 
 Неплохой редактор векторных изображений.
 
