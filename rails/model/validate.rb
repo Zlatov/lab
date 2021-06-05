@@ -104,4 +104,5 @@ class Model < ActiveRecord::Base
 
   def valid_date
     errors.add('asdasdff')
+    errors.add(:name, :blank, message: "cannot be nil") if name.nil?
   end

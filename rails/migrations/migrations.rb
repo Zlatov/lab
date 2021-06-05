@@ -74,6 +74,7 @@ end
 # Внешние ключи
 # 
 
+# Какая печаль, что это всё ненужно, когда мы используем has_and_belongs_to_many
 add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
