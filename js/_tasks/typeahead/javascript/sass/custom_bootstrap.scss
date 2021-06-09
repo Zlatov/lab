@@ -1,0 +1,47 @@
+// Настройка переменный бутсрап, по сути, точечные изменения файла
+// node_modules/bootstrap/scss/_variables.scss
+// 
+// Так же есть файл для изменения поведений некоторых объектов бутсрап, это уже
+// не настройка переменными, а свои дополнительные особенности:
+// javascript/sass/fix_bootstrap.scss
+
+$white:    #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black:    #000;
+
+$ilorem:    #fd5e53;
+
+$primary:       $ilorem;
+$secondary:     $black;
+$light:         $gray-100;
+$dark:          $black;
+
+
+$border-radius:               .25rem !default;
+
+$font-family-sans-serif:      'Open Sans', sans-serif;
+
+$font-family-base:            $font-family-sans-serif;
+
+
+$headings-font-family:        'PT Serif', serif;
+
+$headings-font-weight:        300;
+
+$display1-weight:             700;
+
+$display2-weight:             700;
+
+$display3-weight:             700;
+
+$display4-weight:             700;
+
+$code-color:                        $ilorem;

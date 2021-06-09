@@ -1,0 +1,11 @@
+.logo {
+  transition: filter .25s;
+
+  &>img {
+    vertical-align: baseline;
+  }
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
