@@ -121,7 +121,7 @@ console.log('> Округление с помощью выражения Math.ro
 console.log('Math.round(1.00003 * 100) / 100: ', Math.round(1.00003 * 100) / 100)
 console.log('Math.round(1.554 * 100) / 100: ', Math.round(1.554 * 100) / 100)
 console.log('Math.round(1.555 * 100) / 100: ', Math.round(1.555 * 100) / 100)
-return null
+// return null
 
 console.log()
 console.log('> numberWithSpaces()')
@@ -155,3 +155,22 @@ for (var i = 0, l = a.length; i < l; i++) {
   var item = a[i]
   console.log('item: ', item, item.toString())
 }
+
+console.log('> Расчёт минимального количества повторений элементов в массиве заданной длинны m из элементов число которых n (n>0)')
+console.log('> установленная длинна массива m=100')
+var m = 100
+console.log('> количество данный элементов n меняется от 1 до 105')
+var a = [...Array(105).keys()]
+a.shift()
+console.log('a: ', a)
+console.log('> Расчёт минимальных количеств')
+var b = []
+for (var i = 0, l = a.length; i < l; i++) {
+  var n = a[i]
+  if (n == 0) {
+    continue
+  }
+  var max_count = Math.ceil(m/n)
+  b.push(n + ' ' + max_count)
+}
+console.log('b: ', b)

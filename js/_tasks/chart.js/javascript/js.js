@@ -17,9 +17,11 @@ import "./images/logo.svg"
 import "./images/favicon.svg"
 
 ;(function($) {
+
   "use strict"
 
   $(document).ready(function() {
+
     window.chart.activate()
   });
 })(jQuery);
