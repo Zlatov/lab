@@ -1,9 +1,17 @@
+// События
 // 
 // blur, focus, focusin, focusout,
 // load, resize, scroll, unload, click, dblclick,
 // mousedown, mouseup, mousemove, mouseover, mouseout, mouseenter, mouseleave,
 // change, select, submit, keydown, keypress, keyup, error
 // 
+
+
+// this, currentTarget, target
+// 
+// event.currentTarget - узел указанный селектором css, так же как и this.
+// event.target        - первоначальный источник события, то есть может быть
+//                       подэлементом узал указанного селектором.
 
 
 // 2 способа передачи this в обработчик:

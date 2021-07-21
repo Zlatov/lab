@@ -21,6 +21,7 @@ b = sprintf("%#.2f", a)
 print 'b: '.red; puts b
 # exit
 
+puts 'Тип'.green
 a = 1.01
 ap a.is_a? Float
 ap a.is_a? Integer
@@ -28,6 +29,7 @@ ap 1.to_f
 ap 1.0001.to_f
 ap nil.to_f
 ap nil.nil?
+# exit
 
 def with_spaces number, by=3
   if number.is_a? Float

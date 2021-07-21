@@ -59,6 +59,21 @@
   <% end %>
   <%= field_errors f.object, :payment_type %>
 
+  <% form.object.class.offer_types.each do |string_value, index_value| %>
+    <label class="radio_b">
+      <%= form.radio_button :offer_type, string_value, id: "offer_type_#{string_value}" %>
+      <span></span>
+    </label>
+    <%=
+      form.label :offer_type,
+        form.object.class.human_enum_name(:offer_type, string_value),
+        :value => string_value,
+        :for => "offer_type_#{string_value}"
+    %>
+    <br>
+  <% end %>
+  <%= field_errors form.object, :offer_type %>
+
 
   <%= f.hidden_field :id %>
 

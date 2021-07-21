@@ -123,6 +123,17 @@ console.log('Math.round(1.554 * 100) / 100: ', Math.round(1.554 * 100) / 100)
 console.log('Math.round(1.555 * 100) / 100: ', Math.round(1.555 * 100) / 100)
 // return null
 
+console.log('> Определение ошибок в вычислении.')
+var a = parseFloat("")
+var b = typeof a
+var c = (a == NaN) // неверно
+var d = isNaN(a) // верно
+console.log('a: ', a)
+console.log('b: ', b)
+console.log('c: ', c)
+console.log('d: ', d)
+// return null
+
 console.log()
 console.log('> numberWithSpaces()')
 function numberWithSpaces(x) {

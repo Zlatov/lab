@@ -21,17 +21,42 @@
     #click:hover {
       box-shadow: 0px 0px 5px 5px black;
     }
+    .button {
+      display: inline-block;
+      padding: 4px;
+      margin: 4px;
+      border-radius: 4px;
+      background-color: green;
+      color: white;
+    }
 
   </style>
 </head>
 <body>
+
   <div id="click">click me</div>
+
+  <div class="wrapper">
+    <span class="button">
+      Кнопка
+      <span>
+        Подэлеметн кнопки
+      </span>
+    </span>
+  </div>
+
   <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
     
     $("#click").on("click", function(event) {
       event.target.textContent = event.offsetX + " " + event.offsetY
       console.log('event: ', event)
+    })
+
+    $("body").on("click", ".wrapper .button", function(event) {
+      console.log('event.target: ', event.target)
+      console.log('event.currentTarget: ', event.currentTarget)
+      console.log('this: ', this)
     })
 
   </script>

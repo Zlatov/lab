@@ -1,6 +1,15 @@
 # encoding: UTF-8
-require_relative '../colorize/colorize'
 require_relative '../string/declension'
+
+require 'awesome_print'
+require 'active_support'
+require 'active_support/core_ext'
+
+a = Time.current
+b = a.year
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit
 
 # a = Time.new
 # p a
