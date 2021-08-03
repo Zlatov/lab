@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" type="text/css" href=""> -->
+  <!-- <style type="text/css"></style> -->
+  <!-- <script type="text/javascript" src=""></script> -->
+  <style type="text/css">
+    
+    .wrapper {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    .cloudimage-360 .cloudimage-360-prev, .cloudimage-360 .cloudimage-360-next {
+      padding: 8px;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      border-radius: 4px;
+    }
+    .cloudimage-360 .cloudimage-360-prev:focus, .cloudimage-360 .cloudimage-360-next:focus {
+      outline: none;
+    }
+    .cloudimage-360 .cloudimage-360-prev {
+      display: none;
+      position: absolute;
+      z-index: 100;
+      top: calc(50% - 15px);
+      left: 20px;
+    }
+    .cloudimage-360 .cloudimage-360-next {
+      display: none;
+      position: absolute;
+      z-index: 100;
+      top: calc(50% - 15px);
+      right: 20px;
+    }
+    .cloudimage-360 .cloudimage-360-prev:before, .cloudimage-360 .cloudimage-360-next:before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: 50% 50% / cover no-repeat;
+    }
+    .cloudimage-360 .cloudimage-360-prev:before {
+      background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-left.svg');
+    }
+    .cloudimage-360 .cloudimage-360-next:before {
+      background-image: url('https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/assets/img/arrow-right.svg');
+    }
+    .cloudimage-360 .cloudimage-360-prev.not-active, .cloudimage-360 .cloudimage-360-next.not-active {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div
+      class="cloudimage-360"
+      data-folder="./"
+      data-filename="iris-{index}.jpg"
+      data-amount="36"
+      data-full-screen
+    ></div>
+  </div>
+  <div class="wrapper">
+    <div
+      class="cloudimage-360"
+      data-folder="./"
+      data-filename="iris-{index}.jpg"
+      data-amount="36"
+      data-magnifier="3"
+    ></div>
+  </div>
+  <div class="wrapper">
+    <div
+      class="cloudimage-360"
+      data-folder="./"
+      data-filename="iris-{index}.jpg"
+      data-amount="36"
+      data-magnifier="3"
+      data-bottom-circle
+      circle-offset="2"
+      data-control-reverse
+    >
+      <button class="cloudimage-360-prev"></button>
+      <button class="cloudimage-360-next"></button>
+    </div>
+  </div>
+  <script src="https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2.6.0/js-cloudimage-360-view.min.js"></script>
+</body>
+</html>
