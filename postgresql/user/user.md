@@ -64,6 +64,9 @@ sudo service postgresql restart
 sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'not_empty_password';"
 
 sudo -u postgres psql -c "DROP USER username;"
+
+sudo -u postgres psql -c "ALTER ROLE deploy SUPERUSER;"
+sudo -u postgres psql -c "ALTER ROLE deploy NOSUPERUSER;"
 ```
 
 ```bash

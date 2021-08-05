@@ -1,14 +1,4 @@
-# 1. Поля и свойства
-# 2. Поведение
-# 3. Связии
-# 4. Дополнительные методы класса
-# 5. Дополнительные методы инстанса
 class Model < ApplicationRecord
-  # 1. Поля и свойства
-  # 2. Поведение
-  # 3. Связии
-  # 4. Дополнительные методы класса
-  # 5. Дополнительные методы инстанса
 
   # Множественный первичный ключ
   self.primary_key = [:articul, :angar, :discount]
@@ -48,5 +38,32 @@ class Model < ApplicationRecord
     new_spec = current_spec.clone
     new_spec['database'] = database_name
     establish_connection(new_spec)
+  end
+
+  # Значение по умолчанию для поля
+  # По умолчанию статья активна.
+  def initialize params=nil
+    super params
+    if self.new_record?
+      self.active = params&.[](:active).nil? ? true : params[:active]
+    end
+  end
+  # или
+  after_initialize do |article|
+    if self.new_record? && self.active.nil?
+      self.active = true
+    end
+  end
+  # или
+  after_initialize unless: :persisted? do |article|
+    if self.active.nil?
+      self.active = true
+    end
+  end
+  # или
+  after_initialize if: :new_record? do |article|
+    if self.active.nil?
+      self.active = true
+    end
   end
 end
