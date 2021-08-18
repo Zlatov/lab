@@ -13,17 +13,17 @@ sudo apt-get install python3.6
 
 #### Установка ___pyenv___
 
-Установка _pyenv_ зависимостей:
 
 ```bash
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+
+# Установка _pyenv_ зависимостей:
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
-```
 
-Инициализация _pyenv_ в _~/.bashrc_:
-
-```bash
+# Инициализация _pyenv_ в _~/.bashrc_:
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
