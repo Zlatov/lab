@@ -2,6 +2,8 @@
 
 set -eu
 
+SOMEVAR=''
+
 if [[ -z ${SOMEVAR-} ]]
 then
   echo "Переменная SOMEVAR не установлена." 1>&2;

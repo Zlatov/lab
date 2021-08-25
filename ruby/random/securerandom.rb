@@ -18,3 +18,5 @@ puts SecureRandom.hex(8) #=> "52750b30ffbc7de3b362"
 # протяжении 20 лет = 20*365*300*20*200*2 = 17 520 000 000. 5Байт кодируют число
 # в сотни миллиардов.
 puts SecureRandom.hex(5) #=> "52750b30ffbc7de3b362"
+
+puts SecureRandom.uuid

@@ -28,3 +28,5 @@ INSERT INTO a VALUES
 (DEFAULT, 13);
 SELECT MIN(a.price), MAX(a.price) FROM a;
 -- \q
+
+SELECT gen_random_uuid();

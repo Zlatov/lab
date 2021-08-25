@@ -26,8 +26,8 @@ server {
 
 server {
     listen 443 ssl;
-    ssl_certificate /etc/ssl/certs/zenonline.local.pem;
-    ssl_certificate_key /etc/ssl/private/zenonline.local-key.pem;
+    ssl_certificate /etc/ssl/certs/admin.zenonline.local.pem;
+    ssl_certificate_key /etc/ssl/private/admin.zenonline.local-key.pem;
     server_name admin.zenonline.local;
     client_max_body_size 256m;
 
