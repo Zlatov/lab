@@ -1,0 +1,150 @@
+{
+  // "scope": "source, string.quoted",
+  "completions": [
+    "iadfeshchm",
+    {
+      "contents": "−",
+      "trigger": "zzz-minus\t−"
+    },
+    {
+      "contents": "&#8722;",
+      "trigger": "zzz-minus-code\t−"
+    },
+    {
+      "contents": "–",
+      "trigger": "zzz-ndash\t–"
+    },
+    {
+      "contents": "&#8211;",
+      "trigger": "zzz-ndash-code\t–"
+    },
+    {
+      "contents": "—",
+      "trigger": "zzz-mdash\t—"
+    },
+    {
+      "contents": "&#8212;",
+      "trigger": "zzz-mdash-code\t—"
+    },
+    {
+      "contents": "«»",
+      "trigger": "zzz-quotes-fir\t«»"
+    },
+    {
+      "contents": "&#171;&#187;",
+      "trigger": "zzz-quotes-fir-code\t«»"
+    },
+    {
+      "contents": "„“",
+      "trigger": "zzz-quotes-paws\t„“"
+    },
+    {
+      "contents": "&#8222;&#8220;",
+      "trigger": "zzz-quotes-paws-code\t„“"
+    },
+    {
+      "contents": "…",
+      "trigger": "zzz-dots\t…"
+    },
+    {
+      "contents": "&#8230;",
+      "trigger": "zzz-dots-code\t…"
+    },
+    {
+      "contents": "←↑→↓",
+      "trigger": "zzz-arrow\t←↑→↓"
+    },
+    {
+      "contents": "&#8592;&#8593;&#8594;&#8595;",
+      "trigger": "zzz-arrow-code\t←↑→↓"
+    },
+    {
+      "contents": "₽",
+      "trigger": "zzz-ruble\t₽"
+    },
+    {
+      "contents": "&#8381;",
+      "trigger": "zzz-ruble-code\t₽"
+    },
+    {
+      "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
+      "trigger": "zzz-table\t├┼┤┣╋┫"
+    },
+    {
+      "contents": "&#169;",
+      "trigger": "zzz-copyright\t©"
+    },
+    {
+      "contents": "−",
+      "trigger": "яяя-минус\t−"
+    },
+    {
+      "contents": "&#8722;",
+      "trigger": "яяя-минус-код\t−"
+    },
+    {
+      "contents": "–",
+      "trigger": "яяя-нтире\t–"
+    },
+    {
+      "contents": "&#8211;",
+      "trigger": "яяя-нтире-код\t–"
+    },
+    {
+      "contents": "—",
+      "trigger": "яяя-мтире\t—"
+    },
+    {
+      "contents": "&#8212;",
+      "trigger": "яяя-мтире-код\t—"
+    },
+    {
+      "contents": "«»",
+      "trigger": "яяя-кавычки-ёлки\t«»"
+    },
+    {
+      "contents": "&#171;&#187;",
+      "trigger": "яяя-кавычки-ёлки-код\t«»"
+    },
+    {
+      "contents": "„“",
+      "trigger": "яяя-кавычки-лапки\t„“"
+    },
+    {
+      "contents": "&#8222;&#8220;",
+      "trigger": "яяя-кавычки-лапки-код\t„“"
+    },
+    {
+      "contents": "…",
+      "trigger": "яяя-многоточие\t…"
+    },
+    {
+      "contents": "&#8230;",
+      "trigger": "яяя-многоточие-код\t…"
+    },
+    {
+      "contents": "←↑→↓",
+      "trigger": "яяя-стрелки\t←↑→↓"
+    },
+    {
+      "contents": "&#8592;&#8593;&#8594;&#8595;",
+      "trigger": "яяя-стрелки-код\t←↑→↓"
+    },
+    {
+      "contents": "₽",
+      "trigger": "яяя-рубль\t₽"
+    },
+    {
+      "contents": "&#8381;",
+      "trigger": "яяя-рубль-код\t₽"
+    },
+    {
+      "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
+      "trigger": "яяя-таблица\t├┼┤┣╋┫"
+    },
+    {
+      "contents": "&#169;",
+      "trigger": "яяя-копирайт\t©"
+    }
+  ]
+}

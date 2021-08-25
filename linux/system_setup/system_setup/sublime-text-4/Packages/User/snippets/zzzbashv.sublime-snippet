@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+echo -e "\e[92m${1:text}\e[0m"
+]]></content>
+	<tabTrigger>zzzbashv</tabTrigger>
+	<scope>source.shell</scope>
+</snippet>

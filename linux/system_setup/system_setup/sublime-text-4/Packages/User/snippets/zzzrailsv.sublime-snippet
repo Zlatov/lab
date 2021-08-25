@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+Console.log_header '${1:message}'
+]]></content>
+	<tabTrigger>zzzrailsv</tabTrigger>
+	<scope>source.ruby</scope>
+</snippet>

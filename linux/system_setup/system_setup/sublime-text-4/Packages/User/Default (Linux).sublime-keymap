@@ -1,0 +1,44 @@
+[
+	// Закрытие проекта
+	{ "keys": [ "ctrl+alt+w" ], "command": "close_workspace" },
+
+	// Word_Wrap
+	{ "keys": ["alt+w"], "command": "toggle_setting", "args": {"setting": "word_wrap"}},
+
+	// AdvancedNewFile
+	{ "keys": ["ctrl+alt+n"], "command": "advanced_new_file_new"},
+
+	// Удали системные клавиши и разлогинься-залогинься, чтобы работало:
+	{ "keys": ["ctrl+alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["ctrl+alt+down"], "command": "select_lines", "args": {"forward": true} },
+
+	// Показать текущий файл в боковой панели
+	{ "keys": ["ctrl+'"], "command": "reveal_in_side_bar" },
+
+	// FindAndReplaceByProjectWithExclusions
+	{ "keys": ["ctrl+k", "ctrl+f"], "command": "find_and_replace_by_project_with_exclusions" },
+	{
+		"keys": ["ctrl+shift+k", "ctrl+shift+f"],
+		"command": "find_and_replace_by_project_with_exclusions",
+		"args": {"from_current_file_path": true}
+	},
+
+	// FocusFileOnSidebar
+	// Add into Preference->Settings: `"close_sidebar_if_opened": false`
+	{ "keys": ["ctrl+\\"], "command": "focus_file_on_sidebar" },
+
+	// Wrap line by 80 chars
+	{
+		"keys": ["ctrl+k", "ctrl+w"],
+		"command": "wrap_lines",
+		"args": {"width": 80}
+	},
+	{
+		"keys": ["ctrl+л", "ctrl+ц"],
+		"command": "wrap_lines",
+		"args": {"width": 80}
+	},
+
+	// Русскоязычное комментирование строки
+	{ "keys": ["ctrl+."], "command": "toggle_comment", "args": {"block": false} }
+]

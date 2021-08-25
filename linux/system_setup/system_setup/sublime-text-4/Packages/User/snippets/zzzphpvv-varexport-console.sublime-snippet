@@ -1,0 +1,9 @@
+<snippet>
+	<content><![CDATA[
+echo '\$${1:this}: ' . var_export(\$${1:this}, true) . PHP_EOL;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzzvv-varexport-console</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

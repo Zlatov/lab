@@ -1,0 +1,51 @@
+<snippet>
+	<content><![CDATA[
+<div class="grid row">
+  <div class="col-3">
+    <div class="wrap shred padded">
+      <%= f.label :field_name %>
+
+      <%= f.label :field_name, class: with_required(f.object, :field_name) %>
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="wrap shred padded">
+
+      <!-- Радиокнопки -->
+      <% f.object.class.field_names.each do |value_s, value_i| %>
+        <div>
+          <label class="radio_b">
+            <%= f.radio_button :field_name, value_s %>
+            <span></span>
+          </label>
+          <%= f.label :field_name, f.object.class.human_enum_name(:field_name, value_s), :value => value_s %>
+        </div>
+      <% end %>
+
+      <!-- Флажек -->
+      <%= f.label :field_name, class: "check_b" do %>
+        <%= f.check_box(:field_name) %>
+        <span></span>
+      <% end %>
+
+      <%= text_field_tag :field_name, f.object.class.human_enum_name(:field_name, f.object.form), disabled: true %>
+
+      <%= f.text_field :field_name %>
+
+      <!-- Выпадающий список select -->
+      <%= f.select :field_name, @model_select_options, {include_blank: true, disabled: [33, 60]}, {'data-initial_user_id': current_user.id} %>
+
+      <!-- Пароль -->
+      <%= f.password_field :field_name %>
+
+      <!-- Ошибки поля см хелпер форм -->
+      <%= field_errors f.object, :field_name %>
+    </div>
+  </div>
+</div>
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzzerbformfieldzenon</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.html.ruby text.html.basic</scope>
+</snippet>

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+__${1:$SELECTION}__
+]]></content>
+	<tabTrigger>zzzmdbold</tabTrigger>
+	<scope>source.md</scope>
+	<description>Выделить жирным</description>
+</snippet>

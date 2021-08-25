@@ -1,0 +1,19 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"ANSIescape",
+		"FindAndReplaceByProjectWithExclusions",
+		"Focus File on Sidebar",
+		"Git",
+		"GitGutter",
+		"MoveTab",
+		"Package Control",
+		"Pretty JSON",
+		"SideBarEnhancements",
+	],
+}

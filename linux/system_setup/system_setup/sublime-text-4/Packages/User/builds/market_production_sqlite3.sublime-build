@@ -1,0 +1,7 @@
+{
+	"cmd": [
+		"/home/iadfeshchm/projects/my/lab/sqlite/_tasks/market/production_sqlite3.sh",
+		"$file"
+	],
+	"selector": "source.sql"
+}

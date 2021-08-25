@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+\$sql = sprintf(
+    "
+        SELECT u.user_id...
+        FROM %1\\\$s u
+        LEFT JOIN %2\\\$s ug on...
+        WHERE
+            g.group_name = '%3\\\$s'
+    ",
+    USERS_TABLE,
+    USER_GROUP_TABLE,
+    \$db->sql_escape(\$this->model['group_for_ip'])
+);
+\$result = \$db->sql_query(\$sql);
+
+\$user_count = \$db->sql_affectedrows(\$result);
+\$user_count = (int) \$db->sql_fetchfield('user_count');
+while (\$row = \$db->sql_fetchrow(\$result)) {
+    echo \$row['user_id']
+}
+
+\$db->sql_freeresult(\$result);
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>zzzphpbb-db</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.php</scope>
+</snippet>

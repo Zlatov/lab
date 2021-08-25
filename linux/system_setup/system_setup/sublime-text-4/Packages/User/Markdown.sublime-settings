@@ -1,0 +1,6 @@
+{
+  "extensions": [".md"],
+  "tab_size": 2,
+  "detect_indentation": true,
+  "translate_tabs_to_spaces": true
+}

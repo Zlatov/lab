@@ -1,0 +1,6 @@
+{
+  "cmd": ["bash", "$file"],
+  "selector": "source.shell",
+  "target": "ansi_color_build",
+  "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+}

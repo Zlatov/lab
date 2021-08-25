@@ -1,0 +1,13 @@
+{
+	"theme": "Adaptive.sublime-theme",
+	"font_size": 14,
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"show_encoding": true,
+	"show_full_path": true,
+	"show_project_first": true,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"close_sidebar_if_opened": false,
+}
