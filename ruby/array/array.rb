@@ -293,6 +293,7 @@ hash_of_hash = {
 
 puts
 puts 'Массив хэшей - проверить есть ли хешь со значением поля равным заданному (.any?)'.green
+# Смотри аналогичные методы: .all? .one? .none?
 p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='b'}
 p [{text:'a'},{text:'b'},{text:'c'}].any?{|node|node[:text]=='d'}
 
@@ -715,7 +716,7 @@ b[0] = 0
 print 'a: '.red; p a
 print 'b: '.red; p b
 
-puts 'Над каждым элементом'.green
+puts 'Применить метод к каждому элементу массива'.green
 a = [1,2,3]
 b = a.map(&:to_s)
 print 'a: '.red; p a
@@ -757,3 +758,19 @@ a = PersonCollection.new ['asd', 2, {a: 3}]
 a.each do |per|
   puts per
 end
+
+puts 'Проверить все элементы выражением (.all?)'.green
+# Смотри аналогичные методы: .any? .one? .none?
+a = [true, true, true]
+b = a.all?{|x| x == true}
+print 'a: '.red; p a
+print 'b: '.red; puts b
+# Если массив пуст то всегда возвращается true!!!
+a = []
+b = a.all?{|x| x == true}
+print 'a: '.red; p a
+print 'b: '.red; puts b
+a = []
+b = a.all? &:present?
+print 'a: '.red; p a
+print 'b: '.red; puts b

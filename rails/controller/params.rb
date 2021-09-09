@@ -4,7 +4,9 @@ exit
 
   def create_client_params
     params.require(:market_model_client).permit(
-      :fio, :phone_number, :affiliate_id,
+      :fio,
+      :phone_number,
+      {affiliate_ids: []},
       auth_user_attributes: [
         :email, :password, :password_confirmation
       ]

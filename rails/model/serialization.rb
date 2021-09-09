@@ -46,6 +46,8 @@ class PostsController < ApplicationController
   respond_to :json
 
   def show
+    hash = PostSerializer.new(Post.first).as_json
+    # или
     respond_with Post.find(params[:id])
   end
 end

@@ -17,20 +17,40 @@
 # Колонки
 # 
 
-change_column :table_name, :column_name, :column_type, null: false, default: ''
-add_column table_name, column_name, type, options
+# Добавление колонок
+add_column :table_name, :column_name, :type, options: :options
 add_column :table_name, "column_name", :string,
-  null: true,
-  limit: 256
-# options
-  :limit # Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
-  :default # The column’s default value. Use nil for NULL.
-  :null # Allows or disallows NULL values in the column.
-  :precision # Specifies the precision for the :decimal and :numeric columns.
-  :scale # Specifies the scale for the :decimal and :numeric columns.
-  :comment # Specifies the comment for the column. This option is ignored by some backends.
+  # options
+  :limit => 256 # Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
+  :default => nil # The column’s default value. Use nil for NULL.
+  :null => false # Allows or disallows NULL values in the column.
+  :precision => 10 # (Сколько всего знаков!) Specifies the precision for the :decimal and :numeric columns.
+  :scale => 2 # (Сколько знаков после запятой!) Specifies the scale for the :decimal and :numeric columns.
+  :comment => '...' # Specifies the comment for the column. This option is ignored by some backends.
+
+change_column :table_name, :column_name, :type, null: false, default: '', comment: ''
 
 remove_column :table_name, :column_name
+
+# Добавление колонки через указание связи, связь обязательная поэтому через три
+# миграции: добавить необязательное поле, наполнить, изменить на обязательное.
+  def up
+    # кривые ключи поэтому закомментировано:
+    # add_reference :market_offers, :market_affiliates
+    add_reference :market_offers, :affiliate,
+      foreign_key: { to_table: :market_affiliates, on_update: :cascade, on_delete: :cascade }
+  end
+  def down
+    remove_reference :market_offers, :affiliate
+  end
+
+  def change
+    ::Market::Model::Offer.update_all(affiliate_id: ::Market::Model::Affiliate.where(deleted: false).first.id)
+  end
+
+  def change
+    change_column :market_offers, :affiliate_id, :bigint, null: false
+  end
 
 
 
@@ -75,10 +95,19 @@ end
 # 
 
 # Какая печаль, что это всё ненужно, когда мы используем has_and_belongs_to_many
+# Добавление FK при соществующей таблице и сущ-ем поле.
 add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
-# t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
-# add_reference :table_name, "ref_name", foreign_key: true
+add_foreign_key :emails, :users, on_delete: :cascade, validate: false
+# Удаление FK
+remove_foreign_key_if_exists :emails, column: :user_id
+# Поле и FK при создании таблицы
+create_table ...
+  ...
+  t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
+end
+# Поле и FK при существующей таблице
+add_reference :table_name, "ref_name", foreign_key: true
 
 
 
