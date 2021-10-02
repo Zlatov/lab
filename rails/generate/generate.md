@@ -16,6 +16,9 @@ _config/application.rb_
 ```
 
 ```bash
+# Список доступных генераторов ;)
+TASKER=1 bundle exec rails g
+
 # Миграции
 rails g migration AddColumnNameColumnToTableName deleted_at:datetime
 

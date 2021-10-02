@@ -1,5 +1,14 @@
 class Mailer::FromSite < ApplicationMailer
 
+  # Почему-то хелперы отсутствуют при рендере письма, хотя по документации
+  # должны били быть, прикрутил ручками.
+  helper Market::DateTimeHelper
+  helper Market::TovarHelper
+
+  # Почему-то необходимо задавать ручками layout, может это рельсовая
+  # договорённость, хотя я надеялся он сам найдёт layout по паттерну.
+  layout 'market/mailer/offer_mailer/default'
+
   # рендерит write_to_leader.html.erb
   def write_to_leader form_model
     # Переменные для рендера шаблона письма
@@ -17,6 +26,7 @@ class Mailer::FromSite < ApplicationMailer
       from: ,
       subject: ,
       reply_to: 
+
     # С указанием формата:
     mail(
       to: ZENOMAIL,

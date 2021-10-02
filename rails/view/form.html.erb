@@ -32,16 +32,29 @@
   <%= f.select :pickup_affiliate_id, @affiliate_select_options, {}, {'data-initial_client_id': @current_client.id} %>
   <%=
     select_tag(
-      :client,
-      options_for_select(@angar_list, @angar_selected),
+      :emails,
+      options_for_select(
+        [
+          ['asd@asd.asd', 'asd@asd.asd'],
+          ['Администратору', 'zxc@zxc.zxc']
+        ],
+        'zxc@zxc.zxc' # Если необходимо задать только selected, то передаем вторым параметром.
+      ),
       multiple: true,
-      class: 'ui dropdown'
+      prompt: 'Выберите email',
+      title: 'Выбрать другогой email.',
+      class: 'zenoselect'
     )
     select_tag(
-      :client,
-      options_for_select(@options_for_select_client, selected: @selected_client.id, disabled: ''),
-      class: 'client_select',
-      title: 'Выбрать другого клиента для просмотра его свойств.'
+      :emails,
+      options_for_select(
+        [
+          ['asd@asd.asd', 'asd@asd.asd'],
+          ['Администратору', 'zxc@zxc.zxc']
+        ],
+        disabled: 'asd@asd.asd', # Если необходимо задать disabled, то передаем в виде хэш.
+        selected: 'zxc@zxc.zxc' # selected в этом случае можно не передавать.
+      )
     )
   %>
 
@@ -61,7 +74,13 @@
 
 
   <!--
-    Список флажков
+    Список флажков в случае массива в поле
+  -->
+  <% for email in form.object.emails %>
+    <%= form.check_box :remove_emails, {multiple: true}, email, nil %>
+  <% end %>
+  <!--
+    Список флажков в случае связей
   -->
   <%= form.collection_check_boxes(:role_ids, ::Role.all, :id, :ui_name) %>
   <!-- или -->
@@ -83,7 +102,10 @@
       </li>
     <% end %>
   </ul>
-  <!-- или для самописной формы -->
+  <!--
+    Простое использование при связываных моделях с помощью
+    has_and_belongs_to_many и присутствием экземпляра @users
+  -->
   <%= collection_check_boxes(:users, :role_ids, ::Role.all, :id, :ui_name) %>
 
 
@@ -138,6 +160,30 @@
     %>
   </p>
 <% end %>
+
+
+
+
+  <!--
+    Дата, время
+  -->
+  <%=
+    form.datetime_select :from,
+    form.date_select :from,
+      {
+        order: [:year, :month, :day],
+        prompt: {
+          year: 'выберите Год',
+          month: 'Месяц',
+          day: 'День',
+          # hour: 'Час',
+          # minute: 'Мин.',
+        },
+        start_year: Date.today.year,
+        end_year: Date.today.year + 5,
+        discard_time: true
+      }
+  %>
 
 
 

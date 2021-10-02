@@ -251,6 +251,18 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 
 Неплохой редактор векторных изображений.
 
+### Krita
+
+Неплохой редактор растровой графики.
+
+### OBS Studio
+
+Запись, стриминг видео.
+
+### Shotcut
+
+Редактор видео.
+
 ### FreeRdp
 
 ```
