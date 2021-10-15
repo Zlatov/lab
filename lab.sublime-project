@@ -2,22 +2,34 @@
 	"folders":
 	[
 		{
+			// Исключает файлы из боковой панели, из ctrl+p поиска, из ctrl+shift+f
+			// поиска.
 			"file_exclude_patterns":
 			[
-				"js/_tasks/videopl/data/*"
+				"js/_tasks/videopl/data/*",
 			],
+			// Исключает папки из боковой панели, из ctrl+p поиска, из ctrl+shift+f
+			// поиска.
 			"folder_exclude_patterns":
 			[
 				"bogacho",
-				"argo-ds"
+				"argo-ds",
 			],
+			// Исключает из индексации поиска, однако поиск всёравно осуществляется.
 			"index_exclude_patterns":
 			[
 				"*.log",
 				"*.sql",
 				"*.sqlite3",
-				"theme/bower/*.*",
-				"node_modules/*.*"
+				"node_modules/",
+				"node_modules/*",
+				"node_modules/**",
+				"node_modules/*.*",
+			],
+			// Исключает файлы и папки из ctrl+p поиска, НЕ исключает из ctrl+shift+f
+			// поиска.
+			"binary_file_patterns": [
+				"node_modules/",
 			],
 			"path": ".",
 			"temp_setting_1": "\"follow_symlinks\": true",
@@ -25,10 +37,10 @@
 	],
 	"settings":
 	{
+		// Исключает файлы и папки из ctrl+shift+f поиска.
 		"find_and_replace_by_project_with_exclusions":
 		[
 			"*.log",
-			"*.sqlite3",
 			"node_modules/"
 		],
 		"sublime-view-in-browser":
