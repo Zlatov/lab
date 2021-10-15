@@ -13,13 +13,18 @@ $ which webpack
 /usr/local/bin/webpack
 ```
 
+
 ## Настройка
 
 https://dev.to/pixelgoo/how-to-configure-webpack-from-scratch-for-a-basic-website-46a5
 
+
 ## Анализ
 
 На [сайт](http://webpack.github.io/analyse/) загрузить json файл сегенерированный `./bin/webpack --json --profile > tmp/webpack-stat.json`
+
+Просмотр всех ресурсов webpack: http://localhost:5000/webpack-dev-server
+
 
 ## В rails
 

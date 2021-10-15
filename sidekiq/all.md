@@ -1,5 +1,7 @@
 # Sidekiq
 
+Фоновая обработка задач
+
 ## Установка
 
 ## Запуск
@@ -66,4 +68,34 @@ __Возобновлнение задач определённых типов п
 
 ```ruby
 answer = Sidekiq::QueuePause.unpause(:mailers, :default)
+```
+
+### Пример
+
+```rb
+class MyMailers < ActionMailer::Base
+  def some_mailer(r.user_id)
+    @user = User.find(r.user_id)
+    mailer_name = "ROUNDUP"
+    @email = @user.email
+    @subject ="subject text"
+    mail(to: @email,
+      subject: @subject,
+      template_path: '/notifer_mailers',
+      template_name: 'hourly_roundup.html',
+    )
+  end
+end
+class SomeWorker
+  include Sidekiq::Worker
+  def perform()
+    @user = User.all
+    @reminders = @user.reminders.select(:user_id).uniq.newmade
+    @reminders.each do |r|
+      MyMailers.some_mailer(r.user_id).deliver_later
+    end
+  end
+end
+SomeWorker.perform_async
+SomeWorker.set(queue: 'foo').perform_async(1)
 ```
