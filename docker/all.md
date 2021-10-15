@@ -18,8 +18,7 @@ sudo systemctl enable docker
 
 ```bash
 sudo usermod -aG docker $(whoami)
-# Затем перезагрузить компьютер нахер (релогин нахере помогает)!
-sudo chmod 777 /var/run/docker.sock # 777 ??? TODO загуглить и понять кто тут придумал 777
+sudo chmod 666 /var/run/docker.sock
 ```
 
 ```bash
@@ -32,15 +31,15 @@ docker --version
 __Образы__
 
 ```bash
-docker pull <image> # скачать
+docker pull {image} # скачать
 docker images # скаченные
-docker run <image> # запустить (создать) контейнер из образа
-docker run -it <image> # запустить (создать) контейнер из образа и получить интерактивную консоль
-docker run -it <image> sh # запустить (создать) контейнер из образа, получить интерактивную консоль и выполнить в ней команду sh
-docker run --name <container> <image> # запустить (создать) контейнер из образа с заданным уникальным именем
-docker run -p 8888:80 <image> # запустить (создать) контейнер из образа с пробросом порта
-docker run -d -P <image> # `-d` - detached, типа демон; `-P` - открыть порты
-docker rmi <image> # удалить образ
+docker run {image} # запустить (создать) контейнер из образа
+docker run -it {image} # запустить (создать) контейнер из образа и получить интерактивную консоль
+docker run -it {image} sh # запустить (создать) контейнер из образа, получить интерактивную консоль и выполнить в ней команду sh
+docker run --name {container} {image} # запустить (создать) контейнер из образа с заданным уникальным именем
+docker run -p 8888:80 {image} # запустить (создать) контейнер из образа с пробросом порта
+docker run -d -P {image} # `-d` - detached, типа демон; `-P` - открыть порты
+docker rmi {image} # удалить образ
 ```
 
 __Контейнеры__
@@ -48,17 +47,17 @@ __Контейнеры__
 ```bash
 docker ps # запущенные
 docker ps -a # запущенные и оставновленные
-docker start <container> # запустить остановленный контейнер
-docker attach <container> # получить интерактивную консоль контейнера
+docker start {container} # запустить остановленный контейнер
+docker attach {container} # получить интерактивную консоль контейнера
 # [Ctrl+p, Ctrl+q] - для выхода из консоли, незавершая текущий процесс
-docker commit -m "<tag>" <container> <image>:<tag> # создать новый образ из контейнера
-docker push <image>:<tag> # запушить образ
-docker rm <container>|<container_id> # удалить контейнер
+docker commit -m "{tag}" {container} {image}:{tag} # создать новый образ из контейнера
+docker push {image}:{tag} # запушить образ
+docker rm {container}|{container_id} # удалить контейнер
 docker rm $(docker ps -a -q -f status=exited) # удалить все оставновленные контейнеры
 # или
 docker system prune
-docker port <container_id>|<container> # посмотреть пробрасываемые порты
-docker exec -it zenonline bash -c 'cd /app && ls -lah' # отправка команды в контейнер
+docker port {container_id}|{container} # посмотреть пробрасываемые порты
+docker exec -it zenonline bash -c 'cd /app && ls -lah' # отправка команды в контейнер (запущенный!)
 ```
 
 __Тома (volume) - пробросы каталогов__
