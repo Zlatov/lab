@@ -39,6 +39,7 @@ alias cdloremrails='cd ~/projects/my/lorem_rails'
 alias cdzlatov='cd ~/projects/my/zlatov'
 alias cdilorem='cd ~/projects/my/ilorem'
 alias cdimenu='cd ~/projects/my/imenu'
+alias cdagofolio='cd ~/projects/my/agofolio'
 alias cdnestedarray='cd ~/projects/my/nested_array'
 
 # gaz
