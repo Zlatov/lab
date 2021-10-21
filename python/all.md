@@ -1,35 +1,31 @@
 # Python
 
-## Установка
-
-### Установка ___python___ — системная версия
+## Установка python — системная версия
 
 ```bash
 sudo apt-get update
 sudo apt-get install python3.6
 ```
 
-### Установка ___python___ с помощью ___pyenv___
-
-#### Установка ___pyenv___
-
+## Установка python с помощью pyenv
 
 ```bash
+# Установка pyenv
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 
-# Установка _pyenv_ зависимостей:
+# Установка pyenv зависимостей:
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
 libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
 
-# Инициализация _pyenv_ в _~/.bashrc_:
+# Инициализация pyenv в ~/.bashrc:
 export PATH="$HOME/.pyenv/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 ```
 
-#### Использование ___pyenv___
+## Использование pyenv
 
 ```bash
 pyenv install --list # Возможные версии для установки
@@ -40,6 +36,9 @@ which python # …
 pyenv which python # более точное место если питон установлен с помощью pyenv
 pyenv global 2.7.15 # …
 pyenv local 2.7.15 # …
+
+# Использование pip через pyenv
+pyenv exec pip install termcolor
 ```
 
 ## Разобрать

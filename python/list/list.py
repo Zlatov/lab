@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from termcolor import colored
 
+print(colored('Задание списка', 'green'))
 a = [1, 2, 3]
+print('a type: ' + type(a).__name__)
+print('a:', a)
 print(colored('a [' + type(a).__name__ + ']:', 'red'), a)
 # exit(0)
 
@@ -86,4 +89,14 @@ a = [1, 2, 3]
 b = [str(e) for e in a]
 print(colored('a:', 'red'), a)
 print(colored('b:', 'red'), b)
+# exit(0)
+
+print(colored('Вставка в начало массива', 'green'))
+a = [1, 2, 3]
+a.insert(0, '1')
+print('a:', a)
+print(colored('Вставка в конец массива', 'green'))
+a = [1, 2, 3]
+a.append('4')
+print('a:', a)
 # exit(0)

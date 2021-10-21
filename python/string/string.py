@@ -45,6 +45,16 @@ b=a[2:-4]; print(b) # индекс конца с конца
 b=a[-6:6]; print(b) # индекс начала с конца
 b=a[-6:-2]; print(b) # индексы с конца
 
+print(colored('Индекс последней подстроки в строке', 'green'))
+a = '@import "../../images'
+doubl_quote_index = a.rfind("\"")
+singl_quote_index = a.rfind("'")
+print('doubl_quote_index:', doubl_quote_index)
+print('singl_quote_index:', singl_quote_index)
+quote_index = max(singl_quote_index, doubl_quote_index)
+print('quote_index:', quote_index)
+# exit(0)
+
 # From version 3.6+
 # a = "a"
 # b = f"aa{a}a"

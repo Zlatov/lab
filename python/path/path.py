@@ -22,3 +22,11 @@ a = os.path.join('/as/d/asd', '../../111')
 b = os.path.join('/as/d/asd/', '../../111')
 print('a:', a)
 print('b:', b)
+
+print(colored('Вычисление пути', 'green'))
+a = '/home/iadfeshchm/projects/zenon/zenonline/app/assets/stylesheets/admin'
+b = '../asd'
+c = os.path.join(a, b)
+d = os.path.realpath(c)
+print('c:', c)
+print('d:', d)

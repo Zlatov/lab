@@ -1,5 +1,13 @@
 {
-  "cmd": ["python", "-u", "$file"],
+  // При использовании системной установки
+  // "cmd": ["python3", "-u", "$file"],
+  // "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  // "selector": "source.python",
+  // "target": "ansi_color_build",
+  // "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
+
+  // Перед использованием установить python через pyenv и прописать нужный путь:
+  "cmd": ["/home/iadfeshchm/.pyenv/versions/3.9.7/bin/python", "-u", "$file"],
   "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
   "selector": "source.python",
   "target": "ansi_color_build",

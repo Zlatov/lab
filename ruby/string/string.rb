@@ -4,6 +4,13 @@ require_relative '../colorize/colorize'
 require 'rubygems'
 require 'awesome_print'
 
+puts 'Очистка от BOM символов.'.green
+a = 'sochi@zenonline.ru﻿, svetlana.b@zenonline.ru, olga.f@zenonline.ru'
+b = a.sub("\xEF\xBB\xBF", '').gsub("\r", '')
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit 0
+
 puts 'Альтернатива php str_replace, замена подстрок в тексте.'.green
 a = '??asd?? ??asd??'
 b = a.gsub '??asd??', 'asd'
