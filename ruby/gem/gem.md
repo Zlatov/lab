@@ -15,3 +15,13 @@ gem install bundler #
 gem install rails #
 gem install rails -v 5.2.0 #
 ```
+
+Создание своего гема
+
+```sh
+bundle gem gem_name
+cd gem_name
+rbenv local {ruby-version}
+bundle install
+# Отредактировать prioritize.gemspec
+```

@@ -1,117 +1,118 @@
-require "rubygems"
+# Если надо байбажить то запускать: ruby module.rb
+
 require "awesome_print"
 require "active_support"
+require "byebug"
+
+# Важно!
+# 
+# Объекты в Ruby не хранят свои собственные методы в себе.
+# Класс A хранит свои методы в синглто-классе (`A).
+# Экземпляр класса a хранит свои методы в синглтон-классе экземпляра (`a).
+module M
+end
+class A
+  include M # добавит методы в A (получается добавит прямо в класс - а значит это методы экземпляра.)
+  extend  M # добавит методы в `A (синглтон-класс - а значит это будут методы класса)
+end
+a = A.new
+a.extend(M) # добавит методы в `a (синглтон-класс экземпляра - будут методы экземпляра)
+
 
 module Entity
 
-  # Плохой способ расширения класса:
-  # def reinitialize
-  #   self.class_eval '@@class_variable = ")"'
-  # end
-
-  # Автоматически запускает при `extend Entity`
-  # но ужасный синтаксис внутри
-  def self.extended obj
-    puts '> extended'.green
-    # obj.class_eval '@@class_variable = ")"'
-    obj.class_eval do
-      @@class_variable = ")!"
-    end
+  def self.extended base
   end
 
-  # Фокус в том, что если поставить = nil (инициализировать),
-  # то в методе `def self.class_var` будут использоваться атрибут МОДУЛЯ!!!
-  # ЛУЧШЕ ТАК НЕ ДЕЛАТЬ:
-  # @@class_var = 1
-
-  # Автоматически запускает при `include Entity`
-  def self.included obj
-    puts '> included'.green
-    obj.class_eval do
-      # В любом мать его случае получается Атрибут МОДУЛЯ!!!
-      @@class_var = 'clvar'
-      def self.class_var
-        @@class_var
-      end
-      attr_reader :array
-      def initialize
-        @array = ['asd']
-      end
-    end
-    # obj.instance_eval "@array = [1,2,3]"
-    # obj.instance_exec do
-    #   @array = [1,2,3]
-    # end
-    # obj.class_eval "attr_reader :array"
+  def self.included base
+    puts 'included self:', self
+    puts 'included base:', base
+    # Стандартный подход: в модуле хранить методы и для экземпляра, для класса
+    # хранить методы в подмодуле ClassMethods. При расширении экземпляра
+    # (include Entity) производить расширение класса
+    # (base.extend ClassMethods).
+    base.extend ClassMethods
   end
 
+  def this_is_instance_method
+    puts self
+  end
+
+  module ClassMethods
+    def this_is_class_method
+      puts self
+    end
+
+    attr_accessor :class_variable
+    def self.extended base
+      # byebug
+      puts 'extended self:', self
+      puts 'extended base:', base
+      base.class_eval do
+        # byebug
+        puts 'base.class_eval self:', self
+        @class_variable = 'init value'
+      end
+    end
+  end
 end
 
-# Расширение с помощью ActiveSupport:
+class Cla
+  include Entity
+end
 
+class Cla2
+  include Entity
+end
+
+puts Cla.methods.include? :this_is_class_method
+puts Cla.instance_methods.include? :this_is_instance_method
+
+puts 'Как инициализировать переменную класса при включении модуля'.green
+Cla.class_variable = 3
+puts Cla.class_variable
+puts Cla2.class_variable
+# exit 0
+
+
+puts 'Расширение с помощью ActiveSupport, инициализация переменной класса при включении модуля'.green
 module Modul
-  # Всегда include!
   extend ActiveSupport::Concern
   
   included do |base|
-    # Как в классе!
-    after_save :meth1
-    def self.class_meth
-    end
-    def inst_meth
-    end
-    # Однако:
-    class_eval do
-      @@param
+    def custom_instance_method
     end
   end
 
-  def instance_method
-  end
+  # class_methods do
+  #   # attr_accessor :param
+  # end
 
-  class_methods do
-    def method_name
-      
-    end
-  end
-
-  # То же самое:
-
-  # При include
   module ClassMethods
-    @@asd
-    def class_method
-      
+    def custom_class_method
     end
+    def self.extended base
+      base.class_eval do
+        @param = 'init value for class variable'
+      end
+    end
+    attr_accessor :param
   end
 end
 
-
-class Cl
-
-  # Просто включаем для расширения класса:
-  extend Entity
-  # Или
-  # если нет `def self.extended` то принудительно:
-  # reinitialize
-
-  include Entity
-
-  def self.show_uninitialized_class_variable
-    puts @@class_variable
-  end
-
-  attr_accessor :asd
-  cattr_accessor :asd
-
+class Genom
+  include Modul
 end
+class Genom2
+  include Modul
+end
+Genom.param = 3
+puts Genom.param
+puts Genom2.param
+puts Genom2.instance_methods.include? :custom_instance_method
+puts Genom2.methods.include? :custom_class_method
+# exit 0
 
-Cl.show_uninitialized_class_variable
-p Cl.asd
-p Cl.class_var
-a = Cl.new
-p a.array
-p a.asd
 
 puts 'Расширить экземпляр класса методом из модуля'.green
 class Point
@@ -122,12 +123,25 @@ module Origin
     @x = @y = 0
   end
 end
-
 a.extend Origin
 puts a.methods.include? :origin!
-
 class Point
   include Origin
 end
 a = Point.new
 puts a.methods.include? :origin!
+
+
+puts 'Расширить экземпляр класса через синглтон-класс экземпляра'.green
+class Car; end
+bmw = Car.new
+class << bmw # мы внутри синглтон-класса объекта bmw
+  def number
+    'abc'
+  end
+end
+# тоже самое, что и...
+def bmw.number
+  'abc'
+end
+puts bmw.number #=> 'abc'
