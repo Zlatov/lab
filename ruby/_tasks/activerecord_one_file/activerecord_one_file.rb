@@ -40,3 +40,15 @@ print 'a: '.red; p a
 
 a = Post.all
 print 'a: '.red; p a
+a = Post.connection.exec_query(
+  <<-SQL,
+    SELECT *
+    FROM #{Post.table_name}
+    WHERE id = $1
+  SQL
+  'SQL',
+  [[nil, 1]]
+)
+a.each do |row|
+  puts "row id: #{row['id']}"
+end
