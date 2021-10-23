@@ -4,6 +4,12 @@
 
 ## Установка/удаление/переустановка
 
+__Бэкап__
+
+```sh
+mysqldump --lock-all-tables -u root -p --all-databases > dump.sql
+```
+
 Желательно снести каталоги - `sudo rm -rf /etc/mysql` и `sudo rm -rf /var/lib/mysql`
 
 __Удаление:__
@@ -20,6 +26,15 @@ __Установка:__
 sudo apt update && sudo apt install -y mysql-server
 # с версией
 sudo apt update && sudo apt install -y mysql-server-5.7
+
+sudo apt install mysql-client-5.6 mysql-client-core-5.6
+sudo apt install mysql-server-5.6
+```
+
+__Восстановление__
+
+```sh
+mysql -u root -p < dump.sql
 ```
 
 ### Установка необходимой версии на Centos 7

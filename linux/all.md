@@ -3,25 +3,27 @@
 как преобразуется домен в ip
 как работает http протокол
 
-
 ## Режим восстановления
 
-Как переключить файловую систему в режим чтения записи (file system in recovery mode to read-write mode): `mount -o rw,remount /`
+Как переключить файловую систему в режим чтения записи (file system in recovery
+mode to read-write mode)
+
+```sh
+mount -o rw,remount /
+```
 
 
 ## synaptic - менеджер пакетов
 
+## Форматирование флешки
 
-## форматирование флешки
+```sh
+# Проверим наличие Flash-накопителя:
 
-проверим наличие нашего Flash-накопителя:
-```
 fdisk -l
-```
 
-Выведет информацию о всех подключённых накопителях и их разделах. Обычно sda — это диск на котором установлена ОС, значит нас интересуют sdb, sdc и т.д. Зная объем своей флешки, в моем случае 4gb, я увидел следующее:
+# Выведет информацию о всех подключённых накопителях и их разделах.
 
-```
 Disk /dev/sdb: 3,8 GiB, 4055885824 bytes, 1980413 sectors
 Units: sectors of 1 * 2048 = 2048 bytes
 Sector size (logical/physical): 2048 bytes / 2048 bytes
@@ -30,181 +32,38 @@ Disklabel type: dos
 Disk identifier: 0x6f20736b
 Устр-во    Загрузочный Start Конец    Blocks   Id  System
 /dev/sdb1  *           512   1980412  3959802  7   HPFS/NTFS/exFAT
-/dev/sdb1 - это и есть та самая флешка с которой будем работать.
-```
 
-Нужно проверить примонтирована ли флешка, сделать это можно командой `df -h`:
-```
+# /dev/sdb1 - флешка с которой будем работать.
+
+# Нужно проверить примонтирована ли флэшка.
+# Выводит список примонтированных устройств.
 df -h /dev/sdb1
-```
 
-Сама по себе, команда df -h, выводит весь список примонтированных устройств.
-
-Если флешка примонтирована, нужно отмонтировать:
-
-```
+# Если примонтирована, отмонтировать:
 umount /dev/sdb1
-```
 
-Теперь можно форматировать, форматировать будем в ntfs командой mkfs:
-
-```
+# Теперь можно форматировать, форматировать будем в ntfs командой mkfs:
 mkfs.ntfs -L name /dev/sdb1
-```
-`mkfs` — комада для форматирования.
-`ntfs` — файловая система.
-`-L` — аргумент, позволяющий присвоить имя нашей флешки (недоступен для fat32).
-`name` — имя (метка) нашей флешки.
-`/dev/sdb1` — путь к флешки.
-
-Команды для форматирования в другие файловые системы предназначенные для Flash-накопителей:
-
-`mkfs.ntfs` - NTFS
-
-`mkfs.msdos` - MSDOS
-
-`mkfs.vfat` - VFAT (расширенная FAT32)
-
-
-## Console
-
-### show
-
-`export PS1='$(whoami)@$(hostname):$(pwd)$ '`
-
-or
-
-`export PS1='$(whoami)@$(hostname):$(pwd)'`
-
-
-## Обновления, установки...
-
-### Upgrade mysql 5.5 to 5.6 ubuntu 14.04
-
-Не сработало?:
-
-```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install mysql-server-5.6
+# mkfs — комада для форматирования.
+# ntfs — файловая система.
+# -L — аргумент, позволяющий присвоить имя нашей флешки (недоступен для fat32).
+# name — имя (метка) нашей флешки.
+# /dev/sdb1 — путь к флешке.
 ```
 
-Тогда вместо `sudo apt-get upgrade` попробовать `sudo apt-get dist-upgrade`.
+Команды для форматирования в другие файловые системы предназначенные для
+Flash-накопителей:
 
-А вместо `sudo apt-get install mysql-server-5.6` вообще выполнить список нижеперечисленных:
-
-
-1. Делаем бэкап
-
-```
-mysqldump --lock-all-tables -u root -p --all-databases > dump.sql
+```sh
+mkfs.ntfs # NTFS
+mkfs.msdos # MSDOS
+mkfs.vfat # VFAT (расширенная FAT32)
 ```
 
-2. Удаляем пакеты (оставляем конфиги). Чтобы удалить и настройки нужно использовать `sudo apt-get purge somePackage`
 
-```
-sudo apt-get remove mysql-server
-sudo apt-get autoremove
-```
+## Чувствительность мыши
 
-```
-sudo apt-get remove mysql-client
-sudo apt-get autoremove
-```
-
-* Устанавливаем то, что хотели
-
-```
-sudo apt-get install mysql-client-5.6 mysql-client-core-5.6
-sudo apt-get install mysql-server-5.6
-```
-
-* Восстанавливаем бэкап
-
-```
-mysql -u root -p < dump.sql
-```
-</ol>
-
-
-## Переменные окружения
-
-(переменные среды, environment variable)
-
-Посмотреть пути `echo $PATH`
-
-### Добавить в $PATH свою директорию (создать свои консольные команды)
-
-```bash
-mkdir mkdir -p ~/bin
-touch ~/.profile
-chmod 754 ~/.profile
-nano ~/.profile
-```
-
-```
-#!/bin/bash
-if [ -d &quot;$HOME/bin&quot; ]
-    then
-        PATH=&quot;$HOME/bin:$PATH&quot;
-fi
-
-```
-
-Незабыть выйти/зайти ssh (ну или новое окно терминала открыть).
-
-
-python
->>> import paramiko
->>> print paramiko.__version__
-1.12.0
-
-python get-pip.py --proxy="10.192.0.3:3128"
-pip --proxy proxy.newstar.ru:3128 install --upgrade paramiko==1.15.2
-
-which pip
-/usr/local/bin/pip uninstall pip  
-apt-get remove python-pip  
-apt-get install python-pip
-
-pip --proxy proxy.newstar.ru:3128 install --upgrade pip
-
-/usr/local/bin/pip --proxy proxy.newstar.ru:3128 install --upgrade paramiko==1.15.2
-
-
-    <a href="http://bashrcgenerator.com/">http://bashrcgenerator.com/</a>
-
-https://www.opennet.ru/docs/RUS/bash_scripting_guide/x13621.html https://www.midnight-commander.org/wiki/ru/doc/editor/hotkeys http://superuser.com/questions/461452/is-there-a-way-to-change-shortcuts-in-midnight-commander http://ss64.com/bash/touch.html http://askubuntu.com/questions/161249/bashrc-not-executed-when-opening-new-terminal https://www.opennet.ru/tips/1408_bash_shell.shtml
-
-```bash
-#!/bin/bash
-#export PS1="\[\033[38;5;11m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\h:\[$(tput sgr0)\]\[\033[38;5;6m\][\w]:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
-export PS1='$(whoami)@$(hostname):$(pwd)$ '
-if [[ -n $SSH_CONNECTION ]] ; then
-    echo "I'm logged in remotely"
-fi
-```
-
-## Параметры системы
-
-### Отключить Связки ключей
-
-#### Только для одного приложения (Google Chrome)
-
-в ярлык добавить  `--password-store=basic`
-
-```
-/usr/bin/google-chrome-stable %U --password-store=basic
-```
-
-#### Отключить полностью
-
-__Win__ -> `Пароли и ключи` -> __ПКМ__ на <q>Связка ключей по умолчанию</q> -> <q>Изменить пароль</q> -> Ввести старый, новый оставить пустым, перезайти пользователем.
-
-### Чувствительность мыши
-
-```
-
+```sh
 $ xinput --list --short
 ⎡ Virtual core pointer                      id=2    [master pointer  (3)]
 ⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
@@ -247,62 +106,49 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 
 ## Дополнительное ПО
 
-### Inkscape
+__Inkscape__
 
 Неплохой редактор векторных изображений.
 
-### Krita
+__Krita__
 
 Неплохой редактор растровой графики.
 
-### OBS Studio
+__OBS Studio__
 
 Запись, стриминг видео.
 
-### Shotcut
+__Shotcut__
 
 Редактор видео.
 
-### FreeRdp
+__Shutter__ (PrintScreen as PicPick)
 
-```
+Принтскрины, почти как PicPick в винде.
+
+__VirtualBox__
+
+Отключить захват клавиатуры чтобы быстро переключаться с поммощью Alt + Tab из
+винды в линукс, а не по окнам винды:
+
+Файл → Настройки → Ввод → Автозахват клавиатуры (убрать галку)
+
+
+## FreeRdp
+
+```sh
 xfreerdp /cert-ignore –no-nego /u:administrator /p:123 /v:192.168.172.129 /port:2179 /vmconnect:8021D293-FA6F-4CB5-AFD2-2499936D0949
-```
-
-```
 xfreerdp --version
-```
 
-case of 1.0.2 the "old" command line needs to be used. That would be something like xfreerdp -u username servername:port - server name and port must be the last argument.
+# case of 1.0.2 the "old" command line needs to be used. That would be something
+# like xfreerdp -u username servername:port - server name and port must be the
+# last argument.
 
-```
 xfreerdp -u username servername:port
 ```
 
 
-### gpick
-
-— улучшенный инструмент выбора цвета, позволяющий выбирать цвета из любых мест экрана
-
-### VirtualBox
-
-Отключить захват клавиатуры чтобы быстро переключаться с поммощью __Alt + Tab__ из винды в линукс, а не по окнам винды:
-
-<q>Файл</q> → <q>Настройки</q> → <q>Ввод</q> → <q>Автозахват клавиатуры</q> (убрать галку)
-
-### Terminal
-
-* Размер терминала по умолчанию - сделай под себя
-* Убрать - Включить клавишу для доступа в меню (F10 по умолчанию) - для удобной работы в терминаля с утилитой mc
-
-
-### Shutter (PrintScreen as PicPick)
-
-* Set to run this application with the system.
-* Customize hotkey printskrin to run the application in selection screen area mode.
-
-
-### pv (Pipe Viewer)
+## pv (Pipe Viewer)
 
 If you're just importing from a dump file from the CLI on \*nix, e.g.
 
@@ -318,9 +164,19 @@ pv sqlfile.sql | mysql -uxxx -pxxxx dbname
 
 which will show a progress bar as the program runs.
 
+## Изменить скорость сетевой карты
 
-## Дополнительно
-
-### Знак рубля не отображается
-
-Загуглить, скачать, установить бесплатный шрифт Symbola вресией не ниже 7.17
+```sh
+# Посмотреть интерфейсы
+ifconfig
+# Просмотреть вывода буфера сообщений ядра в стандартный поток, может там какие неполадки с сетевухой...
+dmesg | grep -i 0Mbps
+# включает функцию автосогласования
+sudo ethtool -s eth0 autoneg on
+# отключает автосогласование, включает полудуплекс и устанавливает скорость до 10 Мбит/с
+sudo ethtool -s eth0 speed 10 duplex half autoneg off
+# ...
+sudo ethtool -s eth0 speed 100 duplex full autoneg off
+# ...
+sudo ethtool -s eth0 speed 1000 duplex full autoneg off
+```
