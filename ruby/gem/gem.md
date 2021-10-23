@@ -19,9 +19,25 @@ gem install rails -v 5.2.0 #
 Создание своего гема
 
 ```sh
+# Создаст папку и необходимые файлы
 bundle gem gem_name
 cd gem_name
+
+# Если необходимо - указать версию руби
 rbenv local {ruby-version}
-bundle install
+
 # Отредактировать prioritize.gemspec
+
+# Установить зависимости
+bundle install
+
+# TDD-шить и разрабатывать функционал
+bundle exec rake spec
+# Проверять что-то в irb-консоли
+./bin/console
+
+# После написания функционала собираем гем (и устанавливается локально)
+bundle exec rake install
+
+# Можно производить проверку в другом приложении
 ```
