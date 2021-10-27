@@ -16,6 +16,13 @@ gem install rails #
 gem install rails -v 5.2.0 #
 ```
 
+Можно обновить версию утилиты gem
+
+```sh
+gem install rubygems-update
+update_rubygems
+```
+
 Создание своего гема
 
 ```sh
@@ -40,4 +47,7 @@ bundle exec rake spec
 bundle exec rake install
 
 # Можно производить проверку в другом приложении
+
+# Опубликовать гем
+gem push ./pkg/{gem-version}.gem
 ```
