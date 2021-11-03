@@ -1,4 +1,14 @@
 {
-  "shell_cmd": "node $file",
+  // "shell_cmd": "node $file",
+  // "selector": "source.js"
+
+  // При установке node через nvm легче всего для sublime сделать ручную
+  // настройку, выполнив which node и указав путь точно.
+  // 
+  // Мне не удалось вылечить отсутствие node ни определением NODE_PATH в .bashrc:
+  // export NODE_PATH=`which node`
+  // ни установкой node по умолчению:
+  // nvm alias default v5.4.0
+  "cmd": ["/home/iadfeshchm/.nvm/versions/node/v14.16.1/bin/node", "$file"],
   "selector": "source.js"
 }
