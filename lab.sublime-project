@@ -30,6 +30,7 @@
 			// поиска.
 			"binary_file_patterns": [
 				"node_modules/",
+				"jquery/_doc/highlightjs/",
 			],
 			"path": ".",
 			"temp_setting_1": "\"follow_symlinks\": true",
