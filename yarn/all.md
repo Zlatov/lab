@@ -75,7 +75,7 @@ __Прокси:__
 
 ## Создание пакета
 
-```
+```sh
 mkdir package-name
 cd package-name
 git init
@@ -87,6 +87,9 @@ git push -u origin master
 yarn add webpack --dev
 …
 yarn publish
+
+# Создание подпакета без публикации
+yarn init
 ```
 
 ## Публикация пакета

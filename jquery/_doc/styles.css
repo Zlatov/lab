@@ -5,6 +5,88 @@ html, body {
 }
 
 .container {
-  width: 992px;
+  width: 1200px;
   margin: 0 auto;
+  overflow: hidden;
 }
+
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 4px 0;
+
+  font-size: 0.63rem;
+  line-height: 1.15rem;
+  font-family: Arial, sans-serif;
+}
+
+.area {
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.areas .area {
+  display: flex;
+}
+
+.area.selectors    { flex: 1 1 37.5%; }
+.area.events       { flex: 1 1 25.0%; }
+.area.traversing   { flex: 1 1 25.0%; }
+.area.effects      { flex: 1 1 12.5%; }
+
+.area.manipulation { flex: 1 1 28.0%; }
+.area.ajax         { flex: 1 1 14.0%; }
+.area.callbacks    { flex: 1 1 14.0%; }
+.area.core         { flex: 1 1 28.0%; }
+.area.jqueryui     { flex: 1 1 14.0%; }
+
+.border {
+  padding: 5px 10px;
+  border-radius: 3px;
+  flex: 1;
+}
+
+.area.selectors .border    { background-color: #E3DBBA; }
+.area.events .border       { background-color: #D0DCE3; }
+.area.traversing .border   { background-color: #E3DBBA; }
+.area.effects .border      { background-color: #D0DCE3; }
+.area.manipulation .border { background-color: #E3DBBA; }
+.area.ajax .border         { background-color: #D0DCE3; }
+.area.callbacks .border    { background-color: #E3DBBA; }
+.area.core .border         { background-color: #D0DCE3; }
+.area.jqueryui .border     { background-color: #E3DBBA; }
+
+.area.selectors .columns { columns: 3; }
+.area.events .columns { columns: 2; }
+.area.traversing .columns { columns: 2; }
+.area.manipulation .columns { columns: 2; }
+.area.core .columns { columns: 2; }
+
+h2, h3, h4, h5, h6 { margin-top: 2.0em }
+h1 + h2            { margin-top: 0.5652em }
+h1 + h3            { margin-top: 0.6842em }
+h1 + h4            { margin-top: 0.8125em }
+h1 + h5            { margin-top: 0.9286em }
+h1 + h6            { margin-top: 1.0000em }
+h2 + h3            { margin-top: 0.6842em }
+h2 + h4            { margin-top: 0.8125em }
+h2 + h5            { margin-top: 0.9286em }
+h2 + h6            { margin-top: 1.0000em }
+h3 + h4            { margin-top: 0.8125em }
+h3 + h5            { margin-top: 0.9286em }
+h3 + h6            { margin-top: 1.0000em }
+h4 + h5            { margin-top: 0.9286em }
+h4 + h6            { margin-top: 1.0000em }
+h5 + h6            { margin-top: 1.0000em }
+
+.border h3 { color: white; margin-top: 0.5em; margin-bottom: 0.5em; font-size: 1rem; }
+
+.border ul { margin-top: 0.5em; margin-bottom: 0.5em; padding-left: 0; break-inside: avoid; }
+.border ul:first-child { margin-top: 0; }
+
+.border li { list-style: none; }
+.border li:first-child  { font-weight: bold; }
+
+.border a { text-decoration: none; color: DimGray; }
+.border a:hover { text-decoration: underline; }
