@@ -22,7 +22,10 @@ __Глобально:__
 
 ## Использование
 
-Проверка создания структуры на сервере
-```
+```sh
+# Проверка создания структуры на сервере
 bundle exec cap production deploy:check
+
+bundle exec cap --help
+bundle exec cap -T
 ```

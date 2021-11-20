@@ -25,8 +25,8 @@ puts "#{e}" if e.present?
 # exit
 
 puts 'Неполное частное'.green
-a = 0
-b = a.divmod(0.5)
+a = 10
+b = a.divmod(3)
 c = b[0]
 print 'a: '.red; puts a
 print 'b: '.red; p b

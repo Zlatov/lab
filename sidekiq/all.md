@@ -7,7 +7,12 @@
 ## Запуск
 
 ```bash
-RAILS_ENV=production bundle exec sidekiq -L log/sidekiq.log -C config/sidekiq.yml -d
+# Запуск Процесса-обработчика (он берет задачу из redis и выполняет её в установленное время).
+RAILS_ENV=production bundle exec sidekiq -L log/sidekiq.log -d
+# -C config/sidekiq.yml - только в том случае, если файл расположен не в
+#  стандартном месте (По документации должен схватывать стандартное
+#  расположение).
+# -d отменён в последней версии - используем systemd ...
 ```
 
 __Ключи__

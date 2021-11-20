@@ -156,6 +156,11 @@ var b = a.map(function(element, index, array) {
 console.log('a: ', a)
 console.log('b: ', b)
 
+console.log('> Развернуть (поднять) массив на уровень вверх')
+var a = [1, 2, [3, 4], , undefined, null, 0]
+var b = a.flat()
+console.log('b: ', b)
+// return
 
 console.log('> Удалить элементы массива по значению в переборе')
 console.log('> индексы ведь меняются после удаления, map накосячит:')

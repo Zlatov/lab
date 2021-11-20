@@ -38,6 +38,17 @@ a.each do |k,v|
 end
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+
+puts 'Перебор с разбиением - преобразовывает в массив'.green
+a = {asd: 1, zxc: 2, qwe: 3}
+a.each_slice(2) do |b|
+  print 'b: '.red; p b
+end
+puts 'Перебор с разбиением - и с преобразованием обратно в хэш'.green
+a = {asd: 1, zxc: 2, qwe: 3}
+a.each_slice(2).map(&:to_h).each do |b|
+  print 'b: '.red; p b
+end
 # exit
 
 puts

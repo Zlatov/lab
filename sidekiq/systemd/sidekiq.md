@@ -1,3 +1,6 @@
+Стандартный шаблон systemd (требующий доработки) выглядит следующим образом:
+
+```sh
 #
 # This file tells systemd how to run Sidekiq as a 24/7 long-running daemon.
 #
@@ -87,52 +90,56 @@ SyslogIdentifier=sidekiq
 
 [Install]
 WantedBy=multi-user.target
+```
 
 
 
 
+Пример изменённого Процесса-обработчика:
 
-
-
-
-
-
-
-# /etc/systemd/system/sidekiq.service
-# sudo systemctl enable sidekiq
-# sudo systemctl daemon-reload
+```sh
+# sudo su
+# touch /etc/systemd/system/zenonline_sidekiq.service
+# mcedit /etc/systemd/system/zenonline_sidekiq.service
+# копировать-вставить
+# заменить $(variables)
+# systemctl enable zenonline_sidekiq
+# systemctl daemon-reload
+# systemctl status zenonline_sidekiq
+# systemctl start zenonline_sidekiq
 [Unit]
-Description=sidekiq
+Description=zenonline_sidekiq
 After=syslog.target network.target
 
 [Service]
 Type=notify
+# Настраивает тайм-аут сторожевого таймера для службы. Сторожевой таймер
+# активируется после завершения запуска.
 WatchdogSec=10
 
-WorkingDirectory=/home/iadfeshchm/projects/zenon/admin
-EnvironmentFile=/home/iadfeshchm/projects/zenon/admin/variables.env
+WorkingDirectory=$(/home/iadfeshchm/projects/zenon/zenonline)
+EnvironmentFile=$(/home/iadfeshchm/projects/zenon/zenonline/)variables.env
 
-ExecStart=/bin/bash -lc 'RAILS_ENV=production exec /home/iadfeshchm/.rbenv/shims/bundle exec sidekiq -e production'
-# Use `systemctl kill -s TSTP sidekiq` to quiet the Sidekiq process
+ExecStart=/bin/bash -lc 'bundle exec sidekiq'
 
-User=iadfeshchm
-Group=iadfeshchm
+User=$(iadfeshchm)
+Group=$(iadfeshchm)
 
-# Greatly reduce Ruby memory fragmentation and heap usage
+# Значительно уменьшить фрагментацию памяти Ruby = Снижение многопоточности
 # https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
 Environment=MALLOC_ARENA_MAX=2
 
-# if we crash, restart
 TimeoutSec=12
 RestartSec=5
 Restart=on-failure
 
-# output goes to /var/log/syslog (Ubuntu) or /var/log/messages (CentOS)
 StandardOutput=syslog
 StandardError=syslog
 
 # This will default to "bundler" if we don't specify it
-SyslogIdentifier=sidekiq
+SyslogIdentifier=zenonline_sidekiq
 
 [Install]
 WantedBy=multi-user.target
+
+```

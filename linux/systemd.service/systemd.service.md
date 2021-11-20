@@ -54,6 +54,10 @@ ExecStart=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec puma -C /home/iadfe
 ExecStop=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb stop
 ExecReload=/home/iadfeshchm/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/iadfeshchm/projects/zenon/zenonline/config/puma.rb restart
 
+# Значительно уменьшить фрагментацию памяти Ruby = Снижение многопоточности
+# https://www.mikeperham.com/2018/04/25/taming-rails-memory-bloat/
+Environment=MALLOC_ARENA_MAX=2
+
 # По истечении какого времени считать запуск проваленным.
 TimeoutStartSec=20
 # По истечении какого времени считать остановку проваленой и запускать SIGTERM
@@ -61,6 +65,10 @@ TimeoutStartSec=20
 TimeoutStopSec=10
 # Синоним для задания одновременно TimeoutStartSec и TimeoutStopSec.
 # TimeoutSec=5
+
+# Настраивает тайм-аут сторожевого таймера для службы. Сторожевой таймер
+# активируется после завершения запуска.
+WatchdogSec=10
 
 # Время ожидания перед перезапуском службы. Принимает значение без единиц
 # измерения в секундах или значение промежутка времени, например, «5min 20s». По
