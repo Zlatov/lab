@@ -7,7 +7,9 @@
 	"show_project_first": true,
 	"ignored_packages":
 	[
+		// "Emmet",
 		"Vintage",
 	],
 	"close_sidebar_if_opened": false,
+	"auto_find_in_selection": true,
 }

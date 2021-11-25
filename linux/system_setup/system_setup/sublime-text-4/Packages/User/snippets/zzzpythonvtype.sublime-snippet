@@ -1,9 +1,9 @@
 <snippet>
 	<content><![CDATA[
-print('${1:a} type: ' + type(${1:a}).__name__, ${1:a})
+print('${1:a} type: ' + type(${1:a}).__name__)
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>zzzpythonvvtype</tabTrigger>
+	<tabTrigger>zzzpythonvtype</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.python</scope>
 </snippet>
