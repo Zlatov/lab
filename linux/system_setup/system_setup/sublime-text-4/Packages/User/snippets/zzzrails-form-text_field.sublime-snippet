@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<%= form.text_field :${1:field_name} %>
+<%= field_errors form.object, :${1:field_name} %>
+]]></content>
+	<tabTrigger>zzzrails-form-text_field</tabTrigger>
+	<scope>text.html.ruby</scope>
+</snippet>

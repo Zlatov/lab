@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+<%=
+  form.select :${1:field_name},
+    options_for_select(
+      [
+        ['Надпись 1', 'значение1', {'data-custom_html_attribute' => '1'}],
+        ['Надпись 2', 'значение2', {'data-custom_html_attribute' => '2'}],
+      ],
+      disabled: ['значение2', 2],
+      selected: 1
+    ),
+    {
+      include_blank: true,
+      # prompt: 'Выберите',
+    },
+    {
+      class: 'select',
+      multiple: true,
+      size: 9,
+      'data-custom_html_attribute' => '1'
+    }
+%>
+<%= field_errors form.object, :${1:field_name} %>
+]]></content>
+	<tabTrigger>zzzrails-form-select</tabTrigger>
+	<scope>text.html.ruby</scope>
+</snippet>
