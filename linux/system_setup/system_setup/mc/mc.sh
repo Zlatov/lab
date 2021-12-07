@@ -7,6 +7,11 @@ lab_path=projects/my/lab
 
 [[ -z ${SYSTEM_SETUP_APT_UPDATE-} ]] && sudo apt-get -qq update
 
+echoc "Копируем файл настройки ~/.config/mc/mc.ext." yellow
+mkdir -p $HOME/.config/mc
+cp ~/$lab_path/linux/system_setup/system_setup/mc/mc.ext ~/.config/mc
+echoc "Скопирован файл настройки ~/.config/mc/mc.ext." green
+
 if hash mc 2>/dev/null
 then
   echoc "Уже установлен mc." blue

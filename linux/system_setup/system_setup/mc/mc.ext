@@ -1,0 +1,67 @@
+### Images ###
+
+# type/^GIF
+#     Include=image
+
+# type/^JPEG
+#     View=%view{ascii} /usr/lib/mc/ext.d/image.sh view jpeg
+#     Include=image
+
+# type/^PC\ bitmap
+#     Include=image
+
+# type/^PNG
+#     Include=image
+
+# type/^JNG
+#     Include=image
+
+# type/^MNG
+#     Include=image
+
+# type/^TIFF
+#     Include=image
+
+# type/^PBM
+#     Include=image
+
+# type/^PGM
+#     Include=image
+
+# type/^PPM
+#     Include=image
+
+# type/^Netpbm
+#     Include=image
+
+# shell/.xcf
+#     Open=/usr/lib/mc/ext.d/image.sh open xcf
+
+# shell/.xbm
+#     Open=/usr/lib/mc/ext.d/image.sh open xbm
+
+# shell/.xpm
+#     Include=image
+#     View=/usr/lib/mc/ext.d/image.sh view xpm %f
+
+# shell/.ico
+#     Include=image
+
+# shell/i/.svg
+#     View=%view{ascii} /usr/lib/mc/ext.d/image.sh view svg
+#     Open=/usr/lib/mc/ext.d/image.sh open svg
+
+# include/image
+#     Open=feh %f
+#     View=%view{ascii} /usr/lib/mc/ext.d/image.sh view ALL_FORMATS
+
+shell/.jpg
+    Open=eog %f
+    View=eog %f ALL_FORMATS
+
+shell/.png
+    Open=eog %f
+    View=eog %f ALL_FORMATS
+
+# type/^PGM
+#     Include=image

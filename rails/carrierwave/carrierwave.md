@@ -16,6 +16,7 @@ rails g uploader ProductImage
 Добавим поле к модели
 
 ```bash
+# Сгенерирует готовый к миграции код, однако можно задать default: {}...
 rails g migration add_image_to_offer image:jsonb
 rails db:migrate
 ```

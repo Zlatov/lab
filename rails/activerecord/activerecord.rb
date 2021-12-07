@@ -28,6 +28,13 @@ Post.where(c).where(a).or(Post.where(b).where(c))
 # Примеры .where()
 # 
 Pt.joins(:total_sales).where('market_product_total_sales.is_sale' => true)
+scoup1 = Offer.includes(:affiliates)
+scope2 = scope1.where(affiliates: {id: affiliate.id}).or(
+  scope1.where(affiliates: {id: nil})
+)
+scope3 = scope2.where(status: 'created', user_id: user.id).or(
+  scope2.where(status: ['confirmed', 'agreed', 'published', 'closed'])
+)
 
 
 # 

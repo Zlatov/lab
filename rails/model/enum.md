@@ -4,6 +4,13 @@ _app/model/user.rb_
 class User < ApplicationRecord
 
   enum legal_form: %i(fiz yur ip)
+  enum status: {
+    created: 0,
+    confirmed: 1,
+    agreed: 2,
+    published: 3,
+    closed: 4,
+  }
 
   validates :form,
     presence: true,

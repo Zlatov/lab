@@ -1,5 +1,20 @@
 exit
 
+  params.require(:post)
+  # будет искать params[:post] и вызвать ошибку, если это не существует.
+  params.permit(:name)
+  # представляет список разрешенных (но необязательно) атрибутов.
+
+  # Таким образом можно комбинировать методы двумя способами:
+  # 
+  # 1. когда параметры многоуровневые, например при генерации формой `form_for
+  # (@post)`
+  params.require(:post).permit(:name)
+  # 2. когда параметры плоские и нужно воспользоваться обеими методами
+  params.require(:slug)
+  params.permit(:slug)
+  # https://www.rubyguides.com/2019/06/rails-params/
+
   private
 
   def create_client_params

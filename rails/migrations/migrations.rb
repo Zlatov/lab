@@ -86,6 +86,15 @@ create_table :market_product_clips, id: :string, force: :cascade do |t|
   t.index [:id], name: :uqix_marketproductclips_id, unique: true
   t.index [:tab_id], name: :ix_marketproductclips_tab_id
 end
+# Таблица много ко многим.
+# Индексы по умолчанию не создаются, а обычно они нужны, поэтому так. По
+# умолчанию NOT NULL поэтому в миграции не указано ничего. Если нужно создать
+# много ко многим с NULL то необходимо добавить параметр table_name,
+# table_name, column_options: { null: true }
+create_join_table :tags, :posts do |t|
+  t.index :post_id
+  t.index :tag_id
+end
 
 
 
