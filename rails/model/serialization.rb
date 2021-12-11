@@ -1,3 +1,7 @@
+# https://thoughtbot.com/blog/better-serialization-less-as-json
+# https://til.codes/active-model-serializer-vz-jbuilder-vz-rabl-vz-grape-entity-vz-roar/
+# https://learn.co/lessons/using-active-model-serializer
+
 # Первый вариант определения ограничений по полям:
 class Model < ApplicationRecord
 

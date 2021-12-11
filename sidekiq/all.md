@@ -104,3 +104,12 @@ end
 SomeWorker.perform_async
 SomeWorker.set(queue: 'foo').perform_async(1)
 ```
+
+```rb
+# Удалить все данные о задачах в redis.
+Sidekiq.redis(&:flushdb)
+# Удалить все сообщения о проваленых задачах
+Sidekiq.redis{|c| c.del('stat:failed')}
+# или
+Sidekiq::Stats.new.reset('failed')
+```
