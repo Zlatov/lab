@@ -22,6 +22,8 @@
 ```bash
 # Пользователь nginx должен присутствовать в группе пользователя у которого
 # лежит приложение.
+sudo usermod -a -G deployer www-data
+# Добавить пользователя deployer в группу fpm (не знаю зачем)
 sudo usermod -a -G fpm deployer
 # Проверить право nginx-пользователя на доступ к файлам приложения.
 sudo -u nginx stat /home/deployer/app/name
@@ -30,7 +32,7 @@ chmod g+x /home/
 chmod g+x /home/username
 # Пользователь nginx должен присутствовать в группе пользователя fpm.
 sudo usermod -a -G fpm nginx
-# Проверить
+# Проверить (показать группы пользователя nginx)
 id -Gn nginx
 ```
 
