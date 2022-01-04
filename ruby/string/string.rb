@@ -4,6 +4,40 @@ require_relative '../colorize/colorize'
 require 'rubygems'
 require 'awesome_print'
 
+# qwerty@
+# qw****@
+# qwert@
+# qw***@
+# qwer@
+# qw**@
+# qwe@
+# q**@
+# qw@
+# **@
+# q@
+# *@
+
+a = '2231@example.com'
+def hide_email email
+  at_index = email.index('@') || 0
+  show_index = case true
+  when at_index >= 4
+    2
+  when at_index >= 3
+    1
+  when at_index < 3
+    0
+  end
+  show_part = email[0, show_index]
+  end_part = email[at_index..-1]
+  hide_part = '*' * (at_index - show_index)
+  show_part + hide_part + end_part
+end
+b = hide_email a
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+# exit 0
+
 puts 'Очистка от BOM символов.'.green
 a = 'sochi@zenonline.ru﻿, svetlana.b@zenonline.ru, olga.f@zenonline.ru'
 b = a.sub("\xEF\xBB\xBF", '').gsub("\r", '')

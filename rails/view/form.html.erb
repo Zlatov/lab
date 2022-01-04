@@ -27,9 +27,37 @@
   -->
 
   <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
-  <!-- Чтобы задать выбранные - задать в модели выбранные на стадии контролера - так будет правильнее -->
+  <!--
+    Чтобы задать выбранные:
+    при использовании options_for_select:
+      - вручную добавив как хэш: selected: ...
+      - вручную добавив как второй параметр: , ...
+    при передаче массива вместо использования options_for_select:
+      - хелпер form.select автоматически выберет как в модели.
+  -->
   <%= f.select :pickup_affiliate_id, @affiliate_select_options, include_blank: true, disabled: [33, 60] %>
   <%= f.select :pickup_affiliate_id, @affiliate_select_options, {}, {'data-initial_client_id': @current_client.id} %>
+  <!-- Наиболее полный хелпер form.select -->
+  <%=
+    form.select :field_name,
+      options_for_select(
+        [
+          ['Надпись 1', 'значение1', {'data-custom_html_attribute' => '1'}],
+          ['Надпись 2', 'значение2', {'data-custom_html_attribute' => '2'}],
+        ],
+        disabled: ['значение2', 2],
+        selected: 1
+      ),
+      {
+        include_blank: true,
+        # prompt: 'Выберите',
+      },
+      {
+        multiple: true,
+        size: 9,
+        'data-custom_html_attribute' => '1'
+      }
+  %>
   <%=
     select_tag(
       :emails,
@@ -69,10 +97,6 @@
     <%= f.check_box(:pickup) %>
     <span></span>
   <% end %>
-
-
-
-
   <!--
     Список флажков в случае массива в поле
   -->

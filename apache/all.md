@@ -1,5 +1,12 @@
 
-<h2>Усановка</h2>
+```sh
+a2ensite lab.local.conf
+a2dissite lab.local.conf
+systemctl reload apache2
+```
+
+## Усановка
+
 <pre class="prettyprint lang-sh">
 sudo apt-get update
 sudo apt-get install apache2

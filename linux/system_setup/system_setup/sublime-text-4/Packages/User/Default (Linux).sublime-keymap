@@ -61,6 +61,11 @@
 	// Increment Selection
 	{ "keys": ["ctrl+k", "ctrl+i"], "command": "increment_selection" },
 
+  // Rubocop проверить текущий файл
+  { "keys": ["alt+r"], "command": "rubocop_check_single_file" },
+  // Применить автоисправления для текущего файла
+  { "keys": ["ctrl+alt+r"], "command": "rubocop_auto_correct" },
+
 	// Показать выпадающий список от плагина AutoFileName
 	{
 		"keys": ["ctrl+k", "ctrl+d"],

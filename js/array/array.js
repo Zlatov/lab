@@ -206,6 +206,10 @@ console.log('a: ', a) // a:  [ { a: 2 }, 1 ]
 
 // initialValue (второй параметр ф-ии reduce) - то, с каким значением переменной previousValue начинаем перебор,
 // если не задан второй параметр, то перебор начинается со второго элемента, а previousValue = первому элементу
+var a = [
+  {id: 1, val: [1]},
+  {id: 2, val: [1,1]}
+]
 var initialValue = {}
 var b = a.reduce(function(previousValue, curr, index, array) {
   console.log('previousValue: ', previousValue) // на первом элементе previousValue = {}
@@ -216,6 +220,7 @@ var b = a.reduce(function(previousValue, curr, index, array) {
 }, initialValue)
 console.log('a: ', a)
 console.log('b: ', b)
+// return null
 
 console.log()
 console.log('> Часть массива')

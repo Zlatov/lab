@@ -1,4 +1,5 @@
 exit
+-- mysql -u root -p
 
 -- Просмотр пользователей mysql
 SELECT User, Host, plugin FROM mysql.user;

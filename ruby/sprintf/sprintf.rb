@@ -116,3 +116,18 @@ puts "%g" % 1.6
 puts "%g" % 1.006
 puts "%.3g" % 1.006
 
+
+def test_sprintf format, comment = nil
+  a = 'aa'
+  b = 'bbbb'
+  print 'format: '.red; print "#{format} "
+  puts "#{comment}".green
+  print '---'; print format % a; puts '---';
+  print '---'; print format % b; puts '---';
+end
+
+test_sprintf '%s', 'просто печатает строку'
+test_sprintf '%3s', 'получается что это минимум, а строка по умолчанию заполняется с правой стороны'
+test_sprintf '%.3s', 'максимум 3 символа'
+test_sprintf '%3.3s', 'мин и макс'
+test_sprintf '%-3.3s', 'когда строка меньше - начинается слева'

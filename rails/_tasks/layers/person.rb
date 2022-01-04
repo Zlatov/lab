@@ -1,5 +1,10 @@
 # https://www.youtube.com/watch?v=Ae19vpQ14jwdf
 # https://files.speakerdeck.com/presentations/bbeaaede66054273a83b219c1433ba54/prepared-rubyc.p
+# 
+# http://railscasts.com/episodes/416-form-objects?view=asciicast
+# https://codeclimate.com/blog/7-ways-to-decompose-fat-activerecord-models/
+# https://medium.com/@croatech/%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-form-objects-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-activemodel-%D0%B8-virtus-1e69e87201f4
+# https://jaryl.medium.com/disciplined-rails-form-object-techniques-patterns-part-1-23cfffcaf429
 
 # Модель с кучей условной логики
 class Person < ApplicationRecord
