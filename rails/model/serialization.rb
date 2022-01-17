@@ -2,6 +2,12 @@
 # https://til.codes/active-model-serializer-vz-jbuilder-vz-rabl-vz-grape-entity-vz-roar/
 # https://learn.co/lessons/using-active-model-serializer
 
+# Если модель PORO, то необходимо либо:
+# include ActiveModel::Serialization
+# - предоставит базовую сериализацию методом serializable_hash
+# include ActiveModel::Serializers::JSON
+# - предоставит метод as_json...
+
 # Первый вариант определения ограничений по полям:
 class Model < ApplicationRecord
 

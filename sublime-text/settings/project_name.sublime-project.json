@@ -1,0 +1,64 @@
+// Прочитать подробнее лучше тут https://www.sublimetext.com/docs/3/projects.html
+{
+  "folders": [
+    {
+      "path": ".",
+
+      // Исключает файлы из боковой панели, из ctrl+p поиска, из ctrl+shift+f
+      // поиска.
+      "file_exclude_patterns":
+      [
+        "js/_tasks/videopl/data/*",
+        "config/settings.yml"
+      ],
+
+      // Исключает папки из боковой панели, из ctrl+p поиска, из ctrl+shift+f
+      // поиска.
+      "folder_exclude_patterns":
+      [
+        "bogacho",
+        "argo-ds",
+      ],
+
+      // Исключает из индексации поиска, однако поиск всёравно осуществляется.
+      "index_exclude_patterns":
+      [
+        "*.log",
+        "*.sql",
+        "*.sqlite3",
+        "node_modules/",
+        "node_modules/*",
+        "node_modules/**",
+        "node_modules/*.*",
+      ],
+
+      // Исключает файлы и папки из ctrl+p поиска, НЕ исключает из ctrl+shift+f
+      // поиска.
+      "binary_file_patterns": [
+        "*.jpg",
+        "*.jpeg",
+        "*.png",
+        "*.gif",
+        "*.ttf",
+        "*.ico",
+        "*.eot",
+        "*.pdf",
+        "*.swf",
+        "*.zip",
+        "node_modules/",
+        "jquery/_doc/highlightjs/",
+        "public/assets/",
+        "public/packs/",
+      ],
+
+      "folder_exclude_patterns": [
+        "temp",
+        "app/models/admin",
+        "public/admin"
+      ],
+
+      // Найти симлинки: ls -lR ./ | grep ^l
+      "follow_symlinks": false
+    }
+  ]
+}

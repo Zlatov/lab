@@ -2,20 +2,20 @@
 	"folders":
 	[
 		{
-			// Исключает файлы из боковой панели, из ctrl+p поиска, из ctrl+shift+f
-			// поиска.
+			"binary_file_patterns":
+			[
+				"node_modules/",
+				"jquery/_doc/highlightjs/"
+			],
 			"file_exclude_patterns":
 			[
-				"js/_tasks/videopl/data/*",
+				"js/_tasks/videopl/data/*"
 			],
-			// Исключает папки из боковой панели, из ctrl+p поиска, из ctrl+shift+f
-			// поиска.
 			"folder_exclude_patterns":
 			[
 				"bogacho",
-				"argo-ds",
+				"argo-ds"
 			],
-			// Исключает из индексации поиска, однако поиск всёравно осуществляется.
 			"index_exclude_patterns":
 			[
 				"*.log",
@@ -24,21 +24,14 @@
 				"node_modules/",
 				"node_modules/*",
 				"node_modules/**",
-				"node_modules/*.*",
-			],
-			// Исключает файлы и папки из ctrl+p поиска, НЕ исключает из ctrl+shift+f
-			// поиска.
-			"binary_file_patterns": [
-				"node_modules/",
-				"jquery/_doc/highlightjs/",
+				"node_modules/*.*"
 			],
 			"path": ".",
-			"temp_setting_1": "\"follow_symlinks\": true",
+			"temp_setting_1": "\"follow_symlinks\": true"
 		}
 	],
 	"settings":
 	{
-		// Исключает файлы и папки из ctrl+shift+f поиска.
 		"find_and_replace_by_project_with_exclusions":
 		[
 			"*.log",
@@ -47,7 +40,7 @@
 		"sublime-view-in-browser":
 		{
 			"basePath": "/home/iadfeshchm/projects/my/lab/",
-			"baseUrl": "http://lab.local/",
+			"baseUrl": "http://lab.local/"
 		},
 		"todoreview":
 		{
@@ -58,11 +51,11 @@
 				"framework/*",
 				"public/*"
 			],
-			"resolve_symlinks": false,
+			"resolve_symlinks": false
 		},
 		"xdebug":
 		{
-			"url": "http://lab.local/",
-		},
+			"url": "http://lab.local/"
+		}
 	},
 }

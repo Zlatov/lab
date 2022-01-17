@@ -67,6 +67,7 @@ meth1 asd: 'zxc', zxc: ['asd','zxc']
 
 puts 'meth2 передаём Hash'.green
 meth2 asd: 'zxc', zxc: ['asd','zxc']
+# exit
 
 puts 'meth2 передаём Параметры'.green
 meth2 :video, :suka

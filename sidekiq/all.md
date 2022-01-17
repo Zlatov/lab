@@ -113,3 +113,91 @@ Sidekiq.redis{|c| c.del('stat:failed')}
 # или
 Sidekiq::Stats.new.reset('failed')
 ```
+
+https://gist.github.com/Chocksy/6dccf8cbc0469404ea1967088f00f132
+```rb
+# FOR BUSY JOBS
+# take the process_id from the /busy page in sidekiq and kill the longest running one.
+workers = Sidekiq::Workers.new
+workers.each do |process_id, thread_id, work|
+  process = Sidekiq::Process.new('identity' => process_id)
+  process.stop! if process_id == 'integration.3:4:71d1d7f4ef5a'
+end
+
+# FOR SCHEDULED JOBS
+# you need to know the jid to make this happen
+job = Sidekiq::ScheduledSet.new.find_job('e460064eda529b97e93314d4')
+job.delete # will just remove the job
+
+# FOR RETRY JOBS
+# you need to know the jid to make this happen
+job = Sidekiq::RetrySet.new.find_job('e460064eda529b97e93314d4')
+job.delete # will just remove the job
+```
+
+https://stackoverflow.com/questions/25889699/sidekiq-stop-one-single-running-job
+```rb
+# Задача по прерыванию других задач
+class ThreadLightlyWorker
+  include Sidekiq::Worker
+
+  sidekiq_options retry: false
+
+  # Рекомендуется установить время истечения срока действия больше, чем время,
+  # необходимое для выполнения задания.
+  def expiration
+    # 60 * 60 * 24 * ...
+    @expiration ||= 10
+  end
+
+  def perform(tid, callback = nil)
+    cla = nil
+    cla = callback.constantize if callback.present? && Object.const_defined?(callback)
+    puts format('I am %<class>s, and I will be terminating TID: %<tid>s...', class: self.class, tid: tid)
+    Thread.list.each do |t|
+      next if t.object_id.to_s(36) != tid
+
+      puts format('Goodbye %<tid>s!', tid: t)
+      t.exit
+      cla.new.stop_callback(true) if cla.present?
+      return true
+    end
+    cla.new.stop_callback(false) if cla.present?
+  end
+end
+```
+
+https://stackoverflow.com/questions/24886371/how-to-clear-all-the-jobs-from-sidekiq
+```rb
+require 'sidekiq/api'
+
+# Clear retry set
+
+Sidekiq::RetrySet.new.clear
+
+# Clear scheduled jobs 
+
+Sidekiq::ScheduledSet.new.clear
+
+# Clear 'Dead' jobs statistics
+
+Sidekiq::DeadSet.new.clear
+
+# Clear 'Processed' and 'Failed' jobs statistics
+
+Sidekiq::Stats.new.reset
+
+# Clear all queues
+
+Sidekiq::Queue.all.map(&:clear)
+
+# Clear specific queue
+
+stats = Sidekiq::Stats.new
+stats.queues
+# => {"main_queue"=>25, "my_custom_queue"=>1}
+
+queue = Sidekiq::Queue.new('my_custom_queue')
+queue.count
+queue.clear
+```

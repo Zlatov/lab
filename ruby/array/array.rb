@@ -5,8 +5,9 @@ require "open-uri"
 require 'mini_magick'
 
 # require 'active_support/concern' u8 
-require 'active_support'
-require 'active_support/core_ext'
+# require 'active_support'
+# require 'active_support/core_ext'
+require 'active_support/all'
 
 require_relative '../_libs/array/nested.rb'
 class Array

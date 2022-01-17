@@ -53,6 +53,7 @@ class Model < ActiveRecord::Base
   # атрибуты не пустые
   validates :name, :login, :email, presence: true
   validates :name, :login, :email, presence: { strict: true } # Бросает исключение а не добавляет ошибку в модель
+  validates :name, :login, :email, presence: true, allow_blank: false # и не пустая строка.
   # Быть уверенным, что связь существует (существует ли сам связанный объект):
   has_one :account
   validates :account, presence: true

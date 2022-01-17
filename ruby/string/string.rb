@@ -131,29 +131,28 @@ puts "привет Макс! asd Asd".capitalize!
 # puts "привет Макс! asd Asd".titleize
 # exit
 
-puts 'Вырезать часть строки по позиции'.green
+puts 'Вырезать часть строки (получение подстроки) по позициям и длинне.'.green
 puts '.slice(start,length)'.blue
 puts '.slice(start .. finish)'.blue
-p "0123456789".slice 0, 5 # "01234"
-p "0123456789".[](0, 5) # "01234"
-p "0123456789"[0, 5] # "01234"
-p "0123456789".slice 2, 3 # "234"
-p "0123456789".slice 2 # "2"
-p "0123456789"[2] # "2"
-p "0123456789"[2, 3] # "234"
-p "0123456789"[2 .. 3] # "23"
-p "0123456789"[2 .. -1] # "23456789"
-p "0123456789"[2 .. 0] # ""
-p "0123456789"[2 .. 1] # ""
-mysql_error_message = "Mysql2::Error: Длинна title превышает допустимое значение.: CALL set_seo('vips_j3_166', '123456789-123456789-123456789-123456789-123456789-123456789-123456789-123456789-12', NULL, NULL, NULL, NULL);"
-p mysql_error_message.length
-p mysql_error_message.slice(15, mysql_error_message.length-15)
-p mysql_error_message.slice(15 .. -1)
+p "0123456789".slice 0, 5 # "01234"  с индекса 0, 5 символов
+p "0123456789".[](0, 5) # "01234"    то же самое
+p "0123456789"[0, 5] # "01234"       то же самое
+p "0123456789"[2, 3] # "234"         с индекса 2, 3 символа
+p "0123456789"[2] # "2"              с индекса 2, 1 символ
+p "0123456789"[2 .. 3] # "23"        с индекса 2 по индкс 3 (включая)
+p "0123456789"[2 .. -1] # "23456789" с индекса 2 по индкс -1 (до последнего индекса)
+p "0123456789"[2 .. 1] # ""          с индекса 2 по индкс 0 (в обратную сторону не извлекает)
+p "0123456789"[2 .. 2] # "2"         с индекса 2 по индкс 2 (один символ)
 puts 'Простой пример с префиксом'.blue
-a = 'prefix_needle'
-c = 'prefix_'
-b = a.slice c.length, a.length
-print 'needle: '.red; puts b
+string = 'prefix_asd'
+prefix = string.slice!(0, 7)
+print 'string: '.red; puts string
+print 'prefix: '.red; puts prefix
+puts 'Суффикс suffix'.blue
+string = 'asd_suffix'
+suffix = string.slice!(-7, 7)
+print 'string: '.red; puts string
+print 'suffix: '.red; puts suffix
 # exit
 
 

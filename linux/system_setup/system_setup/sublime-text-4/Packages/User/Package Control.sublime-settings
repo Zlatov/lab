@@ -6,7 +6,8 @@
 	"installed_packages":
 	[
 		"AdvancedNewFile",
-		"Alignment",
+		// "Alignment",
+		"AlignTab",
 		"ANSIescape",
 		"ApacheConf",
 		"ColorPicker",

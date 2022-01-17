@@ -1,20 +1,38 @@
-Sl.first.start
-# => "2018-04-25 11:21:19 UTC"
-Sl.first.start.localtime
-# => 2018-04-25 14:21:19 +0300
+require 'awesome_print'
+require 'active_support/all'
 
-# 
-# Если вы хотите изменить часовой пояс Rails, но продолжайте сохранять Active
-# Record в базе данных в UTC , используйте:
-# _application.rb_
-config.time_zone = 'Eastern Time (US & Canada)'
-config.active_record.default_timezone = :utc # (по умолчанию)
+p Time.parse(Time.current.to_s)
+Time.zone = 'Moscow'
+p Time.zone.parse(Time.current.to_s)
+p I18n.l(Time.parse(Time.current.to_s), format: '%e %B %Y, %T %:z')
+exit
 
-# 
-# Если вы хотите изменить часовой пояс Rails и иметь время хранения Active
-# Record в этом часовом поясе, используйте:
-# _application.rb_
-config.time_zone = 'Eastern Time (US & Canada)'
-config.active_record.default_timezone = :local
+a = '1641817394'
+b = Time.at a.to_i
+print 'b: '.red; puts b
+# exit
 
-# Предупреждение : вам нужно подумать дважды, даже трижды, перед тем, как сохранять время в базе данных в формате, отличном от UTC.
+puts 'В строку и обратно'.green
+a = DateTime.parse DateTime.current.to_s
+print 'a: '.red; puts a
+
+puts 'В строку и обратно'.green
+a = Time.parse Time.current.to_s
+print 'a: '.red; puts a
+Time.zone = "Fiji"
+print 'Time.zone: '.red; puts Time.zone
+a = Time.zone.parse Time.current.to_s
+print 'a: '.red; puts a
+
+
+# print 'ActiveSupport::TimeZone::MAPPING: '.red; p ActiveSupport::TimeZone::MAPPING
+# print 'ActiveSupport::TimeZone.all: '.red; p ActiveSupport::TimeZone.all
+moscow_zone = ActiveSupport::TimeZone::MAPPING['Moscow']
+print 'moscow_zone: '.red; puts moscow_zone
+ActiveSupport::TimeZone.all.each do |zone|
+  if zone.name == 'Moscow'
+    puts zone
+    puts zone.utc_offset
+    puts zone.tzinfo
+  end
+end

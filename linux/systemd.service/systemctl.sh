@@ -43,3 +43,9 @@ systemctl list-units --type mount
 
 # Лог сервиса по имени
 journalctl -u nginx.service
+# Посмотреть лог только за определённое время
+journalctl -u zenonline_sidekiq.service --since today
+journalctl -u zenonline_sidekiq.service -S yesterday
+journalctl -u zenonline_sidekiq.service -S "2015-01-10"
+# С 9 утра сегодняшнего для и до часу назад
+journalctl -u zenonline_sidekiq.service --since 09:00 --until "1 hour ago"
