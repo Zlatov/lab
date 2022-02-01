@@ -1,0 +1,42 @@
+<snippet>
+	<content><![CDATA[
+<% # Переключатель для булева поля с двумя позициями %>
+<%= form.label :${1:field_name}, class: 'radio_b' do %>
+  <%= form.radio_button :${1:field_name}, false, id: '${1:field_name}_false' %>
+  <span></span>
+<% end %>
+<%= form.label :${1:field_name},
+  form.object.class.human_enum_name(:${1:field_name}, 'false'),
+  value: false,
+  for: '${1:field_name}_false'
+%>
+<br>
+<%= form.label :${1:field_name}, class: 'radio_b' do %>
+  <%= form.radio_button :${1:field_name}, true, id: '${1:field_name}_true' %>
+  <span></span>
+<% end %>
+<%= form.label :${1:field_name},
+  form.object.class.human_enum_name(:${1:field_name}, 'true'),
+  value: true,
+  for: '${1:field_name}_true'
+%>
+<%= field_errors form.object, :${1:field_name} %>
+
+<% # Переключатель для перчисляемого поля (enum) %>
+<% form.object.class.${1:field_name}s.each do |string_value, index_value| %>
+  <label class="radio_b">
+    <%= form.radio_button :${1:field_name}, string_value, id: "${1:field_name}_#{string_value}" %>
+    <span></span>
+  </label>
+  <%= form.label :${1:field_name},
+    form.object.class.human_enum_name(:${1:field_name}, string_value),
+    :value => string_value,
+    :for => "${1:field_name}_#{string_value}"
+  %>
+  <br>
+<% end %>
+<%= field_errors form.object, :${1:field_name} %>
+]]></content>
+	<tabTrigger>zzzrails-form-radio</tabTrigger>
+	<scope>text.html.ruby</scope>
+</snippet>

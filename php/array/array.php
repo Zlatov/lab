@@ -36,3 +36,11 @@ $last_key = key($a);
 echo '$a: ' . var_export($a, true) . PHP_EOL;
 echo '$last_key: ' . var_export($last_key, true) . PHP_EOL;
 // exit(0);
+
+echo '> Merge' . PHP_EOL;
+$a = [1,2,3];
+$b = [2,3];
+$c = array_merge($a, $b);
+echo '$a: ' . print_r($a, true) . PHP_EOL;
+echo '$b: ' . print_r($b, true) . PHP_EOL;
+echo '$c: ' . print_r($c, true) . PHP_EOL;

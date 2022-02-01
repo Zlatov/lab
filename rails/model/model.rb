@@ -44,6 +44,13 @@ class Model < ApplicationRecord
     new_spec['database'] = database_name
     establish_connection(new_spec)
   end
+  # Или, например, если нужно присоединиться к БД только по требованию.
+  self.abstract_class = true
+  def self.connect
+    establish_connection(:another_config_in_database_yml)
+    self.table_name = 'table_name'
+    # reset_column_information
+  end
 
   # Значение по умолчанию для поля
   # По умолчанию статья активна.

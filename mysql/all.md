@@ -75,6 +75,36 @@ wait_timeout = 600
 max_allowed_packet = 64M
 ```
 
+### Настройка sql-mode без режима ONLY_FULL_GROUP_BY
+
+Все рекомендуют добавить в конфигурацию подобные строки
+
+```sh
+[mysqld]
+sql_mode= STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+sql_mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+sql-mode = STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+sql-mode = "STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+```
+
+Или прямо в настройки системного демона добавить параметр запуска:
+
+```sh
+# /lib/systemd/system/mysql.service
+ExecStart=/usr/sbin/mysqld --sql-mode=NO_ENGINE_SUBSTITUTION.......
+# systemctl daemon-reload
+# systemctl restart mysql
+```
+
+Но НИЧЕГО не помогло убунту 20 mysql 8. Только обходной путь:
+
+```sh
+# touch /etc/mysql/mysqlmode.sql :
+SET GLOBAL sql_mode = (SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));
+# mcedit /etc/mysql/my.cnf
+[mysqld]
+init-file="/etc/mysql/mysqlmode.sql"
+```
 
 ## Типы данных
 
