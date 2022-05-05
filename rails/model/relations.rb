@@ -3,7 +3,8 @@ class Parent
 class Child
   belongs_to :parent,
     foreign_key: :parent_sid,
-    primary_key: :sid
+    primary_key: :sid,
+    optional: true
 # один-к-одному, содержит FK,
 # один экземпляр модели "принадлежит" одному экземпляру другой модели.
 

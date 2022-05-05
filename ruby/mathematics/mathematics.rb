@@ -44,3 +44,12 @@ print 'c: '.red; puts c
 puts 'Округление в сторону'.green
 print 'ceil - большую: '.red; puts 1.001.ceil
 print 'floor - меньшую: '.red; puts 1.999.floor
+
+puts 'Прогресс'.green
+count = 3
+progress_start = 30
+progress_finish = 70
+count.times do |index|
+  progress = progress_start + (index * (progress_finish - progress_start) / count).floor
+  print 'progress: '.red; puts progress
+end

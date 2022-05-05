@@ -14,6 +14,21 @@
 
 
 # 
+# has_and_belongs_to_many
+# 
+
+rails g migration CreateJoinTableAffiliatesArticles affiliate article
+    create_join_table :affiliates, :articles do |t|
+      t.index [:affiliate_id, :article_id], unique: true, name: "uq_affiliates_articles_affiliateidarticleid"
+      # t.index [:article_id, :affiliate_id]
+    end
+    add_foreign_key :affiliates_articles, :affiliates, on_update: :cascade, on_delete: :cascade
+    add_foreign_key :affiliates_articles, :articles, on_update: :cascade, on_delete: :cascade
+
+
+
+
+# 
 # Колонки
 # 
 
@@ -27,6 +42,14 @@ add_column :table_name, "column_name", :string,
   :precision => 10 # (Сколько всего знаков!) Specifies the precision for the :decimal and :numeric columns.
   :scale => 2 # (Сколько знаков после запятой!) Specifies the scale for the :decimal and :numeric columns.
   :comment => '...' # Specifies the comment for the column. This option is ignored by some backends.
+
+# Опция :limit
+:limit     | Numeric Type | Column Size | Max value
+1          | tinyint      | 1 byte      | 127
+2          | smallint     | 2 bytes     | 32767
+3          | mediumint    | 3 byte      | 8388607
+nil, 4, 11 | int(11)      | 4 byte      | 2147483647
+5..8       | bigint       | 8 byte      | 9223372036854775807
 
 change_column :table_name, :column_name, :type, null: false, default: '', comment: ''
 
@@ -105,7 +128,7 @@ end
 
 # Какая печаль, что это всё ненужно, когда мы используем has_and_belongs_to_many
 # Добавление FK при соществующей таблице и сущ-ем поле.
-add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :nullify
+add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: <:restrict|:nullify|:cascade>
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 add_foreign_key :emails, :users, on_delete: :cascade, validate: false
 # Удаление FK
@@ -117,6 +140,8 @@ create_table ...
 end
 # Поле и FK при существующей таблице
 add_reference :table_name, "ref_name", foreign_key: true
+add_reference :table_name, "ref_name", foreign_key: {on_update: :cascade, on_delete: <:restrict|:nullify|:cascade>}
+add_reference :articles, "affiliate", foreign_key: {on_update: :cascade, on_delete: :nullify}
 
 
 

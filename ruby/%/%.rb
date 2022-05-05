@@ -1,5 +1,9 @@
 require 'awesome_print'
 
+# q - многострочный текст
+# w - массивы строк
+# i - массивы символов
+
 asd = 'zxc'
 
 puts 'Строки'.green

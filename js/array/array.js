@@ -136,6 +136,12 @@ var b = [2,3,2,0]
 var c = a.filter((e) => b.includes(e))
 console.log('c: ', c)
 
+console.log('> Вычетание массивов')
+var a = [1,2,3,2]
+var b = [2,3,2,0]
+var c = a.filter((e) => !b.includes(e))
+console.log('c: ', c)
+// return null
 
 console.log('> привести к уникальным значениям примерно как в _.uniq()')
 console.log('возвращает новый массив')

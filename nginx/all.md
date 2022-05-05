@@ -22,6 +22,7 @@
 ```bash
 # Пользователь nginx должен присутствовать в группе пользователя у которого
 # лежит приложение.
+sudo usermod -a -G <group> <user>
 sudo usermod -a -G deployer www-data
 # Добавить пользователя deployer в группу fpm (не знаю зачем)
 sudo usermod -a -G fpm deployer
@@ -32,8 +33,11 @@ chmod g+x /home/
 chmod g+x /home/username
 # Пользователь nginx должен присутствовать в группе пользователя fpm.
 sudo usermod -a -G fpm nginx
-# Проверить (показать группы пользователя nginx)
+# Проверить (показать Группы в которых состоит пользователь nginx)
 id -Gn nginx
+groups nginx
+# Удалить пользователя из группы
+gpasswd --delete user group
 ```
 
 

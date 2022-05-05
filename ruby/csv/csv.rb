@@ -7,6 +7,12 @@ CSV.open("temp.csv", "w") do |csv|
   csv << ["another", "row"]
 end
 
+puts 'Разделитель'.green
+CSV.open("temp.csv", "w", :col_sep => "\t") do |csv|
+  csv << ["row", "of", "CSV", "data"]
+  csv << ["another", "row"]
+end
+
 a = CSV.generate do |csv|
   csv << ["row", "of", "CSV", "data"]
   csv << ["another", "row"]

@@ -30,10 +30,26 @@ exit
 
 params.permit(:from, :to_free, :subject, :content)
 
+
 # Вложенные параметры вынуть и разрешить так:
 params
   .require(:management_letter)
   .permit(:name, :email, :message, :phonenumber, :file)
+
+
+# Разрешить все параметры вложенные в поле
+  def article_params
+    accessed_params = params.require(:admin_article)[:form].try(:permit!)
+    params.require(:admin_article).permit(
+      :header,
+      :hidden,
+      {
+        attachments: [],
+        affiliate_ids: []
+      }
+    )
+      .merge(:form => accessed_params)
+  end
 
 
 # Аякс контролер

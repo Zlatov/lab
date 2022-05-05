@@ -114,34 +114,7 @@ systemctl restart php-fpm.service
 
 ## Установка Xdebug ubuntu
 
-```sh
-# Установка пакета в sublime
-Xdebug Client
-# Установка расширения.
-sudo apt-get install php-xdebug
-# Поиск ini-файла установленного расширения.
-php --info | grep ini
-# Открытие ini-файла
-sudo subl /etc/php/5.6/cli/conf.d/20-xdebug.ini
-# Код настройки вставляемый в ini-файл
-;;;;;;;;;;
-; Xdebug ;
-;;;;;;;;;;
-xdebug.remote_enable=1
-xdebug.remote_handler=dbgp
-xdebug.remote_host=127.0.0.1
-xdebug.remote_port=9000
-xdebug.remote_log="/var/log/xdebug/xdebug.log"
-# А ещё эту строчку, чтоб без ?XDEBUG_SESSION_START=sublime.xdebug работало.
-xdebug.remote_autostart=true
-# Редактирование sublime-проекта (необязательно) для автоматического открывания
-# страницы с параметром разрешающим дебаг ?XDEBUG_SESSION_START=sublime.xdebug
-  "settings": {
-    "xdebug": {
-      "url": "http://lab.local",
-    }
-  }
-```
+см. php/xdebug/xdebug.md
 
 ## php.ini
 

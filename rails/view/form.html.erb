@@ -26,6 +26,7 @@
     Селект
   -->
 
+  <%= form.collection_select :role_ids, Role.all, :id, :name, {}, {multiple: true, size: 10} %>
   <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
   <!--
     Чтобы задать выбранные:

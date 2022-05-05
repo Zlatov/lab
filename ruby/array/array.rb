@@ -548,6 +548,28 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
+puts 'each по несколько элементов и индекс (.each_slice.with_index)'.green
+a = (1..5)
+b = a.each_slice(2).with_index do |x, i|
+  print 'x: '.red; p x
+  print 'i: '.red; puts i
+end
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
+puts 'each_slice и вычисление глобального индекса'.green
+a = (0..9).to_a
+print 'a: '.red; p a
+a.each_slice(3).with_index do |b, packet_index|
+  b.each_with_index do |c, i|
+    global_index = packet_index * 3 + i
+    print 'c: '.red; puts c
+    print 'global_index: '.red; puts global_index
+  end
+end
+# exit
+
 puts 'Изъять, выбрать из массива'.green
 puts 'С конца (.pop)'.blue
 a = [1,2,3]

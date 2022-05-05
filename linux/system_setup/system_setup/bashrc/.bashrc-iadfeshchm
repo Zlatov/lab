@@ -42,6 +42,8 @@ alias cdilorem='cd ~/projects/my/ilorem'
 alias cdimenu='cd ~/projects/my/imenu'
 alias cdagofolio='cd ~/projects/my/agofolio'
 alias cdnestedarray='cd ~/projects/my/nested_array'
+alias cdcmc='cd ~/projects/anastasia/cmc'
+alias cdminilight='cd ~/projects/zenon/mini-light'
 
 # gaz
 alias cdmosoblgazshop='cd ~/projects/gaz/mosoblgaz_shop'

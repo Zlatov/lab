@@ -5,7 +5,7 @@ p Time.parse(Time.current.to_s)
 Time.zone = 'Moscow'
 p Time.zone.parse(Time.current.to_s)
 p I18n.l(Time.parse(Time.current.to_s), format: '%e %B %Y, %T %:z')
-exit
+# exit
 
 a = '1641817394'
 b = Time.at a.to_i

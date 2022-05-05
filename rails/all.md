@@ -48,6 +48,7 @@ __Создание нового__
 * `rails new .`
 * `rails _5.2.3_ new lorem_rails --webpack --skip-sprockets`
 * `rails _6.0.2.1_ new . --webpack --skip-sprockets`
+* `rails _6.1.5_ new comics_geek_backend --database=postgresql --api`
 
 __Запуск__
 
