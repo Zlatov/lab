@@ -25,6 +25,7 @@ rails g migration AddColumnNameColumnToTableName deleted_at:datetime
 # Контроллер
 bundle exec rails g controller catalog index --no-test-framework --no-helper --no-javascripts --no-stylesheets --no-assets
 bundle exec rails g scaffold_controller catalog_order --no-test-framework --no-helper --no-javascripts --no-jbuilder --no-stylesheets
+bundle exec rails g scaffold_controller admin/affiliate --no-test-framework --no-jbuilder
 
 # Модель
 bundle exec rails g model street --no-test-framework --skip-migration

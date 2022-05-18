@@ -82,6 +82,7 @@ module Modul
   included do |base|
     def custom_instance_method
     end
+    attr_accessor :instance_var
   end
 
   # class_methods do
@@ -111,6 +112,9 @@ puts Genom.param
 puts Genom2.param
 puts Genom2.instance_methods.include? :custom_instance_method
 puts Genom2.methods.include? :custom_class_method
+a = Genom.new
+a.instance_var = 333
+print 'a.instance_var: '.red; puts a.instance_var
 # exit 0
 
 

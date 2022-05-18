@@ -8,9 +8,13 @@ function xhr_get(url) {
   .always(function() {
     // remove loading image maybe
   })
-  .fail(function() {
+  .fail(function(jqXHR, textStatus, errorThrown) {
     // handle request failures
-  });
+    console.log('jqXHR.responseJSON: ', jqXHR.responseJSON)
+    console.log('jqXHR.responseText: ', jqXHR.responseText)
+  })
+  .done(function(data, textStatus, jqXHR) {
+  })
 }
 
 xhr_get('/index').done(function(data) {
@@ -45,7 +49,7 @@ $.ajax({
   type: 'post',
   url: 'ajax.php',
   data: form_data,
-  data_custom: {form: form},
+  custom_data: {form: form},
   // contentType: 'multipart/form-data',
   contentType: false,
   processData: false,
@@ -56,7 +60,7 @@ $.ajax({
   },
   success: function(data, textStatus, jqXHR) {
     console.log('data, textStatus, jqXHR: ', data, textStatus, jqXHR)
-    console.log('this.data_custom.form: ', this.data_custom.form)
+    console.log('this.custom_data.form: ', this.custom_data.form)
   }
 })
 
@@ -82,8 +86,8 @@ jQuery.ajax({
 
   // contentType: [String] ('multipart/form-data'|'application/x-www-form-urlencoded')
   // При отправлении запроса на сервер, данные передаются в формате, указанном в contentType
-  contentType: 'application/x-www-form-urlencoded',
-  contentType: 'multipart/form-data',
+  contentType: "application/x-www-form-urlencoded",
+  contentType: "multipart/form-data",
 
   // context:object
   // В качестве контекста можно задать DOM-элемент, который должен 
