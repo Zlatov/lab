@@ -19,6 +19,10 @@ sudo yum install redis
 sudo systemctl start redis
 sudo systemctl enable redis
 # 2. Из remi репозитория
+# 2.1 Установка реми
+sudo yum -y update # обновить центос
+sudo yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm # добавляем реми в систему
+# 2.2 Установка redis 
 sudo yum --enablerepo=remi install redis
 # Проверить версию
 rpm -qi redis
@@ -33,7 +37,11 @@ maxmemory 256mb
 maxmemory-policy allkeys-lru
 ```
 
-`sudo systemctl restart redis-server.service`
+```sh
+sudo systemctl enable --now redis
+sudo systemctl status redis.service
+sudo systemctl restart redis.service
+```
 
 `redis-cli`
 

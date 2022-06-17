@@ -106,3 +106,25 @@ FROM pg_catalog.pg_user u
 ORDER BY 1;
 \q
 ```
+
+## Восстановление прав имея sudo
+
+1. Находим pg_hba.conf
+2. Добавляем в начало строку
+```sh
+local  all   all   trust
+# или
+host  all   all  127.0.0.1/32  trust
+```
+3. Перезапускаем сервис
+```sh
+systemctl | grep postgres
+systemctl restart postgresql-12
+```
+4. Делаем всё что хотим (меняем пароль или даём права)
+```sh
+psql -U postgres
+# или
+psql -h 127.0.0.1 -U postgres
+```
+5. Возвращаем обратно конфиг и ещё раз рестартим.

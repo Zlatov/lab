@@ -19,6 +19,8 @@ Rails - фреймворк ruby
   ```bash
   # Либо установить вручную gem:
   gem install pg -- --with-pg-config=/usr/pgsql-9.6/bin/pg_config
+  # а при полной жопе (что часто) можно указать старую версию и библиотеки где:
+  gem install pg -v'1.2.3' -- --with-pg-config=/usr/pgsql-12/bin/pg_config --with-pg-lib=/usr/pgsql-12/lib/
   # Либо добавиьт настройку в bundler
   bundle config build.pg --with-pg-config=/usr/pgsql-9.6/bin/pg_config
   # Это НЕ тот путь который нужно использовать!!:

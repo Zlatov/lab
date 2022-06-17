@@ -2,33 +2,65 @@
 require_relative '../string/declension'
 
 require 'awesome_print'
-require 'active_support'
-require 'active_support/core_ext'
+# require 'active_support'
+# require 'active_support/core_ext'
+require 'active_support/all'
 
+
+puts 'Текущее время'.green
 a = Time.current
-b = a.year
-print 'a: '.red; puts a
-print 'b: '.red; puts b
+b = Time.new
+c = Time.now
+d = a.year
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
 # exit
 
-# a = Time.new
-# p a
-# a = Time.now
-# p a
 
-puts 'UNIX timestamp'.green
-p Time.now
-p Time.now.to_i
-p Time.now.zone
-p Time.now.utc
-p Time.utc(2012,3,3,3,3,3,999999).usec
-p Time.now.utc.usec
+puts 'В секундах, микросекунд, часовая зона'.green
+a = Time.now
+b = Time.now.to_i
+c = Time.now.zone
+d = Time.now.utc
+e = Time.utc(2012,3,3,3,3,3,999999).usec
+f = Time.now.utc.usec
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
+print 'f: '.red; p f
+a = Time.current
+b = Time.current.to_i
+c = Time.current.zone
+d = Time.current.utc
+e = Time.current.usec
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
 # exit
 
-print 'Time.now: '.red; puts Time.now
+
+puts 'new, at - Задать время'.green
+a = Time.new()
+b = Time.new(2000, 1, 1, 0, 0, 0, "+03:00")
+c = Time.at(1653042556, 333)
+d = Time.at(1653042556, 333, :millisecond)
+e = Time.at(1653042556, 333, :microsecond)
+f = Time.at(1653042556, 333, :microsecond, in: -3*60*60)
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
+print 'f: '.red; p f
 # exit
 
-# puts 'Пауза выполнения кода.'.green
+
+puts 'sleep - пауза выполнения кода.'.green
 # puts 'сек'.blue
 # sleep 1
 # puts '1/2 сек'.blue
@@ -38,35 +70,56 @@ print 'Time.now: '.red; puts Time.now
 # puts 'yay'.blue
 # # exit
 
-a = Time.new(1998, 2, 8, 9, 12, 23, "+03:00")
-print 'a: '.light_blue; puts a
-b = Time.new(1998, 2, 9, 8, 13, 41, "+03:00")
-print 'b: '.light_blue; puts b
-c = (b - a).to_i
-print 'c: '.light_blue; puts c
-diff = c
 
+puts 'Разница времени'.green
+a = Time.new(2000, 1, 1, 0, 0, 0, "+03:00")
+b = Time.at(946674000, 333333)
+c = b - a
+d = c.to_i
+e = Time.new(2000, 1, 1, 0, 0, 0, "+03:00").to_i
+print 'a: '.blue; p a
+print 'b: '.blue; p b
+print 'c: '.blue; p c
+print 'd: '.blue; p d
+print 'e: '.blue; p e
+exit
+
+puts 'Перевод разницы в дни, часы, ... секунды'.green
+a = Time.new(2000, 1, 1, 0, 0, 0, "+03:00")
+b = Time.new(2000, 1, 1, 1, 1, 1, "+03:00")
+diff = (b - a).to_i
 if diff >= 86400
   days = diff/86400
-  days_w = declension days, 'дней,день,дня'
+  days_w = days.declension 'дней,день,дня'
   puts "#{days} #{days_w} назад"
 elsif diff < 10
   puts 'Только что'
 else
   text = ''
   hours = diff / 3600
-  diff-= hours * 3600
+  diff -= hours * 3600
   minutes = diff / 60
-  diff-= minutes * 60
+  diff -= minutes * 60
   seconds = diff
   puts "#{hours}:#{minutes}:#{seconds} времени назад"
-  text+= "#{hours} ч. " if hours>0
-  text+= "#{minutes} мин. " if minutes>0
-  text+= "#{seconds} с. "
-  text+= "назад"
+  text += "#{hours} ч. " if hours > 0
+  text += "#{minutes} мин. " if minutes > 0
+  text += "#{seconds} с. "
+  text += "назад"
   puts text
 end
-# p (b.to_date - a.to_date).to_i
+# exit
+
+puts 'Разница в микросекундах'.green
+a = Time.at 1111111111, 111111
+b = Time.at 1111111111, 222222
+c = ((b - a) * 10**6).to_i
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+exit
+
+p (b.to_date - a.to_date).to_i
 
 a = Time.now
 b = a.year
@@ -93,24 +146,24 @@ def diff_time time_start_finish, time_finish_start, options={full: false}
   diff = (time_start_finish - time_finish_start).to_i.abs
   if diff >= 24 * 60 * 60 || options[:full]
     days = diff/(24 * 60 * 60)
-    diff_string += "#{days} #{declension days, 'дней, день, дня'}"
+    diff_string += "#{days} #{days.declension 'дней, день, дня'}"
     diff_string += " "
     diff = diff - days * 24 * 60 * 60
   end
   if diff >= 60 * 60 || options[:full]
     hours = diff/(60 * 60)
-    diff_string += "#{hours} #{declension hours, 'часов, час, часа'}"
+    diff_string += "#{hours} #{hours.declension 'часов, час, часа'}"
     diff_string += " "
     diff = diff - hours * 60 * 60
   end
   if diff >= 60 || options[:full]
     minutes = diff/(60)
-    diff_string += "#{minutes} #{declension minutes, 'минут, минута, минуты'}"
+    diff_string += "#{minutes} #{minutes.declension 'минут, минута, минуты'}"
     diff_string += " "
     diff = diff - minutes * 60
   end
   if diff > 0 || diff_string.empty? || options[:full]
-    diff_string += "#{diff} #{declension diff, 'секунд, секунда, секунды'}"
+    diff_string += "#{diff} #{diff.declension('секунд, секунда, секунды')}"
   end
   diff_string
 end

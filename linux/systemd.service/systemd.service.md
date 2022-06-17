@@ -89,3 +89,17 @@ WantedBy=multi-user.target
 
 `sudo systemctl enable <service_name>` — добавить в сервисы.
 `sudo systemctl daemon-reload` — применить изменения конфигурационных файлов _/etc/systemd/system/*.service_.
+
+
+## Разрешить пользователю конкретные sudo команды:
+
+```sh
+# /etc/sudoers.d/deployer:
+%deployer ALL= NOPASSWD: /bin/systemctl start mini-light.site
+%deployer ALL= NOPASSWD: /bin/systemctl stop mini-light.site
+%deployer ALL= NOPASSWD: /bin/systemctl restart mini-light.site
+
+%deployer ALL= NOPASSWD: /bin/systemctl start mini-light.worker
+%deployer ALL= NOPASSWD: /bin/systemctl stop mini-light.worker
+%deployer ALL= NOPASSWD: /bin/systemctl restart mini-light.worker
+```

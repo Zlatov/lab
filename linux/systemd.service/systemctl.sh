@@ -49,3 +49,5 @@ journalctl -u zenonline_sidekiq.service -S yesterday
 journalctl -u zenonline_sidekiq.service -S "2015-01-10"
 # С 9 утра сегодняшнего для и до часу назад
 journalctl -u zenonline_sidekiq.service --since 09:00 --until "1 hour ago"
+# За последние 10 минут
+journalctl -u mini-light.worker --since "10 min ago"

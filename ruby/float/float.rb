@@ -73,3 +73,18 @@ a.each do |b|
   c = price b
   print 'b: '.red; print "#{b}".rjust(11); print ' c: '.red; puts c
 end
+
+puts 'Прогресс'.green
+row_count = 837
+index = 356
+progress = (index.to_f * 100 / row_count).round(4)
+print 'progress: '.red; puts progress
+progress = (index * 100 / row_count).floor
+print 'progress: '.red; puts progress
+# exit 0
+
+puts '.floor(до какого знака) - округляет в меньшую сторону'.green
+print '1.99.floor: '.red; puts 1.99.floor
+print '1.5.floor(0): '.red; puts 1.5.floor(0)
+print '1.99.floor(1): '.red; puts 1.99.floor(1)
+# exit 0

@@ -20,5 +20,5 @@ exit
 user.update_column(:last_request_at, Time.current)
 user.update_columns(last_request_at: Time.current)
 
-# Обновить значение поля/полей у подмножества
+# Обновить значение поля/полей у подмножества (возвращает количество затронутых строк)
 User.where(filter: true).update_all(field: true)

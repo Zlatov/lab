@@ -35,3 +35,38 @@
   При рендере экземпляра передача параметров не требует "locals"
  -->
 <%= render @user, is_foldered_view: @folder.present? %>
+
+<!--
+  А можно из модели рендерить паршелы, но если Очень хочется
+-->
+<%
+class ImportServicePresenter
+  include ActiveModel::Serializers::JSON
+
+  attr_reader :model
+
+  def initialize(model)
+    @model = model
+  end
+
+  def attributes
+    {
+      'status' => nil,
+    }
+  end
+
+  def status
+    render(__method__)
+  end
+
+  private
+
+  def render(method)
+    Admin::ApplicationController.render(
+      locals: { import_service: model },
+      template: "admin/import_services/_#{method}",
+      layout: false
+    )
+  end
+end
+%>

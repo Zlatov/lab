@@ -36,9 +36,9 @@ end
 
 Integer.send(:include, IntegerDeclension)
 
-40.times{ |i|
-  puts "#{i} #{i.declension 'ежей ёж ежа'}"
-}
-40.times{ |i|
-  puts "#{i} #{i.declension ['ошибок не позволило', 'ошибка не позволила', 'ошибки не позволили']}"
-}
+# 40.times{ |i|
+#   puts "#{i} #{i.declension 'ежей ёж ежа'}"
+# }
+# 40.times{ |i|
+#   puts "#{i} #{i.declension ['ошибок не позволило', 'ошибка не позволила', 'ошибки не позволили']}"
+# }

@@ -79,17 +79,21 @@ print 'c: '.red; puts c
 
 puts 'Хранение хэш'.green
 a = $r.hset('c', 'asd', 1)
-b = $r.hset('c', 'zxc', 2)
+b = $r.hset('c', :zxc, 2)
 c = $r.hget('c', 'asd')
 d = $r.hmset('c', 'qwe', 3, 'asd', 4)
+dd = $r.mapped_hmset('c', {qweqwe: 3, 'asdasd' => 4})
 e = $r.hvals('c')
 f = $r.hlen('c')
+j = $r.hgetall(:c)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
 print 'd: '.red; puts d
+print 'dd: '.red; puts dd
 print 'e: '.red; p e
 print 'f: '.red; puts f
+print 'j: '.red; puts j
 # exit 0
 
 puts 'Отсортированные наборы'.green
