@@ -558,6 +558,22 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
+puts 'Добавить информацию о индексе к значениям map.with_index'.green
+a = ['asd', 'zxc']
+b = a.map.with_index do |value, index|
+  [value, index]
+end
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+puts 'Добавить информацию о индексе к значениям map.with_index'.green
+a = ['asd', 'zxc']
+b = a.each_with_index.to_a
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
+
 puts 'each_slice и вычисление глобального индекса'.green
 a = (0..9).to_a
 print 'a: '.red; p a
@@ -579,6 +595,16 @@ print 'b: '.red; p b
 puts 'С начала (.shift)'.blue
 a = [1,2,3]
 b = a.shift 2
+print 'a: '.red; p a
+print 'b: '.red; p b
+puts 'Добавить в начало (.unshift)'.blue
+a = [1,2,3]
+b = a.unshift 4
+print 'a: '.red; p a
+print 'b: '.red; p b
+puts 'Добавить по индексу (.insert)'.blue
+a = [0, 1]
+b = a.insert(1, 'asd')
 print 'a: '.red; p a
 print 'b: '.red; p b
 # exit

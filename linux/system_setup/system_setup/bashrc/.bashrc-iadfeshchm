@@ -43,12 +43,10 @@ alias cdimenu='cd ~/projects/my/imenu'
 alias cdagofolio='cd ~/projects/my/agofolio'
 alias cdnestedarray='cd ~/projects/my/nested_array'
 alias cdcmc='cd ~/projects/anastasia/cmc'
-alias cdminilight='cd ~/projects/zenon/mini-light'
-
-# gaz
-alias cdmosoblgazshop='cd ~/projects/gaz/mosoblgaz_shop'
+alias cdprioritize='cd ~/projects/my/prioritize'
 
 # zenon
+alias cdminilight='cd ~/projects/zenon/mini-light'
 alias cdadmin='cd ~/projects/zenon/admin'
 alias cdframework='cd ~/projects/zenon/framework'
 alias cdmarket='cd ~/projects/zenon/market'

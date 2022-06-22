@@ -1,5 +1,12 @@
-# Для начала сделаем уточнение для sqlite которому бывает тяжко принимать больше
-# 999 параметров в запросе, поэтому порционно примерно так:
+# Для начала сделаем уточнения
+# 
+# 1. Для sqlite которому бывает тяжко принимать больше 999 параметров в запросе,
+# поэтому порционно.
+# 
+# 2. SQLite3 не предоставляет реализации upsert, тоесть insert on duplicate key
+# update, соответственно, либо используем построчный find_or_create_by и затем
+# update ИЛИ перед Model.import удаляем существующие ключи, а для этого
+# необходимо сохранить имеющиеся данные учтя их импорте.
 
 imports.uniq!{|x| x['id']}
 imports.each_slice(500) do |new_data|
@@ -16,3 +23,28 @@ imports.each_slice(500) do |new_data|
     puts "В информационной таблице обновлено #{import.length} #{import.length.declension(['записей','запись','записи'])}"
   end
 end
+
+Postinfo.all.as_json.each(&:deep_symbolize_keys!).each_slice(500) do |news|
+  olds = Pinfo.where(id: news.pluck(:id)).as_json.each(&:deep_symbolize_keys!).to_info(:id)
+  import = news.map{|n| (olds[n[:id]] || Pinfo.new.as_json.symbolize_keys).merge n}
+  Pinfo.transaction do
+    Pinfo.where(id: olds.keys).delete_all
+    Pinfo.import import
+    puts "В информационной таблице обновлено #{import.length} #{import.length.declension(['записей','запись','записи'])}"
+  end
+end
+
+# Когда необходимо Синхронизировать данные, то есть добавить и Удалить
+# несуществующие, можно использовать метод удаления по времени обновления.
+start_update = Time.current
+array.each do |data|
+  affiliate = Affiliate.where(code: data[:code]).first_or_create(name: data[:name])
+  affiliate.update!(
+    name: data[:name],
+    deleted: false,
+    updated_at: Time.current
+  )
+  # с принудительными указанием updated_at, ИЛИ:
+  # affiliate.touch
+end
+Affiliate.where('updated_at < ?', start_update).update_all(deleted: true)

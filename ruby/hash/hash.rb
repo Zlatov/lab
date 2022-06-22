@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require_relative '../colorize/colorize'
 require 'awesome_print'
+require 'active_support/all'
 
 arr = 'asd'
 h = {
@@ -57,6 +58,16 @@ a = {a: 1, b: 2, c: 3}
 b = a.slice :a, :c
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit
+
+puts 'Символизация ключей'.green
+a = [{'a' => 111}]
+b = a.map(&:deep_symbolize_keys)
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+c = a.each(&:deep_symbolize_keys!)
+print 'a: '.red; puts a
+print 'c: '.red; puts c
 # exit
 
 puts
