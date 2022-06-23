@@ -1,0 +1,56 @@
+image: ruby:3.1.2
+
+stages:
+  - staging
+  - production
+
+
+deploy to production:
+  environment: deploy
+  stage: production
+  before_script:
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+    - mkdir -p ~/.ssh
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config'
+
+  script:
+    - gem install awesome_print
+    - gem install capistrano
+    # - gem install capistrano-rvm
+    # - gem install capistrano-bundler
+    # - gem install capistrano-pumactl
+    # - gem install capistrano-rails-db
+    # - gem install capistrano3-delayed-job -v '~> 1.0'
+
+    - cap production deploy
+  only:
+    - master
+  when: manual
+
+deploy to staging:
+  environment: deploy
+  stage: staging
+  before_script:
+    - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+    - mkdir -p ~/.ssh
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh/id_rsa
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config'
+  script:
+    - gem install awesome_print
+    - gem install capistrano
+    # - gem install capistrano-rvm
+    # - gem install capistrano-bundler
+    # - gem install capistrano-pumactl
+    # - gem install capistrano-rails-db
+    # - gem install capistrano3-delayed-job -v '~> 1.0'
+
+    - cap staging deploy
+  only:
+    - master
