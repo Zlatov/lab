@@ -255,35 +255,33 @@ console.log([1, 2, 3].some(id => [4, 5, 6, 2].includes(id)))
 console.log([1, 2, 3].some(id => [4, 5, 6, 2].indexOf(id) >= 0))
 
 
-console.log('> Перебор nested массива')
-a = [
-  {id: '1'},
-  {id: '2', children:
-    [
-      {id: '3'},
-      {id: '4'}
-    ]
-  },
-  {
-    id: '5', children:
-    [
-      {id: '6', children:
-        [
-          {id: '7'}
-        ]
-      }
-    ]
-  },
-  {
-    id: '8', children:
-    [
-      {id: '9'}
-    ]
-  }
-]
-
+// console.log('> Перебор nested массива с next/reset')
+// a = [
+//   {id: '1'},
+//   {id: '2', children:
+//     [
+//       {id: '3'},
+//       {id: '4'}
+//     ]
+//   },
+//   {
+//     id: '5', children:
+//     [
+//       {id: '6', children:
+//         [
+//           {id: '7'}
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     id: '8', children:
+//     [
+//       {id: '9'}
+//     ]
+//   }
+// ]
 // console.log('a: ', a)
-
 // var level = 0
 // var cache = []
 // cache[level] = a.clone()
@@ -314,38 +312,65 @@ a = [
 //     level--
 //   }
 // }
+// return
 
+console.log('')
 console.log('Перебор nested массива без next/reset')
+a = [
+  {id: "1"},
+  {id: "2", children:
+    [
+      {id: "3"},
+      {id: "4"}
+    ]
+  },
+  {
+    id: "5", children:
+    [
+      {id: "6", children:
+        [
+          {id: "7"}
+        ]
+      }
+    ]
+  },
+  {
+    id: "8", children:
+    [
+      {id: "9"}
+    ]
+  }
+]
 console.log('a: ', a)
+var cache = []
+var parent = []
+var index = []
 var level = 0
-var cache = []; cache[level] = a.slice(0)
-var parent = []; parent[level] = null
-var index = []; index[level] = 0
+cache[level] = a.slice(0)
+parent[level] = null
+index[level] = 0
 while (level >= 0) {
   var node = cache[level][index[level]]
   if (node != null) {
 
-    console.log('node.id: ', node.id)
-    console.log('parent: ', parent)
-    console.log('level: ', level)
+    console.log('node.id: ', node.id, 'parent: ', parent, 'level: ', level)
 
     if (
-      node['children'] != null &&
-      Object.prototype.toString.call(node['children']) === '[object Array]' &&
-      node['children'].length
+      Object.prototype.toString.call(node["children"]) === "[object Array]" &&
+      node["children"].length
     ) {
-      level++
+      level ++
       index[level] = 0
       parent[level] = Object.assign({}, node)
-      delete parent[level]['children']
-      cache[level] = node['children'].slice(0)
+      delete parent[level]["children"] // Не обязательная строка
+      cache[level] = node["children"].slice(0)
     } else {
-      index[level]++
+      index[level] ++
     }
   } else {
     parent[level] = null
-    level--
-    index[level]++
+    level --
+    index[level] ++
   }
 }
 // return
