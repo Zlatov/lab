@@ -15,5 +15,8 @@ git remote add origin git@gitlab.newstar.ru:gitlab-instance-2d4cb74e/zenonline-a
 git push -u origin --all
 git push -u origin --tags
 
-# Сменить какую удалённую ветку отслеживает локальная
+# Сменить какую удалённую ветку отслеживает локальная ветка
+# git pull origin;
 git branch --set-upstream-to=origin/master master
+# Посмотреть какие удалённые ветки отслеживают локальные ветки
+git branch -vv
