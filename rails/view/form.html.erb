@@ -222,6 +222,8 @@
 <%= form_tag exchange1c_manage_path, :method => :post, :class => 'ui mini form', id: 'manage_form' do %>
   <%= hidden_field_tag :on, '0' %>
   <%= check_box_tag :on, '1', @on %>
+  <%= radio_button_tag(:action, :delete, false, disabled: false) %>
+  <%= radio_button_tag(:action, :hide,   true,  disabled: false) %>
   <%= button_tag 'Применить', :name => :submit, :type => :submit %>
 <% end %>
 

@@ -46,3 +46,28 @@ response = Net::HTTP.post_form(
 print 'response: '.red; puts response
 print 'response.body: '.red; puts response.body
 # print 'response.body: '.red; p JSON.parse(response.body)['a']
+
+
+puts 'GET'.green
+uri = URI('https://zenonline.ru/products/bl')
+query = {code: '000046651', angar_code: '000000003'}
+uri.query = URI.encode_www_form(query)
+response = Net::HTTP.get_response(uri)
+if response.code != '200'
+  print 'response.message: '.red; puts response.message
+end
+data = JSON.parse(response.body)
+print 'data: '.red; puts data
+# exit
+
+puts 'POST'.green
+# uri = URI("https://zenonline.ru/trader/000046651")
+uri = URI("http://zenonline.local/trader/000046651")
+response = Net::HTTP.post_form(uri, {})
+if response.code != '201'
+  print 'response.message: '.red; puts response.message
+  return
+end
+data = JSON.parse(response.body)
+print 'data: '.red; puts data
+# exit

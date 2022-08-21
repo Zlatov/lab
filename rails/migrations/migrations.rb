@@ -25,6 +25,25 @@ rails g migration CreateJoinTableAffiliatesArticles affiliate article
     add_foreign_key :affiliates_articles, :affiliates, on_update: :cascade, on_delete: :cascade
     add_foreign_key :affiliates_articles, :articles, on_update: :cascade, on_delete: :cascade
 
+    # Кастомная таблица связей (при создании второй связи к той-же таблице)
+    create_table "market_offers_product_affiliates", id: false, force: :cascade do |t|
+      t.integer "affiliate_id", null: false
+      t.integer "offer_id", null: false
+      t.index "affiliate_id", name: "ix_market_offers_product_affiliates_affiliateid"
+      t.index "offer_id", name: "uq_market_offers_product_affiliates_offerid"
+      t.index ["affiliate_id", "offer_id"], name: "uq_market_offers_product_affiliates_ids", unique: true
+    end
+    add_foreign_key :market_offers_product_affiliates, :market_affiliates,
+      primary_key: :id,
+      column: "affiliate_id",
+      on_update: :cascade,
+      on_delete: :cascade
+    add_foreign_key :market_offers_product_affiliates, :market_offers,
+      primary_key: :id,
+      column: "offer_id",
+      on_update: :cascade,
+      on_delete: :cascade
+
 
 
 

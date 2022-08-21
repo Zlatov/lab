@@ -54,6 +54,30 @@ numbers = [
 numbers.each do |x|
   print "#{x.to_s} ".red; puts '%g' % x
 end
+
+# exit
+a = [
+  0,
+  0.1,
+  0.01,
+  0.001,
+  0.0001,
+  0.00001,
+  0.000001,
+  0.999999,
+  1,
+  1.1,
+  1.01,
+  1.001,
+  1.0001,
+  1.00001,
+  1.000001,
+  10.000001,
+  999999.000001
+]
+a.each do |x|
+  print "#{x.to_s} ".red; puts '%g' % x.round(3)
+end
 # exit
 
 # Field |  Other Format

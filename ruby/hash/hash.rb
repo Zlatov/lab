@@ -98,6 +98,19 @@ a.delete :asd
 print 'a: '.red; puts a
 # exit
 
+puts
+puts 'Удаление по ключу .except().'.green
+puts 'Возвращает новый хэш.'.blue
+a = {asd: 1, zxc: 2}
+b = a.except :asd
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+a.except :asd
+a.except :asd
+a.except :asd
+print 'a: '.red; puts a
+# exit
+
 # Преобразование в hash с фильтрацией
 puts
 puts 'Преобразование в hash с фильтрацией'.green

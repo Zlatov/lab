@@ -48,3 +48,9 @@ array.each do |data|
   # affiliate.touch
 end
 Affiliate.where('updated_at < ?', start_update).update_all(deleted: true)
+
+
+# Для нормальной БД аля postgres:
+Post.transaction do
+  Post.import update_posts, on_duplicate_key_update: {conflict_target: [:id], columns: [:status]}
+end

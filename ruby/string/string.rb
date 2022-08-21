@@ -123,6 +123,15 @@ print 'b: '.red; puts b
 print 'c: '.red; puts c
 # exit 0
 
+puts 'Удалить окончание (суфикс)'.green
+a = '- --'
+b = a.delete_suffix('-')
+print 'a: '.red; puts a
+print 'a.length: '.red; puts a.length
+print 'b: '.red; puts b
+print 'b.length: '.red; puts b.length
+# exit 0
+
 # Управление регистром символов в строке (кирилица будет в v 2.4.1)
 puts 'Управление регистром символов в строке'.green
 puts "управление Регистром символов в строке! asd Asd".downcase!
@@ -242,7 +251,7 @@ c = a
   .reject{|e| e==""} # избавляемся от пустых строк
   .uniq
 print 'c: '.red; p c
-exit
+# exit
 
 # Дату в форматированный текст
 puts 'Дату в форматированный текст'.green
@@ -312,3 +321,9 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
 print 'd: '.red; p d
+
+
+a = '%s'
+b = 1
+c = a % b
+print 'c: '.red; puts c
