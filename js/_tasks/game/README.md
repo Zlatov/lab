@@ -7,6 +7,9 @@ yarn --cwd ./ init
 yarn add webpack --dev
 yarn add webpack-dev-server --dev
 yarn add webpack-cli --dev
+
+yarn add sass-loader node-sass postcss-loader css-loader mini-css-extract-plugin --dev
+
 yarn add lodash
 yarn add jquery
 # И колдовство в webpack.config.js
@@ -15,7 +18,16 @@ yarn add jquery
 Запуск
 
 ```sh
-NODE_ENV=production npx webpack
+# Компиляция (продакшн):
+npx webpack --node-env production
+# Разработка с вев-сервером:
+npx webpack-dev-server --node-env development
+# или
 NODE_ENV=development npx webpack-dev-server
 NODE_ENV=development npx webpack-dev-server --open
+
+# Или
+
+npm run build
+npm run development
 ```

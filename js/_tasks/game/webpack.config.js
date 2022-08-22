@@ -3,16 +3,20 @@
 const webpack = require("webpack")
 const path = require("path");
 const NODE_ENV = process.env.NODE_ENV == "production" ? "production" : "development"
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
+console.log('Конфигурация вебпак отрабатывает в окружении NODE_ENV: ', NODE_ENV)
 
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js"
+    filename: "main.js",
+    publicPath: "/dist"
   },
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'),
+      directory: path.join(__dirname),
     },
     hot: true
   },
@@ -20,10 +24,27 @@ module.exports = {
     aggregateTimeout: 300
   },
   devtool: NODE_ENV == "development" ? "inline-cheap-module-source-map" : false,
+  module: {
+    rules: [
+      {
+        test: /\.(sa|sc|c)ss$/i,
+        use: [
+          {loader: MiniCssExtractPlugin.loader, options: {}},
+          {loader: "css-loader", options: {importLoaders: 2}},
+          {loader: "postcss-loader", options: {sourceMap: true}},
+          {loader: "sass-loader", options: {implementation: require("node-sass")}}
+        ]
+      }
+    ]
+  },
   plugins: [
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
+    }),
+    new MiniCssExtractPlugin({
+      // filename: "css.css",
+      ignoreOrder: false
     })
-  ],
+  ]
 }
