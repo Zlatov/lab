@@ -9,6 +9,7 @@ yarn add webpack-dev-server --dev
 yarn add webpack-cli --dev
 
 yarn add sass-loader node-sass postcss-loader css-loader mini-css-extract-plugin --dev
+yarn add html-loader html-webpack-plugin file-loader --dev
 
 yarn add lodash
 yarn add jquery
@@ -28,6 +29,6 @@ NODE_ENV=development npx webpack-dev-server --open
 
 # Или
 
-npm run build
-npm run development
+rm -rf dist && npm run build
+rm -rf dist && npm run development
 ```

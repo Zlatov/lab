@@ -1,5 +1,15 @@
+#field {
+  display: inline-block;
+}
+
 #timer {
+  display: inline-block;
   width: 10px;
   height: 10px;
   background-color: red;
+}
+
+body {
+  background-image: url("img/100-100-colorful-autumn.jpg");
+  background-repeat: repeat;
 }

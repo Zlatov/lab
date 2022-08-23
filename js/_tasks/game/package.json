@@ -5,10 +5,13 @@
   "license": "MIT",
   "scripts": {
     "build": "npx webpack --node-env production",
-    "development": "npx webpack-dev-server --node-env development --open"
+    "development": "npx webpack-dev-server --node-env development"
   },
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
+    "html-loader": "^4.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
     "postcss-loader": "^7.0.1",
