@@ -44,9 +44,15 @@ module.exports = {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
         use: [
           {loader: "file-loader", options: {
+            // name: "[path][name]-[contenthash].[ext]",
             name: "[name]-[contenthash].[ext]",
+            // Мы решили хранить все файлы загруженные данным лоадером в
+            // подпапке images, итоговый путь dist/images.
             outputPath: "images",
-            // publicPath: "/dist/images/"
+            // Пути к изображениям в сгенерированных css-файлах
+            // (dist/main.css) должны начинаться с `images/...`, а не с
+            // `dist/images`, так как сами css-файлы уже лежат в dist.
+            publicPath: "images/"
           }}
         ]
       }
