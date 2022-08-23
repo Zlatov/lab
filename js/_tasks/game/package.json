@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx webpack --node-env production",
-    "development": "npx webpack-dev-server --node-env development"
+    "development": "npx webpack server --node-env development"
   },
   "devDependencies": {
     "css-loader": "^6.7.1",

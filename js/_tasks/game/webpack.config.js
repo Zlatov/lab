@@ -13,11 +13,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
-    publicPath: "/dist"
+    publicPath: "/dist/"
   },
   devServer: {
     static: {
-      directory: path.join(__dirname),
+      directory: "./",
     },
     hot: true
   },
@@ -31,7 +31,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           {loader: MiniCssExtractPlugin.loader, options: {}},
-          {loader: "css-loader", options: {importLoaders: 2}},
+          {loader: "css-loader", options: {importLoaders: 2, esModule: false}},
           {loader: "postcss-loader", options: {sourceMap: true}},
           {loader: "sass-loader", options: {implementation: require("node-sass")}}
         ]
@@ -44,13 +44,9 @@ module.exports = {
         test: /\.(png|jpg|jpeg|gif|svg)$/i,
         use: [
           {loader: "file-loader", options: {
-            context: "src/img",
-            // name: "[name].[ext]",
-            name: "[path][name]-[contenthash].[ext]",
-            // name: "[name]-[contenthash].[ext]",
-            // name: "[path][name].[ext]",
+            name: "[name]-[contenthash].[ext]",
             outputPath: "images",
-            // publicPath: "/",
+            // publicPath: "/dist/images/"
           }}
         ]
       }
