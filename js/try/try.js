@@ -4,7 +4,7 @@
 // 
 
 try {
-  // throw new Error("Данные некорректны");
+  throw new Error("Данные некорректны");
   var a = 1/0;
   console.log('ыыы: ', a)
 } catch(e) {

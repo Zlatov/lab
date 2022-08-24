@@ -15,6 +15,11 @@ console.log('b: ', b)
 var c = [...new Array(10).keys()]
 var c = [...Array(10).keys()]
 console.log('c: ', c)
+
+var a = []
+var b = a.push(...[1, 2, 3])
+console.log('a: ', a)
+console.log('b: ', b)
 // return null
 
 console.log("\n")

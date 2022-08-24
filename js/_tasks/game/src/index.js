@@ -12,7 +12,9 @@ window.Field = Field
 
 $(document).ready(function() {
   Timer.init()
-  Field.create(10, 10, [11,12])
+  Field.create(10, 10, [11,12], 0, 19)
+  Field.calc_path()
+  Field.show_path()
   Field.instance.draw()
   var enemy = new Enemy()
   Field.instance.enemies.push(enemy)

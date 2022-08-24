@@ -32,3 +32,8 @@ NODE_ENV=development npx webpack-dev-server --open
 rm -rf dist && npm run build
 rm -rf dist && npm run development
 ```
+
+TODO
+
+Загрузка изображений: https://www.youtube.com/watch?v=MRs4WR_5ZtM
+Мышь. Путь? https://www.youtube.com/watch?v=k6JXPViHZ9U
