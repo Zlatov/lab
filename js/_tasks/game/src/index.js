@@ -4,10 +4,17 @@ import "jquery"
 
 import "./field"
 
+import { Timer } from "./timer"
+import { Enemy } from "./enemy"
 import { Field } from "./field"
+window.Field = Field
 
-Field.create(10, 10, [[1,2], [2,2]])
 
 $(document).ready(function() {
-  Field.draw()
+  Timer.init()
+  Field.create(10, 10, [11,12])
+  Field.instance.draw()
+  var enemy = new Enemy()
+  Field.instance.enemies.push(enemy)
+  enemy.draw()
 })
