@@ -1,5 +1,6 @@
 "use strict"
 
+
 // Создание ячейки
 // Вызывается через создание поля Field
 function Cell(id, x, y, type) {
@@ -39,8 +40,12 @@ function Cell(id, x, y, type) {
     }
     Field.instance.context.fill(this.drawing)
     Field.instance.context.stroke(this.drawing)
+    // Field.instance.context.fillStyle = "black"
+    // Field.instance.context.fillText(this.id.toString(), this.x * Field.scale + 5, this.y * Field.scale + 15)
   }
 }
+Cell.nearest_types = [0, 3]
+
 
 // Создание поля
 // Вызывается через Field.create(параметры создания)
@@ -179,69 +184,108 @@ Field.create = function(width, height, rocks, start_id, finish_id) {
   return this.instance
 }
 
+
+// Расчёт пути для
 Field.calc_path = function(start_cell_id) {
+  var result = null
   var open_ids = []
   var close_ids = []
   var cell_datas = {}
   var current_id = start_cell_id || this.instance.start_id
 
-  console.log('current_id: ', current_id)
+  // Обозначаем сколько пройдено (passed) в стартовой ячейке, так как в расчетах
+  // суммируем пройденный путь со значением в предыдущей ячейки.
+  cell_datas[current_id] = {
+    id: current_id,
+    prev_id: null,
+    passed: 0
+  }
 
-  // Текущую в Закрытый список
+  // Текущую ячейку помещаем в Закрытый список, чтобы больше не производить по
+  // ним расчёты.
   close_ids.push(current_id)
-  console.log('close_ids: ', close_ids)
 
-  // Поиск соседей
+  // Поиск ячеек с расстоянием в 1 шаг, для новых ячеек запоминаем откуда мы в неё пришли (prev_id)
   open_ids = open_ids.filter((e) => !close_ids.includes(e))
   open_ids.push(...(Field.nearest(current_id)).filter((e) => !close_ids.includes(e)))
-  console.log('open_ids: ', open_ids)
+  open_ids.forEach(open_id => {
+    if (cell_datas[open_id] == null) {
+      cell_datas[open_id] = {
+        id: open_id,
+        prev_id: current_id
+      }
+    }
+  })
 
-  // while(!close_ids.includes(this.instance.finish_id)) {
-  for (var i = 0; i < 20; i++) {
-
-
-
-
-
+  // Пока не дойдем до финишной ячейки
+  while(current_id != this.instance.finish_id) {
 
     // Расчёт Открытого списка
     open_ids.forEach((open_id, i, a) => {
+      // Любой шаг по вертикали/горизонтали = 10
       var passed = 10
       if (current_id != this.instance.start_id) {
-        passed = passed + cell_datas[current_id].passed
+        passed = passed + cell_datas[cell_datas[open_id].prev_id].passed
+        // Перерасчёт ячейки осуществлять только если новый пройденный путь
+        // оказался меньше ранее пройденного.
+        if (cell_datas[open_id] != null && passed >= cell_datas[open_id].passed) {
+          return null
+        }
       }
       var gotta = Field.gotta(open_id)
       var weight = passed + gotta
-      cell_datas[open_id] = {
-        id: open_id,
-        prev_id: current_id,
-        passed: passed,
-        gotta: gotta,
-        weight: weight
-      }
+      cell_datas[open_id].passed = passed
+      cell_datas[open_id].gotta = gotta
+      cell_datas[open_id].weight = weight
     })
-    console.log('cell_datas: ', cell_datas)
+    // open_ids.forEach((open_id, i, a) => {
+    //   var cell = this.instance.cells[open_id]
+    //   this.instance.context.fillStyle = "green"
+    //   this.instance.context.fillText(cell_datas[open_id].passed.toString(), cell.x * this.scale + 5, cell.y * this.scale + 35)
+    //   this.instance.context.fillStyle = "gray"
+    //   this.instance.context.fillText(cell_datas[open_id].gotta.toString(), cell.x * this.scale + 25, cell.y * this.scale + 35)
+    //   this.instance.context.fillStyle = "red"
+    //   this.instance.context.fillText(cell_datas[open_id].weight.toString(), cell.x * this.scale + 25, cell.y * this.scale + 15)
+    // })
 
-
-    // Выбор Текущей
+    // Выбор новой Текущей ячейки по минимальному весу.
     current_id = open_ids.reduce((prev, curr) => cell_datas[prev].weight < cell_datas[curr].weight ? prev : curr)
-    console.log('current_id: ', current_id)
+    // this.instance.context.fillStyle = "red"
+    // this.instance.context.lineWidth = 1
+    // var drawing = new Path2D()
+    // var cell = this.instance.cells[current_id]
+    // drawing.arc(cell.x * this.scale + 25, cell.y * this.scale + 25, 2, 0, Math.PI * 2)
+    // this.instance.context.fill(drawing)
+    // debugger
 
     // Текущую в Закрытый список
     close_ids.push(current_id)
-    console.log('close_ids: ', close_ids)
 
-    // Поиск соседей
-    // = + (Ближайшие - Закрытые)
+    // Поиск ячеек с расстоянием в 1 шаг, для новых ячеек запоминаем откуда мы в
+    // неё пришли (prev_id).
     open_ids = open_ids.filter((e) => !close_ids.includes(e))
     open_ids.push(...(Field.nearest(current_id).filter((e) => !close_ids.includes(e))))
-    console.log('open_ids: ', open_ids)
-
-
-
-
-
+    open_ids.forEach(open_id => {
+      if (cell_datas[open_id] == null) {
+        cell_datas[open_id] = {
+          id: open_id,
+          prev_id: current_id
+        }
+      }
+    })
   }
+  var revese_path = []
+  var cell_id = this.instance.finish_id
+  revese_path.push(cell_id)
+  while(cell_id != this.instance.start_id) {
+    cell_id = cell_datas[cell_id].prev_id
+    revese_path.push(cell_id)
+  }
+  result = revese_path.reverse()
+  if (start_cell_id == null) {
+    this.instance.path = result
+  }
+  return result
 }
 
 // Поиск клеток для открытого списка (клетки на которые можно ступить за 1
@@ -250,22 +294,22 @@ Field.nearest = function(cell_id) {
   var result = []
   var cell = this.instance.cells[cell_id]
   if (cell.x > 0) {
-    if (this.instance.xy_cells[cell.x - 1][cell.y].type == 0) {
+    if (cell.constructor.nearest_types.includes(this.instance.xy_cells[cell.x - 1][cell.y].type)) {
       result.push(this.instance.xy_cells[cell.x - 1][cell.y].id)
     }
   }
   if (cell.x < this.instance.width - 1) {
-    if (this.instance.xy_cells[cell.x + 1][cell.y].type == 0) {
+    if (cell.constructor.nearest_types.includes(this.instance.xy_cells[cell.x + 1][cell.y].type)) {
       result.push(this.instance.xy_cells[cell.x + 1][cell.y].id)
     }
   }
   if (cell.y > 0) {
-    if (this.instance.xy_cells[cell.x][cell.y - 1].type == 0) {
+    if (cell.constructor.nearest_types.includes(this.instance.xy_cells[cell.x][cell.y - 1].type)) {
       result.push(this.instance.xy_cells[cell.x][cell.y - 1].id)
     }
   }
   if (cell.y < this.instance.height - 1) {
-    if (this.instance.xy_cells[cell.x][cell.y + 1].type == 0) {
+    if (cell.constructor.nearest_types.includes(this.instance.xy_cells[cell.x][cell.y + 1].type)) {
       result.push(this.instance.xy_cells[cell.x][cell.y + 1].id)
     }
   }
@@ -277,10 +321,6 @@ Field.gotta = function(cell_id) {
   var finish_cell = this.instance.cells[this.instance.finish_id]
   var cell = this.instance.cells[cell_id]
   return (Math.abs(finish_cell.x - cell.x) + Math.abs(finish_cell.y - cell.y)) * 10
-}
-
-Field.show_path = function() {
-  $("#field_path span").text(this.instance.path.join(', '))
 }
 
 export { Field }
