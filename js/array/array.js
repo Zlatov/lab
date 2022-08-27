@@ -9,14 +9,30 @@ var a = ['a', 1, true, , null, undefined, { a: 'a' }]
 a[7] = 9
 console.log('a: ', a)
 
-var b = new Array(10);
+console.log('> Правильное задание массива')
+console.log('> Неоднозначный код - не всегда понятно по коду, что было на руках (значения массива или его длинна)')
+var a = new Array(5)   // [,,,,]
+var b = new Array('5') // ['5']
+console.log('a: ', a)
 console.log('b: ', b)
+console.log('> Когда на руках длинна, более читаема конструкция c Array(n): [...Array(n)]:')
+var a = [...Array(5)]
+var b = [...new Array(5)]
+console.log('a: ', a)
+console.log('b: ', b)
+console.log('> Когда на руках значения, в конструкции должно отсутствовать Array: [value|...values]')
+var value = 5
+var values = [...Array(5).keys()]
+var a = [value]
+var b = [...values]
+console.log('value: ', value)
+console.log('values: ', values)
+console.log('a: ', a)
+console.log('b: ', b)
+// return null
 
-var c = [...new Array(10).keys()]
-var c = [...Array(10).keys()]
-console.log('c: ', c)
-
-var a = []
+console.log('> Добавить массив значений')
+var a = [9, 8]
 var b = a.push(...[1, 2, 3])
 console.log('a: ', a)
 console.log('b: ', b)
@@ -71,6 +87,7 @@ console.log('a: ', a)
 console.log('b: ', b)
 // return
 
+
 console.log("\n")
 console.log('> Перебор forEach().')
 var a = ['a', 2, true, , null, undefined, { a: 'a' }]
@@ -86,6 +103,16 @@ var b = a.forEach(function(element, index, array) {
 console.log('a: ', a)
 console.log('b: ', b)
 // return
+
+
+console.log("\n")
+console.log('> Перебоп for(var in Object)')
+var a = [...Array(5).keys()]
+for(var i in a) {
+  console.log('i: ', i)
+}
+// return null
+
 
 console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}')
 // var a = ['a','b','a','b']
