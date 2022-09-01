@@ -1,5 +1,7 @@
 "use strict"
 
+import { Enemy } from "./enemy"
+
 
 // Создание ячейки
 // Вызывается через создание поля Field
@@ -19,8 +21,13 @@ function Cell(id, x, y, type) {
     Field.instance.context.lineWidth = 1
     switch(this.type) {
       case 0:
-        Field.instance.context.fillStyle = "rgb(220,220,200)"
-        Field.instance.context.strokeStyle = "rgb(200,200,180)"
+        if (Field.instance.path.includes(this.id)) {
+          Field.instance.context.fillStyle = "rgb(220,240,200)"
+          Field.instance.context.strokeStyle = "rgb(200,220,180)"
+        } else {
+          Field.instance.context.fillStyle = "rgb(220,220,200)"
+          Field.instance.context.strokeStyle = "rgb(200,200,180)"
+        }
       break
       case 1:
         Field.instance.context.fillStyle = "#7c7758"
@@ -57,7 +64,7 @@ function Field(width, height, rocks, start_id, finish_id) {
   this.$canvas = $("#field")
   this.canvas = this.$canvas[0]
   this.context = this.canvas.getContext('2d')
-  this.enemies = []
+  this.enemies = {}
   this.context.canvas.width = this.width * Field.scale
   this.context.canvas.height = this.height * Field.scale
   this.path = []
@@ -124,6 +131,26 @@ function Field(width, height, rocks, start_id, finish_id) {
     //   this.context.fill(cell.drawing)
     //   this.context.stroke(cell.drawing)
     // }
+  }
+  this.run = function() {
+    for (var enemy_id in this.enemies) {
+      var enemy = this.enemies[enemy_id]
+      enemy.run()
+      enemy.draw()
+    }
+  }
+  this.add_enemy = function() {
+    var id = this.get_new_id()
+    var enemy = new Enemy(id)
+    Field.instance.enemies[id] = enemy
+  }
+  this.get_new_id = function() {
+    var ids = Object.keys(this.enemies)
+    var new_id = ids.length
+    while(ids.includes(new_id)) {
+      new_id--
+    }
+    return new_id
   }
 }
 

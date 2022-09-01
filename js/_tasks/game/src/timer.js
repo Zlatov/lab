@@ -14,7 +14,6 @@ Timer.init = function() {
   this.$fps = $("#timer_fps")
   this.$diff = $("#timer_diff")
   this.$button.on("click", function(event) {
-    // Timer.start()
     Timer.begin()
   })
 }
@@ -22,20 +21,8 @@ Timer.init = function() {
 Timer.callback = function() {
   Field.instance.clear()
   Field.instance.draw()
-  Field.instance.enemies.forEach(function(enemy, i, a) {
-    enemy.run()
-    enemy.draw()
-  })
+  Field.instance.run()
 }
-
-// Timer.start = function() {
-//   if (this.id == null) {
-//     this.id = setInterval(this.callback, this.interval)
-//   } else {
-//     clearInterval(this.id)
-//     this.id = null
-//   }
-// }
 
 function step(timestamp) {
   Timer.id = requestAnimationFrame(step)
