@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+rename_column :${1:table_name}, :${2:column_name}, :${3:new_column_name}
+]]></content>
+	<tabTrigger>rename_column</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>full rename_column</description>
+</snippet>

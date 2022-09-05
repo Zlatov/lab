@@ -171,6 +171,21 @@ for val in a
 end
 # exit
 
+puts '.insert(index, item1, item2,...)'.green
+puts 'Возвращает тот оригинальный но изменённый массив'.blue
+a = [0, 1, 2, 3]
+b = a.insert(1, "asd", "zxc")
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
+puts '.sort_by{|x| x.value}'.green
+a = ['zxc', 'asd', 1, nil, 0]
+b = a.sort_by{|x| x.to_s}
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
+
 puts 'break'.green
 for i in 0...3
   print 'i: '.red; puts i

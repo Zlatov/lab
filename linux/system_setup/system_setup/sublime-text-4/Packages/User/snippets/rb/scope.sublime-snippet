@@ -1,0 +1,13 @@
+<snippet>
+	<content><![CDATA[
+scope :${1:scope_name}, ->(${2:param}) {
+  includes().where()
+} do
+  def ${3:custom_method_for_scope}
+  end
+end
+]]></content>
+	<tabTrigger>scope</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>full scope</description>
+</snippet>

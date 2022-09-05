@@ -27,12 +27,13 @@ echoc "Настроен sublime Packages/User." green
 #   echoc "Настроен sublime Prefixw." green
 # fi
 
-path="$(pwd)/.config/sublime-text/Packages/CollapseFolders"
-if [[ -d "$path" ]]
-then
-  echoc "Уже настроен sublime CollapseFolders." blue
-else
-  mkdir -p "$path" 1>/dev/null
-  git clone https://github.com/Zlatov/CollapseFolders.git "$path" 2>/dev/null
-  echoc "Настроен sublime CollapseFolders." green
-fi
+echoc "Добавление пакета CollapseFolders отключено." red
+# path="$(pwd)/.config/sublime-text/Packages/CollapseFolders"
+# if [[ -d "$path" ]]
+# then
+#   echoc "Уже настроен sublime CollapseFolders." blue
+# else
+#   mkdir -p "$path" 1>/dev/null
+#   git clone https://github.com/Zlatov/CollapseFolders.git "$path" 2>/dev/null
+#   echoc "Настроен sublime CollapseFolders." green
+# fi

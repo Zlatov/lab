@@ -4,7 +4,7 @@ require 'active_support/all'
 p Time.parse(Time.current.to_s)
 Time.zone = 'Moscow'
 p Time.zone.parse(Time.current.to_s)
-p I18n.l(Time.parse(Time.current.to_s), format: '%e %B %Y, %T %:z')
+p I18n.l(Time.parse(Time.current.to_s), format: '%-e %B %Y, %T %:z')
 # exit
 
 a = '1641817394'
