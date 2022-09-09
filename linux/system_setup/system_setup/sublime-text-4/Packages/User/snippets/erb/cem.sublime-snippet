@@ -1,0 +1,11 @@
+<snippet>
+  <content><![CDATA[
+<%
+=begin %>
+$0<%
+=end %>
+]]></content>
+  <tabTrigger>cem</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>ERB multiline comment</description>
+</snippet>

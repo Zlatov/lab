@@ -1,0 +1,19 @@
+<snippet>
+  <content><![CDATA[
+<div class="accordion-item">
+  <p class="accordion-header">
+    <button class="accordion-button ${4:[collapsed]}" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-${1:item-1}">
+      $2
+    </button>
+  </p>
+  <div id="accordion-${1:item-1}" class="accordion-collapse collapse ${5:show}">
+    <div class="accordion-body">
+      $3
+    </div>
+  </div>
+</div>
+]]></content>
+  <tabTrigger>accordion-item</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>BS5 accordion-item</description>
+</snippet>

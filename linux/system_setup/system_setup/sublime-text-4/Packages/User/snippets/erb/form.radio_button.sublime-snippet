@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+<% form.object.class.${1:field}s.each do |enum_string, enum_index| %>
+  <%= form.radio_button :${1:field}, enum_index %>
+  <%= form.label :${1:field}, form.object.class.human_enum_name(:${1:field}, enum_string), value: enum_index %>
+<% end %>
+]]></content>
+	<tabTrigger>form.radio_button</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB form.radio_button</description>
+</snippet>

@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <ul class="zn unbullet unmargin col3">
+      <% ${1:Model}.all.each do |${2:model}| %>
+        <li>
+          <div class="form-check">
+            <%= form.check_box :${3:field_ids}, {multiple: true, class: 'form-check-input'}, ${2:model}.id, nil %>
+            <%= form.label :${3:field_ids}, ${2:model}.name, value: ${2:model}.id, class: 'form-check-label' %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.check_boxs</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>form.check_boxs</description>
+</snippet>

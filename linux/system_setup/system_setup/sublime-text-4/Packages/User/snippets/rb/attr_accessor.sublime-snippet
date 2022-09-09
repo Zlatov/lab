@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+attr_accessor :${1:name}
+]]></content>
+	<tabTrigger>attr_accessor</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>full attr_accessor</description>
+</snippet>

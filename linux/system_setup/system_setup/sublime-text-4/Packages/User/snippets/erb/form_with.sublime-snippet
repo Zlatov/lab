@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+<%= form_with(model: @${1:model}, url: ${2:model}_path, method: :${3:get}, class: '${4:form-inline}') do |form| %>
+	$5
+<% end %>
+]]></content>
+  <tabTrigger>form_with</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>form_with</description>
+</snippet>

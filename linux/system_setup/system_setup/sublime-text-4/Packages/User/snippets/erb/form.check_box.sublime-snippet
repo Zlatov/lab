@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <div class="form-check">
+      <%= form.check_box :${1:hidden}, {class: 'form-check-input'}, '1', nil %>
+      <%= form.label :${1:hidden}, "${2:[Имя поля]}", class: 'form-check-label' %>
+    </div>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.check_box</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>form.check_box</description>
+</snippet>

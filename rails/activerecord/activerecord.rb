@@ -1,10 +1,9 @@
-# 
-# ```
-# User.table_name
-# User.column_names
-# User.columns_hash
-# ```
-# 
+Model.table_name
+Model.column_names
+Model.columns_hash
+
+
+
 
 # 
 # Синтаксис логических выражений в SQL операторе WHERE переведён
@@ -37,13 +36,6 @@ scope3 = scope2.where(status: 'created', user_id: user.id).or(
 )
 
 
-# 
-# JOIN
-# 
-# INNER JOIN
-User.joins(:posts) # Только те пользователи у которых есть посты
-# LEFT JOIN
-User.left_outer_join(:posts) # Все пользователи, с учётом постов если они есть
 
 
 # 
@@ -93,9 +85,12 @@ User.transaction do
 end
 
 
+
+
 # 
 # find_or_create_by VS first_or_create
 # 
+
 # В принципе строки аналогичны:
 Foo.find_or_create_by(attributes)
 Foo.where(attributes).first_or_create
@@ -111,9 +106,12 @@ Foo.where(something: value).first_or_create(attributes)
 # тогда как find_or_create_by просто будет использовать `LIMIT 1`
 
 
+
+
 # 
 # .order()
 # 
+
 User.order(:name)
 # SELECT "users".* FROM "users" ORDER BY "users"."name" ASC
 User.order(email: :desc)
@@ -154,9 +152,36 @@ class Profile
 Profile.first.actions.latest
 
 
+
+
 # 
-# Способы подгрузки ассоциаций
+# JOIN
 # 
+
+# INNER JOIN
+User.joins(:posts) # Только те пользователи у которых есть посты
+# LEFT JOIN
+User.left_outer_join(:posts) # Все пользователи, с учётом постов если они есть
+
+
+
+
+# 
+# Способы подгрузки ассоциаций и фильтрация
+# 
+
+Model.joins(:relation).where()
+Model.left_outer_join(:relation).where()
+Model.includes(:relation).where().references(:relation)
+Model.distinct.joins(:relation).where(relation: {field: :value})
+Model.distinct.joins(:relation).where(relation: {field: :value}).preload(:relation, :relation2)
+
+.includes().where().references().preload() # Подгружает ассоциации одним запросом, фильтрация накладывается на ассоциации даже с preload
+.eager_load().where().preload()            # Подгружает ассоциации одним запросом, фильтрация накладывается на ассоциации даже с preload
+.distinct.joins().where().preload()        # Подгружает ассоциации отдельными запросами, фильтрация НЕ накладывается на ассоциации
+
+# .eager_load() равнозначен includes().references()
+
 # .preload - отдельный подзапрос
 class Person < ActiveRecord::Base
   has_many :notes
@@ -204,12 +229,22 @@ User.joins(:posts)
 User.joins(:posts).select('distinct users.*').to_a
 
 
+
+
+# 
 # Limit
+# 
+
 Post.offset(10).limit(1)
 
 
-# Select, дополнительное поле в модель при сложном запросе
-# Нет необходимо в модель User добавлять метод group_id
+
+
+# 
+# Select
+# 
+
+# Нет необходимости в модель добавлять метод group_id:
 users = ::User
   .select('users.* groups.id as group_id')
   .joins(:group)

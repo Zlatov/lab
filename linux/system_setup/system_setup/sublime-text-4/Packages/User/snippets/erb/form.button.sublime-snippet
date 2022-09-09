@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <%= form.button ${1:t('form.delete')}, type: :${2:submit},
+      name: :${3:submit},
+      value: :${4:delete_client},
+      data: {confirm: 'Вы действительно хотите ${5:...}?'},
+      class: 'btn btn-primary btn-sm' do
+    %><%= ${6:delete_icon} %><% end %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.button</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>form.button</description>
+</snippet>

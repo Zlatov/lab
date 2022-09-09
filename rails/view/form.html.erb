@@ -104,6 +104,17 @@
   <% for email in form.object.emails %>
     <%= form.check_box :remove_emails, {multiple: true}, email, nil %>
   <% end %>
+  <!-- или -->
+  <ul class="zn unbullet unmargin col3">
+    <% AffiliateListService.call.each do |affiliate| %>
+      <li>
+        <div class="form-check">
+          <%= form.check_box :affiliate_ids, {multiple: true, class: 'form-check-input'}, affiliate.id, nil %>
+          <%= form.label :affiliate_ids, affiliate.name, value: affiliate.id, class: 'form-check-label' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
   <!--
     Список флажков в случае связей
   -->
