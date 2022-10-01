@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+<%= form_tag(${1:posts_path}, method: :${2:put}${3:, multipart: true}${4:, remote: false}${5:, authenticity_token: false}${6:, class: ''}${7:, id: ''}) do %>
+	$8
+<% end %>
+]]></content>
+  <tabTrigger>form_tag</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>ERB form_tag</description>
+</snippet>

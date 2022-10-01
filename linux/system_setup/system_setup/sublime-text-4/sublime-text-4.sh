@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 # Использование: ctrl+b
+# затем задать пароль:
+# xopen ~/.config/sublime-text/Packages/User/builds/"postgresql iadfeshchm.sublime-build"
 
 set -eu
 

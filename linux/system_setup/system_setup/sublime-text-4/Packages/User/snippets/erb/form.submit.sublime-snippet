@@ -2,11 +2,11 @@
   <content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <%= form.submit '${1:ButtonText}', class: 'btn btn-primary btn-sm' %>
+    <%= form.submit '[Сохранить]', class: 'btn btn-primary btn-sm' %>
   </div>
 </div>
 ]]></content>
   <tabTrigger>form.submit</tabTrigger>
   <scope>text.html.ruby</scope>
-  <description>submit button for form_with</description>
+  <description>ERB form.submit</description>
 </snippet>

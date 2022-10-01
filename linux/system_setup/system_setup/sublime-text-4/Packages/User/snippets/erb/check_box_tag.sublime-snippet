@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <div class="form-check">
+      <%= check_box_tag '${1:name}', 'value', true, disabled: true, class: 'form-check-input' %>
+      <%= label_tag '${1:name}', 'content_or_options = nil', class: 'form-check-label' [do] %>
+    </div>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>check_box_tag</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB check_box_tag</description>
+</snippet>

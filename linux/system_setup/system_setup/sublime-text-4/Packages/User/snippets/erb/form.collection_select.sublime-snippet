@@ -1,0 +1,28 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <b><%= form.label :${1:field}, class: 'form-label' %></b>
+    <%= field_info form.object, :${1:field} %>
+    <%= form.collection_select :${1:field},
+      Admin::Model.all, :id, :name,
+      {
+        # prompt: true # Предложение выбрать, пункт с предложением не отображается если полю назначен один из пунктов выбора.
+        # prompt: 'Выберите:'
+        # include_blank: true # В отличии от prompt - всегда отображает пустой пункт для установки значения поля в NULL.
+        include_blank: 'Не назначен'
+      },
+      {
+        multiple: true,
+        size: 10,
+        class: 'form-select form-select-sm'
+      }
+    %>
+    <%= field_errors form.object, :${1:field} %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.collection_select</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB form.collection_select</description>
+</snippet>

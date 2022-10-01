@@ -1,6 +1,6 @@
 {
 	"theme": "Adaptive.sublime-theme",
-	"font_size": 14,
+	"font_size": 13,
 	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
 	"show_encoding": true,
 	"show_full_path": true,

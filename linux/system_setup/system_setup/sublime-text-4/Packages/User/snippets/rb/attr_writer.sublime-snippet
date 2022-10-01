@@ -4,5 +4,5 @@ attr_writer :${1:name}
 ]]></content>
 	<tabTrigger>attr_writer</tabTrigger>
 	<scope>source.ruby</scope>
-	<description>full attr_writer</description>
+	<description>RB attr_writer</description>
 </snippet>

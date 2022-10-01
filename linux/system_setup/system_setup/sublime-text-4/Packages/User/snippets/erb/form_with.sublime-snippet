@@ -6,5 +6,5 @@
 ]]></content>
   <tabTrigger>form_with</tabTrigger>
   <scope>text.html.ruby</scope>
-  <description>form_with</description>
+  <description>ERB form_with</description>
 </snippet>

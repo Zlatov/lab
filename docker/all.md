@@ -8,21 +8,40 @@ https://habr.com/ru/post/310460/
 ```bash
 sudo apt-get update
 sudo apt install docker.io
+
+sudo yum check-update
+curl -fsSL https://get.docker.com/ | sh
 ```
 
 ```bash
-sudo systemctl status docker
+systemctl --no-page status docker
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
 
 ```bash
+# Добавить текущего пользователя в группу докера
 sudo usermod -aG docker $(whoami)
 sudo chmod 666 /var/run/docker.sock
 ```
 
 ```bash
 docker --version
+```
+
+
+## Установка docker-compose
+
+```sh
+sudo curl -L "https://github.com/docker/compose/releases/download/2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ls /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+# /usr/local/bin/docker-compose: строка 1: Not: команда не найдена
+sudo rm /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+docker-compose --version
+# docker-compose version 1.26.0, build d4451659
 ```
 
 
@@ -49,6 +68,8 @@ __Контейнеры__
 docker ps # запущенные
 docker ps -a # запущенные и оставновленные
 docker start {container} # запустить остановленный контейнер
+docker stop {container} # остановить контейнер
+docker stop $(docker ps -q) # остановить все запущенные контейнеры
 docker attach {container} # получить интерактивную консоль контейнера
 # [Ctrl+p, Ctrl+q] - для выхода из консоли, незавершая текущий процесс
 docker commit -m "{tag}" {container} {image}:{tag} # создать новый образ из контейнера

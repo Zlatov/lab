@@ -139,14 +139,17 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 
 puts 'Слияние двух hash (.merge)'.green
+puts 'Возвращает новый хэш, не изменяя исходный'.blue
 a = {a:'a', c:'1'}
 b = {b:'b', c:'2'}
 c = a.merge(b)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+# exit 0
 
 puts 'Слияние двух hash (.merge!)'.green
+puts 'Изменяет исходный хэш'.blue
 a = {a:'a', c:'1'}
 b = {b:'b', c:'2'}
 c = a.merge!(b)

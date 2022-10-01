@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+<%= text_field_tag('${1:name}', '${2:value}', class: 'form-control', placeholder: 'Name', size: 9, disabled: true %>
+]]></content>
+  <tabTrigger>text_field_tag</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>ERB text_field_tag</description>
+</snippet>

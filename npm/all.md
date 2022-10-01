@@ -31,7 +31,7 @@ node --version
 
 ## Обновление node.js до последней версии
 
-```
+```sh
 node -v
 nodejs -v
 npm -v
@@ -60,9 +60,14 @@ sudo n stable
 
 ## Использование
 
-* `npm install <package-name>`
-* `npm install -g less`
-* `npm install -g less-plugin-clean-css`
+```sh
+npm install <package-name>
+npm install -g less
+npm install -g less-plugin-clean-css
+npm outdated # какие модули имеют более новые версии
+npm update # обновление всех модулей
+npm update {package-name} # обновление модуля
+```
 
 * `--save` — позволяет установить пакет и добавить запись о нём в раздел `dependencies` файла _package.json_.
 * `--save-dev` — позволяет установить пакет и добавить запись о нём в раздел `devDependencies` файла `package.json`. Данный раздел содержит перечень зависимостей для разработки, тестирования и т.п.

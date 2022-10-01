@@ -1,6 +1,17 @@
 # elasticsearch
 
-## Установка
+## Установка с docker
+
+```sh
+docker pull elasticsearch:8.4.1
+docker run -d --name es8 -p 9020:9200 -p 9030:9300 -e "discovery.type=single-node" -e "xpack.security.enabled=false" elasticsearch:8.4.1
+docker exec -it es8 bash
+curl -X GET "localhost:9200"
+# Ctrl + p + q
+curl -X GET "localhost:9020"
+```
+
+## Установка в систему
 
 Там и java нужна определённой версии, в общем жесть - читать внимательно ставить только нужное:
 

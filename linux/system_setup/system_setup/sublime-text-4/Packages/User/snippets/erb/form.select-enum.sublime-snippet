@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <b><%= form.label :${1:field}, class: 'form-label' %></b>
+    <%= field_info form.object, :${1:field} %>
+    <%= form.select :${1:field},
+      form.object.class.${1:field}s.map{|enum_string, enum_index|
+        [form.object.class.human_enum_name(:${1:field}, enum_string), enum_index]
+      },
+      {
+        # include_blank: true || include_blank: 'Выберите' || prompt: 'Выберите'
+      },
+      { class: 'form-select form-select-sm' }
+    %>
+    <%= field_errors form.object, :${1:field} %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.select-enum</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB form.select-enum</description>
+</snippet>

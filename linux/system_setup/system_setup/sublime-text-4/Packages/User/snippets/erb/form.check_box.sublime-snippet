@@ -3,6 +3,7 @@
 <div class="row mb-3">
   <div class="col">
     <div class="form-check">
+                                                                         # Добавлять ли скрытый check_box для передачи значения '0'
       <%= form.check_box :${1:hidden}, {class: 'form-check-input'}, '1', nil %>
       <%= form.label :${1:hidden}, "${2:[Имя поля]}", class: 'form-check-label' %>
     </div>

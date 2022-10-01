@@ -2,6 +2,7 @@
 # 
 # `$ rails routes` - список всех путей;
 # `$ rails routes | grep account` - список путей которые содержат ...;
+# `$ rails routes -c admin/users` - список путей контроллера;
 # `> app.products_path` - проверка пути, вернёт url относительно домена;
 # `> app.product_path 123` - -//-
 # `> app.products_url` - проверка пути, вернёт Абсолютный url (с http).

@@ -28,8 +28,8 @@ xhr_get('/id').done(function(data) {
 });
 
 $.ajax({
-  type: 'get',
-  url: 'https://sign-forum.ru/api/v1/api.php?action=getLastPosts',
+  type: "get",
+  url: "https://sign-forum.ru/api/v1/api.php?action=getLastPosts",
   cache: false,
   // Передадим данные запроса в объект jqXHR для получения их в .then(…) и .fail(…)
   beforeSend: function(jqXHR) {

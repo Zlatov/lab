@@ -9,5 +9,5 @@ end
 ]]></content>
 	<tabTrigger>scope</tabTrigger>
 	<scope>source.ruby</scope>
-	<description>full scope</description>
+	<description>RB scope</description>
 </snippet>

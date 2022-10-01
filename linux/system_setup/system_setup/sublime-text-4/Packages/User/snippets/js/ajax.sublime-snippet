@@ -1,0 +1,32 @@
+<snippet>
+  <content><![CDATA[
+\$.ajax({
+  type: "get",
+  url: "https://domain.ru/api.php?action=posts",
+  data: (new FormData(\$("form").first[0])),
+  data: {
+    articul: this.articul,
+    count: this.count,
+  },
+  custom_data: {asd: "zxc"},
+  contentType: "multipart/form-data", // Формат передаваемых на сервер данных.
+  contentType: false,
+  processData: false, // Отменить преобразование передаваемых данных в формат application/x-www-form-urlencoded.
+  dataType: "json", // Тип данных, в котором ожидается получить ответ от сервера.
+  cache: false,
+  timeout: 3000,
+  beforeSend: function(jqXHR) {
+    jqXHR.custom_data = {asd: "zxc"}
+  },
+}).always(function() {
+}).fail(function(jqXHR, textStatus, errorThrown) {
+  console.log('jqXHR.responseJSON: ', jqXHR.responseJSON)
+  console.log('jqXHR.responseText: ', jqXHR.responseText)
+}).done(function(data, textStatus, jqXHR) {
+  console.log('this.custom_data.asd: ', this.custom_data.asd)
+})
+]]></content>
+  <tabTrigger>ajax</tabTrigger>
+  <scope>source.js</scope>
+  <description>JS ajax</description>
+</snippet>

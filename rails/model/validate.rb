@@ -67,7 +67,11 @@ class Model < ActiveRecord::Base
   # значение атрибута уникально.
   validates :email, uniqueness: true
   # опция :scope для определения более двуух атрибутов для уникальности
-  validates :name, uniqueness: { scope: :year, message: "should happen once per year" }
+  validates :name, uniqueness: {
+    scope: :year,
+    message: "should happen once per year",
+    case_sensitive: false
+  }
 
   # validates_with
   # передает запись в отдельный класс для валидации.

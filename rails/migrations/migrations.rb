@@ -214,3 +214,16 @@ gem "migration_data"
     ArAt.reset_column_information
     ArAt.import stack
   end
+
+
+# belongs_to
+# Добавить связь belongs_to
+# Свойства принадлежат Проектам -> в Свойства добавляем foreign key
+rails g migration AddProjectToProperty project:belongs_to
+# Сгенерирует:
+add_reference :properties, :project, null: false, foreign_key: true
+# Возможно меняем на:
+add_reference :properties, :project, null: true, foreign_key: {on_update: :cascade, on_delete: <:restrict|:nullify|:cascade>}
+# В модели:
+belongs_to :project, optional: true
+has_many :properties

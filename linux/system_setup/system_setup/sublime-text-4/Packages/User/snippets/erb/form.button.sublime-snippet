@@ -13,5 +13,5 @@
 ]]></content>
 	<tabTrigger>form.button</tabTrigger>
 	<scope>text.html.ruby</scope>
-	<description>form.button</description>
+	<description>ERB form.button</description>
 </snippet>

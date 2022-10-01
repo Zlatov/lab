@@ -9,7 +9,9 @@ set -eu
 # 49001—49150 свободны  Официально
 # 
 
-[[ $(lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
+[[ $(sudo lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
+sudo lsof -i -P -n | grep :9000
+sudo netstat -pnat | grep :9000
 
 # Определить процесс и его PID занимающий порт:
 lsof -wni tcp:3000

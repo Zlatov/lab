@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <b><%= form.label :${1:field}, class: 'form-label' %></b>
+    <%= field_info form.object, :${1:field} %>
+    <% form.object.class.${1:field}s.each do |enum_string, enum_index| %>
+      <div class="form-check">
+        <%= form.radio_button :${1:field}, enum_index, class: 'form-check-input' %>
+        <%= form.label :${1:field},
+          form.object.class.human_enum_name(:${1:field}, enum_string),
+          value: enum_index,
+          class: 'form-check-label'
+        %>
+      </div>
+    <% end %>
+    <%= field_errors form.object, :${1:field} %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.radio_button-enum</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB form.radio_button-enum</description>
+</snippet>

@@ -17,5 +17,5 @@
 ]]></content>
 	<tabTrigger>form.check_boxs</tabTrigger>
 	<scope>text.html.ruby</scope>
-	<description>form.check_boxs</description>
+	<description>ERB form.check_boxs</description>
 </snippet>

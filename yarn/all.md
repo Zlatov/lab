@@ -64,9 +64,12 @@ __Прокси:__
 
 Обновить зависимости:
 
-* `yarn upgrade [package]`;
-* `yarn upgrade [package]@[version]`;
-* `yarn upgrade [package]@[tag]`.
+```sh
+yarn outdated
+yarn upgrade [package]
+yarn upgrade [package]@[version]
+yarn upgrade [package]@[tag]
+```
 
 `yarn remove [package]` — удалить зависимости.
 

@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+button_tag 'Применить',
+  type: :submit,
+  name: :submit,
+  value: :add_model,
+  data: {confirm: 'Вы действительно хотите применить?'},
+  class: 'btn btn-primary btn-secondary btn-link btn-sm' do
+  add_icon
+end
+]]></content>
+	<tabTrigger>button_tag</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>RB button_tag</description>
+</snippet>

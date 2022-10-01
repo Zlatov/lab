@@ -55,6 +55,7 @@ alias cdtasker='cd ~/projects/zenon/tasker'
 alias cdforum='cd ~/projects/zenon/sign-forum'
 alias cdzenonline='cd ~/projects/zenon/zenonline'
 alias cdvesta='cd ~/projects/dmproger/vesta-api'
+alias cdinfo='cd ~/projects/zenon/info'
 
 
 

@@ -4,5 +4,5 @@ attr_reader :${1:name}
 ]]></content>
 	<tabTrigger>attr_reader</tabTrigger>
 	<scope>source.ruby</scope>
-	<description>full attr_reader</description>
+	<description>RB attr_reader</description>
 </snippet>
