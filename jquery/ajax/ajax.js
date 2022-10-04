@@ -42,18 +42,18 @@ $.ajax({
   }
 })
 
-var form = $('form')[0]
+var form = $("form")[0]
 var form_data = new FormData(form)
-form_data.append('array', JSON.stringify([1,2,3]))
+form_data.append("array", JSON.stringify([1,2,3]))
 $.ajax({
-  type: 'post',
-  url: 'ajax.php',
+  type: "post",
+  url: "ajax.php",
   data: form_data,
   custom_data: {form: form},
-  // contentType: 'multipart/form-data',
+  // contentType: "multipart/form-data",
   contentType: false,
   processData: false,
-  dataType: 'json',
+  dataType: "json",
   cache: false,
   error: function(jqXHR, textStatus, errorThrown) {
     console.log('jqXHR, textStatus, errorThrown: ', jqXHR, textStatus, errorThrown)

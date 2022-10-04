@@ -51,7 +51,11 @@ rails g migration CreateJoinTableAffiliatesArticles affiliate article
 # Колонки
 # 
 
+# 
 # Добавление колонок
+# 
+
+rails g migration add_field_to_table field:[string|integer|bigint|boolean|decimal|datetime]
 add_column :table_name, :column_name, :type, options: :options
 add_column :table_name, "column_name", :string,
   # options
@@ -70,8 +74,20 @@ add_column :table_name, "column_name", :string,
 nil, 4, 11 | int(11)      | 4 byte      | 2147483647
 5..8       | bigint       | 8 byte      | 9223372036854775807
 
+
+# 
+# Изменение колонки
+# 
+
+rails g migration 
 change_column :table_name, :column_name, :type, null: false, default: '', comment: ''
 
+
+# 
+# Удаление колонки
+# 
+
+rails g migration RemoveFieldNameFromTableName field_name:datatype
 remove_column :table_name, :column_name
 
 # Добавление колонки через указание связи, связь обязательная поэтому через три

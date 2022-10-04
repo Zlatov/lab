@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <b><%= form.label :${1:field}, class: 'form-label' %></b>
+    <b><%= form.label :${1:field}, class: 'form-label required' %></b>
     <%= field_info form.object, :${1:field} %>
     <%= form.collection_select :${1:field},
       Admin::Model.all, :id, :name,

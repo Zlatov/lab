@@ -72,6 +72,7 @@ class Model < ActiveRecord::Base
     message: "should happen once per year",
     case_sensitive: false
   }
+  validates_uniqueness_of :name, :case_sensitive => false
 
   # validates_with
   # передает запись в отдельный класс для валидации.

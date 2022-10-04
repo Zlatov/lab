@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# dollar_question.sh
+
 set -eu
 
 echo '$BASHPID 1: ' $BASHPID

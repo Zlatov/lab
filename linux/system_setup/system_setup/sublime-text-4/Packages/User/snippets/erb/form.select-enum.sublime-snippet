@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <b><%= form.label :${1:field}, class: 'form-label' %></b>
+    <b><%= form.label :${1:field}, class: 'form-label required' %></b>
     <%= field_info form.object, :${1:field} %>
     <%= form.select :${1:field},
       form.object.class.${1:field}s.map{|enum_string, enum_index|

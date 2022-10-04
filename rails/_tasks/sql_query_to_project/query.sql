@@ -39,6 +39,14 @@ WHERE
 ;
 -- \q
 
+select 'Выбираем продукты с каким либо из значений массива ["15"] фильтра 2 в котором число (не пустое пересечение)' as " ";
+SELECT id, code, property_values
+FROM products p
+WHERE
+  to_jsonb(p.property_values->>'2') ?| ARRAY['15']
+;
+-- \q
+
 select 'Выбираем значения фильтров из продутов с фильтром 2' as " ";
 SELECT *
 FROM
