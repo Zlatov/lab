@@ -1,0 +1,75 @@
+<style type="text/css">
+  .price_wrapper {
+    font-size: 20px;
+    line-height: 22px;
+    color: #0e5f9e;
+    vertical-align: middle;
+    display: inline-block;
+  }
+  .price_wrapper .old_price {
+    color: #f50707;
+    font-size: .65em;
+  }
+  .price_wrapper .old_price .rub {
+    text-decoration: line-through;
+  }
+  .price_wrapper .old_price .kop,
+  .price_wrapper .price .kop {
+    font-size: .62em;
+    line-height: .62em;
+    vertical-align: text-top;
+  }
+</style>
+
+<div id="000020067">
+  <h3>000020067</h3>
+  <b>Цена</b>
+  <div class="price_wrapper js_price_wrapper"></div>
+  <b>Наличие:</b>
+  <div class="count"></div>
+</div>
+<hr>
+<div id="000020058">
+  <h3>000020058</h3>
+  <b>Цена</b>
+  <div class="price_wrapper js_price_wrapper"></div>
+  <b>Наличие:</b>
+  <div class="count"></div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $.ajax({
+      type: 'post',
+      url: 'https://zenonline.ru//traders/by_phil',
+      data: {
+        articuls: '000020058,000020067',
+        phil: 'Москва - Гольяново'
+      },
+      contentType: 'application/x-www-form-urlencoded',
+      // processData: false,
+      dataType: 'json',
+      cache: false,
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('jqXHR, textStatus, errorThrown: ', jqXHR, textStatus, errorThrown)
+      },
+      success: function(data, textStatus, jqXHR) {
+        // console.log('data, textStatus, jqXHR: ', data, textStatus, jqXHR)
+        for (var code in data) {
+          var info = data[code]
+          console.log('info: ', info)
+          var product = $("#" + code)
+          if (product.length != 1) {
+            continue
+          }
+          console.log('code: ', code)
+          product.find(".js_price_wrapper").append(info[4])
+          product.find(".count").append(info[5])
+          // product.find(".price").append(info[6])
+        }
+      }
+    })
+  })
+</script>

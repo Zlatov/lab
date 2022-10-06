@@ -1,0 +1,37 @@
+<snippet>
+  <content><![CDATA[
+<div class="table-responsive">
+  <table class="table table-sm table-striped table-hover table-borderless|table-bordered border-primary">
+    <!-- <thead> -->
+      <tr>
+        <th>thead</th>
+        <th scope="col">thead</th>
+        <th scope="col">thead</th>
+      </tr>
+    <!-- </thead> -->
+    <!-- <tfoot> -->
+      <tr>
+        <td>tfoot</td>
+        <td>tfoot</td>
+        <td>tfoot</td>
+      </tr>
+    <!-- </tfoot> -->
+    <!-- <tbody> -->
+      <tr class="table-primary">
+        <td scope="row">tbody</td>
+        <td>tbody</td>
+        <td>tbody</td>
+      </tr>
+      <tr>
+        <td scope="row">tbody</td>
+        <td>tbody</td>
+        <td class="table-success">tbody</td>
+      </tr>
+    <!-- </tbody> -->
+  </table>
+</div>
+]]></content>
+  <tabTrigger>BS-table</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>BS5 table</description>
+</snippet>

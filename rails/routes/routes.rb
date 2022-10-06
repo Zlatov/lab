@@ -1,5 +1,6 @@
 
 # 
+# http://localhost:3000/rails/info/routes
 # `$ rails routes` - список всех путей;
 # `$ rails routes | grep account` - список путей которые содержат ...;
 # `$ rails routes -c admin/users` - список путей контроллера;
