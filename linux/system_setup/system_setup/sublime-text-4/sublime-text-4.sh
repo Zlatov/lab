@@ -39,3 +39,5 @@ echoc "Добавление пакета CollapseFolders отключено." re
 #   git clone https://github.com/Zlatov/CollapseFolders.git "$path" 2>/dev/null
 #   echoc "Настроен sublime CollapseFolders." green
 # fi
+
+xdg-open ~/.config/sublime-text/Packages/User/builds/"postgresql iadfeshchm.sublime-build"

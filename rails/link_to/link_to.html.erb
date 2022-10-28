@@ -1,2 +1,9 @@
 <%= link_to 'Giraffe', rails_admin_path, class: 'item', data: { turbolinks: false } %>
 <a class="item" href="<%= rails_admin_path %>" data-turbolinks="false">Giraffe</a>
+
+<%= link_to 'Giraffe', rails_admin_path, target: '_blank' %>
+
+<%= link_to pdf_catalog.file.url, download: pdf_catalog.file.file.filename, class: 'h3 as_a unline' do %>
+  <%= pdf_catalog.name %>
+  <i class="fa fa-file-pdf-o color dark_danger" style="font-size: 1.5em;"></i>
+<% end %>

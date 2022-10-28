@@ -20,3 +20,13 @@ __Дополнительные операторы jsonb__
 * `JSONB::jsonb - STR` - удаляет поле объекта.
 * `JSONB::jsonb - INT` - удаляет запись массива.
 * `JSONB::jsonb #- PATH` - удаляет поле изи запись по пути PATH.
+
+## Приведение к типам
+
+Типы https://www.postgresql.org/docs/current/datatype.html
+
+```sql
+SELECT field::text
+SELECT field::int
+SELECT field::float
+```

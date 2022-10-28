@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+<button type="button" class="btn btn-primary|secondary|success|danger|warning|info|light|dark|link btn-sm">Primary</button>
+]]></content>
+  <tabTrigger>bs-button</tabTrigger>
+  <scope>text.html.ruby</scope>
+  <description>BS5 button</description>
+</snippet>

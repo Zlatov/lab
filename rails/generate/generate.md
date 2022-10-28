@@ -33,4 +33,7 @@ bundle exec rails g model admin/model/setting key:string:uniq value:string --no-
 
 # Всё
 bundle exec rails g scaffold filter name:string:uniq slug:string:uniq value_type:integer --no-stylesheets --no-assets --no-timestamps --no-helper --no-javascripts --no-test-framework
+
+# Задачи
+rails g task tasks_namespace task1 task2
 ```

@@ -21,6 +21,9 @@ sudo certbot certonly --webroot -w /home/deployer/app/forum -d sign-forum.ru
 # Добавился параметр --register-unsafely-without-email чтобы команда не
 # приводила к ошибке при неуказании email адреса.
 sudo certbot … --register-unsafely-without-email
+
+# Удалить ключи для домена. Пред командой перенастроить nginx на работу без ключей.
+sudo certbot delete --cert-name newzenonline.klej.ru
 ```
 
 Пример настройки nginx с использованием фалов сертификата.

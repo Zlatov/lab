@@ -243,3 +243,20 @@ add_reference :properties, :project, null: true, foreign_key: {on_update: :casca
 # В модели:
 belongs_to :project, optional: true
 has_many :properties
+
+
+
+
+# 
+# Первичный ключ по нескольким полям
+# 
+create_table :prices, id: false, primary_key: [:product_code, :affiliate_code] do |t|
+  t.string  :product_code, null: false
+  t.string  :affiliate_code, null: false
+  ...
+  t.index :product_code, name: 'ix_c1_prices_productcode'
+  t.index :affiliate_code, name: 'ix_c1_prices_affiliatecode'
+  t.index [:product_code, :affiliate_code], name: 'uq_c1_prices_productcodeaffiliatecode', unique: true
+  t.timestamps
+end
+execute 'ALTER TABLE prices ADD PRIMARY KEY (product_code, affiliate_code);'

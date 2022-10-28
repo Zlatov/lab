@@ -1,5 +1,12 @@
 \c lab
 
+
+
+-- SELECT '[]'::json[];
+SELECT '[]'::jsonb;
+\q
+
+
 DROP TABLE IF EXISTS a;
 
 CREATE TABLE a (

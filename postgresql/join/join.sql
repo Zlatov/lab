@@ -1,3 +1,5 @@
+\c lab
+
 DROP TABLE IF EXISTS a;
 DROP TABLE IF EXISTS b;
 CREATE TABLE a (
@@ -113,3 +115,40 @@ FULL JOIN b on a.a_id = b.b_id
 WHERE a.a_id IS NULL OR b.b_id IS NULL;
 
 COMMIT;
+
+SELECT '> JOIN LATERAL (джоин с возможностью собственных ограничений, например LIMIT)' as " ";
+-- Альтернатива с подзапросом тут: postgresql/_tasks/limit_for_joined/limit_for_joined.sql
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+CREATE TABLE posts (
+  id SERIAL PRIMARY KEY
+);
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  post_id integer NOT NULL REFERENCES posts (id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+-- ALTER SEQUENCE seq RESTART;
+INSERT INTO posts (id) VALUES
+(DEFAULT),
+(DEFAULT);
+INSERT INTO comments (id, post_id) VALUES
+(DEFAULT, 1),
+(DEFAULT, 1),
+(DEFAULT, 1),
+(DEFAULT, 2),
+(DEFAULT, 2),
+(DEFAULT, 2),
+(DEFAULT, 2);
+SELECT * FROM posts;
+SELECT * FROM comments;
+
+SELECT
+  posts.*,
+  lateral_comments.*
+FROM posts
+JOIN LATERAL (
+  SELECT comments.* FROM comments
+  WHERE (comments.post_id = posts.id)
+  LIMIT 2
+) lateral_comments ON true
+WHERE posts.id IN (1, 2);

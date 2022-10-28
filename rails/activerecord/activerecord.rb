@@ -34,7 +34,12 @@ scope2 = scope1.where(affiliates: {id: affiliate.id}).or(
 scope3 = scope2.where(status: 'created', user_id: user.id).or(
   scope2.where(status: ['confirmed', 'agreed', 'published', 'closed'])
 )
-
+# LIKE
+Foo.where("bar LIKE ?", "%#{query}%")
+Foo.where("bar LIKE :query", query: "%#{query}%")
+# если LIKE может содержать символ %, то использовать sanitize_sql_like
+Foo.where("bar LIKE ?", "%#{sanitize_sql_like(query)}%")
+Foo.where("bar LIKE :query", query: "%#{sanitize_sql_like(query)}%")
 
 
 
@@ -162,6 +167,16 @@ Profile.first.actions.latest
 User.joins(:posts) # Только те пользователи у которых есть посты
 # LEFT JOIN
 User.left_outer_join(:posts) # Все пользователи, с учётом постов если они есть
+# Подзапрос LEFT или INNER или ... JOIN
+true_comments = Comments.select(...).where(...).group(...).having(...)
+users = User.select('user.*', 'tk.count_true_comments')
+  .joins(
+    <<-SQL
+      LEFT JOIN (#{true_comments.to_sql}) tk ON tk.field_id = users.id
+    SQL
+  )
+  .where(confirmed: true)
+  .preload(:user_properties)
 
 
 
@@ -249,3 +264,65 @@ users = ::User
   .select('users.* groups.id as group_id')
   .joins(:group)
 users.first.group_id
+
+
+
+
+# 
+# has_and_belongs_to_many HABTM
+# 
+
+class Product
+  has_and_belongs_to_many :categories
+end
+
+.categories
+# Returns a Relation of all the associated objects || [].
+.categories << category
+.categories << category, category2
+# or
+.categories.push(category)
+.categories.push(category, category2)
+# Adds one or more objects to the collection by creating associations in the join table. Without waiting for the save or update call!
+.categories.delete(category, …)
+# Removes one or more objects. This does not destroy the objects!
+.categories.destroy(category, …)
+# Removes one or more objects by running destroy on each __association__ in the join table. This does not destroy the objects!
+.categories = categories
+# Replaces the collection’s content by deleting and adding objects as appropriate.
+.categories_singular_ids
+# Returns an array of the associated objects’ ids.
+.categories_singular_ids = ids
+# Replace the collection by the objects identified by the primary keys in ids.
+.categories.clear
+# Removes every object from the collection. This does not destroy the objects.
+.categories.empty?
+# Returns true if there are no associated objects.
+.categories.size
+# Returns the number of associated objects.
+.categories.find(id)
+# Finds an associated object responding to the id and that meets the condition that it has to be associated with this object. Uses the same rules as ActiveRecord::FinderMethods#find.
+.categories.exists?(…)
+# Checks whether an associated object with the given conditions exists. Uses the same rules as ActiveRecord::FinderMethods#exists?.
+.categories.build(attributes = {})
+# Returns a new object of the collection type that has been instantiated with attributes and linked to this object through the join table, but has not yet been saved.
+.categories.create(attributes = {})
+# Returns a new object of the collection type that has been instantiated with attributes, linked to this object through the join table, and that has already been saved (if it passed the validation).
+.categories.reload
+# Returns a Relation of all of the associated objects, forcing a database read. An empty Relation is returned if none are found.
+
+
+
+
+# .having
+C1Price
+  .select('COUNT(affiliate_code) AS count_a')
+  .where(product_code: '000000003')
+  .group(:product_code)
+  .having('COUNT(affiliate_code) > 2')
+  .to_a.first.count_a
+offers = Admin::Offer
+  .joins(:catalogs, :products)
+  .where(catalogs: @parent_id)
+  .group(:id)
+  .having('COUNT(products.id) = 1')

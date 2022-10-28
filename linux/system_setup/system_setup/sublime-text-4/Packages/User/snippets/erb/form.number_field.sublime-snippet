@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <b><%= form.label :${1:order}, class: 'form-label required' %></b>
+    <%= field_info form.object, :${1:order} %>
+    <%= form.number_field :${1:order}, in: 1.0..20.0, step: 0.5, class: 'form-control form-control-sm', autofocus: true %>
+    <%= field_errors form.object, :${1:order} %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.number_field</tabTrigger>
+	<scope>text.html.ruby</scope>
+	<description>ERB form.number_field</description>
+</snippet>

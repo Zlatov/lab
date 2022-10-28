@@ -1,0 +1,17 @@
+<snippet>
+  <content><![CDATA[
+respond_to do |format|
+  if @model.save|.update(model_params)
+    format.html { redirect_to @model, notice: @notice }
+    format.json { render :show, status: :created|:ok, location: @model }
+    format.json { render json: @model, status: :created|:ok }
+  else
+    format.html { render :new|:edit }
+    format.json { render json: @model.errors, status: :unprocessable_entity }
+  end
+end
+]]></content>
+  <tabTrigger>respond_to</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>RB respond_to</description>
+</snippet>
