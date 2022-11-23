@@ -7,6 +7,6 @@
 <% end %>
 ]]></content>
 	<tabTrigger>case</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB case</description>
 </snippet>

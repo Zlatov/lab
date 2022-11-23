@@ -21,6 +21,7 @@ TASKER=1 bundle exec rails g
 
 # Миграции
 rails g migration AddColumnNameColumnToTableName deleted_at:datetime
+rails g migration add_hidden_column_to_posts hidden:boolean
 
 # Контроллер
 bundle exec rails g controller catalog index --no-test-framework --no-helper --no-javascripts --no-stylesheets --no-assets

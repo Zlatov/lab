@@ -154,3 +154,9 @@ post.comment_ids = [1, 7, 15]
         where angar: angar_code
       end
     end
+
+# Доступ к свойствам ассоциации
+Post.reflections["comments"].table_name # => "comments"
+Post.reflections["comments"].macro # => :has_many
+Post.reflections["comments"].foreign_key # => "message_id"
+Post.reflections["comments"].klass # => Comment(id: integer,...)

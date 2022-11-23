@@ -13,6 +13,6 @@
 </div>
 ]]></content>
 	<tabTrigger>button_tag</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB button_tag</description>
 </snippet>

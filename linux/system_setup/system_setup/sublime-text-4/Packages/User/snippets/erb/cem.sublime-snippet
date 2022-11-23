@@ -6,6 +6,6 @@ $0<%
 =end %>
 ]]></content>
   <tabTrigger>cem</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>ERB multiline comment</description>
 </snippet>

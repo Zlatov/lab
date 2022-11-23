@@ -4,12 +4,12 @@
   <div class="col">
     <b><%= form.label :${1:name}, class: 'form-label required' %></b>
     <%= field_info form.object, :${1:name} %>
-    <%= form.text_field :${1:name}, class: 'form-control form-control-sm', autofocus: true, required: true %>
+    <%= form.text_area :${1:name}, class: 'form-control form-control-sm', autofocus: true, required: true, cols: 80, rows: 5, disabled: true %>
     <%= field_errors form.object, :${1:name} %>
   </div>
 </div>
 ]]></content>
-	<tabTrigger>form.text_field</tabTrigger>
+	<tabTrigger>form.text_area</tabTrigger>
 	<scope>text.html.rails</scope>
-	<description>ERB form.text_field</description>
+	<description>ERB form.text_area</description>
 </snippet>

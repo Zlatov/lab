@@ -3,6 +3,6 @@
 <%= submit_tag('${1:Отправить}', class: '${2:button}'${3:, disabled: true}, data: { confirm: '${4:Вы уверены?}' }) %>
 ]]></content>
   <tabTrigger>submit_tag</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>ERB submit_tag</description>
 </snippet>

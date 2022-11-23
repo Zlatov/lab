@@ -23,6 +23,6 @@
 </div>
 ]]></content>
 	<tabTrigger>form.collection_select</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB form.collection_select</description>
 </snippet>

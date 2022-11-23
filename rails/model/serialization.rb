@@ -71,6 +71,8 @@ class PostsController < ApplicationController
     # ещё варианты для сериализации коллекции
     render json: ActiveModel::SerializableResource.new(Admin::Catalog.all.to_a).as_json
     render json: ActiveModel::SerializableResource.new(Admin::Catalog.all).as_json
+    # NOTE: ActiveModel::SerializableResource.new is deprecated; use ActiveModelSerializers::SerializableResource. instead
+    render json: ActiveModelSerializers::SerializableResource.new(Admin::Catalog.all).as_json
     render json: Admin::Catalog.all, each_serializer: Admin::CatalogSerializer
     render json: Admin::Catalog.all
   end

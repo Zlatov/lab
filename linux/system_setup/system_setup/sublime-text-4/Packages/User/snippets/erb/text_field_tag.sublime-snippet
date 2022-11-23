@@ -3,6 +3,6 @@
 <%= text_field_tag(:${1:name}, 'value', class: 'form-control form-control-sm', placeholder: 'Name', size: 9, disabled: true) %>
 ]]></content>
   <tabTrigger>text_field_tag</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>ERB text_field_tag</description>
 </snippet>

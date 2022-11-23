@@ -1,0 +1,12 @@
+<snippet>
+  <content><![CDATA[
+<div class="alert alert-primary|secondary|success|danger|warning|info|light|dark" role="alert">
+  <h4 class="alert-heading">Heading</h4>
+  <p>Alert 1 <a href="#" class="alert-link">link</a></p>
+  <p class="mb-0">Alert 2</p>
+</div>
+]]></content>
+  <tabTrigger>alert</tabTrigger>
+  <scope>text.html.rails</scope>
+  <description>BS5 div.alert</description>
+</snippet>

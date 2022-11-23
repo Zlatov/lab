@@ -19,6 +19,6 @@
 </div>
 ]]></content>
 	<tabTrigger>form.radio_button-enum</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB form.radio_button-enum</description>
 </snippet>

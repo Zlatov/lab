@@ -24,16 +24,20 @@ echo "<pre>";
 printf("\$a = %1\$b | \$a = %1\$d // \$a = B | D | E;", $a);
 echo "</pre>";
 
+echo PHP_EOL . '> ...' . PHP_EOL;
 $a = [0,1,1,0,1,0];
 $a = bindec(implode('',$a));
+echo '$a: ' . print_r($a, true) . PHP_EOL;
 echo "<pre>";
 printf('$a = %b', $a); echo ' // $a = [0,1,1,0,1,0]; $a = bindec(implode(\'\',$a));';
 echo "</pre>";
+// exit(0);
 
 
 
 
 // compare with or'ed values to find the combination
+$c = A | B;
 echo "<pre>";
 switch ($c) {
   case A:
@@ -51,6 +55,7 @@ switch ($c) {
 }
 echo "</pre>";
 
+$d = A | B;
 echo "<pre>";
 switch ($d) {
   case A:
@@ -92,6 +97,7 @@ for ($i = 5; $i >= 0;  $i-- ) {
     printf('$c & current bit = %b', $c & pow(2, $i)); echo PHP_EOL; echo PHP_EOL;
 }
 echo "</pre>";
+// exit(0);
 
 define('YMDHIS', 63);
 define('YMDHI', 31<<1);

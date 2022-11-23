@@ -10,6 +10,6 @@
 </div>
 ]]></content>
 	<tabTrigger>form.number_field</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB form.number_field</description>
 </snippet>

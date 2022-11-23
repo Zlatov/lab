@@ -14,6 +14,6 @@
 </div>
 ]]></content>
   <tabTrigger>accordion-item</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>BS5 accordion-item</description>
 </snippet>

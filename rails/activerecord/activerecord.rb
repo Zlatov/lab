@@ -244,6 +244,26 @@ User.joins(:posts)
 User.joins(:posts).select('distinct users.*').to_a
 
 
+# 
+# Переподгрузка ассоциаций немного хаккерским способом
+# 
+
+# 1st query: load places
+places = Place.all.to_a
+# 2nd query: load events for given places, matching the date condition
+events = Event.where(place: places.map(&:id)).where("start_date > '#{time_in_the_future}'")
+events_by_place_id = events.group_by(&:place_id)
+# 3: manually set the association
+places.each do |place|
+  events = events_by_place_id[place.id] || []
+
+  association = place.association(:events)
+  association.loaded!
+  association.target.concat(events)
+  events.each { |event| association.set_inverse_instance(event) }
+end
+
+
 
 
 # 

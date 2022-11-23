@@ -13,6 +13,6 @@
 </div>
 ]]></content>
 	<tabTrigger>form.check_box</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB form.check_box</description>
 </snippet>

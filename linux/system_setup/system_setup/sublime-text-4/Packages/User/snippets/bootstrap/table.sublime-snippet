@@ -31,7 +31,7 @@
   </table>
 </div>
 ]]></content>
-  <tabTrigger>BS-table</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <tabTrigger>table</tabTrigger>
+  <scope>text.html.rails</scope>
   <description>BS5 table</description>
 </snippet>

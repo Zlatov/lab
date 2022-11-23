@@ -9,6 +9,6 @@
 <% end %>
 ]]></content>
 	<tabTrigger>ifall</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB all if</description>
 </snippet>

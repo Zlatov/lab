@@ -7,6 +7,6 @@
 </div>
 ]]></content>
   <tabTrigger>form.submit</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>ERB form.submit</description>
 </snippet>

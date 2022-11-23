@@ -18,6 +18,6 @@
 </div>
 ]]></content>
 	<tabTrigger>form.select-enum</tabTrigger>
-	<scope>text.html.ruby</scope>
+	<scope>text.html.rails</scope>
 	<description>ERB form.select-enum</description>
 </snippet>

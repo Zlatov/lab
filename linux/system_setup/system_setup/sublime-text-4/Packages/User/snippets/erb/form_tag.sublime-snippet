@@ -5,6 +5,6 @@
 <% end %>
 ]]></content>
   <tabTrigger>form_tag</tabTrigger>
-  <scope>text.html.ruby</scope>
+  <scope>text.html.rails</scope>
   <description>ERB form_tag</description>
 </snippet>

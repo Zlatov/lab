@@ -41,6 +41,7 @@
     scope module: "market/desktop/vision" do
       get '/users/undeleteds/confirm/:hash' => 'undeleteds#confirm', as: :confirm_undeleted
       resources :undeleteds, path: '/users/undeleteds', only: [:new, :create]
+      resources :c1_amounts, except: [:new, :create]
     end
   end
 

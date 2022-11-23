@@ -40,14 +40,14 @@ echo "</pre>";
 
 $c = $a << 1;
 echo "<pre>";
-printf("\$c << \$a; :\n");
+printf("\$c = \$a << 1 :\n");
 printf("%b\n", $a);
 printf("%b\n", $c);
 echo "</pre>";
 
 $c = $a >> 1;
 echo "<pre>";
-printf("\$c << \$a; :\n");
+printf("\$c = \$a >> 1 :\n");
 printf("%b\n", $a);
 printf("%b\n", $c);
 echo "</pre>";
