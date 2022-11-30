@@ -33,6 +33,15 @@ class PageImagesUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+  DIMENSIONS = {
+    thumbnail: [200, 200],
+  }
+  version :thumbnail, if: :image? do
+    process resize_to_fit: self.superclass::DIMENSIONS[:thumbnail]
+  end
+  def dimensions
+    self.class::DIMENSIONS
+  end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -48,4 +57,10 @@ class PageImagesUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  private
+
+  def image?(attachment)
+    %w(jpg jpeg gif png).include?(attachment.extension)
+  end
 end

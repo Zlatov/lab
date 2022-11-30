@@ -85,6 +85,15 @@ class Model < ActiveRecord::Base
   end
   class Person < ApplicationRecord
     validates_with GoodnessValidator
+    # Тоже отдельный класс валидации
+    validates :pdf, limit_file_size: true
+  end
+  class LimitFileSizeValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      if UploadedFile.size_limit_exceeded?(record.send(attribute).file, file_size_limit)
+        record.errors[attribute] << "must not be larger than #{file_size_limit} MB"
+      end
+    end
   end
 
 

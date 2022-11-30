@@ -51,7 +51,9 @@ class Tovar
 
   has_many :video_cards,
     class_name: '::VideoCard',
-    through: :video_cards_rels
+    through: :video_cards_rels,
+    after_add: :log_add_vc,
+    after_remove: :log_remove_vc
 
 class TovarsVideoCard
 
