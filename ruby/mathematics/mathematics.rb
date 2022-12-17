@@ -7,6 +7,10 @@ a = 1.15
 b = a % 0.5
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+a = 101
+b = 100
+c = a % b
+print 'c: '.red; puts c
 # exit
 
 puts 'Окружение строки тэгом враппера при выводе массива записей'.green

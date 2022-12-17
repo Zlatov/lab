@@ -4,6 +4,7 @@ require 'awesome_print'
 require 'nokogiri'
 require 'active_support/all'
 
+puts 'Как читать ноду (Hash.from_xml | Nokogiri::XML)'.green
 Nokogiri::XML::Reader(File.open('./data.xml')).each do |node|
   next unless node.name == 'food' && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
   print 'node.inner_xml [String]: '.red; puts node.inner_xml
@@ -26,6 +27,25 @@ end
 #     imports << import
 #   end
 # end
+
+puts 'Чтение XML как бы построчно'.green
+response = File.open('./data.xml')
+row_count = Nokogiri::XML(response).search('food').count
+print 'row_count: '.red; puts row_count
+import_data = []
+response.pos = 0 if response.is_a? File
+Nokogiri::XML::Reader(response).each do |node|
+  next unless node.name == 'food' && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
+  node_data = Hash.from_xml(node.outer_xml)['food']
+  # node_data = Nokogiri::XML(node.outer_xml).at('./food')
+  record_data = {}
+  record_data[:name] = node_data['name']
+  record_data[:price] = node_data['price']
+  record_data[:description] = node_data['description']
+  record_data[:calories] = node_data['calories']
+  import_data << record_data
+end
+print 'import_data: '.red; p import_data
 
 =begin
     xml_warehouses = xml(__method__, options[:use_temp])

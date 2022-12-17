@@ -81,13 +81,13 @@ class VideoCard
 class User
   self.primary_key = 'sid'
   has_and_belongs_to_many :groups,
-    class_name: "Market::Model::Add::Group", # имя связываемой таблицы
+    class_name: 'Market::Model::Add::Group', # имя связываемой модели
     join_table: :market_us_gr, # имя смежной таблицы
     foreign_key: :user_sid, # FK в смежной таблице для этого класса
     association_foreign_key: :group_id # FK в смежной таблице для связываемого класса
 class Group
   has_and_belongs_to_many :users,
-    class_name: "Market::Model::Main::User",
+    class_name: 'Market::Model::Main::User',
     join_table: :market_us_gr,
     foreign_key: :group_id,
     association_foreign_key: :user_sid

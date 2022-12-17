@@ -63,6 +63,9 @@ namespace :temp do
     Rake::Task['taskname2'].execute
     Rake::Task['taskspace:taskname2'].execute # execute запускает блок do end без зависимых задач
     Rake::Task['taskspace:taskname2'].invoke # invoke запускает с зависимыми задачами
+    # Зависимые задачи это когда:
+    # task :all => [:price, :merge, :new, :correct_sqlite, :actual] do...
+    # 
     # или в командной строке
     # $ RAILS_ENV=production rails taskname2 taskspace:taskname2
   end

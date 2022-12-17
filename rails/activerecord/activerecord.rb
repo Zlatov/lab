@@ -188,6 +188,7 @@ users = User.select('user.*', 'tk.count_true_comments')
 Model.joins(:relation).where()
 Model.left_outer_join(:relation).where()
 Model.includes(:relation).where().references(:relation)
+Model.eager_load(:relation)
 Model.distinct.joins(:relation).where(relation: {field: :value})
 Model.distinct.joins(:relation).where(relation: {field: :value}).preload(:relation, :relation2)
 
@@ -195,7 +196,7 @@ Model.distinct.joins(:relation).where(relation: {field: :value}).preload(:relati
 .eager_load().where().preload()            # Подгружает ассоциации одним запросом, фильтрация накладывается на ассоциации даже с preload
 .distinct.joins().where().preload()        # Подгружает ассоциации отдельными запросами, фильтрация НЕ накладывается на ассоциации
 
-# .eager_load() равнозначен includes().references()
+# .eager_load() равнозначен .includes().references()
 
 # .preload - отдельный подзапрос
 class Person < ActiveRecord::Base
