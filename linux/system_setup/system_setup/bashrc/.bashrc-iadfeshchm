@@ -45,6 +45,7 @@ alias cdagofolio='cd ~/projects/my/agofolio'
 alias cdnestedarray='cd ~/projects/my/nested_array'
 alias cdcmc='cd ~/projects/anastasia/cmc'
 alias cdprioritize='cd ~/projects/my/prioritize'
+alias cdstore='cd ~/projects/my/store'
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'

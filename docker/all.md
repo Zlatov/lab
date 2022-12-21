@@ -42,6 +42,12 @@ sudo rm /usr/local/bin/docker-compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 docker-compose --version
 # docker-compose version 1.26.0, build d4451659
+
+# норм (https://docs.docker.com/compose/install/other/):
+curl -SL https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+ls /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
 ```
 
 
@@ -106,4 +112,27 @@ __Portainer - веб интерфейс докера__
 ```bash
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+```
+
+
+## Использование docker-compose
+
+```sh
+docker-compose config # Проверить конфигурацию
+docker-compose up --build # собираем контейнеры в первый раз
+docker-compose stop # все контейнеры...
+docker-compose start
+
+docker exec -it pg bash
+
+docker-compose rm store_db # Удалить контейнер store_db (удалит все данные если не в volumes!!!)
+# удатлить тут: http://localhost:9000/#/volumes И:
+sudo rm -rf ./volumes/ # чтобы наверняка удалить данные с удалением контейнеров )))
+docker volume rm ...
+
+docker-compose up --build --no-start
+# И вообще
+docker-compose --help
+docker-compose command --help
+# docker-compose run store_db bash # (((
 ```

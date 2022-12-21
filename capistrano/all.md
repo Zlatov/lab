@@ -25,7 +25,9 @@ __Глобально:__
 ```sh
 # Проверка создания структуры на сервере
 bundle exec cap production deploy:check
+# Теперь, с капистрано,  вместо `git pull`:
+bundle exec cap production git:create_release
 
 bundle exec cap --help
-bundle exec cap -T
+bundle exec cap -T # Список всех возможных задач
 ```
