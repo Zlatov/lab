@@ -59,3 +59,8 @@ Metrics/AbcSize:
   # Enabled: false
   Max: 30
   CountRepeatedAttributes: false
+
+# Я так привык — каждый пробел (отступ) должен быть обоснован, а не нафигачен
+# до «красивого» отступа.
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation

@@ -17,7 +17,7 @@
 # has_and_belongs_to_many
 # 
 
-rails g migration CreateJoinTableAffiliatesArticles affiliate article
+# `rails g migration CreateJoinTableAffiliatesArticles affiliate article`
     create_join_table :affiliates, :articles do |t|
       t.index [:affiliate_id, :article_id], unique: true, name: "uq_affiliates_articles_affiliateidarticleid"
       # t.index [:article_id, :affiliate_id]
@@ -222,6 +222,14 @@ gem "migration_data"
       t.string  "attachment"
     end
   end
+  # Порядок:
+  # def data_before
+  # def change/up
+  # def data/data_after
+  # 
+  # def rollback_before
+  # def change/down
+  # def rollback/rollback_after
   def data
     stack_path = Rails.root.join 'tmp', 'stack.json'
     stack_json = File.read stack_path

@@ -2,6 +2,26 @@
 
 Система авторизации, достаточно простая и поэтому понятная/масштабируемая/надёжная.
 
+
+## Установка
+
+```sh
+bundle add pundit
+rails g pundit:install
+```
+
+## Использование
+
+```sh
+rails g pundit:policy post
+```
+
+```rb
+class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+end
+```
+
 ## Получить права вне контроллера или вьюхи
 
 Обычно это исключение из правил, однако условная валидация в модели:

@@ -18,3 +18,9 @@ git fetch --tags
 # Удалить
 git tag -d tagname  # — удалить метку tag с именем tagname
 git push --delete origin 12345  # — запушить удаление тега.
+
+# Изменить описание (сообщение) к старому тегу и отправить в репозиторий:
+git tag 0.3.0 0.3.0^{} -f -a # откроет тектовый редактор для изменения сообщения
+git push --tags # должно запретить: ! [rejected] 0.3.0 -> 0.3.0 (already exists)
+git push --delete origin 0.3.0 # удалит в оригинальном репозитории тег: - [deleted] 0.3.0
+git push --tags # * [new tag] 0.3.0 -> 0.3.0

@@ -15,6 +15,14 @@ yarn add bootstrap-icons
 // app/javascript/packs/application.js
 import "bootstrap"
 import "bootstrap-icons/font/bootstrap-icons.css"
+
+// Иконки всётаки через application.scss:
+@import "bootstrap-icons/font/bootstrap-icons";
+@font-face {
+  font-family: "bootstrap-icons";
+  src: font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"),
+    font-url("bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
+}
 ```
 
 ## Медиа-запросы

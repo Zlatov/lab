@@ -2,6 +2,7 @@
 _/etc/systemd/system/*.service_, например:
 
 ```bash
+# /etc/systemd/system/zlatov.local.service
 [Unit]
 Description=Puma Zlatov
 Requires=network.target
@@ -12,6 +13,7 @@ User=deployer
 Group=deployer
 WorkingDirectory=/home/deployer/app/zlatov/current
 EnvironmentFile=/home/deployer/app/zlatov/current/env.sh
+Environment="RAILS_ENV=production"
 
 #ExecStop=/home/myapp51/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp51/app/current/config/puma.rb stop
 #ExecReload=/home/myapp51/.rbenv/bin/rbenv exec bundle exec pumactl -F /home/myapp51/app/current/config/puma.rb phased-restart

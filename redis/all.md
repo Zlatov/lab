@@ -41,16 +41,20 @@ maxmemory-policy allkeys-lru
 sudo systemctl enable --now redis
 sudo systemctl status redis.service
 sudo systemctl restart redis.service
-```
 
-`redis-cli`
+# Проверка
+telnet localhost 6379
+> ping
+# +PONG
+# ^] Ctrl+d
 
-```
+# Проверка локально-установленной консольной утилиты
+redis-cli
 > ping
 PONG
-```
+# Ctrl+d
 
-```
+# Просмотр настроек и статистики
 redis-cli info
 redis-cli info stats
 redis-cli info server
