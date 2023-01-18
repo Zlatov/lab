@@ -1,0 +1,45 @@
+<snippet>
+	<content><![CDATA[
+<ul class="nav nav-tabs mb-3">
+
+  <li class="nav-item">
+    <% if action_name == 'index' %>
+      <span class="nav-link active">Список</span>
+    <% else %>
+      <%= link_to 'Список', admin_${1:model}s_path, class: 'nav-link' %>
+    <% end %>
+  </li>
+
+  <li class="nav-item">
+    <% if action_name == 'new' %>
+      <span class="nav-link active">Создать</span>
+    <% else %>
+      <%= link_to 'Создать', new_admin_${1:model}_path, class: 'nav-link' %>
+    <% end %>
+  </li>
+
+  <% if @admin_${1:model}.present? && !@admin_${1:model}.new_record? %>
+    <li class="nav-item">
+      <% if action_name == 'edit' %>
+        <span class="nav-link active">Редактировать</span>
+      <% else %>
+        <%= link_to 'Редактировать', edit_admin_${1:model}_path(@admin_${1:model}), class: 'nav-link' %>
+      <% end %>
+  <% end %>
+
+  <% if @admin_${1:model}.present? && !@admin_${1:model}.new_record? %>
+    <li class="nav-item">
+      <% if action_name == 'show' %>
+        <span class="nav-link active">Просмотреть</span>
+      <% else %>
+        <%= link_to 'Просмотреть', @admin_${1:model}, class: 'nav-link' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+]]></content>
+	<tabTrigger>admin_menu</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB admin_menu</description>
+</snippet>

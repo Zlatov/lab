@@ -47,7 +47,7 @@ will_save_change_to_attribute?(attr_name)
 attribute_change_to_be_saved(attr_name)
 # Возвращает изменение атрибута, которое будет сохранено при следующем
 # сохранении.
-attribute_in_database
+attribute_in_database(attr_name)
 # Возвращает значение атрибута в базе данных, а не значение в памяти, которое
 # будет сохранено при следующем сохранении записи.
 changes_to_save

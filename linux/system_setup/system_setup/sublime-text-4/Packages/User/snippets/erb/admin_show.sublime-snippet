@@ -38,7 +38,7 @@
 
 <div class="text-end">
   <div class="btn-group">
-    <%= link_to path_edit(@admin_${1:model}),
+    <%= link_to edit_admin_${1:model}_path(@admin_${1:model}),
       title: 'Редактировать',
       'data-bs-toggle' => 'tooltip',
       class: 'btn btn-secondary btn-sm' do
