@@ -26,8 +26,23 @@
     Селект
   -->
 
-  <%= form.collection_select :role_ids, Role.all, :id, :name, {}, {multiple: true, size: 10} %>
-  <%= f.select :slide_event_hidden, [["Скрыт","true"],["Виден","false"]] %>
+  <!-- collection_select -->
+  <%= form.collection_select :role_ids,
+    Role.all, :id, :name,
+    {
+      # prompt: true # Предложение выбрать, пункт с предложением не отображается если полю назначен один из пунктов выбора.
+      # prompt: 'Выберите необходимые права:'
+      # include_blank: true # В отличии от prompt - всегда отображает пустой пункт для установки значения поля в NULL.
+      # include_blank: 'Не назначен'
+    },
+    {
+      multiple: true,
+      size: 10,
+      class: 'form-select form-select-sm font-monospace'
+    }
+  %>
+
+  <!-- select -->
   <!--
     Чтобы задать выбранные:
     при использовании options_for_select:
@@ -36,29 +51,45 @@
     при передаче массива вместо использования options_for_select:
       - хелпер form.select автоматически выберет как в модели.
   -->
-  <%= f.select :pickup_affiliate_id, @affiliate_select_options, include_blank: true, disabled: [33, 60] %>
-  <%= f.select :pickup_affiliate_id, @affiliate_select_options, {}, {'data-initial_client_id': @current_client.id} %>
-  <!-- Наиболее полный хелпер form.select -->
-  <%=
-    form.select :field_name,
-      options_for_select(
-        [
-          ['Надпись 1', 'значение1', {'data-custom_html_attribute' => '1'}],
-          ['Надпись 2', 'значение2', {'data-custom_html_attribute' => '2'}],
-        ],
-        disabled: ['значение2', 2],
-        selected: 1
-      ),
-      {
-        include_blank: true,
-        # prompt: 'Выберите',
-      },
-      {
-        multiple: true,
-        size: 9,
-        'data-custom_html_attribute' => '1'
-      }
+  <%= form.select :field_name,
+    options_for_select(
+      [
+        ['Надпись 1', 'значение1', {'data-custom_html_attribute' => '1'}],
+        ['Надпись 2', 'значение2', {'data-custom_html_attribute' => '2'}],
+      ],
+      disabled: ['значение2', 2],
+      selected: 1
+    ),
+    {
+      include_blank: true,
+      # prompt: 'Выберите',
+    },
+    {
+      multiple: true,
+      size: 9,
+      'data-custom_html_attribute' => '1'
+    }
   %>
+  <%= form.select :model_ids,
+    options_from_collection_for_select(
+      Model.all, :id, :name,
+      disabled: [1, 2, 3],
+      selected: [3, 4, 5]
+    ),
+    {
+      # prompt: true # Предложение выбрать, пункт с предложением не отображается если полю назначен один из пунктов выбора.
+      # prompt: 'Выберите необходимые права:'
+      # include_blank: true # В отличии от prompt - всегда отображает пустой пункт для установки значения поля в NULL.
+      # include_blank: 'Не назначен'
+    },
+    {
+      multiple: true,
+      size: 10,
+      class: 'form-select form-select-sm font-monospace'
+    }
+  %>
+
+  <!-- select_tag -->
   <%=
     select_tag(
       :emails,

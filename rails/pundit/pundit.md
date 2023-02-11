@@ -14,6 +14,7 @@ rails g pundit:install
 
 ```sh
 rails g pundit:policy post
+rails g pundit:policy admin/product
 ```
 
 ```rb

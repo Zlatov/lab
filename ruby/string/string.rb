@@ -45,13 +45,16 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 # exit 0
 
-puts 'Альтернатива php str_replace, замена подстрок в тексте.'.green
+
+puts "\n"
+puts 'Замена в строке'.green
 a = '??asd?? ??asd??'
 b = a.gsub '??asd??', 'asd'
 print 'a: '.red; puts a
 print 'b: '.red; puts b
-# exit
 
+puts 'Замена в строке по хэш (альтернатива php str_replace, максимально простое приближение)'.green
+puts 'Много gsub но простая замена ключа на значение'.blue
 a = "??asd?? ??asd?? ??zxc??"
 b = {
   "??asd??" => "asdasd",
@@ -60,9 +63,28 @@ b = {
 print 'a: '.red; puts a
 b.each{|k,v| a.gsub! k, v}
 print 'a: '.red; puts a
+puts 'Или с одним gsub но необходима общая регулярка для ключей'.blue
+a = "??asd?? ??asd?? ??zxc??"
+b = {
+  "??asd??" => "asdasd",
+  "??zxc??" => "zxczxc",
+}
+c = a.gsub(/\?\?\S+\?\?/, b)
+print 'c: '.red; puts c
+
+puts 'Замена в строке с подстановкой найденного'.green
+puts 'Подстановка найденного во втором аргументе в виде \n'.blue
+puts '<img src="../../images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
+puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
+puts 'Подстановка найденного в блоке через переменную'.blue
+a = 'asd 0001 zxc'
+b = a.gsub!(/[0-9]+/){|code| "<code>#{code}</code>"}
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 # exit
 
-# Многострочность multiline
+
+puts "\n"
 puts 'Многострочность multiline'.green
 a = 'строка'
   # хередок синтаксис
@@ -191,15 +213,6 @@ print 'a: '.red; puts a.strftime("%m/%d/%Y")
 print 'b: '.red; puts b.strftime("%m/%d/%Y")
 print 'c: '.red; puts c.strftime("%m/%d/%Y")
 # exit
-
-# Замена в строке
-puts 'Замена в строке'.green
-a = '<strong>asdf<strong>'
-b = a.gsub! '<', '&lt;'
-print 'a: '.red; puts a
-print 'b: '.red; puts b
-puts '<img src="../../images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
-puts '<img src="images/sh_2.gif">'.gsub(/\ssrc="((\.\.\/)+)*?images/m, ' src="' + 'http://zenonline.ru/as/df/gh/' + '\1images')
 
 a = '1231231'
 b = a.gsub /\B(?=(\d{3})+(?!\d))/, ' '

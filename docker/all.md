@@ -113,6 +113,19 @@ __Portainer - веб интерфейс докера__
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
+Настройка SSL для доступа к удалённому docker в portainer
+
+https://docs.docker.com/engine/security/protect-access/
+
+```sh
+# /etc/systemd/system/docker.service.d/10-machine.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock --storage-driver overlay2 --tlsverify --tlscacert /etc/docker/ssl/ca.pem --tlscert /etc/docker/ssl/server-cert
+.pem --tlskey /etc/docker/ssl/server-key.pem --label provider=generic
+# systemctl daemon-reload
+# systemctl restart docker
+```
 
 
 ## Использование docker-compose
@@ -135,4 +148,22 @@ docker-compose up --build --no-start
 docker-compose --help
 docker-compose command --help
 # docker-compose run store_db bash # (((
+
+# Зааттачиться к контейнеру в bash/sh
+docker-compose exec store_ruby sh
+# Установить в контейнере bash
+apk add --no-cache bash
+docker-compose exec store_ruby bash
+# Закомитить изменения контейнера store_ruby в image store_ruby
+docker commit store_ruby store_ruby
+# Добавить тег с префиксом пользователя hub.docker.com
+docker tag store_ruby zlatov/store_ruby
+# Сохранить изображение
+docker push zlatov/store_ruby
+
+# Запустить рельсовую команду внутри контейнера
+# если контейнер запущен, то можно exec:
+docker-compose exec store_ruby bundle exec rails db:seed
+# если контейнер остановлен - необходимо запустить не основной с удалением:
+docker-compose run --rm store_ruby bundle exec rails db:seed
 ```
