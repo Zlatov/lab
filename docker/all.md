@@ -33,21 +33,18 @@ docker --version
 ## Установка docker-compose
 
 ```sh
-sudo curl -L "https://github.com/docker/compose/releases/download/2.10.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-ls /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Откуда брать ссылку для скачивания docker-compose: https://github.com/docker/compose/releases
+# Какую именно сборку скачивать, выполнить: echo "$(uname -s)-$(uname -m)"
+sudo su
+curl -SL https://github.com/docker/compose/releases/download/v2.15.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+ls -la /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose # Если необходимо!
+^D
 docker-compose --version
-# /usr/local/bin/docker-compose: строка 1: Not: команда не найдена
-sudo rm /usr/local/bin/docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-docker-compose --version
-# docker-compose version 1.26.0, build d4451659
+docker-compose top
 
-# норм (https://docs.docker.com/compose/install/other/):
-curl -SL https://github.com/docker/compose/releases/download/v2.14.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-ls /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version
+# Может потребоваться добавить пользователя в группу docker
+sudo usermod -a -G docker deployer
 ```
 
 
