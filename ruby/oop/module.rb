@@ -85,9 +85,9 @@ module Modul
     attr_accessor :instance_var
   end
 
-  # class_methods do
-  #   # attr_accessor :param
-  # end
+  class_methods do
+    attr_accessor :asd
+  end
 
   module ClassMethods
     def custom_class_method

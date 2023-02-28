@@ -44,6 +44,7 @@ WantedBy=multi-user.target
 
 ```sh
 # nginx
+# mailcatcher.local.conf
 server {
     listen 80;
     server_name mailcatcher.local;
@@ -58,5 +59,7 @@ server {
         proxy_buffering off;
     }
 }
-
+# nginx -t
+# nginx -s reload
+# systemctl restart nginx
 ```

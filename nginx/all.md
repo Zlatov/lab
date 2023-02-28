@@ -6,13 +6,23 @@
 
 ## Остановка, запуск, статус
 
-* `sudo nginx -t` — проверить кофигурацию.
-* `sudo nginx -s reload` — пперезапустить конфигурационный файл без перезагрузки Nginx.
-* `sudo service nginx stop`
-* `sudo service nginx start`
-* `sudo service nginx restart`
-* `sudo service nginx reload`
-* `sudo service nginx status`
+```sh
+# Проверить кофигурацию:
+nginx -t
+# Перезапустить конфигурационный файл без перезагрузки Nginx:
+nginx -s reload
+
+sudo service nginx stop
+sudo service nginx start
+sudo service nginx restart
+sudo service nginx reload
+sudo service nginx status
+
+systemctl stop nginx
+systemctl start nginx
+systemctl restart nginx
+systemctl status nginx
+```
 
 
 ## Настойки

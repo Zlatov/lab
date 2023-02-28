@@ -9,8 +9,19 @@ https://habr.com/ru/post/310460/
 sudo apt-get update
 sudo apt install docker.io
 
+# Для локальной машины можно:
 sudo yum check-update
 curl -fsSL https://get.docker.com/ | sh
+
+# Для продакшн
+sudo yum install -y yum-utils
+sudo yum-config-manager \
+  --add-repo \
+  https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl start docker
+sudo docker run hello-world
+sudo usermod -a -G docker deployer  
 ```
 
 ```bash
@@ -34,7 +45,8 @@ docker --version
 
 ```sh
 # Откуда брать ссылку для скачивания docker-compose: https://github.com/docker/compose/releases
-# Какую именно сборку скачивать, выполнить: echo "$(uname -s)-$(uname -m)"
+# Какую именно сборку скачивать, выполнить:
+echo "$(uname -s)-$(uname -m)"
 sudo su
 curl -SL https://github.com/docker/compose/releases/download/v2.15.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 ls -la /usr/local/bin/docker-compose
@@ -110,18 +122,31 @@ __Portainer - веб интерфейс докера__
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
-Настройка SSL для доступа к удалённому docker в portainer
+Настройка SSL для доступа к удалённому docker в portainer:
 
 https://docs.docker.com/engine/security/protect-access/
 
+и копируем файлы на локальную машину: ca.pem cert.pem key.pem
+
 ```sh
 # /etc/systemd/system/docker.service.d/10-machine.conf
+# Запуск докер с SSL ключами
 [Service]
 ExecStart=
-ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock --storage-driver overlay2 --tlsverify --tlscacert /etc/docker/ssl/ca.pem --tlscert /etc/docker/ssl/server-cert
-.pem --tlskey /etc/docker/ssl/server-key.pem --label provider=generic
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H unix:///var/run/docker.sock --storage-driver overlay2 --tlsverify --tlscacert /etc/docker/ssl/ca.pem --tlscert /etc/docker/ssl/server-cert.pem --tlskey /etc/docker/ssl/server-key.pem --label provider=generic
 # systemctl daemon-reload
 # systemctl restart docker
+```
+
+Настройка подключения портейнера к серверу:
+
+Endpoints -> Directly connect to the Docker API:
+Endpoint URL: domain:2376
+
+Может понадобится открыть порт через iptables
+
+```sh
+iptables -I INPUT -p tcp -m tcp --dport 2376 -j ACCEPT
 ```
 
 

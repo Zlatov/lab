@@ -12,6 +12,12 @@ set -eu
 [[ $(sudo lsof -i -P -n | grep -c :52698) = '1' ]] && echo 'Порт занят.' || echo 'Порт свободен.'
 sudo lsof -i -P -n | grep :9000
 sudo netstat -pnat | grep :9000
+sudo lsof -i -P -n | grep LISTEN
+sudo netstat -tulpn | grep LISTEN
+sudo ss -tulpn | grep LISTEN
+sudo lsof -i:22 ## see a specific port such as 22 ##
+sudo nmap -sTU -O IP-address-Here
+
 
 # Определить процесс и его PID занимающий порт:
 lsof -wni tcp:3000

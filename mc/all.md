@@ -21,6 +21,7 @@ SELECTED_EDITOR="/usr/bin/subl"
 В формате списка файлов (F9 → Левая панель → Формат списка) удобно назначить «Строку мини-статуса» для текущего файла:
 
 ```
+half type name | size | perm
 half type name space | space owner:8 space group:8 space | space perm
 ```
 

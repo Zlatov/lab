@@ -44,3 +44,48 @@ class Foo
     end
   end
 end
+
+puts 'Удалить инстансный метод из класса'.green
+
+foo.an_instance_method
+
+puts 'remove_method - удаляет метод из класса, но вызывается у предка если было наследование.'.blue
+class Foo
+  remove_method :an_instance_method
+end
+# Или
+# Foo.send(:remove_method, :an_instance_method)
+
+foo = Foo.new
+
+begin
+  foo.an_instance_method
+rescue => e
+  puts e.message
+end
+
+puts 'undef_method - удаляет из класса и запрещает вызов из предка если было наследование.'.blue
+class Foo
+  def an_instance_method2
+    puts 'Foo an_instance_method2'
+  end
+end
+class Bar < Foo
+  def an_instance_method2
+    puts 'Bar an_instance_method2'
+  end
+end
+
+bar = Bar.new
+
+bar.an_instance_method2
+
+Bar.send(:undef_method, :an_instance_method2)
+
+bar = Bar.new
+
+begin
+  bar.an_instance_method2
+rescue => e
+  puts e.message
+end
