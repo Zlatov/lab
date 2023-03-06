@@ -163,6 +163,29 @@ a.each_with_index do |value, key|
   print key.to_s.red, ' ', value.to_s, "\n"
 end
 
+puts 'Пребор for но рубокоп предлагает each'.green
+for i in 0..0
+  print 'i: '.red; puts i
+end
+for i in 0..1
+  print 'i: '.red; puts i
+end
+for i in 1..0
+  print 'i: '.red; puts i
+end
+
+(0..0).each do |i|
+  print 'i: '.red; puts i
+end
+(0..1).each do |i|
+  print 'i: '.red; puts i
+end
+(1..0).each do |i|
+  print 'i: '.red; puts i
+end
+# exit
+
+
 puts 'for in'.blue
 a = [1,2,3]
 for val in a

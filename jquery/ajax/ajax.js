@@ -108,7 +108,7 @@ jQuery.ajax({
 
   // dataType:string(определяется автоматически (xml, json, script, или html))
   // Тип данных, в котором ожидается получить ответ от сервера. Если он не задан, jQuery попытается определить его автоматически
-  dataType: 'json',
+  dataType: "json",
 
   // error(jqXHR, textStatus, errorThrown):function,array
   // global:boolean(true)

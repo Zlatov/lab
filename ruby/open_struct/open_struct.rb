@@ -29,12 +29,14 @@ print 'a[\'zxc\']: '.red; puts a['zxc']
 
 puts 'Создание полей на лету'.green
 a = OpenStruct.new asd: 1
-# a.zxc = 2
-# a[:zxc] = 2
-a['zxc'] = 2
+a.zxc = 2
+a[:zxc] = 3
+a['zxc'] = 4
 print 'a.zxc: '.red; puts a.zxc
 print 'a[:zxc]: '.red; puts a[:zxc]
 print 'a[\'zxc\']: '.red; puts a['zxc']
+print 'a.to_h: '.red; puts a.to_h
+# exit
 
 puts 'Сериализация'.green
 puts 'Сериализация единичного объекта'.blue

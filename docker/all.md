@@ -189,3 +189,8 @@ docker-compose exec store_ruby bundle exec rails db:seed
 # если контейнер остановлен - необходимо запустить не основной с удалением:
 docker-compose run --rm store_ruby bundle exec rails db:seed
 ```
+
+
+## TODO Запуск контейнера не из под root
+
+https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e00f8ee15
