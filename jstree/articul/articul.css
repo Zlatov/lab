@@ -1,0 +1,201 @@
+.jstree {
+  position: relative;
+  margin-right: 116px;
+}
+.jstree::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 116px;
+  right: -116px;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+
+
+.jstree-node[data-faicon] {
+  position: relative;
+}
+.jstree-node[data-faicon]:before {
+  content: attr(data-faicon);
+  font-family: "Font Awesome 6 Free";
+  position: absolute;
+  z-index: 2;
+  display: inline-block;
+  width: 32px;
+  right: -32px;
+  box-sizing: border-box;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-align: center;
+  overflow: hidden;
+}
+.jstree-node[data-faicon-red]:before {
+  color: red;
+}
+.jstree-node[data-faicon-green]:before {
+  color: green;
+}
+.jstree-node[data-faicon-blue]:before {
+  color: blue;
+}
+
+
+
+
+.jstree-node[data-text] {
+  position: relative;
+}
+.jstree-node[data-text]:after {
+  content: attr(data-text);
+  display: inline-block;
+  position: absolute;
+  right: -116px;
+  width: 84px;
+  box-sizing: border-box;
+  padding-right: 4px;
+  text-align: right;
+  overflow: hidden;
+  z-index: 2;
+}
+
+
+
+
+.jstree-anchor[data-faicon-before] {
+  position: relative;
+}
+.jstree-anchor[data-faicon-before]::before {
+  content: attr(data-faicon-before);
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  color: attr(data-faicon-before-color);
+}
+.jstree-anchor[data-faicon-before-red]::before {
+  color: red;
+}
+.jstree-anchor[data-faicon-before-green]::before {
+  color: green;
+}
+.jstree-anchor[data-faicon-before-blue]::before {
+  color: blue;
+}
+
+
+
+
+.jstree-anchor[data-faicon-after] {
+  position: relative;
+}
+.jstree-anchor[data-faicon-after] > i {
+  margin-right: 28px;
+}
+.jstree-anchor[data-faicon-after]::after {
+  content: attr(data-faicon-after);
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+
+  position: absolute;
+  left: 26px;
+
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+}
+.jstree-anchor[data-faicon-before][data-faicon-after]::after {
+  left: 50px;
+}
+.jstree-anchor[data-faicon-after-red]::after {
+  color: red;
+}
+.jstree-anchor[data-faicon-after-green]::after {
+  color: green;
+}
+.jstree-anchor[data-faicon-after-blue]::after {
+  color: blue;
+}
+
+
+
+
+.jstree-anchor[data-icon-before] > i,
+.jstree-anchor[data-icon-after] > i {
+  position: relative;
+}
+.jstree-anchor[data-icon-before] > i,
+.jstree-anchor[data-icon-after] > i {
+  margin-right: 26px;
+}
+.jstree-anchor[data-faicon-after][data-icon-before] > i,
+.jstree-anchor[data-faicon-after][data-icon-after] > i {
+  margin-right: 50px;
+}
+.jstree-anchor[data-icon-before][data-icon-after] > i {
+  margin-right: 50px;
+}
+.jstree-anchor[data-faicon-after][data-icon-before][data-icon-after] > i {
+  margin-right: 74px;
+}
+.jstree-anchor[data-icon-before] > i::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+
+  position: absolute;
+  left: 26px;
+  width: 24px;
+  height: 24px;
+}
+.jstree-anchor[data-faicon-after][data-icon-before] > i::before {
+  left: 50px;
+}
+.jstree-anchor[data-icon-before-red] > i::before {
+  color: red;
+}
+.jstree-anchor[data-icon-before-green] > i::before {
+  color: green;
+}
+.jstree-anchor[data-icon-before-blue] > i::before {
+  color: blue;
+}
+
+
+
+
+.jstree-anchor[data-icon-after] > i::after {
+  content: "\f00d";
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+
+  position: absolute;
+  left: 26px;
+  width: 24px;
+  height: 24px;
+}
+.jstree-anchor[data-icon-before][data-icon-after] > i::after {
+  left: 50px;
+}
+.jstree-anchor[data-faicon-after][data-icon-after] > i::after {
+  left: 50px;
+}
+.jstree-anchor[data-faicon-after][data-icon-before][data-icon-after] > i::after {
+  left: 74px;
+}
+.jstree-anchor[data-icon-after-red] > i::after {
+  color: red;
+}
+.jstree-anchor[data-icon-after-green] > i::after {
+  color: green;
+}
+.jstree-anchor[data-icon-after-blue] > i::after {
+  color: blue;
+}

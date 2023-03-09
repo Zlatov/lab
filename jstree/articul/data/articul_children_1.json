@@ -1,0 +1,13 @@
+[
+  {
+    "id": "2",
+    "parent": "1",
+    "text": "Широкоформатные УФ принтеры",
+    "data": {},
+    "type": "default",
+    "children": true,
+    "state": {
+      "opened": true
+    }
+  }
+]

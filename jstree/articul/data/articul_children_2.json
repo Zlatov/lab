@@ -1,0 +1,178 @@
+[
+  {
+    "id": "15",
+    "text": "Asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe asd zxc qwe",
+    "data": {
+      "article": "000011942"
+    },
+    "type": "file",
+    "li_attr": {
+      "class": "asd",
+      "data-faicon": "\uf00c",
+      "data-faicon-green": true,
+      "data-text": "000011942"
+    }
+  },
+  {
+    "id": "3",
+    "text": "<a href=\"articul2.html\">Линк не работает, см event select_node.jstree</a> УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1",
+    "data": {
+      "article": "000011942"
+    },
+    "type": "file",
+    "li_attr": {
+      "data-faicon": "\uf00c",
+      "data-faicon-green": true
+    },
+    "a_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-faicon-before-green": true,
+      "data-faicon-after": "\uf3d1",
+      "data-faicon-after-blue": true,
+      "title": "Текст подсказки по иконкам"
+    }
+  },
+  {
+    "id": "4",
+    "text": "Широкоформатный УФ принтер 2",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "li_attr": {
+      "data-text": "000011942"
+    },
+    "a_attr": {
+      "data-icon-before": true,
+      "data-icon-before-green": true,
+      "data-icon-after": true,
+      "data-icon-after-red": true
+    }
+  },
+
+  {
+    "id": "5",
+    "text": "faicon-before",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-before": "\uf00c"
+    }
+  },
+  {
+    "id": "6",
+    "text": "faicon-before icon-before",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-icon-before": "\uf00c"
+    }
+  },
+  {
+    "id": "7",
+    "text": "faicon-before icon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "8",
+    "text": "faicon-before icon-before icon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-icon-before": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "9",
+    "text": "faicon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "10",
+    "text": "faicon-after icon-before",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-after": "\uf00c",
+      "data-icon-before": "\uf00c"
+    }
+  },
+  {
+    "id": "11",
+    "text": "faicon-after icon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-after": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "12",
+    "text": "faicon-after icon-before icon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-after": "\uf00c",
+      "data-icon-before": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "13",
+    "text": "faicon-before faicon-after icon-before icon-after",
+    "data": {
+      "article": "000098070"
+    },
+    "type": "file",
+    "a_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-faicon-after": "\uf00c",
+      "data-icon-before": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  },
+  {
+    "id": "14",
+    "text": "asdf",
+    "data": {
+      "article": "000098070"
+    },
+    "class": "asd",
+    "type": "file",
+    "i_attr": {
+      "data-faicon-before": "\uf00c",
+      "data-faicon-after": "\uf00c",
+      "data-icon-before": "\uf00c",
+      "data-icon-after": "\uf00c"
+    }
+  }
+]
