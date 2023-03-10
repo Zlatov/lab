@@ -1,13 +1,13 @@
-.jstree {
+.jstree.jstree-codes {
   position: relative;
-  margin-right: 116px;
+  padding-right: 116px;
 }
-.jstree::after {
+.jstree.jstree-codes::after {
   content: "";
   display: block;
   position: absolute;
   width: 116px;
-  right: -116px;
+  right: 0;
   top: 0;
   bottom: 0;
   background-color: white;
@@ -22,6 +22,7 @@
 .jstree-node[data-faicon]:before {
   content: attr(data-faicon);
   font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   position: absolute;
   z-index: 2;
   display: inline-block;
@@ -71,6 +72,7 @@
 .jstree-anchor[data-faicon-before]::before {
   content: attr(data-faicon-before);
   font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   font-style: normal;
 
   display: inline-block;
@@ -101,6 +103,7 @@
 .jstree-anchor[data-faicon-after]::after {
   content: attr(data-faicon-after);
   font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   font-style: normal;
 
   position: absolute;
@@ -148,6 +151,7 @@
 .jstree-anchor[data-icon-before] > i::before {
   content: "\f00c";
   font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   font-style: normal;
 
   position: absolute;
@@ -174,6 +178,7 @@
 .jstree-anchor[data-icon-after] > i::after {
   content: "\f00d";
   font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   font-style: normal;
 
   position: absolute;

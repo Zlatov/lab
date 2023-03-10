@@ -21,7 +21,7 @@ $(document).ready(function() {
           "children": [
             {
               "id": "j9_76",
-              "text": "Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1",
+              "text": "Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1 Широкоформатный УФ принтер 1<span class=\"articul\">321654987</span>",
               "data": {
                 "article": "000011942"
               },
@@ -87,7 +87,10 @@ $(document).ready(function() {
             callback.call(this, data)
           }
         })
-      }
+      },
+      // Отменяет фокусировку (и перемотку к последней фокусированной ноде) если
+      // был выполнен клик в "пустом" месте (или по псевдоэлементу).
+      restore_focus: false
     },
     plugins: [
       "types"
@@ -108,11 +111,18 @@ $(document).ready(function() {
     // var href = data.node.a_attr.href;
     // window.location.href = href;
   }).on("click", ".jstree-node", function(event) {
-    event.stopPropagation()
-    event.stopImmediatePropagation()
-    // console.log('event: ', event)
-    // console.log('event.offsetX: ', event.offsetX)
-    // console.log('event.target.offsetWidth: ', event.target.offsetWidth)
+    // Если применить event.stopPropagation() тогда отменится стандартный event
+    // jstree "click.jstree", поэтому кастомные обработчики нужно использовать
+    // осторожно!
+    console.log('> click')
+    // event.stopPropagation()
+    // event.stopImmediatePropagation()
+    // if (event.offsetX > event.target.offsetWidth) {
+    //   console.log('> Клик по псевдо-элементу')
+    // } else {
+    //   console.log('> Клик по элементу')
+    // }
+  }).on("click.jstree", function(event, data) {
     if (event.offsetX > event.target.offsetWidth) {
       console.log('> Клик по псевдо-элементу')
     } else {
