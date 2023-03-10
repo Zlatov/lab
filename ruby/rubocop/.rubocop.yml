@@ -37,8 +37,17 @@ Style/EmptyMethod:
 Style/NumericPredicate:
   Enabled: false
 
+# Разбивать метод или блок на подметоды только ради красоты кода не хочу, если
+# всё что нужно сделать в методе задокумментировано и это не дублирующий код а
+# просто большая отдельная задача, то почему бы и не 2000 строк.
 Metrics/MethodLength:
-  Max: 30
+  Max: 100
+Metrics/BlockLength:
+  Max: 100
+Metrics/CyclomaticComplexity:
+  Max: 15
+Metrics/PerceivedComplexity:
+  Max: 15
 
 Metrics/ClassLength:
   Max: 300
@@ -57,10 +66,29 @@ Style/NegatedIf:
 # AbcSize = Math.sqrt(A * A + B * B + C * C)
 Metrics/AbcSize:
   # Enabled: false
-  Max: 30
+  Max: 100
   CountRepeatedAttributes: false
 
 # Я так привык — каждый пробел (отступ) должен быть обоснован, а не нафигачен
 # до «красивого» отступа.
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: key
+
+Layout/FirstHashElementIndentation:
+  EnforcedStyle: consistent
+
+# Короткий синтаксис для слабаков! =) на мой взгляд, когда в одном хэш смешан
+# короткий и полный синтаксис, тогда код читается рывками (читаем один
+# синтаксис, преключаемся на другой, продолжать читать и потом вдруг обратно).
+# Возможно дело привычки.
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+# Терпеть не могу пробелы ради выравнивания, предпочитаю устанавливать
+# необходимое количество отступов (отступ в ruby − кратен двум пробелам).
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
