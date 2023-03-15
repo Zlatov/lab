@@ -1,5 +1,12 @@
 exit
 
+# Метод .require
+# Допустим такие параметры приходят:
+params = ActionController::Parameters.new(user: { ... }, profile: { ... })
+# Так нужно требовать что они (user и profile) обязательны и не пусты
+# (нам нужен не просто наличие ключа, а данные в нём):
+user_params, profile_params = params.require([:user, :profile])
+
   params.require(:post)
   # будет искать params[:post] и вызвать ошибку, если это не существует.
   params.permit(:name)

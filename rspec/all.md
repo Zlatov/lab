@@ -2,7 +2,9 @@
 
 Система тестов для ruby/rails.
 
-Неплохой начальный урок: https://www.youtube.com/watch?v=3ku89naLPg8
+Неплохой начальный урок: https://www.youtube.com/watch?v=3ku89naLPg8 ,
+https://www.youtube.com/watch?v=60g460qWDTU&list=PLWlFXymvoaJ8BVBVvscCO5yG96gkmsZzK
+https://github.com/bodrovis-learning/RSpec-YT-Series
 
 
 ## Установка, настройка

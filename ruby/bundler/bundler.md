@@ -27,7 +27,7 @@ bundle update gem_name # Обновить версию в соответстви
 
 1. Настройка bundle
 
-```
+```bash
 bundle config local.gem_name path/to/gem # Настроить на использование копии гема (в папке).
 bundle config # Покажет специальные настройки.
 bundle config --delete local.gem_name # Удалить специальную настройку для гема.
