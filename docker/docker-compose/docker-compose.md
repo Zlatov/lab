@@ -56,6 +56,29 @@ services:
     env_file:
       - ./variables.env
 
+  es:
+    image: elasticsearch:8.6.2
+    # ports:
+    #   - 9200:9200
+    #   - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    deploy:
+      resources: 
+        limits: 
+          cpus: "0.70"  # 0.50 - Use at most 50% of one CPU core
+          memory: 1000M  # 50M - Use at most 500 MB of RAM
+    # volumes:
+    #   - ./volumes/es_data:/usr/share/elasticsearch/data
+
 # volumes:
 #   'volumes/pg_data': null
 #   'volumes/pg_dump': null

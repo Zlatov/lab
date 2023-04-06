@@ -9,9 +9,13 @@
 <body>
   <div ilorem=2></div>
   <div id="tree"></div>
-  <button type="button" id="change">Изменить ноды и перерисовать.</button>
-  <button type="button" id="change_data">Добавить детей и перерисовать.</button>
-  <button type="button" id="add_deep">Добавить детей глубоко и обновить.</button>
+  <button type="button" id="change">Изменить ноды и перерисовать.</button> <br>
+  <button type="button" id="change_data">Добавить детей и перерисовать (10 в 4).</button> <br>
+  <button type="button" id="add_deep">Добавить детей глубоко и обновить.</button> <br>
+  tree2:
+  <div class="tree2"></div>
+  <button type="button" id="change_children">Изменить детей ноды и перерисовать.</button>
+
   <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="node_modules/jstree/dist/jstree.min.js"></script>
   <script type="text/javascript" src="node_modules/ilorem/dist/ilorem.js"></script>
@@ -33,8 +37,9 @@
       },
       core: {
         data: function (node, callback) {
+          console.log('> data')
           // console.log('this: ', this)
-          // console.log('node: ', node)
+          console.log('node: ', node)
           // console.log('callback: ', callback)
           var data = this.settings.data_custom.json
           if (node.id === "#") {
@@ -45,7 +50,7 @@
         }
       }
     }).on('open_node.jstree', function(event, data) {
-      window.open_node_deep(event, data)
+      // window.open_node_deep(event, data)
     })
 
     $('body').on('click', '#change', function(event) {
@@ -69,13 +74,23 @@
     })
 
     // 
-    // redraw_node(node[mixed], deep[Boolean], is_callback[Boolean], force_render[Boolean]) - перерисовывает один узел Используется внутри.
+    // redraw_node(node[mixed], deep[Boolean], is_callback[Boolean], force_render[Boolean])
     // 
-    // refresh_node(obj[mixed]) - обновляет узел в дереве (перезагружая его дочерние элементы), все открытые узлы внутри этого узла перезагружаются с вызовами load_node.
+    // - перерисовывает один узел Используется внутри.
     // 
-    // load_node(obj[mixed], callback[function]) - загружает узел (выбирает его дочерние элементы, используя core.data настройки). Несколько узлов могут быть переданы с помощью массива.
+    // refresh_node(obj[mixed])
     // 
-    // load_all(obj[mixed], callback[function]) - загружает все ненагруженные узлы
+    // - обновляет узел в дереве (перезагружая его дочерние элементы), все
+    //   открытые узлы внутри этого узла перезагружаются с вызовами load_node.
+    // 
+    // load_node(obj[mixed], callback[function])
+    // 
+    // - загружает узел (выбирает его дочерние элементы, используя core.data
+    //   настройки). Несколько узлов могут быть переданы с помощью массива.
+    // 
+    // load_all(obj[mixed], callback[function])
+    // 
+    // - загружает все ненагруженные узлы
     // 
 
     $('body').on('click', '#change_data', function(event) {
@@ -86,33 +101,35 @@
     })
 
     var add_deep = function() {
-      var struct = $('#tree')
-      var tree = struct.jstree(true)
+      console.log('> add_deep')
+      var tree = $('#tree').jstree(true)
       window.tree = tree
-      tree.settings.data_custom.json.push({id: '111', text: '111', parent: '6'})
+      // tree.settings.data_custom.json.push({id: '111', text: '111', parent: '6'})
       tree.load_node('6')
-      tree.refresh_node('6')
-      tree.settings.data_custom.json.push({id: '222', text: '222', parent: '111'})
-      tree.load_node('111')
-      tree.refresh_node('111')
+      // tree.refresh_node('6')
+      // tree.settings.data_custom.json.push({id: '222', text: '222', parent: '111'})
+      // tree.load_node('111')
+      // tree.refresh_node('111')
       // tree.load_all('111', function() {
       //   tree.refresh_node('111')
       // })
-      console.log('> add_deep done.')
+      // console.log('> add_deep done.')
     }
 
     var open_deep = function() {
+      console.log('> open_deep')
       var struct = $('#tree')
       var tree = struct.jstree(true)
       tree.open_node('4')
       tree.open_node('6')
       tree.open_node('111')
-      console.log('> open_node done.')
+      // console.log('> open_node done.')
     }
 
     function open_node_deep(event, data) {
-      console.log('event: ', event)
-      console.log('data: ', data)
+      console.log('> open_node_deep')
+      // console.log('event: ', event)
+      // console.log('data: ', data)
       var tree = data.instance
       var node = data.node
       node.children.forEach(function(e, i, a) {
@@ -125,9 +142,51 @@
       window.add_deep()
     })
 
-    window.setTimeout(window.add_deep, 100)
-    window.setTimeout(window.open_deep, 1000)
+    window.setTimeout(window.add_deep, 1000)
+    // window.setTimeout(window.open_deep, 2000)
 
+
+    // 
+    // tree2
+    // 
+
+    $(".tree2").jstree({
+      core: {
+        data: function(obj, callback) {
+          console.log('> data2')
+          console.log('obj: ', obj)
+          var url = obj.id === "#" ? "/jstree/redraw/tree2_root.json" : "/jstree/redraw/tree2_1.json"
+          $.ajax({
+            url: url,
+            async: true,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            timeout: 3000
+          })
+          .fail(function(jqXHR, textStatus, errorThrown) {
+            console.log('jqXHR, textStatus, errorThrown: ', jqXHR, textStatus, errorThrown)
+          })
+          .done(function(data) {
+            if (obj.id === "#") {
+              callback.call(this, data)
+            } else {
+              var h = data.filter(function(e) { return e.parent === obj.id })
+              console.log('h: ', h)
+              // callback.call(this, h)
+              callback.call(this, data)
+            }
+          })
+        }
+      }
+    })
+
+    $("body").on("click", "#change_children", function(event) {
+      var tree = $(".tree2").jstree(true)
+      // var node = tree.get_node("1")
+      tree.load_node("1")
+      // tree.load_node("#")
+    })
   </script>
 </body>
 

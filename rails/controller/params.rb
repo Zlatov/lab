@@ -7,6 +7,17 @@ params = ActionController::Parameters.new(user: { ... }, profile: { ... })
 # (нам нужен не просто наличие ключа, а данные в нём):
 user_params, profile_params = params.require([:user, :profile])
 
+params = ActionController::Parameters.new(user: {id: 1}, profile: {id: 1}, link: true, zxc: 'zxc')
+user_params, profile_params = params.require([:user, :profile])
+link = params.permit(:link)[:link]
+asd = params.permit(:asd)[:asd]
+
+# 
+permited_params = params.permit(:catalog_id, :confirm, :_, { offer_ids: [] })
+offer_ids, catalog_id = permited_params.require([:offer_ids, :catalog_id])
+confirm = permited_params[:confirm] == 'true'
+
+
   params.require(:post)
   # будет искать params[:post] и вызвать ошибку, если это не существует.
   params.permit(:name)

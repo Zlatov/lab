@@ -34,6 +34,7 @@ name="${filename%.*}"; echo '$name: ' $name
 # Расширение это символы после первой точки
 extension="${filename#*.}"; echo '$extension: ' $extension
 name="${filename%%.*}"; echo '$name: ' $name
+# exit 0
 
 
 echo

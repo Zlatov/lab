@@ -37,28 +37,53 @@ Style/EmptyMethod:
 Style/NumericPredicate:
   Enabled: false
 
-# Разбивать метод или блок на подметоды только ради красоты кода не хочу, если
-# всё что нужно сделать в методе задокумментировано и это не дублирующий код а
-# просто большая отдельная задача, то почему бы и не 2000 строк.
-Metrics/MethodLength:
-  Max: 100
-Metrics/BlockLength:
-  Max: 100
-Metrics/CyclomaticComplexity:
-  Max: 15
-Metrics/PerceivedComplexity:
-  Max: 15
+Style/SymbolArray:
+  # Предпочитаю полный синтаксис вместо %i[foo bar], пстоянно забываю что
+  # такое %i, %w, %g, %Ж, %П, %x, %y, %й, %н, %я.
+  # EnforcedStyle: brackets
+  # Хотя нет, стиль написания может быть любым, учись понимать и так и сяк.
+  Enabled: false
 
-Metrics/ClassLength:
-  Max: 300
-
-# fail обычно бросает исключение, raise пребрасывает после отлова при необходимости.
+# fail обычно бросает исключение, raise пребрасывает после отлова при
+# необходимости.
 Style/SignalException:
   Enabled: false
 
 # Что может быть более привычным чем простой if
 Style/NegatedIf:
   Enabled: false
+
+Style/SymbolProc:
+  # Аргументы отдельно блоки отдельно:
+  # something.do_something(foo) { |o| o.bar }
+  # AllowMethodsWithArguments: true
+  # Отключена проверка стиля передачи блоков в метод, и так и сяк должно быть
+  # понятным.
+  Enabled: false
+
+# Короткий синтаксис для слабаков! =) на мой взгляд, когда в одном хэш смешан
+# короткий и полный синтаксис, тогда код читается рывками (читаем один
+# синтаксис, преключаемся на другой, продолжать читать и потом вдруг обратно).
+# Возможно дело привычки.
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+# Разбивать метод или блок на подметоды только ради красоты кода не хочу, если
+# всё что нужно сделать в методе задокумментировано и это не дублирующий код а
+# просто большая отдельная задача, то почему бы и не 2000 строк.
+Metrics/MethodLength:
+  Max: 100
+Metrics/BlockLength:
+  Max: 300
+Metrics/CyclomaticComplexity:
+  Max: 30
+Metrics/PerceivedComplexity:
+  Max: 30
+
+Metrics/ClassLength:
+  Max: 300
+Metrics/ModuleLength:
+  Max: 300
 
 # Assignment - присвоения, в том числе +=...
 # Branch - явное прямое ветвление программы (вызов методов).
@@ -81,14 +106,16 @@ Layout/HashAlignment:
 Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
 
-# Короткий синтаксис для слабаков! =) на мой взгляд, когда в одном хэш смешан
-# короткий и полный синтаксис, тогда код читается рывками (читаем один
-# синтаксис, преключаемся на другой, продолжать читать и потом вдруг обратно).
-# Возможно дело привычки.
-Style/HashSyntax:
-  EnforcedShorthandSyntax: never
-
 # Терпеть не могу пробелы ради выравнивания, предпочитаю устанавливать
 # необходимое количество отступов (отступ в ruby − кратен двум пробелам).
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Эммм, это ж короткий синтаксис, нахуй пробелы! array.map{|x| x.id}
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: no_space
+  SpaceBeforeBlockParameters: false

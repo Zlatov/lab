@@ -13,7 +13,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-gi
 SSH_PRIVATE_KEY в разделе gitlab «Настройки» → «CI/CD» → Переменные.
 2. `~/.ssh/id_rsa-app_name.pub` (публичный) добавить в `~/.ssh/authorized_keys`.
 
-```rb
+```yml
 # .gitlab-ci.yml
 stages:
   - production

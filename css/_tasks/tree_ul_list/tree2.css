@@ -1,0 +1,84 @@
+.tree2 {
+  font-size: 1em;
+  margin: 0;
+  padding: 0 0 0 6px;
+  list-style-type: none;
+  line-height: 1.5em;
+}
+.tree2 ul {
+  margin: 0;
+  padding: 0 0 0 6px;
+  list-style-type: none;
+}
+.tree2 li {
+  margin: 0;
+  padding: 0 0 0 30px;
+  border-left: solid 1px gray;
+
+  position: relative;
+}
+.tree2 details {
+  position: relative;
+  top: 0;
+  /* -li.padding + (:before.width/2) - ((summary.width-1)/2) */
+  /* -30 + (26/2) - ((13-1)/2) = -23 */
+  left: -23px;
+}
+.tree2 details::before {
+  content: none;
+}
+.tree2 details[open]::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 1em;
+  background-color: grey;
+  top: -0.75em;
+  left: 6px;
+}
+.tree2 summary {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  box-sizing: border-box;
+  top: calc(-0.75em - 6px);
+  left: auto;
+  list-style-type: none;
+  border: solid 1px gray;
+  cursor:pointer;
+  background:
+    linear-gradient(#000, #000),
+    linear-gradient(#000, #000),
+    #FFF;
+  background-position: center;
+  background-size: 7px 1px, 1px 7px;
+  background-repeat: no-repeat;
+}
+.tree2 details[open] > summary {
+  background:
+    linear-gradient(#000, #000),
+    #FFF;
+  background-position: center;
+  background-size: 7px 1px, 1px 7px;
+  background-repeat: no-repeat;
+}
+.tree2 li::before {
+  content: '';
+  display: block;
+  border-bottom: solid 1px gray;
+  position: absolute;
+  width: 26px;
+  height: 0.75em;
+  left: 0;
+  top: 0;
+}
+.tree2 li:last-child {
+  border-left: 0px solid transparent;
+}
+.tree2 li:last-child > details {
+  left: -22px;
+}
+.tree2 li:last-child::before {
+  border-left: solid 1px gray;
+}

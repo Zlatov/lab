@@ -1,3 +1,37 @@
+<%= form_with(
+  model: nil,
+  scope: nil,
+  url: nil,
+  format: nil
+) do |form| %>
+
+<%= form_with(
+  model: @post,
+  model: Post.first,
+  model: Post.new,
+  model: [:admin, Post.new], # Задаст namespace модели
+  model: [@post, Comment.new], # Надо пробовать, якобы добавление ассоциации к основной модели.
+
+  scope: :post, # Задаст префикс передаваемым параметрам: form.text_field(:title) => <input name="post[title]">
+
+  url: posts_path(@post),
+  url: {action: "create"},
+
+  format: :json # Игнорируется если url задан.
+
+  method: :get|:post|:patch|:put|:delete
+
+  local: true # Отменить XHRs
+
+  skip_enforcing_utf8: true # Отменить передачу параметра utf8
+
+  # HTML атрибуты
+  id: :js_post_form
+  class: 'form'
+  data: {behavior: "autosave"}
+  html: {name: "go"}
+) do |form| %>
+
 <%= form_for article, url: {action: "update"} do |f| %>
 
 

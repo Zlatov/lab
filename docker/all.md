@@ -153,10 +153,10 @@ iptables -I INPUT -p tcp -m tcp --dport 2376 -j ACCEPT
 ## Использование docker-compose
 
 ```sh
-docker-compose config # Проверить конфигурацию
-docker-compose up --build # собираем контейнеры в первый раз
-docker-compose stop # все контейнеры...
-docker-compose start
+docker compose config # Проверить конфигурацию
+docker compose up --build # собираем контейнеры в первый раз
+docker compose stop # все контейнеры...
+docker compose start
 
 docker exec -it pg bash
 
