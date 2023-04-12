@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+add_index :table_name, [:column_name1, :column_name2], name: :ix_|uq_table_name_columnname12, unique: true
+]]></content>
+  <tabTrigger>add_index</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>RB add_index</description>
+</snippet>

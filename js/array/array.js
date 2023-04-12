@@ -16,8 +16,8 @@ var b = new Array('5') // ['5']
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('> Когда на руках длинна, более читаема конструкция c Array(n): [...Array(n)]:')
-var a = [...Array(5)]
-var b = [...new Array(5)]
+var a = [...Array(3)]     // > [ undefined, undefined, undefined ]
+var b = [...new Array(3)] // > [ undefined, undefined, undefined ]
 console.log('a: ', a)
 console.log('b: ', b)
 console.log('> Когда на руках значения, в конструкции должно отсутствовать Array: [value|...values]')
@@ -89,29 +89,42 @@ console.log('b: ', b)
 
 
 console.log("\n")
+console.log('> Переборы forEach, for(in), for(of)')
+
+console.log('')
 console.log('> Перебор forEach().')
-var a = ['a', 2, true, , null, undefined, { a: 'a' }]
-console.log('a: ', a)
+var a = ['asd', 'delete', true, , null, undefined]
+console.log('a:', a) // > a: [ 'asd', 'delete', true, <1 empty item>, null, undefined ]
 var b = a.forEach(function(element, index, array) {
-  if (element == 'a') {
+  if (element == 'asd') {
     array[index] = 'change'
-    array.splice(index + 1, 1) // С индекса, Удалить столько элементов, Добавить эти элементы.
+    array.splice(index + 1, 1) // С индекса 1 (0 + 1) удалить 1 элемент, удалит элемент 'delete'.
     return false // Не остановится на элементе 'a', а переберёт все запустив переданную функцию.
   }
   element = 'change'
 })
-console.log('a: ', a)
-console.log('b: ', b)
+console.log('a:', a) // > a: [ 'change', true, <1 empty item>, null, undefined ]
+console.log('b:', b) // > b: undefined (forEach не возвращает новый массив)
+// return
+
+console.log('')
+console.log('> Перебоп for(var in Object)')
+var a = ['asd', 'zxc', 'qwe']
+for (var i in a) {
+  console.log('i: ', i)       // i:  0
+  console.log('a[i]: ', a[i]) // a[i]:  asd
+}
+// return
+
+console.log('')
+console.log('> Перебор for (var of Object)')
+var a = ['asd', 'zxc', 'qwe']
+for (var e of a) {
+  console.log('e: ', e) // > e: asd
+}
 // return
 
 
-console.log("\n")
-console.log('> Перебоп for(var in Object)')
-var a = [...Array(5).keys()]
-for(var i in a) {
-  console.log('i: ', i)
-}
-// return null
 
 
 console.log('> for (var i = 0, l=a.length; i < l; i++) {a[i]}')
