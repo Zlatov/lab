@@ -125,4 +125,21 @@ class Model < ActiveRecord::Base
     errors.add('asdasdff')
     errors.add(:name, :blank, message: "cannot be nil") if name.nil?
     errors.add(:name, :invalid, message: "cannot be nil") if name.nil?
+    errors.add(:base, :invalid, message: "что-то не так") if name.nil? || email.nil?
   end
+
+# Валидация уникальности составного ключа
+class Admin::OffersProperty < OffersProperty
+  belongs_to :offer
+  belongs_to :property
+
+  validates_uniqueness_of :property_id, scope: :offer_id, message: 'с таким значением уже существует для Торгового предложения'
+end
+
+# Валидация количества привязанных объектов
+class Offer
+  has_many :properties_offers
+  has_many :properties, throught: :properties_offers
+
+  validates :properties, length: { minimum: 0, maximum: 2, message: 'не может содержать больше двух Фильтров'}
+end

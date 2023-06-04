@@ -82,8 +82,19 @@ print 'e: '.red; p e
 print 'f: '.red; p f
 # exit
 
-puts 'Масси включает в себя `:b`?'.green
-p (a.include?(:b)? 'y' : 'n')
+puts 'Масси включает (содержит) в себе значение .include?'.green
+a = [1, 2, 3]
+b = a.include? 3
+c = a.include? 4
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+puts 'Масси НЕ включает (НЕ содержит) в себе значение .exclude?'.green
+a = [1, 2, 3]
+b = a.exclude? 3
+c = a.exclude? 4
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+# exit
 
 puts 'Многострочное задание массива'.green
 a = %w{
@@ -133,7 +144,7 @@ c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
-# exit
+exit
 
 puts 'Перебор'.green
 puts 'В each, value не является ссылкой.'.blue
@@ -647,7 +658,7 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
-puts 'Очистить от нулевых значений (.compact)'.green
+puts 'Очистить (удалить) от нулевых значений (.compact)'.green
 a = [nil, 1, 2, nil, 3]
 b = a.compact
 print 'a: '.red; p a

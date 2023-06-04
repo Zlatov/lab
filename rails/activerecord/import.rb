@@ -50,7 +50,54 @@ end
 Affiliate.where('updated_at < ?', start_update).update_all(deleted: true)
 
 
+
+
+# 
+# 
 # Для нормальной БД аля postgres:
+# 
+# 
+
 Post.transaction do
   Post.import update_posts, on_duplicate_key_update: {conflict_target: [:id], columns: [:status]}
+
+  # Пример
+  progress_proc = ->(rows_size, num_batches, current_batch_number, batch_duration_in_secs) {
+    import.progress_callback((current_batch_number - 1).progress(num_batches))
+  }
+  start_update = Time.current
+  Post.import(
+    update_posts,
+    on_duplicate_key_update: {
+      conflict_target: [:id],
+      columns: [:status]
+    },
+    validate: false,
+    batch_size: 1000,
+    batch_progress: progress_proc
+  )
+  Post.where('updated_at < ?', start_update).delete_all
 end
+
+values = [{ title: 'Book1', author: 'George Orwell' }, { title: 'Book2', author: 'Bob Jones'}]
+# Importing without model validations
+Book.import values, validate: false
+# Import with model validations
+Book.import values, validate: true
+# when not specified :validate defaults to true
+Book.import values
+
+
+books = [
+  { title: "Book 1", author: "George Orwell" },
+  { title: "Book 2", author: "Bob Jones" }
+]
+columns = [ :title ]
+# without validations
+Book.import columns, books, validate: false
+# with validations
+Book.import columns, books, validate: true
+# when not specified :validate defaults to true
+Book.import columns, books
+
+

@@ -117,5 +117,8 @@ Layout/MultilineMethodCallIndentation:
 Layout/SpaceBeforeBlockBraces:
   EnforcedStyle: no_space
 Layout/SpaceInsideBlockBraces:
-  EnforcedStyle: no_space
   SpaceBeforeBlockParameters: false
+
+# На какой вертикали начался блок, на той и должен закрываться.
+Layout/BlockAlignment:
+  EnforcedStyleAlignWith: start_of_block

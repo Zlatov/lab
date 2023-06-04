@@ -53,7 +53,7 @@ end
 # exit
 
 puts
-puts 'Фильтрация ключей'.green
+puts 'Фильтрация ключей (оставить только следующие ключи)'.green
 a = {a: 1, b: 2, c: 3}
 b = a.slice :a, :c
 print 'a: '.red; puts a

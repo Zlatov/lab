@@ -285,7 +285,13 @@ users = ::User
   .select('users.* groups.id as group_id')
   .joins(:group)
 users.first.group_id
-
+# Можно вынести в класс подгрузку количества некоторой ассоциации
+users = User.includes_post_count
+scope :includes_post_count, lambda {
+  joins('LEFT JOIN "posts" "p" ON "p"."user_id" = "user"."id"')
+    .select('"users".*, COUNT("pws"."id") AS "product_count"')
+    .group('"users"."id"')
+}
 
 
 
