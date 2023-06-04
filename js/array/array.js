@@ -108,7 +108,7 @@ console.log('b:', b) // > b: undefined (forEach не возвращает нов
 // return
 
 console.log('')
-console.log('> Перебоп for(var in Object)')
+console.log('> Перебор for(var in Object)')
 var a = ['asd', 'zxc', 'qwe']
 for (var i in a) {
   console.log('i: ', i)       // i:  0

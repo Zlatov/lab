@@ -194,3 +194,11 @@ docker-compose run --rm store_ruby bundle exec rails db:seed
 ## TODO Запуск контейнера не из под root
 
 https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e00f8ee15
+
+
+## Хранение изображений на GitHub
+
+```sh
+docker login ghcr.io
+docker push ghcr.io/zlatov/asd...:latest
+```
