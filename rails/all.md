@@ -39,18 +39,30 @@ Rails - фреймворк ruby
 * __Система__ (ubuntu) потребует изменение параметров ядра `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
 
-## Приложение
+## Создание нового приложения
 
-__Создание нового__
+```sh
+ruby --version # Проверить версию руби, в кажой версии может быть установлены свои версии рельс.
+rbenv versions # Проверить доступные версии, вереключиться/установить другую см. ruby/all.md
+gem list ^rails$ # В текущей версии руби посмотреть доступные версии рельс.
+gem list ^rails$ --remote --all # Доступные для установки версии.
+gem install rails -v 6.0.2.1 # Установить требуемую версию рельс.
+rails --version # Покажет скорее всего послеюнюю из доступных.
 
-`gem list ^rails$ --remote --all`
-`gem install rails -v 6.0.2.1`
+# Создание
+mkdir newapp
+cd newapp
+rails new ./
+subl ./
+bundle exec rails s -p 3001
 
-* `rails new testApp`
-* `rails new .`
-* `rails _5.2.3_ new lorem_rails --webpack --skip-sprockets`
-* `rails _6.0.2.1_ new . --webpack --skip-sprockets`
-* `rails _6.1.5_ new comics_geek_backend --database=postgresql --api`
+# Команды создания:
+rails new testApp
+rails new .
+rails _5.2.3_ new lorem_rails --webpack --skip-sprockets
+rails _6.0.2.1_ new . --webpack --skip-sprockets
+rails _6.1.5_ new comics_geek_backend --database=postgresql --api
+```
 
 __Запуск__
 
