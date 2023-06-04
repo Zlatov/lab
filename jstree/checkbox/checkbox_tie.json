@@ -1,0 +1,15 @@
+[
+  {
+    "id": "1",
+    "parent": "#",
+    "text": "1"
+  },
+  {
+    "id": "2",
+    "parent": "1",
+    "text": "2",
+    "state": {
+      "checked": true
+    }
+  }
+]

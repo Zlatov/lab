@@ -1,0 +1,9 @@
+{
+  "name": "checkbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jstree": "3.3.15"
+  }
+}
