@@ -144,7 +144,7 @@ c = a - b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
-exit
+# exit
 
 puts 'Перебор'.green
 puts 'В each, value не является ссылкой.'.blue
@@ -176,23 +176,23 @@ end
 
 puts 'Пребор for но рубокоп предлагает each'.green
 for i in 0..0
-  print 'i: '.red; puts i
+  print 'i 0..0 ВЫВЕДЕТ 0: '.red; puts i
 end
 for i in 0..1
-  print 'i: '.red; puts i
+  print 'i 0..1 ВЫВЕДЕТ 0 и 1: '.red; puts i
 end
 for i in 1..0
-  print 'i: '.red; puts i
+  print 'i 1..0 ХЕРОТА: '.red; puts i
 end
 
 (0..0).each do |i|
-  print 'i: '.red; puts i
+  print 'i 0..0 ВЫВЕДЕТ 0: '.red; puts i
 end
 (0..1).each do |i|
-  print 'i: '.red; puts i
+  print 'i 0..1 ВЫВЕДЕТ 0 и 1: '.red; puts i
 end
 (1..0).each do |i|
-  print 'i: '.red; puts i
+  print 'i 1..0 ХЕРОТА: '.red; puts i
 end
 # exit
 
