@@ -33,12 +33,29 @@ end
 # или сгенерировать
 # rails g serializer admin/catalog
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :parent
+  attributes(
+    :id,
+    :username,
+    :parent
+  )
+
   # Отдавать атрибут name как text
   attribute :name, key: :text
+
   # Кастомный атрибут
   def parent
     object.parent_id.nil? ? '#' : object.parent_id
+  end
+
+  # Использование параметров для дополнительного атрибута
+  attribute :test_attr do
+    # Использует хелпер контроллера???:
+    object.is_completed?(current_user)
+    current_user.id
+    # Обращение к себе через object:
+    object.id
+    # Параметры переданные при вызове сериализации (render json: @model, test_option: value):
+    @instance_options[:test_option]
   end
 end
 
@@ -75,5 +92,10 @@ class PostsController < ApplicationController
     render json: ActiveModelSerializers::SerializableResource.new(Admin::Catalog.all).as_json
     render json: Admin::Catalog.all, each_serializer: Admin::CatalogSerializer
     render json: Admin::Catalog.all
+
+    # Через ассоциации (has_many, belongs_to…) автоматически подгружается только
+    # первый подуровень, для включения уровней ниже необходимо использовать
+    # настройку:
+    render json: @front_product, include: "offers_products.offer.catalogs_offers.catalog"
   end
 end
