@@ -101,3 +101,18 @@ Book.import columns, books, validate: true
 Book.import columns, books
 
 
+# 
+# Перебор большой таблицы с .find_each .find_in_batches .in_batches
+# 
+Post.where(status: 'success').find_in_batches do |posts|
+  # posts это Array
+  posts.each { |post| post.do_something_great! }
+end
+Post.where(status: 'success').find_each do |post|
+  # post это #<Post>
+  post.do_something_great!
+end
+Post.where(status: 'success').in_batches do |posts|
+  # posts это ActiveRecord_Relation
+  posts.update_all(status: 'draft')
+end

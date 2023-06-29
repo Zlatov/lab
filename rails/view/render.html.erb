@@ -3,6 +3,8 @@
  -->
 <%= render partial: "link_area", layout: "graybar" %>
 <%= render partial: "form", locals: {zone: @zone} %>
+<!-- сокращённый вариант, опускается ключ locals -->
+<%= render "form", zone: @zone %>
 
 <!-- 
   Рендеринг коллекций

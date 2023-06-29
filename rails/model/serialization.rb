@@ -61,8 +61,28 @@ end
 
 # app/serializers/post_serializer.rb
 class PostSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+  include Front::ProductsHelper # опасно! в хелпере могут быть использованы
+                                # хелперы рельсы, например form_tag, которых
+                                # тоже будет нехватать для работы. Лучше
+                                # Admin::ApplicationController.render
+
+  attributes(
+    :id,
+    :content,
+    :created_at,
+    :icon
+  )
+
   has_one :user
-  attributes :id, :content, :created_at
+
+  def icon
+    Admin::ApplicationController.render(
+      locals: { filter: object },
+      template: "admin/filters/_icon",
+      layout: false
+    )
+  end
 end
 
 # app/models/user.rb
@@ -84,6 +104,9 @@ class PostsController < ApplicationController
     hash = PostSerializer.new(Post.first).as_json
     # или
     respond_with Post.find(params[:id])
+    # или
+    render json: Post.find(params[:id]),               serializer: PostSerializer
+    render json: Post.where(user_id: current_user.id), each_serializer: PostSerializer
 
     # ещё варианты для сериализации коллекции
     render json: ActiveModel::SerializableResource.new(Admin::Catalog.all.to_a).as_json
@@ -97,5 +120,17 @@ class PostsController < ApplicationController
     # первый подуровень, для включения уровней ниже необходимо использовать
     # настройку:
     render json: @front_product, include: "offers_products.offer.catalogs_offers.catalog"
+    render json: @front_product, include: [
+      :amounts,
+      :all_amounts,
+      :label,
+      :warehouses_sum,
+      offers_products:
+      {
+        offer: {
+          catalogs_offers: :catalog
+        }
+      }
+    ]
   end
 end

@@ -14,6 +14,8 @@
 //                       подэлементом узал указанного селектором.
 
 
+
+
 // 2 способа передачи this в обработчик:
 
 // 1. `.bind(this)`
@@ -36,3 +38,13 @@ Filters.handler = function(event) {
 
 Filters.calc = function() {
 }
+
+
+
+
+// При программном изменении значений полей форм (.val(value)) - не запускается
+// событие change.
+var input = $(this)
+input.val(value).trigger("change")
+// ИЛИ
+input.val(value).change()

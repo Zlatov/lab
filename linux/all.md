@@ -188,3 +188,11 @@ sudo ethtool -s eth0 speed 100 duplex full autoneg off
 # ...
 sudo ethtool -s eth0 speed 1000 duplex full autoneg off
 ```
+
+## Принтскрин скриншот printScreen screenshot
+
+```sh
+# Если не получается создать скриншот с указателем мыши - успейте навести
+# указатель на нужное место за 5 секунд!:
+sleep 5 && gnome-screenshot -p
+```

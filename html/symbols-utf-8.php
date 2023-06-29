@@ -17,6 +17,11 @@
 		<![endif]-->
 	</head>
 	<body>
+		<p>
+			<a href="https://www.rapidtables.com/code/text/unicode-characters.html">https://www.rapidtables.com/code/text/unicode-characters.html</a>
+			<a href="https://www.utf8-chartable.de/">https://www.utf8-chartable.de/</a>
+			<a href="https://www.compart.com/en/unicode/">https://www.compart.com/en/unicode/</a>
+		</p>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
