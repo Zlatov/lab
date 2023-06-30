@@ -82,7 +82,29 @@ print 'b: '.blue; p b
 print 'c: '.blue; p c
 print 'd: '.blue; p d
 print 'e: '.blue; p e
-exit
+# exit
+
+puts 'Узнать разницу в годах'.green
+a = Time.new(2020, 2, 29, 12, 12, 12, "+03:00")
+b = a + 1.years - 1.seconds
+c = ActiveSupport::Duration.build(b - a).parts
+diff = b.year - a.year
+diff += a + diff.years > b ? -1 : 0
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+print 'diff: '.red; puts diff
+# exit
+
+puts 'Узнать разницу в меяцах'.green
+a = Time.new(2020, 11, 29, 12, 12, 12, "+03:00")
+b = a + 2.month - 1.seconds
+diff = (b.month - a.month) % 12
+diff += a + diff.months > b ? -1 : 0
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'diff: '.red; puts diff
+# exit
 
 puts 'Перевод разницы в дни, часы, ... секунды'.green
 a = Time.new(2000, 1, 1, 0, 0, 0, "+03:00")

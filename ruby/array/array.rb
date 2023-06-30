@@ -71,8 +71,8 @@ a << :d
 b = %w(foo bar baz #{1+1})
 c = %W(foo bar baz #{1+1})
 f = %W/foo bar baz #{1+1}/
-d = (1..3 ).to_a
-e = (1...3).to_a
+d = (1..3 ).to_a # от 1 до 3, включая 3
+e = (1...3).to_a # от 1 до 3, НЕ включая 3
 print 'a: '.red; p a
 print 'a.sample: '.red; puts a.sample
 print 'b: '.red; p b
