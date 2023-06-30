@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <style type="text/css">
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    table, td, th {
+      border: solid 1px;
+    }
+  </style>
   <script type="text/javascript" src="dom.js"></script>
 </head>
 <body>
+  <h1>Пример работы скрипта <code>dom.js</code>, смотри консоль</h1>
   <div id="dom_id" class="wide">
     <span>asd</span>
     zxc
@@ -13,5 +23,70 @@
       <li>qwe</li>
     </ul>
   </div>
+  <h2>Как копировать колонку таблицы из браузера</h2>
+  <ol>
+    <li>
+      Скопировать «инструмент» в буфер обмена и вставить в консоль браузера:
+<pre style="border: solid 1px;"><code>function get_table_column(table_selector, column_index) {
+  return [].slice
+    .call(
+      window.document.querySelectorAll(table_selector)[0]
+        .querySelector(&quot;tbody&quot;)
+        .getElementsByTagName('tr')
+    )
+    .map(tr =&gt; tr.getElementsByTagName('td'))
+    .filter(td =&gt; td.length &gt; 0)
+    .map(td =&gt; td[column_index].innerHTML)  
+}
+get_table_column(&quot;&quot;, 0)
+</code></pre>
+    </li>
+    <li>
+      Найти тег таблицы, копировать селектор тега (Copy selector), вставить
+      селектор первым параметром функции (последняя строка кода);
+    </li>
+    <li>
+      Вторым параметром указать правильный index столбца. Запустить код.
+    </li>
+  </ol>
+  <p>Можешь тренироваться тут:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>.</th>
+        <th>.</th>
+        <th>.</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td>.</td>
+        <td>.</td>
+        <td>.</td>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <td>.</td>
+        <td>Получи</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>.</td>
+        <td>эти</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>.</td>
+        <td>строки</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>.</td>
+        <td>текста</td>
+        <td>.</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
