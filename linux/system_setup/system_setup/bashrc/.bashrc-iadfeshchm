@@ -1,18 +1,9 @@
-function set_title() {
-  if [[ -z "$ORIG" ]]
-  then
-    ORIG=$PS1
-  fi
-  TITLE="\[\e]2;$*\a\]"
-  PS1=${ORIG}${TITLE}
-}
-
 EDITOR_PATH=`which subl`
 export EDITOR="$EDITOR_PATH -w"
 
 export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h \[\033[01;33m\]$STY \[\033[01;34m\]\w \$\[\033[00m\] "
 
-alias nemo='nemo ./ && exit'
+# alias nemo='nemo ./ && exit'
 
 
 
@@ -63,17 +54,9 @@ alias cdinfo='cd ~/projects/zenon/info'
 
 
 # Быстрый доступ к командам git.
-alias gitstatusu='git status -u'
+# alias gitstatusu='git status -u'
 # alias  a='git add'
 # alias aa='git add -A'
 # alias  r='git reset HEAD'
 # alias  c='git commit'
 # alias ca='git add -A && git commit'
-
-export DISABLE_SPRING=1
-
-# function ssh_alias() {
-#     ssh $@;
-#     setterm --default --clear all;
-# }
-# alias ssh=ssh_alias
