@@ -72,3 +72,25 @@
     *   Многострочного выделения в Sublime Ctrl+Alt+Вверх/Вниз: Win+A->`Настройки`->Комбинации клавиш->Перемещение->Переместить на рабочее местов вверх/низ. Не смотря на то что они там уже установлены!: Сменить на клавиши Win+PageUp/Down - это отменит использование сочетаний Ctrl+Alt+Вниз/Вверх на это же событие и освободит эти сочетания для использования в Sublime.
 
 *   Настроить сочетания клавиш для поиска в google hrome смотри файл _custom_keyboard_shortcuts.md_
+
+
+## Настройки для Ubuntu 22
+
+Пидарасы добавили эмодзи на сочетание клавишь <kbd>Ctrl + .</kbd>, из-за этого
+не работает комментирование кода (Ctrl+/) в русской раскладке (Ctrl+.)
+
+```sh
+# Убираем назначенное сочетание клавишь на эмодзи
+gsettings set org.freedesktop.ibus.panel.emoji hotkey "[]"
+```
+
+Переключение раскладки правильнее настраивать через gsettings
+
+```sh
+# Посмотреть какеие сочетания клавишь назначены на "следующая раскладка" и "предыдущая раскладка"
+gsettings get org.gnome.desktop.wm.keybindings switch-input-source
+gsettings get org.gnome.desktop.wm.keybindings switch-input-source-backward
+# Установить Shift+Alt и Alt+Shift соответственно
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Shift>Alt_L']"
+gsettings set org.gnome.desktop.wm.keybindings switch-input-source-backward "['<Alt>Shift_L']"
+```
