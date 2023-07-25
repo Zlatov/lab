@@ -100,3 +100,14 @@ __проверка, версия__
 curl http://localhost:9200/_cluster/health?pretty
 curl -X GET "localhost:9200"
 ```
+
+## Проверка в докер контейнере
+
+```sh
+docker compose exec es bash
+curl -X GET "localhost:9200"
+# Индексы
+curl localhost:9200/_cat/indices
+# Удалить индекс/индексы (через запятую)
+curl -X DELETE http://localhost:9200/users_development_20230706135438618,posts_development_20230706135438618
+```
