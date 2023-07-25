@@ -202,3 +202,20 @@ https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e0
 docker login ghcr.io
 docker push ghcr.io/zlatov/asd...:latest
 ```
+
+## Как затянуть такое же изображение какое было затянуто когда-то по латест
+
+```sh
+# Команда
+docker image inspect {image_name_or_id}
+# вернёт Id, но нужно использовать RepoDigests вместо него:
+# "Id": "sha256:580c0e4e98b06d258754cf28c55f21a6fa0dc386e6fe0bf67e453c3642de9b8b",
+# "RepoTags": [
+#     "portainer/portainer:latest"
+# ],
+# "RepoDigests": [
+#     "portainer/portainer@sha256:fb45b43738646048a0a0cc74fcee2865b69efde857e710126084ee5de9be0f3f"
+# ],
+
+docker pull portainer/portainer@sha256:fb45b43738646048a0a0cc74fcee2865b69efde857e710126084ee5de9be0f3f
+```
