@@ -2,13 +2,17 @@
 
 ```sh
 cd ~
-ruby -v # 2.7+
-gem install mailcatcher -v 0.8.2
+# На руби 3 константа Fixnum не определена, и mailcatcher не работает.
+rbenv install 2.7.8
+rbenv global 2.7.8
+gem install -N mailcatcher -v 0.8.2
+# -N - без документации
 mailcatcher
 # или настроить systemd
 ```
 
 ```sh
+# sudo su
 # touch /etc/systemd/system/mailcatcher.service
 # mcedit /etc/systemd/system/mailcatcher.service
 [Unit]
@@ -38,6 +42,7 @@ WantedBy=multi-user.target
 # systemctl start mailcatcher
 # systemctl status mailcatcher
 # journalctl -u mailcatcher
+# http://localhost:1080
 
 # systemctl disable mailcatcher.service
 ```
