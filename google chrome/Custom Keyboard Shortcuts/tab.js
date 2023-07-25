@@ -48,7 +48,8 @@
     }
     // 2.
     var element = elements[index]
-    element.innerHTML = '<div id="result-pointer" style="position:absolute;left:-15px;">&gt;</div>' + element.innerHTML
+    // element.innerHTML = '<div id="result-pointer" style="position:absolute;left:-15px;">&gt;</div>' + element.innerHTML
+    element.innerHTML = '<div id="result-pointer" style="position:absolute;left:0px;color:green;z-index:1000;">&gt;</div>' + element.innerHTML
     // 3.
     scroll_to_element(element)
     // 4.
@@ -65,7 +66,7 @@
   document.onkeyup = function(event) {
     if(event.keyCode == 38) {
       console.log('> up')
-      var input = document.querySelector("input.gLFyf")
+      var input = document.querySelector("textarea.gLFyf")
       if (input == null) {
         console.log('> no google input.')
         return null
@@ -75,9 +76,9 @@
       }
       select_element(window.google_tabulation.selected_element_index - 1)
     }
-    if(event.keyCode==40) {
+    if(event.keyCode == 40) {
       console.log('> down')
-      var input = document.querySelector("input.gLFyf")
+      var input = document.querySelector("textarea.gLFyf")
       if (input == null) {
         console.log('> no google input.')
         return null

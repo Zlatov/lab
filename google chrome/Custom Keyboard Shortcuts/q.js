@@ -2,7 +2,7 @@
 
   "use strict"
   
-  var input = document.querySelector("input.gLFyf")
+  var input = document.querySelector("textarea.gLFyf")
   if (input == null) {
     console.log('> Не найден поиск google.')
     return null
