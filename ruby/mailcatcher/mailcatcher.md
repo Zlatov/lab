@@ -4,7 +4,9 @@
 cd ~
 # На руби 3 константа Fixnum не определена, и mailcatcher не работает.
 rbenv install 2.7.8
-rbenv global 2.7.8
+mkdir -p projects/my/mailcatcher
+cd projects/my/mailcatcher
+rbenv local 2.7.8
 gem install -N mailcatcher -v 0.8.2
 # -N - без документации
 mailcatcher
@@ -23,9 +25,9 @@ Requires=network.target
 Type=simple
 User=iadfeshchm
 Group=iadfeshchm
-WorkingDirectory=/home/iadfeshchm
+WorkingDirectory=/home/iadfeshchm/projects/my/mailcatcher
 
-ExecStart=/home/iadfeshchm/.rbenv/shims/mailcatcher --smtp-ip 0.0.0.0
+ExecStart=/home/iadfeshchm/.rbenv/bin/rbenv exec mailcatcher --smtp-ip 0.0.0.0
 
 Restart=on-failure
 
@@ -48,8 +50,8 @@ WantedBy=multi-user.target
 ```
 
 ```sh
-# nginx
-# mailcatcher.local.conf
+# sudo touch /etc/nginx/sites-available/mailcatcher.local.conf
+# sudo subl /etc/nginx/sites-available/mailcatcher.local.conf
 server {
     listen 80;
     server_name mailcatcher.local;
@@ -64,7 +66,9 @@ server {
         proxy_buffering off;
     }
 }
-# nginx -t
-# nginx -s reload
-# systemctl restart nginx
+# sudo ln -s /etc/nginx/sites-available/mailcatcher.local.conf /etc/nginx/sites-enabled/mailcatcher.local.conf
+# sudo nginx -t
+# sudo nginx -s reload
+# sudo systemctl restart nginx
+# echo "127.0.0.1  mailcatcher.local" | sudo tee -a /etc/hosts
 ```
