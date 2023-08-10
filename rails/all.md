@@ -81,6 +81,62 @@ __Остановка__
 [[ -s tmp/pids/server.pid ]] && kill -QUIT `cat tmp/pids/server.pid` || echo 'Not found.'; exit 0
 ```
 
+
+## Создание rails с postgresql в докер контейнере
+
+```sh
+sudo apt install -y libpq-dev
+rails new temp_rails -d postgresql
+cd temp_rails
+touch .env
+subl .env
+# Файл .env
+COMPOSE_PROJECT_NAME=temp_rails
+POSTGRES_USER=temp_rails
+POSTGRES_PASSWORD=temp_rails
+
+touch docker-compose.yml
+subl docker-compose.yml
+# Файл docker-compose.yml
+---
+version: "3.8"
+
+services:
+  pg:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:?Пользователь postgres не установлен, смотри файл .env}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?Пароль postgres не установлен, смотри файл .env}
+    volumes:
+      - ./volumes/pg_data:/var/lib/postgresql/data
+    ports:
+      - 5434:5432
+    restart: unless-stopped
+
+subl config/database.yml
+# Файл config/database.yml
+default: &default
+  ...
+  host: localhost
+  port: 5434
+  username: temp_rails
+  password: temp_rails
+
+docker compose up --build --no-start
+docker compose start
+rails db:create
+rails s
+```
+
+И удаление временного приложения
+
+```sh
+docker compose stop
+docker compose down -v --remove-orphans
+sudo rm -rf temp_rails
+```
+
+
 ## Миграции
 
 ### Экспорт/импорт схемы

@@ -150,11 +150,13 @@ iptables -I INPUT -p tcp -m tcp --dport 2376 -j ACCEPT
 ```
 
 
-## Использование docker-compose
+## Использование docker compose
 
 ```sh
 docker compose config # Проверить конфигурацию
 docker compose up --build # собираем контейнеры в первый раз
+docker compose up --build --no-start # собираем но без запуска
+docker compose down -v --remove-orphans # удалить контейнеры с томами (опция -v) и контейнеры сервиса не указанные в файле docker-compose.yml
 docker compose stop # все контейнеры...
 docker compose start
 
