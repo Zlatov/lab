@@ -23,6 +23,10 @@ sudo apt-get install foo
 # Удалить пакет из системы
 sudo apt-get remove foo
 sudo apt-get --purge remove foo # — удалить из системы пакет и все его файлы настроек
+sudo apt remove steam
+sudo apt clean && sudo apt autoremove
+# clean: Удаляет кеш программ, которые старше той, которая была установлена.
+# autoremove: удаляет файлы, которые больше не нужны, например зависимости.
 
 # Найти
 # Найти пакеты, содержащие в своём описании `foo`
