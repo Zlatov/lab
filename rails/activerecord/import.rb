@@ -104,7 +104,7 @@ Book.import columns, books
 # 
 # Перебор большой таблицы с .find_each .find_in_batches .in_batches
 # 
-Post.where(status: 'success').find_in_batches do |posts|
+Post.where(status: 'success').find_in_batches(batch_size: 500) do |posts|
   # posts это Array
   posts.each { |post| post.do_something_great! }
 end

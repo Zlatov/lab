@@ -36,3 +36,25 @@ __Способ 2. Через параметры запуска__
 # /usr/share/applications/google-chrome.desktop которая начинается с Exec=
 sudo sed -i '/^Exec=/s/$/ --password-store=basic %U/' /usr/share/applications/google-chrome.desktop
 ```
+
+
+## Обновить версию
+
+```sh
+# wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+# sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+
+# Обновляем:
+$ sudo apt-get update
+$ sudo apt-get --only-upgrade install google-chrome-stable
+
+# Если при использовании хрома у вас появилась ошибка NET::ERR_CERT_WEAK_SIGNATURE_ALGORITHM:
+# Google Chrome NET::ERR_CERT_WEAK_SIGNATURE_ALGORITHM
+# То нужно установить  Network Security Service libraries (libnss):
+sudo apt-get install libnss3-1d
+
+# Убиваем старые процессы хрома:
+$ killall google-chrome
+
+# Все. Можно пользоваться. 
+```
