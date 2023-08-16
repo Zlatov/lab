@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "parent": "#",
+    "text": "Принтеры для рекламных производств, запчасти и аксессуары",
+    "data": {},
+    "type": "default",
+    "children": true,
+    "state": {
+      "opened": true
+    },
+    "a_attr": {
+      "data-column": "asd"
+    }
+  }
+]

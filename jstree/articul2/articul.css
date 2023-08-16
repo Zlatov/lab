@@ -1,0 +1,41 @@
+.jstree.jstree-column {
+  /* Позволяет позиционировать псевдоэлемент */
+  position: relative;
+  padding-right: 200px;
+}
+/* Псевдоэлемент для скрытия правого края всех узлов */
+.jstree.jstree-column::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 200px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+.jstree.jstree-column li.jstree-node {
+  /* Позволяет позиционировать .jstree-column */
+  position: relative;
+}
+
+/* Ячейка узла в дополнительной колонке */
+.jstree.jstree-column div.jstree-column {
+  display: inline-block;
+  position: absolute;
+  width: 200px;
+  height: 24px;
+  right: -200px;
+  top: auto;
+  text-align: right;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Три дополнительные иконки узла */
+.jstree .jstree-icons {
+  display: inline-block;
+  margin-right: 2px;
+}
