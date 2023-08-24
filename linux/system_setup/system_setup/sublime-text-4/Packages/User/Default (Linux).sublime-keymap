@@ -9,8 +9,10 @@
 	{ "keys": ["ctrl+alt+n"], "command": "advanced_new_file_new"},
 
 	// Удали системные клавиши и разлогинься-залогинься, чтобы работало:
-	{ "keys": ["ctrl+alt+up"], "command": "select_lines", "args": {"forward": false} },
-	{ "keys": ["ctrl+alt+down"], "command": "select_lines", "args": {"forward": true} },
+	//{ "keys": ["ctrl+alt+up"], "command": "select_lines", "args": {"forward": false} },
+	//{ "keys": ["ctrl+alt+down"], "command": "select_lines", "args": {"forward": true} },
+	{ "keys": ["alt+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["alt+down"], "command": "select_lines", "args": {"forward": true} },
 
 	// Показать текущий файл в боковой панели
 	{ "keys": ["ctrl+'"], "command": "reveal_in_side_bar" },

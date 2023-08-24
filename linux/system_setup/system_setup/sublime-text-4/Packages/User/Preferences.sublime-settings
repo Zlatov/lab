@@ -8,6 +8,8 @@
 	"ignored_packages":
 	[
 		// "Emmet",
+		"ColorPicker",
+		"HTML-CSS-JS Prettify",
 		"Vintage",
 	],
 	"close_sidebar_if_opened": false,
