@@ -53,19 +53,26 @@ WantedBy=multi-user.target
 # sudo touch /etc/nginx/sites-available/mailcatcher.local.conf
 # sudo subl /etc/nginx/sites-available/mailcatcher.local.conf
 server {
-    listen 80;
+    listen 127.0.0.1:80;
     server_name mailcatcher.local;
-
-    # auth_basic "Restricted Area";
-    # auth_basic_user_file /etc/nginx/.htpasswd;
+    client_max_body_size 256m;
 
     location / {
         proxy_pass http://127.0.0.1:1080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_connect_timeout 600;
+        proxy_read_timeout 600;
+
         port_in_redirect off;
         proxy_redirect off;
         proxy_buffering off;
     }
 }
+
 # sudo ln -s /etc/nginx/sites-available/mailcatcher.local.conf /etc/nginx/sites-enabled/mailcatcher.local.conf
 # sudo nginx -t
 # sudo nginx -s reload

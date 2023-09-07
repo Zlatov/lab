@@ -112,6 +112,10 @@ c = a & b
 print 'a: '.red; p a
 print 'b: '.red; p b
 print 'c: '.red; p c
+a = [[1,1,3,4], [1,2,4,5], [2,4,5]]
+b = a.reduce(:&)
+print 'a: '.red; p a
+print 'b: '.red; p b
 # exit
 
 puts 'Объеденение?++++++++++++++++++++++++++++++++'.green
@@ -132,6 +136,10 @@ print 'c: '.red; p c
 
 puts 'Объеденение?++++++++++++++++++++++++++++++++'.green
 a = [[1,1,3,4],[1,2,4,5]]
+b = a.flatten
+print 'a: '.red; p a
+print 'b: '.red; p b
+a = [1,3,4,[1,2,4,5],5]
 b = a.flatten
 print 'a: '.red; p a
 print 'b: '.red; p b
@@ -586,6 +594,16 @@ a = {}
 a[:a] ||= []
 a[:a].push({a:1})
 print 'a[:a]: '.red; p a[:a]
+puts '.push может принимать несколько аргументов как отдельные элементы массива'.blue
+a = []
+b = [:asd, :zxc]
+a.push *b
+print 'a: '.red; p a
+puts '<< принимает только один аргумент как элемент массива'.blue
+a = []
+b = [:asd, :zxc]
+a << b
+print 'a: '.red; p a
 # exit
 
 puts 'each по несколько элементов (.each_slice)'.green

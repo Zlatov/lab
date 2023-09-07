@@ -12,6 +12,7 @@ subl /etc/logrotate.d/app
 
 # `/etc/logrotate.d/app`
 /home/iadfeshchm/projects/zenon/app/log/*.log {
+# Комментарии валидны только если от начала строки
   daily                # ежедневная ротация
   weekly               # ротация раз в неделю
   missingok            # отсутствие файла не является ошибкой
@@ -35,7 +36,7 @@ subl /etc/logrotate.d/app
   nodelaycompress      # не откладывать сжатие файла на следующий цикл
   nomail               # не отправлять содержимое удаляемых (старых) журналов по почте
   noolddir             # держать все файлы в одном и том же каталоге
-  delaycompress        # сжимать предыдущий файл при следующей ротации 
+  delaycompress        # сжимать предыдущий файл при следующей ротации
   notifempty           # не обрабатывать пустые файлы
   create 640 root root # сразу после ротации создать пустой файл с заданными правами и пользователем
 
@@ -74,6 +75,10 @@ sudo logrotate --force /etc/logrotate.d/app
 # Пример раз в день
 /home/deployer/app/appname/shared/log/*.log {
     su deployer deployer
+# Или
+    su root syslog
+# Или
+    su root amd
     daily
     rotate 18
     nocreate

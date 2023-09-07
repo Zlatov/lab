@@ -83,6 +83,10 @@ a = {a: 1, b: 2}
 b = a.values
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+a = {a: 1, b: 2}
+b = a.values_at(:a, :b)
+print 'a: '.red; puts a
+print 'b: '.red; puts b
 # exit
 
 puts

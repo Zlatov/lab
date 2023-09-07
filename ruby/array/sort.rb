@@ -24,6 +24,12 @@ puts 'Важно возвращать 1 или -1, 0 - не гарантируе
 a = [1, 2, 3, 4]
 b = a.sort{|x, y| x > 2 ? -1 : 1}
 print 'b: '.red; p b
+a = [1, 2, 3]
+b = a.sort_by do |x|
+  x > 1 ? -1 : 1
+end
+print 'a: '.red; p a
+print 'b: '.red; p b
 # exit
 
 a = 's'
