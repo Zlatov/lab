@@ -1,5 +1,14 @@
 <%= link_to 'Giraffe', rails_admin_path, class: 'item', data: { turbolinks: false } %>
+<!--
+  В rails 7 использовать data: { turbo: false } вместо data: { turbolinks: false }
+-->
+<%= link_to 'Giraffe', rails_admin_path, class: 'item', data: { turbo: false } %>
+
 <a class="item" href="<%= rails_admin_path %>" data-turbolinks="false">Giraffe</a>
+<!--
+  В rails 7 использовать data-turbo="false" вместо data-turbolinks="false"
+-->
+<a class="item" href="<%= rails_admin_path %>" data-turbo="false">Giraffe</a>
 
 <%= link_to 'Giraffe', rails_admin_path, target: '_blank' %>
 

@@ -3,8 +3,9 @@
 
 
 -- SELECT '[]'::json[];
+select 'Выбирать пустой массив' as " ";
 SELECT '[]'::jsonb;
-\q
+-- \q
 
 
 DROP TABLE IF EXISTS a;
@@ -22,6 +23,7 @@ CREATE INDEX uq_a_slug ON a (slug);
 CREATE INDEX ix_a_dataasd ON a (((data ->> 'asd')::int)) WHERE (data ->> 'asd') IS NOT NULL;
 -- \q
 
+select 'Вывести структуру таблицы a с описанием' as " ";
 \d+ a
 -- \q
 
@@ -84,33 +86,33 @@ SELECT data->>'asd' FROM a;
 
 -- \q
 
-select 'Выбираем >' as " ";
+select 'Выбираем где asd больше 2' as " ";
 -- SELECT * FROM a WHERE (data ->> 'asd')::int > 0;
 SELECT data->>'asd' FROM a WHERE ((data->>'asd')::int) > '2';
+-- \q
 
-select 'Выбираем 23' as " ";
+select 'Выбираем id 23 где asd равен 33' as " ";
 SELECT * FROM a WHERE (data->>'asd')::int = 33;
 -- \q
 
-select 'Выбираем 8' as " ";
+select 'Выбираем id 8 где json по пути 1 (индекс массива) равен {"asd": 4}' as " ";
 SELECT * FROM a WHERE (data#>'{1}') = '{"asd": 4}';
 -- \q
 
-select 'Выбираем по JSON' as " ";
+select 'Выбираем всё где json имеет перечисленные пары ключ-значение' as " ";
 -- SELECT * FROM a WHERE (data ->> 'asd')::int > 0;
 SELECT * FROM a WHERE data @> '{"asd": 1, "zxc": 2}';
-
 -- \q
 
-select 'Выбираем 128' as " ";
+select 'Выбираем slug 128 в котором data.list (массив) содержит в себе искомое значение 12' as " ";
 SELECT * FROM a WHERE data->'list' @> '[12]';
 -- \q
 
-select 'Выбираем' as " ";
+select 'Выбираем минимум из data.minmax' as " ";
 SELECT MIN((data->'minmax')::int) FROM a;
 -- \q
 
-select 'Выбираем минимум максимум' as " ";
+select 'Выбираем одновременно минимум и максимум из поля data.group.value' as " ";
 SELECT
   data->'group'->'id', min((data->'group'->'value')::int), max((data->'group'->'value')::int)
 FROM
@@ -123,8 +125,8 @@ GROUP BY
   data->'group'->'id';
 -- \q
 
-select 'Выбираем data->asd' as " ";
-SELECT *, data->>'asd' FROM a WHERE data->>'asd' = '33';
+select 'Выбираем в дополнительном поле data.asd где data.asd == 33' as " ";
+SELECT *, data->>'asd' as "additional" FROM a WHERE data->>'asd' = '33';
 
 -- jsonb является более строгим, и поэтому запрещает экранирование Unicode для
 -- символов, не относящихся к ASCII (те, что выше U+007F), если только кодировка
@@ -139,6 +141,6 @@ SELECT *, data->>'asd' FROM a WHERE data->>'asd' = '33';
 -- они обрабатываются в словарях Python - несортированные. Вам нужно найти
 -- способ обойти это, если вы полагаетесь на порядок ваших ключей JSON.
 
--- Наконец, jsonbне хранит дубликаты ключей объекта (что, опять же, может быть
+-- Наконец, jsonb не хранит дубликаты ключей объекта (что, опять же, может быть
 -- неплохо , особенно если вы хотите избежать неоднозначности в ваших данных),
 -- сохраняя только последнюю запись.

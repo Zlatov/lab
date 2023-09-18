@@ -1,7 +1,5 @@
 
 ```rb
-# config/environments/development.rb
-  config.consider_all_requests_local = false if ENV['CONSIDER_ALL_REQUESTS_LOCAL'].present?
 # config/routes.rb
   match "/404", to: "admin/errors#not_found", via: :all
   match "/500", to: "admin/errors#internal_server_error", via: :all
