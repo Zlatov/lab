@@ -1,6 +1,7 @@
 Добавляем гем в проект, добавим в _Gemfile_.
 
 ```ruby
+# Загрузка файлов
 gem 'carrierwave', '~> 2.0'
 ```
 
@@ -31,6 +32,52 @@ mount_uploader :image, ImageUploader
 # Много изображений на поле
 mount_uploaders :images, ProductImageUploader
 ```
+
+Скафолд для одного изображения
+
+```rb
+# app/controllers/products_controller.rb
+  def product_params
+    params.require(:product).permit(
+      …
+      :image,
+      :remove_image
+    )
+  end
+```
+
+```html
+<!-- app/views/products/_form.html.erb -->
+<%= form_with(model: product) do |form| %>
+
+  <div class="row mb-3">
+    <div class="col">
+      <b><%= form.label :image, class: 'form-label' %></b>
+      <% if form.object.image.present? %>
+        <div>
+          <% image = form.object.image %>
+          <%= image_tag image.url %>
+        </div>
+        <p>
+          <%= link_to image.identifier, image.url, target: '_blank' %>
+        </p>
+        <p>
+          <%= form.hidden_field :image, value: image.identifier %>
+          <%= form.check_box :remove_image, {class: 'form-check-input'}, image.identifier, nil %>
+          <%= form.label :remove_image, 'Удалить', class: 'form-check-label user-select-none mb-0' %>
+        </p>
+      <% end %>
+      <%= form.file_field :image, class: 'form-control form-control-sm' %>
+      <%= field_errors form.object, :image %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+```
+
 
 ## Удаление файлов
 

@@ -86,7 +86,15 @@ __Остановка__
 
 ```sh
 sudo apt install -y libpq-dev
+rbenv versions
+rbenv local 3.2.2
+gem list ^rails$ # В текущей версии руби посмотреть доступные версии рельс.
+gem list ^rails$ --remote --all # Доступные для установки версии.
+
 rails new temp_rails -d postgresql
+gem install rails -v 6.1.7.6
+rails _6.1.7.6_ new . -d postgresql
+
 cd temp_rails
 touch .env
 subl .env
@@ -126,6 +134,11 @@ docker compose up --build --no-start
 docker compose start
 rails db:create
 rails s
+
+# Если рельса 6 (с webpack)
+nvm list
+nvm use v14.16.1
+yarn add @rails/webpacker
 ```
 
 И удаление временного приложения

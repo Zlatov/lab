@@ -37,4 +37,7 @@ bundle exec rails g scaffold filter name:string:uniq slug:string:uniq value_type
 
 # Задачи
 rails g task tasks_namespace task1 task2
+
+# Аплоадер (гем carrierwave)
+bundle exec rails g uploader ProductImages
 ```
