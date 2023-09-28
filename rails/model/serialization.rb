@@ -61,6 +61,8 @@ end
 
 # app/serializers/post_serializer.rb
 class PostSerializer < ActiveModel::Serializer
+  # include Rails.application.routes.url_helpers
+  # include ActionView::Helpers
   include Rails.application.routes.url_helpers
   include Front::ProductsHelper # опасно! в хелпере могут быть использованы
                                 # хелперы рельсы, например form_tag, которых
@@ -71,9 +73,11 @@ class PostSerializer < ActiveModel::Serializer
     :id,
     :content,
     :created_at,
-    :icon
+    :icon,
+    :logo_path
   )
 
+  # автоматом добавит пользователя в ответ, сериалайзер тоже лучше создать
   has_one :user
 
   def icon
@@ -82,6 +86,14 @@ class PostSerializer < ActiveModel::Serializer
       template: "admin/filters/_icon",
       layout: false
     )
+  end
+
+  def logo_path
+    if object[:logo].present?
+      object.logo.url
+    else
+      ActionController::Base.helpers.asset_path 'front/logo.svg'
+    end
   end
 end
 

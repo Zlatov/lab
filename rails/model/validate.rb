@@ -39,6 +39,7 @@ class Model < ActiveRecord::Base
   # только числовые значения.
   validates :points, numericality: true
   validates :games_played, numericality: { only_integer: true } # (/\A[+-]?\d+\z/)
+  validates :product_origin, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
   # :greater_than - больше
   # :greater_than_or_equal_to - больше или равно
   # :equal_to - равно

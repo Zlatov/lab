@@ -27,6 +27,10 @@ rails g migration add_hidden_column_to_posts hidden:boolean
 bundle exec rails g controller catalog index --no-test-framework --no-helper --no-javascripts --no-stylesheets --no-assets
 bundle exec rails g scaffold_controller catalog_order --no-test-framework --no-helper --no-javascripts --no-jbuilder --no-stylesheets
 bundle exec rails g scaffold_controller admin/affiliate --no-test-framework --no-jbuilder
+# для АПИ API
+docker compose exec web bundle exec rails g --help
+docker compose exec web bundle exec rails g controller --help
+docker compose exec web bundle exec rails g controller api/v1/application_settings --no-assets --no-javascripts --no-stylesheets --no-template-engine --no-request-specs --no-controller-specs --no-view-specs --no-routing-specs --no-helper-specs
 
 # Модель
 bundle exec rails g model street --no-test-framework --skip-migration

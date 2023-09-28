@@ -19,6 +19,8 @@ print 'b: '.red; p b
 # exit
 
 puts 'Имя контроллера в класс (controller_name.classify)'.green
-a = 'products'.classify
+a = 'products'
+b = a.classify
 print 'a: '.red; p a
+print 'b: '.red; p b
 # exit
