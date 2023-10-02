@@ -27,6 +27,7 @@ class User
 # :foreign_key - имя внешнего ключа (_id).
 # :foreign_type - имя столбеца, используемого для хранения типа связанного объекта, если это полиморфная ассоциация.
 # :primary_key - имя первичного ключа (id).
+# :dependent - что происходит со связанными объектами при уничтожении их владельца (:destroy, :delete_all, :nullify, :restrict_with_Exceptionion, :restrict_with_error).
 # :counter_cache -
 # :as -
 # :through -

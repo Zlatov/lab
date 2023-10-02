@@ -21,4 +21,10 @@ docker login gitlab.newstar.ru:5050
 # 6. Запушить образ
 # docker push {image}:{tag}
 docker push gitlab.newstar.ru:5050/mini-light/mini-light/zenoweb/mini-light:latest
+
+# 7. Переподнятие из нового изображения
+docker compose stop web
+docker compose down web
+docker compose up web --no-start
+docker compose start
 ```

@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
   def twitter
     read_store_attribute(:preferences, :twitter) || "@#{username}"
   end
+
+  store_accessor :details, :telegram
+  def telegram
+    super() == 'true' || super() == true
+  end
+  def telegram=(value)
+    super(value == 'true' || value == true)
+  end
 end

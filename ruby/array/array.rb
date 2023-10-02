@@ -427,9 +427,13 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
-puts 'Массив строку'.green
+puts 'Массив строку; а в рельсе смотри метод .to_sentence() с i18n'.green
 ap ['asd','zxc'].join # по умолчанию пустая строка
 ap ['asd','zxc'].join('|')
+a = ['asd', 'zxc', 'qwe'].to_sentence # => должно поидее вернуть 'asd, zxc and qwe', а возвращает 'asd, zxc, and qwe', идиотизм решается опцией last_word_connector
+print 'a: '.red; puts a
+a = ['asd', 'zxc', 'qwe'].to_sentence(last_word_connector: ' and ')
+print 'a: '.red; puts a
 # exit
 
 puts 'Массив в sql строку'.green
