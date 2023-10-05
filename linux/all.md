@@ -130,6 +130,10 @@ __Shotcut__
 
 Редактор видео.
 
+__Audacity__
+
+Редактор аудио.
+
 __Shutter__ (PrintScreen as PicPick)
 
 Принтскрины, почти как PicPick в винде.
