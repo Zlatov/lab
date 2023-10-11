@@ -3,6 +3,7 @@
 как преобразуется домен в ip
 как работает http протокол
 
+
 ## Режим восстановления
 
 Как переключить файловую систему в режим чтения записи (file system in recovery
@@ -169,6 +170,7 @@ pv sqlfile.sql | mysql -uxxx -pxxxx dbname
 
 which will show a progress bar as the program runs.
 
+
 ## Изменить скорость сетевой карты
 
 ```sh
@@ -186,10 +188,18 @@ sudo ethtool -s eth0 speed 100 duplex full autoneg off
 sudo ethtool -s eth0 speed 1000 duplex full autoneg off
 ```
 
+
 ## Принтскрин скриншот printScreen screenshot
 
 ```sh
 # Если не получается создать скриншот с указателем мыши - успейте навести
 # указатель на нужное место за 5 секунд!:
 sleep 5 && gnome-screenshot -p
+```
+
+
+## Ubuntu Software не загружает список приложений
+
+```sh
+killall snap-store
 ```

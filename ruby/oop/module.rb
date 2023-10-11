@@ -101,9 +101,16 @@ module Modul
   end
 end
 
+
 class Genom
   include Modul
+  # prepend Modul
 end
+puts 'Метода .ancestors наглядно покажет различие между include и prepend модуля'.green
+a = Genom.ancestors
+print 'a: '.red; p a
+# exit 0
+
 class Genom2
   include Modul
 end
