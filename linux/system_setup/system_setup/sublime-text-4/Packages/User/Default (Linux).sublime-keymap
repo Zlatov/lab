@@ -86,4 +86,8 @@
 	// { "keys": ["ctrl+shift+f11"], "command": "xdebug_layout", "args": {"restore": true}},
 	// Добавить/удалить точку останова
 	{ "keys": ["ctrl+shift+f12"], "command": "xdebug_breakpoint"},
+
+	// Пакет String Utilites
+	// Переключить часть строки из ВерблюжегоРегистра в змеиный_регистр или обратно
+	{ "keys": ["ctrl+k", "ctrl+j"], "command": "convert_pascal_underscores" },
 ]

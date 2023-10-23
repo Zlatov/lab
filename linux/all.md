@@ -127,6 +127,8 @@ __OBS Studio__
 
 Запись, стриминг видео.
 
+Устанавливаю дистрибутив от Flathub, версия 29.1.3(64 bit).
+
 __Shotcut__
 
 Редактор видео.
@@ -134,6 +136,21 @@ __Shotcut__
 __Audacity__
 
 Редактор аудио.
+
+Запускаю из файла скаченного файла `audacity-linux-3.3.3-x64.AppImage`.
+
+```
+# ~/.local/share/applications/Audacity.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name=Audacity
+Comment=Редактор аудио
+Exec=/home/iadfeshchm/audacity-linux-3.3.3-x64.AppImage
+Icon=/home/iadfeshchm/audacity.png
+```
 
 __Shutter__ (PrintScreen as PicPick)
 

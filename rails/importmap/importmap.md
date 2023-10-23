@@ -94,7 +94,9 @@ import "bootstrap"
 ```sh
 # Я скачал @popperjs/core так:
 yarn add @popperjs/core
-mv node_modules/@popperjs/core/dist/umd/popper.min.js vendor/javascript
+yarn add bootstrap
+mkdir vendor/javascript
+cp node_modules/@popperjs/core/dist/umd/popper.min.js vendor/javascript
 # И bootstrap
 cp node_modules/bootstrap/dist/js/bootstrap.min.js vendor/javascript
 # И теперь их удалить

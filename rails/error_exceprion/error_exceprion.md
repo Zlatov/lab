@@ -40,12 +40,17 @@ SHOW_ERRORS_LIKE_IN_PRODUCTION_MODE=1
 
 ## Отловить неотловленные ошибки и показать страницу 500
 
+Существует приоритет назначенных для контроллера rescue_from, снизу вверх
+(последний rescue_from имеет наивысший приоритет). Поэтому
+более «всеохватывающий»  класс ошибок следует ставить на первое место
+(наименьший приоритет), например StandardError.
+
 ```rb
 # app/controllers/admin/application_controller.rb
 
-rescue_from ..., with: :...
-rescue_from ..., with: :...
 rescue_from StandardError, with: :any_uncaught_errors
+rescue_from ActiveRecord::RecordNotFound, ... with: :...
+rescue_from ..., with: :...
 
 private
 
