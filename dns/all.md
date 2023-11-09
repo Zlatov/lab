@@ -4,6 +4,14 @@
 `dig +trace zlatov.net`
 `dig -x 192.5.5.241` - флаг -x заставляет dig провести обратный поиск по IP-адресу.
 
+```sh
+host -t ns zlatov.net
+host -t txt zlatov.net
+host -t a zlatov.net
+host -t mx zlatov.net
+```
+
+
 ## Ресурсные записи домена
 
 * Запись A - связь домена с IP-адресом сервера.
