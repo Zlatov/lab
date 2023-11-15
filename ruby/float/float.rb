@@ -1,6 +1,10 @@
 # encoding: UTF-8
 require 'rubygems'
 require 'awesome_print'
+# require 'active_support/all'
+require 'action_view'
+include ActionView::Helpers::NumberHelper
+
 
 a = 20.95
 b = a * 3
@@ -88,3 +92,14 @@ print '1.99.floor: '.red; puts 1.99.floor
 print '1.5.floor(0): '.red; puts 1.5.floor(0)
 print '1.99.floor(1): '.red; puts 1.99.floor(1)
 # exit 0
+
+
+puts 'Форматирование флоат числа; Формат %.5f возвращает строку с нулями, а number_with_precision без, чего-то среднего (0.0) нет.'.green
+a = 0.000005
+a = 0.000004
+b = a.to_s
+c = '%.5f' % a
+d = number_with_precision a, precision: 5, strip_insignificant_zeros: true
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+print 'd: '.red; puts d
