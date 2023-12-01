@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="node_modules/jstree/dist/themes/default/style.min.css">
+</head>
+
+<body>
+  <h1>Переименовать узел, но обновить родительский узел</h1>
+  <p>
+    Проблема на проде, когда обновляется родительский узел после переименования, то исчезают потомки у узлов.
+  </p>
+  <div id="tree"></div>
+
+  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="node_modules/jstree/dist/jstree.min.js"></script>
+  <script type="text/javascript" src="rename_refresh_parent.js"></script>
+</body>
+</html>

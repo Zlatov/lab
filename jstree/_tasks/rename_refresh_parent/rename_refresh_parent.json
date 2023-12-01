@@ -1,0 +1,9 @@
+[
+  { "id": "111", "text": "111", "parent": "#", "state": { "opened": true } },
+  { "id": "222", "text": "222", "parent": "#" },
+  { "id": "111-1", "text": "111-1", "parent": "111" },
+  { "id": "111-2", "text": "111-2", "parent": "111" },
+  { "id": "111-2-1", "text": "111-2-1", "parent": "111-2" },
+  { "id": "111-3", "text": "111-3", "parent": "111" },
+  { "id": "111-4", "text": "111-4 rename", "parent": "111", "state": { "selected": true } }
+]

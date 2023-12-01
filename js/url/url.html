@@ -69,6 +69,14 @@ window.history.go(-1)
     document.log('window.location.search: ', window.location.search)
     document.log('window.location.hash: ', window.location.hash)
 
+    // Перечисление параметров (после знака ?):
+    var params = new URLSearchParams(window.location.search)
+    for (const [key, value] of params) {
+      console.log('key, value: ', key, value)
+    }
+    for (const [key, value] of params.entries()) {
+      console.log('key, value: ', key, value)
+    }
   </script>
 
 </body>

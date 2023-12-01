@@ -80,6 +80,8 @@ module Modul
   extend ActiveSupport::Concern
   
   included do |base|
+    print 'custom_class_method: '.red; puts custom_class_method
+    print 'custom_class_method2: '.red; puts custom_class_method2
     def custom_instance_method
     end
     attr_accessor :instance_var
@@ -87,10 +89,15 @@ module Modul
 
   class_methods do
     attr_accessor :asd
+
+    def custom_class_method2
+      'custom class method value 2'
+    end
   end
 
   module ClassMethods
     def custom_class_method
+      'custom class method value'
     end
     def self.extended base
       base.class_eval do

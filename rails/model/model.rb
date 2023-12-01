@@ -1,5 +1,8 @@
 class Model < ApplicationRecord
 
+  # Если первичный ключ не id
+  # (create_table :sales, id: false, primary_key: :code do |t|)
+  self.primary_key = :code
   # Множественный первичный ключ
   self.primary_key = [:articul, :angar, :discount]
 

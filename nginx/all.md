@@ -2,15 +2,19 @@
 
 ## Установка
 
-`sudo apt update && sudo apt install -y nginx`
+```sh
+sudo apt-get purge nginx nginx-common nginx-full
+
+sudo apt update && sudo apt install -y nginx
+```
 
 ## Остановка, запуск, статус
 
 ```sh
 # Проверить кофигурацию:
-nginx -t
+sudo nginx -t
 # Перезапустить конфигурационный файл без перезагрузки Nginx:
-nginx -s reload
+sudo nginx -s reload
 
 sudo service nginx stop
 sudo service nginx start
@@ -18,9 +22,9 @@ sudo service nginx restart
 sudo service nginx reload
 sudo service nginx status
 
-systemctl stop nginx
-systemctl start nginx
-systemctl restart nginx
+sudo systemctl stop nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
 systemctl status nginx
 ```
 

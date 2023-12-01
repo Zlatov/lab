@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import re
+
+# pyenv exec pip install termcolor
 from termcolor import colored
 
 # re.match(pattern, string)               — ищет в начале строки, первое совпадение.
@@ -65,7 +67,7 @@ a = "asd zxc asd"
 b = re.findall(r"(.)s(.)", a)
 print("a:", a)
 print("b:", b)
-exit(0)
+# exit(0)
 
 # split
 print(colored('\nsplit()', 'green'))

@@ -14,6 +14,58 @@
 
 
 # 
+# Таблицы
+# 
+
+drop_table :market_product_clips, if_exists: true
+
+class CreateLorems < ActiveRecord::Migration[7.1]
+  def change
+    create_table :lorems, id: :string, primary_key: :code do |t|
+      t.string   :name, null: false
+      t.string   "address"
+      t.integer  "stages"
+      t.decimal  "price", precision: 10, scale: 2
+      t.datetime "created_at", null: false
+      t.datetime "updated_at", null: false
+      t.float    "lat"
+      t.float    "lng"
+      t.text   :text
+      t.index ["name"], name: "index_market_angars_on_name", unique: true
+      # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
+
+      t.timestamps
+      # ИЛИ
+      t.datetime "created_at"
+      t.datetime "updated_at"
+
+      t.index :updated_at, name: :ix_lorems_updatedat
+    end
+  end
+end
+add_index :lorem, :name, unique: true
+
+create_table :market_product_clips, id: :string, force: :cascade do |t|
+  t.string :tab_id, null: false
+  t.string :name,   null: false
+  t.string :url
+  t.index [:id], name: :uqix_marketproductclips_id, unique: true
+  t.index [:tab_id], name: :ix_marketproductclips_tab_id
+end
+# Таблица много ко многим.
+# Индексы по умолчанию не создаются, а обычно они нужны, поэтому так. По
+# умолчанию NOT NULL поэтому в миграции не указано ничего. Если нужно создать
+# много ко многим с NULL то необходимо добавить параметр table_name,
+# table_name, column_options: { null: true }
+create_join_table :tags, :posts do |t|
+  t.index :post_id
+  t.index :tag_id
+end
+
+
+
+
+# 
 # has_and_belongs_to_many
 # 
 
@@ -109,50 +161,6 @@ remove_column :table_name, :column_name
   def change
     change_column :market_offers, :affiliate_id, :bigint, null: false
   end
-
-
-
-
-# 
-# Таблицы
-# 
-
-drop_table :market_product_clips, if_exists: true
-
-create_table "lorem", force: :cascade do |t|
-  t.string   "name", null: true
-  t.string   "address"
-  t.integer  "stages"
-  t.decimal  "price", precision: 10, scale: 2
-  t.datetime "created_at", null: false
-  t.datetime "updated_at", null: false
-  t.float    "lat"
-  t.float    "lng"
-  t.text   :text
-  t.index ["name"], name: "index_market_angars_on_name", unique: true
-  # t.references :market_order, index: true, foreign_key: {on_delete: :cascade}
-  # t.timestamps
-  t.datetime "created_at"
-  t.datetime "updated_at"
-end
-add_index :lorem, :name, unique: true
-
-create_table :market_product_clips, id: :string, force: :cascade do |t|
-  t.string :tab_id, null: false
-  t.string :name,   null: false
-  t.string :url
-  t.index [:id], name: :uqix_marketproductclips_id, unique: true
-  t.index [:tab_id], name: :ix_marketproductclips_tab_id
-end
-# Таблица много ко многим.
-# Индексы по умолчанию не создаются, а обычно они нужны, поэтому так. По
-# умолчанию NOT NULL поэтому в миграции не указано ничего. Если нужно создать
-# много ко многим с NULL то необходимо добавить параметр table_name,
-# table_name, column_options: { null: true }
-create_join_table :tags, :posts do |t|
-  t.index :post_id
-  t.index :tag_id
-end
 
 
 

@@ -33,3 +33,7 @@ print 'uri.fragment: '.red; puts uri.fragment
 # uri.query = URI.encode_www_form(erid: 'asd865sda5f43asdf4@#$%^&') # Заменит существующие параметры
 uri.query = URI.encode_www_form CGI::parse(uri.query || '').merge(erid: 'asd865sda5f43asdf4@#$%^&')
 print 'uri.to_s: '.red; puts uri.to_s
+
+a = 'Русский ёж'
+b = URI.encode_www_form_component a
+print 'b: '.red; puts b

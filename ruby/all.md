@@ -60,12 +60,14 @@ sudo apt install -y libssl-dev
 sudo apt install -y zlib1g-dev
 ```
 
-`rbenv install -l` — список доступных для установки версий;
-`rbenv install 2.3.1` — установить указанную версию;
-`rbenv versions` — список установленных версий;
-`rbenv local 2.3.1` — назначить версию для текущего проекта;
-`rbenv global 2.4.1` — назначить глобальную версию.
-`rbenv uninstall 2.4.1`
+```sh
+rbenv install -l      # — список доступных для установки версий;
+rbenv install 2.3.1   # — установить указанную версию;
+rbenv versions        # — список установленных версий;
+rbenv local 2.3.1     # — назначить версию для текущего проекта;
+rbenv global 2.4.1    # — назначить глобальную версию.
+rbenv uninstall 2.4.1
+```
 
 
 

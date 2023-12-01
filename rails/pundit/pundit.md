@@ -67,6 +67,10 @@ end
 class Offer ...
   attr_accessor :current_user
   validates :project, presence: true, if: -> {
+    # Берёт класс разрешения (Admin::OfferPolicy) автоматически c пространствои
+    # имён объекта self (Admin::Offer)
     Pundit.policy(current_user, self).specify_project?
+    # Можно проверить право просто взяв его (со своим пространством имён)
+    Admin::OfferPolicy.new(current_user, self).specify_project?
   }
 ```
