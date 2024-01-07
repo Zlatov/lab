@@ -49,3 +49,33 @@ a = [
 b = a.sort_by{|x| x[:id]}.reverse.sort_by{|x| x[:order]}
 print 'a: '.red; p a
 print 'b: '.red; p b
+
+puts 'Сортировка по другому массиву'.green
+a = [
+'(10000-12000 K), бин C1',
+'(10000-14000 K), бин B14',
+'(11000-12000 K), бин C-2',
+'(11000-12000 K), бин C-2D',
+'(2700-3000 K), бин AE5-1',
+'(3000-3500 K), бин 30D',
+'(3000-3500 K), бин H05-D',
+'(4000-4500 K), бин 40E'
+]
+# binsort = lambda do |x, y|
+#   return 0
+# end
+# b = a.sort{|x, y| binsort.call(x, y)}
+# indexes = ['C1', 'B14']
+# binsort = lambda do |x|
+#   return indexes.index(x)
+# end
+# b = a.sort_by{|x| binsort.call(x)}
+indexes = [
+'(2700-3000 K), бин AE5-1',
+'(11000-12000 K), бин C-2D'
+]
+b = a.sort_by{|x| indexes.index(x) || a.length}
+print 'a: '.red; p a
+print 'b: '.red; p b
+
+

@@ -156,6 +156,8 @@ __Shutter__ (PrintScreen as PicPick)
 
 Принтскрины, почти как PicPick в винде.
 
+__Hardinfo__ аналог EVEREST
+
 
 ## FreeRdp
 

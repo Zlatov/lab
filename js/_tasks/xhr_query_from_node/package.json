@@ -1,0 +1,15 @@
+{
+  "name": "xhr_query_from_node",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "xhr_query_from_node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}

@@ -60,6 +60,7 @@ mailcatcher
 # config/initializers/devise.rb
 config.allow_unconfirmed_access_for = 2.days
 config.timeout_in = 4.hours
+config.remember_for = 2.weeks
 
 # app/controllers/admin/application_controller.rb
 before_action :authenticate_user!

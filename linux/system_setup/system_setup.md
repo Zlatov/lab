@@ -46,13 +46,14 @@
   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Super>Page_Up']"
   ```
 * __imwheel__ - устранит на 18 убунте баг скрола. Установить: `sudo apt install imwheel` и настроить:
-  1. `mcedit ~/.imwheelrc` добавить:
-    ```
-".*"
-    Control_L, Up,   Control_L|Button4
-    Control_L, Down, Control_L|Button5
-    ```
-  2. Добавить код в автозагрузку системы: <kbd>Win + A</kbd> → `Автоматически запускаемые приложения`, код: `imwheel --kill --buttons "4 5"`
+    1.  `mcedit ~/.imwheelrc` добавить:
+        ```
+        ".*"
+            Control_L, Up,   Control_L|Button4
+            Control_L, Down, Control_L|Button5
+        ```
+    2.  Добавить код в автозагрузку системы: <kbd>Win + A</kbd> → `Автоматически запускаемые приложения`
+        или `startup applications`, код: `imwheel --kill --buttons "4 5"`
 
 ## Настройки для Ubuntu 20
 

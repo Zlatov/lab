@@ -52,7 +52,7 @@
 	{ "keys": ["ctrl+f8"], "command": "open_terminal" },
 
 	// Super calculator
-	{ "keys": ["alt+c"], "command": "super_calculator" },
+	{ "keys": ["alt+k"], "command": "super_calculator" },
 
   // { "keys": [ "ctrl+alt+v" ], "command": "view_in_browser" },
   // { "keys": [ "ctrl+alt+f" ], "command": "view_in_browser", "args": { "browser": "firefox" } },

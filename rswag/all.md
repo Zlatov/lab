@@ -100,4 +100,13 @@ sudo chown -R $(id -u -n):$(id -u -n) ./swagger
 
 ```sh
 docker compose exec web bundle exec rspec ./spec/requests/api/v1/application_settings_spec.rb
+
+# В правильном окружении и с чистой БД:
+docker compose exec -e "RAILS_ENV=test" web bash -c "bundle install && bundle exec rails db:drop db:create db:schema:load db:seed && bundle exec rspec -f d ./spec/requests/api/v1/products_spec.rb"
+
+# Поэтапно, для разработки теста:
+docker compose exec -e "RAILS_ENV=test" web bash
+bundle install
+bundle exec rails db:drop db:create db:schema:load db:seed
+bundle exec rspec -t focus -f documentation ./spec/requests/api/v1/products_spec.rb
 ```
