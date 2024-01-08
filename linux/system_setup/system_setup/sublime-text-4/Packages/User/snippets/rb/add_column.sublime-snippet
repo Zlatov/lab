@@ -1,6 +1,6 @@
 <snippet>
   <content><![CDATA[
-add_column :table_name, :column_name, :string|integer|bigint|boolean|decimal|datetime, null: :false, default: 0, limit: 1(lenght|bytes), precision: 10(всего), scale: 2(после запятой), comment: ''
+add_column :table_name, :column_name, :string|text|integer|bigint|boolean|float|decimal|datetime|date|jsonb, null: false, default: 0, limit: 1(lenght|bytes), precision: 10(всего), scale: 2(после запятой), comment: ''
 ]]></content>
   <tabTrigger>add_column</tabTrigger>
   <scope>source.ruby</scope>

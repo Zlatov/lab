@@ -107,13 +107,12 @@ end
 # Добавление колонок
 # 
 
-rails g migration add_field_to_table field:[string|integer|bigint|boolean|decimal|datetime]
-add_column :table_name, :column_name, :type, options: :options
-add_column :table_name, "column_name", :string,
-  # options
-  :limit => 256 # Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
-  :default => nil # The column’s default value. Use nil for NULL.
+rails g migration add_column_name_to_table_name column_name:string|text|integer|bigint|boolean|float|decimal|datetime|date|jsonb
+add_column :table_name, :column_name, :string|text|integer|bigint|boolean|float|decimal|datetime|date|jsonb, null: false, default: 0, limit: 1(lenght|bytes), precision: 10(всего), scale: 2(после запятой), comment: ''
+add_column :table_name, :column_name, :string,
   :null => false # Allows or disallows NULL values in the column.
+  :default => nil # The column’s default value. Use nil for NULL.
+  :limit => 256 # Requests a maximum column length. This is the number of characters for a :string column and number of bytes for :text, :binary and :integer columns. This option is ignored by some backends.
   :precision => 10 # (Сколько всего знаков!) Specifies the precision for the :decimal and :numeric columns.
   :scale => 2 # (Сколько знаков после запятой!) Specifies the scale for the :decimal and :numeric columns.
   :comment => '...' # Specifies the comment for the column. This option is ignored by some backends.
@@ -140,7 +139,7 @@ change_column :table_name, :column_name, :type, null: false, default: '', commen
 # 
 
 rails g migration RemoveFieldNameFromTableName field_name:datatype
-remove_column :table_name, :column_name
+remove_column :table_name, :column_name, :column_type_for_rollback, :options_for_rollback = {}
 
 # Добавление колонки через указание связи, связь обязательная поэтому через три
 # миграции: добавить необязательное поле, наполнить, изменить на обязательное.
@@ -230,7 +229,7 @@ gem "migration_data"
       t.string  "attachment"
     end
   end
-  # Порядок:
+  # Порядок вызова методов гема относительно методов ActiveRecord (change/up/down):
   # def data_before
   # def change/up
   # def data/data_after
