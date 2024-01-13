@@ -8,6 +8,11 @@
 # include ActiveModel::Serializers::JSON
 # - предоставит метод as_json...
 
+# Gemfile
+# Сериализация старым гемом.
+gem 'active_model_serializers', '~> 0.10.0'
+
+
 # Первый вариант определения ограничений по полям:
 class Model < ApplicationRecord
 
