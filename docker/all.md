@@ -221,3 +221,12 @@ docker image inspect {image_name_or_id}
 
 docker pull portainer/portainer@sha256:fb45b43738646048a0a0cc74fcee2865b69efde857e710126084ee5de9be0f3f
 ```
+
+## Как установить утилиту
+
+```sh
+# Если
+cat /etc/os-release
+# вернёт "Alpine Linux", то
+apk add --no-cache mc
+```

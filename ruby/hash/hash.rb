@@ -65,6 +65,7 @@ a = [{'a' => 111}]
 b = a.map(&:deep_symbolize_keys)
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+a = [{'a' => 111}]
 c = a.each(&:deep_symbolize_keys!)
 print 'a: '.red; puts a
 print 'c: '.red; puts c

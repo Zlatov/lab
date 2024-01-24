@@ -663,6 +663,8 @@ a = [1,2,3]
 b = a.pop
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit
+
 puts 'С начала (.shift)'.blue
 a = [1,2,3]
 b = a.shift 2

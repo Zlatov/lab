@@ -21,14 +21,14 @@ import fetch from 'node-fetch';
 var encoded_params = "filter%5Bnation%5D=ussr&filter%5Btype%5D=&filter%5Brole%5D=&filter%5Btier%5D=5&filter%5Blanguage%5D=ru&filter%5Bpremium%5D=0%2C1"
 var decoded_params = decodeURIComponent(encoded_params)
 console.log('decoded_params: ', decoded_params)
-var decoded_params = "filter[nation]=ussr&filter[type]=&filter[role]=&filter[tier]=5&filter[language]=ru&filter[premium]=0,1"
+var decoded_params = "filter[nation]=ussr&filter[type]=&filter[role]=&filter[tier]=6&filter[language]=ru&filter[premium]=0,1"
 var response = await fetch('https://tanki.su/wotpbe/tankopedia/api/vehicles/by_filters/', {
   "headers": {
-    "accept": "application/json, text/javascript, */*; q=0.01",
-    "accept-language": "ru,en-US;q=0.9,en;q=0.8",
-    "cache-control": "no-cache",
+    // "accept": "application/json, text/javascript, */*; q=0.01",
+    // "accept-language": "ru,en-US;q=0.9,en;q=0.8",
+    // "cache-control": "no-cache",
     "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-    "pragma": "no-cache"
+    // "pragma": "no-cache"
     // "sec-ch-ua": "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
     // "sec-ch-ua-mobile": "?0",
     // "sec-ch-ua-platform": "\"Linux\"",
@@ -47,4 +47,5 @@ var response = await fetch('https://tanki.su/wotpbe/tankopedia/api/vehicles/by_f
 })
 var data = await response.json()
 console.log(data)
+console.log(data.data.data[0])
 process.exit(0)

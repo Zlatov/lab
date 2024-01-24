@@ -26,9 +26,17 @@ console.log('01234567,8a.sd90.,q('.replace(/[^0-9.,]/gi, ''))
 console.log('01234567,8a.sd90.,q('.replace(/,/g, '.'))
 // return null
 
+console.log('> Регулярка проверки артикула')
 var regexp = /\d{9}/
 console.log('regexp.test("123456789"): ', regexp.test("123456789"))
 console.log('regexp.test("12345678"): ', regexp.test("12345678"))
+
+console.log('> Регулярка проверки НОВОГО артикула')
+var regexp = /^[\d-]{8,12}$/
+var a = regexp.test("111222333")
+var b = regexp.test("11111111111111111")
+console.log('a: ', a)
+console.log('b: ', b)
 // return null
 
 var versions = [

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 STRING="100.1.1"
 ARRAY=(${STRING//./})
 A=100

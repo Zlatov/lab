@@ -3,9 +3,64 @@
 <!-- https://eax.me/postgresql-install/ Начало работы с PostgreSQL -->
 <!-- https://postgrespro.ru/ -->
 
+
+## Определить установленную версию version
+
+```sh
+postgres --version
+postgres -V
+# Если команда postgres не найдена
+locate bin/postgres
+/usr/pgsql-9.6/bin/postgres --version
+#> postgres (PostgreSQL) 9.6.24
+
+systemctl | grep postgresql
+systemctl status postgresql
+
+sudo -u postgres psql
+SELECT version();
+SHOW server_version;
+
+# sudo apt install postgresql-client
+psql --version
+psql -V
+locate bin/psql
+```
+
+
 ## Утсановка
 
-`sudo apt-get install -y postgresql`
+```sh
+# Елси просто последняя версия
+sudo apt update
+sudo apt-get install -y postgresql
+
+# Если нужна конкретная версия
+# https://www.postgresql.org/download/linux/ubuntu/
+# Create the file repository configuration:
+sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+# Import the repository signing key:
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+# Update the package lists:
+sudo apt-get update
+# Install the latest version of PostgreSQL.
+# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
+# sudo apt-get -y install postgresql
+
+apt-cache pkgnames postgresql | grep 9.6
+sudo apt-get -y install postgresql-9.6
+systemctl | grep postgresql
+systemctl status postgresql
+
+# Если нужно увеличить версию psql, pg_dump, pg_restore
+# Устанаваливаем пакет postgresql-client-14
+apt-cache pkgnames postgresql | grep 14
+sudo apt-get -y install postgresql-client-14
+# Ищем бинарники пакета
+locate bin/psql
+# В файл .bashrc изменяем переменную PATH так, чтобы пути к новым бинарникам были в начале
+export PATH="/usr/lib/postgresql/14/bin:$PATH"
+```
 
 
 ## Кофигурирование
