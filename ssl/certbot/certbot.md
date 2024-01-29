@@ -98,18 +98,33 @@ sudo certbot … --register-unsafely-without-email
 
 …
 
+# Полный редирект
 server {
-    listen 91.238.11.30:80;
-    server_name newzenonline-dan-stage.klej.ru;
-    rewrite ^ https://newzenonline-dan-stage.klej.ru$request_uri? permanent;
+    listen 80;
+    server_name domain.name;
+    rewrite ^ https://domain.name$request_uri? permanent;
+}
+# Частичный редирект (оставляем .well-known на 80 порту для обновления сертификатов)
+server {
+    listen 80;
+    server_name domain.name;
+
+    # Редирект на https кроме .well-known
+    root /home/deployer/app/name/shared/public;
+    location /.well-known {
+        try_files $uri $uri/ =404;
+    }
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
 
 …
 
 server {
-    listen 91.238.11.30:443 ssl;
-    ssl_certificate /etc/letsencrypt/live/zenonline-zlatov-stage.klej.ru/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/zenonline-zlatov-stage.klej.ru/privkey.pem;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/domain.name/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/domain.name/privkey.pem;
 
     …
 
@@ -126,6 +141,7 @@ server {
 
 ```bash
 # Обновление ssl сертификатов, перегрузку nginx см. /etc/letsencrypt/renewal-hooks/post/nginx-reload
+# Каждое воскресенье в 6:45
 45 6 * * 0 certbot renew
 ```
 
