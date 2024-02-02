@@ -50,6 +50,20 @@ print 'hash_params: '.red; puts hash_params
 print 'hash_params2: '.red; puts hash_params2
 # exit 0
 
-a = 'Русский ёж'
+puts 'Обработка отдельных параметров с помощью URI/CGI'.blue
+
+puts 'URI .encode_www_form_component .decode_www_form_component'.green
+a = '@Русский #ёж!'
 b = URI.encode_www_form_component a
+c = URI.decode_www_form_component b
+print 'a: '.red; puts a
 print 'b: '.red; puts b
+print 'c: '.red; puts c
+
+puts 'CGI .escape .unescape'.green
+a = '@Русский #ёж!'
+b = CGI.escape a
+c = CGI.unescape b
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c

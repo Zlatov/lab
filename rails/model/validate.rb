@@ -120,13 +120,18 @@ class Model < ActiveRecord::Base
   # Булево поле
   validates :field, inclusion: { in: [ true, false ] }
 
-  validate :valid_date, :valid_email
+  validate :valid_date, :icon_file_size
 
   def valid_date
     errors.add('asdasdff')
     errors.add(:name, :blank, message: "cannot be nil") if name.nil?
     errors.add(:name, :invalid, message: "cannot be nil") if name.nil?
     errors.add(:base, :invalid, message: "что-то не так") if name.nil? || email.nil?
+    errors[:icon] << 'не должна быть больше 500 килобайт' if icon.size > 500.kilobytes
+  end
+
+  def icon_file_size
+    errors[:icon] << 'не должна быть больше 500 килобайт' if icon.size > 500.kilobytes
   end
 
 # Валидация уникальности составного ключа
