@@ -1,0 +1,40 @@
+<header>
+  <style type="text/css">
+
+    .wrap {
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+      background-color: red;
+
+      position: relative;
+/*      z-index: 1;*/
+    }
+
+    .hov {
+      width: 50px;
+      height: 50px;
+      background: green;
+      bottom: -30px;
+      left: 30px;
+
+      position: absolute;
+      z-index: 1;
+    }
+
+    .glob {
+      background: gray;
+
+      position: relative;
+      z-index: 1;
+    }
+
+  </style>
+</header>
+
+<div class="glob">
+  <div class="wrap">1<div class="hov"></div></div>
+  <div class="wrap">2<div class="hov"></div></div>
+  <div class="wrap">3<div class="hov"></div></div>
+  <div class="wrap">4<div class="hov"></div></div>
+</div>
