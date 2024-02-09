@@ -90,6 +90,13 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 # exit
 
+puts 'Выбрать не все значения хэша (а только определённых ключей), без ключей .fetch_values().'.green
+a = {a: 'asd', z: 'zxc', q: 'qwe'}
+b = a.fetch_values(:a, :q)
+print 'a: '.red; puts a
+print 'b: '.red; p b
+# exit
+
 puts
 puts 'Удаление по ключу .delete().'.green
 puts 'Возвращает удалённое.'.blue

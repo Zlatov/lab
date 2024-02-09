@@ -1,8 +1,8 @@
 function xhr_get(url) {
   return $.ajax({
     url: url,
-    type: 'get',
-    dataType: 'json',
+    type: "get",
+    dataType: "json",
     beforeSend: showLoadingImgFn
   })
   .always(function() {
