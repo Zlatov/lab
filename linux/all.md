@@ -129,34 +129,24 @@ __OBS Studio__
 
 Устанавливаю дистрибутив от Flathub, версия 29.1.3(64 bit).
 
-__Shotcut__
-
-Редактор видео.
-
-__Audacity__
-
-Редактор аудио.
-
-Запускаю из файла скаченного файла `audacity-linux-3.3.3-x64.AppImage`.
-
-```
-# ~/.local/share/applications/Audacity.desktop
-[Desktop Entry]
-Encoding=UTF-8
-Version=1.0
-Type=Application
-Terminal=false
-Name=Audacity
-Comment=Редактор аудио
-Exec=/home/iadfeshchm/audacity-linux-3.3.3-x64.AppImage
-Icon=/home/iadfeshchm/audacity.png
-```
-
-__Shutter__ (PrintScreen as PicPick)
-
-Принтскрины, почти как PicPick в винде.
-
-__Hardinfo__ аналог EVEREST
+*   ***Shotcut*** Редактор видео.
+*   ***Audacity*** Редактор аудио.
+    Запускаю из файла скаченного файла `audacity-linux-3.3.3-x64.AppImage`.
+    ```sh
+    # ~/.local/share/applications/Audacity.desktop
+    [Desktop Entry]
+    Encoding=UTF-8
+    Version=1.0
+    Type=Application
+    Terminal=false
+    Name=Audacity
+    Comment=Редактор аудио
+    Exec=/home/iadfeshchm/audacity-linux-3.3.3-x64.AppImage
+    Icon=/home/iadfeshchm/audacity.png
+    ```
+*   ***Shutter*** Принтскрины, почти как PicPick в винде. PrintScreen as PicPick.
+*   ***Hardinfo*** Аналог EVEREST.
+*   ***Valentina Studio*** GUI баз данных.
 
 
 ## FreeRdp

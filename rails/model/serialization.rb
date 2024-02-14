@@ -78,7 +78,9 @@ class PostSerializer < ActiveModel::Serializer
     :id,
     :content,
     :created_at,
+
     :icon,
+    :user_grade_icon
     :logo_path
   )
 
@@ -91,6 +93,13 @@ class PostSerializer < ActiveModel::Serializer
       template: "admin/filters/_icon",
       layout: false
     )
+  end
+
+  def user_grade_icon
+    ApplicationController.render \
+      partial: 'tiers/tier_user_grade_icon',
+      object: object.grade,
+      as: :grade
   end
 
   def logo_path

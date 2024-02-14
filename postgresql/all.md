@@ -70,7 +70,7 @@ export PATH="/usr/lib/postgresql/14/bin:$PATH"
 
 ## Доп. ПО
 
-vstudio (Valentina Studion) — GUI редактор.
+vstudio (Valentina Studio) — GUI редактор.
 
 
 ## Консоль

@@ -1,0 +1,18 @@
+<snippet>
+  <content><![CDATA[
+has_many :posts,
+  class_name: '::CommunicationPost',
+  primary_key: :id,
+  foreign_key: :user_id,
+  through: :users_posts, source: :psts
+  dependent: :destroy|delete_all|nullify|restrict_with_Exceptionion|restrict_with_error,
+  inverse_of: :user do
+    def by_affiliate(affiliate)
+      where affiliate_id: affiliate.id
+    end
+  end
+]]></content>
+  <tabTrigger>has_many</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>RB has_many</description>
+</snippet>
