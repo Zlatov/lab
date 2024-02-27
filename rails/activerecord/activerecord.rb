@@ -305,36 +305,50 @@ end
 
 .categories
 # Returns a Relation of all the associated objects || [].
+
 .categories << category
 .categories << category, category2
 # or
 .categories.push(category)
 .categories.push(category, category2)
 # Adds one or more objects to the collection by creating associations in the join table. Without waiting for the save or update call!
+
 .categories.delete(category, …)
 # Removes one or more objects. This does not destroy the objects!
+
 .categories.destroy(category, …)
 # Removes one or more objects by running destroy on each __association__ in the join table. This does not destroy the objects!
+
 .categories = categories
 # Replaces the collection’s content by deleting and adding objects as appropriate.
+
 .categories_singular_ids
 # Returns an array of the associated objects’ ids.
+
 .categories_singular_ids = ids
 # Replace the collection by the objects identified by the primary keys in ids.
+
 .categories.clear
 # Removes every object from the collection. This does not destroy the objects.
+
 .categories.empty?
 # Returns true if there are no associated objects.
+
 .categories.size
 # Returns the number of associated objects.
+
 .categories.find(id)
 # Finds an associated object responding to the id and that meets the condition that it has to be associated with this object. Uses the same rules as ActiveRecord::FinderMethods#find.
+
 .categories.exists?(…)
 # Checks whether an associated object with the given conditions exists. Uses the same rules as ActiveRecord::FinderMethods#exists?.
+
 .categories.build(attributes = {})
 # Returns a new object of the collection type that has been instantiated with attributes and linked to this object through the join table, but has not yet been saved.
+
 .categories.create(attributes = {})
 # Returns a new object of the collection type that has been instantiated with attributes, linked to this object through the join table, and that has already been saved (if it passed the validation).
+
 .categories.reload
 # Returns a Relation of all of the associated objects, forcing a database read. An empty Relation is returned if none are found.
 

@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <b><%= form.label :${1:role_ids}, class: 'form-label' %></b>
+    <%= field_info form.object, :${1:role_ids} %>
+    <%= form.collection_check_boxes :${1:role_ids}, Admin::Role.all, :id, :name do |f| %>
+      <div class="form-check">
+        <%= f.check_box class: 'form-check-input' %>
+        <%= f.label class: 'form-check-label', role: :button %>
+      </div>
+    <% end %>
+    <%= field_errors form.object, :${1:role_ids} %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.collection_check_boxes</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB form.collection_check_boxes</description>
+</snippet>
