@@ -187,3 +187,9 @@ print 'b: '.red; puts b
 a = 'Yes'
 yn = (a =~ /^y(?:es)?$/i) != nil
 print 'yn: '.red; puts yn
+
+puts 'разделение по три цифры/по 3 цифры/по три знака'.green
+a = 1000000
+b = a.to_s.gsub(/\D/, '').reverse.scan(/..?.?/).join('`').reverse
+print 'a: '.red; puts a
+print 'b: '.red; puts b

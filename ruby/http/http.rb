@@ -73,8 +73,16 @@ data = JSON.parse(response.body)
 print 'data: '.red; puts data
 # exit
 
+uri = URI('http://example.com')
+hostname = uri.hostname # => "example.com"
+uri.path = '/posts'
+req = Net::HTTP::Post.new(uri) # => #<Net::HTTP::Post POST>
+req.body = '{"title": "foo","body": "bar","userId": 1}'
+req.content_type = 'application/json'
+res = Net::HTTP.start(hostname) do |http|
+  http.request(req)
+end
 
-exit
 
 
 # 
@@ -90,6 +98,7 @@ end
 
 
 
+exit
 
 HTTPUnknownResponse
 # For unhandled HTTP extensions
