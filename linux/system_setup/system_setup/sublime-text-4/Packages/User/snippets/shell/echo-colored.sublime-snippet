@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+echo -e "\e[31m ${1:red} \e[32m green \e[34m blue \e[33m yellow \e[91m lred \e[92m lgreen \e[94m lblue \e[93m lyellow \e[1m bolder \e[2m lighter \e[0m"
+]]></content>
+  <tabTrigger>echo</tabTrigger>
+  <scope>source.shell</scope>
+  <description>SHELL echo colored</description>
+</snippet>

@@ -166,7 +166,7 @@ Profile.first.actions.latest
 # INNER JOIN
 User.joins(:posts) # Только те пользователи у которых есть посты
 # LEFT JOIN
-User.left_outer_join(:posts) # Все пользователи, с учётом постов если они есть
+User.left_outer_joins(:posts) # Все пользователи, с учётом постов если они есть
 # Подзапрос LEFT или INNER или ... JOIN
 true_comments = Comments.select(...).where(...).group(...).having(...)
 users = User.select('user.*', 'tk.count_true_comments')
@@ -186,7 +186,7 @@ users = User.select('user.*', 'tk.count_true_comments')
 # 
 
 Model.joins(:relation).where()
-Model.left_outer_join(:relation).where()
+Model.left_outer_joins(:relation).where()
 Model.includes(:relation).where().references(:relation)
 Model.eager_load(:relation)
 Model.distinct.joins(:relation).where(relation: {field: :value})
