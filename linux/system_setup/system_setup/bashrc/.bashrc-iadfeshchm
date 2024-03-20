@@ -10,12 +10,8 @@ export PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h \[\033[01;33m
 
 # Быстрый доступ (open+Tab,Tab) к открытию для редактирования.
 alias openbashrc='subl ~/.bashrc'
-alias openbashenv='subl ~/.bashrc-env'
 alias openhosts='subl /etc/hosts'
 alias opensshconfig='subl ~/.ssh/config'
-alias openapacheconfigmy='subl /etc/apache2/sites-available/my.conf'
-alias openapacheconfigzenon='subl /etc/apache2/sites-available/zenon.conf'
-alias openpostgresqlconfiguser='sudo mcedit /etc/postgresql/10/main/pg_hba.conf'
 alias xopen='xdg-open'
 
 
@@ -34,7 +30,6 @@ alias cdilorem='cd ~/projects/my/ilorem'
 alias cdimenu='cd ~/projects/my/imenu'
 alias cdagofolio='cd ~/projects/my/agofolio'
 alias cdnestedarray='cd ~/projects/my/nested_array'
-alias cdcmc='cd ~/projects/anastasia/cmc'
 alias cdprioritize='cd ~/projects/my/prioritize'
 alias cdstore='cd ~/projects/my/store'
 alias cdtanki='cd ~/projects/my/tanki'
