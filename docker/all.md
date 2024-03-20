@@ -5,6 +5,8 @@ https://habr.com/ru/post/310460/
 
 ## Установка
 
+***По старому***
+
 ```bash
 sudo apt-get update
 sudo apt install docker.io
@@ -22,23 +24,55 @@ sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo systemctl start docker
 sudo docker run hello-world
 sudo usermod -a -G docker deployer  
-```
 
-```bash
+# 
 systemctl --no-page status docker
 sudo systemctl start docker
 sudo systemctl enable docker
-```
 
-```bash
 # Добавить текущего пользователя в группу докера
 sudo usermod -aG docker $(whoami)
 sudo chmod 666 /var/run/docker.sock
-```
 
-```bash
 docker --version
 ```
+
+***Install Docker Engine on Ubuntu***
+
+```sh
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+# Install
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# Verify
+sudo docker run hello-world
+# To create the docker group and add your user:
+# Create the docker group.
+sudo groupadd docker
+# Enable autostart
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+# Add your user to the docker group.
+sudo usermod -aG docker $USER
+# Verify
+docker run hello-world
+# Install Portainer
+docker volume create portainer_data
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+# Verify
+docker ps
+```
+
 
 
 ## Установка docker-compose
