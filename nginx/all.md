@@ -50,6 +50,8 @@ sudo usermod -a -G fpm nginx
 # Проверить (показать Группы в которых состоит пользователь nginx)
 id -Gn nginx
 groups nginx
+# Проверить имет ли право nginx-пользователь читать файл.
+su <nginx-user> -s /bin/bash -c 'if [ -r <path-to-html-file> ]; then echo "Readable"; else echo "Invalid permissions"; fi'
 # Удалить пользователя из группы
 gpasswd --delete user group
 ```
