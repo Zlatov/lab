@@ -1,9 +1,0 @@
-[submodule "php/_libs/tree"]
-	path = php/_libs/tree
-	url = https://github.com/Zlatov/tree.git
-[submodule "js/_libs/zlader"]
-	path = js/_libs/zlader
-	url = git@github.com:Zlatov/Zlader.git
-[submodule "js/_libs/ilorem"]
-	path = js/_libs/ilorem
-	url = git@github.com:Zlatov/ilorem.git

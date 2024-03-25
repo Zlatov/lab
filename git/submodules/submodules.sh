@@ -49,8 +49,8 @@ rm -rf .git/modules/submodule_name
 # 6. Сделать коммит изменений.
 # 7. Удалить ненужные файлы подмодулей:
 rm -rf path/to/submodule_name
-
-
+# ИЛИ
+git submodule
 git submodule deinit -f js/_tasks/dotdotdot
 rm -rf .git/modules/js/_tasks/dotdotdot
 git rm -f js/_tasks/dotdotdot
