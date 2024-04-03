@@ -30,6 +30,14 @@ a = "asd123asd$$$\nasd456asd$$$"
 b = /(\d+)\w+(.*)/
 c = a.scan(b)
 print 'c: '.red; p c
+puts 'Найдём единицу измерения (в скобках) и вырежем ее'.green
+a = 'asd asdasd asd sad (123.)'
+b = /\((\S+)\)/
+c = a.scan(b)
+print 'a: '.red; p a
+print 'c: '.red; p c
+name = a.gsub "(#{c[0][0]})", ''
+print 'name: '.red; puts name
 # exit
 
 # Найдена ли подстрока | соответствует ли регулярке

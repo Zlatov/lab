@@ -50,14 +50,17 @@ puts 'Метод с лямбда для синглтон значения'.green
 class A
   def brand
     @brand ||= lambda do
+      puts '== calculate time'
+      # Или без return:
       return Time.new.to_i
     end.call
   end
 end
 a = A.new
 print 'a.brand: '.red; puts a.brand
-sleep 2
+# sleep 2
 print 'a.brand: '.red; puts a.brand
+# exit
 
 puts 'Метод []'.green
 class Asd

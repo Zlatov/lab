@@ -14,3 +14,23 @@ needle='y s'
 if [[ "$string" == *"$needle"* ]]; then
   echo "haystack '$string' contains needle '$needle'"
 fi
+
+
+filename="document.txt"
+
+if [[ "$filename" =~ \.txt$ ]]; then
+  echo "Filename has a .txt extension"
+else
+  echo "Filename does not have a .txt extension"
+fi
+
+comment="add: asdsadasda; :noautodeploy"
+comment="add: asdsadasda;"
+
+if [[ ! "$comment" =~ :noautodeploy ]]; then
+  echo "deploy"
+else
+  echo "no"
+fi
+
+[[ ! "$comment" =~ :noautodeploy ]] && echo deploy || echo no
