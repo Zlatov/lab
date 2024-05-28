@@ -1,0 +1,4 @@
+[
+  {"id": "pv_1", "parent": "1", "text": "11",  "type": "property_value", "children": true},
+  {"id": "pv_2", "parent": "1", "text": "22",  "type": "property_value", "children": true}
+]

@@ -1,0 +1,16 @@
+[
+  {"id": "de_1", "parent": "#",    "text": "Фильтры", "type": "default", "state": {"selected": false, "opened": true}},
+  {"id": "fg_1", "parent": "de_1", "text": "Ширина",  "type": "filter_group", "state": {"selected": false, "opened": true}},
+  {"id": "fg_2", "parent": "de_1", "text": "Цвет",    "type": "filter_group", "children": true, "state": {"selected": true, "opened": false}},
+
+  {"id": "vt_1", "parent": "fg_1", "text": "Значения",    "type": "value_type", "state": {"selected": false}},
+  {"id": "vt_2", "parent": "fg_1", "text": "Уточнения",   "type": "value_type", "children": [], "state": {"selected": false, "opened": true}},
+  {"id": "1",    "parent": "vt_1", "text": "Ширина (см)", "type": "filter", "children": true, "state": {"selected": false, "opened": false}},
+  {"id": "2",    "parent": "vt_2", "text": "Ширина",      "type": "filter", "children": [], "state": {"selected": false, "opened": true}},
+
+  {"id": "pv_3", "parent": "2", "text": "широкий",  "type": "property_value", "children": [], "state": {"selected": false, "opened": true}},
+
+  {"id": "ps_1", "parent": "pv_3", "text": "11-22", "type": "property_strict_value", "children": [], "state": {"selected": false, "opened": true}},
+
+  {"id": "pr_2_ps_1", "parent": "ps_1", "text": "0022",  "type": "product", "state": {"selected": true, "opened": false}}
+]

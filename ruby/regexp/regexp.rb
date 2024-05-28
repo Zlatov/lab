@@ -201,3 +201,11 @@ a = 1000000
 b = a.to_s.gsub(/\D/, '').reverse.scan(/..?.?/).join('`').reverse
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+
+
+puts 'В строке точно число вбитое менеджером'.green
+# a = '1'
+# b = !(a =~ /^\d+$/).nil?
+a = '-121312.1231231'
+b = !(a =~ /^[-]?\d+(?:\.\d+)?$/).nil?
+print 'b: '.red; puts b

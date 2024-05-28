@@ -1,5 +1,13 @@
 "use strict"
 
+console.log('> Безопасный доступ к элементам хэш')
+var a = {asd: "zxc"}
+var b = a.asd
+var c = a.qwe?.asd
+console.log('b: ', b)
+console.log('c: ', c)
+// return
+
 console.log('> Перебор .keys(a).forEach')
 var a = {
   "asd": 1,

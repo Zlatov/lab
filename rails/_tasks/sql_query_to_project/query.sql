@@ -8,14 +8,14 @@ SELECT property_values::jsonb->'2' FROM products;
 -- \q
 
 
-select 'Выбираем продукты со значениме 2 фильтра 1' as " ";
+SELECT 'Выбираем продукты со значениме 2 фильтра 1' AS " ";
 SELECT id, code, property_values FROM products
 WHERE
   products.property_values->'1' @> '["2"]'
 ;
 -- \q
 
-select 'Выбираем продукты с фильтром 2' as " ";
+SELECT 'Выбираем продукты с фильтром 2' AS " ";
 SELECT id, code, property_values
 FROM products p
 WHERE
@@ -23,15 +23,15 @@ WHERE
 ;
 -- \q
 
-select 'Выбираем продукты со значением >= 16 фильтра 2' as " ";
+SELECT 'Выбираем продукты со значением >= 16 фильтра 2' AS " ";
 SELECT id, code, property_values
 FROM products p
 WHERE
-  (p.property_values->'2')::int >= 16
+  (p.property_values->'2')::INT >= 16
 ;
 -- \q
 
-select 'Выбираем продукты с каким либо из значений массива ["1", "2"] фильтра 1 (не пустое пересечение)' as " ";
+SELECT 'Выбираем продукты с каким либо из значений массива ["1", "2"] фильтра 1 (не пустое пересечение)' AS " ";
 SELECT id, code, property_values
 FROM products p
 WHERE
@@ -39,7 +39,7 @@ WHERE
 ;
 -- \q
 
-select 'Выбираем продукты с каким либо из значений массива ["15"] фильтра 2 в котором число (не пустое пересечение)' as " ";
+SELECT 'Выбираем продукты с каким либо из значений массива ["15"] фильтра 2 в котором число (не пустое пересечение)' AS " ";
 SELECT id, code, property_values
 FROM products p
 WHERE
@@ -47,7 +47,7 @@ WHERE
 ;
 -- \q
 
-select 'Выбираем значения фильтров из продутов с фильтром 2' as " ";
+SELECT 'Выбираем значения фильтров из продутов с фильтром 2' AS " ";
 SELECT *
 FROM
   -- products p
@@ -59,11 +59,11 @@ WHERE p.property_values ? '2'
 ;
 -- \q
 
-select 'Все продукты' as " ";
+SELECT 'Все продукты' AS " ";
 SELECT id, code, property_values FROM products;
 
-select 'Выбираем значения фильтров из продуктов с фильтром 2 или 3' as " ";
-SELECT a.key::int, json_agg(a.value) as "values"
+SELECT 'Выбираем значения фильтров из продуктов с фильтром 2 или 3' AS " ";
+SELECT a.key::INT, json_agg(a.value) AS "values"
 FROM
   products p,
   jsonb_each(p.property_values) a
@@ -80,7 +80,7 @@ SELECT f.*, v.values
 FROM
   properties f
   LEFT JOIN (
-    SELECT a.key::int, json_agg(a.value) as "values"
+    SELECT a.key::INT, json_agg(a.value) AS "values"
     FROM
       products p,
       jsonb_each(p.property_values) a
@@ -91,14 +91,21 @@ FROM
       a.key
     HAVING
       a.key IN ('2', '3')
-  ) v on v.key = f.id
+  ) v ON v.key = f.id
 WHERE
- f.filter = true
+ f.filter = TRUE
 ;
 -- \q
 
 -- Выгрибаем все ключи фильтров в продуктах
 SELECT DISTINCT jsonb_object_keys(property_values) FROM products;
 -- Выбираем назначенные свойства
-SELECT to_jsonb(property_values) from products;
+SELECT to_jsonb(property_values) FROM products;
 -- \q
+
+SELECT '> Задача: Выбрать товары у которых назначено какое-либо значение из фильтра с номером' AS " ";
+SELECT id, code, property_values
+FROM products p
+WHERE
+  p.property_values ? '204'
+;

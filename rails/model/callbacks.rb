@@ -55,7 +55,8 @@ will_save_change_to_attribute?(attr_name)
 
 attribute_change_to_be_saved(attr_name)
 # Возвращает изменение атрибута, которое будет сохранено при следующем
-# сохранении.
+# сохранении. Можно вызывать автоматически созданный
+# метод 'field_name'_change_to_be_saved.
 
 attribute_in_database(attr_name)
 # Возвращает значение атрибута в базе данных, а не значение в памяти, которое

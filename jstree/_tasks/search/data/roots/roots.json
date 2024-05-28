@@ -1,0 +1,5 @@
+[
+  {"id": "de_1", "parent": "#",    "text": "Фильтры", "type": "default"},
+  {"id": "fg_1", "parent": "de_1", "text": "Ширина",  "type": "filter_group", "children": true},
+  {"id": "fg_2", "parent": "de_1", "text": "Цвет",    "type": "filter_group", "children": true}
+]

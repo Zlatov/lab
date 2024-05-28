@@ -111,3 +111,7 @@ curl localhost:9200/_cat/indices
 # Удалить индекс/индексы (через запятую)
 curl -X DELETE http://localhost:9200/users_development_20230706135438618,posts_development_20230706135438618
 ```
+
+## Elasticsearch и ruby-приложение
+
+Гем `gem install elasticsearch`, репозиторий https://github.com/elastic/elasticsearch-ruby

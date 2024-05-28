@@ -1,0 +1,6 @@
+[
+  {"id": "vt_1", "parent": "fg_1", "text": "Значения",    "type": "value_type"},
+  {"id": "vt_2", "parent": "fg_1", "text": "Уточнения",   "type": "value_type"},
+  {"id": "1",    "parent": "vt_1", "text": "Ширина (см)", "type": "filter", "children": true},
+  {"id": "2",    "parent": "vt_2", "text": "Ширина",      "type": "filter", "children": true}
+]

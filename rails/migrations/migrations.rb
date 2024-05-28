@@ -174,7 +174,10 @@ add_foreign_key :from_table, :to_table, column: "parent_id", primary_key: "id", 
 add_foreign_key :folders, :folders, column: "parent_id", primary_key: "id", name: "fk_folders_parentid", on_update: :cascade, on_delete: :restrict
 add_foreign_key :emails, :users, on_delete: :cascade, validate: false
 # Удаление FK
-remove_foreign_key_if_exists :emails, column: :user_id
+remove_foreign_key :accounts, :branches # указаны две таблицы и только
+remove_foreign_key :accounts, column: :owner_id # указаны таблица и имя поля
+remove_foreign_key :accounts, name: :special_fk_name # указаны таблица и имя ключа
+remove_foreign_key_if_exists :emails, column: :user_id # удалить ключ с условием (если есть)
 # Поле и FK при создании таблицы
 create_table ...
   ...

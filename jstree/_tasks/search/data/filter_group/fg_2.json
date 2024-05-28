@@ -1,0 +1,4 @@
+[
+  {"id": "vt_3", "parent": "fg_2", "text": "Уточнения",  "type": "value_type"},
+  {"id": "3",    "parent": "vt_3", "text": "Цвет",       "type": "filter", "children": true}
+]
