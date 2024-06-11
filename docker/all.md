@@ -237,6 +237,9 @@ https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e0
 ```sh
 docker login ghcr.io
 docker push ghcr.io/zlatov/asd...:latest
+
+cat ~/.docker/config.json # Проверить куда логинились?
+docker login # должен вывести куда мы релогинимся?
 ```
 
 ## Как затянуть такое же изображение какое было затянуто когда-то по латест

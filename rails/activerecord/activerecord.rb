@@ -38,8 +38,8 @@ scope3 = scope2.where(status: 'created', user_id: user.id).or(
 Foo.where("bar LIKE ?", "%#{query}%")
 Foo.where("bar LIKE :query", query: "%#{query}%")
 # если LIKE может содержать символ %, то использовать sanitize_sql_like
-Foo.where("bar LIKE ?", "%#{sanitize_sql_like(query)}%")
-Foo.where("bar LIKE :query", query: "%#{sanitize_sql_like(query)}%")
+Foo.where("bar LIKE ?", "%#{Foo.sanitize_sql_like(query)}%")
+Foo.where("bar LIKE :query", query: "%#{Foo.sanitize_sql_like(query)}%")
 
 
 
