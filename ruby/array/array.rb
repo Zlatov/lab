@@ -360,8 +360,17 @@ p   [{text:'a'},{text:'b'},{text:'b'}].select{|node|node[:text]=='b'}
 p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).select{|k,node|node[:id]=='b'}
 
 puts 'Массив хэшей|Хэш хэшей - удалить только те элементы значения которых равны заданному (.reject)'.green
-p   [{text:'a'},{text:'b'},{text:'b'}].reject{|node|node[:text]=='b'}
-p ({a:{id:'a'},b:{id:'b'},c:{id:'b'}}).reject{|k,node|node[:id]=='b'}
+puts '.reject Возвращает новый масств не изменяя исходный'.blue
+a = [{a: 'asd'}, {z: 'zxc'}]
+b = a.reject{|x| x[:a] == 'asd'}
+print 'a: '.red; p a
+print 'b: '.red; p b
+puts '.reject! Изменяет исходный массив'.blue
+a = [{a: 'asd'}, {z: 'zxc'}]
+b = a.reject!{|x| x[:a] == 'asd'}
+print 'a: '.red; p a
+print 'b: '.red; p b
+# exit
 
 
 # Удалить из массива хешей по значению хеша
