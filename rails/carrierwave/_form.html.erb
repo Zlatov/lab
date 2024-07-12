@@ -1,3 +1,6 @@
+<%#
+  Одно изображение
+%>
 <%= form_with(model: product) do |form| %>
 
   <div class="row mb-3">
@@ -26,3 +29,34 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
+
+
+<%#
+  Поле с файлами, и как определить какой из выводимых файлов является изображением (media_type == 'image')
+%>
+<% form.object.files.each do |file| %>
+  <% case MIME::Types.type_for(file.url).first.try(:media_type); when 'image' %>
+    <div>
+      <%= image_tag file.url, class: 'img-thumbnail', style: 'max-width: 200px; max-height: 200px;' %>
+    </div>
+    <p>
+      <%= link_to file.identifier, file.url, target: '_blank' %>
+    </p>
+  <% else %>
+    <div>
+      <%= file.url %>
+    </div>
+    <p>
+      <%= link_to file.identifier, file.url, target: '_blank' %>
+    </p>
+  <% end %>
+  <p>
+    <%= form.hidden_field :files, multiple: true, value: file.identifier %>
+    <%= form.check_box :remove_files, { multiple: true, class: 'form-check-input' }, file.identifier, nil %>
+    <%= form.label :remove_files, 'Удалить', value: file.identifier, class: 'form-check-label user-select-none mb-0' %>
+  </p>
+<% end if form.object.files.present? %>
+<%= form.file_field :files, multiple: true, class: 'form-control form-control-sm' %>
+<%= field_errors form.object, :files %>

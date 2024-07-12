@@ -344,6 +344,7 @@ end
 # Checks whether an associated object with the given conditions exists. Uses the same rules as ActiveRecord::FinderMethods#exists?.
 
 .categories.build(attributes = {})
+.build_categories(attributes = {}) # если has_one
 # Returns a new object of the collection type that has been instantiated with attributes and linked to this object through the join table, but has not yet been saved.
 
 .categories.create(attributes = {})

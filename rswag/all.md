@@ -65,7 +65,7 @@ RSpec.describe 'api/v1/application_settings', type: :request do
         # Схема отдаваемых данных
         schema type: :object, description: ApplicationSetting.t, properties: {
           name: {type: :string, description: ApplicationSetting.human_attribute_name(:name)},
-          abbr: {type: :string, description: ApplicationSetting.human_attribute_name(:abbr)}
+          abbr: {type: :string, nullable: true, description: ApplicationSetting.human_attribute_name(:abbr)}
         }
 
         after do |example|

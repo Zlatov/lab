@@ -1,4 +1,11 @@
-Добавляем гем в проект, добавим в _Gemfile_.
+# Carrierwave
+
+Гем carrierwave обеспечивает простой и гибкий способ загрузки файлов в ruby
+приложения.
+
+## Установка, настройка
+
+Добавляем гем в _Gemfile_.
 
 ```ruby
 # Загрузка файлов
@@ -9,6 +16,7 @@ gem 'carrierwave', '~> 2.0'
 
 ```bash
 bundle
+
 rails g uploader Image
 # Лучше добавить имя модели к которой загружаем
 rails g uploader ProductImage
@@ -33,10 +41,10 @@ mount_uploader :image, ImageUploader
 mount_uploaders :images, ProductImageUploader
 ```
 
-Скафолд для одного изображения
+Контроллер
 
 ```rb
-# app/controllers/products_controller.rb
+  # Простой способ удалить файл по галке
   def product_params
     params.require(:product).permit(
       …
@@ -44,7 +52,23 @@ mount_uploaders :images, ProductImageUploader
       :remove_image
     )
   end
+
+  # Удаление файлов через галку требует убрать удаляемые файлы из параметров, в
+  # то время как существует способ удалять файлы просто уничтожая html код
+  # формы отвечающий за передачу информации о файле.
+  def admin_affiliate_params
+    # Удаляем отмеченные файлы
+    if params[:admin_affiliate]&.[](:remove_files).present? && params[:admin_affiliate]&.[](:files).present?
+      params[:admin_affiliate][:files] = params[:admin_affiliate][:files] - params[:admin_affiliate][:remove_files]
+    end
+    params.require(:admin_affiliate).permit(
+      :name,
+      …
+      files: []
+    )
 ```
+
+Вьюха
 
 ```html
 <!-- app/views/products/_form.html.erb -->
