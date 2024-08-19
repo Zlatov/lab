@@ -1,5 +1,12 @@
 # Sublime Text
 
+## Обновление
+
+```sh
+sudo apt-get update
+sudo apt-get install sublime-text # Ага install - это обновление тут по факту.
+```
+
 ## Консоль
 
 Открыть консоль Ctrl+\` или View → Show Console

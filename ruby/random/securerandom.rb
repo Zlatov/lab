@@ -20,3 +20,29 @@ puts SecureRandom.hex(8) #=> "52750b30ffbc7de3b362"
 puts SecureRandom.hex(5) #=> "52750b30ffbc7de3b362"
 
 puts SecureRandom.uuid
+
+require 'digest'
+require "base64"
+require 'openssl'
+
+# code_verifier = 'ZA3qGGmLS2l6_tfMCz1qQPxSeukt1W8QNAN7njYfwtA'
+code_verifier = SecureRandom.hex(64)
+print 'code_verifier: '.red; puts code_verifier
+
+# code_challenge = Base64.encode64(
+code_challenge = Base64.urlsafe_encode64(
+  # Digest::SHA2.new(256).hexdigest(code_verifier)
+  # Digest::SHA2.new(256).digest(code_verifier)
+  Digest::SHA256.new.digest(code_verifier)
+# ).tr("+/", "-_").tr("=", "")
+).gsub('=', '')
+print 'code_challenge: '.red; p code_challenge
+
+code_challenge2 = Base64.urlsafe_encode64(
+  OpenSSL::Digest::SHA256.digest(code_verifier)
+).gsub(/=/, '')
+print 'code_challenge2: '.red; p code_challenge2
+
+
+print 'true code_challenge: '.red; p '5wb9Vlb2DAoCuHhpS6Fl56SXwDx4XpQTkEuY2IsKVuQ'
+puts code_challenge == code_challenge2
