@@ -1,9 +1,10 @@
 require 'awesome_print'
 require 'active_support/all'
 
-p Time.parse(Time.current.to_s)
+print 'Time.current.to_s: '.red; puts Time.current.to_s
+print 'Time.parse(Time.current.to_s): '.red; puts Time.parse(Time.current.to_s)
 Time.zone = 'Moscow'
-p Time.zone.parse(Time.current.to_s)
+print 'Time.zone.parse(Time.current.to_s): '.red; puts Time.zone.parse(Time.current.to_s)
 p I18n.l(Time.parse(Time.current.to_s), format: '%-e %B %Y, %T %:z')
 # exit
 
@@ -36,3 +37,18 @@ ActiveSupport::TimeZone.all.each do |zone|
     puts zone.tzinfo
   end
 end
+
+puts 'Разница между двумя временами в секундах'.green
+a = DateTime.current
+b = DateTime.current - 10.seconds
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+c = ((a - b) * 24 * 60 * 60).to_i
+print 'c: '.red; puts c
+
+a = Time.current
+b = Time.current - 10.seconds
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+c = (a - b).to_i
+print 'c: '.red; puts c

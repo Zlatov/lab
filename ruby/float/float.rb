@@ -91,6 +91,12 @@ puts '.floor(до какого знака) - округляет в меньшу�
 print '1.99.floor: '.red; puts 1.99.floor
 print '1.5.floor(0): '.red; puts 1.5.floor(0)
 print '1.99.floor(1): '.red; puts 1.99.floor(1)
+puts '.ceil - округляет в большую сторону'.green
+print '1.1.ceil: '.red; puts 1.1.ceil
+print '1.4.ceil: '.red; puts 1.4.ceil
+print '1.5.ceil: '.red; puts 1.5.ceil
+print '-1.5.ceil: '.red; puts -1.5.ceil
+print '1.ceil: '.red; puts 1.ceil
 # exit 0
 
 

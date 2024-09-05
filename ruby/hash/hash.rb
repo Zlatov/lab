@@ -52,6 +52,14 @@ a.each_slice(2).map(&:to_h).each do |b|
 end
 # exit
 
+puts 'Безопасный доступ к полям (safe navigation)'.green
+a = {a: {b: 333}}
+b = a[:a]&.[](:b) # => 333
+c = a[:c]&.[](:b) # => nil
+print 'b: '.red; p b
+print 'c: '.red; p c
+# exit
+
 puts
 puts 'Фильтрация ключей (оставить только следующие ключи)'.green
 a = {a: 1, b: 2, c: 3}

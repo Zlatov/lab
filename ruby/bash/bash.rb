@@ -20,9 +20,9 @@ b = %x(#{a})
 c = $?
 d = c.exitstatus
 print 'a: '.red; puts a
-print 'b: '.red; puts b
-print 'c: '.red; puts c
-print 'd: '.red; puts d
+print 'b: '.red; print b.class, ' '; puts b
+print 'c: '.red; print c.class, ' '; puts c
+print 'd: '.red; print d.class, ' '; puts d
 # exit 0
 
 puts

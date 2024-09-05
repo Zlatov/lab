@@ -121,6 +121,8 @@ docker stop {container} # остановить контейнер
 docker stop $(docker ps -q) # остановить все запущенные контейнеры
 docker attach {container} # получить интерактивную консоль контейнера
 # [Ctrl+p, Ctrl+q] - для выхода из консоли, незавершая текущий процесс
+# Ctrl+p, Ctrl+q иногда не работает. --sig-proxy=false позволяет отсоединяться чере Ctrl+c.
+docker compose attach --sig-proxy=false sidekiq
 docker commit -m "{tag}" {container} {image}:{tag} # создать новый образ из контейнера
 docker push {image}:{tag} # запушить образ
 docker rm {container}|{container_id} # удалить контейнер
