@@ -225,7 +225,7 @@ docker push zlatov/store_ruby
 # если контейнер запущен, то можно exec:
 docker-compose exec store_ruby bundle exec rails db:seed
 # если контейнер остановлен - необходимо запустить не основной с удалением:
-docker-compose run --rm store_ruby bundle exec rails db:seed
+docker compose run --rm store_ruby bundle exec rails db:seed
 ```
 
 

@@ -21,6 +21,11 @@ drop_table :market_product_clips, if_exists: true
 
 class CreateLorems < ActiveRecord::Migration[7.1]
   def change
+    # 
+    # настройка id: false               === primary_key настройка идёт к чертям;
+    # настройка primary_key: :code      === добавленние колонки вручную t.string :code идёт к чертям;
+    # отсутствует настройка id: :string === primary_key: :code созадётся как :bigint.
+    # 
     create_table :lorems, id: :string, primary_key: :code do |t|
       t.string   :name, null: false
       t.string   "address"
