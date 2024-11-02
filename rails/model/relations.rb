@@ -32,7 +32,7 @@ class User
 # :counter_cache -
 # :as -
 # :through -
-# :source -
+# :source - имя ассоциации в Смежной модели (указанной в has_many through: …). Используйте настройку только в том случае, если имя не может быть определено автоматически.
 # :source_type -
 # :validate -
 # :autosave -

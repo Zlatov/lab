@@ -1,5 +1,5 @@
--- dropdb -U lorem_rails lorem_rails --if-exists -W
--- createdb -U lorem_rails lorem_rails -W
+-- dropdb -U lorem_rails lorem_rails --if-exists -W # -W - запросить пароль
+-- createdb -U lorem_rails lorem_rails -W # -W - запросить пароль
 -- createdb --encoding=UTF8 --locale=ru_RU.utf8 -U lorem_rails lorem_rails -W
 -- или psql -U lorem_rails -d template1 -c "create database lorem_rails;"
 -- sudo -u postgres psql -c "\l"

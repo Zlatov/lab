@@ -7,6 +7,7 @@ uri = URI.parse('https://nettakogodomena123.com/')
 uri = URI.parse('http://mini-light.local/#target')
 uri = URI.parse('http://mini-light.local/api/v1/affiliates')
 uri = URI.parse('http://mini-light.local/admin/mini_applications/connection?id=1')
+uri = URI.parse('https://httpbin.org/get?id=1')
 query = {
   id: 123,
   code: '000123',
@@ -41,3 +42,25 @@ else
   print 'response.each_header.to_h: '.red; puts response.each_header.to_h
   print 'response.body: '.red; puts response.body
 end
+
+puts 'Запрос с заголовками Headers'.green
+uri = URI.parse('https://httpbin.org/get?id=1')
+# http - выбор протокола (http|https) и настройка параметров
+http = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.instance_of?(URI::HTTPS), read_timeout: 5)
+print 'http.use_ssl?: '.red; puts http.use_ssl?
+# request - запрос с заголовком
+request = Net::HTTP::Get.new uri
+request['CustomHeader'] = 'CusomValue'
+print 'request: '.red; puts request
+print 'request.size: '.red; puts request.size
+print 'request.content_length: '.red; puts request.content_length
+print 'request.each_header: '.red; puts request.each_header
+# response - ответ
+response = http.request(request)
+print 'response: '.red; puts response
+print 'response.class: '.red; puts response.class
+print 'response.is_a?(Net::HTTPOK): '.red; puts response.is_a?(Net::HTTPOK)
+print 'response.each_header.to_h: '.red; puts response.each_header.to_h
+print 'response.code: '.red; puts response.code
+print 'response.message: '.red; puts response.message
+print 'response.body: '.red; puts response.body

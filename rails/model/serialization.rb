@@ -141,6 +141,10 @@ class PostsController < ApplicationController
     render json: ActiveModelSerializers::SerializableResource.new(Admin::Catalog.all).as_json
     render json: Admin::Catalog.all, each_serializer: Admin::CatalogSerializer
     render json: Admin::Catalog.all
+    render json: {
+      posts: posts.map{|x| Admin::PostSerializer.new(x).as_json},
+      posts2: ActiveModelSerializers::SerializableResource.new(posts2, each_serializer: Admin::PostSerializer).as_json
+    }
 
     # Через ассоциации (has_many, belongs_to…) автоматически подгружается только
     # первый подуровень, для включения уровней ниже необходимо использовать
