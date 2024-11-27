@@ -717,13 +717,20 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
-puts 'Определить наличие дубликатов (.detect)'.green
+puts 'Определить наличие дубликата (не уникального значения) (.detect)'.green
+puts '.detect возвращает первое попавшееся значение при котором блок принимает true'.blue
 a = [1,2,3,2,2,4,4,5]
 b = a.detect{|v| a.count(v) > 1}
 print 'a: '.red; p a
 print 'b: '.red; p b
+puts '.select выберем не только первый, а все дубликаты'.blue
 a = [1,2,3,2,2,4,4,5]
 b = a.select{|e| a.count(e) > 1}.uniq
+print 'a: '.red; p a
+print 'b: '.red; p b
+puts 'выберем все дубликаты и их количество'.blue
+a = [1,2,3,2,2,4,4,5]
+b = a.select{|e| a.count(e) > 1}.uniq.map{|v| [v, a.count(v)]}
 print 'a: '.red; p a
 print 'b: '.red; p b
 # exit

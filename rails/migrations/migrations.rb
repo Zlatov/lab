@@ -219,6 +219,13 @@ add_index :table_name, "column_name", name: :uq_tablename_columnname, unique: tr
 # ```
 # Note: SQLite doesn’t support index length.
 
+
+
+
+# 
+# Обратные вызовы для работы с данными, гем migration_data
+# 
+
 gem "migration_data"
   def change
     stack = {}

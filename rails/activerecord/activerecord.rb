@@ -40,6 +40,11 @@ Foo.where("bar LIKE :query", query: "%#{query}%")
 # если LIKE может содержать символ %, то использовать sanitize_sql_like
 Foo.where("bar LIKE ?", "%#{Foo.sanitize_sql_like(query)}%")
 Foo.where("bar LIKE :query", query: "%#{Foo.sanitize_sql_like(query)}%")
+# LIKE-поиск в любом "регистре" (case)
+brands = Brand
+  .where('LOWER("name") LIKE ?', "%#{Brand.sanitize_sql_like(params[:q].downcase)}%")
+  .limit(10)
+
 
 
 
