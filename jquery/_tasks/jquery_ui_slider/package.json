@@ -1,0 +1,10 @@
+{
+  "name": "jquery_ui_slider",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.7.1",
+    "jquery-ui": "^1.14.1"
+  }
+}
