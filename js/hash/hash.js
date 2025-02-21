@@ -20,6 +20,13 @@ Object.keys(a).forEach(key => {
 })
 // exit
 
+console.log('> Получение ключей хэш; ключи хэш')
+var a = {asd: "zxc"}
+var b = Object.keys(a)
+console.log('a: ', a)
+console.log('b: ', b)
+// return
+
 console.log('> Перебор for in')
 var a = {
   "asd": 1,
