@@ -52,6 +52,7 @@ a = '??asd?? ??asd??'
 b = a.gsub '??asd??', 'asd'
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit 0
 
 puts 'Замена в строке по хэш (альтернатива php str_replace, максимально простое приближение)'.green
 puts 'Много gsub но простая замена ключа на значение'.blue
@@ -133,10 +134,11 @@ print 'a: '.red; print a
 
 # Удалить пробелы вокругтекста (`trim` в других языках)
 puts 'Удалить пробелы вокругтекста'.green
-a = ' asd asd  '
+a = '  asd asd  '
 b = a.strip
 print 'a: '.red; puts a
 print 'b: '.red; puts b
+# exit 0
 
 puts 'Удалить специальные символы вокруг текста'.green
 a = ',asd asd ,,'

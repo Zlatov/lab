@@ -145,6 +145,17 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
+puts 'Конкатинация сложение объединение .concat'.green
+puts '.concat не создаёт новый массив'.blue
+puts 'b не может быть nil, может быть пустым массивом'.blue
+a = [1, 2]
+b = [3, 4]
+c = a.concat b
+    a.concat b
+print 'a: '.red; p a
+print 'c: '.red; p c
+# exit
+
 puts 'Вычитание'.green
 a = [1,1,3,4]
 b = [1,2,4,5]
@@ -694,6 +705,26 @@ a = [0, 1]
 b = a.insert(1, 'asd')
 print 'a: '.red; p a
 print 'b: '.red; p b
+# exit
+
+puts 'Найти индекс значения или индекс удовлетворяющий условию .index - первый с начала, .rindex - первый с конца'.green
+a = [
+  [0, false],
+  [1, false],
+  [2, true],
+  [3, false],
+  [4, true],
+  [5, true],
+  [6, false],
+  [7, true],
+  [8, false]
+]
+b = a.index{|x| x[1] == true}
+c = a.rindex{|x| x[1] == true}
+d = a.index([3, false])
+print 'b: '.red; puts b.inspect
+print 'c: '.red; puts c.inspect
+print 'd: '.red; puts d.inspect
 # exit
 
 puts 'Очистить (удалить) от нулевых значений (.compact)'.green
