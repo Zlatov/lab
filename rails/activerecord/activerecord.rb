@@ -373,3 +373,27 @@ offers = Admin::Offer
   .where(catalogs: @parent_id)
   .group(:id)
   .having('COUNT(products.id) = 1')
+
+
+# UNION
+posts_from_tags = Tag
+  .select('"posts".*')
+  .joins(:posts)
+  .where('"posts"."hidden" IS FALSE')
+  .where(id: tag_ids)
+  .group('"posts"."id"')
+posts_from_categories = Category
+  .select('"posts".*')
+  .joins(:categories)
+  .where('"posts"."hidden" IS FALSE')
+  .where(id: category_id)
+  .group('"posts"."id"')
+posts = Post
+  .from(%(
+    (
+      #{posts_from_tags.to_sql}
+      UNION
+      #{posts_from_categories.to_sql}
+    ) AS "posts"
+  ))
+  .preload(:comments)

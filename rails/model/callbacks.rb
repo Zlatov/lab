@@ -52,31 +52,53 @@ date_was
 # 
 will_save_change_to_attribute?(attr_name)
 # Изменится ли этот атрибут при следующем сохранении?
+# Например:
+will_save_change_to_attribute?(:hidden) => true
+
 
 attribute_change_to_be_saved(attr_name)
 # Возвращает изменение атрибута, которое будет сохранено при следующем
 # сохранении. Можно вызывать автоматически созданный
 # метод 'field_name'_change_to_be_saved.
+# Например:
+attribute_change_to_be_saved(:hidden) => [false, true]
+
 
 attribute_in_database(attr_name)
 # Возвращает значение атрибута в базе данных, а не значение в памяти, которое
 # будет сохранено при следующем сохранении записи.
+# Например:
+attribute_in_database(:hidden) => false
+
 
 changes_to_save
 # Возвращает хэш, содержащий все изменения, которые будут сохранены при
 # следующем сохранении.
+# Например:
+changes_to_save => {"hidden"=>[false, true]}
+
 
 has_changes_to_save?
 # Будут ли при следующем вызове save сохраняться какие-либо изменения?
+# Например:
+has_changes_to_save? => true
+
 
 changed_attribute_names_to_save
 # Возвращает массив имен любых атрибутов, которые изменятся при следующем
 # сохранении записи.
+# Например:
+changed_attribute_names_to_save => ["hidden"]
+
 
 attributes_in_database
 # Возвращает хэш атрибутов, которые изменятся при следующем сохранении записи.
 # Хэш-значения — это исходные значения атрибутов в базе данных (в отличие от
 # значений в памяти, которые должны быть сохранены).
+# Например:
+attributes_in_database => {"deleted"=>false}
+
+
 
 
 # 

@@ -30,6 +30,7 @@ Rails - фреймворк ruby
   ```bash
   sudo apt install -y libsqlite3-dev
   sudo yum install -y sqlite-devel
+  apk add --no-cache sqlite-dev
   ```
 * __Mysql__ (гем mysql2) потребует библиотеку
   ```bash

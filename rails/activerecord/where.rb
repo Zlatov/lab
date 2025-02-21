@@ -47,6 +47,24 @@ p a.to_a.each{|e| e}
 puts a.each{|e| e.class.name}
 puts a.all.each{|e| e.class.name}
 
+posts = Post
+  .where(date: DateTime.new(2000,1,1))
+a_posts = posts.to_a
+print 'a_posts: '.red; p a_posts
+
+a = 1.month.ago
+b = ..a
+c = ..1.month.ago
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+posts = Post
+  .where(date: ..a)
+print 'posts.to_sql: '.red; puts posts.to_sql
+a_posts = posts.to_a
+print 'a_posts: '.red; p a_posts
+
+
 # 
 # Includes использует нетерпеливую загрузку
 # joins использует отложенную загрузку
