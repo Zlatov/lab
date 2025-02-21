@@ -1,0 +1,167 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby '3.1.2'
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
+gem 'rails', '~> 6.1.7.4'
+# Use postgresql as the database for Active Record
+# gem 'pg', '~> 1.1'
+gem 'pg', '~> 1.2.3'
+# Use Puma as the app server
+gem 'puma', '~> 5.0'
+# Use SCSS for stylesheets
+gem 'sass-rails', '>= 6'
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker', '~> 5.0'
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks', '~> 5'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.7'
+# Use Redis adapter to run Action Cable in production
+gem 'redis', '~> 4.0'
+# Use Active Model has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use Active Storage variant
+# gem 'image_processing', '~> 1.2'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.4.4', require: false
+
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara', '>= 3.26'
+  gem 'selenium-webdriver', '>= 4.0.0.rc1'
+  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'webdrivers'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+# Для формирования переменных среды.
+gem 'dotenv-rails', groups: [:development, :test, :production]
+
+# Древовидная структура данных
+gem 'closure_tree'
+
+# Множественный первичный ключ бывает!
+gem 'composite_primary_keys', '~> 13.0'
+
+# Мультивставка (INSERT multiple rows)
+gem 'activerecord-import'
+
+# Цветной текст консоли.
+gem 'awesome_print'
+
+# Загрузка файлов
+gem 'carrierwave', '~> 2.0'
+gem 'carrierwave-i18n', '< 3'
+gem 'fog', '2.3.0'
+
+# I18n
+gem 'i18n'
+gem 'rails-i18n', '~> 6.0'
+
+# Фоновая обработка задач
+gem 'sidekiq'
+
+# Следим за кодом
+gem 'rubocop', require: false
+
+
+group :development do
+  # Для деплоя.
+  gem 'capistrano', '~> 3.17', require: false
+  # Альтернатива для rails console > irb, с историей…
+  gem 'pry-rails'
+  # Дебаг интернационализации
+  gem 'i18n-debug', group: :development
+
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'web-console', '>= 4.1.0'
+  # Display performance information such as SQL time and flame graphs for each request in your browser.
+  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'listen', '~> 3.3'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
+
+# Для API
+gem  'rswag-api'
+gem  'rswag-ui'
+
+group  :development ,  :test  do
+  gem  'rspec-rails'
+  gem  'rswag-specs'
+  # Для очистки БД при тестировании
+  gem 'database_cleaner-active_record'
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+end
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'rack-cors'
+
+
+gem 'net-smtp', require: false
+
+# Хлебные крошки
+gem 'breadcrumbs_on_rails'
+
+# Пагинация
+gem 'kaminari'
+
+# Работа с древовидными массивами.
+gem 'nested_array', '~> 3.0'
+
+# Сериализация
+gem 'active_model_serializers', '~> 0.10.0'
+
+# Сортировка
+gem 'prioritize', '~> 1.0'
+
+# Расспаралеливание в потоки (для Redis соединения). Не путать с кластеризацией Redis!
+gem 'connection_pool', '~> 2.2', '>= 2.2.5'
+
+# Клиент SOAP протокола (обмен сообщениями в XML формате)
+gem 'savon', '~> 2.12.0'
+
+# При запуске bundle exec sidekiq выдаёт ошибки если не обнаружены mail-сервисы или эти гемы:
+# gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+
+# Аутентификация.
+gem 'devise'
+
+
+# Поиск
+gem 'elasticsearch', '~> 8.4.0'
+gem 'ransack'
+
+# Иконки
+gem 'font-awesome-sass', '~> 6.2.0'
+
+# В миграциях удобно оперировать данными
+gem 'migration_data'
+
+# Для структурирования авторизационных правил
+gem 'pundit', '~> 2.3'
+
+# Я не робот
+gem 'recaptcha'
+
+# Безопасное хранение межпоточных переменных сессии
+gem 'request_store'
+
+# Текстовый редактор
+gem 'tinymce-rails'
+
+# Разрешаем кросс-доменные запросы
+gem 'rack-cors'
+
+# Для импорта старых данных при переезде со старого сайта на новый, ничего более.
+gem 'sqlite3', '~> 1.3.6'

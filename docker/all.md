@@ -109,6 +109,9 @@ docker run -p 8888:80 {image} # запустить (создать) контей
 docker run -d -P {image} # `-d` - detached, типа демон; `-P` - открыть порты
 docker rmi {image} # удалить образ
 docker run -v /home/username/dir:/mnt # запустить (создать) контейнер с пробросом пути системы в /mnt контейнера, для копирования файлов и др.
+
+docker tag        image_name:latest new_image_name:old    # Дулировать изображение, с переименованием.
+docker image tag  web_ruby:latest ghcr.io/web_ruby:latest # Переименовать изображение.
 ```
 
 __Контейнеры__
@@ -224,8 +227,10 @@ docker push zlatov/store_ruby
 # Запустить рельсовую команду внутри контейнера
 # если контейнер запущен, то можно exec:
 docker-compose exec store_ruby bundle exec rails db:seed
-# если контейнер остановлен - необходимо запустить не основной с удалением:
+# если контейнер остановлен - необходимо запустить временный контейнер (run) с удалением (--rm):
 docker compose run --rm store_ruby bundle exec rails db:seed
+# выполнить в запущенном контейнере но с дополнительной переменной окружения
+docker compose exec -e SOME_VARIABLE=VALUE web bundle exec rails some:task
 ```
 
 
@@ -238,6 +243,7 @@ https://medium.com/redbubble/running-a-docker-container-as-a-non-root-user-7d2e0
 
 ```sh
 docker login ghcr.io
+echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
 docker push ghcr.io/zlatov/asd...:latest
 
 cat ~/.docker/config.json # Проверить куда логинились?
