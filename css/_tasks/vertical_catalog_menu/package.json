@@ -1,0 +1,10 @@
+{
+  "name": "vertical_catalog_menu",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "jquery": "^3.7.1"
+  }
+}

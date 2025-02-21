@@ -1,0 +1,77 @@
+.vertical_catalog_menu {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .vertical_catalog_menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .vertical_catalog_menu ul li {
+      margin-left: 2em; }
+  .vertical_catalog_menu li {
+    border-top: solid 1px #D2D2D2; }
+  .vertical_catalog_menu > li {
+    border-right: solid 1px #D2D2D2; }
+  .vertical_catalog_menu span {
+    display: block;
+    background-color: #FFFFFF; }
+    .vertical_catalog_menu span:hover {
+      background-color: #E4E4E4; }
+    .vertical_catalog_menu span:has(> a:hover) {
+      background-color: #FFFFFF; }
+  .vertical_catalog_menu a {
+    display: block;
+    border-left: solid 1px #D2D2D2;
+    background-color: #FFFFFF;
+    padding: .3em .4em;
+    text-decoration: none; }
+    .vertical_catalog_menu a:hover {
+      text-decoration: underline; }
+    .vertical_catalog_menu a.current {
+      font-weight: bolder; }
+  .vertical_catalog_menu li:has(a.current) > span a {
+    text-decoration: underline; }
+  .vertical_catalog_menu li:has(ul) > ul {
+    position: relative; }
+    .vertical_catalog_menu li:has(ul) > ul::before {
+      content: "";
+      display: block;
+      width: 100%;
+      position: absolute;
+      border-bottom: solid 1px #D2D2D2; }
+  .vertical_catalog_menu li:has(ul) {
+    position: relative; }
+    .vertical_catalog_menu li:has(ul) > span > a {
+      margin-right: 20px; }
+    .vertical_catalog_menu li:has(ul) > span {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer; }
+    .vertical_catalog_menu li:has(ul) > span::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      right: 0;
+      top: 0;
+      mask: url(up_arrow_icon.svg) no-repeat center center;
+      mask-size: 15px;
+      background-color: #787878;
+      transform: rotate(90deg); }
+  .vertical_catalog_menu li > ul {
+    display: none; }
+  .vertical_catalog_menu li.open > ul {
+    display: block; }
+  .vertical_catalog_menu li.open > span::after {
+    transform: rotate(180deg); }
+  .vertical_catalog_menu > li:last-child:not(:has(ul)) a {
+    border-bottom: solid 1px #D2D2D2; }
+  .vertical_catalog_menu > li:last-child li:last-child:not(:has(ul)) a {
+    border-bottom: solid 1px #D2D2D2; }
+  .vertical_catalog_menu > li:last-child:has(> ul):not(.open) {
+    border-bottom: solid 1px #D2D2D2; }
+  .vertical_catalog_menu > li:last-child li:last-child:has(> ul):not(.open) {
+    border-bottom: solid 1px #D2D2D2; }
+
+/*# sourceMappingURL=index.css.map */
