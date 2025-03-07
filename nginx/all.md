@@ -42,6 +42,7 @@ sudo usermod -a -G deployer www-data
 sudo usermod -a -G fpm deployer
 # Проверить право nginx-пользователя на доступ к файлам приложения.
 sudo -u nginx stat /home/deployer/app/name
+sudo -u www-data stat /home/deployer/app/name
 # Зачастую нехватает +x прав на корневые каталоги пользователя.
 chmod g+x /home/
 chmod g+x /home/username

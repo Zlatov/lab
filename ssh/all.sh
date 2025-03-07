@@ -4,6 +4,7 @@ exit 0
 
 # Сгенерировать пару ключей
 ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub
 
 # Список ключей
 ls -lah ~/.ssh

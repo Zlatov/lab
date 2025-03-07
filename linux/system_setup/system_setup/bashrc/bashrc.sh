@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Запуск этого скрипта:
+# ~/projects/my/lab/linux/system_setup/system_setup/bashrc/bashrc.sh
+
 set -eu
 
 cd ~
