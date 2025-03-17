@@ -1,0 +1,5 @@
+<%= render partial: user.roles, spacer_template: 'comma' %>
+<%= render partial: 'admin/affiliates/affiliate', collection: @admin_warehouse.affiliates, spacer_template: 'comma' %>
+
+<%= render partial: user.roles.first(2), spacer_template: 'comma' %>
+<%= "и ещё #{user.roles.length - 2}" if user.roles.length > 2 %>
