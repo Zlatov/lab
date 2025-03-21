@@ -8,7 +8,10 @@
   <style type="text/css">
     .test_wrapper {
       padding: 20px;
+      background-color: AliceBlue;
     }
+
+    /* Test 1 */
     #test1 {
       width: 16px;
       height: 16px;
@@ -17,6 +20,8 @@
     #test1:hover {
       transform: scale(2);
     }
+
+    /* Test 2 */
     #test2 {
       width: 64px;
       height: 64px;
@@ -26,6 +31,8 @@
     #test2:hover {
       transform: scale(.5);
     }
+
+    /* Test 3 */
     #test3 {
       width: 64px;
       height: 64px;
@@ -35,17 +42,39 @@
     #test3:hover {
       transform: scale(.5) translate(32px);
     }
+
+    /* Test 4 */
+    #test4 {
+      width: 64px;
+      height: 64px;
+      background-image: url("../../images/jpg/64-64-ripe-apple.jpg");
+      transition: transform .5s;
+    }
+    #test4.open {
+      transform: scale(.5);
+    }
   </style>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
+  <p>Масштабируется без «перехода» (<code>transition</code>) по <code>hover</code>.</p>
   <div class="test_wrapper">
     <div id="test1"></div>
   </div>
+
+  <p>Масштабируется <code>transition</code> по <code>hover</code>.</p>
   <div class="test_wrapper">
     <div id="test2"></div>
   </div>
+
+  <p>Масштабируется и смещается с <code>transition</code>.</p>
   <div class="test_wrapper">
     <div id="test3"></div>
+  </div>
+
+  <p>Масштабируется при клике на обертку, по <code>onclick</code> добавляется класс <code>open</code>.</p>
+  <div class="test_wrapper" onclick="$(this).find('#test4').toggleClass('open')">
+    <div id="test4"></div>
   </div>
 </body>
 </html>

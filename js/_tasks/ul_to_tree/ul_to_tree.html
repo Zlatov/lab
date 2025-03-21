@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style type="text/css">
+    td { vertical-align: top; }
+    code { color: DarkRed; background-color: FloralWhite; padding: .25em .15em; }
+  </style>
+  <script type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="ul_to_tree.js"></script>
+</head>
+<body>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Обычный вложенный список <code>ul > li > ul > li</code></td>
+      <td>Добавляем класс <code>ul_to_tree</code></td>
+      <td>Добавляем уточняющий класс <code>ul_to_tree-dropdown</code></td>
+    </tr>
+    <tr>
+      <td>
+<ul style="width: 25%;">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+      <td>
+<ul style="width: 25%;" class="ul_to_tree">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+      <td>
+<ul style="width: 25%;" class="ul_to_tree ul_to_tree-dropdown">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+<ul style="width: 25%;">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+      <td>
+<ul style="width: 25%;" class="ul_to_tree2">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+      <td>
+<ul style="width: 25%;" class="ul_to_tree ul_to_tree-dropdown">
+  <li>Asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd asd</li>
+  <li>
+    Asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2 asd2
+    <ul>
+      <li>Zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc zxc</li>
+    </ul>
+  </li>
+  <li>
+    Asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3 asd3
+    <ul>
+      <li>Zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2 zxc2</li>
+      <li>
+        Zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3 zxc3
+        <ul>
+          <li>Qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1 qwe1</li>
+          <li>Qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2 qwe2</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <!-- <li>Foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo</li> -->
+</ul>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
