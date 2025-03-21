@@ -46,53 +46,80 @@ html, body {
     height: 0px; }
 
 .ul_to_tree2 {
-  padding-left: 8px; }
+  margin: 0;
+  padding: 0;
+  padding-left: 2em; }
   .ul_to_tree2 li {
-    position: relative;
     list-style: none outside none;
-    border-left: solid 1px #999;
-    padding: 0 0 0 19px; }
+    margin: 0;
+    padding: 0;
+    padding-left: 2em;
+    position: relative; }
+    .ul_to_tree2 li > i {
+      display: none; }
+    .ul_to_tree2 li > div {
+      position: relative; }
     .ul_to_tree2 li::before {
       content: "";
       display: block;
-      border-bottom: solid 1px #999;
+      border-left: solid 1px LightGray;
       position: absolute;
-      width: 16px;
-      height: 10px;
-      left: 0;
+      width: 0px;
+      height: 100%;
+      left: -1.5em;
       top: 0; }
     .ul_to_tree2 li::after {
       content: "";
       display: block;
+      border-bottom: solid 1px LightGray;
+      border-left: solid 1px LightGray;
       position: absolute;
-      width: 16px;
+      width: 3.2em;
+      height: 0.6em;
+      left: -1.5em;
+      top: 0em; }
+    .ul_to_tree2 li:last-child::before {
+      border-left: none; }
+    .ul_to_tree2 li:has(> ul) > div::before {
+      content: "";
+      display: block;
+      border-left: solid 1px LightGray;
+      position: absolute;
+      width: 0px;
       height: 100%;
-      border-left: solid 1px red;
-      left: 2px;
-      top: 0; }
-    .ul_to_tree2 li:last-child {
-      border-left: 0 none; }
-      .ul_to_tree2 li:last-child::before {
-        border-left: solid 1px #999; }
+      left: -1.5em;
+      top: 0.6em; }
+  .ul_to_tree2 > li::before {
+    left: -1.0em; }
+  .ul_to_tree2 > li::after {
+    left: -1.0em;
+    width: 2.7em; }
   .ul_to_tree2 ul {
     margin: 0;
-    padding-left: 6px; }
-  .ul_to_tree2.ul_to_tree-dropdown li:has(> ul) > ul {
-    transition: height 250ms ease;
-    overflow: hidden; }
-  .ul_to_tree2.ul_to_tree-dropdown li:has(> ul)::after {
-    content: "";
+    padding: 0;
+    margin-left: -2em;
+    padding-left: 2em; }
+  .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul) > i {
     display: block;
     position: absolute;
-    width: 11px;
-    height: 11px;
-    left: -6px;
-    top: 5px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAALCAIAAAD0nuopAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE1JREFUeNpinDlzJgNlgAWI09LScEnPmjWLoAImrHpIAkwMFAMqGMGC6X44GzkIsHoQooAFTTVQKdbAwxOigyMsmIh3MC7ASHnqBAgwAD4CGeOiDhXRAAAAAElFTkSuQmCC");
-    background-position: -11px 0;
+    left: 0.5em;
+    top: 0.6em;
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: -.45em;
+    margin-top: -.45em;
+    background-image: url(plus.svg);
+    background-position: center center;
     background-repeat: no-repeat;
-    cursor: pointer; }
-  .ul_to_tree2.ul_to_tree-dropdown li:has(> ul).close::after {
-    background-position: 0 0; }
-  .ul_to_tree2.ul_to_tree-dropdown li:has(> ul).close > ul {
+    background-size: contain;
+    cursor: pointer;
+    z-index: 2; }
+  .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul) > ul {
+    transition: height 250ms ease;
+    overflow: hidden; }
+  .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > ul {
     height: 0px; }
+    .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > ul li::before, .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > ul li::after, .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > ul div::before, .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > ul i {
+      display: none; }
+  .ul_to_tree2.ul_to_tree2-dropdown li:has(> ul).close > div::before {
+    display: none; }

@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  height="100%"
+  width="100%"
+>
+  <path d="M0 0H24V24H0Z" fill="White"/>
+  <path d="M13 7V11H17V13H13V17H11V13H7V11H11V7H13Z" fill="Gray"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H24V24H0V0ZM2 2V22H22V2H2Z" fill="Gray"/>
+</svg>
