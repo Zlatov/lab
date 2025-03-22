@@ -1,7 +1,2 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-@import "_ul_to_tree.scss";
-@import "_ul_to_tree2.scss";
+@use "ul_to_tree.scss";
+@use "ul_to_tree2.scss";
