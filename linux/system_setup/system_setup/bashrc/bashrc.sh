@@ -2,6 +2,9 @@
 
 # Запуск этого скрипта:
 # ~/projects/my/lab/linux/system_setup/system_setup/bashrc/bashrc.sh
+# Затем:
+# source ~/.bashrc
+# или `. ~/.bashrc`
 
 set -eu
 

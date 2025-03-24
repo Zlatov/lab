@@ -1,5 +1,7 @@
 return null
 
+// https://esnext.github.io/es6-module-transpiler/editor
+
 // Именованный экспорт
 // В этом случае имя импорта должно совпадать с именем экспорта.
 export { Name1, Name2, NameN }

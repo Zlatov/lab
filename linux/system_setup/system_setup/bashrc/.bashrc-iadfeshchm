@@ -32,6 +32,7 @@ alias cdnestedarray='cd ~/projects/my/nested_array'
 alias cdprioritize='cd ~/projects/my/prioritize'
 alias cdstore='cd ~/projects/my/store'
 alias cdtanki='cd ~/projects/my/tanki'
+alias cdnlist='cd ~/projects/my/nlist'
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'
