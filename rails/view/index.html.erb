@@ -1,3 +1,4 @@
+<%# Коллекции по связям %>
 <%= render partial: user.roles, spacer_template: 'comma' %>
 <%= render partial: 'admin/affiliates/affiliate', collection: @admin_warehouse.affiliates, spacer_template: 'comma' %>
 <%= render partial: 'admin/affiliates/affiliate', object: @admin_warehouse.affiliate %>
@@ -5,4 +6,10 @@
 <%= render partial: user.roles.first(2), spacer_template: 'comma' %>
 <%= "и ещё #{user.roles.length - 2}" if user.roles.length > 2 %>
 
+
+<%# Значение enum поля в БД %>
 <%= admin_order.read_attribute_before_type_cast(:exchange_status) %>
+
+
+<%# Пагинация kaminary %>
+<%= paginate orders, views_prefix: 'admin', param_name: :orders_page, params: {anchor: 'tab-1'}, pagination_class: 'mb-0' %>

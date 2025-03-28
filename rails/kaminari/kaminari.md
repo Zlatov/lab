@@ -72,4 +72,5 @@ end
 
 ```rb
 = paginate @admin_users, views_prefix: 'admin'
+= paginate orders, views_prefix: 'admin', param_name: :orders_page, params: {anchor: 'tab-1'}, pagination_class: 'mb-0'
 ```
