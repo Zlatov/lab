@@ -116,3 +116,36 @@ Post.where(status: 'success').in_batches do |posts|
   # posts это ActiveRecord_Relation
   posts.update_all(status: 'draft')
 end
+
+
+# 
+# ActiveRecord 6+ для вставки с обновлением может без гема!
+# 
+# Все методы работают на уровне SQL, без ActiveRecord логики (валидаторов, before_create, и т.п.).
+# Обязательные поля, например created_at, updated_at, нужно указывать вручную.
+# Для upsert и upsert_all нужно, чтобы в таблице был уникальный индекс по unique_by
+books = [
+  { title: "Book 1", author: "Джордж Оруэлл", created_at: Time.current, updated_at: Time.current },
+  { title: "Book 2", author: "Боб Джонс", created_at: Time.current, updated_at: Time.current }
+]
+
+# Простая мультивставка (insert_many)
+# ⚠️ Без валидаций и колбэков
+Book.insert_all(books)
+# Вставляет массив хэшей в таблицу. Без валидаций, колбэков. Не обновляет при дублировании.
+
+# Вставка с обновлением при конфликте (UPSERT)
+# ⚠️ Ключи должны быть уникальными (например, по title)
+Book.upsert_all(books, unique_by: :title)
+# То же самое, но обновляет запись при конфликте (по уникальному индексу).
+
+# Вставка одной записи с UPSERT
+book = { title: "Book 3", author: "Лев Толстой", created_at: Time.current, updated_at: Time.current }
+Book.upsert(book, unique_by: :title)
+# Вставляет или обновляет одну запись.
+
+# Составные ключи
+# Обновит существующие записи по уникальному составному ключу
+Book.upsert_all(books, unique_by: { columns: [:title, :author] })
+Book.upsert(book, unique_by: { columns: [:title, :author] })
+# Поле unique_by: может принимать :index_books_on_title_and_author (по имени индекса)
