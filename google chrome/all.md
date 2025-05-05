@@ -58,3 +58,9 @@ $ killall google-chrome
 
 # Все. Можно пользоваться. 
 ```
+
+## Если Google Chrome установлен через flatpak и не видит локальные файлы ~/README.md
+
+```sh
+flatpak override com.google.Chrome --filesystem=home
+```

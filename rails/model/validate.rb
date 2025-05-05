@@ -128,6 +128,11 @@ class Model < ActiveRecord::Base
     errors.add(:name, :invalid, message: "cannot be nil") if name.nil?
     errors.add(:base, :invalid, message: "что-то не так") if name.nil? || email.nil?
     errors[:icon] << 'не должна быть больше 500 килобайт' if icon.size > 500.kilobytes
+
+    # Способ                           # Поведение                                  # Когда использовать
+    add(:field, 'сообщение')           # Сообщение без локализации                  # Когда быстро, без i18n
+    add(:field, :invalid)              # Локализованное сообщение :invalid из YAML  # Когда хочешь поддержки i18n
+    add(:field, :invalid, message: '') # Переопределение локализованного сообщения  # Когда нужен ключ и своё сообщение
   end
 
   def icon_file_size

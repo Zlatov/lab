@@ -4,7 +4,9 @@ exit 0
 
 # Сгенерировать пару ключей
 ssh-keygen -t rsa
+ssh-keygen -t rsa -b 4096 -C "Ключ для деплоя приложений"
 cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa
 
 # Список ключей
 ls -lah ~/.ssh
