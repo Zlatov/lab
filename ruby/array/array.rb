@@ -802,6 +802,19 @@ print 'a: '.red; p a
 print 'b: '.red; p b
 # exit
 
+puts 'group_by'.green
+a = [{id: 1, value: 11}, {id: 1, value: 22}]
+b = a.group_by{|x| x[:id]}
+c = a.group_by{|x| x[:id]}.map{|k, v| [k, v.map{|x| x[:value]}]}.to_h
+d = a.group_by{|x| x[:id]}.to_h{|k, v| [k, v.map{|x| x[:value]}]}
+e = a.group_by{|x| x[:id]}.transform_values{|v| v.map{|x| x[:value]}}
+print 'a: '.red; p a
+print 'b: '.red; p b
+print 'c: '.red; p c
+print 'd: '.red; p d
+print 'e: '.red; p e
+# exit
+
 a = [1,2,3,2,4,4,5]
 b = a.group_by{|v| v}
 c = b.select{|k,v| v.length > 1}

@@ -47,12 +47,5 @@ alias cdvesta='cd ~/projects/dmproger/vesta-api'
 alias cdinfo='cd ~/projects/zenon/info'
 
 
-
-
-# Быстрый доступ к командам git.
-# alias gitstatusu='git status -u'
-# alias  a='git add'
-# alias aa='git add -A'
-# alias  r='git reset HEAD'
-# alias  c='git commit'
-# alias ca='git add -A && git commit'
+# docker
+alias dockerps='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'

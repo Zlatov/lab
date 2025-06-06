@@ -115,3 +115,65 @@ curl -X DELETE http://localhost:9200/users_development_20230706135438618,posts_d
 ## Elasticsearch и ruby-приложение
 
 Гем `gem install elasticsearch`, репозиторий https://github.com/elastic/elasticsearch-ruby
+
+
+## Просмотр статуса ES
+
+docker compose exec es bash
+
+```bash
+# Кластер (Cluster)
+# можно сказать что это сервис, может работать на нескольких нодах
+# (контейнерах), посмотреть кластер:
+curl -XGET 'localhost:9200/_cluster/health?pretty'
+
+# Нода (Node)
+# Один запущенный экземпляр Elasticsearch (обычно контейнер или процесс).
+# Посмотреть ноды кластера:
+curl -XGET 'localhost:9200/_cat/nodes?v'
+
+# Индекс (Index)
+# Логическая "коллекция документов", индекс разбивается на шарды. Список
+# индексов:
+curl -XGET 'localhost:9200/_cat/indices?v'
+# Удалить индекс:
+curl -XDELETE 'localhost:9200/my_index'
+
+# Документ (Document)
+# Запись, объект в индексе, как строка в таблице или JSON-файле. Пример запроса
+# документа по ID:
+curl -XGET 'localhost:9200/product/_doc/123'
+
+# Шард (Shard)
+# Физическая часть индекса, в которой реально хранятся данные. Шарды:
+curl -XGET 'localhost:9200/_cat/shards?v'
+
+# Реплика (Replica)
+# 
+# Копия primary-шарда для отказоустойчивости. Elasticsearch сам решает, куда
+# положить реплики. Если у тебя одна нода, то реплики невозможно аллоцировать →
+# проблемы. Изменить число реплик у индекса:
+curl -XPUT 'localhost:9200/my_index/_settings' -H 'Content-Type: application/json' -d '{
+  "index": {
+    "number_of_replicas": 0
+  }
+}'
+
+# UNASSIGNED Шард
+# 
+# Шард есть, но ни одна нода не может его «взять на себя». Причина может быть:
+# нехватка места, 1 нода и 1 реплика, падение или удаление старой ноды.
+# почему не аллоцируется:
+curl -XGET 'localhost:9200/_cluster/allocation/explain?pretty' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "index": "my_index",
+    "shard": 0,
+    "primary": true
+}'
+
+# Информация о дисках (fs)
+curl -XGET 'localhost:9200/_nodes/stats/fs?pretty'
+# Текущие настройки кластера
+curl -XGET 'localhost:9200/_cluster/settings?pretty'
+```
