@@ -1,0 +1,7 @@
+{
+  "posix": {
+    "linux": {
+      "chrome": "google-chrome-stable"
+    }
+  }
+}

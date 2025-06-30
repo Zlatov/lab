@@ -3,6 +3,6 @@
 __${1:$SELECTION}__
 ]]></content>
 	<tabTrigger>zzzmdbold</tabTrigger>
-	<scope>source.md</scope>
-	<description>Выделить жирным</description>
+	<scope>text.html.markdown</scope>
+	<!-- <description>Выделить жирным</description> -->
 </snippet>

@@ -2,10 +2,11 @@
   <content><![CDATA[
 <%
 =begin %>
-$0<%
+${1:$SELECTION}<%
 =end %>
+
 ]]></content>
   <tabTrigger>cem</tabTrigger>
   <scope>text.html.rails</scope>
-  <description>ERB multiline comment</description>
+  <!-- <description>ERB multiline comment</description> -->
 </snippet>
