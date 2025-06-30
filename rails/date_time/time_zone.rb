@@ -22,9 +22,14 @@ config.active_record.default_timezone = :local
 
 
 ActiveSupport::TimeZone.all
+ActiveSupport::TimeZone.instance_methods(false) # Даст понять что можно вызвать у инстанса кроме .name
+ActiveSupport::TimeZone.all.second.name         # => "American Samoa" — человекочитаемое имя
+ActiveSupport::TimeZone.all.second.tzinfo       # => #<TZInfo::DataTimezone: Pacific/Pago_Pago>
+ActiveSupport::TimeZone.all.second.formatted_offset  # => "-11:00" — с учётом знака и двоеточия
+ActiveSupport::TimeZone.all.second.utc_offset   # => -39600 — в секундах
+ActiveSupport::TimeZone.all.second.now          # => текущее время в этой зоне
 
 Hash[ActiveSupport::TimeZone.all.map{|e| ["#{e.name} #{e.utc_offset/3600}",e.name]}]
-# 
 # Вернёт:
 # ```
 # {
@@ -40,8 +45,11 @@ Hash[ActiveSupport::TimeZone.all.map{|e| ["#{e.name} #{e.utc_offset/3600}",e.nam
 # ```
 # <optinon value="Moscow">Moscow 3</option>
 # ```
-# 
 
+ActiveSupport::TimeZone.all.map{|e| [e.formatted_offset, e.name]}
+# => [["-12:00", "International Date Line West"],
+#  ["-11:00", "American Samoa"],
+# …
 
 
 # Системное время.
