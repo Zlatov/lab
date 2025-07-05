@@ -8,5 +8,5 @@ ${1:$SELECTION}<%
 ]]></content>
   <tabTrigger>cem</tabTrigger>
   <scope>text.html.rails</scope>
-  <!-- <description>ERB multiline comment</description> -->
+  <description>ERB multiline comment</description>
 </snippet>

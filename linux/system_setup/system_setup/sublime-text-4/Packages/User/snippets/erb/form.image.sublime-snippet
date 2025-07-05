@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <b><%= form.label :image, class: 'form-label' %></b>
+    <%= form.label :image, class: 'form-label fw-bold' %>
     <%= field_info form.object, :image %>
     <% if form.object.image.present? %>
       <div>

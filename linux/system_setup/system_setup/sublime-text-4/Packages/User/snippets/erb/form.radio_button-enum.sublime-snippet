@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <b><%= form.label :${1:field}, class: 'form-label required' %></b>
+    <%= form.label :${1:field}, class: 'form-label fw-bold required' %>
     <%= field_info form.object, :${1:field} %>
     <% form.object.class.${1:field}s.each do |enum_string, enum_index| %>
       <div class="form-check">

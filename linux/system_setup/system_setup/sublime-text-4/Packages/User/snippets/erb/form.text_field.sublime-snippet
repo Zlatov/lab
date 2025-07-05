@@ -2,7 +2,7 @@
 	<content><![CDATA[
 <div class="row mb-3">
   <div class="col">
-    <b><%= form.label :${1:name}, class: 'form-label required' %></b>
+    <%= form.label :${1:name}, class: 'form-label fw-bold required' %>
     <%= field_info form.object, :${1:name} %>
     <%= form.text_field :${1:name}, class: 'form-control form-control-sm', autofocus: true, required: true, disabled: true %>
     <%= field_errors form.object, :${1:name} %>
