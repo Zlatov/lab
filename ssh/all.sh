@@ -7,6 +7,9 @@ ssh-keygen -t rsa
 ssh-keygen -t rsa -b 4096 -C "Ключ для деплоя приложений"
 cat ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/igni_deploy -C "Ключ для деплоя igni_deploy"
+cat ~/.ssh/igni_deploy.pub
+cat ~/.ssh/igni_deploy
 
 # Список ключей
 ls -lah ~/.ssh
