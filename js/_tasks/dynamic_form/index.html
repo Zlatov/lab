@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="dynamic_form container mt-3" data-form_data="[]">
+    <h1 class="mb-3">Создание формы</h1>
+    <div class="row mb-3">
+      <div class="col">
+        <div class="btn-group" role="group">
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="header"
+            title="Заголовок"
+          >H1</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="text"
+            title="Текст"
+          >TXT</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="input"
+            title="Текстовое поле"
+          >✏️</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="textarea"
+            title="Многострочное поле"
+          >📝</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="select"
+            title="Выпадающий список"
+          >🔽</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="checkbox"
+            title="Флажок (булев)"
+          >☑️</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="checkboxes"
+            title="Флажки"
+          >[☑️]</button>
+          <button type="button" class="dynamic_form-add btn btn-primary text-start" data-type="radio"
+            title="Переключатели"
+          >🔘</button>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6 dynamic_form-tune">
+      </div>
+      <div class="col-6 dynamic_form-view">
+      </div>
+    </div>
+    <div class="row mb-3 dynamic_form-invisible">
+      <div class="col dynamic_form-samples">
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-header" data-type="header">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">1</span>. Заголовок</b>
+            <div class="form-group mt-2">
+              <label>Значение</label>
+              <input type="text" name="value" class="form-control">
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-text" data-type="text">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">2</span>. Текст</b>
+            <div class="form-group mt-2">
+              <label>Значение</label>
+              <textarea name="value" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-input" data-type="input">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">3</span>. Текстовое поле</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-textarea" data-type="textarea">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">4</span>. Многострочное поле</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-select" data-type="select">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">5</span>. Выпадающий список</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+            <div class="form-group mt-2">
+              <label>Подсказка</label>
+              <input type="text" name="prompt" class="form-control">
+            </div>
+            <div class="form-group mt-2 dynamic_form-options">
+              <span class="user-select-none">
+                Опции
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-success user-select-none dynamic_form-option_add"
+                  title="Добавить опцию"
+                >＋</button>
+              </span>
+              <div class="input-group mb-1 dynamic_form-option">
+                <input type="text" name="option" class="form-control">
+                <button type="button" class="btn btn-outline-danger dynamic_form-option_remove" title="Удалить">&#x2715;</button>
+              </div>
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-checkbox" data-type="checkbox">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">6</span>. Флажок (булев)</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-checkboxes" data-type="checkboxes">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">7</span>. Флажки</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+            <div class="form-group mt-2 dynamic_form-options">
+              <span class="user-select-none">
+                Опции
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-success user-select-none dynamic_form-option_add"
+                  title="Добавить опцию"
+                >＋</button>
+              </span>
+              <div class="input-group mb-1 dynamic_form-option">
+                <input type="text" name="option" class="form-control">
+                <button type="button" class="btn btn-outline-danger dynamic_form-option_remove" title="Удалить">&#x2715;</button>
+              </div>
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+        <div class="card mb-3 p-3 d-flex flex-row align-items-start dynamic_form-field dynamic_form-radio" data-type="radio">
+          <div class="drag-handle pe-3 text-muted user-select-none" title="Перетащить" style="cursor: grab;">
+            &#x2630;
+          </div>
+          <div class="flex-grow-1">
+            <b><span class="dynamic_form-num">8</span>. Переключатели</b>
+            <div class="form-group mt-2">
+              <label>Метка</label>
+              <input type="text" name="label" class="form-control">
+            </div>
+            <div class="form-group mt-2 dynamic_form-options">
+              <span class="user-select-none">
+                Опции
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-success user-select-none dynamic_form-option_add"
+                  title="Добавить опцию"
+                >＋</button>
+              </span>
+              <div class="input-group mb-1 dynamic_form-option">
+                <input type="text" name="option" class="form-control">
+                <button type="button" class="btn btn-outline-danger dynamic_form-option_remove" title="Удалить">&#x2715;</button>
+              </div>
+            </div>
+          </div>
+          <div class="ms-2">
+            <button type="button" class="btn btn-sm btn-outline-danger user-select-none dynamic_form-remove" title="Удалить">
+              &#x2715;
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <pre><code>include ERB::Util
+a = json_escape(
+{
+  "name"=>"Заголовок",
+  "text"=>"Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti autem nam nulla quae omnis tenetur harum, necessitatibus quo dolor explicabo dolorem sunt laboriosam eum id itaque, quos. Eum, cupiditate iste.",
+  "fields"=>[]
+}.to_json)
+print 'a: '.red; p a
+exit 0</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
