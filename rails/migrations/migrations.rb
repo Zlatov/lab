@@ -130,6 +130,12 @@ add_column :table_name, :column_name, :string,
 nil, 4, 11 | int(11)      | 4 byte      | 2147483647
 5..8       | bigint       | 8 byte      | 9223372036854775807
 
+# Опция :limit в create_table
+create_table :tags, id: :integer, limit: 2 do |t| # max 32767
+create_table :tags, id: :integer, limit: 4 do |t| # max 2147483647 (или просто id: :integer, без limit)
+
+
+
 
 # 
 # Изменение колонки

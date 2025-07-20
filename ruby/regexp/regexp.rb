@@ -2,13 +2,17 @@
 require 'awesome_print'
 
 puts 'Соответствует ли регулярному выражению.'.green
+puts '=~ (Соответствует?) возвращает nil или index'.blue
 a = /s/
 b = "asd"
 c = "zxc"
-puts !(a =~ b).nil?
-puts !(b =~ a).nil?
-puts !(a =~ c).nil?
-puts !(c =~ a).nil?
+print '!(a =~ b).nil?: '.red; p !(a =~ b).nil?
+print '!(b =~ a).nil?: '.red; p !(b =~ a).nil?
+print '!(a =~ c).nil?: '.red; p !(a =~ c).nil?
+print '!(c =~ a).nil?: '.red; p !(c =~ a).nil?
+puts '!~ (НеСоответствует?) возвращает true или false'.blue
+print 'a !~ b: '.red; p a !~ b
+print 'a !~ c: '.red; p a !~ c
 # exit
 
 puts '.scan(regex|string) - поиск подстрок'.green

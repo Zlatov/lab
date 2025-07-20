@@ -52,3 +52,15 @@ print 'a: '.red; puts a
 print 'b: '.red; puts b
 c = (a - b).to_i
 print 'c: '.red; puts c
+
+
+puts 'Если нужен формат даты как БД (0000-00-00)'.green
+puts 'При передаче Date.current в «ActiveRecord», последний видит объект и преобразует в нужный формат'.blue
+a = Date.current
+print 'a: '.red; p a.inspect
+a = Time.current.strftime('%Y-%m-%d')
+print 'a: '.red; p a
+a = Time.current.strftime('%F')
+print 'a: '.red; p a
+a = Date.current.strftime('%F')
+print 'a: '.red; p a

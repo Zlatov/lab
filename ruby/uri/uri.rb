@@ -67,3 +67,18 @@ c = CGI.unescape b
 print 'a: '.red; puts a
 print 'b: '.red; puts b
 print 'c: '.red; puts c
+
+
+puts 'Есть урл, а экранировать нужно только его компоненты'.green
+puts 'encode_www_form_component - экранирует всё что попало, считает переданный аргумент компонетой УРЛа'.blue
+puts 'URI::DEFAULT_PARSER.escape - неплохо, но не замечает УРЛ знак #'.blue
+puts 'Addressable::URI.parse(a).normalize.to_s - парсит урл и экранирует отдельные компоненты'.blue
+a = 'https://domain.name/some/путь/index_file_вдруг.html?name=ДаНуНа#toc'
+b = URI.encode_www_form_component a
+c = URI::DEFAULT_PARSER.escape a
+print 'a: '.red; puts a
+print 'b: '.red; puts b
+print 'c: '.red; puts c
+require 'addressable/uri'
+d = Addressable::URI.parse(a).normalize.to_s
+print 'd: '.red; puts d
