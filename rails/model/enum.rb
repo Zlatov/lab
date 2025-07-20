@@ -37,6 +37,7 @@ Post.create! status: 'done'
 
 Post.all.each do |post|
   print 'post: '.red; p post
+  print 'post.read_attribute_before_type_cast(:status): '.red; puts post.read_attribute_before_type_cast(:status)
 end
 
 puts Post.find(1).one?
