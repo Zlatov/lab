@@ -19,14 +19,17 @@ const DynamicForm = {
     input: {
       type: "input",
       label: "ФИО полностью",
+      required: true,
     },
     textarea: {
       type: "textarea",
       label: "Комментарий",
+      required: false,
     },
     select: {
       type: "select",
       label: "Тип компании",
+      required: true,
       prompt: "Выберите",
       options: [
         "Малый бизнес",
@@ -39,6 +42,7 @@ const DynamicForm = {
     checkbox: {
       type: "checkbox",
       label: "Буду присутствовать на семинаре после конференции",
+      required: false,
     },
     checkboxes: {
       type: "checkboxes",
@@ -53,6 +57,7 @@ const DynamicForm = {
     radio: {
       type: "radio",
       label: "Ваша должность",
+      required: true,
       options: [
         "Руководитель",
         "Маркетолог",
@@ -83,7 +88,8 @@ const DynamicForm = {
     this.place.on("click", ".dynamic_form-tune .dynamic_form-remove", this.remove.bind(this))
     this.place.on("click", ".dynamic_form-tune .dynamic_form-option_remove", this.option_remove.bind(this))
     this.place.on("click", ".dynamic_form-tune .dynamic_form-option_add", this.option_add.bind(this))
-    this.place.on("keyup", ".dynamic_form-tune input", this.input_save_to_data.bind(this))
+    this.place.on("keyup", ".dynamic_form-tune input[type='text']", this.input_save_to_data.bind(this))
+    this.place.on("change", ".dynamic_form-tune input[type='checkbox']", this.required_to_data.bind(this))
     this.place.on("keyup", ".dynamic_form-tune textarea", this.textarea_save_to_data.bind(this))
   },
 
@@ -178,6 +184,17 @@ const DynamicForm = {
     }, 300)
   },
 
+  required_to_data(event) {
+    var input = $(event.currentTarget)
+    var checked = input.prop("checked")
+    var field = input.closest(".dynamic_form-field")
+    var index = this.tune.find(".dynamic_form-field").index(field)
+    if (index !== -1) {
+      this.data[index].required = checked
+      this.render()
+    }
+  },
+
   render() {
     this.tune.empty()
     console.log('this.data: ', this.data)
@@ -205,6 +222,7 @@ const DynamicForm = {
     var template = this.samples.find(".dynamic_form-input").clone()
     template.find(".dynamic_form-num").text(index + 1)
     template.find("input[name='label']").val(data.label)
+    template.find("input[type='checkbox']").prop({"checked": data.required})
     this.tune.append(template)
   },
 
@@ -212,6 +230,7 @@ const DynamicForm = {
     var template = this.samples.find(".dynamic_form-textarea").clone()
     template.find(".dynamic_form-num").text(index + 1)
     template.find("input[name='label']").val(data.label)
+    template.find("input[type='checkbox']").prop({"checked": data.required})
     this.tune.append(template)
   },
 
@@ -227,6 +246,7 @@ const DynamicForm = {
       option.find("input[name='option']").val(e)
       template.find(".dynamic_form-options").append(option)
     })
+    template.find("input[type='checkbox']").prop({"checked": data.required})
     this.tune.append(template)
   },
 
@@ -234,6 +254,7 @@ const DynamicForm = {
     var template = this.samples.find(".dynamic_form-checkbox").clone()
     template.find(".dynamic_form-num").text(index + 1)
     template.find("input[name='label']").val(data.label)
+    template.find("input[type='checkbox']").prop({"checked": data.required})
     this.tune.append(template)
   },
 
@@ -262,6 +283,7 @@ const DynamicForm = {
       option.find("input[name='option']").val(e)
       template.find(".dynamic_form-options").append(option)
     })
+    template.find("input[type='checkbox']").prop({"checked": data.required})
     this.tune.append(template)
   },
 
@@ -281,32 +303,35 @@ const DynamicForm = {
           break
 
         case "input":
+          var required = field.required ? "required" : null
           element = $(`
             <div class="form-group mb-3">
-              <label>${field.label}</label>
+              <label class="form-label ${required}">${field.label}</label>
               <input type="text" class="form-control" placeholder="">
             </div>
           `)
           break
 
         case "textarea":
+          var required = field.required ? "required" : null
           element = $(`
             <div class="form-group mb-3">
-              <label>${field.label}</label>
+              <label class="form-label ${required}">${field.label}</label>
               <textarea class="form-control" rows="3"></textarea>
             </div>
           `)
           break
 
         case "select":
+          var required = field.required ? "required" : null
           const options = (field.options || [])
             .map(o => `<option>${o}</option>`)
             .join("")
           element = $(`
             <div class="form-group mb-3">
-              <label>${field.label}</label>
+              <label class="form-label ${required}">${field.label}</label>
               <select class="form-control">
-                <option disabled selected>${field.prompt || "Выберите"}</option>
+                <option disabled selected>${field.prompt}</option>
                 ${options}
               </select>
             </div>
@@ -314,10 +339,11 @@ const DynamicForm = {
           break
 
         case "checkbox":
+          var required = field.required ? "required" : null
           element = $(`
             <div class="form-check mb-3">
               <input class="form-check-input" type="checkbox" id="checkbox_${index}">
-              <label class="form-check-label" for="checkbox_${index}">
+              <label class="form-check-label ${required}" for="checkbox_${index}">
                 ${field.label}
               </label>
             </div>
@@ -344,6 +370,7 @@ const DynamicForm = {
           break
 
         case "radio":
+          var required = field.required ? "required" : null
           const radios = (field.options || [])
             .map((opt, i) => `
               <div class="form-check">
@@ -356,7 +383,7 @@ const DynamicForm = {
             .join("")
           element = $(`
             <div class="mb-3">
-              <label class="form-label d-block">${field.label}</label>
+              <label class="form-label d-block ${required}">${field.label}</label>
               ${radios}
             </div>
           `)

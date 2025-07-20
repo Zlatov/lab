@@ -3,3 +3,10 @@
   position: absolute;
   left: -9999px;
 }
+
+.form-label.required:after, .form-check-label.required:after {
+  content: " *";
+  color: #EF4545;
+  font-size: larger;
+  line-height: 0.5em;
+}
