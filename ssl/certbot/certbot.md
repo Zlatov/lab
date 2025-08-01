@@ -11,6 +11,39 @@ certbot --version
 #> certbot 1.22.0
 ```
 
+
+## Режимы работы
+
+- --standalone
+- --webroot
+- --nginx
+
+Основные отличия режимов:
+
+- --standalone — Certbot сам запускает временный веб-сервер на 80 порту.
+- --webroot — Certbot кладёт challenge-файл в .well-known/acme-challenge в указанной папке, и ожидает, что веб-сервер отдаст его.
+- --nginx — Certbot находит Nginx-конфигурацию сам и временно встраивает challenge-обработчик.
+
+Применяется:
+
+- --standalone — редко, на сервере нет Nginx или Apache, либо нужно получить сертификат ДО настройки веб-сервера.
+- --webroot — часто, Certbot использует .well-known в указанной папке, и ожидает, что веб-сервер отдаёт её содержимое.
+- --nginx — очень редко, иногда "магия" не срабатывает — тогда проще webroot вручную.
+
+Команды:
+
+```bash
+# --standalone — красота!
+sudo certbot certonly --standalone -d domain.name
+
+# --webroot — главное найти и обслужить -w директорию
+sudo certbot certonly --webroot -w /var/www/domain.name -d domain.name
+
+# --nginx — даже рисковать пробовать не буду - что он там сам поменяет в nginx!
+sudo certbot --nginx -d domain.name
+```
+
+
 ## Использование
 
 ```bash
