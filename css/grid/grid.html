@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="">
+  <style type="text/css">
+
+code { color: darkred; }
+
+.container {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}
+
+.container2 {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+}
+
+.container3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto 200px;
+  gap: 10px;
+}
+
+.container4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-rows: auto 200px;
+  gap: 10px;
+}
+
+.container5.start {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  justify-items: start;  /* по горизонтали, start|center|end */
+}
+.container5.center {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  justify-items: center;  /* по горизонтали, start|center|end */
+}
+.container5.end {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  justify-items: end;  /* по горизонтали, start|center|end */
+}
+
+.container6.start {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  align-items: start; /* по вертикали, start|center|end */
+}
+.container6.center {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  align-items: center; /* по вертикали, start|center|end */
+}
+.container6.end {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+  align-items: end; /* по вертикали, start|center|end */
+}
+
+.container7 {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+
+  width: 800px;
+  height: 500px;
+  background: #f0f0f0;
+  border: 2px dashed #aaa;
+
+  justify-content: center; /* start|center|space-between */
+  align-content: center;
+}
+
+.container8 {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+}
+.container8>.wide {
+  grid-column: 1 / 3; /* Занять пространство от вертикальной линии 1 до линии 3. Занимает 2 колонки: 1 и 2. */
+  background-color: red !important;
+}
+
+.container9 {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto 200px;
+  gap: 10px;
+}
+.container9>.wide {
+  grid-column: span 2;
+  background-color: red !important;
+}
+
+.container10 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 650px);
+  grid-template-rows: 100px 200px;
+  grid-auto-rows: 50px;
+  gap: 10px;
+}
+
+.container11 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.container12 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+  </style>
+</head>
+<body>
+
+
+
+
+<h2>Пример</h2>
+
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: 100px 1fr 2fr;
+  grid-template-rows: auto auto;
+  gap: 10px;
+}</code></pre>
+
+<div class="container">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h2>Основные свойства контейнера</h2>
+
+<h3>Размер колонок и строк</h3>
+
+<pre><code>grid-template-rows: auto 200px;</code></pre>
+
+<div class="container2">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h3>Автоматическая генерация</h3>
+
+<pre><code>grid-template-columns: repeat(3, 1fr); /* grid-template-columns: 1fr 1fr 1fr; */</code></pre>
+
+<div class="container3">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h3>Автозаполнение ячейками</h3>
+
+<pre><code>grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));</code></pre>
+
+<div class="container4">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h2>Выравнивание внутри сетки</h2>
+
+<h3><code>justify-items</code> — по горизонтали</h3>
+
+<pre><code>justify-items: start;</code></pre>
+
+<div class="container5 start">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<pre><code>justify-items: center;</code></pre>
+
+<div class="container5 center">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<pre><code>justify-items: end;</code></pre>
+
+<div class="container5 end">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<h3><code>align-items</code> — по вертикали</h3>
+
+<pre><code>align-items: start;</code></pre>
+
+<div class="container6 start">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<pre><code>align-items: center;</code></pre>
+
+<div class="container6 center">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<pre><code>align-items: end;</code></pre>
+
+<div class="container6 end">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h2>Выравнивание всей сетки</h2>
+
+<pre><code>justify-content: center;
+align-content: center;</code></pre>
+
+<div class="container7">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h2>Расположение элементов</h2>
+
+<h3>Ручное позиционирование</h3>
+
+<pre><code>.container8>.wide {
+  grid-column: 1 / 3;
+  background-color: red;
+}</code></pre>
+
+<p><b>Три колонки — четыре вертикальных линии. <code>1 / 3</code> — занять пространство от линии 1 до линии 3</b></p>
+
+<div class="container8">
+  <div style="background-color: pink;">1</div>
+  <div class="wide" style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div class="wide" style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<h3>Однострочно</h3>
+
+<pre><code>grid-column: span 2;  /* занять 2 колонки */</code></pre>
+
+<div class="container9">
+  <div style="background-color: pink;">1</div>
+  <div class="wide" style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div class="wide" style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+<h2>Автоматическая раскладка</h2>
+
+<pre><code>  display: grid;
+  grid-template-columns: repeat(auto-fill, 650px);
+  grid-template-rows: 100px 200px;
+  grid-auto-rows: 50px;
+  gap: 10px;</code></pre>
+
+<p><b>Не указан <code>template</code> для новых появившихся rows? — идём брать высоту из <code>grid-auto-rows</code>.</b></p>
+
+<p><b>Аналогично <code>grid-auto-columns</code>.</b></p>
+
+<div class="container10">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h2>Частые примеры</h2>
+
+<h3>Равномерная сетка из 3 колонок</h3>
+
+<pre><code>  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;</code></pre>
+
+<div class="container11">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+<h3>Адаптивная сетка</h3>
+
+<pre><code>  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;</code></pre>
+
+<div class="container12">
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+  <div style="background-color: pink;">1</div>
+  <div style="background-color: lightgreen;">2</div>
+  <div style="background-color: lightblue;">3</div>
+  <div style="background-color: lightyellow;">4</div>
+</div>
+
+
+</body>
+</html>
