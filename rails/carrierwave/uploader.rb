@@ -36,6 +36,15 @@ class PageImagesUploader < CarrierWave::Uploader::Base
     # do something
   end
 
+  # Ресайз если размеры не подходящие, размеры определяются динамически, к примеру хранятся в БД.
+  process :scale
+  def scale
+    image = MiniMagick::Image.open(current_path)
+    width = ApplicationSetting.instance.banner_origin_x
+    height = ApplicationSetting.instance.banner_origin_y
+    resize_to_fill width, height if image.width != width || image.height != height
+  end
+
   # Create different versions of your uploaded files:
   # version :thumb do
   #   process resize_to_fit: [50, 50]

@@ -65,7 +65,7 @@
 | 417 | :expectation_failed | Expectation Failed Client Error / ожидаение не удалось
 | 418 | - | I’m a teapot / я&nbsp;— чайник
 | 421 | :misdirected_request | Misdirected Request Client Error
-| 422 | :unprocessable_entity | Unprocessable Entity Client Error / необрабатываемый экземпляр
+| 422 | :unprocessable_entity | Unprocessable Entity Client Error / необрабатываемый экземпляр (запрос синтаксически верен, семантически - нет, данные не верны)
 | 423 | :locked | Locked Client Error / заблокировано
 | 424 | :failed_dependency | Failed Dependency Client Error / невыполненная зависимость
 | 425 | :too_early | Too Early Client Error / неупорядоченный набор

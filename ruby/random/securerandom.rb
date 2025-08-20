@@ -4,6 +4,7 @@ require 'securerandom'
 puts SecureRandom.hex(10) #=> "52750b30ffbc7de3b362"
 puts SecureRandom.hex(10) #=> "92b15d6c8dc4beb5f559"
 puts SecureRandom.hex(11) #=> "39b290146bea6ce975c37cfc23"
+# exit 0
 
 # 1 Байт - 8 бит
 puts "FF".to_i(16)

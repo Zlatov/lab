@@ -25,6 +25,7 @@
       <% else %>
         <%= link_to 'Редактировать', edit_admin_${1:model}_path(@admin_${1:model}), class: 'nav-link' %>
       <% end %>
+    </li>
   <% end %>
 
   <% if @admin_${1:model}.present? && !@admin_${1:model}.new_record? %>
