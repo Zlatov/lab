@@ -286,7 +286,10 @@ has_many :properties
 # 
 # Первичный ключ по нескольким полям
 # 
-create_table :prices, primary_key: [:product_code, :affiliate_code] do |t|
+
+# Добавь и в "create_table" код `id: false, primary_key: [:product_code, :affiliate_code]`
+# и после код `execute 'ALTER TABLE prices ADD PRIMARY KEY (product_code, affiliate_code);'`
+create_table :prices, id: false, primary_key: [:product_code, :affiliate_code] do |t|
   t.string  :product_code, null: false
   t.string  :affiliate_code, null: false
   ...
@@ -295,20 +298,21 @@ create_table :prices, primary_key: [:product_code, :affiliate_code] do |t|
 
   t.index :updated_at, name: :ix_prices_updatedat
   # Несмотря на то что первичный ключ указан, постгрес не создаёт явные индексы
-  # для полей уникаьного ключа. Однако в документации указано, что при создании
-  # любой уникальности автоматически создаются индексы, так как они
-  # обеспечивают эту уникальность.
-  # 
-  # На сколько перегрузит лишними данными мою БД если я перестрахуюсь и добавлю
-  # дополнительные индексы?
-  t.index :product_code, name: 'ix_c1_prices_productcode'
+  # для отдельных полей ключа. Однако первое поле в составном ключе
+  # проиндексировано. Если логика приложения нуждается в поиске по остальным
+  # полям ключа, то индексы по ним нужно добавлять вручную.
+  t.index :product_code, name: 'ix_c1_prices_productcode' # Первое поле составного ключа в postgres можно не индексировать.
   t.index :affiliate_code, name: 'ix_c1_prices_affiliatecode'
-  # t.index [:product_code, :affiliate_code], name: 'uq_c1_prices_productcodeaffiliatecode', unique: true
+  # Точно не нужна:
+  # t.index [:product_code, :affiliate_code], name: 'uq_prices_productcodeaffiliatecode', unique: true
 end
-# Это видимо когда я забыло убрать опцию id: false
 execute 'ALTER TABLE prices ADD PRIMARY KEY (product_code, affiliate_code);'
+
 # В моделях добавить:
-# С гемом composite_primary_keys
-# self.primary_keys = :code, :uuid
-# Без гема composite_primary_keys
-self.primary_key = [:code, :uuid]
+self.primary_keys = :code, :uuid # С гемом composite_primary_keys
+self.primary_key = [:code, :uuid] # Без гема composite_primary_keys
+
+# Какие поля индексируются «автоматически» при создании составного первичного ключа:
+# 1. Создаётся уникальный индекс по двум полям:
+CREATE UNIQUE INDEX models_pkey ON public.models USING btree (code, uuid)
+# 2. По отдельным полям индекса нет, но первое поле в составном индексе обычно проиндексировано

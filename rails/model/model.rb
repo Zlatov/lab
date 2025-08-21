@@ -3,8 +3,26 @@ class Model < ApplicationRecord
   # Если первичный ключ не id
   # (create_table :sales, id: false, primary_key: :code do |t|)
   self.primary_key = :code
+
   # Множественный первичный ключ
-  self.primary_key = [:articul, :angar, :discount]
+
+  # Без гема composite_primary_keys:
+  self.primary_key = [:code, :uuid]
+  # Model.where(code: 'code', uuid: 'uuid').first
+
+  # С гемом composite_primary_keys:
+  self.primary_keys = :code, :uuid
+  # Model.find(['code', 'uuid'])
+  # Найти два объекта сразу:
+  # Model.find(['code', 'uuid'], ['code', 'uuid'])
+  # Не пытаться!:
+  # Model.find('code', 'uuid')
+  # Создание/поиск "не меняется" с гемом:
+  # Model.create!(code: 'code', uuid: "uuid")
+  # Model.where(code: 'code', uuid: "uuid").first
+
+
+
 
   # Kaminari (pagination)
   paginates_per 3

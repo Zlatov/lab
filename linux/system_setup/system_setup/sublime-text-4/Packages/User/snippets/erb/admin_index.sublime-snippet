@@ -5,18 +5,15 @@
     <table class="table table-sm table-striped">
       <thead>
         <tr>
-          <th class="text-nowrap" style="width: 1%;">
+          <th style="width: 1%;">
             <%= @admin_${1:model}s.klass.human_attribute_name :id %>
             <%= field_info @admin_${1:model}s, :id %>
           </th>
-          <th class="text-nowrap">
+          <th>
             <%= @admin_${1:model}s.klass.human_attribute_name :name %>
             <%= field_info @admin_${1:model}s, :name %>
           </th>
-          <th class="text-nowrap text-center">
-            <%= @admin_${1:model}s.klass.human_attribute_name :hidden %>
-            <%= field_info @admin_${1:model}s, :hidden %>
-          </th>
+
           <th class="text-center" style="width: 1%;">Управление</th>
         </tr>
       </thead>
@@ -27,33 +24,23 @@
               <%= admin_${1:model}.id %>
             </td>
             <td>
-              <%= link_to admin_${1:model}.name, admin_${1:model}, title: 'Просмотреть', 'data-bs-toggle' => 'tooltip' %>
-            </td>
-            <td class="text-center">
-              <% if admin_${1:model}.hidden? %>
-                <%= hidden_icon class: 'text-danger', title: admin_${1:model}.human_enum_name(:hidden), tooltip: true  %>
-              <% else %>
-                <%= show_icon class: 'text-success', title: admin_${1:model}.human_enum_name(:hidden), tooltip: true %>
-              <% end %>
+              <%= admin_${1:model}.name %>
             </td>
 
             <td class="text-center">
               <div class="btn-group">
-                <%= link_to admin_${1:model},
+                <%= link_to admin_${1:model}_path(admin_${1:model}),
                   title: 'Просмотреть',
-                  'data-bs-toggle' => 'tooltip',
-                  class: 'btn btn-secondary btn-sm' do
+                  class: 'btn btn-secondary btn-sm hint' do
                 %><%= show_icon %><% end %>
                 <%= link_to edit_admin_${1:model}_path(admin_${1:model}),
                   title: 'Редактировать',
-                  'data-bs-toggle' => 'tooltip',
-                  class: 'btn btn-secondary btn-sm' do
+                  class: 'btn btn-secondary btn-sm hint' do
                 %><%= edit_icon %><% end %>
-                <%= link_to admin_${1:model},
+                <%= link_to admin_${1:model}_path(admin_${1:model}),
                   method: :delete,
                   title: 'Удалить',
-                  'data-bs-toggle' => 'tooltip',
-                  class: 'btn btn-danger btn-sm',
+                  class: 'btn btn-danger btn-sm hint',
                   data: { confirm: t(:are_you_sure) } do
                 %><%= delete_icon %><% end %>
               </div>

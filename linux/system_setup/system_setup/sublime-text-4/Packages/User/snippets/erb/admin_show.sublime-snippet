@@ -20,34 +20,17 @@
         <%= @admin_${1:model}.name %>
       </td>
     </tr>
-    <tr>
-      <td>
-        <%= @admin_${1:model}.class.human_attribute_name :hidden %>
-        <%= field_info @admin_${1:model}, :hidden %>
-      </td>
-      <td>
-        <% if @admin_${1:model}.hidden? %>
-          <%= hidden_icon class: 'text-danger', title: @admin_${1:model}.human_enum_name(:hidden), tooltip: true  %>
-        <% else %>
-          <%= show_icon class: 'text-success', title: @admin_${1:model}.human_enum_name(:hidden), tooltip: true %>
-        <% end %>
-      </td>
-    </tr>
   </tbody>
 </table>
 
 <div class="text-end">
   <div class="btn-group">
     <%= link_to edit_admin_${1:model}_path(@admin_${1:model}),
-      title: 'Редактировать',
-      'data-bs-toggle' => 'tooltip',
-      class: 'btn btn-secondary btn-sm' do
+      class: 'btn btn-secondary' do
     %><%= edit_icon %> Редактировать<% end %>
-    <%= link_to @admin_${1:model},
+    <%= link_to admin_${1:model}_path(@admin_${1:model}),
       method: :delete,
-      title: 'Удалить',
-      'data-bs-toggle' => 'tooltip',
-      class: 'btn btn-danger btn-sm',
+      class: 'btn btn-danger',
       data: { confirm: t(:are_you_sure) } do
     %><%= delete_icon %> Удалить<% end %>
   </div>
