@@ -25,6 +25,10 @@ SHOW server_version;
 psql --version
 psql -V
 locate bin/psql
+
+# Определить расположение конфигурационных файлов postgresql.conf и pg_hba.conf
+sudo -u postgres psql -c "SHOW config_file;"
+sudo -u postgres psql -c "SHOW hba_file;"
 ```
 
 

@@ -45,7 +45,7 @@
 
 | код | symbol | описание
 | --- | --- | ---
-| 400 | :bad_request | Bad Request Client Error / плохой, неверный запрос
+| 400 | :bad_request | Bad Request Client Error / плохой, неверный запрос (запрос не верен синтаксически, например, нехватка полей данных)
 | 401 | :unauthorized | Unauthorized Client Error / не авторизован
 | 402 | :payment_required | Payment Required Client Error / необходима оплата
 | 403 | :forbidden | Forbidden Client Error / запрещено

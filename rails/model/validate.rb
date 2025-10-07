@@ -154,3 +154,22 @@ class Offer
 
   validates :properties, length: { minimum: 0, maximum: 2, message: 'не может содержать больше двух Фильтров'}
 end
+
+
+
+# Получение ошибок модели:
+# * массивом
+resource.errors.full_messages                                    # => Ошибка с использованием гема russian ["Email can't be blank", "Password is too short"]
+resource.errors.map(&:full_message)                              # => ["Email can't be blank", "Password is too short"]
+resource.errors.map(&:message)                                   # => ["can't be blank", "is too short"]
+resource.errors.map { |error| [error.attribute, error.message] } # => [[:email, "can't be blank"], [:password, "is too short"]]
+# * в хэш
+resource.errors.to_hash                                          # => {:email=>["can't be blank"], :password=>["is too short"]}
+resource.errors.to_hash(full_messages: true)                     # => {:email=>["Email can't be blank"], :password=>["Password is too short"]}
+# * конкретного атрибута
+resource.errors[:email]                                          # => ["can't be blank"]
+resource.errors.where(:email)                                    # => [#<ActiveModel::Error attribute=email, type=blank>]
+resource.errors.where(:email).map(&:message)                     # => ["can't be blank"]
+# * для API
+resource.errors.as_json                                          # => {:email=>[{:error=>:blank}], :password=>[{:error=>:too_short, :count=>6}]}
+resource.errors.details                                          # => {:email=>[{:error=>:blank}], :password=>[{:error=>:too_short, :count=>6}]}

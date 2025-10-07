@@ -120,6 +120,12 @@ b = {
   zxc: 2
 }
 print 'b: '.red; puts b
+
+a = <<~DESC.strip
+  Строка  
+  Ещё строка  
+DESC
+print 'a: '.red; p a
 # exit
 
 puts 'Хередок в параметрах и массивах.'.green
@@ -132,7 +138,7 @@ a = [
 print 'a: '.red; print a
 # exit
 
-# Удалить пробелы вокругтекста (`trim` в других языках)
+# Удалить пробелы вокругтекста .strip (`trim` в других языках)
 puts 'Удалить пробелы вокругтекста'.green
 a = '  asd asd  '
 b = a.strip

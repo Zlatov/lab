@@ -100,6 +100,14 @@ Book.import columns, books, validate: true
 # when not specified :validate defaults to true
 Book.import columns, books
 
+# Если в качестве параметра для .import будет передан не хэш, а набор AR
+# моделей, то вступит в силу бизнес-логика гема обновления временных меток. А
+# именно, поле updated_at будет выставлено в текущее время, created_at будет
+# выставлено в текущее время если экземпляр новый (new_record?). Можно
+# отключить эту логику опцией timestamps: false.
+
+
+
 
 # 
 # Перебор большой таблицы с .find_each .find_in_batches .in_batches
