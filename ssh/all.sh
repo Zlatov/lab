@@ -25,7 +25,7 @@ sudo apt install -y openssh-server
 sudo service ssh status
 
 # Настройка для поддержки связи с сервером (на стороне клиента)
-# /etc/ssh/ssh_config
+# /etc/ssh/ssh_config, а для клиента то лучше прописывать это в ~/.ssh/config !!!
 Host *
 ServerAliveInterval 100
 # ServerAliveInterval Клиент будет отправлять нулевой пакет на сервер каждые 100

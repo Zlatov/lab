@@ -160,6 +160,14 @@ __Portainer - веб интерфейс докера__
 ```bash
 docker volume create portainer_data
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+# Просто последняя "Community Edition":
+docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart=always                -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+# Чтобы портейнер можно было подключить к удалённому docker через Environment Wizard -> Docker Standalone -> API -> Url: localhost:2375, нужно:
+# docker stop portainer
+# docker rm portainer
+# ssh server, cd /etc/systemd/, edit docker.service, ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375, curl http://localhost:2375/_ping, ssh -L 2375:localhost:2375 test,
+docker run -d                           --name portainer --restart=always --network=host -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+# http://localhost:9000
 ```
 Настройка SSL для доступа к удалённому docker в portainer:
 
