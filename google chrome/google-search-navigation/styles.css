@@ -1,0 +1,9 @@
+#result-pointer {
+    position: absolute;
+    display: block;
+    width: 20px;
+    left: -22px;
+    text-align: right;
+    z-index: 1000;
+    pointer-events: none;
+}

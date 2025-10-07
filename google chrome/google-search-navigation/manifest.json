@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Навигация по поисковой выдаче Google",
+  "version": "1.0",
+  "description": "Упрощает навигацию по страницам поисковой выдачи Google с помощью клавиатуры.",
+  
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/search?*", "https://www.google.ru/search?*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "host_permissions": [
+    "https://www.google.com/search?*",
+    "https://www.google.ru/search?*"
+  ]
+}
