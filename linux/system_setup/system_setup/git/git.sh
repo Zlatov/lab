@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eu
 
+# Запуск скрипта можно производить просто по Ctrl+b
+
 cd ~
 lab_path=projects/my/lab
 . $lab_path/bash/_lib/echoc
