@@ -115,23 +115,18 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 
 ## Дополнительное ПО
 
-__Inkscape__
+*   ***Postman***;
+*   ***Smartgit***;
+*   ***Inkscape*** - редактор векторных изображений;
+*   ***Krita*** - редактор растровой графики;
+*   ***OBS Studio*** - запись, стриминг видео.
 
-Неплохой редактор векторных изображений.
+    Устанавливаю дистрибутив от Flathub, версия 29.1.3(64 bit)
+*   ***Shotcut*** - редактор видео;
+*   ***Audacity*** - редактор аудио;
 
-__Krita__
-
-Неплохой редактор растровой графики.
-
-__OBS Studio__
-
-Запись, стриминг видео.
-
-Устанавливаю дистрибутив от Flathub, версия 29.1.3(64 bit).
-
-*   ***Shotcut*** Редактор видео.
-*   ***Audacity*** Редактор аудио.
     Запускаю из файла скаченного файла `audacity-linux-3.3.3-x64.AppImage`.
+
     ```sh
     # ~/.local/share/applications/Audacity.desktop
     [Desktop Entry]
@@ -144,9 +139,9 @@ __OBS Studio__
     Exec=/home/iadfeshchm/audacity-linux-3.3.3-x64.AppImage
     Icon=/home/iadfeshchm/audacity.png
     ```
-*   ***Shutter*** Принтскрины, почти как PicPick в винде. PrintScreen as PicPick.
-*   ***Hardinfo*** Аналог EVEREST.
-*   ***Valentina Studio*** GUI баз данных.
+*   ***Shutter*** - принтскрин, почти как PicPick в винде;
+*   ***Hardinfo*** - аналог EVEREST;
+*   ***Valentina Studio*** - GUI баз данных.
 
 
 ## FreeRdp
