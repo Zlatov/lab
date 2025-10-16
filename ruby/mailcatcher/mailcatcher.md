@@ -1,5 +1,18 @@
 # Mailcatcher
 
+```bash
+# Проверяем, есть процессы слушающие необходимые нам порты.
+ss -tlnp | grep ':1025\>'
+ss -tlnp | grep ':1080\>'
+docker run -d -p 1025:1025 -p 1080:1080 --name mailcatcher schickling/mailcatcher
+# http://localhost:1080/
+# SMTP_PORT=1025
+
+docker stop mailcatcher
+docker rm mailcatcher
+docker run -d            --network host --name mailcatcher schickling/mailcatcher
+```
+
 ```sh
 cd ~
 # На руби 3 константа Fixnum не определена, и mailcatcher не работает.
