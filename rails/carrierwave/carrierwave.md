@@ -105,8 +105,6 @@ mount_uploaders :images, ProductImageUploader
 
 ## Удаление файлов
 
-Странно, что в 2021 году до сих пор симатическая проблема в удалении файлов, вот два способа удаления:
-
 ```rb
 slide = Slide.last
 slide.image = File.open('/path/to/file')
@@ -117,22 +115,20 @@ slide.image
 # => #<SlideUploader...>
 
 # Превый способ
-slide.remove_image! # Удалит файл и подготовит поле к обновлению при сохранении
+slide.remove_image!    # Удалит файл  и подготовит поле к обновлению при сохранении
+# slide.remove_images! # Удалит файлы и подготовит поле к обновлению при сохранении
 slide.save
+# slide.save!(validate: false)
 
 # Второй способ
 slide.image.remove! # Удалит только файл
 slide.update_column :image, nil # Сохранит сразу поле пустым
-
-# Почему в первом способе к модели добавляются синтетические методы - имхо
-# некрасиво.
-# 
-# Во втором способе я не нашел метод как можно обнулить поле, а сохранить
-# отдельно через save.
 ```
 
+
+## Определяем существование фалов по базе данных, без проверки существования файлов на диске или S3
+
 ```rb
-# Проверка есть ли запись о файлах в БД без проверки существования файла на диске.
 product.image.identifier.present?         # ✅ безопасно
 product.images.first&.identifier.present? # ✅ безопасно
   # Как НЕ надо делать если есть S3 (проверяется наличие файла на диске, вызываея .file.exists?):
@@ -140,4 +136,65 @@ product.images.first&.identifier.present? # ✅ безопасно
   # image.blank?
   # image.file.exists?
   # image.try(:url).present?
+```
+
+
+## <del>Добавление</del> установка прикреплённых фалов «программно» (не через форму)
+
+```rb
+# Вариант 1, через временно сохранённые файлы в tmp
+begin
+  files_for_upload = []
+
+  tmp_dir = Rails.root.join("tmp", "some_path", "some_path")
+  file_path = File.join(tmp_dir, "file.name")
+  files_for_upload << File.open(file_path)
+
+  product.images = files_for_upload
+  product.save!
+rescue StandardError => e
+  puts "== Не удалось"
+  puts e.message
+ensure
+  # Закрываем файловые дескрипторы!
+  files_for_upload&.each do |file|
+    file.close if !file.closed?
+  end
+  if File.directory?(tmp_dir)
+    FileUtils.rm_rf(tmp_dir)
+    puts "== Удалена временная директория #{tmp_dir}"
+  end
+end
+
+# Вариант 2. Через родной Uploader
+files_for_upload = []
+
+  file = …
+  filename = …
+  uploader = ProductImagesUploader.new(product, :images)
+  # uploader.set_filename(filename)
+  uploader.store!(file)
+  files_for_upload << uploader
+
+product.images = files_for_upload
+product.save!
+  # В ProductImagesUploader добавить код ниже если необходимо использовать uploader.set_filename(filename)
+  # def filename
+  #   # @custom_filename || super
+  #   if @custom_filename
+  #     # Для всех версий используем то же имя, но с префиксом версии
+  #     if version_name.present?
+  #       # Для версий: big_filename.jpg, view_filename.jpg и т.д.
+  #       "#{version_name}_#{@custom_filename}"
+  #     else
+  #       # Для оригинала: filename.jpg
+  #       @custom_filename
+  #     end
+  #   else
+  #     super
+  #   end
+  # end
+  # def set_filename(name)
+  #   @custom_filename = name
+  # end
 ```

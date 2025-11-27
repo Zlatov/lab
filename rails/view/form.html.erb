@@ -34,6 +34,16 @@ TODO collection_radio_buttons
   html: {name: "go"}
 ) do |form| %>
 
+<% <<~JS
+  // jQ, приведёт к прямому GET запросу в браузере даже если форма `local: false`:
+  $(".nomenclature_tree_search").submit()
+  // Вызвать событие Rails UJS:
+  Rails.fire($(".nomenclature_tree_search")[0], "submit")
+  // не очень правильно, можно не угадать кастомное событие:
+  $(".nomenclature_tree_search").trigger("rails:submit")
+JS
+%>
+
 <%= form_for article, url: {action: "update"} do |f| %>
 
 

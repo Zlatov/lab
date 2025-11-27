@@ -12,6 +12,15 @@ certbot --version
 ```
 
 
+## Проверка домена
+
+```bash
+# На какой сервер ведёт домен
+nslookup domain.name
+nslookup www.domain.name
+```
+
+
 ## Режимы работы
 
 - --standalone

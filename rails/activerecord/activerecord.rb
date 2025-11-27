@@ -190,64 +190,44 @@ users = User.select('user.*', 'tk.count_true_comments')
 # Способы подгрузки ассоциаций и фильтрация
 # 
 
-Model.joins(:relation).where()
-Model.left_outer_joins(:relation).where()
-Model.includes(:relation).where().references(:relation)
-Model.eager_load(:relation)
-Model.distinct.joins(:relation).where(relation: {field: :value})
-Model.distinct.joins(:relation).where(relation: {field: :value}).preload(:relation, :relation2)
+# Rails 6+
 
-.includes().where().references().preload() # Подгружает ассоциации одним запросом, фильтрация накладывается на ассоциации даже с preload
-.eager_load().where().preload()            # Подгружает ассоциации одним запросом, фильтрация накладывается на ассоциации даже с preload
-.distinct.joins().where().preload()        # Подгружает ассоциации отдельными запросами, фильтрация НЕ накладывается на ассоциации
+# 1. Нужно фильтровать Model по ассоциации; Без ассоциаций
+Model.joins(:relation).where(relation: {field: :value})
+# 2. Нужно фильтровать Model по ассоциации; Все ассоциации
+Model.joins(:relation).where(relation: {field: :value}).preload(:relation)
+# 3. Нужно фильтровать Model по ассоциации; Ассоциации с той-же фильтрацией
+Model.eager_load(:relation).where(relation: {field: :value})
+# 4. Нужно не фильтровать Model; Все ассоциации
+Model.includes(:relation) Model.preload(:relation)
+# 5. Нужно не фильтровать Model (или фильтровать но по другой логике), ассоциации с фильтрацией
+models = Model.all.to_a
+ActiveRecord::Associations::Preloader.new.preload(models, :relation, Relation.where(field: :value))
 
-# .eager_load() равнозначен .includes().references()
+# Аналоги
+# Rails 5+, eager_load + where:
+Model.includes(:relation).where(relation: {field: :value}).references(:relation) # следует избегать старого синтаксиса
+# Rails 6+, eager_load + where (автоматически добавляем left_joins):
+Model.includes(:relation).where(relation: {field: :value}) # следует избегать неявности
 
-# .preload - отдельный подзапрос
-class Person < ActiveRecord::Base
-  has_many :notes
-  # Ассоциация со статическим условием
-  has_many :important_notes, -> { where(important: true) }, class_name: "Note"
-end
-Person.preload(:important_notes)
-# Зато позволяет связывать с динамическим условием две модели. Однако обязателен
-# вызов через `ActiveRecord::Associations::Preloader.new.preload` так как это
-# позволяет избежать выборки `Price.where(currency_code: 'USD')` без условия на
-# выбранные прежде основные модели, что сожрало бы память.
-products = Product.all.to_a
-ActiveRecord::Associations::Preloader.new.preload(
-  products, :prices,
-  # Вынуть именно USD цены из этой модели, с учётом выбранных products
-  Price.where(currency_code: 'USD')
-)
-products.each do |product|
-  product.prices.first.cents
-end
+# Если вместо preload - includes вместо всех ассоциации получили ассоциации с фильтрацией:
+Model.joins(:relation).where(relation: {field: :value}).includes(:relation)
+# Обратная подгрузка основной модели в подгружаемой, из-за includes получим фильтрацию на :relation, но :models (которая в :relation) будут все?
+Model.joins(:relations).where(relations: {field: :value}).includes(relation: :models)
+# Условие накладывается на Model, :relations загружается отдельным запросом без условия и :models, :relation2 тоже нет условий.
+Model.joins(:relations).where(relations: {field: :value}).preload(relations: [:models, :relation2])
 
-# .eager_load - LEFT JOIN -  загружает ассоциации в одном запросе с
-# использованием Left Outer Join, точно так же, как действует includes в
-# сочетании с references.
-class Person < ActiveRecord::Base
-  has_many :notes
-  has_many :important_notes, -> { where(important: true) }, class_name: "Note"
-end
-Person.eager_load(:important_notes)
-# Попробовать:
-Post.eager_load(:goods).joins("AND goods.user_id = 3").to_sql
+# .eager_load() равнозначен .includes().references(), то есть условие наложится и на основную модель и на ассоциации, но в Rails 6+ рекомендуется .eager_load()
+# .preload() - всегда отдельный подзапрос, условия основного запроса не влияют (тольк подгрузка будет осуществляться только для id основного запроса - это очевидно)
+# совместно .includes(:relations1).preload(:relations1) - бессмысленно, можно: .includes(:relations1).preload(:relations2)
+# .joins(:relations) .left_joins(:relations) - скорее всего понадобится .distinct (.select('distinct models.*')), а если jsonb не позволит - то придётся .group()
 
-# .includes - действует так же, как и preload, но в случае наличия условия по
-# ассоциированной таблице переключается на создание единственного запроса с LEFT
-# OUTER JOIN. Однако по каким-то причинам иногда необходимо форсировать
-# применение такого подхода, в таких случаях необходимо использовать метод
-# .references
-User.includes(:posts).references(:posts).to_a
+# Ассоциация со "статическим" условием, Model.opened_posts
+has_many :opened_posts, -> {where(status: 'open')}, class_name: "Post"
+# Ассоциация с "динамическим" условием, Model.statused_posts('open')
+has_many :statused_posts, ->(status) {where(status: status)}, class_name: "Post"
 
-# .joins - INNER JOIN
-User.joins(:posts)
-# При этом, загружаются данные только из таблицы users. Кроме того, этот запрос
-# может возвратить дублирующие друг друга записи (Избежать повторений можем с
-# использованием distinct)
-User.joins(:posts).select('distinct users.*').to_a
+
 
 
 # 

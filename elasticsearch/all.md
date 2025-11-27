@@ -136,6 +136,8 @@ curl -XGET 'localhost:9200/_cat/nodes?v'
 # Логическая "коллекция документов", индекс разбивается на шарды. Список
 # индексов:
 curl -XGET 'localhost:9200/_cat/indices?v'
+# включая системные индексы, например, .geoip_databases:
+curl -X GET "localhost:9200/_cat/indices?v&s=store.size:desc&expand_wildcards=all"
 # Удалить индекс:
 curl -XDELETE 'localhost:9200/my_index'
 
@@ -176,4 +178,56 @@ curl -XGET 'localhost:9200/_cluster/allocation/explain?pretty' \
 curl -XGET 'localhost:9200/_nodes/stats/fs?pretty'
 # Текущие настройки кластера
 curl -XGET 'localhost:9200/_cluster/settings?pretty'
+curl -s -X GET 'localhost:9200/_cluster/settings?pretty'
+
+# Установить менее требовательные лимиты к жесткому диску (временное решение).
+# persistent - сохраняются между перезапусками кластера
+# transient - теряются при перезапуске
+curl -X PUT "localhost:9200/_cluster/settings" -H 'Content-Type: application/json' -d'
+{
+  "persistent": {
+    "cluster.routing.allocation.disk.watermark.low": "92%",
+    "cluster.routing.allocation.disk.watermark.high": "95%",
+    "cluster.routing.allocation.disk.watermark.flood_stage": "98%"
+  }
+}
+'
+```
+
+```yml
+  es:
+    image: .../elasticsearch:8.6.2
+    # ports:
+    #   - 9200:9200
+    #   - 9300:9300
+    environment:
+      # Режим работы Elasticsearch как одиночного узла (без кластера)
+      - discovery.type=single-node
+      # Отключает встроенную аутентификацию и безопасность для упрощения разработки
+      - xpack.security.enabled=false
+      # У Elasticsearch есть встроенный функционал для автоматического
+      # обновления GeoIP баз данных. Эти базы хранятся в специальном системном
+      # индексе с именем .geoip_databases. Настройка отключает встроенный
+      # функционал обновления:
+      - ingest.geoip.downloader.enabled=false
+    # Папка ./volumes/es_data должна принадлежать пользователю 1000:1000, чтобы
+    # внутрений пользователь контейнера elasticsearch имел к ней доступ.
+    # sudo chown -R 1000:1000 ./volumes/es_data
+    # sudo chmod -R 755 ./volumes/es_data
+    user: "1000:1000"
+    deploy:
+      resources:
+        limits:
+          # Ограничение CPU: контейнер может использовать не более 70% одного ядра CPU.
+          # Если нужно больше - увеличить до "1.0" или "2.0"
+          cpus: "0.70"
+          # Ограничение оперативной памяти: контейнер может использовать не более 1 ГБ RAM.
+          # Elasticsearch важно иметь достаточно памяти для кэширования и работы JVM.
+          # При нехватке памяти могут возникать ошибки OutOfMemoryError
+          memory: 1000M
+    volumes:
+      # Монтирование директории для сохранения данных Elasticsearch между перезапусками.
+      # Без этого volume все данные будут теряться при перезапуске контейнера!
+      - ./volumes/es_data:/usr/share/elasticsearch/data
+    restart: unless-stopped
 ```

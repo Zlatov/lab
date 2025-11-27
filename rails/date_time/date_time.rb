@@ -1,4 +1,5 @@
 require 'awesome_print'
+require 'mini_magick'
 require 'active_support/all'
 
 print 'Time.current.to_s: '.red; puts Time.current.to_s

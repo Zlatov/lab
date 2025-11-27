@@ -21,6 +21,6 @@ iptables -D INPUT -p tcp -s 172.16.0.0/12 --dport 5432 -j ACCEPT
 iptables -L INPUT --line-numbers
 iptables -D INPUT 1
 
-# Сохранить чтобы правила остались после перезагрузки:
+# Сохранить чтобы правила остались после перезагрузке:
 service iptables save
 ```

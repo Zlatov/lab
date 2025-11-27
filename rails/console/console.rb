@@ -31,3 +31,11 @@ old_logger = ActiveRecord::Base.logger
 ActiveRecord::Base.logger = nil
 # ActiveRecord.запросы ...
 ActiveRecord::Base.logger = old_logger
+
+
+
+
+# Сохранить в файл данные полученные в консоли rails
+f = File.new 'tmp/console.log', 'w'
+f.puts data
+f.close

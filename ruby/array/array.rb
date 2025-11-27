@@ -7,18 +7,12 @@ require 'mini_magick'
 # require 'active_support/concern' u8 
 # require 'active_support'
 # require 'active_support/core_ext'
-require 'active_support/all'
+require 'active_support/all' # gem install activesupport -v 6.1.7.4
 
 require_relative '../_libs/array/nested.rb'
 class Array
   include Array::Nested
 end
-
-# 
-# Все методы
-# 
-# reverse
-# 
 
 class Array
   def lib_to_info i
@@ -80,6 +74,17 @@ print 'c: '.red; p c
 print 'd: '.red; p d
 print 'e: '.red; p e
 print 'f: '.red; p f
+# exit
+
+puts 'Реверс .reverse'.green
+a = [1,2,3]
+b = a.reverse
+print 'a: '.red; p a
+print 'b: '.red; p b
+b.each.with_index do |value, index|
+  print 'value: '.red; puts value
+  print 'index: '.red; puts index
+end
 # exit
 
 puts 'Масси включает (содержит) в себе значение .include?'.green
