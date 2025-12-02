@@ -1,0 +1,14 @@
+[
+  {
+    "id": "p_4",
+    "text": "p_4",
+    "parent": "c_4",
+    "type": "product"
+  },
+  {
+    "id": "p_5",
+    "text": "p_5 Оригинал p_1",
+    "parent": "c_4",
+    "type": "product"
+  }
+]

@@ -155,6 +155,8 @@
         data: function(obj, callback) {
           console.log('> data2')
           console.log('obj: ', obj)
+          console.log('callback: ', callback)
+
           var url = obj.id === "#" ? "/jstree/redraw/tree2_root.json" : "/jstree/redraw/tree2_1.json"
           $.ajax({
             url: url,
@@ -171,9 +173,12 @@
             if (obj.id === "#") {
               callback.call(this, data)
             } else {
-              var h = data.filter(function(e) { return e.parent === obj.id })
-              console.log('h: ', h)
+              // var h = data.filter(function(e) { return e.parent === obj.id })
+              // console.log('h: ', h)
               // callback.call(this, h)
+              console.log('data: ', data)
+              console.log('callback: ', callback)
+              console.log('this: ', this)
               callback.call(this, data)
             }
           })
@@ -186,6 +191,7 @@
       // var node = tree.get_node("1")
       tree.load_node("1")
       // tree.load_node("#")
+      // $(".tree2").jstree(true).load_node("some")
     })
   </script>
 </body>

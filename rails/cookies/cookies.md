@@ -26,6 +26,7 @@ cookies.signed.permanent[:login] = "XJ-122"
 
 # Удаление
 cookies.delete :user_name
+# cookies.delete(:name, path: '/api-docs') # Удалить куку которую даже не видим (например текущий путь /admin)
 
 # Для домена
 cookies[:name] = {

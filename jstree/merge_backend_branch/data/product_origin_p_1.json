@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "id": "c_1",
+      "text": "c_1",
+      "parent": "#",
+      "type": "catalog",
+      "state": {
+        "opened": true
+      }
+    },
+    {
+      "id": "c_3",
+      "text": "c_3",
+      "parent": "c_1",
+      "type": "catalog",
+      "children": true
+    },
+    {
+      "id": "c_4",
+      "text": "c_4 Другой товар и оригиналка от p_1",
+      "parent": "c_1",
+      "type": "catalog",
+      "state": {
+        "opened": true
+      }
+    },
+    {
+      "id": "p_4",
+      "text": "p_4",
+      "parent": "c_4",
+      "type": "product"
+    },
+    {
+      "id": "p_5",
+      "text": "p_5 Оригинал p_1",
+      "parent": "c_4",
+      "type": "product",
+      "state": {
+        "selected": true
+      }
+    },
+
+
+
+
+    {
+      "id": "c_2",
+      "text": "c_2",
+      "parent": "#",
+      "type": "catalog",
+      "state": {
+        "opened": true
+      }
+    },
+    {
+      "id": "p_2",
+      "text": "p_2",
+      "parent": "c_2",
+      "type": "product"
+    },
+    {
+      "id": "p_3",
+      "text": "p_3 ыыыы",
+      "parent": "c_2",
+      "type": "product",
+      "state": {
+        "selected": true
+      }
+    }
+  ]
+}

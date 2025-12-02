@@ -1,0 +1,16 @@
+[
+  {
+    "id": "c_1",
+    "text": "c_1",
+    "parent": "#",
+    "type": "catalog",
+    "children": true
+  },
+  {
+    "id": "c_2",
+    "text": "c_2",
+    "parent": "#",
+    "type": "catalog",
+    "children": true
+  }
+]

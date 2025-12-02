@@ -1,0 +1,16 @@
+[
+  {
+    "id": "c_3",
+    "text": "c_3",
+    "parent": "c_1",
+    "type": "catalog",
+    "children": true
+  },
+  {
+    "id": "c_4",
+    "text": "c_4 Другой товар и оригиналка от p_1",
+    "parent": "c_1",
+    "type": "catalog",
+    "children": true
+  }
+]

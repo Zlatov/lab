@@ -1,0 +1,11 @@
+{
+  "name": "merge_backend_branch",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "jquery": "^3.6.0",
+    "jstree": "3.3.12"
+  }
+}
