@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "ilorem": "^1.1.0",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "semantic-ui-css": "~2.2"
   }
 }
