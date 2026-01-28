@@ -1,0 +1,9 @@
+<%= form_with(model: admin_object, local: false) do |form| %>
+  <%= form_errors(form) %>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

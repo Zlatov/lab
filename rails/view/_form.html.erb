@@ -1,0 +1,20 @@
+<%= form_with(model: admin_clip) do |form| %>
+  <%= form_errors(form) %>
+
+  <% if !form.object.new_record? %>
+    <div class="row mb-3">
+      <div class="col">
+        <%= form.label :id, class: 'form-label fw-bold' %>
+        <%= field_info form.object, :id %>
+        <%= form.text_field :id, class: 'form-control', disabled: true %>
+        <%= field_errors form.object, :id %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

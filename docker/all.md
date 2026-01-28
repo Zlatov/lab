@@ -158,17 +158,21 @@ docker system prune # удалить неиспользуемые контейн
 __Portainer - веб интерфейс докера__
 
 ```bash
+docker ps | grep portainer
+docker stop portainer
+docker rm portainer
+docker volume rm portainer_data
+docker network rm portainer-net
+
 docker volume create portainer_data
-docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
-# Просто последняя "Community Edition":
-docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart=always                -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
-# Чтобы портейнер можно было подключить к удалённому docker через Environment Wizard -> Docker Standalone -> API -> Url: localhost:2375, нужно:
-# docker stop portainer
-# docker rm portainer
-# ssh server, cd /etc/systemd/, edit docker.service, ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375, curl http://localhost:2375/_ping, ssh -L 2375:localhost:2375 test,
-docker run -d                           --name portainer --restart=always --network=host -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+docker network create --subnet=172.22.0.0/16 --gateway=172.22.0.1 --driver bridge portainer-net
+docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart=always --network=portainer-net -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+# Проверка доступности порта с АПИ на локальной машине: ssh server, cd /etc/systemd/, edit docker.service, ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375, ssh -L 2375:localhost:2375 test, curl http://localhost:2375/_ping
+ssh -L 172.20.0.1:2375:localhost:2375 test
 # http://localhost:9000
+# Создание Environment: Docker Standalone -> API -> Url: 172.20.0.1:2375
 ```
+
 Настройка SSL для доступа к удалённому docker в portainer:
 
 https://docs.docker.com/engine/security/protect-access/

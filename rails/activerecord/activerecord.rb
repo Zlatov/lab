@@ -139,15 +139,63 @@ User.order('name DESC, email')
 # 
 # Ассоциации
 # 
+
 # После find_by_sql можно разве что preload сделать.
 @users = User.find_by_sql(
   <<-SQL
   SQL
 )
-ActiveRecord::Associations::Preloader.new.preload(@users, :company)
-ActiveRecord::Associations::Preloader.new.preload(@users, [:company, :account])
-ActiveRecord::Associations::Preloader.new.preload(@users, {company: :category})
-ActiveRecord::Associations::Preloader.new.preload(@users, [{company: :category}, :account])
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  :company
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  [:company, :account]
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  company: :category
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  [:account, {company: :category}]
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  :company,
+  Company.where(filed: value)
+)
+# Осторожно! указан массив ассоциаций и одно условие! В этом случае AR наложит
+# условие на первую ассоциацию, а не "по смыслу", [:accounts, :companies] - не
+# пройдёт.
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  [:companies, :accounts],
+  Company.where(filed: value)
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  companies: :categories
+  Company.where(filed: value) # companies - по условию, в сompany все categories.
+)
+# Вообще не сработает!!! условие накладывается на :accounts:
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  [:accounts, {companies: :categories}]
+  Company.left_joins(:categories).where(categories: {filed: value})
+)
+# Предыдущий пример проще разбить подгрузки:
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  :accounts
+)
+ActiveRecord::Associations::Preloader.new.preload(
+  users,
+  companies: :categories,
+  Company.left_joins(:categories).where(categories: {filed: value})
+)
+
 # Получить класс ассоциации (.klass) через связь:
 @user.groups.klass
 # Ассоциация с дополнительным методом (не путать со статическим условием

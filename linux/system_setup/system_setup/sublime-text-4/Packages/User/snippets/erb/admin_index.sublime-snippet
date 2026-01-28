@@ -1,6 +1,9 @@
 <snippet>
 	<content><![CDATA[
 <% if @admin_${1:model}s.present? %>
+  <%= paginate_info @admin_${1:model}s %>
+  <%= paginate @admin_${1:model}s, views_prefix: 'admin' %>
+
   <div class="table-responsive">
     <table class="table table-sm table-striped">
       <thead>
@@ -50,11 +53,14 @@
       </tbody>
     </table>
   </div>
+
+  <%= paginate @admin_${1:model}s, views_prefix: 'admin' %>
 <% else %>
   <p class="alert alert-info" role="alert">
     <%= t(:no_entries) %>
   </p>
 <% end %>
+
 ]]></content>
 	<tabTrigger>admin_index</tabTrigger>
 	<scope>text.html.rails</scope>

@@ -82,6 +82,17 @@ end
     add_foreign_key :affiliates_articles, :affiliates, on_update: :cascade, on_delete: :cascade
     add_foreign_key :affiliates_articles, :articles, on_update: :cascade, on_delete: :cascade
 
+    # Через t.references
+    create_table :alternatives do |t|
+      t.references :product,
+        foreign_key: { to_table: :products, name: :fk_alternatives_productid, on_update: :cascade, on_delete: :cascade },
+        index: { name: :ix_alternatives_productid }
+      t.references :alternative,
+        foreign_key: { to_table: :products, name: :fk_alternatives_alternativeid, on_update: :cascade, on_delete: :cascade },
+        index: { name: :ix_alternatives_alternativeid }
+      t.index [:product_id, :alternative_id], name: :uq_alternatives_ids
+    end
+
     # Кастомная таблица связей (при создании второй связи к той-же таблице)
     create_table "market_offers_product_affiliates", id: false, force: :cascade do |t|
       t.integer "affiliate_id", null: false

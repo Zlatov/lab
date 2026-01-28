@@ -18,12 +18,38 @@
     #classed_item2.success {
       animation: success_animation 10s;
     }
+
+    @keyframes bounce {
+      0%    { transform: translateX(0); }
+      12.5% { transform: translateX(-5px); }
+      25%   { transform: translateX(5px); }
+      37.5% { transform: translateX(-5px); }
+      50%   { transform: translateX(5px); }
+      62.5% { transform: translateX(-5px); }
+      75%   { transform: translateX(5px); }
+      87.5% { transform: translateX(-5px); }
+      100%  { transform: translateX(0); }
+    }
+
+    .box-animated {
+      width: 100px;
+      height: 100px;
+      background-color: green;
+    }
+
+    /* Animation properties applied when the 'bounce' class is added */
+    .bounce {
+      animation-name: bounce;
+      animation-duration: .5s; /* How long the animation takes to complete */
+      animation-iteration-count: 1; /* How many times it plays */
+    }
   </style>
 </head>
 <body>
-  <button type="button" id="toggle_class">Переключить класс .success у элемента</button>
+  <button type="button" id="toggle_class">Переключить класс у элементов</button>
   <div id="classed_item">Элемент с классом или без</div>
   <div id="classed_item2">Элемент2 с классом или без</div>
+  <div class="box-animated"></div>
   <script type="text/javascript" src="../../node_modules/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript">
 
@@ -32,9 +58,11 @@
       $(document).ready(function() {
         var element = $("#classed_item")
         var element2 = $("#classed_item2")
+        var element3 = $(".box-animated")
         $("#toggle_class").on("click", function(event) {
           element.toggleClass("success")
           element2.toggleClass("success")
+          element3.toggleClass("bounce")
         })
       })
     })(jQuery);
