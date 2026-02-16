@@ -98,4 +98,12 @@
 			"name": "Packages/User/snippets/erb/cem.sublime-snippet"
 		}
 	},
+	// Переключение регистрозависимости поиска по файлу.
+  { "keys": ["alt+s"], "command": "toggle_case_sensitive", "context":
+  	[{ "key": "panel", "operand": "find" }, { "key": "panel_has_focus" }]
+  },
+	// Переключение регистрозависимости поиска по проекту.
+  { "keys": ["alt+s"], "command": "toggle_case_sensitive", "context":
+  	[{ "key": "panel", "operand": "find_in_files" }, { "key": "panel_has_focus" }]
+  }
 ]

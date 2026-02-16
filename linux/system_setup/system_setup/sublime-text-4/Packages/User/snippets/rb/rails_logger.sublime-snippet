@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+Rails.logger.error "[ScopeControllersActionBlockdo] context: #{model.id} class: #{e.class} message: #{e.message} backtrace: #{e.backtrace&.first}"
+]]></content>
+	<tabTrigger>Rails.logger</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>RB Rails.logger</description>
+</snippet>

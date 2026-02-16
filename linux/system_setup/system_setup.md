@@ -134,3 +134,10 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "[]"
 
 
 ```
+
+Если слетел драйвер, например при обновлении ядра ubuntu
+
+```sh
+sudo ubuntu-drivers autoinstall
+reboot
+```

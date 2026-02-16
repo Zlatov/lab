@@ -1,7 +1,34 @@
 <snippet>
   <content><![CDATA[
-<%= form_with(model: @${1:model}, url: ${2:model}_path, method: :${3:get}, class: '${4:form-inline}') do |form| %>
+<%= form_with(
+  model: ${1:model},
+  url: ${2:admin_model}_path,
+  method: :${3:post},
+  local: false,
+  format: :js, # Когда указано local: false - это уже формат :js, однако, в экзотических случаях можно указать явно.
+  class: '${4:row gy-2 gx-3 align-items-center}'
+) do |form| %>
 	$5
+
+  <div class="col-auto">
+    <%= form.submit 'Отправить',
+      class: 'btn btn-primary',
+      disabled: true,
+      data: { confirm: 'Вы точно уверены?', disable_with: 'Отправляется…' }
+    %>
+  </div>
+
+  <div class="col-auto">
+    <%= form.button type: :submit,
+      name: 'submit',
+      value: 'search',
+      class: 'btn btn-outline-secondary btn-sm',
+      disabled: true,
+      data: { confirm: 'Вы точно уверены?', disable_with: '<i class="fas fa-spinner fa-spin"></i>' } do
+    %>
+      <%= icon 'fas', 'magnifying-glass' %>
+    <% end %>
+  </div>
 <% end %>
 ]]></content>
   <tabTrigger>form_with</tabTrigger>

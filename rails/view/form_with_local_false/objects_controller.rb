@@ -7,10 +7,10 @@ class Admin::ObjectsController < Admin::ApplicationController
       if @admin_object.save
         flash[:notice] = @notice
         format.html { redirect_to admin_object_url(@admin_object) }
-        format.js { render js: "window.location = '#{admin_object_url(@admin_object)}'" }
+        format.js   { render js: "window.location = '#{admin_object_url(@admin_object)}'" }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.js { render :new, status: :unprocessable_entity }
+        format.js   { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -20,10 +20,10 @@ class Admin::ObjectsController < Admin::ApplicationController
       if @admin_object.update(admin_object_params)
         flash[:notice] = @notice
         format.html { redirect_to admin_object_url(@admin_object) }
-        format.js { render js: "window.location = '#{admin_object_url(@admin_object)}'" }
+        format.js   { render js: "window.location = '#{admin_object_url(@admin_object)}'" }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.js { render :edit, status: :unprocessable_entity }
+        format.js   { render :edit, status: :unprocessable_entity }
       end
     end
   end

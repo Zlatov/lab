@@ -22,7 +22,7 @@ alias cdprojects='cd ~/projects'
 
 # my
 alias cdlab='cd ~/projects/my/lab'
-alias cdzlatov_su='cd ~/projects/my/zlatov_su'
+alias cdzlatovsu='cd ~/projects/my/zlatovsu'
 alias cdshop='cd ~/projects/my/shop'
 alias cdjslab='cd ~/projects/my/js-lab.ru'
 alias cdilorem='cd ~/projects/my/ilorem'

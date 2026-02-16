@@ -46,7 +46,7 @@
 | код | symbol | описание
 | --- | --- | ---
 | 400 | :bad_request | Bad Request Client Error / плохой, неверный запрос (запрос не верен синтаксически, например, нехватка полей данных)
-| 401 | :unauthorized | Unauthorized Client Error / не авторизован
+| 401 | :unauthorized | Unauthorized Client Error / не аутентифицирован/не залогинен. Внимание! Историческая ошибка в назывании ошибки, Unauthorized - не авторизован (не хватает прав). Правильнее было бы Unauthenticated. Ошибке 30+ лет.
 | 402 | :payment_required | Payment Required Client Error / необходима оплата
 | 403 | :forbidden | Forbidden Client Error / запрещено
 | 404 | :not_found | Not Found Client Error / не найдено
