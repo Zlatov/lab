@@ -26,4 +26,4 @@ user.confirmed = true
 user.save                    # user.save!
 
 # Обновить значение поля/полей у подмножества (возвращает количество затронутых строк)
-User.where(filter: true).update_all(field: true)
+updated_count = User.where(filter: true).update_all(field: true)

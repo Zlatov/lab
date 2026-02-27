@@ -169,6 +169,7 @@ resource.errors.to_hash(full_messages: true)                     # => {:email=>[
 # * конкретного атрибута
 resource.errors[:email]                                          # => ["can't be blank"]
 resource.errors.where(:email)                                    # => [#<ActiveModel::Error attribute=email, type=blank>]
+resource.errors.where(:email, :too_short).any?                   # => true - поиск ошибки с определенным типом - errors.add(:email, :too_short, message: 'подозрительно короткий')
 resource.errors.where(:email).map(&:message)                     # => ["can't be blank"]
 # * для API
 resource.errors.as_json                                          # => {:email=>[{:error=>:blank}], :password=>[{:error=>:too_short, :count=>6}]}

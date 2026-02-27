@@ -4,6 +4,7 @@
 # Показать правила
 iptables -S INPUT # правила в формате команд
 iptables -L -n    # показывает таблицу правил (в том числе от docker каким-то образом)
+iptables -t nat -L -n -v # с NAT таблицей
 
 iptables -I ... # Insert - вставляет правило в начало цепочки
 iptables -A ... # Append - добавляет правило в конец цепочки
@@ -22,5 +23,9 @@ iptables -L INPUT --line-numbers
 iptables -D INPUT 1
 
 # Сохранить чтобы правила остались после перезагрузке:
+# (плохая команда, сохраняет автоматические правила от docker?)
 service iptables save
+
+# Проверить что блок порта из-за iptables:
+service iptables stop
 ```

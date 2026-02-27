@@ -6,9 +6,9 @@
   method: :${3:post},
   local: false,
   format: :js, # Когда указано local: false - это уже формат :js, однако, в экзотических случаях можно указать явно.
-  class: '${4:row gy-2 gx-3 align-items-center}'
+  class: 'border rounded p-3 d-inline-flex align-items-center gap-3'
 ) do |form| %>
-	$5
+	$4
 
   <div class="col-auto">
     <%= form.submit 'Отправить',
