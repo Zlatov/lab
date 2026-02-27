@@ -1,7 +1,0 @@
-{
-  "cmd": ["/home/iadfeshchm/.rbenv/shims/ruby", "$file"],
-  "file_regex": "^(...*?):([0-9]*):?([0-9]*)",
-  "selector": "source.ruby",
-  "target": "ansi_color_build",
-  "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
-}

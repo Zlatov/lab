@@ -1,6 +1,0 @@
-{
-  "cmd": ["sass", "$file", "$file_path/temp_$file_base_name.css"],
-  "selector": "source.scss",
-  "target": "ansi_color_build",
-  "syntax": "Packages/ANSIescape/ANSI.tmLanguage"
-}

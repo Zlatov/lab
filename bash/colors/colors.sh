@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Использование:
+# Ctrl + b
+# или
+# ~/projects/my/lab/bash/colors/colors.sh
+
 # Три способа эскейпа форматирования:
 # \e
 # \033

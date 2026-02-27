@@ -67,6 +67,14 @@
       "trigger": "zzz-ruble-code\t₽"
     },
     {
+      "contents": "✓",
+      "trigger": "zzz-check\t✓"
+    },
+    {
+      "contents": "&#10003;",
+      "trigger": "zzz-check-code\t✓"
+    },
+    {
       "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",
       "trigger": "zzz-table\t├┼┤┣╋┫"
     },
@@ -137,6 +145,18 @@
     {
       "contents": "&#8381;",
       "trigger": "яяя-рубль-код\t₽"
+    },
+    {
+      "contents": "&#769;",
+      "trigger": "яяя-ударение-код\tе́"
+    },
+    {
+      "contents": "✓",
+      "trigger": "яяя-галка\t✓"
+    },
+    {
+      "contents": "&#10003;",
+      "trigger": "яяя-галка-код\t✓"
     },
     {
       "contents": "┌┬┐├┼┤└┴┘─│┏┳┓┣╋┫┗┻┛━┃",

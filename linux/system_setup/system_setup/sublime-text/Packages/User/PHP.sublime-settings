@@ -1,9 +1,0 @@
-{
-  "extensions":
-  [
-    "php"
-  ],
-  "tab_size" : 4,
-  "detect_indentation": true,
-  "translate_tabs_to_spaces": true
-}
