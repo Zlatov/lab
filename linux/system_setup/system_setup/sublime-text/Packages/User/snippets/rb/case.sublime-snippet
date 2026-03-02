@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+case ${1:@model.status}
+when '${2:active}'
+  $0
+else
+end
+]]></content>
+	<tabTrigger>case</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>RB case</description>
+</snippet>

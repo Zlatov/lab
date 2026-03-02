@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+<% ${1:@models}.each do |${2:model}| %>
+  $0
+<% end %>
+]]></content>
+	<tabTrigger>each</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB each</description>
+</snippet>

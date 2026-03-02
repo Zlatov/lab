@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+<table class="table table-sm table-striped">
+  <tbody>
+    <tr>
+      <td class="w-25">
+        <%= @admin_${1:model}.class.human_attribute_name :id %>
+        <%= field_info @admin_${1:model}, :id %>
+      </td>
+      <td>
+        <%= @admin_${1:model}.id %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= @admin_${1:model}.class.human_attribute_name :name %>
+        <%= field_info @admin_${1:model}, :name %>
+      </td>
+      <td>
+        <%= @admin_${1:model}.name %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="text-end">
+  <div class="btn-group">
+    <%= link_to edit_admin_${1:model}_path(@admin_${1:model}),
+      class: 'btn btn-secondary' do
+    %><%= edit_icon %> Редактировать<% end %>
+    <%= link_to admin_${1:model}_path(@admin_${1:model}),
+      method: :delete,
+      class: 'btn btn-danger',
+      data: { confirm: t(:are_you_sure) } do
+    %><%= delete_icon %> Удалить<% end %>
+  </div>
+</div>
+
+]]></content>
+	<tabTrigger>admin_show</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB admin_show</description>
+</snippet>

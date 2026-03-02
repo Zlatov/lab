@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col-auto">
+    <%= form.button 'Отправить|do…end', type: :submit|button,
+      name: 'submit', value: 'import',
+      class: 'btn btn-outline-secondary btn-sm',
+      disabled: true,
+      data: { confirm: 'Вы точно уверены?', disable_with: '<i class="fas fa-spinner fa-spin"></i>' } do
+    %><%= icon :fas, 'magnifying-glass' %> <%= icon :fas, 'floppy-disk' %><% end %>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>form.button</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB form.button</description>
+</snippet>

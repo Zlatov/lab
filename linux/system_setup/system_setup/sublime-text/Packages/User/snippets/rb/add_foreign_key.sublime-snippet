@@ -1,0 +1,12 @@
+<snippet>
+  <content><![CDATA[
+add_foreign_key :table_with_fk, :table_with_id,
+  column: :foreign_id, primary_key: :id,
+  name: :fk_table_with_fk_foreignid,
+  on_update: :restrict|:nullify|:cascade,
+  on_delete: :restrict|:nullify|:cascade
+]]></content>
+  <tabTrigger>add_foreign_key</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>RB add_index</description>
+</snippet>

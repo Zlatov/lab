@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+begin
+  ${1:}
+rescue StandardError => e
+  ${2:}
+end
+]]></content>
+	<tabTrigger>try begin rescue</tabTrigger>
+	<scope>source.ruby</scope>
+	<description>RB try begin rescue</description>
+</snippet>

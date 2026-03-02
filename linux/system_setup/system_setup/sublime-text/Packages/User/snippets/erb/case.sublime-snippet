@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+<% case ${1:@variable}; when ${2:'active'} %>
+  $3
+<% when ${4:'index', 'show'} %>
+<% else %>
+<% end %>
+]]></content>
+	<tabTrigger>case</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB case</description>
+</snippet>

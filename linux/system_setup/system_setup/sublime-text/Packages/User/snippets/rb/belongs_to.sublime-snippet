@@ -1,0 +1,17 @@
+<snippet>
+  <content><![CDATA[
+belongs_to :post,
+  class_name: '::CommunicationPost',
+  foreign_key: :post_id,
+  primary_key: :id,
+  optional: true,
+  inverse_of: :comments do
+    def by_affiliate(affiliate)
+      where affiliate_id: affiliate.id
+    end
+  end
+]]></content>
+  <tabTrigger>belongs_to</tabTrigger>
+  <scope>source.ruby</scope>
+  <description>RB belongs_to</description>
+</snippet>

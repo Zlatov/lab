@@ -1,0 +1,68 @@
+<snippet>
+	<content><![CDATA[
+<% if @admin_${1:model}s.present? %>
+  <%= paginate_info @admin_${1:model}s %>
+  <%= paginate @admin_${1:model}s, views_prefix: 'admin' %>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th style="width: 1%;">
+            <%= @admin_${1:model}s.klass.human_attribute_name :id %>
+            <%= field_info @admin_${1:model}s, :id %>
+          </th>
+          <th>
+            <%= @admin_${1:model}s.klass.human_attribute_name :name %>
+            <%= field_info @admin_${1:model}s, :name %>
+          </th>
+
+          <th class="text-center" style="width: 1%;">Управление</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @admin_${1:model}s.each do |admin_${1:model}| %>
+          <tr class="align-middle">
+            <td>
+              <%= admin_${1:model}.id %>
+            </td>
+            <td>
+              <%= admin_${1:model}.name %>
+            </td>
+
+            <td class="text-center">
+              <div class="btn-group">
+                <%= link_to admin_${1:model}_path(admin_${1:model}),
+                  title: 'Просмотреть',
+                  class: 'btn btn-secondary btn-sm hint' do
+                %><%= show_icon %><% end %>
+                <%= link_to edit_admin_${1:model}_path(admin_${1:model}),
+                  title: 'Редактировать',
+                  class: 'btn btn-secondary btn-sm hint' do
+                %><%= edit_icon %><% end %>
+                <%= link_to admin_${1:model}_path(admin_${1:model}),
+                  method: :delete,
+                  title: 'Удалить',
+                  class: 'btn btn-danger btn-sm hint',
+                  data: { confirm: t(:are_you_sure) } do
+                %><%= delete_icon %><% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <%= paginate @admin_${1:model}s, views_prefix: 'admin' %>
+<% else %>
+  <p class="alert alert-info" role="alert">
+    <%= t(:no_entries) %>
+  </p>
+<% end %>
+
+]]></content>
+	<tabTrigger>admin_index</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB admin_index</description>
+</snippet>

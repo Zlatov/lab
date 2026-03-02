@@ -1,0 +1,18 @@
+// Settings in here override those in "Default/Preferences.sublime-settings",
+// and are overridden in turn by syntax-specific settings.
+{
+	"font_size": 13,
+	"show_encoding": true,
+	"show_full_path": true,
+	"show_project_first": true,
+	"close_sidebar_if_opened": false,
+	"auto_find_in_selection": true,
+	"theme": "Adaptive.sublime-theme",
+	"color_scheme": "Monokai.sublime-color-scheme",
+	// Запоминает какой сниппет был выбран в
+	// предыдущий раз и выделяет его при последующем
+	// использовании, поэтому можно смело жать два
+	// раза Tab Tab когда знаешь, что существует
+	// много сниппетов для текущего слова
+	"auto_complete_use_history": true,
+}

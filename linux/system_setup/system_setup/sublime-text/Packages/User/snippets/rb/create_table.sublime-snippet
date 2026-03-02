@@ -1,0 +1,30 @@
+<snippet>
+  <content><![CDATA[
+create_table :posts_tags, id: false, primary_key: [:post_id, :tag_id] do |t|
+  t.bigint  :post_id, null: false
+  t.bigint  :tag_id, null: false
+
+  t.timestamps
+  t.index :updated_at, name: :ix_posts_tags_updatedat
+
+  t.index :post_id, name: :ix_posts_tags_postid
+  t.index :tag_id, name: :ix_posts_tags_tagid
+  t.index [:post_id, :tag_id], name: :uq_posts_tags, unique: true
+end
+create_table :products, id: :string[, primary_key: :code] do |t|
+  t.string :name, null: false, comment: 'Header'
+  t.text :description
+  t.boolean :hidden, null: false, default: true
+  t.integer :status, null: false, default: 0, limit: <1...8>
+  t.float :latitude
+  t.float :longitude
+  t.decimal :price, precision: 10, scale: 2
+  t.datetime :confirmed_at
+  t.date :birthday
+  t.jsonb :images, default: {}
+end
+]]></content>
+  <tabTrigger>create_table</tabTrigger>
+  <description>RB create_table</description>
+  <scope>source.ruby</scope>
+</snippet>

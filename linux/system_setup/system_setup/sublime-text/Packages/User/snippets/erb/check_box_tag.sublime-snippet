@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+<div class="row mb-3">
+  <div class="col">
+    <div class="form-check">
+      <%= hidden_field_tag 'admin_model[hidden]', '0', id: nil %>
+      <%= check_box_tag 'admin_model[hidden]', '1', is_checked, disabled: true, class: 'form-check-input', role: :button %>
+      <%= label_tag 'admin_model_hidden', 'Скрытый|do…end', class: 'form-check-label fw-bold user-select-none', role: :button, for: 'custom_id' %>
+      <%= string_info 'Скрыть из списка' %>
+    </div>
+  </div>
+</div>
+]]></content>
+	<tabTrigger>check_box_tag</tabTrigger>
+	<scope>text.html.rails</scope>
+	<description>ERB check_box_tag</description>
+</snippet>
