@@ -28,11 +28,11 @@ alias cdjslab='cd ~/projects/my/js-lab.ru'
 alias cdilorem='cd ~/projects/my/ilorem'
 alias cdimenu='cd ~/projects/my/imenu'
 alias cdagofolio='cd ~/projects/my/agofolio'
-alias cdnestedarray='cd ~/projects/my/nested_array'
 alias cdprioritize='cd ~/projects/my/prioritize'
 alias cdstore='cd ~/projects/my/store'
 alias cdtanki='cd ~/projects/my/tanki'
 alias cdnestedul='cd ~/projects/my/nestedul'
+alias cdnestedulweb='cd ~/projects/my/nestedulweb'
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'

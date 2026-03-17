@@ -197,4 +197,12 @@ product.save!
   # def set_filename(name)
   #   @custom_filename = name
   # end
+
+# Вариант дублирования изображений из одного объекта в другой
+new_product.images = product.images&.map do |image|
+  uploader = image.dup # «Дубликат аплоадера, чтобы не сохранился в старом product.»
+  uploader.cache_stored_file! # Помещает в кэш существующие файлы (вместо ручного скачивания оригинала и пересоздания версий из него). 
+  uploader
+end
+new_product.save!
 ```
