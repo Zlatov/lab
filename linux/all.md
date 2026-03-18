@@ -124,7 +124,8 @@ $ xinput --set-prop 8 "Device Accel Constant Deceleration" 1.7
 *   ***Shotcut*** - редактор видео;
 *   ***Audacity*** - редактор аудио;
 *   ***Hardinfo*** - аналог EVEREST;
-*   ***Shutter*** - принтскрин, почти как PicPick в винде.
+*   ***Shutter*** - принтскрин, почти как PicPick в винде;
+*   ***Flameshot*** - принтскрин, ещё лучше.
 
 
 ## FreeRdp
@@ -190,3 +191,13 @@ sleep 5 && gnome-screenshot -p
 ```sh
 killall snap-store
 ```
+
+
+## Flameshot
+
+```bash
+sudo apt install flameshot
+```
+
+* Settings → Keyboard → Shortcuts
+* Добавить `/usr/bin/flameshot gui` на <kbd>PrintScreen</kbd>
