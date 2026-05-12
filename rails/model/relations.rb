@@ -164,3 +164,32 @@ Post.reflections["comments"].table_name # => "comments"
 Post.reflections["comments"].macro # => :has_many
 Post.reflections["comments"].foreign_key # => "message_id"
 Post.reflections["comments"].klass # => Comment(id: integer,...)
+
+
+
+
+#
+# Валидация и вложенные формы (nested attributes)
+#
+
+# validate: true
+# * Участвует в валидации родителя (но НЕ гарантирует вызов valid? у детей);
+# * При сохранении родителя ПОПРОБОВАТЬ ПРОВАЛИДИРОВАТЬ АССОЦИАЦИЮ, но НЕ ГАРАНТИРУЕТ
+#   вызов valid? у детей, вызов callbacks (before_validation, validate).
+# autosave: true
+# * Сохраняет вложенные модели автоматически (create/update/destroy);
+# * Может сохранять БЕЗ валидации (validate: false).
+has_many :property_values, inverse_of: :property, validate: true, autosave: true
+
+# accepts_nested_attributes_for (отвечает за передачу данных)
+# * Разрешает передавать вложенные атрибуты из формы;
+# * Включает autosave.
+# allow_destroy: true
+# * позволяет удалять вложенные записи через _destroy.
+accepts_nested_attributes_for :property_values, allow_destroy: true
+
+# validates_associated (отвечает за запуск каскада валидаций)
+# * ГАРАНТИРУЕТ вызов valid? у вложенных моделей;
+# * Запускает все callbacks (before_validation, validate и т.д. у вложенных моделей).
+# Без этого nested-модели могут сохраняться БЕЗ валидаций.
+validates_associated :property_values

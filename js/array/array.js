@@ -1,5 +1,10 @@
 "use strict"
 
+var _ = require('underscore')
+var d = _.difference([1, 2, 3, 5, 4, 5], [5, 2, 10])
+console.log('d: ', d)
+// return null
+
 // 
 // .shift() — удаляет первый элемент из массива и возвращает его значение. Этот метод изменяет длину массива.
 // 

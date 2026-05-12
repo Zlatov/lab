@@ -831,6 +831,8 @@ a = [{a:'1'},{a:'2'},{a:'3'},{a:'2'},{a:'4'},{a:'4'},{a:'5'}]
 b = a.group_by{|v| v[:a]}.select{|k,v| v.length >1}
 print 'a: '.red; p a
 print 'b: '.red; p b
+exit
+
 
 a = [
   {domain: 1, id: 1},

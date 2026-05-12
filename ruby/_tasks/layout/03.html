@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+  <canvas id="field"></canvas>
+  <script type="text/javascript" src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">
+
+var $canvas = $("#field")
+var canvas = $canvas[0]
+const context = canvas.getContext('2d')
+
+
+function shape_grid() {
+  return 
+}
+$.ajax({
+  type: "get",
+  url: "shape_grid.json",
+  cache: false,
+}).done(function(data, textStatus, jqXHR) {
+  console.log('data: ', data)
+})
+
+const canvas_width = 100
+const canvas_height = 100
+const axis_step = 50
+const field_step = 10
+
+context.canvas.width = canvas_width
+context.canvas.height = canvas_height
+
+// Оси
+context.beginPath()
+context.moveTo(0, 0)
+context.lineTo(0, canvas_height)
+context.lineTo(6, canvas_height - 8)
+context.moveTo(0, 0)
+context.lineTo(canvas_width, 0)
+context.lineTo(canvas_width - 8, 6)
+context.strokeStyle = "black"
+context.lineWidth = 1
+context.stroke()
+// Разметка осей
+let axis_x = 0
+while (axis_x < canvas_width - axis_step) {
+  axis_x = axis_x + axis_step
+  context.beginPath()
+  context.moveTo(axis_x, 0)
+  context.lineTo(axis_x, 3)
+  context.strokeStyle = "black"
+  context.stroke()
+  context.fillStyle = "black"
+  context.font = "9px sans-serif"
+  context.fillText(axis_x.toString(), axis_x + 2, 10)
+}
+let axis_y = 0
+while (axis_y < canvas_height - axis_step) {
+  axis_y = axis_y + axis_step
+  context.beginPath()
+  context.moveTo(0, axis_y)
+  context.lineTo(3, axis_y)
+  context.strokeStyle = "black"
+  context.stroke()
+  context.fillStyle = "black"
+  context.font = "9px sans-serif"
+  context.fillText(axis_y.toString(), 1, axis_y + 10)
+}
+
+
+// var is = [...Array(41)]
+// var js = [...Array(41)]
+// for (var i in is) {
+//   for (var j in js) {
+//     var x = i * 10 + 5
+//     var y = j * 10 + 5
+//     context.beginPath()
+//     context.arc(x, y, 1, 0, 2 * Math.PI)
+//     context.fillStyle = "black"
+//     context.fill()
+//     var x2 = x - 10
+//     var y2 = y - 10
+//     var alfa = Math.PI/2 - ((x-200)/200) * Math.PI/4 - ((y)/400) * Math.PI/4 * ((x-200)/200)
+//     var x2 = x + 10 * Math.cos(alfa)
+//     var y2 = y + 10 * Math.sin(alfa)
+//     context.beginPath()
+//     context.moveTo(x, y)
+//     context.lineTo(x2, y2)
+//     context.strokeStyle = "red"
+//     context.stroke()
+//   }
+// }
+let x, y
+for (x = 0; x < canvas_width; x = x + field_step) {
+  for (y = 0; y < canvas_height; y = y + field_step) {
+    context.beginPath()
+    context.arc(x, y, 1, 0, 2 * Math.PI)
+    context.fillStyle = "black"
+    context.fill()
+  }
+}
+
+  </script>
+</body>
+</html>

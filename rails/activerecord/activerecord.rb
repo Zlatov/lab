@@ -247,7 +247,7 @@ Model.joins(:relation).where(relation: {field: :value}).preload(:relation)
 # 3. Нужно фильтровать Model по ассоциации; Ассоциации с той-же фильтрацией
 Model.eager_load(:relation).where(relation: {field: :value})
 # 4. Нужно не фильтровать Model; Все ассоциации
-Model.includes(:relation) Model.preload(:relation)
+Model.includes(:relation) Model.preload(:relation) # includes vs preload: includes умнее - если есть where по ассоциациям, то он сам делает LEFT JOIN, а preload это всегда отдельные запросы.
 # 5. Нужно не фильтровать Model (или фильтровать но по другой логике), ассоциации с фильтрацией
 models = Model.all.to_a
 ActiveRecord::Associations::Preloader.new.preload(models, :relation, Relation.where(field: :value))
@@ -337,44 +337,57 @@ class Product
 end
 
 .categories
-# Returns a Relation of all the associated objects || [].
+# Возвращает отношение для получения связанных объектов.
 
 .categories << category
 .categories << category, category2
-# or
+# или
 .categories.push(category)
 .categories.push(category, category2)
-# Adds one or more objects to the collection by creating associations in the join table. Without waiting for the save or update call!
+# Добавляет один или несколько объектов в коллекцию, создавая связи в таблице
+# связей. Без ожидания вызова функции сохранения или обновления!
 
 .categories.delete(category, …)
-# Removes one or more objects. This does not destroy the objects!
+# Удаляет один или несколько объектов. При этом объекты не уничтожаются!
 
 .categories.destroy(category, …)
-# Removes one or more objects by running destroy on each __association__ in the join table. This does not destroy the objects!
+# Удаляет один или несколько объектов, выполняя команду destroy для каждой
+# ассоциации в таблице связей. При этом сами объекты не уничтожаются!
 
 .categories = categories
-# Replaces the collection’s content by deleting and adding objects as appropriate.
+# Заменяет содержимое коллекции, удаляя и добавляя объекты по мере необходимости.
 
-.categories_singular_ids
-# Returns an array of the associated objects’ ids.
+.category_ids
+# Возвращает массив идентификаторов связанных объектов.
 
-.categories_singular_ids = ids
-# Replace the collection by the objects identified by the primary keys in ids.
+.category_ids = ids
+# Заменяет коллекцию объектами с указанными id. Игнорирует несуществующие ID, то
+# есть выполнится без выкидывания ошибки.
 
 .categories.clear
-# Removes every object from the collection. This does not destroy the objects.
+# Удаляет все объекты из коллекции. При этом объекты не уничтожаются.
 
 .categories.empty?
-# Returns true if there are no associated objects.
+# Возвращает true, если связанных объектов нет.
+.categories.present?
+# Возвращает true, если есть связанные объекты.
+# Оба этих метода: Если связь подгружена то их ответ опирается на то что в
+# памяти, если связь не подгружена то выполнятся SQL но при этом подгрузка в
+# память не произведётся.
+
+.categories.exists?
+# Проверяет есть ли хоть одна ассоциация. Выполняет лёгкий запрос не подгружая
+# ассоциации (плюс), не использует ранее подгруженное (иногда минус). Нет
+# антонима (empty? работает по другому принципу).
+
+.categories.exists?(…)
+# Проверяет, существует ли связанный объект, соответствующий заданным условиям.
 
 .categories.size
 # Returns the number of associated objects.
 
 .categories.find(id)
 # Finds an associated object responding to the id and that meets the condition that it has to be associated with this object. Uses the same rules as ActiveRecord::FinderMethods#find.
-
-.categories.exists?(…)
-# Checks whether an associated object with the given conditions exists. Uses the same rules as ActiveRecord::FinderMethods#exists?.
 
 .categories.build(attributes = {})
 .build_categories(attributes = {}) # если has_one
