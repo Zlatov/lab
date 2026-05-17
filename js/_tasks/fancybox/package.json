@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
-    "jquery": "^3.4.1"
+    "jquery": "^3.5.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.6.2",
