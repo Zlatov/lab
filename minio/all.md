@@ -7,6 +7,11 @@ wget https://dl.min.io/aistor/mc/release/linux-amd64/mcli_20260312041855.0.0_amd
 sudo dpkg -i mcli_20260312041855.0.0_amd64.deb
 mcli --version
 
+# Centos:
+wget https://dl.min.io/aistor/mc/release/linux-amd64/mcli-20260421042649.0.0-1.x86_64.rpm
+sudo yum install -y ./mcli-20260421042649.0.0-1.x86_64.rpm
+mcli --version
+
 
 mcli alias set zenominio https://minio.example.com:API_PORT ACCESS_KEY SECRET_KEY
 

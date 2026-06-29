@@ -146,6 +146,28 @@ docker volume rm # удалить
 docker volume prune # удалить все неиспользуемые
 ```
 
+Тома бывают именованые и не именованые:
+
+```yml
+  redis:
+    volumes:
+      - redis_data:/data # Именованый, грубо говоря: в системе
+      - ./volumes/redis_data:/data # Не именованый, в диретории приложения
+```
+
+```sh
+# Удалить именованый том redis потому что происходит постоянный рестарт
+# контейнера redis с ошибкой «Bad file format reading the append only file»
+docker compose -f docker-compose-file.yml stop redis # Остановить redis контейнер
+docker compose -f docker-compose-file.yml rm -f redis # Удалить контейнер
+docker volume rm <project>_redis_data # Удалить том, <project> — это имя директории проекта или COMPOSE_PROJECT_NAME
+docker compose -f docker-compose-file.yml up -d redis # Пересоздать контейнер, том создастся чистый
+# Можно так же через шелл контейнера:
+docker compose -f docker-compose-file.yml stop redis
+docker compose -f docker-compose-file.yml run --rm redis sh -c "rm -rf /data/*"
+docker compose -f docker-compose-file.yml up -d redis
+```
+
 __Система докера__
 
 ```bash
