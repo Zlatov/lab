@@ -33,6 +33,7 @@ alias cdstore='cd ~/projects/my/store'
 alias cdtanki='cd ~/projects/my/tanki'
 alias cdnestedul='cd ~/projects/my/nestedul'
 alias cdnestedulweb='cd ~/projects/my/nestedulweb'
+alias claude-clean-del='~/.claude/scripts/clean-del-sessions.sh'
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'
