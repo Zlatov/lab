@@ -44,6 +44,35 @@ sudo npm install -g n
 sudo n stable
 ```
 
+## nvm и не-интерактивные окружения (cron, systemd, GUI-хоткеи)
+
+nvm добавляет `node`/`npm`/глобальные бинарники в `PATH` только через
+`.bashrc`/`.zshrc` — это работает исключительно в интерактивном шелле.
+Команда, запущенная не через него (хоткей GNOME, cron, systemd unit),
+этот `PATH` не видит и не находит ни `node`, ни глобально
+установленные пакеты, даже если `nvm alias default` настроен.
+Стабильного, не завязанного на версию пути у nvm нет в принципе.
+
+Фикс — символическая ссылка в `/usr/local/bin` (он обычно есть в
+`PATH` любого процесса в системе, а не только интерактивного шелла):
+
+```bash
+sudo ln -sf "$(nvm which current)" /usr/local/bin/node
+sudo ln -sf "$(npm root -g)/<пакет>/bin/<entry>.js" /usr/local/bin/<команда>
+```
+
+Пример (пакет `debash`):
+
+```bash
+sudo ln -sf "$(nvm which current)" /usr/local/bin/node
+sudo ln -sf "$(npm root -g)/debash/bin/debash.js" /usr/local/bin/debash
+```
+
+⚠️ **Ссылка на `node` жёстко привязана к версии**, активной в момент
+выполнения команды (`nvm which current`). При переключении версии
+через nvm сама не обновится — придётся пересоздать ссылку заново.
+
+
 ## Настройки
 
 * `npm config list`
