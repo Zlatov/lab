@@ -34,6 +34,28 @@ alias cdtanki='cd ~/projects/my/tanki'
 alias cdnestedul='cd ~/projects/my/nestedul'
 alias cdnestedulweb='cd ~/projects/my/nestedulweb'
 alias claude-clean-del='~/.claude/scripts/clean-del-sessions.sh'
+npmpatch() {
+    local message otp
+    read -rp "Что изменилось: " message
+    git add -A || return 1
+    git commit -m "$message" || return 1
+    git push || return 1
+    npm version patch -m "Release v%s: $message" || return 1
+    git push --follow-tags || return 1
+    read -rp "npm OTP: " otp
+    npm publish --otp="$otp"
+}
+npmminor() {
+    local message otp
+    read -rp "Что изменилось: " message
+    git add -A || return 1
+    git commit -m "$message" || return 1
+    git push || return 1
+    npm version minor -m "Release v%s: $message" || return 1
+    git push --follow-tags || return 1
+    read -rp "npm OTP: " otp
+    npm publish --otp="$otp"
+}
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'

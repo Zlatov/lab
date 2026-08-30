@@ -26,6 +26,16 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 ```
 
+## python — виртуальное окружение
+
+```bash
+                  user_name ~/projects $ mkdir -p ~/projects/piper-tts
+                  user_name ~/projects $ cd ~/projects/piper-tts
+        user_name ~/projects/piper-tts $ python3 -m venv .venv
+        user_name ~/projects/piper-tts $ source .venv/bin/activate
+(.venv) user_name ~/projects/piper-tts $ deactivate
+```
+
 ## Использование pyenv
 
 ```bash
