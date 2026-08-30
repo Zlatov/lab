@@ -56,6 +56,17 @@ npmminor() {
     read -rp "npm OTP: " otp
     npm publish --otp="$otp"
 }
+npmmajor() {
+    local message otp
+    read -rp "Что изменилось: " message
+    git add -A || return 1
+    git commit -m "$message" || return 1
+    git push || return 1
+    npm version major -m "Release v%s: $message" || return 1
+    git push --follow-tags || return 1
+    read -rp "npm OTP: " otp
+    npm publish --otp="$otp"
+}
 
 # zenon
 alias cdminilight='cd ~/projects/zenon/mini-light'
