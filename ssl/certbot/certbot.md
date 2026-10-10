@@ -95,7 +95,7 @@ nginx -s reload
 # Посмотреть имена сертификатов (могут не совпадать с доменами):
 certbot certificates
 # Обновить, указав имя сертификата --cert-name
-certbot renew --cert-name domain.name --dry-run # --dry-run - опробовать?
+certbot renew --cert-name domain.name --dry-run # --dry-run - опробовать
 certbot renew --cert-name domain.name
 # Перезрузить nginx
 nginx -t
